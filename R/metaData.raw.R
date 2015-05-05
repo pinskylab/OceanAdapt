@@ -1,6 +1,8 @@
 
 library(EML)
 
+# setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/metaData")
+
 # =================================================================
 # = Define Possible Units and Column Descriptions for All Regions =
 # =================================================================
@@ -71,6 +73,7 @@ gen.cols <- c(
 	"SID" = "species identification number",
 	"vessel" = "vessel ID",
 	"cruise" = "cruise ID",
+	"haul" = "the integer haul number within a cruise", # does same description apply beyond just AI?
 	"haulid" = "a unique identifier for the haul; vessel ID - cruise ID - haul number", 
 	"stratum" = "the statistical stratum of the haul",
 	"station"= "the station ID for the haul" ,
@@ -119,7 +122,8 @@ ai.cols <- c(
 	"SURF_TEMP" = gen.cols[["stemp"]],
 	"VESSEL" = gen.cols[["vessel"]],
 	"CRUISE" = gen.cols[["cruise"]],
-	"HAUL Areakm2" = gen.cols[["stratumarea"]]
+	"HAUL" = gen.cols[["haul"]],
+	"Areakm2" = gen.cols[["stratumarea"]]
 	
 )
 
@@ -141,9 +145,11 @@ ai.units <- list(
 	"SURF_TEMP" = gen.units[["stemp"]],
 	"VESSEL" = c("unit" = "number"),
 	"CRUISE" = c("unit" = "number"),
-	"HAUL Areakm2" = gen.units[["stratumarea"]]
+	"HAUL" = "haul number", # problem here is that the leading and trailing white space turn what shoudl be an integer into a character
+	"Areakm2" = gen.units[["stratumarea"]]
 	
 )
+
 
 # Create minimal EML file
 ai.head <- as.data.frame(head(ai)) # https://github.com/rBatt/trawl/blob/master/Scripts/Data/read.ai.R#L38
