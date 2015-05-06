@@ -17,7 +17,7 @@ source("../../OceanAdapt/R/metadata/gen.cols&units.R")
 
 # <title>
 	# character vector title
-	sreg.title <- "Example region bottom trawl survey"
+	dataTitle <- "Example region bottom trawl survey"
 
 # <creator>
 	# as(as.person("First Last <email@address.com>"), "creator")
