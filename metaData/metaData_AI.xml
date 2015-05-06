@@ -1,26 +1,61 @@
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml_1.1" packageId="58e55bad-f911-409b-bd3f-a6bc91811e71" system="uuid" scope="system">
-  <dataset id="aaa69862-aca8-4e89-9e74-e89cb6bdc7c6" scope="document">
-    <title>aiMetaData</title>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml_1.1" packageId="b2e3991c-732a-47b8-b759-95de3b515868" system="uuid">
+  <dataset scope="document">
+    <title>Aleutian Islands bottom trawl survey</title>
     <creator>
+      <organizationName>National Oceanic and Atmospheric Administration (NOAA) Alaska Fisheries Science Center (AFSC) Resource Assessment and Conservation Engineering Division (RACE)</organizationName>
+      <address>
+        <deliveryPoint>7600 Sand Point Way, N.E. bldg. 4</deliveryPoint>
+        <city>Seattle</city>
+        <administrativeArea>WA</administrativeArea>
+        <postalCode>98115</postalCode>
+        <country>USA</country>
+      </address>
+      <onlineUrl>http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm</onlineUrl>
+    </creator>
+    <metadataProvider>
       <individualName>
         <givenName>Ryan</givenName>
         <surName>Batt</surName>
       </individualName>
       <electronicMailAddress>battrd@gmail.com</electronicMailAddress>
-    </creator>
-    <pubDate>2015-05-04</pubDate>
+    </metadataProvider>
+    <associatedParty>
+      <individualName>
+        <givenName>Bob</givenName>
+        <surName>Lauth</surName>
+      </individualName>
+      <organizationName>National Oceanic and Atmospheric Administration (NOAA) Alaska Fisheries Science Center (AFSC) Resource Assessment and Conservation Engineering Division (RACE)</organizationName>
+      <electronicMailAddress>Bob.Lauth@noaa.gov</electronicMailAddress>
+      <role>ctb</role>
+    </associatedParty>
+    <pubDate>2012</pubDate>
+    <abstract>The Resource Assessment and Conservation Engineering Division (RACE) of the Alaska Fisheries Science Center (AFSC) conducts bottom trawl surveys to monitor the condition of the demersal fish and crab stocks of Alaska. These data include catch per unit effort for each identified species at a standard set of stations. This is a subset of the main racebase datase. Excluded are non standard stations, earlier years using different gear, and other types of data collected other than species id, species weight, water temperature and depth.</abstract>
     <intellectualRights>CC0, http://creativecommons.org/publicdomain/zero/1.0</intellectualRights>
     <contact>
       <individualName>
-        <givenName>Ryan</givenName>
-        <surName>Batt</surName>
+        <givenName>Wayne</givenName>
+        <surName>Palsson</surName>
       </individualName>
-      <electronicMailAddress>battrd@gmail.com</electronicMailAddress>
+      <organizationName>National Oceanic and Atmospheric Administration (NOAA) Alaska Fisheries Science Center (AFSC) Resource Assessment and Conservation Engineering Division (RACE)</organizationName>
+      <address>
+        <deliveryPoint>7600 Sand Point Way, N.E. bldg. 4</deliveryPoint>
+        <city>Seattle</city>
+        <administrativeArea>WA</administrativeArea>
+        <postalCode>98115</postalCode>
+        <country>USA</country>
+      </address>
+      <electronicMailAddress>Wayne.Palsson@noaa.gov</electronicMailAddress>
     </contact>
-    <dataTable id="6629bba7-a020-4471-a8c9-8807d4212366" system="uuid" scope="system">
-      <entityName>data table</entityName>
+    <methods>
+      <methodStep>
+        <dataSource>http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm</dataSource>
+        <description>http://www.afsc.noaa.gov/RACE/groundfish/survey_data/metadata_template.php?fname=RACEweb.xml</description>
+      </methodStep>
+    </methods>
+    <dataTable id="997e7e57-177e-49d7-9e9e-d056d1271ba7" system="uuid" scope="system">
+      <entityName>ai</entityName>
       <physical>
-        <objectName>data_table_58338c.csv</objectName>
+        <objectName>ai_82aa9f.csv</objectName>
         <size>4352</size>
         <characterEncoding>en_US.UTF-8</characterEncoding>
         <dataFormat>
@@ -35,7 +70,7 @@
           </textFormat>
         </dataFormat>
       </physical>
-      <attributeList id="728c169b-98ae-471d-92f9-380c796d4fd7">
+      <attributeList id="f6a7113e-2d03-4917-a61f-588172eaf67c">
         <attribute>
           <attributeName>STRATUM</attributeName>
           <attributeDefinition>the statistical stratum of the haul</attributeDefinition>
@@ -258,22 +293,29 @@
         </attribute>
         <attribute>
           <attributeName>HAUL</attributeName>
-          <attributeDefinition>the area of the statistical stratum (km2)</attributeDefinition>
+          <attributeDefinition>the integer haul number within a cruise</attributeDefinition>
           <measurementScale>
             <nominal>
               <nonNumericDomain>
-                <enumeratedDomain>
-                  <codeDefinition>
-                    <code>unit</code>
-                    <definition>squareKilometers</definition>
-                  </codeDefinition>
-                  <codeDefinition>
-                    <code>precision</code>
-                    <definition>1</definition>
-                  </codeDefinition>
-                </enumeratedDomain>
+                <textDomain>
+                  <definition>haul number</definition>
+                </textDomain>
               </nonNumericDomain>
             </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Areakm2</attributeName>
+          <attributeDefinition>the area of the statistical stratum (km2)</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>squareKilometers</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
           </measurementScale>
         </attribute>
       </attributeList>
