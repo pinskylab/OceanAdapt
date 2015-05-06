@@ -22,6 +22,10 @@ gen.units <- list(
 	
 	"time"= c(format = "MMHH"),
 	"date" = c(format="YYYY-MM-DD", precision=1),
+	"season" = c(
+		"SPRING" = "spring",
+		"FALL" = "fall"
+	),
 	
 	"spp" = "Genus species",
 	"common" = "common name",
