@@ -105,3 +105,49 @@
 	# 	) # end c() of methodStep
 	#
 	# ) # end new methods
+
+
+
+
+
+# ======================
+# = Create EML Objects =
+# ======================
+# Create "dataTable": the physical data set with associated column definitions and units
+REGION.dataTable <- eml_dataTable(
+		dat=REGION.data,
+		name="REGION",
+		col.defs=REGION.cols,
+		unit.defs=REGION.units
+)
+
+# Create "dataset": adds the other metadata to the annotated data
+dataset <- new(
+	"dataset", 
+    title = dataTitle,
+    creator = creator,
+    contact = contact,
+	metadataProvider = metadataProvider,
+    pubDate = pubDate,
+    # intellectualRights = rights,
+    abstract = abstract,
+    associatedParty = associatedParty,
+    # keywordSet = keys,
+    # coverage = coverage,
+    methods = methods,
+    dataTable = c(REGION.dataTable)
+)
+
+
+# Create "eml": the full/ final EML object
+eml <- new(
+	"eml",
+    packageId = uuid::UUIDgenerate(),
+    system = "uuid", # type of identifier
+    dataset = dataset#,
+    # additionalMetadata = additionalMetadata
+)
+
+
+# Write EML data file
+eml_write(eml, file="metaData_REGION.xml")
