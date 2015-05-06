@@ -1,5 +1,19 @@
 
+library(EML)
 
+# setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/metaData")
+source("../../OceanAdapt/R/metadata/gen.cols&units.R")
+
+
+# ===============================
+# = Column and Unit Definitions =
+# ===============================
+
+
+
+# =============================
+# = Name Meta Data Components =
+# =============================
 
 # <title>
 	# character vector title
@@ -14,9 +28,9 @@
 	# @phone
 	# @onlineUrl
 	# organization name
-	afsc.name <- "National Oceanic and Atmospheric Administration (NOAA) Alaska Fisheries Science Center (AFSC) Resource Assessment and Conservation Engineering Division (RACE)"
+	REGION.name <- "National Oceanic and Atmospheric Administration (NOAA) Alaska Fisheries Science Center (AFSC) Resource Assessment and Conservation Engineering Division (RACE)"
 	# create organization address
-	afsc_address <- new(
+	REGION_address <- new(
 		"address", 
 		deliveryPoint = "7600 Sand Point Way, N.E. bldg. 4",
 		city = "Seattle",
@@ -25,8 +39,8 @@
 		country = "USA"
 	)
 	creator <- c(as("", "creator"))
-	creator[[1]]@organizationName <- afsc.name
-	creator[[1]]@address <- afsc_address
+	creator[[1]]@organizationName <- REGION.name
+	creator[[1]]@address <- REGION_address
 	creator[[1]]@onlineUrl <- "http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm"
 
 # <contact>
@@ -41,8 +55,8 @@
 	# example, taken from AI
 	contact <- as(as.person("Bob Lauth <Bob.Lauth@noaa.gov>"), "contact")
 	# add the organization info
-	contact@organizationName <- afsc.name
-	contact@address <- afsc_address
+	contact@organizationName <- REGION.name
+	contact@address <- REGION_address
 	
 
 # <metadataProvider>
@@ -66,7 +80,7 @@
 	
 	# example, from AI; note that you need something in the [] in the as.person() text (it's the person's role, I think this can be anything)
 	associatedParty <- c(as(as.person("Bob Lauth [ctb] <Bob.Lauth@noaa.gov>"), "associatedParty"))
-	associatedParty[[1]]@organizationName <- afsc.name
+	associatedParty[[1]]@organizationName <- REGION.name
 	
 	
 # <pubDate>
