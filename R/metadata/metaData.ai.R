@@ -2,7 +2,7 @@
 library(EML)
 
 # setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/metaData")
-
+source("../../OceanAdapt/R/metadata/gen.cols&units.R")
 
 # =============================================
 # = Copy Example AI Data from `trawl` Project =
