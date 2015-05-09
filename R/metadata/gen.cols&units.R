@@ -65,6 +65,7 @@ gen.units <- list(
 	"meshsize" = c(unit = "inch", precision=0.01),
 	"duration" = c(unit = "minute", precision=1),
 	"towspeed" = c(unit="knots", precision=0.1),
+	"areaswept" = c(unit = "hectare", precision =0.000001),
 	
 	"stratum" = "1 degree lon lat", 
 	"stratumarea"=c(unit = "squareKilometers",precision = 1),
@@ -120,6 +121,7 @@ gen.cols <- c(
 	"meshsize" = "the size of the net mesh (inches of stretch)",
 	"duration" = "duration of the haul (how long the net was being towed)",
 	"towspeed" = "the speed of the vessel",
+	"areaswept" = "area sweap by the net (an index of effort)",
 	
 	# location info
 	"stratumarea" = "the area of the statistical stratum (km2)",
