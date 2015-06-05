@@ -311,7 +311,7 @@ fix_speed = function () {
 calculate_stratum_area = function () {
   # Calculate stratum area where needed (use convex hull approach)
   neus$stratumarea <<- 	neus$Areanmi2 * 3.429904 # convert square nautical miles to square kilometers
-  neusF$stratumarea <<- nes2$Areanmi2 * 3.429904 # convert square nautical miles to square kilometers
+  neusF$stratumarea <<- neusF$Areanmi2 * 3.429904 # convert square nautical miles to square kilometers
   
   wctristrats = summarize(wctri[,c('START_LONGITUDE', 'START_LATITUDE')], by=list(stratum=wctri$stratum), FUN=calcarea, stat.name = 'stratumarea')
   wctri <<- merge(wctri, wctristrats[,c('stratum', 'stratumarea')], by.x='stratum', by.y='stratum', all.x=TRUE)
