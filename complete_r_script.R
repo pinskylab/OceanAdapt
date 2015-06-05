@@ -146,6 +146,28 @@ compile_NEUS = function () {
   
   return(neus)
 }
+
+compile_NEUSF = function () {
+  #Northeast US
+  #function returns neus
+  survdat = data.table(read.csv(paste(WORKING_DIRECTORY, '/neus_data.csv', sep='')))
+  neusstrata = read.csv(paste(WORKING_DIRECTORY, '/neus_strata.csv', sep=''))
+  spp = data.table(read.csv(paste(WORKING_DIRECTORY, '/neus_svspp.csv', sep='')))
+  
+  setkey(survdat, CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX)
+  neusF <- unique(survdat) # drops length data
+  neusF[, c('LENGTH', 'NUMLEN') := NULL] # remove length columns
+  neusF = neusF[,sum(BIOMASS),by=list(YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP)] # sum different sexes of same spp together
+  setnames(neusF, 'V1', 'wtcpue')
+  neusF = neusF[SEASON=='FALL',] # trim to spring survey only
+  spp[,c('ITISSPP', 'COMNAME', 'AUTHOR') := NULL] # remove some columns from spp data.table
+  neusF = merge(neusF, spp, by='SVSPP') # add species names
+  neusF = as.data.frame(neusF) # this makes the calculations less efficient... but avoids having to rewrite the code for data.tables
+  neusF = merge(neusF, neusstrata[,c('StratumCode', 'Areanmi2')], by.x='STRATUM', by.y = 'StratumCode', all.x=TRUE)
+  
+  return(neusF)
+}
+
 compile_WCTri = function () {
   #function returns wctri
   # West Coast Trienniel 
@@ -206,7 +228,8 @@ create_haul_id = function  () {
   ai$haulid <<- paste(formatC(ai$VESSEL, width=3, flag=0), formatC(ai$CRUISE, width=3, flag=0), formatC(ai$HAUL, width=3, flag=0), sep='-')
   ebs$haulid <<- paste(formatC(ebs$VESSEL, width=3, flag=0), formatC(ebs$CRUISE, width=3, flag=0), formatC(ebs$HAUL, width=3, flag=0), sep='-')
   goa$haulid <<- paste(formatC(goa$VESSEL, width=3, flag=0), formatC(goa$CRUISE, width=3, flag=0), formatC(goa$HAUL, width=3, flag=0), sep='-')
-  neus$haulid <<- paste(formatC(neus$CRUISE6, width=6, flag=0), formatC(neus$STATION, width=3, flag=0), formatC(neus$STRATUM, width=4, flag=0), sep='-') 
+  neus$haulid <<- paste(formatC(neus$CRUISE6, width=6, flag=0), formatC(neus$STATION, width=3, flag=0), formatC(neus$STRATUM, width=4, flag=0), sep='-')
+  neusF$haulid <<- paste(formatC(neusF$CRUISE6, width=6, flag=0), formatC(neusF$STATION, width=3, flag=0), formatC(neusF$STRATUM, width=4, flag=0), sep='-')  
   wctri$haulid <<- paste(formatC(wctri$VESSEL, width=3, flag=0), formatC(wctri$CRUISE, width=3, flag=0), formatC(wctri$HAUL, width=3, flag=0), sep='-')
   wcann$haulid <<- wcann$Trawl.Id
   gmex$haulid <<- paste(formatC(gmex$VESSEL, width=3, flag=0), formatC(gmex$CRUISE_NO, width=3, flag=0), formatC(gmex$P_STA_NO, width=5, flag=0, format='d'), sep='-')
@@ -260,6 +283,7 @@ high_quality_strata = function () {
   ebs <<- ebs[!(ebs$STRATUM %in% c(82,90)),]
   goa <<- goa[!(goa$STRATUM %in% c(50, 210, 410, 420, 430, 440, 450, 510, 520, 530, 540, 550)),] # strata to remove.
   neus <<- neus[neus$STRATUM %in% c("1010", "1020", "1030", "1040", "1050", "1060", "1070", "1080", "1090", "1100", "1110", "1130", "1140", "1150", "1160", "1170", "1190", "1200", "1210", "1220", "1230", "1240", "1250", "1260", "1270", "1280", "1290", "1300", "1340", "1360", "1370", "1380", "1400", "1650", "1660", "1670", "1680", "1690", "1700", "1710", "1730", "1740", "1750"), ] # strata to keep (based on Nye et al. MEPS)
+  neusF <<- neusF[neusF$STRATUM %in% c("1010", "1020", "1030", "1040", "1050", "1060", "1070", "1080", "1090", "1100", "1110", "1130", "1140", "1150", "1160", "1170", "1190", "1200", "1210", "1220", "1230", "1240", "1250", "1260", "1270", "1280", "1290", "1300", "1340", "1360", "1370", "1380", "1400", "1650", "1660", "1670", "1680", "1690", "1700", "1710", "1730", "1740", "1750"), ] # strata to keep (based on Nye et al. MEPS)
   
   wctri <<- wctri[wctri$stratum %in% c("36.5-50", "37.5-150", "37.5-50", "38.5-150", "38.5-250", "38.5-350", "38.5-50", "39.5-150", "39.5-50", "40.5-150", "40.5-250", "41.5-150", "41.5-250", "41.5-50", "42.5-150", "42.5-250", "42.5-50", "43.5-150", "43.5-250", "43.5-350", "43.5-50", "44.5-150", "44.5-250", "44.5-350", "44.5-50", "45.5-150", "45.5-350", "45.5-50", "46.5-150", "46.5-250", "46.5-50", "47.5-150", "47.5-50", "48.5-150", "48.5-250", "48.5-50"),]
   
@@ -287,6 +311,7 @@ fix_speed = function () {
 calculate_stratum_area = function () {
   # Calculate stratum area where needed (use convex hull approach)
   neus$stratumarea <<- 	neus$Areanmi2 * 3.429904 # convert square nautical miles to square kilometers
+  neusF$stratumarea <<- nes2$Areanmi2 * 3.429904 # convert square nautical miles to square kilometers
   
   wctristrats = summarize(wctri[,c('START_LONGITUDE', 'START_LATITUDE')], by=list(stratum=wctri$stratum), FUN=calcarea, stat.name = 'stratumarea')
   wctri <<- merge(wctri, wctristrats[,c('stratum', 'stratumarea')], by.x='stratum', by.y='stratum', all.x=TRUE)
@@ -335,6 +360,13 @@ column_names_updated = function () {
   names(neus)[names(neus)=='LON'] <<- 'lon'
   names(neus)[names(neus)=='DEPTH'] <<- 'depth'
   names(neus)[names(neus)=='STRATUM'] <<- 'stratum'
+  
+  names(neusF)[names(neusF)=='YEAR'] <<- 'year'
+  names(neusF)[names(neusF)=='SCINAME'] <<- 'spp'
+  names(neusF)[names(neusF)=='LAT'] <<- 'lat'
+  names(neusF)[names(neusF)=='LON'] <<- 'lon'
+  names(neusF)[names(neusF)=='DEPTH'] <<- 'depth'
+  names(neusF)[names(neusF)=='STRATUM'] <<- 'stratum'
   
   names(wctri)[names(wctri)=='VESSEL'] <<- 'svvessel'
   names(wctri)[names(wctri) == 'START_LATITUDE'] <<- 'lat'
@@ -386,6 +418,8 @@ remove_rows_without_sci_names_or_fish_or_inverts = function() {
   goa <<- goa[goa$spp != '' & !(goa$spp %in% c("Decapodiformesunid.egg", "Volutopsiussp.eggs", "Bathyrajaaleuticaeggcase", "Bathyrajainterruptaeggcase", "Bathyrajamaculataeggcase", "Bathyrajaparmiferaeggcase", "Bathyrajasp.", "Bathyrajasp.eggcase", "Bathyrajataranetzieggcase", "Beringiussp.eggs", "Buccinumsp.Eggs", "Fusitritonoregonensiseggs", "gastropodeggs", "Hemitripterusbolinieggs", "Naticidaeeggs", "Neptuneasp.eggs", "Pyrulofusussp.eggs", "Rajabadiaeggcase", "Rossiapacificaeggs", "Bathyraja aleutica egg case", "Bathyraja interrupta egg case", "Bathyraja parmifera egg case", "Bathyraja sp. egg case", "gastropod eggs", "Neptunea sp. eggs", "Rajarhinaeggcase", "Rajasp.eggcase", "Apristurus brunneus egg case", "Selachimorpha egg case", "Bathyraja taranetzi egg case", "Bathyraja trachura egg case", "Beringius sp. eggs", "Cephalopoda unid. egg", "Fusitriton oregonensis eggs", "Hemitripterus bolini eggs", "Hydrolagus colliei egg case", "Naticidae eggs", "Pyrulofusus sp. eggs", "Raja binoculata egg case", "Raja rhina egg case", "Raja sp. egg case", "Volutopsius sp. eggs")),]
   neus <<- neus[!(neus$spp == '' | is.na(neus$spp)),]
   neus <<- neus[!(neus$spp %in% c('UNIDENTIFIED FISH', 'ILLEX ILLECEBROSUS EGG MOPS', 'LOLIGO PEALEII EGG MOPS')),] # remove unidentified spp and non-species
+  neusF <<- neusF[!(neusF$spp == '' | is.na(neusF$spp)),]
+  neusF <<- neusF[!(neusF$spp %in% c('UNIDENTIFIED FISH', 'ILLEX ILLECEBROSUS EGG MOPS', 'LOLIGO PEALEII EGG MOPS')),] # remove unidentified spp and non-species
   wctri <<- wctri[wctri$spp != '' & !(wctri$spp %in% c("Apristurus brunneus egg case", "fish eggs unident.", "Raja binoculata egg case", "Raja sp. egg case", "Rajiformes egg case", "Shark egg case unident.", "Bathyraja sp. egg case", "gastropod eggs", "Hydrolagus colliei egg case", "Selachimorpha egg case")),]
   wcann <<- wcann[wcann$spp != '' & !(wcann$spp %in% c("Apristurus brunneus egg case", "gastropod eggs", "Selachimorpha egg case", "Bathyraja sp. egg case", "fish eggs unident.", "Hydrolagus colliei egg case", "Raja binoculata egg case", "Raja sp. egg case", "Rajiformes egg case", "Shark egg case unident.")),]
   gmex <<- gmex[!(gmex$spp == '' | is.na(gmex$spp)),]
@@ -401,6 +435,7 @@ adjust_spp_names = function () {
   i <- sapply(ebs, is.factor); ebs[i] <<- lapply(ebs[i], as.character)
   i <- sapply(goa, is.factor); goa[i] <<- lapply(goa[i], as.character)
   i <- sapply(neus, is.factor); neus[i] <<- lapply(neus[i], as.character)
+  i <- sapply(neusF, is.factor); neusF[i] <<- lapply(neusF[i], as.character)
   i <- sapply(wctri, is.factor); wctri[i] <<- lapply(wctri[i], as.character)
   i <- sapply(wcann, is.factor); wcann[i] <<- lapply(wcann[i], as.character)
   i <- sapply(gmex, is.factor); gmex[i] <<- lapply(gmex[i], as.character)
@@ -458,6 +493,9 @@ adjust_spp_names = function () {
   neus2 = aggregate(list(wtcpue = neus$wtcpue), by = list(haulid = neus$haulid, stratum = neus$stratum, stratumarea = neus$stratumarea, year = neus$year, lat = neus$lat, lon = neus$lon, depth = addNA(neus$depth), spp = neus$spp), FUN=sumna) # use addNA() for depth so that NA values are not dropped by aggregate()
   neus2$depth = as.numeric(as.character(neus2$depth)) # convert depth back to a numeric
   
+  neusF2 = aggregate(list(wtcpue = neusF$wtcpue), by = list(haulid = neusF$haulid, stratum = neusF$stratum, stratumarea = neusF$stratumarea, year = neusF$year, lat = neusF$lat, lon = neusF$lon, depth = addNA(neusF$depth), spp = neusF$spp), FUN=sumna) # use addNA() for depth so that NA values are not dropped by aggregate()
+  neusF2$depth = as.numeric(as.character(neusF2$depth)) # convert depth back to a numeric
+  
   wctri2 = aggregate(list(wtcpue = wctri$wtcpue), by = list(haulid = wctri$haulid, stratum = wctri$stratum, stratumarea = wctri$stratumarea, year = wctri$year, lat = wctri$lat, lon = wctri$lon, depth = wctri$depth, spp = wctri$spp), FUN=sumna)
   
   wcann2 = aggregate(list(wtcpue = wcann$wtcpue), by = list(haulid = wcann$haulid, stratum = wcann$stratum, stratumarea = wcann$stratumarea, year = wcann$year, lat = wcann$lat, lon = wcann$lon, depth = wcann$depth, spp = wcann$spp), FUN=sumna)
@@ -468,6 +506,7 @@ adjust_spp_names = function () {
   ebs<<-ebs2
   goa<<-goa2
   neus<<-neus2
+  neusF<<-neusF2
   wctri<<-wctri2
   wcann<<-wcann2
   gmex<<-gmex2
@@ -487,7 +526,8 @@ add_region_column = function () {
     ai$region <<- "Aleutian Islands"
     ebs$region <<- "Eastern Bering Sea"
     goa$region <<- "Gulf of Alaska"
-    neus$region <<- "Northeast US"
+    neus$region <<- "Northeast US Spring"
+	neusF$region <<- "Northeast US Fall"
     wctri$region <<- "West Coast Triennial"
     wcann$region <<- "West Coast Annual"
     gmex$region <<- "Gulf of Mexico"
@@ -509,7 +549,8 @@ rearrange_and_trim_columns = function () {
   ai <<- ai[,nm]
   ebs <<- ebs[,nm]
   goa <<- goa[,nm]
-  neus <<- neus[,nm]  
+  neus <<- neus[,nm]
+  neusF <<- neusF[,nm]  
   wctri <<- wctri[,nm]
   wcann <<- wcann[,nm]
   gmex <<- gmex[,nm]
@@ -521,7 +562,7 @@ rearrange_and_trim_columns = function () {
 
 create_master_table = function () {
   #  combine and remove NA values
-  dat = rbind(ai, ebs, goa, neus, wctri, wcann, gmex)
+  dat = rbind(ai, ebs, goa, neus, neusF, wctri, wcann, gmex)
   # dim(dat)
   
   # Remove NA values in wtcpue
@@ -644,7 +685,7 @@ national_data = function (centbio) {
   #####################################################
   
   #WHEN USING ENGLISH NAMES FROM add_region_column(), UNCOMMENT NEXT LINE:
-  regstouse = c('Eastern Bering Sea', 'Northeast US') # Only include regions not constrained by geography in which surveys have consistent methods through time
+  regstouse = c('Eastern Bering Sea', 'Northeast US Spring', 'Northeast US Fall') # Only include regions not constrained by geography in which surveys have consistent methods through time
   #WHEN USING DEFAULT NAMES FROM add_region_column(), UN COMMENT NEXT LINE:
   #regstouse = c('AFSC_EBS', 'NEFSC_NEUSSpring') # Only include regions not constrained by geography in which surveys have consistent methods through time
   natstartyear = 1982 # a common starting year for the both focal regions
@@ -790,6 +831,9 @@ if(!exists('OVERRIDE_COMPILING') || !isTRUE(OVERRIDE_COMPILING) ) {
     
     neus = compile_NEUS()
     print_status('>NEUS done.')
+	
+    neusF = compile_NEUSF()
+    print_status('>NEUSF done.')
     
     wctri = compile_WCTri()
     print_status('>WCTri done.')
@@ -905,7 +949,7 @@ rm( haul_id_complete, year_extraction_complete, gmex_lat_long_calculation_comple
 print_status('Scientific name/Common name data available: `tax` ')
 print_status('National data available: `dat` ')
 if(!isTRUE(REMOVE_REGION_DATASETS)) {
-  print_status('Regional data available: `ai`, `ebs`, `gmex`, `goa`, `neus`, `wcann`, and `wctri`')
+  print_status('Regional data available: `ai`, `ebs`, `gmex`, `goa`, `neus`, `neusF`, `wcann`, and `wctri`')
 }
 
 if(isTRUE(OPTIONAL_OUTPUT_DAT_MASTER_TABLE)){
