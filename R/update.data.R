@@ -49,3 +49,46 @@ write.csv(updatedEBS, file="~/Documents/School&Work/pinskyPost/OceanAdapt/ebs_da
 # write.csv(updatedWC, file="~/Documents/School&Work/pinskyPost/OceanAdapt/wcann_data.csv", row.names=FALSE)
 
 
+# ===============
+# = Update GMEX =
+# ===============
+# bio
+newGMEX.bio0 <- as.data.table(read.csv("~/Downloads/public_seamap_csvs/BGSREC.csv"))
+oldGMEX.bio <- fread("~/Documents/School&Work/pinskyPost/OceanAdapt/gmex_bio.csv")
+# any(!names(oldGMEX.bio)%in%names(newGMEX.bio0)) # FALSE good
+gmex.bio.names <- names(oldGMEX.bio)
+newGMEX.bio <- newGMEX.bio0[,(gmex.bio.names), with=FALSE]
+write.csv(newGMEX.bio, file="~/Documents/School&Work/pinskyPost/OceanAdapt/gmex_bio.csv", row.names=FALSE)
+
+# cruise
+newGMEX.cruise0 <- as.data.table(read.csv("~/Downloads/public_seamap_csvs/CRUISES.csv"))
+oldGMEX.cruise <- fread("~/Documents/School&Work/pinskyPost/OceanAdapt/gmex_cruise.csv")
+# any(!names(oldGMEX.bio)%in%names(newGMEX.bio0)) # FALSE good
+gmex.cruise.names <- names(oldGMEX.cruise)
+oldGMEX.cruise <- newGMEX.cruise0[,(gmex.cruise.names), with=FALSE]
+write.csv(oldGMEX.cruise, file="~/Documents/School&Work/pinskyPost/OceanAdapt/gmex_cruise.csv", row.names=FALSE)
+
+# spp
+newGMEX.spp0 <- as.data.table(read.csv("~/Downloads/public_seamap_csvs/NEWBIOCODESBIG.csv"))
+oldGMEX.spp <- fread("~/Documents/School&Work/pinskyPost/OceanAdapt/gmex_spp.csv")
+# any(!names(oldGMEX.spp)%in%names(newGMEX.spp0)) # FALSE good
+gmex.spp.names <- names(oldGMEX.spp)
+oldGMEX.spp <- newGMEX.spp0[,(gmex.spp.names), with=FALSE]
+write.csv(oldGMEX.spp, file="~/Documents/School&Work/pinskyPost/OceanAdapt/gmex_spp.csv", row.names=FALSE)
+
+# station
+newGMEX.station0 <- as.data.table(read.csv("~/Downloads/public_seamap_csvs/STAREC.csv")) # had to open .csv in excel, resave as a csv. Did nothing else, then worked.
+oldGMEX.station <- as.data.table(read.csv("~/Documents/School&Work/pinskyPost/OceanAdapt/gmex_station.csv"))
+# any(!names(oldGMEX.station)%in%names(newGMEX.station0)) # FALSE good
+gmex.station.names <- names(oldGMEX.station)
+oldGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
+write.csv(oldGMEX.station, file="~/Documents/School&Work/pinskyPost/OceanAdapt/gmex_station.csv", row.names=FALSE)
+
+# tow
+newGMEX.tow0 <- as.data.table(read.csv("~/Downloads/public_seamap_csvs/INVREC.csv"))
+oldGMEX.tow <- as.data.table(read.csv("~/Documents/School&Work/pinskyPost/OceanAdapt/gmex_tow.csv"))
+# any(!names(oldGMEX.tow)%in%names(newGMEX.tow0)) # FALSE good
+gmex.tow.names <- names(oldGMEX.tow)
+oldGMEX.tow <- newGMEX.tow0[,(gmex.tow.names), with=FALSE]
+write.csv(oldGMEX.tow, file="~/Documents/School&Work/pinskyPost/OceanAdapt/gmex_tow.csv", row.names=FALSE)
+
