@@ -16,3 +16,14 @@ write.csv(updatedAI, file="~/Documents/School&Work/pinskyPost/OceanAdapt/ai_data
 
 
 
+# ==============
+# = Update EBS =
+# ==============
+oldEBS <- fread("~/Documents/School&Work/pinskyPost/OceanAdapt/ebs_data.csv")
+newEBS <- as.data.table(read.csv("~/Downloads/ebs201_20143.csv")) # had to use read.csv to auto remove whitespace in col names
+updatedEBS0 <- rbind(oldEBS, newEBS)
+updatedEBS <- as.data.table(updatedEBS0)
+setkeyv(updatedEBS, names(updatedEBS))
+updatedEBS <- unique(updatedEBS)
+write.csv(updatedEBS, file="~/Documents/School&Work/pinskyPost/OceanAdapt/ebs_data.csv", row.names=FALSE)
+
