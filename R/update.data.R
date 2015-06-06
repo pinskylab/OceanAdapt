@@ -33,3 +33,19 @@ write.csv(updatedEBS, file="~/Documents/School&Work/pinskyPost/OceanAdapt/ebs_da
 # ==============
 # As of 5-June-2015, GOA doesn't have any new data (new meaning 2014)
 # skip for now
+
+
+
+
+# ===============
+# = Update WFSC =
+# ===============
+# oldWC.fish <- fread("~/Documents/School&Work/pinskyPost/OceanAdapt/wcann_fish.csv", colClasses=c("character","character","numeric","numeric"))
+# newWC <- as.data.table(read.csv("~/Downloads/wcann201_20143.csv")) # had to use read.csv to auto remove whitespace in col names
+# updatedWC0 <- rbind(oldWC, newWC)
+# updatedWC <- as.data.table(updatedWC0)
+# setkeyv(updatedWC, names(updatedWC))
+# updatedWC <- unique(updatedWC)
+# write.csv(updatedWC, file="~/Documents/School&Work/pinskyPost/OceanAdapt/wcann_data.csv", row.names=FALSE)
+
+
