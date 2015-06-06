@@ -27,3 +27,9 @@ setkeyv(updatedEBS, names(updatedEBS))
 updatedEBS <- unique(updatedEBS)
 write.csv(updatedEBS, file="~/Documents/School&Work/pinskyPost/OceanAdapt/ebs_data.csv", row.names=FALSE)
 
+
+# ==============
+# = Update GOA =
+# ==============
+# As of 5-June-2015, GOA doesn't have any new data (new meaning 2014)
+# skip for now
