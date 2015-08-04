@@ -43,6 +43,11 @@ gmex.spp.file <- "~/Downloads/public_seamap_csvs/NEWBIOCODESBIG.csv"
 gmex.station.file <- "~/Downloads/public_seamap_csvs/STAREC.csv"
 gmex.tow.file <- "~/Downloads/public_seamap_csvs/INVREC.csv"
 
+# NEUS
+# Sean Lucey - NOAA Federal <sean.lucey@noaa.gov>
+neus.file <- "~/Downloads/Survdat.RData"
+
+
 # WC
 # Email Beth Horness <Beth.Horness@noaa.gov>
 zipFiles_wc <- file.info(list.files("~/Downloads", full=TRUE, patt="^Comprehensive.+.zip"))
@@ -274,6 +279,31 @@ if(file.exists(gmex.tow.file)){
 	gmex.tow.names <- names(oldGMEX.tow)
 	newGMEX.tow <- newGMEX.tow0[,(gmex.tow.names), with=FALSE]
 	write.csv(newGMEX.tow, file=paste(new.zip.folder,"gmex_tow.csv",sep="/"), row.names=FALSE)
+}
+
+
+# ========
+# = NEUS =
+# ========
+# NEUS Data
+oldNEUS <- upData$neus_data.csv
+if(file.exists(neus.file)){
+	# newNEUS <- as.data.table(read.csv(neus.file)) # had to use read.csv to auto remove whitespace in col names
+	local({
+		load(neus.file)
+		stopifnot(length(ls())==1)
+		newNEUS <<- get(ls())
+		rm(list=ls())
+	})
+	neus.names <- names(oldNEUS)
+	stopifnot(all(neus.names%in%names(newNEUS)))
+	
+	updatedNEUS <- newNEUS[,neus.names,with=F]
+	
+	updatedNEUS <- as.data.table(updatedNEUS)
+	setkeyv(updatedNEUS, names(updatedNEUS))
+	updatedNEUS <- unique(updatedNEUS)
+	write.csv(updatedNEUS, file=paste(new.zip.folder,"neus_data.csv",sep="/"), row.names=FALSE)
 }
 
 
