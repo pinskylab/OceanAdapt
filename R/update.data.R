@@ -100,9 +100,10 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", ...) {
 # = Read in Old Data Sets (currently zipped) =
 # ============================================
 # zipFiles <- file.info(list.files("./data", full=TRUE, patt="^Data_Updated_[0-9]{4}.+"))
-zipFiles <- file.info(list.files("./data", full=TRUE, patt="^Data_.+"))
+zipFiles <- file.info(list.files("./data", full=TRUE, patt="^Data_.+.zip"))
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
-upData <- read.csv.zip(recentZip, integer64="character")
+# upData <- read.csv.zip(recentZip, integer64="character")
+upData <- read.csv.zip("./data/Data_Vis_2015_06_05.zip")
 old.csv.names <- names(upData)
 
 # Unzip locally
@@ -229,8 +230,10 @@ if(file.exists(gmex.bio.file)){ # consider having it look for the zip file too, 
 oldGMEX.cruise <- upData$gmex_cruise.csv
 if(file.exists(gmex.cruise.file)){
 	newGMEX.cruise0 <- as.data.table(read.csv(gmex.cruise.file))
-	stopifnot(all(names(oldGMEX.cruise)%in%names(newGMEX.cruise0)))
-	gmex.cruise.names <- names(oldGMEX.cruise)
+	# stopifnot(all(names(oldGMEX.cruise)%in%names(newGMEX.cruise0)))
+	gmex.cruise.names <- c("CRUISEID", "YR", "SOURCE", "VESSEL", "CRUISE_NO", "STARTCRU", "ENDCRU", "TITLE", "NOTE", "INGEST_SOURCE", "INGEST_PROGRAM_VER") # from .docx from Lucas
+	stopifnot(all(gmex.cruise.names%in%names(newGMEX.cruise0)))
+	# gmex.cruise.names <- names(oldGMEX.cruise)
 	newGMEX.cruise <- newGMEX.cruise0[,(gmex.cruise.names), with=FALSE]
 	write.csv(newGMEX.cruise, file=paste(new.zip.folder,"gmex_cruise.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
@@ -304,7 +307,19 @@ if(file.exists(neus.file)){
 	updatedNEUS <- as.data.table(updatedNEUS)
 	setkeyv(updatedNEUS, names(updatedNEUS))
 	updatedNEUS <- unique(updatedNEUS)
-	write.csv(updatedNEUS, file=paste(new.zip.folder,"neus_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	new.neus.names <- paste0("\"",names(updatedNEUS),"\"") # put names in extra quotes
+	setnames(updatedNEUS, names(updatedNEUS), new.neus.names)
+	updatedNEUS2 <- cbind(NA, updatedNEUS)
+	setnames(updatedNEUS2, "V1", "\"\"")
+	write.csv(updatedNEUS2, file=paste(new.zip.folder,"neus_neus.csv",sep="/"), row.names=FALSE, quote=FALSE) # neus breaks the naming convention
+}
+
+if(FALSE){
+	neus.svspp.csv <- read.csv(paste(new.zip.folder,"neus_svspp.csv",sep="/"))
+	names(neus.svspp.csv) <- paste0("\"",names(neus.svspp.csv),"\"")
+	neus.svspp.csv2 <- cbind(NA, neus.svspp.csv)
+	names(neus.svspp.csv2)[1] <- "\"\""
+	write.csv(neus.svspp.csv2, file=paste(new.zip.folder,"neus_svspp.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 
@@ -338,6 +353,25 @@ if(nrow(zipFiles_wc)>=1){
 	write.csv(new_wcann_fish, file=paste(new.zip.folder,"wcann_fish.csv",sep="/"), row.names=FALSE, quote=FALSE)
 	write.csv(new_wcann_invert, file=paste(new.zip.folder,"wcann_invert.csv",sep="/"), row.names=FALSE, quote=FALSE)
 	write.csv(new_wcann_haul, file=paste(new.zip.folder,"wcann_haul.csv",sep="/"), row.names=FALSE, quote=FALSE)
+}
+
+
+# ========================
+# = WC Tri Structure Fix =
+# ========================
+if(FALSE){
+	wctri_catch.csv <- read.csv(file.path(new.zip.folder,"wctri_catch.csv"))
+	names(wctri_catch.csv) <- paste0("\"",names(wctri_catch.csv),"\"")
+	write.csv(wctri_catch.csv, file.path(new.zip.folder,"wctri_catch.csv"), row.names=FALSE, quote=FALSE)
+	
+	wctri_haul.csv <- read.csv(file.path(new.zip.folder,"wctri_haul.csv"))
+	names(wctri_haul.csv) <- paste0("\"",names(wctri_haul.csv),"\"")
+	write.csv(wctri_haul.csv, file.path(new.zip.folder,"wctri_haul.csv"), row.names=FALSE, quote=FALSE)
+	
+	
+	wctri_species.csv <- read.csv(file.path(new.zip.folder,"wctri_species.csv"))
+	names(wctri_species.csv) <- paste0("\"",names(wctri_species.csv),"\"")
+	write.csv(wctri_species.csv, file.path(new.zip.folder,"wctri_species.csv"), row.names=FALSE, quote=FALSE)
 }
 
 
@@ -390,6 +424,8 @@ sapply(c(list.files(normalizePath(raw.dir), full=T),normalizePath(raw.dir)), fil
 # For each region, create a new directory
 regions2upload <- c("ai","ebs","goa","gmex","neus","wcann","wctri")
 files.matched <- c()
+file.headers <- structure(vector("list",length(regions2upload)), .Names=regions2upload)
+
 t.files0 <- list.files(normalizePath(new.zip.folder),full=T)
 for(i in 1:length(regions2upload)){
 	t.reg <- regions2upload[i]
@@ -398,13 +434,23 @@ for(i in 1:length(regions2upload)){
 	t.files <- t.files0[grepl(paste0(t.reg,"_"),t.files0)]
 	files.matched <- c(files.matched, t.files)
 	
+
+	# scan("~/Desktop/wctri/catch.csv",nlines=1, sep=",", what="character", quote="") # TODO use this in a nested for() to collect column names
+	
 	t.dest.dir <- paste(dirname(t.files[1]), t.reg, sep="/")
 	# Update to strip region name from files when copying ... needed for OA 
-	t.dest.file0 <- t.dest.file <- paste(t.dest.dir, basename(t.files),sep="/")
+	t.dest.file0 <- paste(t.dest.dir, basename(t.files),sep="/")
 	t.dest.file <- gsub(paste0(t.reg,"_"), "", t.dest.file0)
+	
+	file.headers[[i]] <- structure(vector("list", length(t.files)), .Names=basename(t.dest.file))
+	for(j in 1:length(t.files)){
+		file.headers[[i]][[j]] <- scan(t.files[j],nlines=1, sep=",", what="character", quote="", quiet=T)
+	}
+	
 	file.copy(from=t.files, to=t.dest.file)
 	file.remove(t.files)
 	
+
 	oldwd <- getwd()
 	# setwd(new.zip.folder)
 	setwd(paste(new.zip.folder,basename(t.dest.dir),sep="/"))
@@ -417,6 +463,18 @@ for(i in 1:length(regions2upload)){
 	sapply(c(list.files(t.dest.dir, full=T),t.dest.dir), file.remove) # delete local folder
 	
 }
+
+sink("./metadata/oa_upload_colNames.txt",type=c(type="output"))
+for(i in 1:length(regions2upload)){
+	cat(names(file.headers)[i], "\n")
+	for(j in 1:length(file.headers[[i]])){
+		cat("\t",names(file.headers[[i]])[j], "\n", paste0("\t\t",file.headers[[i]][[j]],"\n"),"\n")
+	}
+	if(i!=length(regions2upload)){
+		cat("\n\n")
+	}
+}
+sink(NULL)
 
 # mark parent as ready for upload
 file.rename(normalizePath(new.zip.folder), paste(normalizePath(new.zip.folder),"ready2upload",sep="_"))
