@@ -368,7 +368,9 @@ for(i in 1:length(regions2upload)){
 	files.matched <- c(files.matched, t.files)
 	
 	t.dest.dir <- paste(dirname(t.files[1]), t.reg, sep="/")
-	t.dest.file <- paste(t.dest.dir, basename(t.files),sep="/")
+	# Update to strip region name from files when copying ... needed for OA 
+	t.dest.file0 <- t.dest.file <- paste(t.dest.dir, basename(t.files),sep="/")
+	t.dest.file <- gsub(paste0(t.reg,"_"), "", t.dest.file0)
 	file.copy(from=t.files, to=t.dest.file)
 	file.remove(t.files)
 	
