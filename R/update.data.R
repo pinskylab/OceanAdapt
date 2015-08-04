@@ -99,9 +99,10 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", ...) {
 # ============================================
 # = Read in Old Data Sets (currently zipped) =
 # ============================================
-zipFiles <- file.info(list.files("./data", full=TRUE, patt="^Data_Updated_[0-9]{4}.+"))
+# zipFiles <- file.info(list.files("./data", full=TRUE, patt="^Data_Updated_[0-9]{4}.+"))
+zipFiles <- file.info(list.files("./data", full=TRUE, patt="^Data_.+"))
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
-upData <- read.csv.zip(recentZip)
+upData <- read.csv.zip(recentZip, integer64="character")
 old.csv.names <- names(upData)
 
 # Unzip locally
@@ -109,7 +110,7 @@ old.csv.names <- names(upData)
 # actually, nvm, it's still useful if the newly downloaded data are in a zip file
 unzip(normalizePath(recentZip), exdir="data/Data_Updated", junkpaths=TRUE, setTimes=TRUE)
 zip.folder <- gsub("(\\.[^.]+$)", "", recentZip)
-new.zip.folder <- gsub("(?<=Data_Updated).+", "", zip.folder, perl=T)
+new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated") #gsub("(?<=Data_Updated).+", "", zip.folder, perl=T)
 # file.rename(zip.folder, new.zip.folder) # rename folder
 
 
@@ -128,8 +129,8 @@ if(file.exists(ai.file)){
 	updatedAI <- as.data.table(updatedAI0)
 	setkeyv(updatedAI, names(updatedAI))
 	updatedAI <- unique(updatedAI)
-	# write.csv(updatedAI, file="~/Documents/School&Work/pinskyPost/OceanAdapt/ai_data.csv", row.names=FALSE)
-	write.csv(updatedAI, file=paste(new.zip.folder,"ai_data.csv",sep="/"), row.names=FALSE)
+	# write.csv(updatedAI, file="~/Documents/School&Work/pinskyPost/OceanAdapt/ai_data.csv", row.names=FALSE, quote=FALSE)
+	write.csv(updatedAI, file=paste(new.zip.folder,"ai_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 # Update Strata file
@@ -141,7 +142,7 @@ if(file.exists(ai.file2)){
 	updatedAI2 <- newAI2[,ai.file2,with=F]
 	setkeyv(updatedAI2, names(updatedAI2))
 	updatedAI2 <- unique(updatedAI2)
-	write.csv(updatedAI2, file=paste(new.zip.folder,"ai_strata.csv",sep="/"), row.names=FALSE)
+	write.csv(updatedAI2, file=paste(new.zip.folder,"ai_strata.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 
@@ -159,8 +160,8 @@ if(file.exists(ebs.file)){
 	updatedEBS <- as.data.table(updatedEBS0)
 	setkeyv(updatedEBS, names(updatedEBS))
 	updatedEBS <- unique(updatedEBS)
-	# write.csv(updatedEBS, file="~/Documents/School&Work/pinskyPost/OceanAdapt/ebs_data.csv", row.names=FALSE)
-	write.csv(updatedEBS, file=paste(new.zip.folder,"ebs_data.csv",sep="/"), row.names=FALSE)
+	# write.csv(updatedEBS, file="~/Documents/School&Work/pinskyPost/OceanAdapt/ebs_data.csv", row.names=FALSE, quote=FALSE)
+	write.csv(updatedEBS, file=paste(new.zip.folder,"ebs_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 # Update Strata file
@@ -172,7 +173,7 @@ if(file.exists(ebs.file2)){
 	updatedEBS2 <- newEBS2[,ebs.file2,with=F]
 	setkeyv(updatedEBS2, names(updatedEBS2))
 	updatedEBS2 <- unique(updatedEBS2)
-	write.csv(updatedEBS2, file=paste(new.zip.folder,"ebs_strata.csv",sep="/"), row.names=FALSE)
+	write.csv(updatedEBS2, file=paste(new.zip.folder,"ebs_strata.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 
@@ -192,8 +193,8 @@ if(file.exists(goa.file)){
 	updatedGOA <- as.data.table(updatedGOA0)
 	setkeyv(updatedGOA, names(updatedGOA))
 	updatedGOA <- unique(updatedGOA)
-	# write.csv(updatedGOA, file="~/Documents/School&Work/pinskyPost/OceanAdapt/goa_data.csv", row.names=FALSE)
-	write.csv(updatedGOA, file=paste(new.zip.folder,"goa_data.csv",sep="/"), row.names=FALSE)
+	# write.csv(updatedGOA, file="~/Documents/School&Work/pinskyPost/OceanAdapt/goa_data.csv", row.names=FALSE, quote=FALSE)
+	write.csv(updatedGOA, file=paste(new.zip.folder,"goa_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 # Update Strata file
@@ -205,7 +206,7 @@ if(file.exists(goa.file2)){
 	updatedGOA2 <- newGOA2[,goa.file2,with=F]
 	setkeyv(updatedGOA2, names(updatedGOA2))
 	updatedGOA2 <- unique(updatedGOA2)
-	write.csv(updatedGOA2, file=paste(new.zip.folder,"goa_strata.csv",sep="/"), row.names=FALSE)
+	write.csv(updatedGOA2, file=paste(new.zip.folder,"goa_strata.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 
@@ -221,7 +222,7 @@ if(file.exists(gmex.bio.file)){ # consider having it look for the zip file too, 
 	stopifnot(all(names(oldGMEX.bio)%in%names(newGMEX.bio0)))
 	gmex.bio.names <- names(oldGMEX.bio)
 	newGMEX.bio <- newGMEX.bio0[,(gmex.bio.names), with=FALSE]
-	write.csv(newGMEX.bio, file=paste(new.zip.folder,"gmex_bio.csv",sep="/"), row.names=FALSE)
+	write.csv(newGMEX.bio, file=paste(new.zip.folder,"gmex_bio.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 # cruise
@@ -231,7 +232,7 @@ if(file.exists(gmex.cruise.file)){
 	stopifnot(all(names(oldGMEX.cruise)%in%names(newGMEX.cruise0)))
 	gmex.cruise.names <- names(oldGMEX.cruise)
 	newGMEX.cruise <- newGMEX.cruise0[,(gmex.cruise.names), with=FALSE]
-	write.csv(newGMEX.cruise, file=paste(new.zip.folder,"gmex_cruise.csv",sep="/"), row.names=FALSE)
+	write.csv(newGMEX.cruise, file=paste(new.zip.folder,"gmex_cruise.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 # spp
@@ -241,7 +242,7 @@ if(file.exists(gmex.spp.file)){
 	stopifnot(all(names(oldGMEX.spp)%in%names(newGMEX.spp0)))
 	gmex.spp.names <- names(oldGMEX.spp)
 	newGMEX.spp <- newGMEX.spp0[,(gmex.spp.names), with=FALSE]
-	write.csv(newGMEX.spp, file=paste(new.zip.folder,"gmex_spp.csv",sep="/"), row.names=FALSE)
+	write.csv(newGMEX.spp, file=paste(new.zip.folder,"gmex_spp.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 # station
@@ -264,7 +265,7 @@ updateGMEX.station <- function(){
 			stopifnot(all(names(oldGMEX.station)%in%names(newGMEX.station0)))
 			gmex.station.names <- names(oldGMEX.station)
 			newGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
-			write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE)
+			write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=FALSE)
 		# }	
 	}
 }
@@ -278,7 +279,7 @@ if(file.exists(gmex.tow.file)){
 	stopifnot(all(names(oldGMEX.tow)%in%names(newGMEX.tow0)))
 	gmex.tow.names <- names(oldGMEX.tow)
 	newGMEX.tow <- newGMEX.tow0[,(gmex.tow.names), with=FALSE]
-	write.csv(newGMEX.tow, file=paste(new.zip.folder,"gmex_tow.csv",sep="/"), row.names=FALSE)
+	write.csv(newGMEX.tow, file=paste(new.zip.folder,"gmex_tow.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 
@@ -303,7 +304,7 @@ if(file.exists(neus.file)){
 	updatedNEUS <- as.data.table(updatedNEUS)
 	setkeyv(updatedNEUS, names(updatedNEUS))
 	updatedNEUS <- unique(updatedNEUS)
-	write.csv(updatedNEUS, file=paste(new.zip.folder,"neus_data.csv",sep="/"), row.names=FALSE)
+	write.csv(updatedNEUS, file=paste(new.zip.folder,"neus_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 
@@ -334,9 +335,9 @@ if(nrow(zipFiles_wc)>=1){
 	wcann_invert.names <- names(oldWC$wcann_invert.csv)
 	new_wcann_invert <- newWC[[wc.match["wcann_invert.csv"]]][,wcann_invert.names,with=F]
 
-	write.csv(new_wcann_fish, file=paste(new.zip.folder,"wcann_fish.csv",sep="/"), row.names=FALSE)
-	write.csv(new_wcann_invert, file=paste(new.zip.folder,"wcann_invert.csv",sep="/"), row.names=FALSE)
-	write.csv(new_wcann_haul, file=paste(new.zip.folder,"wcann_haul.csv",sep="/"), row.names=FALSE)
+	write.csv(new_wcann_fish, file=paste(new.zip.folder,"wcann_fish.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	write.csv(new_wcann_invert, file=paste(new.zip.folder,"wcann_invert.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	write.csv(new_wcann_haul, file=paste(new.zip.folder,"wcann_haul.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 
@@ -405,8 +406,11 @@ for(i in 1:length(regions2upload)){
 	file.remove(t.files)
 	
 	oldwd <- getwd()
-	setwd(new.zip.folder)
-	zip(basename(t.dest.dir), files=list.files(basename(t.dest.dir), full=TRUE))
+	# setwd(new.zip.folder)
+	setwd(paste(new.zip.folder,basename(t.dest.dir),sep="/"))
+	# zip(basename(t.dest.dir), files=list.files(basename(t.dest.dir), full=TRUE))
+	# zip("ai", files=list.files(t.dest.file, full=TRUE))
+	zip(file.path("..",t.reg), files=basename(t.dest.file))
 	setwd(oldwd)
 	
 	
