@@ -94,7 +94,7 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", ...) {
 # ============================================
 # = Read in Old Data Sets (currently zipped) =
 # ============================================
-zipFiles <- file.info(list.files("./data", full=TRUE, patt="^Data_Updated_.+"))
+zipFiles <- file.info(list.files("./data", full=TRUE, patt="^Data_Updated_[0-9]{4}.+"))
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 upData <- read.csv.zip(recentZip)
 old.csv.names <- names(upData)
