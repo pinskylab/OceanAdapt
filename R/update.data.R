@@ -58,10 +58,16 @@ wc.match <- c(
 )
 wcann.zip.file <- row.names(zipFiles_wc[order(zipFiles_wc$mtime, zipFiles_wc$ctime, zipFiles_wc$atime, decreasing=TRUE)[1],])
 
-# ==================
-# = Old Data Files =
-# ==================
 
+# ==============================
+# = Function to Wrap in Quotes =
+# ==============================
+wrap.quotes <- function(x){gsub("(.+)", "\"\\1\"", x)}
+
+
+# ===================================
+# = Function to read files from zip =
+# ===================================
 read.csv.zip <- function(zipfile, pattern="\\.csv$", ...){
 	
 	# Create a name for the dir where we'll unzip
@@ -108,6 +114,7 @@ old.csv.names <- names(upData)
 unzip(normalizePath(recentZip), exdir="data/Data_Updated", junkpaths=TRUE, setTimes=TRUE)
 zip.folder <- gsub("(\\.[^.]+$)", "", recentZip)
 new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
+
 
 # =============
 # = Update AI =
@@ -364,9 +371,18 @@ if(file.exists(neus.file)){
 # Also, the NEUS uplaod isn't working still
 if(FALSE){
 	neus.svspp.csv <- read.csv(paste(new.zip.folder,"neus_svspp.csv",sep="/"))
+	
+	# Need to add quotes around author field
+	neus.svspp.csv[,"AUTHOR"] <- wrap.quotes(neus.svspp.csv[,"AUTHOR"])
+	
+	# Wrap column names in quotes
 	names(neus.svspp.csv) <- paste0("\"",names(neus.svspp.csv),"\"")
+	
+	# Add "" column as first column
 	neus.svspp.csv2 <- cbind(NA, neus.svspp.csv)
 	names(neus.svspp.csv2)[1] <- "\"\""
+	
+	# Save csv
 	write.csv(neus.svspp.csv2, file=paste(new.zip.folder,"neus_svspp.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
@@ -437,9 +453,14 @@ if(FALSE){
 # = Zip File for GitHub =
 # =======================
 # Zip up and rename
-zip(new.zip.folder, files=list.files(new.zip.folder, full=TRUE))
-new.zip.file0 <- paste0(new.zip.folder,".zip")
+oldwd <- getwd()
+setwd(dirname(new.zip.folder))
+
+zip(basename(new.zip.folder), files=list.files(basename(new.zip.folder),full=TRUE))
+new.zip.file0 <- paste0(basename(new.zip.folder),".zip")
 file.rename(new.zip.file0, renameNow(new.zip.file0))
+
+setwd(oldwd)
 
 
 # ======================================
