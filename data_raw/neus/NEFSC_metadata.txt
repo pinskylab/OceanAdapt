@@ -1,0 +1,71 @@
+Northeast Fisheries Science Center bottom trawl metadata
+
+	Data emailed by Sean Lucey, Sean.Lucey@noaa.gov, Northeast Fisheries Science Center. Data through 2008 can also be downloaded from www.iobis.org.
+
+Version 2014-03-23/
+	Survdat.RData
+		Northeast US bottom trawl survey data, in binary format (readable by R). Each line is a record for a species caught within a haul/tow on a cruise. These data have already had conversion factors applied and filtered for "good" tows (shg < 136). The script that creates this file is SeanLuceycode/Survdat_calibrate.r. However, the script can only be run from behind the NEFSC firewall.
+	
+		CRUISE6: six-digit cruise id (first four digits are the year)
+		STATION: station number (within a cruise)
+		STRATUM: statistical stratum 
+		SVSPP: species id. matches to SVSPP in neusSVSPP.RData file
+		CATCHSEX: sex of the catch
+			0: unsexed
+			1: male
+			2: female
+			3-6?
+		SVVESSEL: vessel id
+		YEAR: year
+		SEASON: season (FALL or SPRING)
+		LAT: latitude in decimal degrees
+		LON: longitude in decimal degrees
+		DEPTH: depth in meters
+		SURFTEMP: surface temperature in degrees Celsius
+		SURFSALIN: surface salinity 
+		BOTTEMP: bottom temperature, deg C
+		BOTSALIN: bottom salinity
+	
+	SVSPP.RData
+		Northeast US bottom trawl species data
+	
+		SCINAME: scientific name
+		SVSPP: species id
+		ITISSPP: ??
+		COMNAME: common name
+		AUTHOR: author for the species
+
+	station.RData
+		data for each tow. duplicated in Survdat.RData?
+		
+	bigelow_fall_calibration.csv
+	bigelow_spring_calibration.csv
+		Calibration numbers for adjusting data for changes in methods through time. These are two, but not all, of the files used by SeanLuceycode/Survdat_calibrate.r to generate Survdat.RData. Unfortunately, the other files are behind the NEFSC firewall.
+
+	neusStrata.csv
+		Area for each statistical stratum in the Aleutian Island, Eastern Bering Sea, Gulf of Alaska, and Northeast US surveys. Not all files have all fields.
+	
+		NPFMCArea: region name
+		SubareaDescription: subarea name
+		StratumCode: code for the stratum (matches STRATUM in ai, ebs, and goa files)
+		OldStratumCode: stratum code from older classification system (only neus)
+		DepthIntervalm: range of depths for the stratum, in meters
+		Areakm2: area of the stratum in km2
+		Areanmi2: area in square nautical miles
+		
+	SeanLuceycode/Survdat_calibrate.r
+		Pulls data from the NEFSC survey database, filters for "good" tows, and applies calibration factors for changes in methods through time. It then outputs Survdat.RData. It can only be run from behind the NEFSC firewall.
+		
+	SeanLuceycode/survey.r
+		Example code to take Survdat.RData and trim it in various ways.
+
+Version 2015-01-30/
+	Updated Survdat.RData file with date of tow included. This was by way of a new data pull by Sean Lucey at NEFSC.
+		Now as EST_TOWDATE column, which is in format YYYY-MM-DD HH-MM-SS
+	The rest of the files in this version are from the previous data version.
+
+Version 2015-08-05/
+	Ryan Batt got the latest Survdata.RData file from Sean Lucey
+	The SVSPP.RDdata file is from the previous version
+	I did not include the other files that are useful for documenting this dataset. See the Git respository metadata/docs folder for those.
+	

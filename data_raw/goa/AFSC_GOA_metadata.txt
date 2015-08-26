@@ -1,0 +1,75 @@
+AFSC_GOA/
+	Data downloaded from http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm
+
+Version 2011-09-22/
+	goa1984_1987.csv
+	goa1990_1999.csv
+	goa2001_2005.csv
+	goa2007_2011.csv
+		Gulf of Alaska bottom trawl survey data. Files are divided by year. A vessel goes out on a cruise, visits various stations, and conducts hauls with the bottom trawl. Each line is a species caught on a haul/tow.
+	
+		LATITUDE: latitude at start of a survey haul
+		LONGITUDE: longitude at start of a survey haul
+		STATION: station identication number for the haul
+		STRATUM: statistical stratum of the haul
+		YEAR: year of haul
+		DATETIME: date and local time of the haul in MM/DD/YYYYHH:MM
+		WTCPUE: weight in KG/hectare. -9999 for NA
+		NUMCPUE: number, in number/hectrare. -9999 for NA
+		COMMON: common name
+		SCIENTIFIC: scientific name
+		SID: species ID
+		BOT_DEPTH: depth of the bottom at the location of the haul
+		BOT_TEMP: temperature at the bottom
+		SURF_TEMP: surface temperature
+		VESSEL: vessel identification ID
+		CRUISE: cruise identification ID
+		HAUL: haul identification ID
+
+	goaStrata.csv
+		Area for each statistical stratum in the Aleutian Island, Eastern Bering Sea, Gulf of Alaska, and Northeast US surveys. Not all files have all fields.
+	
+		NPFMCArea: region name
+		SubareaDescription: subarea name
+		StratumCode: code for the stratum (matches STRATUM in ai, ebs, and goa files)
+		OldStratumCode: stratum code from older classification system (only neus)
+		DepthIntervalm: range of depths for the stratum, in meters
+		Areakm2: area of the stratum in km2
+		Areanmi2: area in square nautical miles
+
+Version 2013-10-17/
+	goa1984_1987.csv
+	goa1990_1999.csv
+	goa2001_2005.csv
+	goa2007_2013.csv
+		Gulf of Alaska bottom trawl survey data. Files are divided by year. A vessel goes out on a cruise, visits various stations, and conducts hauls with the bottom trawl. Each line is a species caught on a haul/tow.
+	
+		LATITUDE: latitude at start of a survey haul
+		LONGITUDE: longitude at start of a survey haul
+		STATION: station identication number for the haul
+		STRATUM: statistical stratum of the haul
+		YEAR: year of haul
+		DATETIME: date and local time of the haul in MM/DD/YYYYHH:MM
+		WTCPUE: weight in KG/hectare. -9999 for NA
+		NUMCPUE: number, in number/hectrare. -9999 for NA
+		COMMON: common name
+		SCIENTIFIC: scientific name
+		SID: species ID
+		BOT_DEPTH: depth of the bottom at the location of the haul
+		BOT_TEMP: temperature at the bottom
+		SURF_TEMP: surface temperature
+		VESSEL: vessel identification ID
+		CRUISE: cruise identification ID
+		HAUL: haul identification ID
+
+	goaStrata.csv
+		Area for each statistical stratum in the Aleutian Island, Eastern Bering Sea, Gulf of Alaska, and Northeast US surveys. Not all files have all fields.
+	
+		NPFMCArea: region name
+		SubareaDescription: subarea name
+		StratumCode: code for the stratum (matches STRATUM in ai, ebs, and goa files)
+		OldStratumCode: stratum code from older classification system (only neus)
+		DepthIntervalm: range of depths for the stratum, in meters
+		Areakm2: area of the stratum in km2
+		Areanmi2: area in square nautical miles
+
