@@ -1,0 +1,21 @@
+#Ocean Adapt
+##data_updates Readme  
+This folder contains <fill>
+
+When the data sets are to be updated, the contents of this folder will change in the following manner:  
+  
+  1. item  
+  2. item  
+    1. sub  
+    1. sub  
+  1. item  
+  72. item  
+  
+Files ending in the extension `.zip` and following the naming convention 
+`Data_Updated_DATE_TIME.zip` (where `DATE == YYYY-MM-DD` and `TIME == HH-mm-ss-tz`) contain:  
+  * thing
+  * thing2
+  
+The folder `Data_Updated_read2upload` contains the files in the most recently dated of the aforementioned zip files.  
+
+etc
