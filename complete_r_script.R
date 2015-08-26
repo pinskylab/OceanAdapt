@@ -20,7 +20,7 @@ library(data.table) # much of this code could be sped up by converting to data.t
 library(PBSmapping) # for calculating stratum areas
 library(maptools) # for calculating stratum areas
 library(Hmisc)
-#test
+
 
 ### IMPORTANT VARIABLES
 WORKING_DIRECTORY = getwd()
