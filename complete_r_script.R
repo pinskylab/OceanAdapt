@@ -1,10 +1,19 @@
-#Comments:
-#In this file: the top contains required variables and libraris and flags.
+### READ THIS FIRST TO RUN THIS FILE
+# This script runs using the RAW data as downloaded from the OceanAdapt website (http://oceanadapt.rutgers.edu)
+# All of the raw data files need to be in the same directory.
+# There are then three ways to run the script, from easiest to somewhat more advanced:
+#   1) Put this script in the same directory as the data files and use `source('PATH/complete_r_script.R', chdir=TRUE)`, where PATH is replaced with the path to the script (even easier on some systems: drag and drop this script onto the R window and it will source it automatically). The chdir option will temporarily change the working directory to where the script is located. Please use command `?source` for more information.
+#   2) Open R, manually change the working directory to the directory with the data files, and run all the code in this script. 
+#   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with your data and run the script. 
+
+
+### File Structure
+#In this file: the top contains required variables and libraries and flags.
 #The middle contains all functions used by this file
 #The bottom (Search[Ctrl+f] for `programfunction` without quotes) contains the instructions for R to recreate `dat`, the master table
 #Also at the bottom (Search[Ctrl+f] for `modifyprogram` without quotes) you can do your own analysis. We have the code we use there as an example for you.
 
-#Required Libraries
+### Required Libraries
 #You should be able to use the install.packages() function here if the libraries do not exist on your machine
 #Please use command `?install.packages` for more information
 library(data.table) # much of this code could be sped up by converting to data.tables
@@ -12,18 +21,9 @@ library(PBSmapping) # for calculating stratum areas
 library(maptools) # for calculating stratum areas
 library(Hmisc)
 
-#The working directory should be where the script is located. 
-#To run the code properly from R, please use `source('C:/Users/YOUR_USER_NAME/../complete_r_script.R', chdir=TRUE)
-#The chdir option will temporarily change the working directory to where the script is located at.
-#Omitting the chdir parameter may result in file not found/cannot open the connection error messages
-#By default the script will look for data in the folder it is currently placed at, so if you know where the data is you can set 
-# WORKING_DIRECTORY yourself, however, we tried to make it easier for you.
-#Please use command `?source` for more information
 
-#IMPORTANT VARIABLES
-#DO NOT MODIFY BELOW THIS LINE
+### IMPORTANT VARIABLES
 WORKING_DIRECTORY = getwd()
-#DO NOT MODIFY ABOVE THIS LINE
 
 #FLAGS, please make TRUE or FALSE [Yes, in all CAPS].
 PRINT_STATUS = TRUE #DEFAULT: TRUE. Simply uses print() to give a status update to the user. Used by `print_status()`.
@@ -33,7 +33,7 @@ OPTIONAL_PLOT_CHARTS = FALSE #OPTIONAL, DEFAULT:FALSE, creates graphs based on t
 OPTIONAL_OUTPUT_DAT_MASTER_TABLE = FALSE #OPTIONAL, DEFAULT:FALSE, Outputs the dat into an rdata file
 
 
-#Useful generic functions 
+### Useful generic functions 
 sumna = function(x){
   #acts like sum(na.rm=T) but returns NA if all are NA
   if(!all(is.na(x))) return(sum(x, na.rm=T))
@@ -732,7 +732,10 @@ national_data = function (centbio) {
 
 plot_species = function(centbio) {
   # Species
+
+	# for latitude
   #quartz(width = 10, height = 8)
+  print("Starting latitude plots for species")
   pdf(file=paste(WORKING_DIRECTORY, '/sppcentlatstrat_', Sys.Date(), '.pdf', sep=''), width=10, height=8)
   
   regs = sort(unique(centbio$region))
@@ -747,8 +750,8 @@ plot_species = function(centbio) {
       inds = centbio$spp == spps[j] & centbio$region == regs[i]
       minlat = centbio$lat[inds] - centbio$latse[inds]
       maxlat = centbio$lat[inds] + centbio$latse[inds]
-      minlat[is.na(minlat)] = centbio$lat[inds][is.na(minlat)] # fill in missing values so that polygon draws correctly
-      maxlat[is.na(maxlat)] = centbio$lat[inds][is.na(maxlat)]
+      minlat[is.na(minlat) | is.infinite(minlat)] = centbio$lat[inds][is.na(minlat) | is.infinite(minlat)] # fill in missing values so that polygon draws correctly
+      maxlat[is.na(maxlat) | is.infinite(maxlat)] = centbio$lat[inds][is.na(maxlat) | is.infinite(maxlat)]
       ylims = c(min(minlat, na.rm=TRUE), max(maxlat, na.rm=TRUE))
       
       plot(0,0, type='l', ylab='Latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
@@ -761,14 +764,46 @@ plot_species = function(centbio) {
   }
   
   dev.off()
+
+	# for depth
+  print("Starting depth plots for species")
+  pdf(file=paste(WORKING_DIRECTORY, '/sppcentdepthstrat_', Sys.Date(), '.pdf', sep=''), width=10, height=8)
+  
+  regs = sort(unique(centbio$region))
+  for(i in 1:length(regs)){
+    print(i)
+    par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
+    spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
+    
+    xlims = range(centbio$year[centbio$region == regs[i]])
+    
+    for(j in 1:length(spps)){
+      inds = centbio$spp == spps[j] & centbio$region == regs[i]
+      mindep = centbio$depth[inds] - centbio$depthse[inds]
+      maxdep = centbio$depth[inds] + centbio$depthse[inds]
+      mindep[is.na(mindep) | is.infinite(mindep)] = centbio$depth[inds][is.na(mindep) | is.infinite(mindep)] # fill in missing values so that polygon draws correctly
+      maxdep[is.na(maxdep) | is.infinite(maxdep)] = centbio$depth[inds][is.na(maxdep) | is.infinite(maxdep)]
+      ylims = c(min(mindep, na.rm=TRUE), max(maxdep, na.rm=TRUE))
+      
+      plot(0,0, type='l', ylab='Depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
+      polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
+      lines(centbio$year[inds], centbio$depth[inds], col='#D95F02', lwd=2)
+      
+      if((j-1) %% 6 == 0) mtext(text='Depth (m)', side=2, line=2.3, cex=0.6)
+      if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
+    }
+  }
+  
+  dev.off()
+
 }
 
 plot_regional = function(regcentbio) {
   
   # Regional
   #quartz(width=6, height=6)
-  pdf(file=paste(WORKING_DIRECTORY, '/regcentlatstrat_', Sys.Date(), '.pdf', sep=''), width=6, height=6)
-  par(mfrow=c(3,3))
+  pdf(file=paste(WORKING_DIRECTORY, '/regcentlat_depth_strat_', Sys.Date(), '.pdf', sep=''), width=6, height=6)
+  par(mfrow=c(3,3)) # page 1: latitude
   
   regs = sort(unique(regcentbio$region))
   for(i in 1:length(regs)){
@@ -782,9 +817,25 @@ plot_regional = function(regcentbio) {
     polygon(c(regcentbio$year[inds], rev(regcentbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
     lines(regcentbio$year[inds], regcentbio$lat[inds], col='#D95F02', lwd=2)
   }
+
+  par(mfrow=c(3,3)) # page 2: depth
+  regs = sort(unique(regcentbio$region))
+  for(i in 1:length(regs)){
+    inds = regcentbio$region == regs[i]
+    mindep = regcentbio$depth[inds] - regcentbio$depthse[inds]
+    maxdep = regcentbio$depth[inds] + regcentbio$depthse[inds]
+    xlims = range(regcentbio$year[regcentbio$region == regs[i]])
+    ylims = c(min(mindep, na.rm=TRUE), max(maxdep, na.rm=TRUE))
+    
+    plot(0,0, type='l', ylab='Depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main=regs[i], las=1)
+    polygon(c(regcentbio$year[inds], rev(regcentbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
+    lines(regcentbio$year[inds], regcentbio$depth[inds], col='#D95F02', lwd=2)
+  }
+
   
   dev.off()
 }
+
 plot_national = function(natcentbio) {
   
   # National
