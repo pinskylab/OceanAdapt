@@ -67,5 +67,5 @@ Version 2015-01-30/
 Version 2015-08-05/
 	Ryan Batt got the latest Survdata.RData file from Sean Lucey
 	The SVSPP.RDdata file is from the previous version
-	I did not include the other files that are useful for documenting this dataset. See the Git respository metadata/docs folder for those.
+	Malin did not include in the zipfile the other files that are useful for documenting this dataset. See the Git respository metadata/docs folder for those.
 	

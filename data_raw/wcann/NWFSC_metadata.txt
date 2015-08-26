@@ -39,3 +39,6 @@ Version 2014-02-11/
 
 	wcann2003_2012invert.csv
 		West Coast annual bottom trawl survey, invertebrate catch data. Same field metadata as for wcann2003_2012fish.csv. Needs to be linked with other wcann files to get full trawl data.
+
+Version 2015-07-22/
+	Ryan Batt submitted a data request to Beth Horness at NWFSC. She sent the files back as CSVs.

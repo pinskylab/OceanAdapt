@@ -70,4 +70,5 @@ Version 2013-10-17/
 		Areakm2: area of the stratum in km2
 		Areanmi2: area in square nautical miles
 
-
+Version 2015-08-26/
+	Malin downloaded the complete set of csvs from http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm

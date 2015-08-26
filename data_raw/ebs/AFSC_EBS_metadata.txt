@@ -1,4 +1,6 @@
 Alaska Fishery Science Center Eastern Bering Sea bottom trawl survey
+
+Version 2013-10-17/
 	Data downloaded from http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm
 
 	ebs1982_1984.csv
@@ -40,3 +42,5 @@ Alaska Fishery Science Center Eastern Bering Sea bottom trawl survey
 		Areakm2: area of the stratum in km2
 		Areanmi2: area in square nautical miles
 
+Version 2015-08-26/
+	Malin downloaded the complete set of csvs from http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
