@@ -1,6 +1,5 @@
 #Ocean Adapt
 ##data_updates Readme  
-This folder contains <fill>
 
 When the data sets are to be updated, the contents of this folder will change in the following manner:  
   
