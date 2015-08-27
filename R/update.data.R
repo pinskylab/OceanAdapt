@@ -149,8 +149,6 @@ new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
 # ========================================================
 # = Prepare the Directory that will be Focus of Updates  =
 # ========================================================
-
-
 	# ensure clean start by deleting this directory and all of its contents, the recreating it
 if(file.exists(new.zip.folder)){
 	# delete all of directory's contents
@@ -213,11 +211,11 @@ if(length(ai.fileS)>=1){ # if not 0 will be true
 #
 	# Save data
 	write.csv(updatedAI, file=paste(new.zip.folder,"ai_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 # Update Strata file
 oldAI2 <- upData$ai_strata.csv
-if(file.exists(ai.file2)){
+if(file.exists(ai.file2)){ # NOT FOUND, NO CHECK 2015-08-27 RDB
 	newAI2 <- as.data.table(read.csv(ai.file2)) # had to use read.csv to auto remove whitespace in col names
 	ai.names2 <- names(oldAI2)
 	stopifnot(all(ai.names2%in%names(newAI2)))
@@ -266,11 +264,11 @@ if(length(ebs.fileS)>=1){ # if not 0 will be true
 	
 	# Save updated file
 	write.csv(updatedEBS, file=paste(new.zip.folder,"ebs_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 # Update Strata file
 oldEBS2 <- upData$ebs_strata.csv
-if(file.exists(ebs.file2)){
+if(file.exists(ebs.file2)){ # NOT FOUND, NO CHECK 2015-08-27 RDB
 	
 	# Load Data
 	newEBS2 <- as.data.table(read.csv(ebs.file2)) # had to use read.csv to auto remove whitespace in col names
@@ -325,11 +323,11 @@ if(length(goa.fileS)>=1){
 	
 	# Save data
 	write.csv(updatedGOA, file=paste(new.zip.folder,"goa_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS with WARNING (column type fread()) 2015-08-27 RDB
 
 # Update Strata file
 oldGOA2 <- upData$goa_strata.csv
-if(file.exists(goa.file2)){
+if(file.exists(goa.file2)){ # NOT FOUND, NO CHECK 2015-08-27 RDB
 	newGOA2 <- as.data.table(read.csv(goa.file2)) # had to use read.csv to auto remove whitespace in col names
 	goa.names2 <- names(oldGOA2)
 	stopifnot(all(goa.names2%in%names(newGOA2)))
@@ -346,14 +344,14 @@ if(file.exists(goa.file2)){
 # http://seamap.gsmfc.org/
 
 # bio
-oldGMEX.bio <- upData$gmex_bio.csv
+oldGMEX.bio <- upData$gmex_bio.csv # only uses old data files for names
 if(file.exists(gmex.bio.file)){ # consider having it look for the zip file too, then unzipping it
 	newGMEX.bio0 <- as.data.table(read.csv(gmex.bio.file))
 	stopifnot(all(names(oldGMEX.bio)%in%names(newGMEX.bio0)))
 	gmex.bio.names <- names(oldGMEX.bio)
 	newGMEX.bio <- newGMEX.bio0[,(gmex.bio.names), with=FALSE]
 	write.csv(newGMEX.bio, file=paste(new.zip.folder,"gmex_bio.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 # cruise
 oldGMEX.cruise <- upData$gmex_cruise.csv
@@ -373,7 +371,7 @@ if(file.exists(gmex.cruise.file)){
 	stopifnot(all(gmex.cruise.names%in%names(newGMEX.cruise0)))
 	newGMEX.cruise <- newGMEX.cruise0[,(gmex.cruise.names), with=FALSE]
 	write.csv(newGMEX.cruise, file=paste(new.zip.folder,"gmex_cruise.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 # spp
 oldGMEX.spp <- upData$gmex_spp.csv
@@ -383,7 +381,7 @@ if(file.exists(gmex.spp.file)){
 	gmex.spp.names <- names(oldGMEX.spp)
 	newGMEX.spp <- newGMEX.spp0[,(gmex.spp.names), with=FALSE]
 	write.csv(newGMEX.spp, file=paste(new.zip.folder,"gmex_spp.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 # station
 oldGMEX.station <- upData$gmex_station.csv
@@ -394,14 +392,14 @@ if(file.exists(gmex.station.file)){
 	# to the following message ...
 	msg1 <- "WAIT! You need to open"
 	msg2 <- "in Excel, then resave it as a csv for the file to load properly."
-	cat("\n",msg1,gmex.station.file, msg2, "\n")
+	message("\n",msg1,gmex.station.file, msg2, "\n")
 
 	newGMEX.station0 <- as.data.table(read.csv(gmex.station.file))
 	stopifnot(all(names(oldGMEX.station)%in%names(newGMEX.station0)))
 	gmex.station.names <- names(oldGMEX.station)
 	newGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
 	write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 
 # tow
@@ -412,7 +410,7 @@ if(file.exists(gmex.tow.file)){
 	gmex.tow.names <- names(oldGMEX.tow)
 	newGMEX.tow <- newGMEX.tow0[,(gmex.tow.names), with=FALSE]
 	write.csv(newGMEX.tow, file=paste(new.zip.folder,"gmex_tow.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 
 # ========
@@ -462,7 +460,7 @@ if(file.exists(neus.file)){
 	
 	# Save NEUS
 	write.csv(updatedNEUS2, file=paste(new.zip.folder,"neus_neus.csv",sep="/"), row.names=FALSE, quote=FALSE) # neus breaks the naming convention
-}
+} # WORKS 2015-08-27 RDB
 
 # Fix up NEUS's svspp.csv file
 # This was not originally in right format, but 
@@ -484,7 +482,7 @@ if(FALSE){
 	
 	# Save csv
 	write.csv(neus.svspp.csv2, file=paste(new.zip.folder,"neus_svspp.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # NO TEST 2015-08-27 RDB
 
 
 # ======
@@ -603,7 +601,7 @@ push(path=localPath, remoteName=remoteName, path2=remotePath)
 # Cleanup by deleting holding folder and zipped holding folder
 file.remove(localPath) # delete local zip
 # sapply(c(list.files(normalizePath(raw.dir), full=T),normalizePath(raw.dir)), file.remove) # delete local folder
-# @mpinsky ... i'm really not sure what you want to do with these files now. Do we want to have 2+ copies of all the raw data files on github? (one idata data raw, one in the raw-file-updated-on, and then all the version history of both of those on top of it)
+
 
 # ============================================
 # = Reorganize Updated Data for Upload to OA =
