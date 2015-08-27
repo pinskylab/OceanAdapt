@@ -696,11 +696,11 @@ for(i in 1:length(regions2upload)){
 # To finish the process for preparing for the OA upload,
 # mark the folder as containing the .zip files that are ready
 # to be uplaoded
-r2u.dir <- paste(normalizePath(new.zip.folder),"ready2upload",sep="_")
-if(file.exists(r2u.dir)){
-	sapply(list.files(r2u.dir, full=TRUE), file.remove)
-}
-file.rename(normalizePath(new.zip.folder), r2u.dir)
+# r2u.dir <- paste(normalizePath(new.zip.folder),"ready2upload",sep="_")
+# if(file.exists(r2u.dir)){
+# 	sapply(list.files(r2u.dir, full=TRUE), file.remove)
+# }
+# file.rename(normalizePath(new.zip.folder), r2u.dir)
 
 
 # =======================================================
