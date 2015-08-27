@@ -15,7 +15,7 @@ Sub-directories found here:
 * wcann: west coast annual survey (run by NWFSC)  
 * wctri: west coast triennial survey (run by AFSC, now stopped)  
 
-# Regions included in OceanAdapt:
+### Regions included in OceanAdapt:
 * ai
 * ebs
 * gmex
