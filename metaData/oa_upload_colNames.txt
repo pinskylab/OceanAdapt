@@ -16,7 +16,7 @@ ai
  		SURF_TEMP
  		VESSEL
  		CRUISE
- 		HAUL       
+ 		HAUL
  
 	 strata.csv 
  		NPFMCArea
@@ -72,8 +72,7 @@ goa
  		SURF_TEMP
  		VESSEL
  		CRUISE
- 		HAUL       
- 		HAUL    
+ 		HAUL
  
 	 strata.csv 
  		SubareaDescription
