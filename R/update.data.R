@@ -68,6 +68,15 @@ wc.match <- c(
 wcann.zip.file <- row.names(zipFiles_wc[order(zipFiles_wc$mtime, zipFiles_wc$ctime, zipFiles_wc$atime, decreasing=TRUE)[1],])
 
 
+# ====================================================
+# = Function to Trim Trailing and Leading Whitespace =
+# ====================================================
+# http://stackoverflow.com/questions/2261079/how-to-trim-leading-and-trailing-whitespace-in-r
+# Simple regex, but the answer also provides some other handy tricks
+# and explanation if others are interested in learning more
+trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+
+
 # ==============================
 # = Function to Wrap in Quotes =
 # ==============================
