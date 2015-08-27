@@ -122,7 +122,7 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, ...){
 # ============================================
 # = Read in Old Data Sets (currently zipped) =
 # ============================================
-zipFiles <- file.info(list.files("./data_updates", full=TRUE, patt="^Data_.+.zip"))
+zipFiles <- file.info(list.files("./data_updates", full=TRUE, patt="^Data_.+.zip")) # zipFiles only used in next few lines; intended to find old data sets, which is used both for main data (which we're now just redownloading every year), as well as for the strata files etc.
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 # upData <- read.csv.zip(recentZip, integer64="character")
 data.vis <- sort(list.files("./data_download",pattern="Data_Vis_.[0-9,_]*.zip", full=T),dec=T)[1] # grab most recent data.viz 
