@@ -176,13 +176,6 @@ if(!file.exists(new.zip.folder)){
 unzip(normalizePath(recentZip), exdir=new.zip.folder, junkpaths=TRUE, setTimes=TRUE)
 
 
-
-
-
-
-	
-
-
 # =============
 # = Update AI =
 # =============
@@ -610,7 +603,7 @@ push(path=localPath, remoteName=remoteName, path2=remotePath)
 
 # Cleanup by deleting holding folder and zipped holding folder
 file.remove(localPath) # delete local zip
-# sapply(c(list.files(normalizePath(raw.dir), full=T),normalizePath(raw.dir)), file.remove) # delete local folder
+sapply(c(list.files(normalizePath(raw.dir), full=T),normalizePath(raw.dir)), file.remove) # delete local folder and its files
 
 
 # ============================================
