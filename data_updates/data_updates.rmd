@@ -4,7 +4,7 @@ This folder contains <fill>
 
 When the data sets are to be updated, the contents of this folder will change in the following manner:  
   
-  1. A new zip file will be added. Old zip files will remain.
+  1. A new zip file will be added. Old zip files will remain. The updata.data.R script produces this zip file from the files in data_raw/
   
 Files ending in the extension `.zip` and following the naming convention 
 `Data_Updated_DATE_TIME.zip` (where `DATE == YYYY-MM-DD` and `TIME == HH-mm-ss-tz`) contain:  
@@ -29,8 +29,13 @@ Files ending in the extension `.zip` and following the naming convention
       2. strata.csv
       3. svspp.csv
     6. wcann.zip
+      1. fish.csv
+      2. haul.csv
+      3. invert.csv
     7. wctri.zip
-  
+      1. catch.csv
+      2. haul.csv
+      3. species.csv
+      
 The folder `Data_Updated_read2upload` contains the files in the most recently dated of the aforementioned zip files.  
 
-etc
