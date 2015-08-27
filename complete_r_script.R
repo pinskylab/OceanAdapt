@@ -5,7 +5,7 @@
 #   1) Put this script in the same directory as the data files and use `source('PATH/complete_r_script.R', chdir=TRUE)`, where PATH is replaced with the path to the script (even easier on some systems: drag and drop this script onto the R window and it will source it automatically). The chdir option will temporarily change the working directory to where the script is located. Please use command `?source` for more information.
 #   2) Open R, manually change the working directory to the directory with the data files, and run all the code in this script. 
 #   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with your data and run the script. 
- 
+    
 
 ### File Structure
 #In this file: the top contains required variables and libraries and flags.
@@ -220,9 +220,9 @@ compile_GMEX = function () {
   return(gmex)
 }
 
-compile_SEUS = function () { 
+compile_SEUSSpr = function () { 
   #Southeast US
-  #function returns seusSPRING, seusSUMMER, seusFALL
+  #function returns seusSPRING
   survcatch = data.table(read.csv(file=paste(WORKING_DIRECTORY, '/seus_catch.csv', sep=''), stringsAsFactors=FALSE))
   survhaul = data.table(read.csv(paste(WORKING_DIRECTORY, '/seus_haul.csv', sep=''), stringsAsFactors=FALSE)) # only needed for DEPTHSTART
   survhaul <- unique(data.table(EVENTNAME = survhaul$EVENTNAME, DEPTHSTART = survhaul$DEPTHSTART))
@@ -239,40 +239,107 @@ compile_SEUS = function () {
   seus = cbind(seus, MONTH = month(seus$DATE))
   SEASON = as.yearqtr(seus$DATE)
   seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
+  
+  #seus has some unique data corrections that are dealt with here
+  #Occasions where weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
+  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 20010106 & seus$SPECIESCODE == 8713050104, 31.9) 
+  seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT) & seus$SPECIESCODE == 5802010101] <- 0 # these 'NA' weights needed to first be converted to 0
+  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9)
+  seus = seus[!is.na(seus$SPECIESTOTALWEIGHT),] # remove long line fish from dataset which have 'NA' for weight
+  #Three hauls have 0 or NA for 'EFFORT', which are data entry errors, the following corrects these values
+  seus$EFFORT[seus$COLLECTIONNUMBER == 19910105] <- 1.71273
+  seus$EFFORT[seus$COLLECTIONNUMBER == 19990065] <- 0.53648
+  seus$EFFORT[seus$COLLECTIONNUMBER == 20070177] <- 0.99936
+  
+  #Separate the the spring season and convert to dataframe
+  seusSPRING = as.data.frame(seus[seus$SEASON == "spring",])
+  return(seusSPRING)
+} 
+
+compile_SEUSSum = function () { 
+  #Southeast US
+  #function returns seusSUMMER
+  survcatch = data.table(read.csv(file=paste(WORKING_DIRECTORY, '/seus_catch.csv', sep=''), stringsAsFactors=FALSE))
+  survhaul = data.table(read.csv(paste(WORKING_DIRECTORY, '/seus_haul.csv', sep=''), stringsAsFactors=FALSE)) # only needed for DEPTHSTART
+  survhaul <- unique(data.table(EVENTNAME = survhaul$EVENTNAME, DEPTHSTART = survhaul$DEPTHSTART))
+  seusstrata = data.table(read.csv(paste(WORKING_DIRECTORY, '/seus_strata.csv', sep=''))) # contains strata areas
+  setkey(survcatch, EVENTNAME, SPECIESCODE)
+  setkey(survhaul, EVENTNAME)
+  seus = survcatch[survhaul] # Add depth data from survhaul 
+  seus = cbind(seus, STRATA = as.integer(str_sub(string = seus$STATIONCODE, start = 1, end = 2))) #Create STRATA column
+  seus = seus[seus$DEPTHZONE != "OUTER",] # Drop OUTER depth zone because it was only sampled for 10 years
+  seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
+  
+  #Create a 'SEASON' column using 'MONTH' as a criteria
+  seus$DATE <- as.Date(seus$DATE, "%m/%d/%Y")
+  seus = cbind(seus, MONTH = month(seus$DATE))
+  SEASON = as.yearqtr(seus$DATE)
+  seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
   #September EVENTS were grouped with summer, should be fall because all hauls made in late-September during fall-survey
   seus$SEASON[seus$MONTH == 9] <- "fall"
   
   #seus has some unique data corrections that are dealt with here
-  #On 20 occasions, weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
-  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 20010106 & seus$SPECIESCODE == 8713050104, 31.9) 
+  #Occasions where weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
   seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT) & seus$SPECIESCODE == 5802010101] <- 0 # these 'NA' weights needed to first be converted to 0
   seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9)
   seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 19940236 & seus$SPECIESCODE == 9002050101, 204) 
   seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46) 
   
   seus = seus[!is.na(seus$SPECIESTOTALWEIGHT),] # remove long line fish from dataset which have 'NA' for weight
-
-  #Nine hauls have 0 or NA for 'EFFORT', which are data entry errors, the following corrects these values
-  seus$EFFORT[seus$COLLECTIONNUMBER == 19910105] <- 1.71273
-  seus$EFFORT[seus$COLLECTIONNUMBER == 19910423] <- 0.50031
+  
+  #Four hauls have 0 or NA for 'EFFORT', which are data entry errors, the following corrects these values
   seus$EFFORT[seus$COLLECTIONNUMBER == 19950335] <- 0.9775
-  seus$EFFORT[seus$COLLECTIONNUMBER == 19990065] <- 0.53648
-  seus$EFFORT[seus$COLLECTIONNUMBER == 20010431] <- 0.25099
-  seus$EFFORT[seus$COLLECTIONNUMBER == 20070177] <- 0.99936
   seus$EFFORT[seus$COLLECTIONNUMBER == 20110393] <- 1.65726
   seus$EFFORT[seus$EVENTNAME == 2014325] <- 1.755
   seus$EFFORT[seus$EVENTNAME == 1992219] <- 1.796247
   #Data entry error fixes for lat/lon coordinates
-  seus$LONGITUDESTART[seus$EVENTNAME == 1998467] <- -79.01
   seus$LONGITUDESTART[seus$EVENTNAME == 2010233] <- -81.006
   seus$LATITUDESTART[seus$EVENTNAME == 2014325] <- 34.616
   
-  #Separate the three different seasons
-  #seusSPRING <- as.data.frame(seus[seus$SEASON == "spring",])
-  #seusSUMMER <- as.data.frame(seus[seus$SEASON == "summer",])
-  #seusFALL <- as.data.frame(seus[seus$SEASON == "fall",])
-  #return(seusSPRING, seusSUMMER, FALL)
-  return(seus)
+  #Separate the summer season and convert to dataframe
+  seusSUMMER = as.data.frame(seus[seus$SEASON == "summer",])
+  return(seusSUMMER)
+} 
+
+compile_SEUSFal = function () { 
+  #Southeast US
+  #function returns seusFALL
+  survcatch = data.table(read.csv(file=paste(WORKING_DIRECTORY, '/seus_catch.csv', sep=''), stringsAsFactors=FALSE))
+  survhaul = data.table(read.csv(paste(WORKING_DIRECTORY, '/seus_haul.csv', sep=''), stringsAsFactors=FALSE)) # only needed for DEPTHSTART
+  survhaul <- unique(data.table(EVENTNAME = survhaul$EVENTNAME, DEPTHSTART = survhaul$DEPTHSTART))
+  seusstrata = data.table(read.csv(paste(WORKING_DIRECTORY, '/seus_strata.csv', sep=''))) # contains strata areas
+  setkey(survcatch, EVENTNAME, SPECIESCODE)
+  setkey(survhaul, EVENTNAME)
+  seus = survcatch[survhaul] # Add depth data from survhaul 
+  seus = cbind(seus, STRATA = as.integer(str_sub(string = seus$STATIONCODE, start = 1, end = 2))) #Create STRATA column
+  seus = seus[seus$DEPTHZONE != "OUTER",] # Drop OUTER depth zone because it was only sampled for 10 years
+  seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
+  
+  #Create a 'SEASON' column using 'MONTH' as a criteria
+  seus$DATE <- as.Date(seus$DATE, "%m/%d/%Y")
+  seus = cbind(seus, MONTH = month(seus$DATE))
+  SEASON = as.yearqtr(seus$DATE)
+  seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
+  #September EVENTS were grouped with summer, should be fall because all hauls made in late-September during fall-survey
+  seus$SEASON[seus$MONTH == 9] <- "fall"
+  
+  #seus has some unique data corrections that are dealt with here
+  #Occasions where weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
+  seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT) & seus$SPECIESCODE == 5802010101] <- 0 # these 'NA' weights needed to first be converted to 0
+  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9)
+  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46) 
+  
+  seus = seus[!is.na(seus$SPECIESTOTALWEIGHT),] # remove long line fish from dataset which have 'NA' for weight
+  
+  #Two hauls have 0 or NA for 'EFFORT', which are data entry errors, the following corrects these values
+  seus$EFFORT[seus$COLLECTIONNUMBER == 19910423] <- 0.50031
+  seus$EFFORT[seus$COLLECTIONNUMBER == 20010431] <- 0.25099
+  #Data entry error fix for lat/lon coordinates
+  seus$LONGITUDESTART[seus$EVENTNAME == 1998467] <- -79.01
+  
+  #Separate the fall season and convert to dataframe
+  seusFALL = as.data.frame(seus[seus$SEASON == "fall",])
+  return(seusFALL)
 } 
 
 #region helper functions
@@ -290,7 +357,9 @@ create_haul_id = function  () {
   wctri$haulid <<- paste(formatC(wctri$VESSEL, width=3, flag=0), formatC(wctri$CRUISE, width=3, flag=0), formatC(wctri$HAUL, width=3, flag=0), sep='-')
   wcann$haulid <<- wcann$Trawl.Id
   gmex$haulid <<- paste(formatC(gmex$VESSEL, width=3, flag=0), formatC(gmex$CRUISE_NO, width=3, flag=0), formatC(gmex$P_STA_NO, width=5, flag=0, format='d'), sep='-')
-  seus$haulid <<- seus$EVENTNAME
+  seusSPRING$haulid <<- seusSPRING$EVENTNAME
+  seusSUMMER$haulid <<- seusSUMMER$EVENTNAME
+  seusFALL$haulid <<- seusFALL$EVENTNAME  
   return(TRUE)
 }
 
@@ -313,7 +382,9 @@ extract_year = function () {
   wctri$year <<- as.numeric(substr(wctri$CRUISE, 1,4))
   wcann$year <<- as.numeric(gsub('Cycle ', '', wcann$Survey.Cycle))
   gmex$year <<- as.numeric(unlist(strsplit(as.character(gmex$MO_DAY_YR), split='-'))[seq(1,by=3,length=nrow(gmex))])
-  seus$year <<- as.numeric(substr(seus$EVENTNAME, 1,4))
+  seusSPRING$year <<- as.numeric(substr(seusSPRING$EVENTNAME, 1,4))
+  seusSUMMER$year <<- as.numeric(substr(seusSUMMER$EVENTNAME, 1,4))
+  seusFALL$year <<- as.numeric(substr(seusFALL$EVENTNAME, 1,4))
   
   return(TRUE)
 }
@@ -361,10 +432,9 @@ high_quality_years = function () {
   # Trim to high-quality years (sample all strata)  
   goa <<- goa[!(goa$YEAR %in% 2001),] # 2001 didn't sample many strata
   gmex <<- gmex[!(gmex$year %in% c(1982, 1983)),] # 1982 and 1983 didn't sample many strata
-  seus <<- seus[!(seus$year %in% 1989),] # Many strata this year only had one two, plus spring sampled at night
-  #The following two year/season combos did not sample all strata
-  seus <<- seus[!(seus$year %in% 1990 & seus$SEASON %in% "fall"),]
-  seus <<- seus[!(seus$year %in% 2013 & seus$SEASON %in% "spring"),]
+  seusSPRING <<- seusSPRING[seusSPRING$year != 1989 & seusSPRING$year != 2013,] # Many strata in 1989 only had one tow, plus spring sampled at night. 2013 did not sample all strata.
+  seusSUMMER <<- seusSUMMER[!(seusSUMMER$year %in% 1989),] # Many strata in 1989 only had one tow.
+  seusFALL <<- seusFALL[seusFALL$year != 1989 & seusFALL$year != 1990,] # Many strata in 1989 only had one tow. 1990 did not sample all strata
   return(TRUE)
 }
 fix_speed = function () {
@@ -449,13 +519,26 @@ column_names_updated = function () {
   
   names(gmex)[names(gmex)=='TAXONOMIC'] <<- 'spp'
   
-  names(seus)[names(seus)=='STRATA'] <<- 'stratum'
-  names(seus)[names(seus)=='LATITUDESTART'] <<- 'lat'
-  names(seus)[names(seus)=='LONGITUDESTART'] <<- 'lon' 
-  names(seus)[names(seus)=='DEPTHSTART'] <<- 'depth'
-  names(seus)[names(seus)=='SPECIESSCIENTIFICNAME'] <<- 'spp'
-  names(seus)[names(seus)=='STRATAHECTARE'] <<- 'stratumarea'
+  names(seusSPRING)[names(seusSPRING)=='STRATA'] <<- 'stratum'
+  names(seusSPRING)[names(seusSPRING)=='LATITUDESTART'] <<- 'lat'
+  names(seusSPRING)[names(seusSPRING)=='LONGITUDESTART'] <<- 'lon' 
+  names(seusSPRING)[names(seusSPRING)=='DEPTHSTART'] <<- 'depth'
+  names(seusSPRING)[names(seusSPRING)=='SPECIESSCIENTIFICNAME'] <<- 'spp'
+  names(seusSPRING)[names(seusSPRING)=='STRATAHECTARE'] <<- 'stratumarea'
   
+  names(seusSUMMER)[names(seusSUMMER)=='STRATA'] <<- 'stratum'
+  names(seusSUMMER)[names(seusSUMMER)=='LATITUDESTART'] <<- 'lat'
+  names(seusSUMMER)[names(seusSUMMER)=='LONGITUDESTART'] <<- 'lon' 
+  names(seusSUMMER)[names(seusSUMMER)=='DEPTHSTART'] <<- 'depth'
+  names(seusSUMMER)[names(seusSUMMER)=='SPECIESSCIENTIFICNAME'] <<- 'spp'
+  names(seusSUMMER)[names(seusSUMMER)=='STRATAHECTARE'] <<- 'stratumarea'
+  
+  names(seusFALL)[names(seusFALL)=='STRATA'] <<- 'stratum'
+  names(seusFALL)[names(seusFALL)=='LATITUDESTART'] <<- 'lat'
+  names(seusFALL)[names(seusFALL)=='LONGITUDESTART'] <<- 'lon' 
+  names(seusFALL)[names(seusFALL)=='DEPTHSTART'] <<- 'depth'
+  names(seusFALL)[names(seusFALL)=='SPECIESSCIENTIFICNAME'] <<- 'spp'
+  names(seusFALL)[names(seusFALL)=='STRATAHECTARE'] <<- 'stratumarea'
   return(TRUE)
 }
 
@@ -484,8 +567,12 @@ remove_paired_tows = function () {
   gmex <<- gmex[!(gmex$haulid %in% unique(dupped$haulid[grep('PORT', dupped$COMSTAT)])),] # remove the port haul (this is arbitrary, but seems to be right based on the notes associated with these hauls)
   
   #In seus there are two 'COLLECTIONNUMBERS' per 'EVENTNAME', with no exceptions; EFFORT is always the same for each COLLECTIONNUMBER
-  seus <<- aggregate(list(BIOMASS = seus$SPECIESTOTALWEIGHT), by=list(haulid = seus$haulid, stratum = seus$stratum, stratumarea = seus$stratumarea, year = seus$year, lat = seus$lat, lon = seus$lon, depth = seus$depth, SEASON = seus$SEASON, EFFORT = seus$EFFORT, spp = seus$spp), FUN=sum)
-  seus$wtcpue <<- seus$BIOMASS/(seus$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  seusSPRING <<- aggregate(list(BIOMASS = seusSPRING$SPECIESTOTALWEIGHT), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, SEASON = seusSPRING$SEASON, EFFORT = seusSPRING$EFFORT, spp = seusSPRING$spp), FUN=sum)
+  seusSPRING$wtcpue <<- seusSPRING$BIOMASS/(seusSPRING$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, EFFORT = seusSUMMER$EFFORT, spp = seusSUMMER$spp), FUN=sum)
+  seusSUMMER$wtcpue <<- seusSUMMER$BIOMASS/(seusSUMMER$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  seusFALL <<- aggregate(list(BIOMASS = seusFALL$SPECIESTOTALWEIGHT), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, SEASON = seusFALL$SEASON, EFFORT = seusFALL$EFFORT, spp = seusFALL$spp), FUN=sum)
+  seusFALL$wtcpue <<- seusFALL$BIOMASS/(seusFALL$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
   
   return(TRUE)
 }
@@ -503,8 +590,10 @@ remove_rows_without_sci_names_or_fish_or_inverts = function() {
   wcann <<- wcann[wcann$spp != '' & !(wcann$spp %in% c("Apristurus brunneus egg case", "gastropod eggs", "Selachimorpha egg case", "Bathyraja sp. egg case", "fish eggs unident.", "Hydrolagus colliei egg case", "Raja binoculata egg case", "Raja sp. egg case", "Rajiformes egg case", "Shark egg case unident.")),]
   gmex <<- gmex[!(gmex$spp == '' | is.na(gmex$spp)),]
   gmex <<- gmex[!(gmex$spp %in% c('UNID CRUSTA', 'UNID OTHER', 'UNID.FISH', 'CRUSTACEA(INFRAORDER) BRACHYURA', 'MOLLUSCA AND UNID.OTHER #01', 'ALGAE', 'MISCELLANEOUS INVERTEBR', 'OTHER INVERTEBRATES')),]	# remove unidentified spp
-  seus <<- seus[!(seus$spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','MICROPANOPE NUTTINGI','PSEUDOMEDAEUS AGASSIZII','ALGAE','DYSPANOPEUS SAYI')),]
-  
+  #For seus a few unreliable taxa are also removed 
+  seusSPRING <<- seus[!(seus$spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','MICROPANOPE NUTTINGI','ALGAE','DYSPANOPEUS SAYI')),]
+  seusSUMMER <<- seus[!(seus$spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','PSEUDOMEDAEUS AGASSIZII','ALGAE','DYSPANOPEUS SAYI')),]  
+  seusFALL <<- seus[!(seus$spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','ALGAE','DYSPANOPEUS SAYI')),]
   return(TRUE)
 }
 
@@ -560,8 +649,12 @@ adjust_spp_names = function () {
   i = gmex$spp %in% c('SOLENOCERA ATLANTIDIS', 'SOLENOCERA NECOPINA', 'SOLENOCERA VIOSCAI'); gmex$spp[i] <<- 'SOLENOCERA'
   i = gmex$spp %in% c('TRACHYPENEUS CONSTRICTUS', 'TRACHYPENEUS SIMILIS'); gmex$spp[i] <<- 'TRACHYPENEUS'
 
-  seus$spp[seus$spp %in% c('ANCHOA HEPSETUS','ANCHOA MITCHILLI','ANCHOA LYOLEPIS')] <<- 'ANCHOA'
-  seus$spp[seus$spp %in% c('LIBINIA DUBIA','LIBINIA EMARGINATA')] <<- 'LIBINIA'
+  seusSPRING$spp[seusSPRING$spp %in% c('ANCHOA HEPSETUS','ANCHOA MITCHILLI','ANCHOA LYOLEPIS')] <<- 'ANCHOA'
+  seusSPRING$spp[seusSPRING$spp %in% c('LIBINIA DUBIA','LIBINIA EMARGINATA')] <<- 'LIBINIA'
+  seusSUMMER$spp[seusSUMMER$spp %in% c('ANCHOA HEPSETUS','ANCHOA MITCHILLI','ANCHOA LYOLEPIS')] <<- 'ANCHOA'
+  seusSUMMER$spp[seusSUMMER$spp %in% c('LIBINIA DUBIA','LIBINIA EMARGINATA')] <<- 'LIBINIA'
+  seusFALL$spp[seusFALL$spp %in% c('ANCHOA HEPSETUS','ANCHOA MITCHILLI','ANCHOA LYOLEPIS')] <<- 'ANCHOA'
+  seusFALL$spp[seusFALL$spp %in% c('LIBINIA DUBIA','LIBINIA EMARGINATA')] <<- 'LIBINIA'
   
   ai2 = aggregate(list(wtcpue = ai$wtcpue), by = list(haulid = ai$haulid, stratum = ai$stratum, stratumarea = ai$stratumarea, year = ai$year, lat = ai$lat, lon = ai$lon, depth = addNA(ai$depth), spp = ai$spp), FUN=sumna) # use addNA() for depth so that NA values are not dropped by aggregate()
   ai2$depth = as.numeric(as.character(ai2$depth)) # convert depth back to a numeric
@@ -584,7 +677,9 @@ adjust_spp_names = function () {
   
   gmex2 = aggregate(list(wtcpue = gmex$wtcpue), by=list(haulid = gmex$haulid, stratum = gmex$stratum, stratumarea = gmex$stratumarea, year = gmex$year, lat = gmex$lat, lon = gmex$lon, depth = gmex$depth, spp = gmex$spp), FUN=sumna)
   
-  seus2 = aggregate(list(wtcpue = seus$wtcpue), by=list(haulid = seus$haulid, stratum = seus$stratum, stratumarea = seus$stratumarea, year = seus$year, lat = seus$lat, lon = seus$lon, depth = seus$depth, spp = seus$spp), FUN=sumna)
+  seusSPRING2 = aggregate(list(wtcpue = seusSPRING$wtcpue), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, spp = seusSPRING$spp), FUN=sumna)
+  seusSUMMER2 = aggregate(list(wtcpue = seusSUMMER$wtcpue), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, spp = seusSUMMER$spp), FUN=sumna)
+  seusFALL2 = aggregate(list(wtcpue = seusFALL$wtcpue), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, spp = seusFALL$spp), FUN=sumna)
   
   ai<<-ai2
   ebs<<-ebs2
@@ -594,7 +689,9 @@ adjust_spp_names = function () {
   wctri<<-wctri2
   wcann<<-wcann2
   gmex<<-gmex2
-  seus<<-seus2    
+  seusSPRING<<-seusSPRING2    
+  seusSUMMER<<-seusSUMMER2    
+  seusFALL<<-seusFALL2    
   
   return(TRUE)
 }
@@ -612,12 +709,14 @@ add_region_column = function () {
     ebs$region <<- "Eastern Bering Sea"
     goa$region <<- "Gulf of Alaska"
     neus$region <<- "Northeast US Spring"
-	neusF$region <<- "Northeast US Fall"
+	  neusF$region <<- "Northeast US Fall"
     wctri$region <<- "West Coast Triennial"
     wcann$region <<- "West Coast Annual"
     gmex$region <<- "Gulf of Mexico"
-    seus$region <<- "Southeast US"
-  
+    seusSPRING$region <<- "Southeast US Spring"
+  	seusSUMMER$region <<- "Southeast US Summer"
+	  seusFALL$region <<- "Southeast US Fall"
+	
   #Here are the default names that we're not using currently
 #   ai$region <<- "AFSC_Aleutians"
 #   ebs$region <<- "AFSC_EBS"
@@ -640,15 +739,16 @@ rearrange_and_trim_columns = function () {
   wctri <<- wctri[,nm]
   wcann <<- wcann[,nm]
   gmex <<- gmex[,nm]
-  seus <<- seus[,nm]  
+  seusSPRING <<- seusSPRING[,nm]  
+  seusSUMMER <<- seusSUMMER[,nm]  
+  seusFALL <<- seusFALL[,nm]  
   return(TRUE)
 }
 
 
-
 create_master_table = function () {
   #  combine and remove NA values
-  dat = rbind(ai, ebs, goa, neus, neusF, wctri, wcann, gmex, seus)
+  dat = rbind(ai, ebs, goa, neus, neusF, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL)
   # dim(dat)
   
   # Remove NA values in wtcpue
@@ -981,8 +1081,14 @@ if(!exists('OVERRIDE_COMPILING') || !isTRUE(OVERRIDE_COMPILING) ) {
     gmex = compile_GMEX()
     print_status('>GMEX done.')
     
-    seus = compile_SEUS()
-    print_status('>SEUS done.')
+    seusSPRING = compile_SEUSSpr()
+    print_status('>SEUSSpr done.')
+    
+    seusSUMMER = compile_SEUSSum()
+    print_status('>SEUSSum done.')
+    
+    seusFALL = compile_SEUSFal()
+    print_status('>SEUSFal done.')
     
   }, error=function(e) {
     print("[HINT] Please run the program with chdir=TRUE. (e.g. `source('C:/Users/YOUR_USER_NAME/../complete_r_script.R', chdir=TRUE)`")
@@ -1090,7 +1196,7 @@ rm( haul_id_complete, year_extraction_complete, gmex_lat_long_calculation_comple
 print_status('Scientific name/Common name data available: `tax` ')
 print_status('National data available: `dat` ')
 if(!isTRUE(REMOVE_REGION_DATASETS)) {
-  print_status('Regional data available: `ai`, `ebs`, `gmex`, `goa`, `neus`, `neusF`, `wcann`, `seus`, and `wctri`')
+  print_status('Regional data available: `ai`, `ebs`, `gmex`, `goa`, `neus`, `neusF`, `wcann`, `seusSPRING`, `seusSUMMER`, `seusFALL`, and `wctri`')
 }
 
 if(isTRUE(OPTIONAL_OUTPUT_DAT_MASTER_TABLE)){
