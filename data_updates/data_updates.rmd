@@ -25,6 +25,9 @@ Files ending in the extension `.zip` and following the naming convention
       1. data.csv
       2. strata.csv
     5. neus.zip
+      1. neus.csv
+      2. strata.csv
+      3. svspp.csv
     6. wcann.zip
     7. wctri.zip
   
