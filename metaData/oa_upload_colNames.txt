@@ -45,7 +45,7 @@ ebs
  		SURF_TEMP
  		VESSEL
  		CRUISE
- 		HAUL
+ 		HAUL       
  
 	 strata.csv 
  		SubareaDescription

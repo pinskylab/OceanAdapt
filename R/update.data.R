@@ -20,19 +20,28 @@ if(Sys.info()["sysname"]=="Linux"){
 # =======================================
 # = Names & Locations of New Data Files =
 # =======================================
+date.zip.patt <- "[0-9]{4}-[0-9]{2}-[0-9]{2}.zip"
+
 # AI
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-ai.file <- "~/Downloads/ai2014.csv"
+# ai.file <- "~/Downloads/ai2014.csv" # TODO pointless
+ai.raw.path.top <- file.path("./data_raw/ai")
+ai.fileS <- list.files(ai.raw.path.top, full.names=T, pattern=date.zip.patt)
 ai.file2 <- "~/Downloads/ai_strata.csv"
+
 
 # EBS
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-ebs.file <- "~/Downloads/ebs201_20143.csv"
+# ebs.file <- "~/Downloads/ebs201_20143.csv"
+ebs.raw.path.top <- file.path("./data_raw/ebs")
+ebs.fileS <- list.files(ebs.raw.path.top, full.names=T, pattern=date.zip.patt)
 ebs.file2 <- "~/Downloads/ebs_strata.csv"
 
 # GOA
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-goa.file <- "~/Downloads/goa2007_2013.csv"
+# goa.file <- "~/Downloads/goa2007_2013.csv"
+goa.raw.path.top <- file.path("./data_raw/goa")
+goa.fileS <- list.files(goa.raw.path.top, full.names=T, pattern=date.zip.patt)
 goa.file2 <- "~/Downloads/goa_strata.csv"
 
 # GMEX
@@ -59,6 +68,15 @@ wc.match <- c(
 wcann.zip.file <- row.names(zipFiles_wc[order(zipFiles_wc$mtime, zipFiles_wc$ctime, zipFiles_wc$atime, decreasing=TRUE)[1],])
 
 
+# ====================================================
+# = Function to Trim Trailing and Leading Whitespace =
+# ====================================================
+# http://stackoverflow.com/questions/2261079/how-to-trim-leading-and-trailing-whitespace-in-r
+# Simple regex, but the answer also provides some other handy tricks
+# and explanation if others are interested in learning more
+trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+
+
 # ==============================
 # = Function to Wrap in Quotes =
 # ==============================
@@ -68,7 +86,7 @@ wrap.quotes <- function(x){gsub("(.+)", "\"\\1\"", x)}
 # ===================================
 # = Function to read files from zip =
 # ===================================
-read.csv.zip <- function(zipfile, pattern="\\.csv$", ...){
+read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, ...){
 	
 	# Create a name for the dir where we'll unzip
 	zipdir <- tempfile()
@@ -83,13 +101,24 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", ...){
 	files <- list.files(zipdir, rec=TRUE, pattern=pattern)
 	
 	# Create a list of the imported csv files
-	csv.data <- sapply(files, 
-		function(f){
-		    fp <- file.path(zipdir, f)
-			dat <- fread(fp, ...)
-		    return(dat)
-		}
-	)
+	if(SIMPLIFY){
+		csv.data <- sapply(files, 
+			function(f){
+			    fp <- file.path(zipdir, f)
+				dat <- fread(fp, ...)
+			    return(dat)
+			}
+		)
+	}else{
+		csv.data <- lapply(files, 
+			function(f){
+			    fp <- file.path(zipdir, f)
+				dat <- fread(fp, ...)
+			    return(dat)
+			}
+		)
+	}
+	
 	
 	# Use csv names to name list elements
 	names(csv.data) <- basename(files)
@@ -102,49 +131,104 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", ...){
 # ============================================
 # = Read in Old Data Sets (currently zipped) =
 # ============================================
-zipFiles <- file.info(list.files("./data", full=TRUE, patt="^Data_.+.zip"))
+zipFiles <- file.info(list.files("./data_updates", full=TRUE, patt="^Data_.+.zip")) # zipFiles only used in next few lines; intended to find old data sets, which is used both for main data (which we're now just redownloading every year), as well as for the strata files etc.
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 # upData <- read.csv.zip(recentZip, integer64="character")
-upData <- read.csv.zip("./data/Data_Vis_2015_06_05.zip") # TODO This should probably go back to using recentZip
+data.vis <- sort(list.files("./data_download",pattern="Data_Vis_.[0-9,_]*.zip", full=T),dec=T)[1] # grab most recent data.viz 
+upData <- read.csv.zip(data.vis) # TODO This should probably go back to using recentZip
 old.csv.names <- names(upData)
 
-# Unzip locally
-# this kind of makes the whole process of read.csv.zip function pointless, as now I could simply read in the data files from this folder
-# actually, nvm, it's still useful if the newly downloaded data are in a zip file
-unzip(normalizePath(recentZip), exdir="data/Data_Updated", junkpaths=TRUE, setTimes=TRUE)
+
+# ===========================
+# = Identify New Zip Folder =
+# ===========================
+# new.zip.folder is where all the newly-gathered .csv's will be written
+# for NEUS, is also where the helper data file (strat or spp id file) will be read
+# is where a lot of the other data organization processes occur
+# new.zip.folder <- "data_updates" #paste0(dirname(zip.folder),"/data_updates")
 zip.folder <- gsub("(\\.[^.]+$)", "", recentZip)
 new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
+
+
+# ========================================================
+# = Prepare the Directory that will be Focus of Updates  =
+# ========================================================
+	# ensure clean start by deleting this directory and all of its contents, the recreating it
+if(file.exists(new.zip.folder)){
+	# delete all of directory's contents & directory
+	unlink(new.zip.folder, recursive=TRUE)
+}
+
+if(!file.exists(new.zip.folder)){
+	dir.create(new.zip.folder)
+}else{
+	stop(paste0(
+		"Failure to automatically remove directory named \n\t\t", 
+		new.zip.folder, 
+		"\nFresh start cannot be ensured.",
+		"\nPlease remove directory and its contents manually,",
+		"\nand proceed with caution (paths have likely been altered)."
+	))
+}
+
+
+# ======================================
+# = Unzip Most Recent Zip File Locally =
+# ======================================
+# create explosion of .csv files inside data_updates
+# these .csv's are from data vis
+# they are used for the bonus files like ebs_strata.csv, or neus_strata.csv
+# these are files that are not reaquired during the data updating procedure (from raw file collection)
+unzip(normalizePath(recentZip), exdir=new.zip.folder, junkpaths=TRUE, setTimes=TRUE)
 
 
 # =============
 # = Update AI =
 # =============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-oldAI <- upData$ai_data.csv
-if(file.exists(ai.file)){
+# oldAI <- upData$ai_data.csv
+if(length(ai.fileS)>=1){ # if not 0 will be true
+	# Load updated, partially old AI
+	recent.ai.old <- sort(ai.fileS, dec=T)[1]
+	oldAI <- read.csv.zip(recent.ai.old, SIMPLIFY=FALSE)
+	for(i in 1:length(oldAI)){
+		if(i==1){
+			t.oldAI <- oldAI[[1]]
+			setnames(t.oldAI, trim(names(t.oldAI)))
+			oldAI.hold <- oldAI[[1]]
+			
+		}else{
+			t.oldAI <- oldAI[[i]]
+			setnames(t.oldAI, trim(names(t.oldAI)))
+			oldAI.hold <- rbind(oldAI.hold, t.oldAI)
+			
+		}
+	}
+	updatedAI <- copy(oldAI.hold)
+	rm(list=c("oldAI", "oldAI.hold", "t.oldAI"))
 	
-	# Load Data
-	newAI <- as.data.table(read.csv(ai.file)) # had to use read.csv to auto remove whitespace in col names
-	
-	# Get and Check Names
-	ai.names <- names(oldAI)
-	stopifnot(all(ai.names%in%names(newAI)))
-	
-	# Accumulate data (region's files are not cummulative)
-	updatedAI0 <- rbind(oldAI, newAI)
-	
-	# Sort, drop redundant rows
-	updatedAI <- as.data.table(updatedAI0) # confirm that it's a data file (can probably be removed)
+	# # Load Data
+# 	newAI <- as.data.table(read.csv(ai.file)) # had to use read.csv to auto remove whitespace in col names
+#
+# 	# Get and Check Names
+# 	ai.names <- names(oldAI)
+# 	stopifnot(all(ai.names%in%names(newAI)))
+#
+# 	# Accumulate data (region's files are not cummulative)
+# 	updatedAI0 <- rbind(oldAI, newAI)
+#
+# 	# Sort, drop redundant rows
+# 	updatedAI <- as.data.table(updatedAI0) # confirm that it's a data file (can probably be removed)
 	setkeyv(updatedAI, names(updatedAI)) # sort, and define which columns determine uniqueness of rows
 	updatedAI <- unique(updatedAI) # drops redundant rows
-	
+#
 	# Save data
 	write.csv(updatedAI, file=paste(new.zip.folder,"ai_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 # Update Strata file
 oldAI2 <- upData$ai_strata.csv
-if(file.exists(ai.file2)){
+if(file.exists(ai.file2)){ # NOT FOUND, NO CHECK 2015-08-27 RDB
 	newAI2 <- as.data.table(read.csv(ai.file2)) # had to use read.csv to auto remove whitespace in col names
 	ai.names2 <- names(oldAI2)
 	stopifnot(all(ai.names2%in%names(newAI2)))
@@ -159,31 +243,45 @@ if(file.exists(ai.file2)){
 # = Update EBS =
 # ==============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-oldEBS <- upData$ebs_data.csv
-if(file.exists(ebs.file)){
+# oldEBS <- upData$ebs_data.csv
+# ebs.raw.path.top <- file.path("./data_raw/ebs")
+# ebs.fileS <- list.files(ebs.old.path.top, full.names=T, pattern=date.zip.patt)
+if(length(ebs.fileS)>=1){ # if not 0 will be true
+	# Load updated, partially old EBS
+	recent.ebs.old <- sort(ebs.fileS, dec=T)[1]
+	oldEBS <- read.csv.zip(recent.ebs.old, SIMPLIFY=FALSE)
+	for(i in 1:length(oldEBS)){
+		if(i==1){
+			oldEBS.hold <- oldEBS[[1]]
+		}else{
+			oldEBS.hold <- rbind(oldEBS.hold, oldEBS[[i]])
+		}
+	}
+	updatedEBS <- copy(oldEBS.hold)
+	rm(list=c("oldEBS", "oldEBS.hold"))
 	
-	# Load Data
-	newEBS <- as.data.table(read.csv(ebs.file)) # had to use read.csv to auto remove whitespace in col names
-	
-	# Get names, make sure new data has all needed names
-	ebs.names <- names(oldEBS)
-	stopifnot(all(ebs.names%in%names(newEBS)))
-	
-	# Accumulate data (region's files are not cummulative)
-	updatedEBS0 <- rbind(oldEBS, newEBS)
-	
-	# Sort data, drop redundant rows
-	updatedEBS <- as.data.table(updatedEBS0)
+	# # Load Data
+# 	newEBS <- as.data.table(read.csv(ebs.file)) # had to use read.csv to auto remove whitespace in col names
+#
+# 	# Get names, make sure new data has all needed names
+# 	ebs.names <- names(oldEBS)
+# 	stopifnot(all(ebs.names%in%names(newEBS)))
+#
+# 	# Accumulate data (region's files are not cummulative)
+# 	updatedEBS0 <- rbind(oldEBS, newEBS)
+#
+# 	# Sort data, drop redundant rows
+# 	updatedEBS <- as.data.table(updatedEBS0)
 	setkeyv(updatedEBS, names(updatedEBS))
 	updatedEBS <- unique(updatedEBS)
 	
 	# Save updated file
 	write.csv(updatedEBS, file=paste(new.zip.folder,"ebs_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 # Update Strata file
 oldEBS2 <- upData$ebs_strata.csv
-if(file.exists(ebs.file2)){
+if(file.exists(ebs.file2)){ # NOT FOUND, NO CHECK 2015-08-27 RDB
 	
 	# Load Data
 	newEBS2 <- as.data.table(read.csv(ebs.file2)) # had to use read.csv to auto remove whitespace in col names
@@ -206,30 +304,49 @@ if(file.exists(ebs.file2)){
 # = Update GOA =
 # ==============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-oldGOA <- upData$goa_data.csv
-if(file.exists(goa.file)){
-	# Load Data
-	newGOA <- as.data.table(read.csv(goa.file)) # had to use read.csv to auto remove whitespace in col names
+# oldGOA <- upData$goa_data.csv
+if(length(goa.fileS)>=1){
+	# Load updated, partially old GOA
+	recent.goa.old <- sort(goa.fileS, dec=T)[1]
+	oldGOA <- read.csv.zip(recent.goa.old, SIMPLIFY=FALSE)
+	for(i in 1:length(oldGOA)){
+		if(i==1){
+			t.oldGOA <- oldGOA[[1]]
+			setnames(t.oldGOA, trim(names(t.oldGOA)))
+			oldGOA.hold <- t.oldGOA
+		}else{
+			t.oldGOA <- oldGOA[[i]]
+			setnames(t.oldGOA, trim(names(t.oldGOA)))
+			oldGOA.hold <- t.oldGOA
+			# oldGOA.hold <- rbind(oldGOA.hold, oldGOA[[i]], fill=TRUE)
+			oldGOA.hold <- rbind(oldGOA.hold, t.oldGOA)
+		}
+	}
+	updatedGOA <- copy(oldGOA.hold)
+	rm(list=c("oldGOA", "oldGOA.hold"))
 	
-	# Get names, make sure new data has all needed names
-	goa.names <- names(oldGOA)
-	stopifnot(all(goa.names%in%names(newGOA)))
-	
-	# Accumulate data (region's files are not cummulative)
-	updatedGOA0 <- rbind(oldGOA, newGOA)
-	updatedGOA <- as.data.table(updatedGOA0)
-	
+	# # Load Data
+# 	newGOA <- as.data.table(read.csv(goa.file)) # had to use read.csv to auto remove whitespace in col names
+#
+# 	# Get names, make sure new data has all needed names
+# 	goa.names <- names(oldGOA)
+# 	stopifnot(all(goa.names%in%names(newGOA)))
+#
+# 	# Accumulate data (region's files are not cummulative)
+# 	updatedGOA0 <- rbind(oldGOA, newGOA)
+# 	updatedGOA <- as.data.table(updatedGOA0)
+#
 	# Sort data, drop redundant rows
 	setkeyv(updatedGOA, names(updatedGOA))
 	updatedGOA <- unique(updatedGOA)
 	
 	# Save data
 	write.csv(updatedGOA, file=paste(new.zip.folder,"goa_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS with WARNING (column type fread()) 2015-08-27 RDB
 
 # Update Strata file
 oldGOA2 <- upData$goa_strata.csv
-if(file.exists(goa.file2)){
+if(file.exists(goa.file2)){ # NOT FOUND, NO CHECK 2015-08-27 RDB
 	newGOA2 <- as.data.table(read.csv(goa.file2)) # had to use read.csv to auto remove whitespace in col names
 	goa.names2 <- names(oldGOA2)
 	stopifnot(all(goa.names2%in%names(newGOA2)))
@@ -246,14 +363,14 @@ if(file.exists(goa.file2)){
 # http://seamap.gsmfc.org/
 
 # bio
-oldGMEX.bio <- upData$gmex_bio.csv
+oldGMEX.bio <- upData$gmex_bio.csv # only uses old data files for names
 if(file.exists(gmex.bio.file)){ # consider having it look for the zip file too, then unzipping it
 	newGMEX.bio0 <- as.data.table(read.csv(gmex.bio.file))
 	stopifnot(all(names(oldGMEX.bio)%in%names(newGMEX.bio0)))
 	gmex.bio.names <- names(oldGMEX.bio)
 	newGMEX.bio <- newGMEX.bio0[,(gmex.bio.names), with=FALSE]
 	write.csv(newGMEX.bio, file=paste(new.zip.folder,"gmex_bio.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 # cruise
 oldGMEX.cruise <- upData$gmex_cruise.csv
@@ -273,7 +390,7 @@ if(file.exists(gmex.cruise.file)){
 	stopifnot(all(gmex.cruise.names%in%names(newGMEX.cruise0)))
 	newGMEX.cruise <- newGMEX.cruise0[,(gmex.cruise.names), with=FALSE]
 	write.csv(newGMEX.cruise, file=paste(new.zip.folder,"gmex_cruise.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 # spp
 oldGMEX.spp <- upData$gmex_spp.csv
@@ -283,7 +400,7 @@ if(file.exists(gmex.spp.file)){
 	gmex.spp.names <- names(oldGMEX.spp)
 	newGMEX.spp <- newGMEX.spp0[,(gmex.spp.names), with=FALSE]
 	write.csv(newGMEX.spp, file=paste(new.zip.folder,"gmex_spp.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 # station
 oldGMEX.station <- upData$gmex_station.csv
@@ -294,14 +411,14 @@ if(file.exists(gmex.station.file)){
 	# to the following message ...
 	msg1 <- "WAIT! You need to open"
 	msg2 <- "in Excel, then resave it as a csv for the file to load properly."
-	cat("\n",msg1,gmex.station.file, msg2, "\n")
+	message("\n",msg1,gmex.station.file, msg2, "\n")
 
 	newGMEX.station0 <- as.data.table(read.csv(gmex.station.file))
 	stopifnot(all(names(oldGMEX.station)%in%names(newGMEX.station0)))
 	gmex.station.names <- names(oldGMEX.station)
 	newGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
 	write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 
 # tow
@@ -312,7 +429,7 @@ if(file.exists(gmex.tow.file)){
 	gmex.tow.names <- names(oldGMEX.tow)
 	newGMEX.tow <- newGMEX.tow0[,(gmex.tow.names), with=FALSE]
 	write.csv(newGMEX.tow, file=paste(new.zip.folder,"gmex_tow.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # WORKS 2015-08-27 RDB
 
 
 # ========
@@ -362,7 +479,7 @@ if(file.exists(neus.file)){
 	
 	# Save NEUS
 	write.csv(updatedNEUS2, file=paste(new.zip.folder,"neus_neus.csv",sep="/"), row.names=FALSE, quote=FALSE) # neus breaks the naming convention
-}
+} # WORKS 2015-08-27 RDB
 
 # Fix up NEUS's svspp.csv file
 # This was not originally in right format, but 
@@ -384,7 +501,7 @@ if(FALSE){
 	
 	# Save csv
 	write.csv(neus.svspp.csv2, file=paste(new.zip.folder,"neus_svspp.csv",sep="/"), row.names=FALSE, quote=FALSE)
-}
+} # NO TEST 2015-08-27 RDB
 
 
 # ======
@@ -454,7 +571,7 @@ if(FALSE){
 # =======================
 # Zip up and rename
 oldwd <- getwd()
-setwd(dirname(new.zip.folder))
+setwd(dirname(new.zip.folder)) # new.zip.folder is "./data_updates/Data_Updated"
 
 zip(basename(new.zip.folder), files=list.files(basename(new.zip.folder),full=TRUE))
 new.zip.file0 <- paste0(basename(new.zip.folder),".zip")
@@ -463,42 +580,46 @@ file.rename(new.zip.file0, renameNow(new.zip.file0))
 setwd(oldwd)
 
 
-# ======================================
-# = Zip File for Amphiprion (Raw Data) =
-# ======================================
-# Copy, Zip, & Ship! Then delete.
-
-# Create directory to hold raw files locally
-raw.dir <- "./data/Raw_Files_Updated_on" # directory to hold raw files
-dir.create(raw.dir) # create directory
-
-# Determine which files are available
-raw2copy0 <- unlist(sapply(ls()[grepl("\\.file$",ls())], get))
-raw2copy <- raw2copy0[file.exists(raw2copy0)]
-
-# Copy raw files into local holding folder
-file.copy(from=raw2copy, to=paste(raw.dir, basename(raw2copy),sep="/"))
-
-# Zip local holding folder, and rename with date
-oldwd <- getwd()
-setwd("./data")
-zip(basename(raw.dir), files=list.files(basename(raw.dir), full=TRUE))
-setwd(oldwd)
-
-# Rename the file that is to be push (add date)
-raw.dir.zip <- paste0(raw.dir,".zip")
-raw.dir.zip.now <- renameNow(raw.dir.zip)
-file.rename(raw.dir.zip, raw.dir.zip.now)
-
-# Push to Amphiprion
-localPath <- normalizePath(raw.dir.zip.now)
-remoteName <- "ryanb@amphiprion.deenr.rutgers.edu"
-remotePath <- "/local/shared/pinsky_lab/trawl_surveys/OA_rawData_Updates"
-push(path=localPath, remoteName=remoteName, path2=remotePath)
-
-# Cleanup by deleting holding folder and zipped holding folder
-file.remove(localPath) # delete local zip
-sapply(c(list.files(normalizePath(raw.dir), full=T),normalizePath(raw.dir)), file.remove) # delete local folder
+# # ======================================
+# # = Zip File for Amphiprion (Raw Data) =
+# # ======================================
+# # Copy, Zip, & Ship! Then delete.
+#
+# # Create directory to hold raw files locally
+# raw.dir <- "./Raw_Files_Updated_on" # directory to hold raw files
+# if(file.exists(raw.dir)){
+# 	sapply(list.files(raw.dir, full=T), file.remove)
+# }else{
+# 	dir.create(raw.dir) # create directory
+# }
+#
+# # Determine which files are available
+# raw2copy0 <- unlist(sapply(ls()[grepl("\\.file$",ls())], get))
+# raw2copy <- raw2copy0[file.exists(raw2copy0)]
+#
+# # Copy raw files into local holding folder
+# file.copy(from=raw2copy, to=paste(raw.dir, basename(raw2copy),sep="/"))
+#
+# # Zip local holding folder, and rename with date
+# # oldwd <- getwd()
+# # setwd("./data_updates")
+# zip(raw.dir, files=list.files(raw.dir, full=TRUE))
+# # setwd(oldwd)
+#
+# # Rename the file that is to be push (add date)
+# raw.dir.zip <- paste0(raw.dir,".zip")
+# raw.dir.zip.now <- renameNow(raw.dir.zip)
+# file.rename(raw.dir.zip, raw.dir.zip.now)
+#
+# # Push to Amphiprion
+# localPath <- normalizePath(raw.dir.zip.now)
+# remoteName <- "ryanb@amphiprion.deenr.rutgers.edu"
+# remotePath <- "/local/shared/pinsky_lab/trawl_surveys/OA_rawData_Updates"
+# push(path=localPath, remoteName=remoteName, path2=remotePath)
+#
+# # Cleanup by deleting holding folder and zipped holding folder
+# file.remove(localPath) # delete local zip
+# sapply(c(list.files(normalizePath(raw.dir), full=T),normalizePath(raw.dir)), file.remove) # delete local folder and its files
 
 
 # ============================================
@@ -509,6 +630,9 @@ regions2upload <- c("ai","ebs","goa","gmex","neus","wcann","wctri")
 files.matched <- c()
 file.headers <- structure(vector("list",length(regions2upload)), .Names=regions2upload)
 
+# get a list of all files in
+# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/"
+# these should be the .csv's from each region, as well as complete_r_script.R (?)
 t.files0 <- list.files(normalizePath(new.zip.folder),full=T)
 
 for(i in 1:length(regions2upload)){
@@ -518,10 +642,15 @@ for(i in 1:length(regions2upload)){
 	
 	# Create a directory where current region can
 	# have its files safely renamed to somethign generic, like data.csv
+	# So it creates things like:
+	# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/ai"
+	# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/ebs"
+	# etc ...
 	dir.create(paste0(normalizePath(new.zip.folder),"/",t.reg))
 	
 	# Identify files for this region, and remember which files found
 	t.files <- t.files0[grepl(paste0(t.reg,"_"),t.files0)] # files w/ current region in name
+	if(length(t.files)==0){warning(paste("skipping region",t.reg)); next} # skip w/ warning if region isn't found
 	files.matched <- c(files.matched, t.files) # accumulate file names that were found
 	
 	# Define names for files as they will appear for upload;
@@ -558,13 +687,18 @@ for(i in 1:length(regions2upload)){
 	setwd(oldwd)
 	
 	# Delete local folder
-	sapply(c(list.files(t.dest.dir, full=T),t.dest.dir), file.remove)
+	# sapply(c(list.files(t.dest.dir, full=T),t.dest.dir), file.remove)
+	unlink(t.dest.dir, recursive=TRUE)
 }
 
 # To finish the process for preparing for the OA upload,
 # mark the folder as containing the .zip files that are ready
 # to be uplaoded
-file.rename(normalizePath(new.zip.folder), paste(normalizePath(new.zip.folder),"ready2upload",sep="_"))
+# r2u.dir <- paste(normalizePath(new.zip.folder),"ready2upload",sep="_")
+# if(file.exists(r2u.dir)){
+# 	sapply(list.files(r2u.dir, full=TRUE), file.remove)
+# }
+# file.rename(normalizePath(new.zip.folder), r2u.dir)
 
 
 # =======================================================

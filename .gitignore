@@ -1,6 +1,6 @@
 .Rapp.history
 .DS_Store
-*.csv
+# *.csv
 .Rhistory
 .Rproj.user/
 OceanAdapt.Rproj
