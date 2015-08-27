@@ -196,15 +196,19 @@ if(length(ai.fileS)>=1){ # if not 0 will be true
 	oldAI <- read.csv.zip(recent.ai.old, SIMPLIFY=FALSE)
 	for(i in 1:length(oldAI)){
 		if(i==1){
+			t.oldAI <- oldAI[[1]]
+			setnames(t.oldAI, trim(names(t.oldAI)))
 			oldAI.hold <- oldAI[[1]]
 			
 		}else{
-			oldAI.hold <- rbind(oldAI.hold, oldAI[[i]])
+			t.oldAI <- oldAI[[i]]
+			setnames(t.oldAI, trim(names(t.oldAI)))
+			oldAI.hold <- rbind(oldAI.hold, t.oldAI)
 			
 		}
 	}
 	updatedAI <- copy(oldAI.hold)
-	rm(list=c("oldAI", "oldAI.hold"))
+	rm(list=c("oldAI", "oldAI.hold", "t.oldAI"))
 	
 	# # Load Data
 # 	newAI <- as.data.table(read.csv(ai.file)) # had to use read.csv to auto remove whitespace in col names
@@ -310,9 +314,15 @@ if(length(goa.fileS)>=1){
 	oldGOA <- read.csv.zip(recent.goa.old, SIMPLIFY=FALSE)
 	for(i in 1:length(oldGOA)){
 		if(i==1){
-			oldGOA.hold <- oldGOA[[1]]
+			t.oldGOA <- oldGOA[[1]]
+			setnames(t.oldGOA, trim(names(t.oldGOA)))
+			oldGOA.hold <- t.oldGOA
 		}else{
-			oldGOA.hold <- rbind(oldGOA.hold, oldGOA[[i]], fill=TRUE)
+			t.oldGOA <- oldGOA[[i]]
+			setnames(t.oldGOA, trim(names(t.oldGOA)))
+			oldGOA.hold <- t.oldGOA
+			# oldGOA.hold <- rbind(oldGOA.hold, oldGOA[[i]], fill=TRUE)
+			oldGOA.hold <- rbind(oldGOA.hold, t.oldGOA)
 		}
 	}
 	updatedGOA <- copy(oldGOA.hold)
