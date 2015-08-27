@@ -14,8 +14,9 @@ We follow these steps to update the OceanAdapt data annually.
    1. Within data_raw/, each survey has a sub-directory. 
    2. Within each sub-directory, you should create a folder with naming format exactly `YYYY-MM-DD`, reflecting the data on which you downloaded the latest files for this survey.
    3. Put all the files in that new folder.
-   4. Zip it up
-   5. Delete the original folder
+   4. Copy over the strata file from the previous version from this region (presumably, it has not changed).
+   5. Zip it up
+   6. Delete the original folder
 
 3. Prepare the raw data for uploading to OceanAdapt website
    1. Eventually, the update.data.R script should handle everything from here. It is not quite there yet.
