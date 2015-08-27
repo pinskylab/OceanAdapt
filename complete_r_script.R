@@ -5,8 +5,8 @@
 #   1) Put this script in the same directory as the data files and use `source('PATH/complete_r_script.R', chdir=TRUE)`, where PATH is replaced with the path to the script (even easier on some systems: drag and drop this script onto the R window and it will source it automatically). The chdir option will temporarily change the working directory to where the script is located. Please use command `?source` for more information.
 #   2) Open R, manually change the working directory to the directory with the data files, and run all the code in this script. 
 #   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with your data and run the script. 
-    
-
+      
+ 
 ### File Structure
 #In this file: the top contains required variables and libraries and flags.
 #The middle contains all functions used by this file
@@ -250,9 +250,10 @@ compile_SEUSSpr = function () {
   seus$EFFORT[seus$COLLECTIONNUMBER == 19910105] <- 1.71273
   seus$EFFORT[seus$COLLECTIONNUMBER == 19990065] <- 0.53648
   seus$EFFORT[seus$COLLECTIONNUMBER == 20070177] <- 0.99936
-  
+   
   #Separate the the spring season and convert to dataframe
-  seusSPRING = as.data.frame(seus[seus$SEASON == "spring",])
+  seusSPRING = seus[seus$SEASON == "spring",]
+  seusSPRING = data.frame(seusSPRING)
   return(seusSPRING)
 } 
 
@@ -286,7 +287,7 @@ compile_SEUSSum = function () {
   seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46) 
   
   seus = seus[!is.na(seus$SPECIESTOTALWEIGHT),] # remove long line fish from dataset which have 'NA' for weight
-  
+   
   #Four hauls have 0 or NA for 'EFFORT', which are data entry errors, the following corrects these values
   seus$EFFORT[seus$COLLECTIONNUMBER == 19950335] <- 0.9775
   seus$EFFORT[seus$COLLECTIONNUMBER == 20110393] <- 1.65726
@@ -297,7 +298,8 @@ compile_SEUSSum = function () {
   seus$LATITUDESTART[seus$EVENTNAME == 2014325] <- 34.616
   
   #Separate the summer season and convert to dataframe
-  seusSUMMER = as.data.frame(seus[seus$SEASON == "summer",])
+  seusSUMMER = seus[seus$SEASON == "summer",]
+  seusSUMMER = data.frame(seusSUMMER)
   return(seusSUMMER)
 } 
 
@@ -338,7 +340,8 @@ compile_SEUSFal = function () {
   seus$LONGITUDESTART[seus$EVENTNAME == 1998467] <- -79.01
   
   #Separate the fall season and convert to dataframe
-  seusFALL = as.data.frame(seus[seus$SEASON == "fall",])
+  seusFALL = seus[seus$SEASON == "fall",]
+  seusFALL = data.frame(seusFALL)
   return(seusFALL)
 } 
 
@@ -432,9 +435,9 @@ high_quality_years = function () {
   # Trim to high-quality years (sample all strata)  
   goa <<- goa[!(goa$YEAR %in% 2001),] # 2001 didn't sample many strata
   gmex <<- gmex[!(gmex$year %in% c(1982, 1983)),] # 1982 and 1983 didn't sample many strata
-  seusSPRING <<- seusSPRING[seusSPRING$year != 1989 & seusSPRING$year != 2013,] # Many strata in 1989 only had one tow, plus spring sampled at night. 2013 did not sample all strata.
+  seusSPRING <<- seusSPRING[!(seusSPRING$year %in% c(1989, 2013)),] # Many strata in 1989 only had one tow, plus spring sampled at night. 2013 did not sample all strata.
   seusSUMMER <<- seusSUMMER[!(seusSUMMER$year %in% 1989),] # Many strata in 1989 only had one tow.
-  seusFALL <<- seusFALL[seusFALL$year != 1989 & seusFALL$year != 1990,] # Many strata in 1989 only had one tow. 1990 did not sample all strata
+  seusFALL <<- seusFALL[!(seusFALL$year %in% c(1989, 1990)),] # Many strata in 1989 only had one tow. 1990 did not sample all strata
   return(TRUE)
 }
 fix_speed = function () {
@@ -591,9 +594,9 @@ remove_rows_without_sci_names_or_fish_or_inverts = function() {
   gmex <<- gmex[!(gmex$spp == '' | is.na(gmex$spp)),]
   gmex <<- gmex[!(gmex$spp %in% c('UNID CRUSTA', 'UNID OTHER', 'UNID.FISH', 'CRUSTACEA(INFRAORDER) BRACHYURA', 'MOLLUSCA AND UNID.OTHER #01', 'ALGAE', 'MISCELLANEOUS INVERTEBR', 'OTHER INVERTEBRATES')),]	# remove unidentified spp
   #For seus a few unreliable taxa are also removed 
-  seusSPRING <<- seus[!(seus$spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','MICROPANOPE NUTTINGI','ALGAE','DYSPANOPEUS SAYI')),]
-  seusSUMMER <<- seus[!(seus$spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','PSEUDOMEDAEUS AGASSIZII','ALGAE','DYSPANOPEUS SAYI')),]  
-  seusFALL <<- seus[!(seus$spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','ALGAE','DYSPANOPEUS SAYI')),]
+  seusSPRING <<- seusSPRING[!(seusSPRING$spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','MICROPANOPE NUTTINGI','ALGAE','DYSPANOPEUS SAYI')),]
+  seusSUMMER <<- seusSUMMER[!(seusSUMMER$spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','PSEUDOMEDAEUS AGASSIZII','ALGAE','DYSPANOPEUS SAYI')),]  
+  seusFALL <<- seusFALL[!(seusFALL$spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','ALGAE','DYSPANOPEUS SAYI')),]
   return(TRUE)
 }
 
@@ -767,7 +770,7 @@ create_master_table = function () {
   #set dat2 to dat, then return dat
   dat = dat2
   
-  return(dat)
+  return(dat) 
 }
 
 #Functions to calculate [by region by species], by region, and by national
