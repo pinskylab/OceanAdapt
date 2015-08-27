@@ -1,0 +1,1041 @@
+"","taxon","spp","sppCorr","common.malin","common","taxLvl","species","genus","family","order","class","superclass","subphylum","phylum","kingdom"
+"1","AASIMUS LATUS","Aasimus latus","Anasimus latus","","stilt spider crab","Species","Anasimus latus","Anasimus","Inachoididae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"2","ACANTHEPHYRA PELAGICA","Acanthephyra pelagica","Acanthephyra pelagica","scarlet shrimp",NA,"Species","Acanthephyra pelagica","Acanthephyra","Oplophoridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"3","ACHOA HEPSETUS","Achoa hepsetus","Anchoa hepsetus","","broad-striped anchovy","Species","Anchoa hepsetus","Anchoa","Engraulidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"4","ACHOA MITCHILLI","Achoa mitchilli","Achoa mitchilli","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"5","ACTINARIA","Actinaria","Actinaria","anemones",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"6","ACYLOPSETTA DILECTA","Acylopsetta dilecta","Ancylopsetta dilecta","","three-eye flounder","Species","Ancylopsetta dilecta","Ancylopsetta","Paralichthyidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"7","ACYLOPSETTA QUADROCELLATA","Acylopsetta quadrocellata","Ancylopsetta quadrocellatus","","Gulf of Mexico ocellated flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"8","AGONUS DECAGONUS","Agonus decagonus","Agonus decagonus","Atlantic poacher","Atlantic poacher","Species","Leptagonus decagonus","Leptagonus","Agonidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"9","ALEPOCEPHALUS BAIRDII","Alepocephalus bairdii","Alepocephalus bairdii","Baird's smoothhead","Baird's smoothhead","Species","Alepocephalus bairdii","Alepocephalus","Alepocephalidae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"10","ALOSA AESTIVALIS","Alosa aestivalis","Alosa aestivalis","blueback herring","blueback shad","Species","Alosa aestivalis","Alosa","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"11","ALOSA PSEUDOHARENGUS","Alosa pseudoharengus","Alosa pseudoharengus","alewife","alewife","Species","Alosa pseudoharengus","Alosa","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"12","ALOSA SAPIDISSIMA","Alosa sapidissima","Alosa sapidissima","American shad","American shad","Species","Alosa sapidissima","Alosa","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"13","AMBLYRAJA RADIATA","Amblyraja radiata","Amblyraja radiata","starry skate","thorny skate","Species","Amblyraja radiata","Amblyraja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"14","AMMODYTES DUBIUS","Ammodytes dubius","Ammodytes dubius","northern sand lance","northern sand lance","Species","Ammodytes dubius","Ammodytes","Ammodytidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"15","AMUSIUM PAPYRACEUM","Amusium papyraceum","Amusium papyraceum","paper scallop","paper scallop","Species","Amusium papyraceum","Amusium","Pectinidae","Ostreoida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"16","ANARHICHAS DENTICULATUS","Anarhichas denticulatus","Anarhichas denticulatus","northern wolffish","northern wolffish","Species","Anarhichas denticulatus","Anarhichas","Anarhichadidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"17","ANARHICHAS LUPUS","Anarhichas lupus","Anarhichas lupus","Atlantic wolffish","Atlantic wolffish","Species","Anarhichas lupus","Anarhichas","Anarhichadidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"18","ANARHICHAS MINOR","Anarhichas minor","Anarhichas minor","spotted wolffish","spotted wolffish","Species","Anarhichas minor","Anarhichas","Anarhichadidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"19","ANASIMUS LATUS",NA,NA,"stilt spider crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"20","ANCHOA HEPSETUS","Anchoa hepsetus","Anchoa hepsetus","striped anchovy","broad-striped anchovy","Species","Anchoa hepsetus","Anchoa","Engraulidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"21","ANCHOA MITCHILLI","Anchoa mitchilli","Anchoa mitchilli","bay anchovy","bay anchovy","Species","Anchoa mitchilli","Anchoa","Engraulidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"22","ANCYLOPSETTA DILECTA",NA,NA,"three-eye flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"23","ANCYLOPSETTA QUADROCELLATA","Ancylopsetta quadrocellata","Ancylopsetta quadrocellata","Gulf of Mexico ocellated flounder","Gulf of Mexico ocellated flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"24","ANTENNARIUS RADIOSUS","Antennarius radiosus","Antennarius radiosus","singlespot frogfish","singlespot frogfish","Species","Antennarius radiosus","Antennarius","Antennariidae","Lophiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"25","ANTIMORA ROSTRATA","Antimora rostrata","Antimora rostrata","blue hake","blue antimora","Species","Antimora rostrata","Antimora","Moridae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"26","AREAEUS CRIBRARIUS","Areaeus cribrarius","Arenaeus cribrarius","","speckled swimming crab","Species","Arenaeus cribrarius","Arenaeus","Portunidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"27","ARGENTINA SILUS","Argentina silus","Argentina silus","Atlantic argentine","greater argentine","Species","Argentina silus","Argentina","Argentinidae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"28","ARGIS DENTATA","Argis dentata","Argis dentata","Artic argid","Artic argid","Species","Argis dentata","Argis","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"29","ARIUS FELIS","Arius felis","Arius felis","hardhead catfish","hardheaded sea catfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"30","ARTEDIELLUS  SP",NA,NA,"hookear sculpins",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"31","ARTEDIELLUS  SP.","Artediellus","Artediellus","hookear sculpins","hookear sculpins","Genus",NA,"Artediellus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"32","ASPIDOPHOROIDES MONOPTERYGIUS","Aspidophoroides monopterygius","Aspidophoroides monopterygius","alligatorfish","alligatorfish","Species","Aspidophoroides monopterygius","Aspidophoroides","Agonidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"33","ASPIDOPHOROIDES OLRIKI","Aspidophoroides olriki","Aspidophoroides olriki","Arctic alligatorfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"34","ASTEROIDEA","Asteroidea","Asteroidea","sea stars","starfishes","Class",NA,NA,NA,NA,"Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"35","ATEARIUS RADIOSUS","Atearius radiosus","Antennarius radiosus","","singlespot frogfish","Species","Antennarius radiosus","Antennarius","Antennariidae","Lophiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"36","AURELIA","Aurelia","Aurelia","moon jellies","Moon jellyfish","Genus",NA,"Aurelia","Ulmaridae","Semaeostomeae","Scyphozoa",NA,"Medusozoa","Cnidaria","Animalia"
+"37","Acantholithodes hispidus","Acantholithodes hispidus","Acantholithodes hispidus","spiny lithode crab","spiny lithode crab","Species","Acantholithodes hispidus","Acantholithodes","Lithodidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"38","Acantholithodeshispidus",NA,NA,"spiny lithode crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"39","Actinauge verrilli","Actinauge verrilli","Actinauge verrilli","","reticulate anemone","Species","Actinauge verrilli","Actinauge","Hormathiidae","Actiniaria","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"40","Actiniaria","Actiniaria","Actiniaria","anemones","sea anemones","Order",NA,NA,NA,"Actiniaria","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"41","Aforia circinata","Aforia circinata","Aforia circinata","keeled aforia","keeled aforia","Species","Aforia circinata","Aforia","Turridae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"42","Aforiacircinata",NA,NA,"keeled aforia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"43","Agonopsis vulsa","Agonopsis vulsa","Agonopsis vulsa","","northern spearnose poacher","Species","Agonopsis vulsa","Agonopsis","Agonidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"44","Albatrossia pectoralis","Albatrossia pectoralis","Albatrossia pectoralis","giant grenadier","giant grenadier","Species","Albatrossia pectoralis","Albatrossia","Macrouridae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"45","Albatrossiapectoralis",NA,NA,"giant grenadier",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"46","Allocentrotus fragilis","Allocentrotus fragilis","Allocentrotus fragilis","","fragile urchin","Species","Allocentrotus fragilis","Allocentrotus","Strongylocentrotidae","Echinoida","Echinoidea",NA,"Echinozoa","Echinodermata","Animalia"
+"47","Allosmerus elongatus","Allosmerus elongatus","Allosmerus elongatus","whitebait smelt","whitebait smelt","Species","Allosmerus elongatus","Allosmerus","Osmeridae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"48","Alosa aestivalis",NA,NA,"blueback herring",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"49","Alosa pseudoharengus",NA,NA,"alewife",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"50","Alosa sapidissima","Alosa sapidissima","Alosa sapidissima","American shad","American shad","Species","Alosa sapidissima","Alosa","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"51","Amblyraja radiata",NA,NA,"starry skate",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"52","Ammodytes hexapterus","Ammodytes hexapterus","Ammodytes hexapterus","Pacific sand lance","Pacific sand lance","Species","Ammodytes hexapterus","Ammodytes","Ammodytidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"53","Ammodyteshexapterus",NA,NA,"Pacific sand lance",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"54","Anarhichas lupus",NA,NA,"Atlantic wolffish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"55","Anarhichas orientalis","Anarhichas orientalis","Anarhichas orientalis","Bering wolffish","Bering wolffish","Species","Anarhichas orientalis","Anarhichas","Anarhichadidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"56","Anarhichasorientalis",NA,NA,"Bering wolffish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"57","Anarrhichthys ocellatus","Anarrhichthys ocellatus","Anarrhichthys ocellatus","","wolf-eel","Species","Anarrhichthys ocellatus","Anarrhichthys","Anarhichadidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"58","Anisodoris nobilis","Anisodoris nobilis","Anisodoris nobilis","","Pacific sea-lemon","Species","Anisodoris nobilis","Anisodoris","Discodorididae","Nudibranchia","Gastropoda",NA,NA,"Mollusca","Animalia"
+"59","Anoplopoma fimbria","Anoplopoma fimbria","Anoplopoma fimbria","sablefish","sablefish","Species","Anoplopoma fimbria","Anoplopoma","Anoplopomatidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"60","Anoplopomafimbria",NA,NA,"sablefish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"61","Anthoptilum grandiflorum","Anthoptilum grandiflorum","Anthoptilum grandiflorum","",NA,"Species","Anthoptilum grandiflorum","Anthoptilum","Anthoptilidae","Pennatulacea","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"62","Aphrocallistes vastus","Aphrocallistes vastus","Aphrocallistes vastus","","cloud sponge","Species","Aphrocallistes vastus","Aphrocallistes","Aphrocallistidae","Hexactinosida","Hexactinellida",NA,NA,"Porifera","Animalia"
+"63","Aphrodita spp.","Aphrodita","Aphrodita","","Afroditka plstnatá","Genus",NA,"Aphrodita","Aphroditidae","Phyllodocida","Errantia",NA,"Polychaeta","Annelida","Animalia"
+"64","Aphroditidae","Aphroditidae","Aphroditidae","sea mice","scaleworms","Family",NA,NA,"Aphroditidae","Phyllodocida","Errantia",NA,"Polychaeta","Annelida","Animalia"
+"65","Aplidium sp. A (Clark 2006)","Aplidium","Aplidium","ascidians","glanzende bolzakpijp","Genus",NA,"Aplidium","Polyclinidae","Enterogona","Ascidiacea",NA,"Urochordata","Chordata","Animalia"
+"66","Aplidiumsp.A(Clark2006)",NA,NA,"ascidians",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"67","Apristurus brunneus","Apristurus brunneus","Apristurus brunneus","brown cat shark","brown cat shark","Species","Apristurus brunneus","Apristurus","Scyliorhinidae","Carcharhiniformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"68","Aptocyclus ventricosus","Aptocyclus ventricosus","Aptocyclus ventricosus","smooth lumpsucker","smooth lumpsucker","Species","Aptocyclus ventricosus","Aptocyclus","Cyclopteridae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"69","Aptocyclusventricosus",NA,NA,"smooth lumpsucker",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"70","Arctomelon stearnsii","Arctomelon stearnsii","Arctomelon stearnsii","","Alaska volute","Species","Arctomelon stearnsii","Arctomelon","Volutidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"71","Argentina sialis","Argentina sialis","Argentina sialis","","Pacific argentine","Species","Argentina sialis","Argentina","Argentinidae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"72","Argentina silus",NA,NA,"Atlantic argentine",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"73","Argis dentata","Argis dentata","Argis dentata","Artic argid","Artic argid","Species","Argis dentata","Argis","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"74","Argis lar","Argis lar","Argis lar","","kuro shrimp","Species","Argis lar","Argis","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"75","Argis sp.","Argis","Argis","argid shrimps","kuro shrimp","Genus",NA,"Argis","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"76","Argissp.",NA,NA,"argid shrimps",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"77","Ascidiacea","Ascidiacea","Ascidiacea","tunicates","sea squirts","Class",NA,NA,NA,NA,"Ascidiacea",NA,"Urochordata","Chordata","Animalia"
+"78","Aspidophoroides bartoni","Aspidophoroides bartoni","Aspidophoroides bartoni","Aleutian alligatorfish","Aleutian alligatorfish","Species","Aspidophoroides bartoni","Aspidophoroides","Agonidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"79","Aspidophoroidesbartoni",NA,NA,"Aleutian alligatorfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"80","Asterias amurensis","Asterias amurensis","Asterias amurensis","North Pacific seastar","Nordpazifischer Seestern","Species","Asterias amurensis","Asterias","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"81","Asteriasamurensis",NA,NA,"North Pacific seastar",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"82","Asteroidea","Asteroidea","Asteroidea","sea stars","starfishes","Class",NA,NA,NA,NA,"Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"83","Astropecten californicus","Astropecten californicus","Astropecten californicus","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"84","Atheresthes evermanni","Atheresthes evermanni","Atheresthes evermanni","","Kamchatka flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"85","Atheresthes sp.","Atheresthes","Atheresthes","arrowtooth and Kamchatka flounders","Stillehavshellefisk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"86","Atheresthes stomias","Atheresthes stomias","Atheresthes stomias","arrowtooth flounder","arrowtooth flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"87","Atheresthessp",NA,NA,"arrowtooth and Kamchatka flounders",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"88","Atheresthessp.",NA,NA,"arrowtooth and Kamchatka flounders",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"89","Atheresthesstomias",NA,NA,"arrowtooth flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"90","Aurelia spp.","Aurelia","Aurelia","moon jellies","Moon jellyfish","Genus",NA,"Aurelia","Ulmaridae","Semaeostomeae","Scyphozoa",NA,"Medusozoa","Cnidaria","Animalia"
+"91","BAGRE MARIUS","Bagre marius","Bagre marina","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"92","BALISTES CAPRISCUS","Balistes capriscus","Balistes capriscus","gray triggerfish","grey triggerfish","Species","Balistes capriscus","Balistes","Balistidae","Tetraodontiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"93","BATHYLAGUS EURYOPS","Bathylagus euryops","Bathylagus euryops","goiter blacksmelt","goiter blacksmelt","Species","Bathylagus euryops","Bathylagus","Bathylagidae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"94","BELLATOR MILITARIS","Bellator militaris","Bellator militaris","","horned searobin","Species","Bellator militaris","Bellator","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"95","BOLLMAIA COMMUIS","Bollmaia commuis","Bollmannia communis","","ragged goby","Species","Bollmannia communis","Bollmannia","Gobiidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"96","BOLLMANNIA COMMUNIS",NA,NA,"ragged goby",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"97","BOREOGADUS SAIDA","Boreogadus saida","Boreogadus saida","Arctic cod","Arctic cod","Species","Boreogadus saida","Boreogadus","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"98","BREGMACEROS ATLANTICUS",NA,NA,"antenna codlet",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"99","BREGMACEROS ATLATICUS","Bregmaceros atlaticus","Bregmaceros atlanticus","","antenna codlet","Species","Bregmaceros atlanticus","Bregmaceros","Bregmacerotidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"100","BREVOORTIA PATRONUS",NA,NA,"Gulf menhaden",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"101","BREVOORTIA PATROUS","Brevoortia patrous","Brevoortia petronus","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"102","BROSME BROSME","Brosme brosme","Brosme brosme","cusk","cusk","Species","Brosme brosme","Brosme","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"103","BROTULA BARBATUM","Brotula barbatum","Brotula barbata","bearded brotula","bearded brotula","Species","Brotula barbata","Brotula","Ophidiidae","Ophidiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"104","BUCCINIDAE","Buccinidae","Buccinidae","true whelks","buccinum whelks","Family",NA,NA,"Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"105","Balanus evermanni","Balanus evermanni","Balanus evermanni","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"106","Balanus sp.","Balanus","Balanus","","Barnacle","Genus",NA,"Balanus","Balanidae","Sessilia","Maxillopoda",NA,"Crustacea","Arthropoda","Animalia"
+"107","Bathyagonus nigripinnis","Bathyagonus nigripinnis","Bathyagonus nigripinnis","","blackfin poacher","Species","Bathyagonus nigripinnis","Bathyagonus","Agonidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"108","Bathyagonus pentacanthus","Bathyagonus pentacanthus","Bathyagonus pentacanthus","","bigeye poacher","Species","Bathyagonus pentacanthus","Bathyagonus","Agonidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"109","Bathyagonusnigripinnis",NA,NA,"blackfin poacher",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"110","Bathymaster caeruleofasciatus","Bathymaster caeruleofasciatus","Bathymaster caeruleofasciatus","","Alaskan ronquil","Species","Bathymaster caeruleofasciatus","Bathymaster","Bathymasteridae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"111","Bathymaster signatus","Bathymaster signatus","Bathymaster signatus","searcher","searcher","Species","Bathymaster signatus","Bathymaster","Bathymasteridae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"112","Bathymastersignatus",NA,NA,"searcher",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"113","Bathyplotes sp.","Bathyplotes","Bathyplotes","","svømmepølse","Genus",NA,"Bathyplotes","Synallactidae","Aspidochirotida","Holothuroidea",NA,"Echinozoa","Echinodermata","Animalia"
+"114","Bathyraja aleutica","Bathyraja aleutica","Bathyraja aleutica","","Aleutian skate","Species","Bathyraja aleutica","Bathyraja","Arhynchobatidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"115","Bathyraja interrupta","Bathyraja interrupta","Bathyraja interrupta","","sandpaper skate","Species","Bathyraja interrupta","Bathyraja","Arhynchobatidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"116","Bathyraja maculata","Bathyraja maculata","Bathyraja maculata","","white-blotched skate","Species","Bathyraja maculata","Bathyraja","Arhynchobatidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"117","Bathyraja parmifera","Bathyraja parmifera","Bathyraja parmifera","","Alaska skate","Species","Bathyraja parmifera","Bathyraja","Arhynchobatidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"118","Bathyraja sp.","Bathyraja","Bathyraja","","roughtail skate","Genus",NA,"Bathyraja","Arhynchobatidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"119","Bathyraja taranetzi","Bathyraja taranetzi","Bathyraja taranetzi","","mud skate",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"120","Bathyraja trachura","Bathyraja trachura","Bathyraja trachura","","roughtail skate","Species","Bathyraja trachura","Bathyraja","Arhynchobatidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"121","Bathyrajasp",NA,NA,"bathyrajid skates",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"122","Bathyrajasp.",NA,NA,"bathyrajid skates",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"123","Benthoctopus leioderma","Benthoctopus leioderma","Benthoctopus leioderma","","smoothskin octopus","Species","Benthoctopus leioderma","Benthoctopus","Octopodidae","Octopoda","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"124","Benthoctopus spp.","Benthoctopus","Benthoctopus","","Octopus","Genus",NA,"Benthoctopus","Octopodidae","Octopoda","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"125","Beringius beringii","Beringius beringii","Beringius beringii","true whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"126","Beringius kennicottii","Beringius kennicottii","Beringius kennicottii","","rotund whelk","Species","Beringius kennicottii","Beringius","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"127","Beringius sp.","Beringius","Beringius","true whelks","Turton's Neptune","Genus",NA,"Beringius","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"128","Beringiusberingii",NA,NA,"true whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"129","Beringiussp.",NA,NA,"true whelks",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"130","Berryteuthis magister","Berryteuthis magister","Berryteuthis magister","magister armhook squid","magister armhook squid","Species","Berryteuthis magister","Berryteuthis","Gonatidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"131","Berryteuthismagister",NA,NA,"magister armhook squid",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"132","Bivalvia","Bivalvia","Bivalvia","bivalves","bivalves","Class",NA,NA,NA,NA,"Bivalvia",NA,NA,"Mollusca","Animalia"
+"133","Bolinia euryptera","Bolinia euryptera","Bolinia euryptera","",NA,"Species","Bolinia euryptera","Bolinia","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"134","Boltenia ovifera","Boltenia ovifera","Boltenia ovifera","","stalked sea squirt","Species","Boltenia ovifera","Boltenia","Pyuridae","Pleurogona","Ascidiacea",NA,"Urochordata","Chordata","Animalia"
+"135","Boltenia sp.","Boltenia","Boltenia","","Kaktussøpung","Genus",NA,"Boltenia","Pyuridae","Pleurogona","Ascidiacea",NA,"Urochordata","Chordata","Animalia"
+"136","Boreogadus saida","Boreogadus saida","Boreogadus saida","Arctic cod","Arctic cod","Species","Boreogadus saida","Boreogadus","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"137","Bothrocara pusillum","Bothrocara pusillum","Bothrocara pusillum","","Alaska eelpout","Species","Bothrocara pusillum","Bothrocara","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"138","Brachiopoda","Brachiopoda","Brachiopoda","bivalve coelomates","lampshells","Phylum",NA,NA,NA,NA,NA,NA,NA,"Brachiopoda","Animalia"
+"139","Brisaster latifrons","Brisaster latifrons","Brisaster latifrons","",NA,"Species","Brisaster latifrons","Brisaster","Schizasteridae","Spatangoida","Echinoidea",NA,"Echinozoa","Echinodermata","Animalia"
+"140","Brisaster spp.","Brisaster","Brisaster","","dypvannssjømus","Genus",NA,"Brisaster","Schizasteridae","Spatangoida","Echinoidea",NA,"Echinozoa","Echinodermata","Animalia"
+"141","Brosme brosme",NA,NA,"cusk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"142","Bryozoa","Bryozoa","Bryozoa","bryozoan shrimp","bryozoans","Phylum",NA,NA,NA,NA,NA,NA,NA,"Bryozoa","Animalia"
+"143","Bryozoichthys marjorius","Bryozoichthys marjorius","Bryozoichthys marjorius","","pearly prickleback","Species","Bryozoichthys marjorius","Bryozoichthys","Stichaeidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"144","Buccinum angulosum","Buccinum angulosum","Buccinum angulosum","","angular whelk","Species","Buccinum angulosum","Buccinum","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"145","Buccinum plectrum","Buccinum plectrum","Buccinum plectrum","sinuous whelk","sinuous whelk","Species","Buccinum plectrum","Buccinum","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"146","Buccinum polare","Buccinum polare","Buccinum polare","","polar whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"147","Buccinum scalariforme","Buccinum scalariforme","Buccinum scalariforme","","ladder whelk","Species","Buccinum scalariforme","Buccinum","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"148","Buccinum sp.","Buccinum","Buccinum","true whelks","buccins","Genus",NA,"Buccinum","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"149","Buccinum spp.","Buccinum","Buccinum","true whelks","buccins","Genus",NA,"Buccinum","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"150","Buccinumplectrum",NA,NA,"sinuous whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"151","Buccinumsp.",NA,NA,"true whelks",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"152","CALAPPA SULCATA","Calappa sulcata","Calappa sulcata","yellow box crab","yellow box crab","Species","Calappa sulcata","Calappa","Calappidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"153","CALLIECTES SAPIDUS","Calliectes sapidus","Callinectes sapidus","blue crab","blue crab","Species","Callinectes sapidus","Callinectes","Portunidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"154","CALLIECTES SIMILIS","Calliectes similis","Callinectes similis","lesser blue crab","lesser blue crab","Species","Callinectes similis","Callinectes","Portunidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"155","CALLINECTES SAPIDUS","Callinectes sapidus","Callinectes sapidus","blue crab","blue crab","Species","Callinectes sapidus","Callinectes","Portunidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"156","CALLINECTES SIMILIS","Callinectes similis","Callinectes similis","lesser blue crab","lesser blue crab","Species","Callinectes similis","Callinectes","Portunidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"157","CANCER BOREALIS","Cancer borealis","Cancer borealis","","Jonah crab","Species","Cancer borealis","Cancer","Cancridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"158","CANCER IRRORATUS","Cancer irroratus","Cancer irroratus","","Atlantic rock crab","Species","Cancer irroratus","Cancer","Cancridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"159","CARANX CRYSOS","Caranx crysos","Caranx crysos","blue runner","blue runner","Species","Caranx crysos","Caranx","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"160","CARAX CRYSOS","Carax crysos","Caranx crysos","","blue runner","Species","Caranx crysos","Caranx","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"161","CAULOLATILUS INTERMEDIUS",NA,NA,"anchor tilefish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"162","CAULOLATILUS ITERMEDIUS","Caulolatilus itermedius","Caulolatilus intermedius","","Gulf bareye tilefish","Species","Caulolatilus intermedius","Caulolatilus","Malacanthidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"163","CENTROPRISTIS PHILADELPHICUS",NA,NA,"rock sea bass",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"164","CENTROPRISTIS STRIATA","Centropristis striata","Centropristis striata","","black seabass","Species","Centropristis striata","Centropristis","Serranidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"165","CENTROSCYLLIUM FABRICII","Centroscyllium fabricii","Centroscyllium fabricii","black dogfish","black dogfish","Species","Centroscyllium fabricii","Centroscyllium","Etmopteridae","Squaliformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"166","CEPHALOPODA","Cephalopoda","Cephalopoda","octopuses","cephalopods","Class",NA,NA,NA,NA,"Cephalopoda",NA,NA,"Mollusca","Animalia"
+"167","CETROPRISTIS PHILADELPHICUS","Cetropristis philadelphicus","Centropristis philadelphica","","rock sea bass","Species","Centropristis philadelphica","Centropristis","Serranidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"168","CHAETODIPTERUS FABER","Chaetodipterus faber","Chaetodipterus faber","Atlantic spadefish","Atlantic spadefish","Species","Chaetodipterus faber","Chaetodipterus","Ephippidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"169","CHAULIODUS SLOANI","Chauliodus sloani","Chauliodus sloani","Sloane's viperfish","Sloane's viperfish","Species","Chauliodus sloani","Chauliodus","Stomiidae","Stomiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"170","CHIASMODON NIGER","Chiasmodon niger","Chiasmodon niger","black swallower","black swallower","Species","Chiasmodon niger","Chiasmodon","Chiasmodontidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"171","CHILOMYCTERUS SCHOEPFI","Chilomycterus schoepfi","Chilomycterus schoepfi","","striped burrfish","Species","Chilomycterus schoepfii","Chilomycterus","Diodontidae","Tetraodontiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"172","CHIONOECETES OPILIO","Chionoecetes opilio","Chionoecetes opilio","snow crab","snow crab","Species","Chionoecetes opilio","Chionoecetes","Oregoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"173","CHLAMYS ISLANDICA","Chlamys islandica","Chlamys islandica","Iceland scallop","Iceland scallop","Species","Chlamys islandica","Chlamys","Pectinidae","Ostreoida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"174","CHLOROSCOMBRUS CHRYSURUS","Chloroscombrus chrysurus","Chloroscombrus chrysurus","Atlantic bumper","Atlantic bumper","Species","Chloroscombrus chrysurus","Chloroscombrus","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"175","CHRYSAORA QUIQUECIRRHA","Chrysaora quiquecirrha","Chrysaora quinquechirrha","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"176","CITHARICHTHYS ARCTIFRONS","Citharichthys arctifrons","Citharichthys arctifrons","","Gulf Stream flounder","Species","Citharichthys arctifrons","Citharichthys","Paralichthyidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"177","CITHARICHTHYS MACROPS","Citharichthys macrops","Citharichthys macrops","spotted whiff","spotted whiff","Species","Citharichthys macrops","Citharichthys","Paralichthyidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"178","CITHARICHTHYS SPILOPTERUS","Citharichthys spilopterus","Citharichthys spilopterus","bay whiff","bay whiff","Species","Citharichthys spilopterus","Citharichthys","Paralichthyidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"179","CLUPEA HARENGUS","Clupea harengus","Clupea harengus","Atlantic herring","Atlantic herring","Species","Clupea harengus","Clupea","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"180","COODO OBILIS","Coodo obilis","Conodon nobilis","","barred grunt","Species","Conodon nobilis","Conodon","Haemulidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"181","CORYPHAENOIDES RUPESTRIS","Coryphaenoides rupestris","Coryphaenoides rupestris","rock grenadier","roundnose grenadier","Species","Coryphaenoides rupestris","Coryphaenoides","Macrouridae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"182","COTTUNCULUS MICROPS","Cottunculus microps","Cottunculus microps","polar sculpin","Arctic sculpin","Species","Cottunculus microps","Cottunculus","Psychrolutidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"183","CRUSTACEA SHRIMP","Crustacea shrimp","Crustacea","","crustaceans","Subphylum",NA,NA,NA,NA,NA,NA,"Crustacea","Arthropoda","Animalia"
+"184","CRYPTACANTHODES MACULATUS","Cryptacanthodes maculatus","Cryptacanthodes maculatus","wrymouth","wrymouth","Species","Cryptacanthodes maculatus","Cryptacanthodes","Cryptacanthodidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"185","CYCLOPSETTA CHITTEDEI","Cyclopsetta chittedei","Cyclopsetta chittendeni","","Mexican flounder","Species","Cyclopsetta chittendeni","Cyclopsetta","Paralichthyidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"186","CYCLOPSETTA CHITTENDENI",NA,NA,"Mexican flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"187","CYCLOPTERUS LUMPUS","Cyclopterus lumpus","Cyclopterus lumpus","lumpfish","lumpfish","Species","Cyclopterus lumpus","Cyclopterus","Cyclopteridae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"188","CYNOSCION",NA,NA,"weakfishes",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"189","CYOSCIO","Cyoscio",NA,"",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"190","CYOSCIO AREARIUS","Cyoscio arearius","Cynoscion arenarius","","sand weakfish","Species","Cynoscion arenarius","Cynoscion","Sciaenidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"191","CYOSCIO OTHUS","Cyoscio othus","Cynoscion nothus","","silver seatrout","Species","Cynoscion nothus","Cynoscion","Sciaenidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"192","Calinaticina oldroydii","Calinaticina oldroydii","Calinaticina oldroydii","","Oldroyd's Fragile Moon Snail","Species","Calinaticina oldroydii","Calinaticina","Naticidae","Neotaenioglossa","Gastropoda",NA,NA,"Mollusca","Animalia"
+"193","Cancer magister","Cancer magister","Cancer magister","dungeness crab","Dungeness crab","Species","Cancer magister","Cancer","Cancridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"194","Cancer oregonensis","Cancer oregonensis","Cancer oregonensis","pygmy rock crab","pygmy rock crab","Species","Cancer oregonensis","Cancer","Cancridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"195","Cancer productus","Cancer productus","Cancer productus","","red rock crab","Species","Cancer productus","Cancer","Cancridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"196","Cancermagister",NA,NA,"dungeness crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"197","Canceroregonensis",NA,NA,"pygmy rock crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"198","Careproctus melanurus","Careproctus melanurus","Careproctus melanurus","blacktail snailfish","blacktail snailfish","Species","Careproctus melanurus","Careproctus","Liparidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"199","Careproctus rastrinus","Careproctus rastrinus","Careproctus rastrinus","","salmon snailfish","Species","Careproctus rastrinus","Careproctus","Liparidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"200","Careproctus sp.","Careproctus","Careproctus","snailfishes","Sorthalet ringbug","Genus",NA,"Careproctus","Liparidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"201","Careproctusmelanurus",NA,NA,"blacktail snailfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"202","Careproctussp.",NA,NA,"snailfishes",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"203","Centropristis striata",NA,NA,"black sea bass",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"204","Ceramaster japonicus","Ceramaster japonicus","Ceramaster japonicus","",NA,"Species","Ceramaster japonicus","Ceramaster","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"205","Ceramaster patagonicus","Ceramaster patagonicus","Ceramaster patagonicus","","Cookie Star","Species","Ceramaster patagonicus","Ceramaster","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"206","Ceramaster sp.","Ceramaster","Ceramaster","","Cookie Star","Genus",NA,"Ceramaster","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"207","Ceramaster spp.","Ceramaster","Ceramaster","","Cookie Star","Genus",NA,"Ceramaster","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"208","Chauliodontinae","Chauliodontinae","Chauliodontinae","","viperfishes","Subfamily",NA,NA,"Stomiidae","Stomiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"209","Chauliodus macouni","Chauliodus macouni","Chauliodus macouni","","Pacific viperfish","Species","Chauliodus macouni","Chauliodus","Stomiidae","Stomiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"210","Chauliodusmacouni",NA,NA,"Pacific viperfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"211","Cheiraster dawsoni","Cheiraster dawsoni","Cheiraster dawsoni","",NA,"Species","Cheiraster dawsoni","Cheiraster","Benthopectinidae","Notomyotida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"212","Chilara taylori","Chilara taylori","Chilara taylori","spotted cusk-eel","spotted cusk-eel","Species","Chilara taylori","Chilara","Ophidiidae","Ophidiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"213","Chionoecetes bairdi","Chionoecetes bairdi","Chionoecetes bairdi","Tanner crab","Tanner crab","Species","Chionoecetes bairdi","Chionoecetes","Oregoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"214","Chionoecetes hybrid","Chionoecetes hybrid","Chionoecetes","snow crabs","Arktisk krabbe","Genus",NA,"Chionoecetes","Oregoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"215","Chionoecetes opilio","Chionoecetes opilio","Chionoecetes opilio","snow crab","snow crab","Species","Chionoecetes opilio","Chionoecetes","Oregoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"216","Chionoecetes tanneri","Chionoecetes tanneri","Chionoecetes tanneri","","grooved Tanner crab","Species","Chionoecetes tanneri","Chionoecetes","Oregoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"217","Chionoecetesbairdi",NA,NA,"Tanner crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"218","Chionoeceteshybrid",NA,NA,"snow crabs",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"219","Chionoecetesopilio",NA,NA,"snow crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"220","Chitonotus pugetensis","Chitonotus pugetensis","Chitonotus pugetensis","","roughback sculpin","Species","Chitonotus pugetensis","Chitonotus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"221","Chlamys rubida","Chlamys rubida","Chlamys rubida","","reddish scallop","Species","Chlamys rubida","Chlamys","Pectinidae","Ostreoida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"222","Chlamys sp.","Chlamys","Chlamys","scallops","Schwimmende Jakobsmuschel","Genus",NA,"Chlamys","Pectinidae","Ostreoida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"223","Chlamyssp",NA,NA,"scallops",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"224","Chlamyssp.",NA,NA,"scallops",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"225","Chorilia longipes","Chorilia longipes","Chorilia longipes","","longhorn decorator crab","Species","Chorilia longipes","Chorilia","Pisidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"226","Citharichthys sordidus","Citharichthys sordidus","Citharichthys sordidus","Pacific sanddab","Pacific sanddab","Species","Citharichthys sordidus","Citharichthys","Paralichthyidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"227","Clinocardium ciliatum","Clinocardium ciliatum","Clinocardium ciliatum","","hairy cockle","Species","Clinocardium ciliatum","Clinocardium","Cardiidae","Veneroida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"228","Clinocardium sp.","Clinocardium","Clinocardium","","Nuttall cockle","Genus",NA,"Clinocardium","Cardiidae","Veneroida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"229","Clinopegma magnum","Clinopegma magnum","Clinopegma magnum","helmet whelk","helmet whelk","Species","Clinopegma magnum","Clinopegma","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"230","Clinopegmamagnum",NA,NA,"helmet whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"231","Clupea harengus",NA,NA,"Atlantic herring",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"232","Clupea pallasi","Clupea pallasi","Clupea pallasi","Pacific herring","Pacific herring","Species","Clupea pallasii","Clupea","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"233","Clupeapallasi",NA,NA,"Pacific herring",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"234","Colus halli","Colus halli","Colus halli","",NA,"Species","Colus hallii","Colus","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"235","Colus herendeenii","Colus herendeenii","Colus herendeenii","","thin-ribbed whelk","Species","Colus herendeenii","Colus","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"236","Colus sp.","Colus","Colus","true whelks","Colus","Genus",NA,"Colus","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"237","Colus spitzbergensis","Colus spitzbergensis","Colus spitzbergensis","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"238","Colussp.",NA,NA,"true whelks",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"239","Corallimorphus spp.","Corallimorphus","Corallimorphus","",NA,"Genus",NA,"Corallimorphus","Corallimorphidae","Corallimorpharia","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"240","Cottidae","Cottidae","Cottidae","","sculpins","Family",NA,NA,"Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"241","Crangon communis","Crangon communis","Crangon communis","","gray shrimp","Species","Neocrangon communis","Neocrangon","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"242","Crangon dalli","Crangon dalli","Crangon dalli","","ridged crangon","Species","Crangon dalli","Crangon","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"243","Crangon sp.","Crangon","Crangon","shrimps","sandreker","Genus",NA,"Crangon","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"244","Crangon spp.","Crangon","Crangon","shrimps","sandreker","Genus",NA,"Crangon","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"245","Crangonsp.",NA,NA,"shrimps",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"246","Crepidula grandis","Crepidula grandis","Crepidula grandis","","great slippersnail","Species","Crepidula grandis","Crepidula","Calyptraeidae","Neotaenioglossa","Gastropoda",NA,NA,"Mollusca","Animalia"
+"247","Crossaster borealis","Crossaster borealis","Crossaster borealis","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"248","Crossaster papposus","Crossaster papposus","Crossaster papposus","","Sonnenstern","Species","Crossaster papposus","Crossaster","Solasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"249","Crossaster sp.","Crossaster","Crossaster","","Sonnenstern","Genus",NA,"Crossaster","Solasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"250","Cryptacanthodes giganteus","Cryptacanthodes giganteus","Cryptacanthodes giganteus","","giant wrymouth","Species","Cryptacanthodes giganteus","Cryptacanthodes","Cryptacanthodidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"251","Cryptacanthodesgiganteus",NA,NA,"giant wrymouth",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"252","Crystallichthys cyclospilus","Crystallichthys cyclospilus","Crystallichthys cyclospilus","","blotched snailfish","Species","Crystallichthys cyclospilus","Crystallichthys","Liparidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"253","Ctenodiscus crispatus","Ctenodiscus crispatus","Ctenodiscus crispatus","mud star","Mud Star","Species","Ctenodiscus crispatus","Ctenodiscus","Goniopectinidae","Paxillosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"254","Ctenodiscuscrispatus",NA,NA,"mud star",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"255","Cucumaria fallax","Cucumaria fallax","Cucumaria fallax","",NA,"Species","Cucumaria fallax","Cucumaria","Cucumariidae","Dendrochirotida","Holothuroidea",NA,"Echinozoa","Echinodermata","Animalia"
+"256","Cucumaria sp.","Cucumaria","Cucumaria","","red sea cucumber","Genus",NA,"Cucumaria","Cucumariidae","Dendrochirotida","Holothuroidea",NA,"Echinozoa","Echinodermata","Animalia"
+"257","Cyanea capillata","Cyanea capillata","Cyanea capillata","","lion's mane","Species","Cyanea capillata","Cyanea","Cyaneidae","Semaeostomeae","Scyphozoa",NA,"Medusozoa","Cnidaria","Animalia"
+"258","Cymatogaster aggregata","Cymatogaster aggregata","Cymatogaster aggregata","","shiner perch","Species","Cymatogaster aggregata","Cymatogaster","Embiotocidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"259","DECAPTERUS PUCTATUS","Decapterus puctatus","Decapterus","","mackerel scads","Genus",NA,"Decapterus","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"260","DIPLECTRUM BIVITTATUM","Diplectrum bivittatum","Diplectrum bivittatum","dwarf sand perch","dwarf sand perch","Species","Diplectrum bivittatum","Diplectrum","Serranidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"261","DIPLECTRUM FORMOSUM","Diplectrum formosum","Diplectrum formosum","sand perch","sand perch","Species","Diplectrum formosum","Diplectrum","Serranidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"262","DIPTURUS LAEVIS","Dipturus laevis","Dipturus laevis","","barndoor skate","Species","Dipturus laevis","Dipturus","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"263","Dasycottus setiger","Dasycottus setiger","Dasycottus setiger","spinyhead sculpin","spinyhead sculpin","Species","Dasycottus setiger","Dasycottus","Psychrolutidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"264","Dasycottussetiger",NA,NA,"spinyhead sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"265","Decapodiformes","Decapodiformes","Decapodiformes","squids",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"266","Dermasterias imbricata","Dermasterias imbricata","Dermasterias imbricata","","Leather star","Species","Dermasterias imbricata","Dermasterias","Poraniidae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"267","Diplopteraster multipes","Diplopteraster multipes","Diplopteraster multipes","",NA,"Species","Diplopteraster multipes","Diplopteraster","Pterasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"268","Dipsacaster borealis","Dipsacaster borealis","Dipsacaster borealis","",NA,"Species","Dipsacaster borealis","Dipsacaster","Astropectinidae","Paxillosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"269","Dorididae","Dorididae","Dorididae","",NA,"Family",NA,NA,"Dorididae","Nudibranchia","Gastropoda",NA,NA,"Mollusca","Animalia"
+"270","Doryteuthis (Amerigo) pealeii",NA,NA,"longfin inshore squid",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"271","ECHINOIDEA","Echinoidea","Echinoidea","heart urchins","sea urchins","Class",NA,NA,NA,NA,"Echinoidea",NA,"Echinozoa","Echinodermata","Animalia"
+"272","EGYOPHRYS SETA","Egyophrys seta","Engyophrys senta","","spiny flounder","Species","Engyophrys senta","Engyophrys","Bothidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"273","ENCHELYOPUS CIMBRIUS","Enchelyopus cimbrius","Enchelyopus cimbrius","fourbeard rockling","fourbeard rockling","Species","Enchelyopus cimbrius","Enchelyopus","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"274","ENGYOPHRYS SENTA",NA,NA,"spiny flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"275","EQUETUS UMBROSUS","Equetus umbrosus","Equetus umbrosus","cubbyu","cubbyu",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"276","ETROPUS CROSSOTUS","Etropus crossotus","Etropus crossotus","fringed flounder","fringed flounder","Species","Etropus crossotus","Etropus","Paralichthyidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"277","ETRUMEUS TERES","Etrumeus teres","Etrumeus teres","round herring","red-eye round herring","Species","Etrumeus teres","Etrumeus","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"278","EUALUS GAIMARDII","Eualus gaimardii","Eualus gaimardii","circumpolar eualid","circumpolar eualid","Species","Eualus gaimardii","Eualus","Hippolytidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"279","EUALUS MACILENTUS","Eualus macilentus","Eualus macilentus","Greenland shrimp","Greenland shrimp","Species","Eualus macilentus","Eualus","Hippolytidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"280","EUCINOSTOMUS GULA","Eucinostomus gula","Eucinostomus gula","silver jenny","jenny mojarra","Species","Eucinostomus gula","Eucinostomus","Gerreidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"281","EUCIOSTOMUS GULA","Euciostomus gula","Eucinostomus gula","","jenny mojarra","Species","Eucinostomus gula","Eucinostomus","Gerreidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"282","EUMESOGRAMMUS PRAECISUS","Eumesogrammus praecisus","Eumesogrammus praecisus","fourline snakeblenny","fourline snakeblenny","Species","Eumesogrammus praecisus","Eumesogrammus","Stichaeidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"283","EUMICROTREMUS SPINOSUS","Eumicrotremus spinosus","Eumicrotremus spinosus","Atlantic spiny lumpsucker","Atlantic spiny lumpsucker","Species","Eumicrotremus spinosus","Eumicrotremus","Cyclopteridae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"284","Echinacea","Echinacea","Echinacea","","purple coneflower",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"285","Echinarachnius parma","Echinarachnius parma","Echinarachnius parma","","common sand dollar","Species","Echinarachnius parma","Echinarachnius","Echinarachniidae","Clypeasteroida","Echinoidea",NA,"Echinozoa","Echinodermata","Animalia"
+"286","Eleginus gracilis","Eleginus gracilis","Eleginus gracilis","","saffron cod","Species","Eleginus gracilis","Eleginus","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"287","Engraulis mordax","Engraulis mordax","Engraulis mordax","northern anchovy","northern anchovy","Species","Engraulis mordax","Engraulis","Engraulidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"288","Enteroctopus dofleini","Enteroctopus dofleini","Enteroctopus dofleini","","North Pacific giant octopus","Species","Enteroctopus dofleini","Enteroctopus","Octopodidae","Octopoda","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"289","Eopsetta jordani","Eopsetta jordani","Eopsetta jordani","petrale sole","Petrale sole","Species","Eopsetta jordani","Eopsetta","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"290","Eopsettajordani",NA,NA,"petrale sole",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"291","Eptatretus deani","Eptatretus deani","Eptatretus deani","","black hagfish","Species","Eptatretus deani","Eptatretus","Myxinidae","Myxiniformes","Myxini",NA,"Vertebrata","Chordata","Animalia"
+"292","Eptatretus stouti","Eptatretus stouti","Eptatretus stouti","","Pacific hagfish","Species","Eptatretus stoutii","Eptatretus","Myxinidae","Myxiniformes","Myxini",NA,"Vertebrata","Chordata","Animalia"
+"293","Erimacrus isenbeckii","Erimacrus isenbeckii","Erimacrus isenbeckii","hair crab","hair crab","Species","Erimacrus isenbeckii","Erimacrus","Cheiragonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"294","Erimacrusisenbeckii",NA,NA,"hair crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"295","Eumicrotremus orbis","Eumicrotremus orbis","Eumicrotremus orbis","Pacific spiny lumpsucker","Pacific spiny lumpsucker","Species","Eumicrotremus orbis","Eumicrotremus","Cyclopteridae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"296","Eumicrotremusorbis",NA,NA,"Pacific spiny lumpsucker",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"297","Eunoe depressa","Eunoe depressa","Eunoe depressa","",NA,"Species","Eunoe depressa","Eunoe","Polynoidae","Phyllodocida","Errantia",NA,"Polychaeta","Annelida","Animalia"
+"298","Eunoe nodosa","Eunoe nodosa","Eunoe nodosa","",NA,"Species","Eunoe nodosa","Eunoe","Polynoidae","Phyllodocida","Errantia",NA,"Polychaeta","Annelida","Animalia"
+"299","Euspira pallida","Euspira pallida","Euspira pallida","","pale moonsnail","Species","Euspira pallida","Euspira","Naticidae","Neotaenioglossa","Gastropoda",NA,NA,"Mollusca","Animalia"
+"300","Evasterias echinosoma","Evasterias echinosoma","Evasterias echinosoma","",NA,"Species","Evasterias echinosoma","Evasterias","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"301","Evasterias troschelii","Evasterias troschelii","Evasterias troschelii","",NA,"Species","Evasterias troschelii","Evasterias","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"302","Florometra spp.","Florometra","Florometra","","common feather star","Genus",NA,"Florometra","Antedonidae","Comatulida","Crinoidea",NA,"Crinozoa","Echinodermata","Animalia"
+"303","Flustra serrulata","Flustra serrulata","Flustra serrulata","",NA,"Species","Flustra serrulata","Flustra","Flustridae","Cheilostomata","Gymnolaemata",NA,NA,"Bryozoa","Animalia"
+"304","Fusitriton oregonensis","Fusitriton oregonensis","Fusitriton oregonensis","Oregon triton","Oregon triton","Species","Fusitriton oregonensis","Fusitriton","Ranellidae","Neotaenioglossa","Gastropoda",NA,NA,"Mollusca","Animalia"
+"305","Fusitritonoregonensis",NA,NA,"Oregon triton",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"306","GADUS MORHUA","Gadus morhua","Gadus morhua","Atlantic cod","Atlantic cod","Species","Gadus morhua","Gadus","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"307","GAIDROPSARUS  SP",NA,NA,"three-bearded rocklings",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"308","GAIDROPSARUS  SP.","Gaidropsarus","Gaidropsarus","three-bearded rocklings","three-bearded rocklings","Genus",NA,"Gaidropsarus","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"309","GLYPTOCEPHALUS CYNOGLOSSUS","Glyptocephalus cynoglossus","Glyptocephalus cynoglossus","witch flounder","witch","Species","Glyptocephalus cynoglossus","Glyptocephalus","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"310","GONATUS  SP.","Gonatus","Gonatus","armhook squids","Gonate squid","Genus",NA,"Gonatus","Gonatidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"311","GORGONOCEPHALIDAE","Gorgonocephalidae","Gorgonocephalidae","basket stars","basketstars","Family",NA,NA,"Gorgonocephalidae","Phrynophiurida","Ophiuroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"312","GYMACHIRUS TEXAE","Gymachirus texae","Gymnachirus texae","","Gulf of Mexico fringed sole","Species","Gymnachirus texae","Gymnachirus","Achiridae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"313","GYMNACHIRUS TEXAE",NA,NA,"fringed sole",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"314","GYMNELIS VIRIDIS","Gymnelis viridis","Gymnelis viridis","fish doctor",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"315","GYMOTHORAX IGROMARGIATUS","Gymothorax igromargiatus",NA,"",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"316","Gadus macrocephalus","Gadus macrocephalus","Gadus macrocephalus","Pacific cod","Pacific cod","Species","Gadus macrocephalus","Gadus","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"317","Gadus morhua",NA,NA,"Atlantic cod",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"318","Gadusmacrocephalus",NA,NA,"Pacific cod",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"319","Galeorhinus galeus","Galeorhinus galeus","Galeorhinus galeus","","tope shark","Species","Galeorhinus galeus","Galeorhinus","Triakidae","Carcharhiniformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"320","Gastropoda","Gastropoda","Gastropoda","gastropods","gastropods","Class",NA,NA,NA,NA,"Gastropoda",NA,NA,"Mollusca","Animalia"
+"321","Genyonemus lineatus","Genyonemus lineatus","Genyonemus lineatus","white croaker","white croaker","Species","Genyonemus lineatus","Genyonemus","Sciaenidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"322","Gephyreaster swifti","Gephyreaster swifti","Gephyreaster swifti","","Gunpowder Star","Species","Gephyreaster swifti","Gephyreaster","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"323","Gersemia sp.","Gersemia","Gersemia","sea strawberry","sea strawberry","Genus",NA,"Gersemia","Alcyoniidae","Alcyonacea","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"324","Gersemiasp.",NA,NA,"sea strawberry",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"325","Glyptocephalus cynoglossus",NA,NA,"witch flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"326","Glyptocephalus zachirus","Glyptocephalus zachirus","Glyptocephalus zachirus","rex sole","Rex sole","Species","Glyptocephalus zachirus","Glyptocephalus","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"327","Glyptocephaluszachirus",NA,NA,"rex sole",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"328","Gonatopsis borealis","Gonatopsis borealis","Gonatopsis borealis","","Boreopacific gonate squid","Species","Gonatopsis borealis","Gonatopsis","Gonatidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"329","Gonatus onyx","Gonatus onyx","Gonatus onyx","","clawed armhook squid","Species","Gonatus onyx","Gonatus","Gonatidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"330","Gorgonacea","Gorgonacea","Gorgonacea","","soft corals",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"331","Gorgonocephalus eucnemis","Gorgonocephalus eucnemis","Gorgonocephalus eucnemis","basket star","basket star","Species","Gorgonocephalus eucnemis","Gorgonocephalus","Gorgonocephalidae","Phrynophiurida","Ophiuroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"332","Gorgonocephaluseucnemis",NA,NA,"basket star",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"333","Gymnocanthus galeatus","Gymnocanthus galeatus","Gymnocanthus galeatus","armorhead sculpin","armorhead sculpin","Species","Gymnocanthus galeatus","Gymnocanthus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"334","Gymnocanthus pistilliger","Gymnocanthus pistilliger","Gymnocanthus pistilliger","","threaded sculpin","Species","Gymnocanthus pistilliger","Gymnocanthus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"335","Gymnocanthusgaleatus",NA,NA,"armorhead sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"336","HAEMULO AUROLIEATUM","Haemulo aurolieatum","Haemulon aurolineatum","","tomtate","Species","Haemulon aurolineatum","Haemulon","Haemulidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"337","HAEMULON AUROLINEATUM","Haemulon aurolineatum","Haemulon aurolineatum","tomtate","tomtate","Species","Haemulon aurolineatum","Haemulon","Haemulidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"338","HALIEUTICHTHYS ACULEATUS","Halieutichthys aculeatus","Halieutichthys aculeatus","pancake batfish","pancake batfish","Species","Halieutichthys aculeatus","Halieutichthys","Ogcocephalidae","Lophiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"339","HAREGULA JAGUAA","Haregula jaguaa","Harengula jaguana","","scaled sardine","Species","Harengula jaguana","Harengula","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"340","HARENGULA JAGUANA","Harengula jaguana","Harengula jaguana","scaled sardine","scaled sardine","Species","Harengula jaguana","Harengula","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"341","HELICOLENUS DACTYLOPTERUS","Helicolenus dactylopterus","Helicolenus dactylopterus","blackbelly rosefish","blackbelly rosefish","Species","Helicolenus dactylopterus","Helicolenus","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"342","HEMICARAX AMBLYRHYCHUS","Hemicarax amblyrhychus","Hemicaranx amblyrhynchus","","bluntnose jack","Species","Hemicaranx amblyrhynchus","Hemicaranx","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"343","HEMITRIPTERUS AMERICANUS","Hemitripterus americanus","Hemitripterus americanus","sea raven","sea raven","Species","Hemitripterus americanus","Hemitripterus","Hemitripteridae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"344","HEPATUS EPHELITICUS","Hepatus epheliticus","Hepatus epheliticus","calico box crab","calico box crab","Species","Hepatus epheliticus","Hepatus","Hepatidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"345","HILDEBRADIA FLAVA","Hildebradia flava","Hildebrandia flava","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"346","HILDEBRANDIA FLAVA",NA,NA,"yellow conger",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"347","HIPPOCAMPUS ERECTUS","Hippocampus erectus","Hippocampus erectus","","lined seahorse","Species","Hippocampus erectus","Hippocampus","Syngnathidae","Gasterosteiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"348","HIPPOGLOSSOIDES PLATESSOIDES","Hippoglossoides platessoides","Hippoglossoides platessoides","American plaice","American plaice","Species","Hippoglossoides platessoides","Hippoglossoides","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"349","HIPPOGLOSSUS HIPPOGLOSSUS","Hippoglossus hippoglossus","Hippoglossus hippoglossus","Atlantic halibut","Atlantic halibut","Species","Hippoglossus hippoglossus","Hippoglossus","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"350","HOLOTHUROIDEA","Holothuroidea","Holothuroidea","sea cucumbers","sea cucumbers","Class",NA,NA,NA,NA,"Holothuroidea",NA,"Echinozoa","Echinodermata","Animalia"
+"351","HOMARUS AMERICANUS","Homarus americanus","Homarus americanus","American lobster","American lobster","Species","Homarus americanus","Homarus","Nephropidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"352","HOPLUIS MACRURUS","Hopluis macrurus","Hoplunnis macrurus","","freckled pike-conger",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"353","HOPLUNNIS MACRURUS",NA,NA,"freckled pike-conger",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"354","HYAS  SP",NA,NA,"lyre crabs",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"355","HYAS  SP.","Hyas","Hyas","lyre crabs","pyntekrabber","Genus",NA,"Hyas","Oregoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"356","Halichondria panicea","Halichondria panicea","Halichondria panicea","","Klumpenschwamm","Species","Halichondria panicea","Halichondria","Halichondriidae","Halichondrida","Demospongiae",NA,NA,"Porifera","Animalia"
+"357","Halocynthia aurantium","Halocynthia aurantium","Halocynthia aurantium","",NA,"Species","Halocynthia aurantium","Halocynthia","Pyuridae","Pleurogona","Ascidiacea",NA,"Urochordata","Chordata","Animalia"
+"358","Halocynthia igaboja","Halocynthia igaboja","Halocynthia igaboja","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"359","Halocynthia sp.","Halocynthia","Halocynthia","","ascidi roig","Genus",NA,"Halocynthia","Pyuridae","Pleurogona","Ascidiacea",NA,"Urochordata","Chordata","Animalia"
+"360","Helicolenus dactylopterus",NA,NA,"blackbelly rosefish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"361","Hemilepidotus hemilepidotus","Hemilepidotus hemilepidotus","Hemilepidotus hemilepidotus","","red Irish lord","Species","Hemilepidotus hemilepidotus","Hemilepidotus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"362","Hemilepidotus jordani","Hemilepidotus jordani","Hemilepidotus jordani","yellow Irish lord","yellow Irish lord","Species","Hemilepidotus jordani","Hemilepidotus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"363","Hemilepidotus papilio","Hemilepidotus papilio","Hemilepidotus papilio","butterfly sculpin","butterfly sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"364","Hemilepidotus spinosus","Hemilepidotus spinosus","Hemilepidotus spinosus","","brown Irish lord","Species","Hemilepidotus spinosus","Hemilepidotus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"365","Hemilepidotus zapus","Hemilepidotus zapus","Hemilepidotus zapus","longfin Irish lord","longfin Irish lord","Species","Hemilepidotus zapus","Hemilepidotus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"366","Hemilepidotushemilepidotus",NA,NA,"red Irish lord",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"367","Hemilepidotusjordani",NA,NA,"yellow Irish lord",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"368","Hemilepidotuspapilio",NA,NA,"butterfly sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"369","Hemilepidotuszapus",NA,NA,"longfin Irish lord",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"370","Hemitripterus americanus",NA,NA,"sea raven",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"371","Hemitripterus bolini","Hemitripterus bolini","Hemitripterus bolini","bigmouth sculpin","bigmouth sculpin","Species","Hemitripterus bolini","Hemitripterus","Hemitripteridae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"372","Hemitripterusbolini",NA,NA,"bigmouth sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"373","Henricia leviuscula","Henricia leviuscula","Henricia leviuscula","","Pacific blood star","Species","Henricia leviuscula","Henricia","Echinasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"374","Henricia sp.","Henricia","Henricia","","blodsjøstjerner","Genus",NA,"Henricia","Echinasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"375","Henricia spp.","Henricia","Henricia","","blodsjøstjerner","Genus",NA,"Henricia","Echinasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"376","Heterozonias alternatus","Heterozonias alternatus","Heterozonias alternatus","",NA,"Species","Heterozonias alternatus","Heterozonias","Solasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"377","Hexactinellida","Hexactinellida","Hexactinellida","","Glasschwämme","Class",NA,NA,NA,NA,"Hexactinellida",NA,NA,"Porifera","Animalia"
+"378","Hexactinosida","Hexactinosida","Hexactinosida","",NA,"Order",NA,NA,NA,"Hexactinosida","Hexactinellida",NA,NA,"Porifera","Animalia"
+"379","Hexagrammos decagrammus","Hexagrammos decagrammus","Hexagrammos decagrammus","kelp greenling","kelp greenling","Species","Hexagrammos decagrammus","Hexagrammos","Hexagrammidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"380","Hexagrammos stelleri","Hexagrammos stelleri","Hexagrammos stelleri","whitespotted greenling","whitespotted greenling","Species","Hexagrammos stelleri","Hexagrammos","Hexagrammidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"381","Hexagrammosdecagrammus",NA,NA,"kelp greenling",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"382","Hexagrammosstelleri",NA,NA,"whitespotted greenling",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"383","Hexanchus griseus","Hexanchus griseus","Hexanchus griseus","","bluntnose sixgill shark","Species","Hexanchus griseus","Hexanchus","Hexanchidae","Hexanchiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"384","Hiatella arctica","Hiatella arctica","Hiatella arctica","","Arctic hiatella","Species","Hiatella arctica","Hiatella","Hiatellidae","Myoida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"385","Hippasteria californica","Hippasteria californica","Hippasteria californica","",NA,"Species","Hippasteria californica","Hippasteria","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"386","Hippasteria spinosa","Hippasteria spinosa","Hippasteria spinosa","",NA,"Species","Hippasteria spinosa","Hippasteria","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"387","Hippoglossina oblonga",NA,NA,"fourspot flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"388","Hippoglossoides elassodon","Hippoglossoides elassodon","Hippoglossoides elassodon","flathead sole","flathead sole","Species","Hippoglossoides elassodon","Hippoglossoides","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"389","Hippoglossoides platessoides",NA,NA,"American plaice",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"390","Hippoglossoides sp.","Hippoglossoides","Hippoglossoides","flounders","Bering flounder","Genus",NA,"Hippoglossoides","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"391","Hippoglossoideselassodon",NA,NA,"flathead sole",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"392","Hippoglossoidessp",NA,NA,"flounders",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"393","Hippoglossoidessp.",NA,NA,"flounders",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"394","Hippoglossus hippoglossus",NA,NA,"Atlantic halibut",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"395","Hippoglossus stenolepis","Hippoglossus stenolepis","Hippoglossus stenolepis","Pacific halibut","Pacific halibut","Species","Hippoglossus stenolepis","Hippoglossus","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"396","Hippoglossusstenolepis",NA,NA,"Pacific halibut",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"397","Holothuroidea","Holothuroidea","Holothuroidea","sea cucumbers","sea cucumbers","Class",NA,NA,NA,NA,"Holothuroidea",NA,"Echinozoa","Echinodermata","Animalia"
+"398","Homarus americanus",NA,NA,"American lobster",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"399","Hormathiidae","Hormathiidae","Hormathiidae","",NA,"Family",NA,NA,"Hormathiidae","Actiniaria","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"400","Hyas coarctatus","Hyas coarctatus","Hyas coarctatus","Arctic lyre crab","Arctic lyre crab","Species","Hyas coarctatus","Hyas","Oregoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"401","Hyas lyratus","Hyas lyratus","Hyas lyratus","Pacific lyre crab","Pacific lyre crab","Species","Hyas lyratus","Hyas","Oregoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"402","Hyascoarctatus",NA,NA,"Arctic lyre crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"403","Hyaslyratus",NA,NA,"Pacific lyre crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"404","Hydrolagus colliei","Hydrolagus colliei","Hydrolagus colliei","spotted ratfish","spotted ratfish","Species","Hydrolagus colliei","Hydrolagus","Chimaeridae","Chimaeriformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"405","Hydrolaguscolliei",NA,NA,"spotted ratfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"406","Hypsagonus quadricornis","Hypsagonus quadricornis","Hypsagonus quadricornis","","fourhorn poacher","Species","Hypsagonus quadricornis","Hypsagonus","Agonidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"407","ICELUS SPATULA","Icelus spatula","Icelus spatula","spatulate sculpin","spatulate sculpin","Species","Icelus spatula","Icelus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"408","ILLEX ILLECEBROSUS","Illex illecebrosus","Illex illecebrosus","northern shortfin squid","northern shortfin squid","Species","Illex illecebrosus","Illex","Ommastrephidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"409","Icelinus filamentosus","Icelinus filamentosus","Icelinus filamentosus","threadfin sculpin","threadfin sculpin","Species","Icelinus filamentosus","Icelinus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"410","Icelinus fimbriatus","Icelinus fimbriatus","Icelinus fimbriatus","","fringed sculpin","Species","Icelinus fimbriatus","Icelinus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"411","Icelus spiniger","Icelus spiniger","Icelus spiniger","thorny sculpin","thorny sculpin","Species","Icelus spiniger","Icelus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"412","Icelusspiniger",NA,NA,"thorny sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"413","Illex illecebrosus",NA,NA,"northern shortfin squid",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"414","Invertebrata","Invertebrata","Invertebrata","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"415","Isopoda","Isopoda","Isopoda","","pill bugs, wood lice and sea slaters","Order",NA,NA,NA,"Isopoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"416","Isopsetta isolepis","Isopsetta isolepis","Isopsetta isolepis","butter sole","butter sole","Species","Isopsetta isolepis","Isopsetta","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"417","Isopsettaisolepis",NA,NA,"butter sole",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"418","KATHETOSTOMA ALBIGUTTA","Kathetostoma albigutta","Kathetostoma albigutta","lancer stargazer","lancer stargazer","Species","Kathetostoma albigutta","Kathetostoma","Uranoscopidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"419","LAGOCEPHALUS LAEVIGATUS","Lagocephalus laevigatus","Lagocephalus laevigatus","smooth puffer","smooth puffer","Species","Lagocephalus laevigatus","Lagocephalus","Tetraodontidae","Tetraodontiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"420","LAGODO RHOMBOIDES","Lagodo rhomboides","Lagodon rhomboides","","pinfish","Species","Lagodon rhomboides","Lagodon","Sparidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"421","LAGODON RHOMBOIDES","Lagodon rhomboides","Lagodon rhomboides","pinfish","pinfish","Species","Lagodon rhomboides","Lagodon","Sparidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"422","LARIMUS FASCIATUS","Larimus fasciatus","Larimus fasciatus","banded drum","banded drum","Species","Larimus fasciatus","Larimus","Sciaenidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"423","LEBBEUS GROENLANDICUS","Lebbeus groenlandicus","Lebbeus groenlandicus","spiny lebbeid","spiny lebbeid","Species","Lebbeus groenlandicus","Lebbeus","Hippolytidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"424","LEBBEUS POLARIS","Lebbeus polaris","Lebbeus polaris","polar lebbeid","polar lebbeid","Species","Lebbeus polaris","Lebbeus","Hippolytidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"425","LEIOLAMBRUS ITIDUS","Leiolambrus itidus","Leiolambrus nitidus","","white elbow crab","Species","Leiolambrus nitidus","Leiolambrus","Parthenopidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"426","LEIOSTOMUS XANTHURUS","Leiostomus xanthurus","Leiostomus xanthurus","spot","spot croaker","Species","Leiostomus xanthurus","Leiostomus","Sciaenidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"427","LEIOSTOMUS XATHURUS","Leiostomus xathurus","Leiostomas xanthurus","spot",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"428","LEPOPHIDIUM BREVIBARBE","Lepophidium brevibarbe","Lepophidium brevibarbe","blackedge cusk-eel","shortbeard cusk-eel","Species","Lepophidium brevibarbe","Lepophidium","Ophidiidae","Ophidiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"429","LEPOPHIDIUM JEAAE","Lepophidium jeaae","Lepophidium","","Leopard cusk eel","Genus",NA,"Lepophidium","Ophidiidae","Ophidiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"430","LEPOPHIDIUM JEANNAE",NA,NA,"mottled cusk-eel",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"431","LEPOPHIDIUM PROFUNDORUM","Lepophidium profundorum","Lepophidium profundorum","fawn cusk-eel","blackrim cusk-eel","Species","Lepophidium profundorum","Lepophidium","Ophidiidae","Ophidiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"432","LEUCORAJA ERINACEA","Leucoraja erinacea","Leucoraja erinacea","","little skate","Species","Leucoraja erinacea","Leucoraja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"433","LEUCORAJA GARMANI","Leucoraja garmani","Leucoraja garmani","","rosette skate","Species","Leucoraja garmani","Leucoraja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"434","LEUCORAJA OCELLATA","Leucoraja ocellata","Leucoraja ocellata","big skate","winter skate","Species","Leucoraja ocellata","Leucoraja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"435","LIBIIA EMARGIATA","Libiia emargiata","Libinia emerginata","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"436","LIMANDA FERRUGINEA","Limanda ferruginea","Limanda ferruginea","rusty flounder","yellowtail flounder","Species","Limanda ferruginea","Limanda","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"437","LIMANDA FERRUGINEA ",NA,NA,"rusty flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"438","LIPARIDAE","Liparidae","Liparidae","snailfishes","snailfishes","Family",NA,NA,"Liparidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"439","LITHODES MAJA","Lithodes maja","Lithodes maja","Norway king crab","Norway king crab","Species","Lithodes maja","Lithodes","Lithodidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"440","LITHODIDAE","Lithodidae","Lithodidae","stone and king crabs","stone and king crabs","Family",NA,NA,"Lithodidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"441","LOLIGO","Loligo","Loligo","","Nordischer Kalmar","Genus",NA,"Loligo","Loliginidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"442","LOLIGO PEALEII","Loligo pealeii","Loligo pealeii","longfin inshore squid","longfin inshore squid","Species","Loligo pealeii","Loligo","Loliginidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"443","LOLIGO PLEII","Loligo pleii","Loligo pleii","slender inshore squid",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"444","LOLLIGUCULA BREVIS","Lolligucula brevis","Lolliguncula brevis","","Atlantic brief squid","Species","Lolliguncula brevis","Lolliguncula","Loliginidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"445","LOLLIGUNCULA BREVIS","Lolliguncula brevis","Lolliguncula brevis","Atlantic brief squid","Atlantic brief squid","Species","Lolliguncula brevis","Lolliguncula","Loliginidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"446","LOPHIUS AMERICANUS","Lophius americanus","Lophius americanus","goosefish","American angler","Species","Lophius americanus","Lophius","Lophiidae","Lophiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"447","LUIDIA CLATHRATA","Luidia clathrata","Luidia clathrata","","lined sea star","Species","Luidia clathrata","Luidia","Luidiidae","Paxillosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"448","LUMPENUS LUMPRETAEFORMIS","Lumpenus lumpretaeformis","Lumpenus lumpretaeformis","snakeblenny",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"449","LUMPENUS MACULATUS","Lumpenus maculatus","Lumpenus maculatus","daubed shanny",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"450","LUTJANUS CAMPECHANUS","Lutjanus campechanus","Lutjanus campechanus","red snapper","northern red snapper","Species","Lutjanus campechanus","Lutjanus","Lutjanidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"451","LUTJANUS SYNAGRIS","Lutjanus synagris","Lutjanus synagris","lane snapper","lane snapper","Species","Lutjanus synagris","Lutjanus","Lutjanidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"452","LUTJAUS CAMPECHAUS","Lutjaus campechaus","Lutjanus campechianus","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"453","LUTJAUS SYAGRIS","Lutjaus syagris","Lutianus synagris","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"454","LYCENCHELYS  SP.","Lycenchelys","Lycenchelys","eelpouts","slipskin","Genus",NA,"Lycenchelys","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"455","LYCODES ESMARKI","Lycodes esmarki","Lycodes esmarki","Esmark's eelpout","Esmark's eelpout","Species","Lycodes esmarkii","Lycodes","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"456","LYCODES RETICULATUS","Lycodes reticulatus","Lycodes reticulatus","Arctic eelpout","Arctic eelpout","Species","Lycodes reticulatus","Lycodes","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"457","LYCODES VAHLII","Lycodes vahlii","Lycodes vahlii","Vahl's eelpout","Vahl's eelpout","Species","Lycodes vahlii","Lycodes","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"458","Labidochirus splendescens","Labidochirus splendescens","Labidochirus splendescens","","splendid hermit","Species","Labidochirus splendescens","Labidochirus","Paguridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"459","Lamna ditropis","Lamna ditropis","Lamna ditropis","","tiburón salmón","Species","Lamna ditropis","Lamna","Lamnidae","Lamniformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"460","Laqueus californianus","Laqueus californianus","Laqueus californianus","",NA,"Species","Laqueus californianus","Laqueus","Laqueidae","Terebratulida","Rhynchonellata",NA,"Rhynchonelliformea","Brachiopoda","Animalia"
+"461","Lebbeus groenlandicus","Lebbeus groenlandicus","Lebbeus groenlandicus","spiny lebbeid","spiny lebbeid","Species","Lebbeus groenlandicus","Lebbeus","Hippolytidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"462","Lepidopsetta sp",NA,NA,"rock soles",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"463","Lepidopsetta sp.","Lepidopsetta","Lepidopsetta","rock soles","Pacifisk flynder","Genus",NA,"Lepidopsetta","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"464","Lepidopsettasp",NA,NA,"rock soles",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"465","Lepidopsettasp.",NA,NA,"rock soles",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"466","Lepophidium profundorum",NA,NA,"fawn cusk-eel",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"467","Leptagonus frenatus","Leptagonus frenatus","Leptagonus frenatus","sawback poacher","sawback poacher",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"468","Leptagonusfrenatus",NA,NA,"sawback poacher",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"469","Leptasterias arctica","Leptasterias arctica","Leptasterias arctica","",NA,"Species","Leptasterias arctica","Leptasterias","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"470","Leptasterias polaris","Leptasterias polaris","Leptasterias polaris","","grande astérie polaire","Species","Leptasterias polaris","Leptasterias","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"471","Leptasterias sp.","Leptasterias","Leptasterias","","six-rayed sea stars","Genus",NA,"Leptasterias","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"472","Leptocottus armatus","Leptocottus armatus","Leptocottus armatus","Pacific staghorn sculpin","Pacific staghorn sculpin","Species","Leptocottus armatus","Leptocottus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"473","Lethasterias nanimensis","Lethasterias nanimensis","Lethasterias nanimensis","",NA,"Species","Lethasterias nanimensis","Lethasterias","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"474","Lethotremus muticus","Lethotremus muticus","Lethotremus muticus","","docked snailfish","Species","Lethotremus muticus","Lethotremus","Cyclopteridae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"475","Leucoraja ocellata",NA,NA,"big skate",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"476","Leuroglossus schmidti","Leuroglossus schmidti","Leuroglossus schmidti","northern smoothtongue","northern smooth-tongue","Species","Leuroglossus schmidti","Leuroglossus","Bathylagidae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"477","Leuroglossusschmidti",NA,NA,"northern smoothtongue",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"478","Limanda aspera","Limanda aspera","Limanda aspera","yellowfin sole","yellowfin sole","Species","Limanda aspera","Limanda","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"479","Limanda ferruginea",NA,NA,"rusty flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"480","Limanda proboscidea","Limanda proboscidea","Limanda proboscidea","longhead dab","longhead dab","Species","Limanda proboscidea","Limanda","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"481","Limanda sakhalinensis","Limanda sakhalinensis","Limanda sakhalinensis","","Sakhalin sole","Species","Limanda sakhalinensis","Limanda","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"482","Limandaaspera",NA,NA,"yellowfin sole",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"483","Limandaproboscidea",NA,NA,"longhead dab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"484","Liparidae","Liparidae","Liparidae","snailfishes","snailfishes","Family",NA,NA,"Liparidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"485","Liparis sp.","Liparis","Liparis","","snailfishes",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"486","Liponema brevicornis","Liponema brevicornis","Liponema brevicornis","","tentacle shedding anemone","Species","Liponema brevicornis","Liponema","Liponematidae","Actiniaria","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"487","Lithodes aequispinus","Lithodes aequispinus","Lithodes aequispinus","golden king crab","golden king crab","Species","Lithodes aequispinus","Lithodes","Lithodidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"488","Lithodesaequispinus",NA,NA,"golden king crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"489","Loligo opalescens","Loligo opalescens","Loligo opalescens","california market squid","california market squid","Species","Loligo opalescens","Loligo","Loliginidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"490","Lophius americanus",NA,NA,"goosefish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"491","Lopholithodes foraminatus","Lopholithodes foraminatus","Lopholithodes foraminatus","brown box crab","brown box crab","Species","Lopholithodes foraminatus","Lopholithodes","Lithodidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"492","Lopholithodesforaminatus",NA,NA,"brown box crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"493","Luidia foliolata","Luidia foliolata","Luidia foliolata","",NA,"Species","Luidia foliolata","Luidia","Luidiidae","Paxillosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"494","Lumpenella longirostris","Lumpenella longirostris","Lumpenella longirostris","longsnout prickleback","longsnout prickleback","Species","Lumpenella longirostris","Lumpenella","Stichaeidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"495","Lumpenellalongirostris",NA,NA,"longsnout prickleback",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"496","Lumpenus maculatus","Lumpenus maculatus","Lumpenus maculatus","daubed shanny",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"497","Lumpenus sagitta","Lumpenus sagitta","Lumpenus sagitta","","snake prickleback","Species","Lumpenus sagitta","Lumpenus","Stichaeidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"498","Lumpenusmaculatus",NA,NA,"daubed shanny",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"499","Lumpenussagitta",NA,NA,"snake prickleback",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"500","Lycodes brevipes","Lycodes brevipes","Lycodes brevipes","shortfin eelpout","shortfin eelpout","Species","Lycodes brevipes","Lycodes","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"501","Lycodes concolor","Lycodes concolor","Lycodes concolor","ebony eelpout","ebony eelpout","Species","Lycodes concolor","Lycodes","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"502","Lycodes cortezianus","Lycodes cortezianus","Lycodes cortezianus","bigfin eelpout","bigfin eelpout","Species","Lycodes cortezianus","Lycodes","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"503","Lycodes diapterus","Lycodes diapterus","Lycodes diapterus","black eelpout","black eelpout","Species","Lycodes diapterus","Lycodes","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"504","Lycodes pacificus","Lycodes pacificus","Lycodes pacificus","","blackbelly eelpout","Species","Lycodes pacificus","Lycodes","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"505","Lycodes palearis","Lycodes palearis","Lycodes palearis","wattled eelpout","wattled eelpout","Species","Lycodes palearis","Lycodes","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"506","Lycodes raridens","Lycodes raridens","Lycodes raridens","sparse-toothed lycod","marbled eelpout","Species","Lycodes raridens","Lycodes","Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"507","Lycodesbrevipes",NA,NA,"shortfin eelpout",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"508","Lycodesconcolor",NA,NA,"ebony eelpout",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"509","Lycodesdiapterus",NA,NA,"black eelpout",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"510","Lycodespalearis",NA,NA,"wattled eelpout",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"511","Lycodesraridens",NA,NA,"sparse-toothed lycod",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"512","Lyopsetta exilis","Lyopsetta exilis","Lyopsetta exilis","slender sole","slender sole","Species","Lyopsetta exilis","Lyopsetta","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"513","Lyopsettaexilis",NA,NA,"slender sole",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"514","MACROURUS BERGLAX","Macrourus berglax","Macrourus berglax","roughhead grenadier","onion-eye grenadier","Species","Macrourus berglax","Macrourus","Macrouridae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"515","MACROZOARCES AMERICANUS","Macrozoarces americanus","Macrozoarces americanus","ocean pout","ocean pout",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"516","MALACORAJA SENTA","Malacoraja senta","Malacoraja senta","smooth skate","smooth skate","Species","Malacoraja senta","Malacoraja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"517","MALACOSTEUS NIGER","Malacosteus niger","Malacosteus niger","lightless loosejaw","stoplight loosejaw","Species","Malacosteus niger","Malacosteus","Stomiidae","Stomiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"518","MALLOTUS VILLOSUS","Mallotus villosus","Mallotus villosus","capelin","capelin","Species","Mallotus villosus","Mallotus","Osmeridae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"519","MELANOGRAMMUS AEGLEFINUS","Melanogrammus aeglefinus","Melanogrammus aeglefinus","haddock","haddock","Species","Melanogrammus aeglefinus","Melanogrammus","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"520","MENTICIRRHUS AMERICANUS","Menticirrhus americanus","Menticirrhus americanus","southern kingfish","southern kingcroaker","Species","Menticirrhus americanus","Menticirrhus","Sciaenidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"521","MERLUCCIUS ALBIDUS","Merluccius albidus","Merluccius albidus","offshore hake","offshore hake","Species","Merluccius albidus","Merluccius","Merlucciidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"522","MERLUCCIUS BILINEARIS","Merluccius bilinearis","Merluccius bilinearis","silver hake","silver hake","Species","Merluccius bilinearis","Merluccius","Merlucciidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"523","METICIRRHUS AMERICAUS","Meticirrhus americaus","Menthicirrhus americanus","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"524","MICROPOGOIAS UDULATUS","Micropogoias udulatus","Micropogon undulatus","Atlantic croaker","Atlantic croaker",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"525","MICROPOGONIAS UNDULATUS","Micropogonias undulatus","Micropogonias undulatus","Atlantic croaker","Atlantic croaker","Species","Micropogonias undulatus","Micropogonias","Sciaenidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"526","MOACATHUS HISPIDUS","Moacathus hispidus","Monacanthus hispidus","","planehead filefish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"527","MONACANTHUS HISPIDUS",NA,NA,"planehead filefish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"528","MULLUS AURATUS","Mullus auratus","Mullus auratus","red goatfish","red goatfish","Species","Mullus auratus","Mullus","Mullidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"529","MUSTELUS CAIS","Mustelus cais","Mustellus canis","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"530","MUSTELUS CANIS","Mustelus canis","Mustelus canis","","smooth dogfish","Species","Mustelus canis","Mustelus","Triakidae","Carcharhiniformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"531","MYCTOPHIDAE","Myctophidae","Myctophidae","lanternfishes","lanternfishes","Family",NA,NA,"Myctophidae","Myctophiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"532","MYOXOCEPHALUS OCTODECEMSPINOSUS","Myoxocephalus octodecemspinosus","Myoxocephalus octodecemspinosus","longhorn sculpin","longhorn sculpin","Species","Myoxocephalus octodecemspinosus","Myoxocephalus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"533","MYOXOCEPHALUS SCORPIUS","Myoxocephalus scorpius","Myoxocephalus scorpius","shorthorn sculpin","shorthorn sculpin","Species","Myoxocephalus scorpius","Myoxocephalus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"534","MYXINE GLUTINOSA","Myxine glutinosa","Myxine glutinosa","","Atlantic hagfish","Species","Myxine glutinosa","Myxine","Myxinidae","Myxiniformes","Myxini",NA,"Vertebrata","Chordata","Animalia"
+"535","Macoma sp.","Macoma","Macoma","","nonnetjes","Genus",NA,"Macoma","Tellinidae","Veneroida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"536","Mactromeris polynyma","Mactromeris polynyma","Mactromeris polynyma","","Arctic surfclam","Species","Mactromeris polynyma","Mactromeris","Mactridae","Veneroida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"537","Malacocottus zonurus","Malacocottus zonurus","Malacocottus zonurus","darkfin sculpin","darkfin sculpin","Species","Malacocottus zonurus","Malacocottus","Psychrolutidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"538","Malacocottuszonurus",NA,NA,"darkfin sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"539","Malacoraja senta",NA,NA,"smooth skate",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"540","Mallotus villosus","Mallotus villosus","Mallotus villosus","capelin","capelin","Species","Mallotus villosus","Mallotus","Osmeridae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"541","Mallotusvillosus",NA,NA,"capelin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"542","Mediaster aequalis","Mediaster aequalis","Mediaster aequalis","","Vermilion star","Species","Mediaster aequalis","Mediaster","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"543","Mediaster spp.","Mediaster","Mediaster","","Vermilion star","Genus",NA,"Mediaster","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"544","Melanogrammus aeglefinus",NA,NA,"haddock",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"545","Merluccius albidus",NA,NA,"offshore hake",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"546","Merluccius bilinearis",NA,NA,"silver hake",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"547","Merluccius productus","Merluccius productus","Merluccius productus","Pacific hake","North Pacific hake","Species","Merluccius productus","Merluccius","Merlucciidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"548","Metridium farcimen","Metridium farcimen","Metridium farcimen","","gigantic anemone","Species","Metridium farcimen","Metridium","Metridiidae","Actiniaria","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"549","Metridium sp.","Metridium","Metridium","plumose anemones","Plumose sea anemones","Genus",NA,"Metridium","Metridiidae","Actiniaria","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"550","Metridiumsp.",NA,NA,"plumose anemones",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"551","Microgadus proximus","Microgadus proximus","Microgadus proximus","Pacific tomcod","Pacific tomcod","Species","Microgadus proximus","Microgadus","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"552","Microgadusproximus",NA,NA,"Pacific tomcod",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"553","Microstomus pacificus","Microstomus pacificus","Microstomus pacificus","Dover sole","Dover sole","Species","Microstomus pacificus","Microstomus","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"554","Microstomuspacificus",NA,NA,"Dover sole",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"555","Modiolus modiolus","Modiolus modiolus","Modiolus modiolus","","northern horsemussel","Species","Modiolus modiolus","Modiolus","Mytilidae","Mytiloida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"556","Molgula grifithsii","Molgula grifithsii","Molgula griffithsii","","sea grapes","Species","Molgula griffithsii","Molgula","Molgulidae","Pleurogona","Ascidiacea",NA,"Urochordata","Chordata","Animalia"
+"557","Molpadia intermedia","Molpadia intermedia","Molpadia intermedia","",NA,"Species","Molpadia intermedia","Molpadia","Molpadiidae","Molpadiida","Holothuroidea",NA,"Echinozoa","Echinodermata","Animalia"
+"558","Moroteuthis robusta","Moroteuthis robusta","Moroteuthis robusta","","robust clubhook squid","Species","Moroteuthis robusta","Moroteuthis","Onychoteuthidae","Teuthida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"559","Munida quadrispina","Munida quadrispina","Munida quadrispina","",NA,"Species","Munida quadrispina","Munida","Galatheidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"560","Musculus discors","Musculus discors","Musculus discors","","discordant mussel","Species","Musculus discors","Musculus","Mytilidae","Mytiloida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"561","Mycale loveni","Mycale loveni","Mycale loveni","",NA,"Species","Mycale loveni","Mycale","Mycalidae","Poecilosclerida","Demospongiae",NA,NA,"Porifera","Animalia"
+"562","Myctophidae","Myctophidae","Myctophidae","lanternfishes","lanternfishes","Family",NA,NA,"Myctophidae","Myctophiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"563","Myoxocephalus jaok","Myoxocephalus jaok","Myoxocephalus jaok","","plain sculpin","Species","Myoxocephalus jaok","Myoxocephalus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"564","Myoxocephalus octodecemspinosus",NA,NA,"longhorn sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"565","Myoxocephalus polyacanthocephalus","Myoxocephalus polyacanthocephalus","Myoxocephalus polyacanthocephalus","","great sculpin","Species","Myoxocephalus polyacanthocephalus","Myoxocephalus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"566","Myoxocephalus sp.","Myoxocephalus","Myoxocephalus","daddy sculpins","daddy sculpins","Genus",NA,"Myoxocephalus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"567","Myoxocephalussp",NA,NA,"daddy sculpins",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"568","Myoxocephalussp.",NA,NA,"daddy sculpins",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"569","Myxinidae","Myxinidae","Myxinidae","","hagfishes","Family",NA,NA,"Myxinidae","Myxiniformes","Myxini",NA,"Vertebrata","Chordata","Animalia"
+"570","Myxoderma platyacanthum","Myxoderma platyacanthum","Myxoderma platyacanthum","",NA,"Species","Myxoderma platyacanthum","Myxoderma","Zoroasteridae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"571","NEMICHTHYS SCOLOPACEUS","Nemichthys scolopaceus","Nemichthys scolopaceus","Atlantic snipe eel","slender snipe eel","Species","Nemichthys scolopaceus","Nemichthys","Nemichthyidae","Anguilliformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"572","NEZUMIA BAIRDI","Nezumia bairdi","Nezumia bairdi","marlin-spike","grenadier du Grand Banc","Species","Nezumia bairdii","Nezumia","Macrouridae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"573","NEZUMIA BAIRDII","Nezumia bairdii","Nezumia bairdii","marlin-spike","marlin-spike grenadier","Species","Nezumia bairdii","Nezumia","Macrouridae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"574","NOTACANTHIDAE","Notacanthidae","Notacanthidae","spiny eels","spiny eels","Family",NA,NA,"Notacanthidae","Albuliformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"575","Natica sp.","Natica","Natica","","Red-Banded Moon Snail","Genus",NA,"Natica","Naticidae","Neotaenioglossa","Gastropoda",NA,NA,"Mollusca","Animalia"
+"576","Nautichthys oculofasciatus","Nautichthys oculofasciatus","Nautichthys oculofasciatus","","sailfin sculpin","Species","Nautichthys oculofasciatus","Nautichthys","Hemitripteridae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"577","Neptunea amianta","Neptunea amianta","Neptunea amianta","",NA,"Species","Neptunea amianta","Neptunea","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"578","Neptunea borealis","Neptunea borealis","Neptunea borealis","true whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"579","Neptunea heros","Neptunea heros","Neptunea heros","true whelk","Heros Neptune","Species","Neptunea heros","Neptunea","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"580","Neptunea lyrata","Neptunea lyrata","Neptunea lyrata","lyre whelk","lyre whelk","Species","Neptunea lyrata","Neptunea","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"581","Neptunea pribiloffensis","Neptunea pribiloffensis","Neptunea pribiloffensis","Pribilof whelk","Pribilof whelk","Species","Neptunea pribiloffensis","Neptunea","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"582","Neptunea sp.","Neptunea","Neptunea","true whelks","noordhorens","Genus",NA,"Neptunea","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"583","Neptunea spp.","Neptunea","Neptunea","true whelks","noordhorens","Genus",NA,"Neptunea","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"584","Neptunea ventricosa","Neptunea ventricosa","Neptunea ventricosa","fat whelk","fat whelk","Species","Neptunea ventricosa","Neptunea","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"585","Neptuneaborealis",NA,NA,"true whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"586","Neptuneaheros",NA,NA,"true whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"587","Neptunealyrata",NA,NA,"lyre whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"588","Neptuneapribiloffensis",NA,NA,"Pribilof whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"589","Neptuneasp.",NA,NA,"true whelks",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"590","Neptuneaventricosa",NA,NA,"fat whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"591","Notostomum cyclostomum","Notostomum cyclostomum","Notostomum cyclostomum","",NA,"Species","Notostomum cyclostomum","Notostomum","Piscicolidae","Rhynchobdellida","Hirudinea",NA,"Clitellata","Annelida","Animalia"
+"592","Nudibranchia","Nudibranchia","Nudibranchia","nudibranchs","nudibranchs","Order",NA,NA,NA,"Nudibranchia","Gastropoda",NA,NA,"Mollusca","Animalia"
+"593","OCTOPODIDAE","Octopodidae","Octopodidae","octopuses","Echte Kraken","Family",NA,NA,"Octopodidae","Octopoda","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"594","OGCOCEPHALUS DECLIVIROSTRIS","Ogcocephalus declivirostris","Ogcocephalus declivirostris","","slantbrow batfish","Species","Ogcocephalus declivirostris","Ogcocephalus","Ogcocephalidae","Lophiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"595","OPHICHTHUS GOMESII","Ophichthus gomesii","Ophichthus gomesii","","shrimp eel","Species","Ophichthus gomesii","Ophichthus","Ophichthidae","Anguilliformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"596","OPHIDIO HOLBROOKI","Ophidio holbrooki","Ophidion holbrooki","","bank cusk-eel","Species","Ophidion holbrookii","Ophidion","Ophidiidae","Ophidiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"597","OPHIDIO WELSHI","Ophidio welshi","Ophidion welshi","","crested cusk-eel",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"598","OPHIDION WELSHI",NA,NA,"crested cusk-eel",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"599","OPISTHOEMA OGLIUM","Opisthoema oglium","Opisthonema oglinun","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"600","OPISTHONEMA OGLINUM","Opisthonema oglinum","Opisthonema oglinum","Atlantic thread herring","Atlantic thread herring","Species","Opisthonema oglinum","Opisthonema","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"601","ORTHOPRISTIS CHRYSOPTERUS","Orthopristis chrysopterus","Orthopristis chrysopterus","pigfish","pigfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"602","OVALIPES FLORIDAUS","Ovalipes floridaus","Ovalipes floridanus","","Florida lady crab","Species","Ovalipes floridanus","Ovalipes","Portunidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"603","Occella dodecaedron","Occella dodecaedron","Occella dodecaedron","Bering poacher","Bering poacher","Species","Occella dodecaedron","Occella","Agonidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"604","Occelladodecaedron",NA,NA,"Bering poacher",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"605","Octopodidae","Octopodidae","Octopodidae","octopuses","Echte Kraken","Family",NA,NA,"Octopodidae","Octopoda","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"606","Octopus (=Enteroctopus) dofleini","Octopus dofleini","Octopus dofleini","",NA,"Species","Enteroctopus dofleini","Enteroctopus","Octopodidae","Octopoda","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"607","Octopus rubescens","Octopus rubescens","Octopus rubescens","","East Pacific red octopus","Species","Octopus rubescens","Octopus","Octopodidae","Octopoda","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"608","Oncorhynchus gorbuscha","Oncorhynchus gorbuscha","Oncorhynchus gorbuscha","","pink salmon","Species","Oncorhynchus gorbuscha","Oncorhynchus","Salmonidae","Salmoniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"609","Oncorhynchus keta","Oncorhynchus keta","Oncorhynchus keta","chum salmon","chum salmon","Species","Oncorhynchus keta","Oncorhynchus","Salmonidae","Salmoniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"610","Oncorhynchus kisutch","Oncorhynchus kisutch","Oncorhynchus kisutch","coho salmon","coho salmon","Species","Oncorhynchus kisutch","Oncorhynchus","Salmonidae","Salmoniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"611","Oncorhynchus nerka","Oncorhynchus nerka","Oncorhynchus nerka","","sockeye salmon","Species","Oncorhynchus nerka","Oncorhynchus","Salmonidae","Salmoniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"612","Oncorhynchus tshawytscha","Oncorhynchus tshawytscha","Oncorhynchus tshawytscha","Chinook salmon","Chinook salmon","Species","Oncorhynchus tshawytscha","Oncorhynchus","Salmonidae","Salmoniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"613","Oncorhynchusketa",NA,NA,"chum salmon",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"614","Oncorhynchuskisutch",NA,NA,"coho salmon",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"615","Oncorhynchustshawytscha",NA,NA,"Chinook salmon",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"616","Ophiodon elongatus","Ophiodon elongatus","Ophiodon elongatus","lingcod","lingcod","Species","Ophiodon elongatus","Ophiodon","Hexagrammidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"617","Ophiodonelongatus",NA,NA,"lingcod",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"618","Ophiopholis aculeata","Ophiopholis aculeata","Ophiopholis aculeata","","daisy brittle star","Species","Ophiopholis aculeata","Ophiopholis","Ophiactidae","Ophiurida","Ophiuroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"619","Ophiopholis spp.","Ophiopholis","Ophiopholis","","Crevice brittlestar","Genus",NA,"Ophiopholis","Ophiactidae","Ophiurida","Ophiuroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"620","Ophiura sarsi","Ophiura sarsi","Ophiura sarsi","","storfjällig fransormstjärna","Species","Ophiura sarsi","Ophiura","Ophiuridae","Ophiurida","Ophiuroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"621","Ophiuroidea","Ophiuroidea","Ophiuroidea","","brittle stars","Class",NA,NA,NA,NA,"Ophiuroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"622","Oregonia gracilis","Oregonia gracilis","Oregonia gracilis","graceful decorator crab","graceful decorator crab","Species","Oregonia gracilis","Oregonia","Oregoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"623","Oregoniagracilis",NA,NA,"graceful decorator crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"624","Orthasterias koehleri","Orthasterias koehleri","Orthasterias koehleri","",NA,"Species","Orthasterias koehleri","Orthasterias","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"625","Osmeridae","Osmeridae","Osmeridae","smelts","smelts","Family",NA,NA,"Osmeridae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"626","Osmerus mordax","Osmerus mordax","Osmerus mordax","","rainbow smelt","Species","Osmerus mordax","Osmerus","Osmeridae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"627","PANDALUS BOREALIS","Pandalus borealis","Pandalus borealis","northern shrimp","northern shrimp","Species","Pandalus borealis","Pandalus","Pandalidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"628","PANDALUS MONTAGUI","Pandalus montagui","Pandalus montagui","Aesop shrimp","Aesop shrimp","Species","Pandalus montagui","Pandalus","Pandalidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"629","PANDALUS PROPINQUUS","Pandalus propinquus","Pandalus propinquus","pandalid shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"630","PARALEPIDIDAE","Paralepididae","Paralepididae","barracudinas","barracudinas","Family",NA,NA,"Paralepididae","Aulopiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"631","PARALICHTHYS DENTATUS","Paralichthys dentatus","Paralichthys dentatus","","summer flounder","Species","Paralichthys dentatus","Paralichthys","Paralichthyidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"632","PARALICHTHYS LETHOSTIGMA","Paralichthys lethostigma","Paralichthys lethostigma","southern flounder","southern flounder","Species","Paralichthys lethostigma","Paralichthys","Paralichthyidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"633","PARALICHTHYS OBLONGUS","Paralichthys oblongus","Paralichthys oblongus","","American fourspot flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"634","PARTHEOPE GRAULATA","Partheope graulata","Parthenope granulata","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"635","PASIPHAEA  SP",NA,NA,"glass shrimps",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"636","PASIPHAEA  SP.","Pasiphaea","Pasiphaea","glass shrimps","glassreker","Genus",NA,"Pasiphaea","Pasiphaeidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"637","PEAEUS AZTECUS","Peaeus aztecus","Penaeus aztecus","","brown shrimp","Species","Farfantepenaeus aztecus","Farfantepenaeus","Penaeidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"638","PEAEUS DUORARUM","Peaeus duorarum","Penaeus duoranim","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"639","PEAEUS SETIFERUS","Peaeus setiferus","Penaeus setiferus","","white shrimp","Species","Litopenaeus setiferus","Litopenaeus","Penaeidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"640","PENAEUS AZTECUS",NA,NA,"brown shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"641","PENAEUS DUORARUM",NA,NA,"northern pink shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"642","PENAEUS SETIFERUS",NA,NA,"northern white shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"643","PEPRILUS ALEPIDOTUS","Peprilus alepidotus","Peprilus alepidotus","harvestfish","star butterfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"644","PEPRILUS BURTI","Peprilus burti","Peprilus burti","Gulf butterfish","Gulf butterfish","Species","Peprilus burti","Peprilus","Stromateidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"645","PEPRILUS TRIACANTHUS","Peprilus triacanthus","Peprilus triacanthus","","American butterfish","Species","Peprilus triacanthus","Peprilus","Stromateidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"646","PERISTEDION MINIATUM","Peristedion miniatum","Peristedion miniatum","","armored searobin","Species","Peristedion miniatum","Peristedion","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"647","PERSEPHOA CRIITA","Persephoa criita","Persephona crinita","","pink purse crab","Species","Persephona crinita","Persephona","Leucosiidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"648","PERSEPHOA MEDITERRAEA","Persephoa mediterraea","Persephona mediterranea","","mottled purse crab","Species","Persephona mediterranea","Persephona","Leucosiidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"649","PLACOPECTEN MAGELLANICUS","Placopecten magellanicus","Placopecten magellanicus","","sea scallop","Species","Placopecten magellanicus","Placopecten","Pectinidae","Ostreoida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"650","POLLACHIUS VIRENS","Pollachius virens","Pollachius virens","pollock","saithe","Species","Pollachius virens","Pollachius","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"651","POLYDACTYLUS OCTOEMUS","Polydactylus octoemus","Polydactylus octonemus","","Atlantic threadfin","Species","Polydactylus octonemus","Polydactylus","Polynemidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"652","POMATOMUS SALTATRIX","Pomatomus saltatrix","Pomatomus saltatrix","","bluefish","Species","Pomatomus saltatrix","Pomatomus","Pomatomidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"653","PORICHTHYS PLECTRODO","Porichthys plectrodo","Porichthys plectrodon","","Atlantic midshipman","Species","Porichthys plectrodon","Porichthys","Batrachoididae","Batrachoidiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"654","PORICHTHYS PLECTRODON","Porichthys plectrodon","Porichthys plectrodon","Atlantic midshipman","Atlantic midshipman","Species","Porichthys plectrodon","Porichthys","Batrachoididae","Batrachoidiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"655","PORIFERA","Porifera","Porifera","sponges","sponges","Phylum",NA,NA,NA,NA,NA,NA,NA,"Porifera","Animalia"
+"656","PORTUNUS GIBBESII","Portunus gibbesii","Portunus gibbesii","iridescent swimming crab","iridescent swimming crab","Species","Portunus gibbesii","Portunus","Portunidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"657","PORTUNUS SPINICARPUS",NA,NA,"longspine swimming crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"658","PORTUNUS SPINIMANUS","Portunus spinimanus","Portunus spinimanus","blotched swimming crab","blotched swimming crab","Species","Portunus spinimanus","Portunus","Portunidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"659","PORTUUS GIBBESII","Portuus gibbesii","Portunus gibbesii","","iridescent swimming crab","Species","Portunus gibbesii","Portunus","Portunidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"660","PORTUUS SPIICARPUS","Portuus spiicarpus","Portunas spinicarpus","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"661","PORTUUS SPIIMAUS","Portuus spiimaus","Portunus spinimanus","","blotched swimming crab","Species","Portunus spinimanus","Portunus","Portunidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"662","PRIACANTHUS ARENATUS","Priacanthus arenatus","Priacanthus arenatus","bigeye","Atlantic bigeye","Species","Priacanthus arenatus","Priacanthus","Priacanthidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"663","PRIACATHUS AREATUS","Priacathus areatus","Priacanthus arenatus","","Atlantic bigeye","Species","Priacanthus arenatus","Priacanthus","Priacanthidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"664","PRIONOTUS CAROLINUS","Prionotus carolinus","Prionotus carolinus","","northern searobin","Species","Prionotus carolinus","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"665","PRIONOTUS EVOLANS","Prionotus evolans","Prionotus evolans","","striped searobin","Species","Prionotus evolans","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"666","PRIONOTUS LONGISPINOSUS",NA,NA,"bigeye searobin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"667","PRIONOTUS OPHRYAS","Prionotus ophryas","Prionotus ophryas","bandtail searobin","bandtail searobin","Species","Prionotus ophryas","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"668","PRIONOTUS PARALATUS",NA,NA,"Mexican searobin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"669","PRIONOTUS ROSEUS",NA,NA,"bluespotted searobin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"670","PRIONOTUS RUBIO","Prionotus rubio","Prionotus rubio","blackfin searobin","blackwing searobin","Species","Prionotus rubio","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"671","PRIONOTUS STEARNSI",NA,NA,"shortwing searobin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"672","PRIONOTUS TRIBULUS","Prionotus tribulus","Prionotus tribulus","bighead searobin","bighead searobin","Species","Prionotus tribulus","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"673","PRIOOTUS LOGISPIOSUS","Priootus logispiosus","Prionotus longispinosus","","bigeye searobin","Species","Prionotus longispinosus","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"674","PRIOOTUS OPHRYAS","Priootus ophryas","Prionotus ophryas","","bandtail searobin","Species","Prionotus ophryas","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"675","PRIOOTUS PARALATUS","Priootus paralatus","Prionotus paralatus","","Mexican searobin","Species","Prionotus paralatus","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"676","PRIOOTUS ROSEUS","Priootus roseus","Prionotus roseus","","bluespotted searobin","Species","Prionotus roseus","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"677","PRIOOTUS RUBIO","Priootus rubio","Prionotus rubio","","blackwing searobin","Species","Prionotus rubio","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"678","PRIOOTUS SCITULUS","Priootus scitulus","Prionotus scitulus","","leopard searobin","Species","Prionotus scitulus","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"679","PRIOOTUS STEARSI","Priootus stearsi","Prionotus stearnsi","","shortwing searobin","Species","Prionotus stearnsi","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"680","PRIOOTUS TRIBULUS","Priootus tribulus","Prionotus tribulus","","bighead searobin","Species","Prionotus tribulus","Prionotus","Triglidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"681","PRISTIPOMOIDES AQUILOARIS","Pristipomoides aquiloaris","Pristipomoides aquilonaris","","wrenchman","Species","Pristipomoides aquilonaris","Pristipomoides","Lutjanidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"682","PRISTIPOMOIDES AQUILONARIS",NA,NA,"wenchman",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"683","PSEUDOPLEURONECTES AMERICANUS","Pseudopleuronectes americanus","Pseudopleuronectes americanus","blackback","winter flounder","Species","Pseudopleuronectes americanus","Pseudopleuronectes","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"684","PSEUDOPLEURONECTES AMERICANUS ",NA,NA,"",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"685","Paguridae","Paguridae","Paguridae","right-handed hermit crabs","right-handed hermit crabs","Family",NA,NA,"Paguridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"686","Paguristes turgidus","Paguristes turgidus","Paguristes turgidus","",NA,"Species","Paguristes turgidus","Paguristes","Diogenidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"687","Pagurus aleuticus","Pagurus aleuticus","Pagurus aleuticus","","Aleutian hermit","Species","Pagurus aleuticus","Pagurus","Paguridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"688","Pagurus brandti","Pagurus brandti","Pagurus brandti","","sponge hermit","Species","Pagurus brandti","Pagurus","Paguridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"689","Pagurus capillatus","Pagurus capillatus","Pagurus capillatus","",NA,"Species","Pagurus capillatus","Pagurus","Paguridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"690","Pagurus confragosus","Pagurus confragosus","Pagurus confragosus","","knobbyhand hermit","Species","Pagurus confragosus","Pagurus","Paguridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"691","Pagurus ochotensis","Pagurus ochotensis","Pagurus ochotensis","","Alaskan hermit crab","Species","Pagurus ochotensis","Pagurus","Paguridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"692","Pagurus sp.","Pagurus","Pagurus","","hermit crabs","Genus",NA,"Pagurus","Paguridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"693","Pagurus spp.","Pagurus","Pagurus","","hermit crabs","Genus",NA,"Pagurus","Paguridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"694","Pandalopsis dispar","Pandalopsis dispar","Pandalopsis dispar","sidestripe shrimp","sidestripe shrimp","Species","Pandalopsis dispar","Pandalopsis","Pandalidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"695","Pandalopsisdispar",NA,NA,"sidestripe shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"696","Pandalus eous (=borealis)","Pandalus eous","Pandalus eous","Alaskan pink shrimp","Alaskan pink shrimp","Species","Pandalus eous","Pandalus","Pandalidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"697","Pandalus goniurus","Pandalus goniurus","Pandalus goniurus","humpy shrimp","humpy shrimp","Species","Pandalus goniurus","Pandalus","Pandalidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"698","Pandalus hypsinotus","Pandalus hypsinotus","Pandalus hypsinotus","","coonstriped shrimp","Species","Pandalus hypsinotus","Pandalus","Pandalidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"699","Pandalus jordani","Pandalus jordani","Pandalus jordani","ocean shrimp","ocean shrimp","Species","Pandalus jordani","Pandalus","Pandalidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"700","Pandalus platyceros","Pandalus platyceros","Pandalus platyceros","spot shrimp","spot shrimp","Species","Pandalus platyceros","Pandalus","Pandalidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"701","Pandalus sp.","Pandalus","Pandalus","","Dybhavsreje","Genus",NA,"Pandalus","Pandalidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"702","Pandalus tridens","Pandalus tridens","Pandalus tridens","","yellowleg pandalid","Species","Pandalus tridens","Pandalus","Pandalidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"703","Pandaluseous(=borealis)",NA,NA,"Alaskan pink shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"704","Pandalusgoniurus",NA,NA,"humpy shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"705","Pandalushypsinotus",NA,NA,"coonstriped shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"706","Pandalusplatyceros",NA,NA,"spot shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"707","Paractinostola faeculenta","Paractinostola faeculenta","Paractinostola faeculenta","","hobnail vase anemone","Species","Paractinostola faeculenta","Paractinostola","Actinostolidae","Actiniaria","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"708","Paragorgia arborea","Paragorgia arborea","Paragorgia arborea","","bubblegum coral","Species","Paragorgia arborea","Paragorgia","Paragorgiidae","Alcyonacea","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"709","Paralichthys dentatus",NA,NA,"summer flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"710","Paralithodes camtschaticus","Paralithodes camtschaticus","Paralithodes camtschaticus","red king crab","red king crab","Species","Paralithodes camtschaticus","Paralithodes","Lithodidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"711","Paralithodes platypus","Paralithodes platypus","Paralithodes platypus","blue king crab","blue king crab","Species","Paralithodes platypus","Paralithodes","Lithodidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"712","Paralithodescamtschaticus",NA,NA,"red king crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"713","Paralithodesplatypus",NA,NA,"blue king crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"714","Parastichopus californicus","Parastichopus californicus","Parastichopus californicus","",NA,"Species","Parastichopus californicus","Parastichopus","Stichopodidae","Aspidochirotida","Holothuroidea",NA,"Echinozoa","Echinodermata","Animalia"
+"715","Parastichopus leukothele","Parastichopus leukothele","Parastichopus leukothele","",NA,"Species","Parastichopus leukothele","Parastichopus","Stichopodidae","Aspidochirotida","Holothuroidea",NA,"Echinozoa","Echinodermata","Animalia"
+"716","Parophrys vetulus","Parophrys vetulus","Parophrys vetulus","English sole","English sole","Species","Parophrys vetulus","Parophrys","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"717","Parophrysvetulus",NA,NA,"English sole",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"718","Pasiphaea pacifica","Pasiphaea pacifica","Pasiphaea pacifica","","Pacific glass shrimp","Species","Pasiphaea pacifica","Pasiphaea","Pasiphaeidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"719","Pasiphaeapacifica",NA,NA,"Pacific glass shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"720","Patinopecten caurinus","Patinopecten caurinus","Patinopecten caurinus","weathervane scallop","weathervane scallop","Species","Patinopecten caurinus","Patinopecten","Pectinidae","Ostreoida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"721","Patinopectencaurinus",NA,NA,"weathervane scallop",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"722","Pennatulacea","Pennatulacea","Pennatulacea","sea panzies","sea pens","Order",NA,NA,NA,"Pennatulacea","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"723","Peprilus simillimus","Peprilus simillimus","Peprilus simillimus","","Pacific pompano","Species","Peprilus simillimus","Peprilus","Stromateidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"724","Peprilus triacanthus",NA,NA,"butterfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"725","Pisaster brevispinus","Pisaster brevispinus","Pisaster brevispinus","","Giant Pink Sea Star","Species","Pisaster brevispinus","Pisaster","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"726","Placetron wosnessenskii","Placetron wosnessenskii","Placetron wosnessenskii","scaled crab","scaled crab","Species","Placetron wosnessenskii","Placetron","Lithodidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"727","Placetronwosnessenskii",NA,NA,"scaled crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"728","Placopecten magellanicus",NA,NA,"sea scallop",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"729","Platichthys stellatus","Platichthys stellatus","Platichthys stellatus","starry flounder","starry flounder","Species","Platichthys stellatus","Platichthys","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"730","Platichthysstellatus",NA,NA,"starry flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"731","Platymera gaudichaudii","Platymera gaudichaudii","Platymera gaudichaudii","","armed box crab","Species","Platymera gaudichaudii","Platymera","Calappidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"732","Pleurobranchaea californica","Pleurobranchaea californica","Pleurobranchaea californica","",NA,"Species","Pleurobranchaea californica","Pleurobranchaea","Pleurobranchidae","Notaspidea","Gastropoda",NA,NA,"Mollusca","Animalia"
+"733","Pleurogrammus monopterygius","Pleurogrammus monopterygius","Pleurogrammus monopterygius","Atka mackerel","Atka mackerel","Species","Pleurogrammus monopterygius","Pleurogrammus","Hexagrammidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"734","Pleurogrammusmonopterygius",NA,NA,"Atka mackerel",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"735","Pleuronectes quadrituberculatus","Pleuronectes quadrituberculatus","Pleuronectes quadrituberculatus","Alaska plaice","Alaska plaice","Species","Pleuronectes quadrituberculatus","Pleuronectes","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"736","Pleuronectesquadrituberculatus",NA,NA,"Alaska plaice",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"737","Pleuronichthys decurrens","Pleuronichthys decurrens","Pleuronichthys decurrens","curlfin sole","curlfin sole","Species","Pleuronichthys decurrens","Pleuronichthys","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"738","Pleuronichthys verticalis","Pleuronichthys verticalis","Pleuronichthys verticalis","","hornyhead turbot","Species","Pleuronichthys verticalis","Pleuronichthys","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"739","Plicifusus kroyeri","Plicifusus kroyeri","Plicifusus kroyeri","true whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"740","Plicifususkroyeri",NA,NA,"true whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"741","Pododesmus macrochisma","Pododesmus macrochisma","Pododesmus macrochisma","","green falsejingle","Species","Pododesmus macrochisma","Pododesmus","Anomiidae","Ostreoida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"742","Podothecus accipenserinus","Podothecus accipenserinus","Podothecus accipenserinus","sturgeon poacher","sturgeon poacher","Species","Podothecus accipenserinus","Podothecus","Agonidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"743","Podothecusaccipenserinus",NA,NA,"sturgeon poacher",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"744","Pollachius virens",NA,NA,"pollock",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"745","Polychaeta","Polychaeta","Polychaeta","","polychaetes","Subphylum",NA,NA,NA,NA,NA,NA,"Polychaeta","Annelida","Animalia"
+"746","Polynoidae","Polynoidae","Polynoidae","","scaleworms","Family",NA,NA,"Polynoidae","Phyllodocida","Errantia",NA,"Polychaeta","Annelida","Animalia"
+"747","Polyplacophora","Polyplacophora","Polyplacophora","","chitons","Class",NA,NA,NA,NA,"Polyplacophora",NA,NA,"Mollusca","Animalia"
+"748","Poraniopsis inflata","Poraniopsis inflata","Poraniopsis inflata","",NA,"Species","Poraniopsis inflata","Poraniopsis","Echinasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"749","Porichthys notatus","Porichthys notatus","Porichthys notatus","plainfin midshipman","plainfin midshipman","Species","Porichthys notatus","Porichthys","Batrachoididae","Batrachoidiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"750","Porifera","Porifera","Porifera","sponges","sponges","Phylum",NA,NA,NA,NA,NA,NA,NA,"Porifera","Animalia"
+"751","Poroclinus rothrocki","Poroclinus rothrocki","Poroclinus rothrocki","","whitebarred prickleback","Species","Poroclinus rothrocki","Poroclinus","Stichaeidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"752","Primnoa willeyi","Primnoa willeyi","Primnoa willeyi","",NA,"Species","Primnoa willeyi","Primnoa","Primnoidae","Alcyonacea","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"753","Prionotus carolinus",NA,NA,"northern searobin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"754","Prionotus evolans",NA,NA,"striped searobin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"755","Protomyctophum thompsoni","Protomyctophum thompsoni","Protomyctophum thompsoni","","bigeye lanternfish","Species","Protomyctophum thompsoni","Protomyctophum","Myctophidae","Myctophiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"756","Psettichthys melanostictus","Psettichthys melanostictus","Psettichthys melanostictus","","Pacific sand sole","Species","Psettichthys melanostictus","Psettichthys","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"757","Psettichthysmelanostictus",NA,NA,"sand sole",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"758","Pseudarchaster alascensis","Pseudarchaster alascensis","Pseudarchaster alascensis","","Alaskan scarlet star",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"759","Pseudarchaster parelii","Pseudarchaster parelii","Pseudarchaster parelii","","ledsjöstjärna","Species","Pseudarchaster parelii","Pseudarchaster","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"760","Pseudarchaster spp.","Pseudarchaster","Pseudarchaster","","Alaskan scarlet star","Genus",NA,"Pseudarchaster","Goniasteridae","Valvatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"761","Pseudopleuronectes americanus",NA,NA,"blackback",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"762","Pseudostichopus mollis","Pseudostichopus mollis","Pseudostichopus mollis","",NA,"Species","Pseudostichopus mollis","Pseudostichopus","Synallactidae","Aspidochirotida","Holothuroidea",NA,"Echinozoa","Echinodermata","Animalia"
+"763","Psolus sp.","Psolus","Psolus","","Schuppen-Seegurke","Genus",NA,"Psolus","Psolidae","Dendrochirotida","Holothuroidea",NA,"Echinozoa","Echinodermata","Animalia"
+"764","Pteraster jordani","Pteraster jordani","Pteraster jordani","",NA,"Species","Pteraster jordani","Pteraster","Pterasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"765","Pteraster militaris","Pteraster militaris","Pteraster militaris","","spetsig knubbsjöstjärna","Species","Pteraster militaris","Pteraster","Pterasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"766","Pteraster obscurus","Pteraster obscurus","Pteraster obscurus","",NA,"Species","Pteraster obscurus","Pteraster","Pterasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"767","Pteraster sp.","Pteraster","Pteraster","","slime stars","Genus",NA,"Pteraster","Pterasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"768","Pteraster spp.","Pteraster","Pteraster","","slime stars","Genus",NA,"Pteraster","Pterasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"769","Pteraster tesselatus","Pteraster tesselatus","Pteraster tesselatus","","cushion star","Species","Pteraster tesselatus","Pteraster","Pterasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"770","Ptilosarcus gurneyi","Ptilosarcus gurneyi","Ptilosarcus gurneyi","","Gurney's sea pen","Species","Ptilosarcus gurneyi","Ptilosarcus","Pennatulidae","Pennatulacea","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"771","Purple Striated Anemone","Purple striated anemone","Purple","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"772","Pycnopodia helianthoides","Pycnopodia helianthoides","Pycnopodia helianthoides","sunflower sea star","Sonnenblumen-Seestern","Species","Pycnopodia helianthoides","Pycnopodia","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"773","Pycnopodiahelianthoides",NA,NA,"sunflower sea star",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"774","Pyrulofusus deformis","Pyrulofusus deformis","Pyrulofusus deformis","warped whelk","warped whelk","Species","Pyrulofusus deformis","Pyrulofusus","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"775","Pyrulofusus harpa","Pyrulofusus harpa","Pyrulofusus harpa","","left-hand whelk","Species","Pyrulofusus harpa","Pyrulofusus","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"776","Pyrulofusus melonis","Pyrulofusus melonis","Pyrulofusus melonis","",NA,"Species","Pyrulofusus melonis","Pyrulofusus","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"777","Pyrulofususdeformis",NA,NA,"warped whelk",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"778","RAIOIDES LOUISIAESIS","Raioides louisiaesis","Raninoides louisianensis","","Gulf frog crab","Species","Raninoides louisianensis","Raninoides","Raninidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"779","RAJA (BATHYRAJA) SPINICAUDA","Raja spinicauda","Raja spinicauda","spinytail skate","spinytail skate","Species","Bathyraja spinicauda","Bathyraja","Arhynchobatidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"780","RAJA EGLANTERIA","Raja eglanteria","Raja eglanteria","","clearnose skate","Species","Raja eglanteria","Raja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"781","RAJA FYLLAE","Raja fyllae","Raja fyllae","round skate","round ray",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"782","RAJA RADIATA","Raja radiata","Raja radiata","starry skate","thorny skate","Species","Amblyraja radiata","Amblyraja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"783","RAJA SENTA","Raja senta","Raja senta","smooth skate","smooth skate","Species","Malacoraja senta","Malacoraja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"784","RAJA TEXAA","Raja texaa","Raia texana","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"785","RAJA TEXANA",NA,NA,"roundel skate",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"786","RANINOIDES LOUISIANENSIS",NA,NA,"Gulf frog crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"787","REILLA MULLERI","Reilla mulleri","Renilla muelleri","","Mueller's sea pansy","Species","Renilla muelleri","Renilla","Renillidae","Pennatulacea","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"788","REINHARDTIUS HIPPOGLOSSOIDES","Reinhardtius hippoglossoides","Reinhardtius hippoglossoides","Greenland halibut","Greenland flounder","Species","Reinhardtius hippoglossoides","Reinhardtius","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"789","RHIOPTERA BOASUS","Rhioptera boasus","Rhinoptera bonasus","","cownose ray","Species","Rhinoptera bonasus","Rhinoptera","Rhinopteridae","Myliobatiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"790","RHIZOPRIONODON TERRAENOVAE","Rhizoprionodon terraenovae","Rhizoprionodon terraenovae","Atlantic sharpnose shark","Atlantic sharpnose shark","Species","Rhizoprionodon terraenovae","Rhizoprionodon","Carcharhinidae","Carcharhiniformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"791","RHIZOPRIOODO TERRAEOVAE","Rhizoprioodo terraeovae","Rhizoprionodon terraenova","","cazón de ley","Species","Rhizoprionodon terraenovae","Rhizoprionodon","Carcharhinidae","Carcharhiniformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"792","RHOMBOPLITES AURORUBES","Rhomboplites aurorubes","Rhomboplites aurorubens","","vermilion snapper","Species","Rhomboplites aurorubens","Rhomboplites","Lutjanidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"793","ROSSIINAE","Rossiinae","Rossiinae","bobtail squids",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"794","Radulinus asprellus","Radulinus asprellus","Radulinus asprellus","","slim sculpin","Species","Radulinus asprellus","Radulinus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"795","Raja binoculata","Raja binoculata","Raja binoculata","big skate","big skate","Species","Raja binoculata","Raja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"796","Raja binoculata egg case",NA,NA,"",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"797","Raja inornata","Raja inornata","Raja inornata","","California ray","Species","Raja inornata","Raja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"798","Raja rhina","Raja rhina","Raja rhina","longnose skate","longnose skate","Species","Raja rhina","Raja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"799","Raja sp. egg case",NA,NA,"",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"800","Raja stellulata","Raja stellulata","Raja stellulata","","starry skate","Species","Raja stellulata","Raja","Rajidae","Rajiformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"801","Rajabinoculata",NA,NA,"big skate",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"802","Rajarhina",NA,NA,"longnose skate",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"803","Rajiformes egg case",NA,NA,"",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"804","Rastrinus scutiger","Rastrinus scutiger","Rastrinus scutiger","","roughskin sculpin","Species","Rastrinus scutiger","Rastrinus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"805","Rathbunaster californicus","Rathbunaster californicus","Rathbunaster californicus","",NA,"Species","Rathbunaster californicus","Rathbunaster","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"806","Reinhardtius hippoglossoides","Reinhardtius hippoglossoides","Reinhardtius hippoglossoides","Greenland halibut","Greenland flounder","Species","Reinhardtius hippoglossoides","Reinhardtius","Pleuronectidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"807","Reinhardtiushippoglossoides",NA,NA,"Greenland halibut",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"808","Rhamphocottus richardsoni","Rhamphocottus richardsoni","Rhamphocottus richardsoni","","grunt sculpin","Species","Rhamphocottus richardsonii","Rhamphocottus","Rhamphocottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"809","Rhamphocottusrichardsoni",NA,NA,"grunt sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"810","Rhinolithodes wosnessenskii","Rhinolithodes wosnessenskii","Rhinolithodes wosnessenskii","","rhinoceros crab","Species","Rhinolithodes wosnessenskii","Rhinolithodes","Lithodidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"811","Ronquilus jordani","Ronquilus jordani","Ronquilus jordani","","northern ronquil","Species","Ronquilus jordani","Ronquilus","Bathymasteridae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"812","Rossellinae","Rossellinae","Rossellinae","",NA,"Subfamily",NA,NA,"Rossellidae","Lyssacinosida","Hexactinellida",NA,NA,"Porifera","Animalia"
+"813","Rossia pacifica","Rossia pacifica","Rossia pacifica","eastern pacific bobtail","eastern pacific bobtail","Species","Rossia pacifica","Rossia","Sepiolidae","Sepiolida","Cephalopoda",NA,NA,"Mollusca","Animalia"
+"814","Rossiapacifica",NA,NA,"eastern pacific bobtail",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"815","SABINEA HYSTRIX","Sabinea hystrix","Sabinea hystrix","shrimp",NA,"Species","Sabinea hystrix","Sabinea","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"816","SABINEA SARSI","Sabinea sarsi","Sabinea sarsi","Sars shrimp","Sars shrimp","Species","Sabinea sarsii","Sabinea","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"817","SABINEA SEPTEMCARINATA","Sabinea septemcarinata","Sabinea septemcarinata","sevenline shrimp","sevenline shrimp","Species","Sabinea septemcarinata","Sabinea","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"818","SARDIELLA AURITA","Sardiella aurita","Sardinella aurita","","round sardinella","Species","Sardinella aurita","Sardinella","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"819","SAURIDA BRASILIENSIS",NA,NA,"largescale lizardfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"820","SAURIDA BRASILIESIS","Saurida brasiliesis","Candida brasiliensis","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"821","SCLEROCRANGON BOREAS","Sclerocrangon boreas","Sclerocrangon boreas","sculptured shrimp","sculptured shrimp","Species","Sclerocrangon boreas","Sclerocrangon","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"822","SCOMBER SCOMBRUS","Scomber scombrus","Scomber scombrus","Atlantic mackerel","Atlantic mackerel","Species","Scomber scombrus","Scomber","Scombridae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"823","SCOMBEROMORUS CAVALLA","Scomberomorus cavalla","Scomberomorus cavalla","","king mackerel","Species","Scomberomorus cavalla","Scomberomorus","Scombridae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"824","SCOMBEROMORUS MACULATUS","Scomberomorus maculatus","Scomberomorus maculatus","Atlantic Spanish mackerel","Spanish mackerel","Species","Scomberomorus maculatus","Scomberomorus","Scombridae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"825","SCOPHTHALMUS AQUOSUS","Scophthalmus aquosus","Scophthalmus aquosus","","windowpane","Species","Scophthalmus aquosus","Scophthalmus","Scophthalmidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"826","SCORPAEA CALCARATA","Scorpaea calcarata","Scorpaena calcarata","","smoothhead scorpionfish","Species","Scorpaena calcarata","Scorpaena","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"827","SCORPAENA CALCARATA","Scorpaena calcarata","Scorpaena calcarata","smoothhead scorpionfish","smoothhead scorpionfish","Species","Scorpaena calcarata","Scorpaena","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"828","SCYLIORHINUS RETIFER","Scyliorhinus retifer","Scyliorhinus retifer","","chain catshark","Species","Scyliorhinus retifer","Scyliorhinus","Scyliorhinidae","Carcharhiniformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"829","SCYPHOZOA","Scyphozoa","Scyphozoa","jellyfishes","jellyfishes","Class",NA,NA,NA,NA,"Scyphozoa",NA,"Medusozoa","Cnidaria","Animalia"
+"830","SEBASTES FASCIATUS","Sebastes fasciatus","Sebastes fasciatus","","Acadian redfish","Species","Sebastes fasciatus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"831","SEBASTES MARINUS","Sebastes marinus","Sebastes marinus","golden redfish","ocean perch",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"832","SEBASTES MENTELLA","Sebastes mentella","Sebastes mentella","deepwater redfish","deepwater redfish","Species","Sebastes mentella","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"833","SEBASTES SP",NA,NA,"rockfishes",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"834","SEBASTES SP.","Sebastes","Sebastes","rockfishes","rockfishes","Genus",NA,"Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"835","SELAR CRUMENOPHTHALMUS","Selar crumenophthalmus","Selar crumenophthalmus","bigeye scad","bigeye scad","Species","Selar crumenophthalmus","Selar","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"836","SELAR CRUMEOPHTHALMUS","Selar crumeophthalmus","Selar crumenopthalmus","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"837","SELEE SETAPIIS","Selee setapiis","Selene setapinnis","","Atlantic moonfish","Species","Selene setapinnis","Selene","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"838","SELEE VOMER","Selee vomer","Selene vomer","","lookdown","Species","Selene vomer","Selene","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"839","SELENE SETAPINNIS","Selene setapinnis","Selene setapinnis","Atlantic moonfish","Atlantic moonfish","Species","Selene setapinnis","Selene","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"840","SERIOLA DUMERILI","Seriola dumerili","Seriola dumerili","","greater amberjack","Species","Seriola dumerili","Seriola","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"841","SERRAICULUS PUMILIO","Serraiculus pumilio","Serraniculus pumilio","","pygmy sea bass","Species","Serraniculus pumilio","Serraniculus","Serranidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"842","SERRANUS ATROBRANCHUS",NA,NA,"blackear bass",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"843","SERRAUS ATROBRACHUS","Serraus atrobrachus","Serranus atrobranchus","","blackear bass","Species","Serranus atrobranchus","Serranus","Serranidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"844","SERRIVOMER BEANI","Serrivomer beani","Serrivomer beani","sawtooth eel","Bean's sawtoothed eel","Species","Serrivomer beanii","Serrivomer","Serrivomeridae","Anguilliformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"845","SICYOIA BREVIROSTRIS","Sicyoia brevirostris","Eusicyonia brevirostris","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"846","SICYOIA BURKEROADI","Sicyoia burkeroadi","Sicyonia burkenroadi","","spiny rock shrimp","Species","Sicyonia burkenroadi","Sicyonia","Sicyoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"847","SICYOIA DORSALIS","Sicyoia dorsalis","Sicyonia dorsalis","","lesser rock shrimp","Species","Sicyonia dorsalis","Sicyonia","Sicyoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"848","SICYONIA BREVIROSTRIS","Sicyonia brevirostris","Sicyonia brevirostris","brown rock shrimp","brown rock shrimp","Species","Sicyonia brevirostris","Sicyonia","Sicyoniidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"849","SICYONIA DORSALIS",NA,NA,"lesser rock shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"850","SOLENOCERA",NA,NA,"shrimps",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"851","SOLEOCERA VIOSCAI","Soleocera vioscai","Solenocera vioscai","","humpback shrimp","Species","Solenocera vioscai","Solenocera","Solenoceridae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"852","SPHOEROIDES PARVUS","Sphoeroides parvus","Sphoeroides parvus","least puffer","least puffer","Species","Sphoeroides parvus","Sphoeroides","Tetraodontidae","Tetraodontiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"853","SPHYRAEA GUACHACHO","Sphyraea guachacho","Sphyraena guachanche","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"854","SPHYRAENA GUACHANCHO","Sphyraena guachancho","Sphyraena guachancho","guaguanche","guaguanche","Species","Sphyraena guachancho","Sphyraena","Sphyraenidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"855","SPIRONTOCARIS LILLJEBORGI","Spirontocaris lilljeborgi","Spirontocaris lilljeborgi","friendly blade shrimp",NA,"Species","Spirontocaris lilljeborgii","Spirontocaris","Hippolytidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"856","SPIRONTOCARIS SPINUS","Spirontocaris spinus","Spirontocaris spinus","parrot shrimp","parrot shrimp","Species","Spirontocaris spinus","Spirontocaris","Hippolytidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"857","SQUALUS ACANTHIAS","Squalus acanthias","Squalus acanthias","piked dogfish","spiny dogfish","Species","Squalus acanthias","Squalus","Squalidae","Squaliformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"858","SQUILLA CHYDAEA","Squilla chydaea","Squilla chydaea","",NA,"Species","Squilla chydaea","Squilla","Squillidae","Stomatopoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"859","SQUILLA EMPUSA","Squilla empusa","Squilla empusa","","mantis shrimp","Species","Squilla empusa","Squilla","Squillidae","Stomatopoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"860","STELLIFER LACEOLATUS","Stellifer laceolatus","Stellifer lanceolatus","","American stardrum","Species","Stellifer lanceolatus","Stellifer","Sciaenidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"861","STELLIFER LANCEOLATUS","Stellifer lanceolatus","Stellifer lanceolatus","star drum","American stardrum","Species","Stellifer lanceolatus","Stellifer","Sciaenidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"862","STENOTOMUS CAPRINUS",NA,NA,"longspine porgy",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"863","STENOTOMUS CHRYSOPS","Stenotomus chrysops","Stenotomus chrysops","","scup","Species","Stenotomus chrysops","Stenotomus","Sparidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"864","STEORHYCHUS SETICORIS","Steorhychus seticoris","Stenorhynchus seticornis","","yellowline arrow crab","Species","Stenorhynchus seticornis","Stenorhynchus","Inachidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"865","STEOTOMUS CAPRIUS","Steotomus caprius","Stenotomus caprinus","","longspine porgy","Species","Stenotomus caprinus","Stenotomus","Sparidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"866","STEREOMASTIS SCULPTA","Stereomastis sculpta","Stereomastis sculpta","flatback lobster",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"867","STOMIAS BOA FEROX","Stomias boa ferox","Stomias boa ferox","boa dragonfish","boa dragonfish","Subspecies","Stomias boa","Stomias","Stomiidae","Stomiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"868","SYACIUM GUNTERI",NA,NA,"shoal flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"869","SYACIUM GUTERI","Syacium guteri","Scyacium gunteri","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"870","SYACIUM PAPILLOSUM","Syacium papillosum","Syacium papillosum","dusky flounder","dusky flounder","Species","Syacium papillosum","Syacium","Paralichthyidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"871","SYMPHURUS CIVITATUM","Symphurus civitatum","Symphurus civitatum","","offshore tonguefish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"872","SYMPHURUS DIOMEDIAUS","Symphurus diomediaus","Symphurus diomedeanus","","spottedfin tonguefish","Species","Symphurus diomedeanus","Symphurus","Cynoglossidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"873","SYMPHURUS PLAGIUSA","Symphurus plagiusa","Symphurus plagiusa","blackcheek tonguefish","blackcheek tonguefish","Species","Symphurus plagiusa","Symphurus","Cynoglossidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"874","SYNAPHOBRANCHUS KAUPI","Synaphobranchus kaupi","Synaphobranchus kaupi","northern cutthroat eel","northern cutthroat eel","Species","Synaphobranchus kaupii","Synaphobranchus","Synaphobranchidae","Anguilliformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"875","SYNODUS FOETENS","Synodus foetens","Synodus foetens","inshore lizardfish","inshore lizardfish","Species","Synodus foetens","Synodus","Synodontidae","Aulopiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"876","SYNODUS POEYI","Synodus poeyi","Synodus poeyi","offshore lizardfish","offshore lizardfish","Species","Synodus poeyi","Synodus","Synodontidae","Aulopiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"877","SYODUS FOETES","Syodus foetes","Synodus foetens","","inshore lizardfish","Species","Synodus foetens","Synodus","Synodontidae","Aulopiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"878","SYODUS POEYI","Syodus poeyi","Synodus poeyi","","offshore lizardfish","Species","Synodus poeyi","Synodus","Synodontidae","Aulopiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"879","Sardinops sagax","Sardinops sagax","Sardinops sagax","","South American pilchard","Species","Sardinops sagax","Sardinops","Clupeidae","Clupeiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"880","Scleractinia","Scleractinia","Scleractinia","","stony corals","Order",NA,NA,NA,"Scleractinia","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"881","Sclerocrangon boreas","Sclerocrangon boreas","Sclerocrangon boreas","sculptured shrimp","sculptured shrimp","Species","Sclerocrangon boreas","Sclerocrangon","Crangonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"882","Scomber scombrus",NA,NA,"Atlantic mackerel",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"883","Scophthalmus aquosus",NA,NA,"windowpane",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"884","Scyphozoa","Scyphozoa","Scyphozoa","jellyfishes","jellyfishes","Class",NA,NA,NA,NA,"Scyphozoa",NA,"Medusozoa","Cnidaria","Animalia"
+"885","Sebastes alutus","Sebastes alutus","Sebastes alutus","Pacific ocean perch","Pacific ocean perch","Species","Sebastes alutus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"886","Sebastes auriculatus","Sebastes auriculatus","Sebastes auriculatus","","brown rockfish","Species","Sebastes auriculatus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"887","Sebastes aurora","Sebastes aurora","Sebastes aurora","","aurora rockfish","Species","Sebastes aurora","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"888","Sebastes babcocki","Sebastes babcocki","Sebastes babcocki","redbanded rockfish","redbanded rockfish","Species","Sebastes babcocki","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"889","Sebastes borealis","Sebastes borealis","Sebastes borealis","shortraker rockfish","shortraker rockfish","Species","Sebastes borealis","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"890","Sebastes brevispinis","Sebastes brevispinis","Sebastes brevispinis","","silvergray rockfish","Species","Sebastes brevispinis","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"891","Sebastes caurinus","Sebastes caurinus","Sebastes caurinus","","copper rockfish","Species","Sebastes caurinus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"892","Sebastes chlorostictus","Sebastes chlorostictus","Sebastes chlorostictus","greenspotted rockfish","greenspotted rockfish","Species","Sebastes chlorostictus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"893","Sebastes crameri","Sebastes crameri","Sebastes crameri","darkblotched rockfish","darkblotched rockfish","Species","Sebastes crameri","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"894","Sebastes diploproa","Sebastes diploproa","Sebastes diploproa","splitnose rockfish","splitnose rockfish","Species","Sebastes diploproa","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"895","Sebastes elongatus","Sebastes elongatus","Sebastes elongatus","greenstriped rockfish","greenstriped rockfish","Species","Sebastes elongatus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"896","Sebastes entomelas","Sebastes entomelas","Sebastes entomelas","widow rockfish","widow rockfish","Species","Sebastes entomelas","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"897","Sebastes fasciatus",NA,NA,"Acadian redfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"898","Sebastes flavidus","Sebastes flavidus","Sebastes flavidus","yellowtail rockfish","yellowtain rockfish","Species","Sebastes flavidus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"899","Sebastes goodei","Sebastes goodei","Sebastes goodei","chilipepper","chilipepper","Species","Sebastes goodei","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"900","Sebastes helvomaculatus","Sebastes helvomaculatus","Sebastes helvomaculatus","rosethorn rockfish","rosethorn rockfish","Species","Sebastes helvomaculatus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"901","Sebastes hopkinsi","Sebastes hopkinsi","Sebastes hopkinsi","","squarespot rockfish","Species","Sebastes hopkinsi","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"902","Sebastes jordani","Sebastes jordani","Sebastes jordani","shortbelly rockfish","shortbelly rockfish","Species","Sebastes jordani","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"903","Sebastes levis","Sebastes levis","Sebastes levis","","cowcod","Species","Sebastes levis","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"904","Sebastes maliger","Sebastes maliger","Sebastes maliger","","quillback rockfish","Species","Sebastes maliger","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"905","Sebastes melanops","Sebastes melanops","Sebastes melanops","","black rockfish","Species","Sebastes melanops","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"906","Sebastes melanostictus or Sebastes aleutianus","Sebastes melanostictus or sebastes aleutianus","Sebastes melanostictus","","blackspotted rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"907","Sebastes melanostomus","Sebastes melanostomus","Sebastes melanostomus","","blackgill rockfish","Species","Sebastes melanostomus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"908","Sebastes paucispinis","Sebastes paucispinis","Sebastes paucispinis","bocaccio","bocaccio","Species","Sebastes paucispinis","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"909","Sebastes pinniger","Sebastes pinniger","Sebastes pinniger","canary rockfish","canary rockfish","Species","Sebastes pinniger","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"910","Sebastes polyspinis","Sebastes polyspinis","Sebastes polyspinis","northern rockfish","northern rockfish","Species","Sebastes polyspinis","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"911","Sebastes proriger","Sebastes proriger","Sebastes proriger","redstripe rockfish","redstripe rockfish","Species","Sebastes proriger","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"912","Sebastes reedi","Sebastes reedi","Sebastes reedi","yellowmouth rockfish","yellowmouth rockfish","Species","Sebastes reedi","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"913","Sebastes ruberrimus","Sebastes ruberrimus","Sebastes ruberrimus","rasphead rockfish","yelloweye rockfish","Species","Sebastes ruberrimus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"914","Sebastes rufus","Sebastes rufus","Sebastes rufus","bank rockfish","bank rockfish","Species","Sebastes rufus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"915","Sebastes saxicola","Sebastes saxicola","Sebastes saxicola","stripetail rockfish","stripetail rockfish","Species","Sebastes saxicola","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"916","Sebastes semicinctus","Sebastes semicinctus","Sebastes semicinctus","","halfbanded rockfish","Species","Sebastes semicinctus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"917","Sebastes sp.","Sebastes","Sebastes","rockfishes","rockfishes","Genus",NA,"Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"918","Sebastes sp. (Vermilion And Sunset)","Sebastes","Sebastes","","rockfishes","Genus",NA,"Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"919","Sebastes variabilis","Sebastes variabilis","Sebastes variabilis","","dusky rockfish","Species","Sebastes variabilis","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"920","Sebastes variegatus","Sebastes variegatus","Sebastes variegatus","harlequin rockfish","harlequin rockfish","Species","Sebastes variegatus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"921","Sebastes wilsoni","Sebastes wilsoni","Sebastes wilsoni","pygmy rockfish","pygmy rockfish","Species","Sebastes wilsoni","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"922","Sebastes zacentrus","Sebastes zacentrus","Sebastes zacentrus","sharpchin rockfish","sharpchin rockfish","Species","Sebastes zacentrus","Sebastes","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"923","Sebastesalutus",NA,NA,"Pacific ocean perch",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"924","Sebastesbabcocki",NA,NA,"redbanded rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"925","Sebastesborealis",NA,NA,"shortraker rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"926","Sebastesbrevispinis",NA,NA,"silvergray rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"927","Sebastescrameri",NA,NA,"darkblotched rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"928","Sebasteselongatus",NA,NA,"greenstriped rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"929","Sebasteshelvomaculatus",NA,NA,"rosethorn rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"930","Sebastesmaliger",NA,NA,"quillback rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"931","Sebastesmelanops",NA,NA,"black rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"932","Sebastespinniger",NA,NA,"canary rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"933","Sebastespolyspinis",NA,NA,"northern rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"934","Sebastesproriger",NA,NA,"redstripe rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"935","Sebastesruberrimus",NA,NA,"rasphead rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"936","Sebastessp.",NA,NA,"rockfishes",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"937","Sebastesvariegatus",NA,NA,"harlequin rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"938","Sebasteszacentrus",NA,NA,"sharpchin rockfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"939","Sebastolobus alascanus","Sebastolobus alascanus","Sebastolobus alascanus","shortspine thornyhead","shortspine thornyhead","Species","Sebastolobus alascanus","Sebastolobus","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"940","Sebastolobus altivelis","Sebastolobus altivelis","Sebastolobus altivelis","","longspine thornyhead","Species","Sebastolobus altivelis","Sebastolobus","Scorpaenidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"941","Sebastolobusalascanus",NA,NA,"shortspine thornyhead",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"942","Sergestes similis","Sergestes similis","Sergestes similis","",NA,"Species","Sergestes similis","Sergestes","Sergestidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"943","Serripes groenlandicus","Serripes groenlandicus","Serripes groenlandicus","Greenland cockle","Greenland cockle","Species","Serripes groenlandicus","Serripes","Cardiidae","Veneroida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"944","Serripes laperousii","Serripes laperousii","Serripes laperousii","","broad cockle","Species","Serripes laperousii","Serripes","Cardiidae","Veneroida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"945","Serripes sp.","Serripes","Serripes","","Grönlandmuschel","Genus",NA,"Serripes","Cardiidae","Veneroida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"946","Serripesgroenlandicus",NA,NA,"Greenland cockle",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"947","Siliqua alta","Siliqua alta","Siliqua alta","","Alaska razor","Species","Siliqua alta","Siliqua","Pharidae","Veneroida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"948","Sipuncula","Sipuncula","Sipuncula","","peanut worms","Phylum",NA,NA,NA,NA,NA,NA,NA,"Sipuncula","Animalia"
+"949","Solaster borealis","Solaster borealis","Solaster borealis","",NA,"Species","Solaster borealis","Solaster","Solasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"950","Solaster sp.","Solaster","Solaster","sea stars","morning sunstar","Genus",NA,"Solaster","Solasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"951","Solaster spp.","Solaster","Solaster","","morning sunstar","Genus",NA,"Solaster","Solasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"952","Solaster stimpsoni","Solaster stimpsoni","Solaster stimpsoni","","Stimpsons Sonnenstern","Species","Solaster stimpsoni","Solaster","Solasteridae","Spinulosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"953","Solastersp.",NA,NA,"sea stars",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"954","Somniosus pacificus","Somniosus pacificus","Somniosus pacificus","Pacific sleeper shark","Pacific sleeper shark","Species","Somniosus pacificus","Somniosus","Somniosidae","Squaliformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"955","Somniosuspacificus",NA,NA,"Pacific sleeper shark",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"956","Spirinchus starksi","Spirinchus starksi","Spirinchus starksi","","night smelt","Species","Spirinchus starksi","Spirinchus","Osmeridae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"957","Spirinchus thaleichthys","Spirinchus thaleichthys","Spirinchus thaleichthys","","longfin smelt","Species","Spirinchus thaleichthys","Spirinchus","Osmeridae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"958","Squalus acanthias","Squalus acanthias","Squalus acanthias","piked dogfish","spiny dogfish","Species","Squalus acanthias","Squalus","Squalidae","Squaliformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"959","Squalusacanthias",NA,NA,"piked dogfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"960","Stegophiura ponderosa","Stegophiura ponderosa","Stegophiura ponderosa","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"961","Stenobrachius leucopsarus","Stenobrachius leucopsarus","Stenobrachius leucopsarus","","northern lampfish","Species","Stenobrachius leucopsarus","Stenobrachius","Myctophidae","Myctophiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"962","Stenotomus chrysops",NA,NA,"scup",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"963","Stomphia spp.","Stomphia","Stomphia","","cowardly anemone","Genus",NA,"Stomphia","Actinostolidae","Actiniaria","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"964","Strongylocentrotus droebachiensis","Strongylocentrotus droebachiensis","Strongylocentrotus droebachiensis","green sea urchin","green sea urchin","Species","Strongylocentrotus droebachiensis","Strongylocentrotus","Strongylocentrotidae","Echinoida","Echinoidea",NA,"Echinozoa","Echinodermata","Animalia"
+"965","Strongylocentrotus franciscanus","Strongylocentrotus franciscanus","Strongylocentrotus franciscanus","",NA,"Species","Strongylocentrotus franciscanus","Strongylocentrotus","Strongylocentrotidae","Echinoida","Echinoidea",NA,"Echinozoa","Echinodermata","Animalia"
+"966","Strongylocentrotus spp.","Strongylocentrotus","Strongylocentrotus","","Purpurseeigel","Genus",NA,"Strongylocentrotus","Strongylocentrotidae","Echinoida","Echinoidea",NA,"Echinozoa","Echinodermata","Animalia"
+"967","Strongylocentrotusdroebachiensis",NA,NA,"green sea urchin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"968","Styela rustica","Styela rustica","Styela rustica","","Hornet søpung","Species","Styela rustica","Styela","Styelidae","Pleurogona","Ascidiacea",NA,"Urochordata","Chordata","Animalia"
+"969","Stylasterias forreri","Stylasterias forreri","Stylasterias forreri","",NA,"Species","Stylasterias forreri","Stylasterias","Asteriidae","Forcipulatida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"970","Stylatula sp.","Stylatula","Stylatula","","slender sea pen","Genus",NA,"Stylatula","Virgulariidae","Pennatulacea","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"971","TAUTOGOLABRUS ADSPERSUS","Tautogolabrus adspersus","Tautogolabrus adspersus","","cunner","Species","Tautogolabrus adspersus","Tautogolabrus","Labridae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"972","TRACHURUS LATHAMI","Trachurus lathami","Trachurus lathami","rough scad","rough scad","Species","Trachurus lathami","Trachurus","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"973","TRACHYPEEUS COSTRICTUS","Trachypeeus costrictus","Trachypenaeus constrictus","","roughneck shrimp",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"974","TRACHYPEEUS SIMILIS","Trachypeeus similis","Trachypenaeus similis","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"975","TRACHYPENEUS",NA,NA,"trachypeneid shrimps",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"976","TRICHIURUS LEPTURUS","Trichiurus lepturus","Trichiurus lepturus","Atlantic cutlassfish","Atlantic cutlassfish","Species","Trichiurus lepturus","Trichiurus","Trichiuridae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"977","TRICHOPSETTA VENTRALIS",NA,NA,"sash flounder",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"978","TRICHOPSETTA VETRALIS","Trichopsetta vetralis","Trichopsetta ventralis","","sash flounder","Species","Trichopsetta ventralis","Trichopsetta","Bothidae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"979","TRIECTES MACULATUS","Triectes maculatus","Trinectes maculatus","","hogchoker","Species","Trinectes maculatus","Trinectes","Achiridae","Pleuronectiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"980","TRIGLOPS  SP",NA,NA,"sculpins",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"981","TRIGLOPS  SP.","Triglops","Triglops","sculpins","Pingels knurulk","Genus",NA,"Triglops","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"982","Tactostoma macropus","Tactostoma macropus","Tactostoma macropus","","longfin dragonfish","Species","Tactostoma macropus","Tactostoma","Stomiidae","Stomiiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"983","Tautogolabrus adspersus",NA,NA,"cunner",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"984","Tellina lutea","Tellina lutea","Tellina lutea","","alaska great tellin","Species","Tellina lutea","Tellina","Tellinidae","Veneroida","Bivalvia",NA,NA,"Mollusca","Animalia"
+"985","Telmessus cheiragonus","Telmessus cheiragonus","Telmessus cheiragonus","helmet crab","helmet crab","Species","Telmessus cheiragonus","Telmessus","Cheiragonidae","Decapoda","Malacostraca",NA,"Crustacea","Arthropoda","Animalia"
+"986","Telmessuscheiragonus",NA,NA,"helmet crab",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"987","Terebratalia transversa","Terebratalia transversa","Terebratalia transversa","",NA,"Species","Terebratalia transversa","Terebratalia","Laqueidae","Terebratulida","Rhynchonellata",NA,"Rhynchonelliformea","Brachiopoda","Animalia"
+"988","Terebratellacea","Terebratellacea","Terebratellacea","",NA,"Superfamily",NA,NA,NA,"Terebratulida","Rhynchonellata",NA,"Rhynchonelliformea","Brachiopoda","Animalia"
+"989","Thaleichthys pacificus","Thaleichthys pacificus","Thaleichthys pacificus","eulachon","eulachon","Species","Thaleichthys pacificus","Thaleichthys","Osmeridae","Osmeriformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"990","Thaleichthyspacificus",NA,NA,"eulachon",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"991","Thaliacea","Thaliacea","Thaliacea","","pelagic tunicates","Class",NA,NA,NA,NA,"Thaliacea",NA,"Urochordata","Chordata","Animalia"
+"992","Theragra chalcogramma","Theragra chalcogramma","Theragra chalcogramma","walleye pollock","walleye pollock",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"993","Theragrachalcogramma",NA,NA,"walleye pollock",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"994","Thoracica","Thoracica","Thoracica","","barnacles","Superorder",NA,NA,NA,NA,"Maxillopoda",NA,"Crustacea","Arthropoda","Animalia"
+"995","Thrissacanthias penicillatus","Thrissacanthias penicillatus","Thrissacanthias penicillatus","",NA,"Species","Thrissacanthias penicillatus","Thrissacanthias","Astropectinidae","Paxillosida","Asteroidea",NA,"Asterozoa","Echinodermata","Animalia"
+"996","Thyriscus anoplus","Thyriscus anoplus","Thyriscus anoplus","","sponge sculpin","Species","Thyriscus anoplus","Thyriscus","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"997","Tochuina tetraquetra","Tochuina tetraquetra","Tochuina tetraquetra","","giant orange tochui","Species","Tochuina tetraquetra","Tochuina","Tritoniidae","Nudibranchia","Gastropoda",NA,NA,"Mollusca","Animalia"
+"998","Torpedo californica","Torpedo californica","Torpedo californica","Pacific electric ray","Pacific electric ray","Species","Torpedo californica","Torpedo","Torpedinidae","Torpediniformes","Chondrichthyes","Chondrichthyes","Vertebrata","Chordata","Animalia"
+"999","Trachurus symmetricus","Trachurus symmetricus","Trachurus symmetricus","jack mackerel","Pacific jack mackerel","Species","Trachurus symmetricus","Trachurus","Carangidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1000","Trichodon trichodon","Trichodon trichodon","Trichodon trichodon","","Pacific sandfish","Species","Trichodon trichodon","Trichodon","Trichodontidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1001","Trichodontrichodon",NA,NA,"Pacific sandfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1002","Triglops forficata","Triglops forficata","Triglops forficata","scissortail sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1003","Triglops macellus","Triglops macellus","Triglops macellus","roughspine sculpin","roughspine sculpin","Species","Triglops macellus","Triglops","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1004","Triglops pingeli","Triglops pingeli","Triglops pingeli","ribbed sculpin","ribbed sculpin","Species","Triglops pingelii","Triglops","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1005","Triglops scepticus","Triglops scepticus","Triglops scepticus","spectacled sculpin","spectacled sculpin","Species","Triglops scepticus","Triglops","Cottidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1006","Triglopsforficata",NA,NA,"scissortail sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1007","Triglopsmacellus",NA,NA,"roughspine sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1008","Triglopspingeli",NA,NA,"ribbed sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1009","Triglopsscepticus",NA,NA,"spectacled sculpin",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1010","Tritonia diomedea","Tritonia diomedea","Tritonia diomedea","","rosy tritonia","Species","Tritonia diomedea","Tritonia","Tritoniidae","Nudibranchia","Gastropoda",NA,NA,"Mollusca","Animalia"
+"1011","Tritonia sp.","Tritonia","Tritonia","","Große Tritonia","Genus",NA,"Tritonia","Tritoniidae","Nudibranchia","Gastropoda",NA,NA,"Mollusca","Animalia"
+"1012","Tunicata","Tunicata","Tunicata","","tunicates",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1013","UPEEUS PARVUS","Upeeus parvus","Upeneus parvus","","dwarf goatfish","Species","Upeneus parvus","Upeneus","Mullidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1014","UPENEUS PARVUS","Upeneus parvus","Upeneus parvus","dwarf goatfish","dwarf goatfish","Species","Upeneus parvus","Upeneus","Mullidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1015","UROPHYCIS CHESTERI","Urophycis chesteri","Urophycis chesteri","longfin hake",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1016","UROPHYCIS CHUSS","Urophycis chuss","Urophycis chuss","red hake","red hake","Species","Urophycis chuss","Urophycis","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1017","UROPHYCIS CIRRATUS","Urophycis cirratus","Urophycis cirratus","Gulf hake",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1018","UROPHYCIS FLORIDANUS",NA,NA,"southern hake",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1019","UROPHYCIS FLORIDAUS","Urophycis floridaus","Urophycis floridannus","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1020","UROPHYCIS REGIA","Urophycis regia","Urophycis regia","spotted hake","spotted codling","Species","Urophycis regia","Urophycis","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1021","UROPHYCIS TENUIS","Urophycis tenuis","Urophycis tenuis","white hake","white hake","Species","Urophycis tenuis","Urophycis","Gadidae","Gadiformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1022","Urophycis chuss",NA,NA,"red hake",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1023","Urophycis regia",NA,NA,"spotted hake",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1024","Urophycis tenuis",NA,NA,"white hake",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1025","Urticina crassicornis","Urticina crassicornis","Urticina crassicornis","","mottled anemone",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1026","Urticina spp.","Urticina","Urticina","","dickhörnige Seerose","Genus",NA,"Urticina","Actiniidae","Actiniaria","Anthozoa",NA,"Anthozoa","Cnidaria","Animalia"
+"1027","Volutopsius fragilis","Volutopsius fragilis","Volutopsius fragilis","","fragile whelk","Species","Volutopsius fragilis","Volutopsius","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"1028","Volutopsius sp.","Volutopsius","Volutopsius","true whelks","Norway whelk","Genus",NA,"Volutopsius","Buccinidae","Neogastropoda","Gastropoda",NA,NA,"Mollusca","Animalia"
+"1029","Volutopsiussp.",NA,NA,"true whelks",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1030","XIPHOPEAEUS KROYERI","Xiphopeaeus kroyeri","Xiphopenaeus kroyeni","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1031","Xeneretmus latifrons","Xeneretmus latifrons","Xeneretmus latifrons","","blacktip poacher","Species","Xeneretmus latifrons","Xeneretmus","Agonidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1032","ZOARCIDAE","Zoarcidae","Zoarcidae","eelpouts","eelpouts","Family",NA,NA,"Zoarcidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1033","Zalembius rosaceus","Zalembius rosaceus","Zalembius rosaceus","pink seaperch","pink seaperch","Species","Zalembius rosaceus","Zalembius","Embiotocidae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1034","Zaniolepis latipinnis","Zaniolepis latipinnis","Zaniolepis latipinnis","","longspine combfish","Species","Zaniolepis latipinnis","Zaniolepis","Hexagrammidae","Scorpaeniformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1035","Zaprora silenus","Zaprora silenus","Zaprora silenus","prowfish","prowfish","Species","Zaprora silenus","Zaprora","Zaproridae","Perciformes","Actinopterygii","Osteichthyes","Vertebrata","Chordata","Animalia"
+"1036","Zaprorasilenus",NA,NA,"prowfish",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1037","Zoarces americanus",NA,NA,"ocean pout",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1038","Zoroaster evermanni","Zoroaster evermanni","Zoroaster evermanni","",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1039","gastropod eggs",NA,NA,"Gastropod eggs",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"1040","gastropodeggs",NA,NA,"Gastropod eggs",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
