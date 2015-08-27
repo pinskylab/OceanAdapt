@@ -155,11 +155,8 @@ new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
 # ========================================================
 	# ensure clean start by deleting this directory and all of its contents, the recreating it
 if(file.exists(new.zip.folder)){
-	# delete all of directory's contents
-	sapply(list.files(new.zip.folder, full=T), file.remove)
-	
-	# delete directory
-	file.remove(new.zip.folder)
+	# delete all of directory's contents & directory
+	unlink(new.zip.folder, recursive=TRUE)
 }
 
 if(!file.exists(new.zip.folder)){
@@ -690,7 +687,8 @@ for(i in 1:length(regions2upload)){
 	setwd(oldwd)
 	
 	# Delete local folder
-	sapply(c(list.files(t.dest.dir, full=T),t.dest.dir), file.remove)
+	# sapply(c(list.files(t.dest.dir, full=T),t.dest.dir), file.remove)
+	unlink(t.dest.dir, recursive=TRUE)
 }
 
 # To finish the process for preparing for the OA upload,
