@@ -14,7 +14,8 @@ We follow these steps to update the OceanAdapt data annually.
    1. Within data_raw/, each survey has a sub-directory. 
    2. Within each sub-directory, you should create a folder with naming format exactly `YYYY-MM-DD`, reflecting the data on which you downloaded the latest files for this survey.
    3. Put all the files in that new folder.
-   4. Copy over the strata file from the previous version from this region (presumably, it has not changed).
+   4. Copy over the strata file from the previous version from this region (presumably, it has not changed). There are no strata files for gmex, wctri, or wcann.
+   5. Copy over SVSPP.Rdata fro the previous version of neus, if not in the update.
    5. Zip it up
    6. Delete the original folder
 
