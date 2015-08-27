@@ -4,7 +4,11 @@ This folder contains <fill>
 
 When the data sets are to be updated, the contents of this folder will change in the following manner:  
   
-  1. A new zip file will be added. Old zip files will remain. The updata.data.R script produces this zip file from the files in data_raw/
+  1. A new zip file will be added. 
+  2. Old zip files will remain. 
+  3. The [update.data.R](https://github.com/mpinsky/OceanAdapt/blob/master/R/update.data.R) script produces this zip file from the files in data_raw/  
+    a. The conents of data_raw/ are as-is data acquired from the primary data provider  
+    b. the files of this folder have been processed for uploading to Ocean Adapt
   
 Files ending in the extension `.zip` and following the naming convention 
 `Data_Updated_DATE_TIME.zip` (where `DATE == YYYY-MM-DD` and `TIME == HH-mm-ss-tz`) contain:  
