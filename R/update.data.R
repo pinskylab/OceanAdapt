@@ -146,6 +146,34 @@ unzip(normalizePath(recentZip), exdir="data_updates", junkpaths=TRUE, setTimes=T
 zip.folder <- gsub("(\\.[^.]+$)", "", recentZip)
 new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
 
+# ========================================================
+# = Prepare the Directory that will be Focus of Updates  =
+# ========================================================
+
+
+	# ensure clean start by deleting this directory and all of its contents, the recreating it
+if(file.exists(new.zip.folder)){
+	# delete all of directory's contents
+	sapply(list.files(new.zip.folder, full=T), file.remove)
+	
+	# delete directory
+	file.remove(new.zip.folder)
+}
+
+if(!file.exists(new.zip.folder)){
+	dir.create(new.zip.folder)
+}else{
+	stop(paste0(
+		"Failure to automatically remove directory named \n\t\t", 
+		new.zip.folder, 
+		"\nFresh start cannot be ensured.",
+		"\nPlease remove directory and its contents manually,",
+		"\nand proceed with caution (paths have likely been altered)."
+	))
+}
+	
+	
+
 
 # =============
 # = Update AI =
