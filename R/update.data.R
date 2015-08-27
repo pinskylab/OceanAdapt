@@ -583,46 +583,46 @@ file.rename(new.zip.file0, renameNow(new.zip.file0))
 setwd(oldwd)
 
 
-# ======================================
-# = Zip File for Amphiprion (Raw Data) =
-# ======================================
-# Copy, Zip, & Ship! Then delete.
-
-# Create directory to hold raw files locally
-raw.dir <- "./Raw_Files_Updated_on" # directory to hold raw files
-if(file.exists(raw.dir)){
-	sapply(list.files(raw.dir, full=T), file.remove)
-}else{
-	dir.create(raw.dir) # create directory
-}
-
-# Determine which files are available
-raw2copy0 <- unlist(sapply(ls()[grepl("\\.file$",ls())], get))
-raw2copy <- raw2copy0[file.exists(raw2copy0)]
-
-# Copy raw files into local holding folder
-file.copy(from=raw2copy, to=paste(raw.dir, basename(raw2copy),sep="/"))
-
-# Zip local holding folder, and rename with date
-# oldwd <- getwd()
-# setwd("./data_updates")
-zip(raw.dir, files=list.files(raw.dir, full=TRUE))
-# setwd(oldwd)
-
-# Rename the file that is to be push (add date)
-raw.dir.zip <- paste0(raw.dir,".zip")
-raw.dir.zip.now <- renameNow(raw.dir.zip)
-file.rename(raw.dir.zip, raw.dir.zip.now)
-
-# Push to Amphiprion
-localPath <- normalizePath(raw.dir.zip.now)
-remoteName <- "ryanb@amphiprion.deenr.rutgers.edu"
-remotePath <- "/local/shared/pinsky_lab/trawl_surveys/OA_rawData_Updates"
-push(path=localPath, remoteName=remoteName, path2=remotePath)
-
-# Cleanup by deleting holding folder and zipped holding folder
-file.remove(localPath) # delete local zip
-sapply(c(list.files(normalizePath(raw.dir), full=T),normalizePath(raw.dir)), file.remove) # delete local folder and its files
+# # ======================================
+# # = Zip File for Amphiprion (Raw Data) =
+# # ======================================
+# # Copy, Zip, & Ship! Then delete.
+#
+# # Create directory to hold raw files locally
+# raw.dir <- "./Raw_Files_Updated_on" # directory to hold raw files
+# if(file.exists(raw.dir)){
+# 	sapply(list.files(raw.dir, full=T), file.remove)
+# }else{
+# 	dir.create(raw.dir) # create directory
+# }
+#
+# # Determine which files are available
+# raw2copy0 <- unlist(sapply(ls()[grepl("\\.file$",ls())], get))
+# raw2copy <- raw2copy0[file.exists(raw2copy0)]
+#
+# # Copy raw files into local holding folder
+# file.copy(from=raw2copy, to=paste(raw.dir, basename(raw2copy),sep="/"))
+#
+# # Zip local holding folder, and rename with date
+# # oldwd <- getwd()
+# # setwd("./data_updates")
+# zip(raw.dir, files=list.files(raw.dir, full=TRUE))
+# # setwd(oldwd)
+#
+# # Rename the file that is to be push (add date)
+# raw.dir.zip <- paste0(raw.dir,".zip")
+# raw.dir.zip.now <- renameNow(raw.dir.zip)
+# file.rename(raw.dir.zip, raw.dir.zip.now)
+#
+# # Push to Amphiprion
+# localPath <- normalizePath(raw.dir.zip.now)
+# remoteName <- "ryanb@amphiprion.deenr.rutgers.edu"
+# remotePath <- "/local/shared/pinsky_lab/trawl_surveys/OA_rawData_Updates"
+# push(path=localPath, remoteName=remoteName, path2=remotePath)
+#
+# # Cleanup by deleting holding folder and zipped holding folder
+# file.remove(localPath) # delete local zip
+# sapply(c(list.files(normalizePath(raw.dir), full=T),normalizePath(raw.dir)), file.remove) # delete local folder and its files
 
 
 # ============================================
