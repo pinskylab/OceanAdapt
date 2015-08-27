@@ -130,21 +130,16 @@ upData <- read.csv.zip(data.vis) # TODO This should probably go back to using re
 old.csv.names <- names(upData)
 
 
-# ======================================
-# = Unzip Most Recent Zip File Locally =
-# ======================================
-# create explosion of .csv files inside data_updates
-# these .csv's are from data vis
-# they are used for the bonus files like ebs_strata.csv, or neus_strata.csv
-# these are files that are not reaquired during the data updating procedure (from raw file collection)
-unzip(normalizePath(recentZip), exdir="data_updates", junkpaths=TRUE, setTimes=TRUE)
-
+# ===========================
+# = Identify New Zip Folder =
+# ===========================
 # new.zip.folder is where all the newly-gathered .csv's will be written
 # for NEUS, is also where the helper data file (strat or spp id file) will be read
 # is where a lot of the other data organization processes occur
 # new.zip.folder <- "data_updates" #paste0(dirname(zip.folder),"/data_updates")
 zip.folder <- gsub("(\\.[^.]+$)", "", recentZip)
 new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
+
 
 # ========================================================
 # = Prepare the Directory that will be Focus of Updates  =
@@ -169,7 +164,22 @@ if(!file.exists(new.zip.folder)){
 		"\nand proceed with caution (paths have likely been altered)."
 	))
 }
-	
+
+
+# ======================================
+# = Unzip Most Recent Zip File Locally =
+# ======================================
+# create explosion of .csv files inside data_updates
+# these .csv's are from data vis
+# they are used for the bonus files like ebs_strata.csv, or neus_strata.csv
+# these are files that are not reaquired during the data updating procedure (from raw file collection)
+unzip(normalizePath(recentZip), exdir=new.zip.folder, junkpaths=TRUE, setTimes=TRUE)
+
+
+
+
+
+
 	
 
 
