@@ -129,11 +129,16 @@ data.vis <- sort(list.files("./data_download",pattern="Data_Vis_.[0-9,_]*.zip", 
 upData <- read.csv.zip(data.vis) # TODO This should probably go back to using recentZip
 old.csv.names <- names(upData)
 
-# Unzip locally
-# this kind of makes the whole process of read.csv.zip function pointless, as now I could simply read in the data files from this folder
-# actually, nvm, it's still useful if the newly downloaded data are in a zip file
+
+# ======================================
+# = Unzip Most Recent Zip File Locally =
+# ======================================
 unzip(normalizePath(recentZip), exdir="data_updates", junkpaths=TRUE, setTimes=TRUE)
 zip.folder <- gsub("(\\.[^.]+$)", "", recentZip)
+
+# new.zip.folder is where all the newly-gathered .csv's will be written
+# for NEUS, is also where the helper data file (strat or spp id file) will be read
+# is where a lot of the other data organization processes occur
 # new.zip.folder <- "data_updates" #paste0(dirname(zip.folder),"/data_updates")
 new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
 
@@ -144,7 +149,7 @@ new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
 # =============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 # oldAI <- upData$ai_data.csv
-if(length(ai.fileS)>1){ # if not 0 will be true
+if(length(ai.fileS)>=1){ # if not 0 will be true
 	# Load updated, partially old AI
 	recent.ai.old <- sort(ai.fileS, dec=T)[1]
 	oldAI <- read.csv.zip(recent.ai.old, SIMPLIFY=FALSE)
@@ -518,7 +523,7 @@ if(FALSE){
 # =======================
 # Zip up and rename
 oldwd <- getwd()
-setwd(dirname(new.zip.folder))
+setwd(dirname(new.zip.folder)) # new.zip.folder is "./data_updates/Data_Updated"
 
 zip(basename(new.zip.folder), files=list.files(basename(new.zip.folder),full=TRUE))
 new.zip.file0 <- paste0(basename(new.zip.folder),".zip")
@@ -577,6 +582,9 @@ regions2upload <- c("ai","ebs","goa","gmex","neus","wcann","wctri")
 files.matched <- c()
 file.headers <- structure(vector("list",length(regions2upload)), .Names=regions2upload)
 
+# get a list of all files in
+# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/"
+# these should be the .csv's from each region, as well as complete_r_script.R (?)
 t.files0 <- list.files(normalizePath(new.zip.folder),full=T)
 
 for(i in 1:length(regions2upload)){
@@ -586,11 +594,15 @@ for(i in 1:length(regions2upload)){
 	
 	# Create a directory where current region can
 	# have its files safely renamed to somethign generic, like data.csv
+	# So it creates things like:
+	# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/ai"
+	# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/ebs"
+	# etc ...
 	dir.create(paste0(normalizePath(new.zip.folder),"/",t.reg))
 	
 	# Identify files for this region, and remember which files found
 	t.files <- t.files0[grepl(paste0(t.reg,"_"),t.files0)] # files w/ current region in name
-	if(length(t.files)==0){warning(paste("skipping region",t.reg)); next}
+	if(length(t.files)==0){warning(paste("skipping region",t.reg)); next} # skip w/ warning if region isn't found
 	files.matched <- c(files.matched, t.files) # accumulate file names that were found
 	
 	# Define names for files as they will appear for upload;
