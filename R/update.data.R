@@ -147,7 +147,6 @@ zip.folder <- gsub("(\\.[^.]+$)", "", recentZip)
 new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
 
 
-
 # =============
 # = Update AI =
 # =============
@@ -208,7 +207,7 @@ if(file.exists(ai.file2)){
 # oldEBS <- upData$ebs_data.csv
 # ebs.raw.path.top <- file.path("./data_raw/ebs")
 # ebs.fileS <- list.files(ebs.old.path.top, full.names=T, pattern=date.zip.patt)
-if(length(ebs.fileS)>1){ # if not 0 will be true
+if(length(ebs.fileS)>=1){ # if not 0 will be true
 	# Load updated, partially old EBS
 	recent.ebs.old <- sort(ebs.fileS, dec=T)[1]
 	oldEBS <- read.csv.zip(recent.ebs.old, SIMPLIFY=FALSE)
@@ -267,7 +266,7 @@ if(file.exists(ebs.file2)){
 # ==============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 # oldGOA <- upData$goa_data.csv
-if(length(goa.fileS)>1){
+if(length(goa.fileS)>=1){
 	# Load updated, partially old GOA
 	recent.goa.old <- sort(goa.fileS, dec=T)[1]
 	oldGOA <- read.csv.zip(recent.goa.old, SIMPLIFY=FALSE)
