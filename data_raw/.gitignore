@@ -1,0 +1,4 @@
+.Rapp.history
+.DS_Store
+!*.csv
+.Rhistory
