@@ -211,8 +211,8 @@ compile_GMEX = function () {
   gmexspp = gmexspp[!(gmexspp$CODE %in% gmexspp$CODE[which(duplicated(gmexspp$CODE))]),] # remove the duplicates that were just combined
   gmexspp = rbind(gmexspp[,names(newspp)], newspp) # add the combined records on to the end. trim out extra columns from gmexspp
   
-  gmex = merge(gmexbio, gmextow[gmextow$GEAR_TYPE=='ST', c('STATIONID', 'CRUISE_NO', 'P_STA_NO', 'INVRECID', 'GEAR_SIZE', 'GEAR_TYPE', 'MESH_SIZE', 'MIN_FISH', 'OP')], all.x=TRUE) # merge tow information with catch data, but only for shrimp trawl tows (ST)
-  gmex = merge(gmex, gmexstation[,c('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')], all.x=TRUE) # add station location and related data
+  gmex = merge(gmexbio, gmextow[gmextow$GEAR_TYPE=='ST', c('STATIONID', 'CRUISE_NO', 'P_STA_NO', 'INVRECID', 'GEAR_SIZE', 'GEAR_TYPE', 'MESH_SIZE', 'MIN_FISH', 'OP')]) # merge tow information with catch data, but only for shrimp trawl tows (ST)
+  gmex = merge(gmex, gmexstation[,c('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')]) # add station location and related data
   gmex = merge(gmex, gmexspp[,c('CODE', 'TAXONOMIC')], by.x='BIO_BGS', by.y='CODE', all.x=TRUE) # add scientific name
   gmex = merge(gmex, gmexcruise[,c('CRUISEID', 'VESSEL', 'TITLE')], all.x=TRUE) # add cruise title
   gmex = gmex[gmex$TITLE %in% c('Summer SEAMAP Groundfish Survey', 'Summer SEAMAP Groundfish Suvey') & gmex$GEAR_SIZE==40 & gmex$MESH_SIZE == 1.63 & !is.na(gmex$MESH_SIZE) & gmex$OP %in% c(''),] # # Trim to high quality SEAMAP summer trawls, based off the subset used by Jeff Rester's GS_TRAWL_05232011.sas
@@ -242,9 +242,9 @@ compile_SEUSSpr = function () {
   
   #seus has some unique data corrections that are dealt with here
   #Occasions where weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
-  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 20010106 & seus$SPECIESCODE == 8713050104, 31.9) 
+  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 20010106 & seus$SPECIESCODE == 8713050104, 31.9) # roughtail stingray
   seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT) & seus$SPECIESCODE == 5802010101] <- 0 # these 'NA' weights needed to first be converted to 0
-  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9)
+  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9) # horseshoe crabs
   seus = seus[!is.na(seus$SPECIESTOTALWEIGHT),] # remove long line fish from dataset which have 'NA' for weight
   #Three hauls have 0 or NA for 'EFFORT', which are data entry errors, the following corrects these values
   seus$EFFORT[seus$COLLECTIONNUMBER == 19910105] <- 1.71273
@@ -282,9 +282,9 @@ compile_SEUSSum = function () {
   #seus has some unique data corrections that are dealt with here
   #Occasions where weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
   seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT) & seus$SPECIESCODE == 5802010101] <- 0 # these 'NA' weights needed to first be converted to 0
-  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9)
-  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 19940236 & seus$SPECIESCODE == 9002050101, 204) 
-  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46) 
+  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9) # horseshoe crabs
+  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 19940236 & seus$SPECIESCODE == 9002050101, 204) # leatherback sea turtle
+  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46) # loggerhead
   
   seus = seus[!is.na(seus$SPECIESTOTALWEIGHT),] # remove long line fish from dataset which have 'NA' for weight
    
@@ -328,7 +328,7 @@ compile_SEUSFal = function () {
   #seus has some unique data corrections that are dealt with here
   #Occasions where weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
   seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT) & seus$SPECIESCODE == 5802010101] <- 0 # these 'NA' weights needed to first be converted to 0
-  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9)
+  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9) # horseshoe crab
   seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46) 
   
   seus = seus[!is.na(seus$SPECIESTOTALWEIGHT),] # remove long line fish from dataset which have 'NA' for weight
@@ -427,6 +427,8 @@ high_quality_strata = function () {
   wcann <<- wcann[wcann$stratum %in% c("36.5-50", "37.5-150", "37.5-50", "38.5-150", "38.5-250", "38.5-350", "38.5-50", "39.5-150", "39.5-50", "40.5-150", "40.5-250", "41.5-150", "41.5-250", "41.5-50", "42.5-150", "42.5-250", "42.5-50", "43.5-150", "43.5-250", "43.5-350", "43.5-50", "44.5-150", "44.5-250", "44.5-350", "44.5-50", "45.5-150", "45.5-350", "45.5-50", "46.5-150", "46.5-250", "46.5-50", "47.5-150", "47.5-50", "48.5-150", "48.5-250", "48.5-50"),] # trim wcann to same footprint as wctri
   
   gmex <<- gmex[gmex$stratum %in% c("26.5--96.5-50", "26.5--97.5-50", "27.5--96.5-50", "27.5--97.5-50", "28.5--90.5-50", "28.5--91.5-50", "28.5--92.5-50", "28.5--93.5-50", "28.5--94.5-50", "28.5--95.5-50", "28.5--96.5-50", "29.5--88.5-50", "29.5--89.5-50", "29.5--92.5-50", "29.5--93.5-50", "29.5--94.5-50"),]
+  
+  # all seus strata are retained
     
   return(TRUE)
 }
@@ -570,6 +572,7 @@ remove_paired_tows = function () {
   gmex <<- gmex[!(gmex$haulid %in% unique(dupped$haulid[grep('PORT', dupped$COMSTAT)])),] # remove the port haul (this is arbitrary, but seems to be right based on the notes associated with these hauls)
   
   #In seus there are two 'COLLECTIONNUMBERS' per 'EVENTNAME', with no exceptions; EFFORT is always the same for each COLLECTIONNUMBER
+  # We sum the two tows in seus
   seusSPRING <<- aggregate(list(BIOMASS = seusSPRING$SPECIESTOTALWEIGHT), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, SEASON = seusSPRING$SEASON, EFFORT = seusSPRING$EFFORT, spp = seusSPRING$spp), FUN=sum)
   seusSPRING$wtcpue <<- seusSPRING$BIOMASS/(seusSPRING$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
   seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, EFFORT = seusSUMMER$EFFORT, spp = seusSUMMER$spp), FUN=sum)
@@ -878,9 +881,11 @@ national_data = function (centbio) {
   #WHEN USING DEFAULT NAMES FROM add_region_column(), UN COMMENT NEXT LINE:
   #regstouse = c('AFSC_EBS', 'NEFSC_NEUSSpring') # Only include regions not constrained by geography in which surveys have consistent methods through time
   natstartyear = 1982 # a common starting year for the both focal regions
+  maxyrs = aggregate(list(maxyear = dat$year[dat$region %in% regstouse]), by=list(region=dat$region[dat$region %in% regstouse]), FUN=max)
+  natendyear = min(maxyrs$maxyear)
   
   ## Find a standard set of species (present every year in the focal regions) for the national analysis
-  inds = dat$year >= natstartyear & dat$region %in% regstouse # For national average, start in prescribed year, only use focal regions
+  inds = dat$year >= natstartyear & dat$year <= natendyear & dat$region %in% regstouse # For national average, start in prescribed year, only use focal regions
   
   presyr = aggregate(list(pres = dat$wtcpue[inds]>0), by=list(region = dat$region[inds], spp=dat$spp[inds], year=dat$year[inds]), FUN=sum, na.rm=TRUE) # find which species are present in which years
   presyrsum = aggregate(list(presyr = presyr$pres>0), by=list(region=presyr$region, spp=presyr$spp), FUN=sum) # presyr col holds # years in which spp was present
@@ -889,7 +894,7 @@ national_data = function (centbio) {
   spplist2 = presyrsum[presyrsum$presyr == presyrsum$maxyr,c('region', 'spp')] # retain all spp present at least once every time a survey occurs
   
   # Make a new centbio dataframe for regional use, only has spp in spplist
-  centbio3 = centbio[paste(centbio$region, centbio$spp) %in% paste(spplist2$region, spplist2$spp) & centbio$year >= natstartyear, c('region', 'spp', 'year', 'lat', 'lon', 'depth')]
+  centbio3 = centbio[paste(centbio$region, centbio$spp) %in% paste(spplist2$region, spplist2$spp) & centbio$year >= natstartyear & centbio$year <= natendyear , c('region', 'spp', 'year', 'lat', 'lon', 'depth')]
   
   # Calculate offsets of lat and depth (start at 0 in initial year of survey)
   startyear = aggregate(list(startyear = centbio3$year), by=list(region = centbio3$region), FUN=min) # find initial year in each region
@@ -1177,7 +1182,7 @@ print_status('Done.')
 
 
 print_status('Rearrange and Trim Columns.')
-add_region_columns_complete = rearrange_and_trim_columns()
+rearrange_and_trim_complete = rearrange_and_trim_columns()
 print_status('Done.')
 
 
@@ -1194,7 +1199,7 @@ if(isTRUE(REMOVE_REGION_DATASETS)) {
 }
 
 #Clear boolean complete values. 
-rm( haul_id_complete, year_extraction_complete, gmex_lat_long_calculation_complete, adding_stratum_complete,  hq_years_complete, hq_strata_complete,  fix_speed_complete,  calculate_stratum_area_complete, column_names_update_complete, neg_9999_complete, adjust_tow_area_complete, remove_paired_tows_complete,  remove_non_sci_fish_inv_complete, adjust_spp_names_complete, calculate_corrected_longitude_complete, add_region_columns_complete)
+rm( haul_id_complete, year_extraction_complete, gmex_lat_long_calculation_complete, adding_stratum_complete,  hq_years_complete, hq_strata_complete,  fix_speed_complete,  calculate_stratum_area_complete, column_names_update_complete, neg_9999_complete, adjust_tow_area_complete, remove_paired_tows_complete,  remove_non_sci_fish_inv_complete, adjust_spp_names_complete, calculate_corrected_longitude_complete, add_region_columns_complete, rearrange_and_trim_complete)
 
 print_status('Scientific name/Common name data available: `tax` ')
 print_status('National data available: `dat` ')
