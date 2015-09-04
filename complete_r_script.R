@@ -5,6 +5,8 @@
 #   1) Put this script in the same directory as the data files and use `source('PATH/complete_r_script.R', chdir=TRUE)`, where PATH is replaced with the path to the script (even easier on some systems: drag and drop this script onto the R window and it will source it automatically). The chdir option will temporarily change the working directory to where the script is located. Please use command `?source` for more information.
 #   2) Open R, manually change the working directory to the directory with the data files, and run all the code in this script. 
 #   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with your data and run the script. 
+
+# RDB quality of life enhancer "~/Documents/School&Work/pinskyPost/OceanAdapt/data_download/Data_Vis_2015_09_04"
        
  
 ### File Structure
@@ -749,6 +751,10 @@ rearrange_and_trim_columns = function () {
   seusSUMMER <<- seusSUMMER[,nm]  
   seusFALL <<- seusFALL[,nm]  
   return(TRUE)
+}
+
+explode0 <- function(x, by=c("STRATUM")){
+	
 }
 
 
