@@ -753,8 +753,18 @@ rearrange_and_trim_columns = function () {
   return(TRUE)
 }
 
-explode0 <- function(x, by=c("STRATUM")){
+
+explode0 <- function(x, by=c()){
+	x <- as.data.table(x)
+	setkey(x, haulid, stratum, year, lat, lon, stratumarea, depth)
 	
+	u.spp <- x[,unique(spp)]
+	u.haul <- x[,list(haulid=unique(haulid)), by="year"]
+	u.haul[,j={cbind(.SD, u.spp)}, by=c("year","haulid")]
+	x.skele <- data.table(expand.grid(year=u.haul[,year], haulid=u.haul[,haulid], spp=u.spp))
+	
+	x.loc <- x[,list(haulid, stratum, stratumarea, year, lat, lon, depth, region)]
+	x.spp.dat <- x[,list(spp, wtcpue)]
 }
 
 
