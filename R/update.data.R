@@ -410,7 +410,7 @@ if(file.exists(gmex.station.file)){
 	# so if you get this file updated, be sure to listen
 	# to the following message ...
 	msg1 <- "WAIT! You need to open"
-	msg2 <- "in Excel, then resave it as a csv for the file to load properly."
+	msg2 <- 'in a text editor (e.g., TextWrangler), then search&replace \\" with "", then resave it for the file to load properly.'
 	message("\n",msg1,gmex.station.file, msg2, "\n")
 
 # Reading in and writing out the station file creates problems with quoted fields. Using quote=TRUE in the write.csv may work, but copying the file is even simpler (MLP 2015-09-08)
