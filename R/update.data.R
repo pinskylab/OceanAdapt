@@ -417,7 +417,7 @@ if(file.exists(gmex.station.file)){
 	stopifnot(all(names(oldGMEX.station)%in%names(newGMEX.station0)))
 	gmex.station.names <- names(oldGMEX.station)
 	newGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
-	write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=TRUE) # need quotes on because some comment fields have commas
 } # WORKS 2015-08-27 RDB
 
 
