@@ -413,12 +413,16 @@ if(file.exists(gmex.station.file)){
 	msg2 <- "in Excel, then resave it as a csv for the file to load properly."
 	message("\n",msg1,gmex.station.file, msg2, "\n")
 
-	newGMEX.station0 <- as.data.table(read.csv(gmex.station.file))
-	stopifnot(all(names(oldGMEX.station)%in%names(newGMEX.station0)))
-	gmex.station.names <- names(oldGMEX.station)
-	newGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
-	write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=FALSE)
-} # WORKS 2015-08-27 RDB
+# Reading in and writing out the station file creates problems with quoted fields. Using quote=TRUE in the write.csv may work, but copying the file is even simpler (MLP 2015-09-08)
+#	newGMEX.station0 <- as.data.table(read.csv(gmex.station.file))
+#	stopifnot(all(names(oldGMEX.station)%in%names(newGMEX.station0)))
+#	gmex.station.names <- names(oldGMEX.station)
+#	newGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
+#	write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=FALSE)
+
+	file.copy(from=gmex.station.file, to=paste(new.zip.folder,"gmex_station.csv",sep="/"))
+
+}
 
 
 # tow
