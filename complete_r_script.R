@@ -754,20 +754,6 @@ rearrange_and_trim_columns = function () {
 }
 
 
-explode0 <- function(x, by=c()){
-	x <- as.data.table(x)
-	setkey(x, haulid, stratum, year, lat, lon, stratumarea, depth)
-	
-	u.spp <- x[,unique(spp)]
-	u.haul <- x[,list(haulid=unique(haulid)), by="year"]
-	u.haul[,j={cbind(.SD, u.spp)}, by=c("year","haulid")]
-	x.skele <- data.table(expand.grid(year=u.haul[,year], haulid=u.haul[,haulid], spp=u.spp))
-	
-	x.loc <- x[,list(haulid, stratum, stratumarea, year, lat, lon, depth, region)]
-	x.spp.dat <- x[,list(spp, wtcpue)]
-}
-
-
 create_master_table = function () {
   #  combine and remove NA values
   dat = rbind(ai, ebs, goa, neus, neusF, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL)
@@ -839,6 +825,41 @@ species_data = function () {
   return(centbio)
   
 }
+
+# ===========
+# = Add 0's =
+# ===========
+explode0 <- function(x, by=c("region")){
+	# x <- copy(x)
+	stopifnot(is.data.table(x))
+	
+	# print(x[1])
+	
+	# x <- as.data.table(x)
+	# x <- as.data.table(dat)[region=="Eastern Bering Sea"]
+	# setkey(x, haulid, stratum, year, lat, lon, stratumarea, depth)
+	setorder(x, haulid, stratum, year, lat, lon, stratumarea, depth)
+	
+	u.spp <- x[,as.character(unique(spp))]
+	u.cmmn <- x[,common[!duplicated(as.character(spp))]]
+
+	x.loc <- x[,list(haulid, year, stratum, stratumarea, lat, lon, depth)]
+	setkey(x.loc, haulid, year)
+
+	x.skele <- x.loc[,list(spp=u.spp, common=u.cmmn), by=eval(colnames(x.loc))]
+	setkey(x.skele, haulid, year, spp)
+	x.skele <- unique(x.skele)
+	setcolorder(x.skele, c("haulid","year","spp", "common", "stratum", "stratumarea","lat","lon","depth"))
+	
+	x.spp.dat <- x[,list(haulid, year, spp, wtcpue)]
+	setkey(x.spp.dat, haulid, year, spp)
+	x.spp.dat <- unique(x.spp.dat)
+	
+	out <- x.spp.dat[x.skele]
+	
+	out
+}
+
 
 region_data = function (centbio) {
   #Returns region data
@@ -1241,6 +1262,14 @@ print_status('Begin calculating by species, region, and national data')
 ##species_data modifies dat
 BY_SPECIES_DATA = species_data() #NOTE: Might take a little bit depending on processor speed
 print_status('>Species data complete.')
+
+# ===========
+# = Add 0's =
+# ===========
+dat.exploded <- as.data.table(dat)[,explode0(.SD), by="region"]
+# write.csv(dat.exploded, file.path(WORKING_DIRECTORY, "..", "..", "dat.exploded.csv")) # this will be ~600MB
+
+
 BY_REGION_DATA = region_data(BY_SPECIES_DATA) ##This function requires use of Species data and will not run properly without it.
 print_status('>Region data complete.')
 BY_NATIONAL_DATA = national_data(BY_SPECIES_DATA) ##This function requires use of Species data and will not run properly without it.
