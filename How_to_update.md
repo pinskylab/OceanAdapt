@@ -16,7 +16,7 @@ We follow these steps to update the OceanAdapt data annually.
    3. Put all the files for that survey in that new folder.
    4. Copy over the strata file from the previous version from this region (presumably, it has not changed). There are no strata files for gmex, wctri, or wcann.
    5. If you are updating NEUS, copy over SVSPP.Rdata from the previous version of neus (assuming it is not in the update).
-   6. If you are updating GMEX, open the STAREC.csv file in a text editor (e.g., TextWrangler) and search/replace \" with ""
+   6. If you are updating GMEX, open the STAREC.csv file in a text editor (e.g., TextWrangler) and search/replace \" with "". We do this because R can't understand escaped double quotes.
    6. Zip the survey's sub-directory up
    7. Delete the original folder (keeping the .zip)
 
