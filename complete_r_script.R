@@ -779,12 +779,10 @@ create_master_table = function () {
 }
 
 #Functions to calculate [by region by species], by region, and by national
-species_data = function () {
-  #Returns species data
-  
-  ######################################################
-  ## Calculate mean position through time for species ##
-  ######################################################
+trim_species_data = function(dat) {
+  #Returns dat, but trimmed only to species with sufficient data
+
+
   ## Find a standard set of species (present at least two years in a region)
   presyr = aggregate(list(pres = dat$wtcpue>0), by=list(region = dat$region, spp=dat$spp, common=dat$common, year=dat$year), FUN=sum, na.rm=TRUE) # find which species are present in which years
   presyrsum = aggregate(list(presyr = presyr$pres>0), by=list(region=presyr$region, spp=presyr$spp, common=presyr$common), FUN=sum) # presyr col holds # years in which spp was present
@@ -793,8 +791,18 @@ species_data = function () {
   spplist = presyrsum[presyrsum$presyr >= presyrsum$maxyrs*3/4,c('region', 'spp', 'common')] # retain all spp present at least half the available years in a survey
   
   # Trim to these species
-  dat <<- dat[paste(dat$region, dat$spp) %in% paste(spplist$region, spplist$spp),]
+  trimmed <- dat[paste(dat$region, dat$spp) %in% paste(spplist$region, spplist$spp),]
   
+  return(trimmed)
+}
+  
+species_data = function (dat) {
+  #Returns species data
+  
+  ######################################################
+  ## Calculate mean position through time for species ##
+  ######################################################
+
   # Calculate mean latitude and depth of each species by year within each survey/region
   datstrat = with(dat[!duplicated(dat[,c('region', 'stratum', 'haulid')]),], aggregate(list(lat = lat, lon = lon, depth = depth, stratumarea = stratumarea), by=list(stratum = stratum, region = region), FUN=meanna)) # mean lat/lon/depth for each stratum
   
@@ -856,6 +864,8 @@ explode0 <- function(x, by=c("region")){
 	x.spp.dat <- unique(x.spp.dat)
 	
 	out <- x.spp.dat[x.skele]
+	
+	out$wtcpue[is.na(out$wtcpue)] <- 0
 	
 	out
 }
@@ -1259,14 +1269,14 @@ print_status('**DATA PREPARATION COMPLETE**')
 ##FEEL FREE TO ADD, MODIFY, OR DELETE ANYTHING BELOW THIS LINE
 
 print_status('Begin calculating by species, region, and national data')
-##species_data modifies dat
-BY_SPECIES_DATA = species_data() #NOTE: Might take a little bit depending on processor speed
+trimmed_dat <- trim_species_data(dat) # trim to species with enough data
+BY_SPECIES_DATA = species_data(trimmed_dat) #NOTE: Might take a little bit depending on processor speed
 print_status('>Species data complete.')
 
 # ===========
 # = Add 0's =
 # ===========
-dat.exploded <- as.data.table(dat)[,explode0(.SD), by="region"]
+dat.exploded <- as.data.table(trimmed_dat)[,explode0(.SD), by="region"]
 # write.csv(dat.exploded, file.path(WORKING_DIRECTORY, "..", "..", "dat.exploded.csv")) # this will be ~600MB
 
 
