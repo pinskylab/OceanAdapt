@@ -12,12 +12,13 @@ We follow these steps to update the OceanAdapt data annually.
 
 2. Organize new data files into data_raw/ directory
    1. Within data_raw/, each survey has a sub-directory. 
-   2. Within each sub-directory, you should create a folder with naming format exactly `YYYY-MM-DD`, reflecting the data on which you downloaded the latest files for this survey.
-   3. Put all the files in that new folder.
+   2. Within each survey's sub-directory, you should create a folder with naming format exactly `YYYY-MM-DD`, reflecting the data on which you downloaded the latest files for this survey.
+   3. Put all the files for that survey in that new folder.
    4. Copy over the strata file from the previous version from this region (presumably, it has not changed). There are no strata files for gmex, wctri, or wcann.
-   5. Copy over SVSPP.Rdata fro the previous version of neus, if not in the update.
-   5. Zip it up
-   6. Delete the original folder
+   5. If you are updating NEUS, copy over SVSPP.Rdata from the previous version of neus (assuming it is not in the update).
+   6. If you are updating GMEX, open the STAREC.csv file in a text editor (e.g., TextWrangler) and search/replace \" with ""
+   6. Zip the survey's sub-directory up
+   7. Delete the original folder (keeping the .zip)
 
 3. Prepare the raw data for uploading to OceanAdapt website
    1. Eventually, the update.data.R script should handle everything from here. It is not quite there yet.
