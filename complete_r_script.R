@@ -783,12 +783,12 @@ trim_species_data = function(dat) {
   #Returns dat, but trimmed only to species with sufficient data
 
 
-  ## Find a standard set of species (present at least two years in a region)
+  ## Find a standard set of species (present at least 3/4 of the years in a region)
   presyr = aggregate(list(pres = dat$wtcpue>0), by=list(region = dat$region, spp=dat$spp, common=dat$common, year=dat$year), FUN=sum, na.rm=TRUE) # find which species are present in which years
   presyrsum = aggregate(list(presyr = presyr$pres>0), by=list(region=presyr$region, spp=presyr$spp, common=presyr$common), FUN=sum) # presyr col holds # years in which spp was present
   maxyrs = aggregate(list(maxyrs = presyrsum$presyr), by=list(region = presyrsum$region), FUN=max) # max # years of survey in each region
   presyrsum = merge(presyrsum, maxyrs) # merge in max years
-  spplist = presyrsum[presyrsum$presyr >= presyrsum$maxyrs*3/4,c('region', 'spp', 'common')] # retain all spp present at least half the available years in a survey
+  spplist = presyrsum[presyrsum$presyr >= presyrsum$maxyrs*3/4,c('region', 'spp', 'common')] # retain all spp present at least 3/4 of the available years in a survey
   
   # Trim to these species
   trimmed <- dat[paste(dat$region, dat$spp) %in% paste(spplist$region, spplist$spp),]
