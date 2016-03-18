@@ -163,7 +163,7 @@ compile_NEUSF = function () {
   neusF[, c('LENGTH', 'NUMLEN') := NULL] # remove length columns
   neusF = neusF[,sum(BIOMASS),by=list(YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP)] # sum different sexes of same spp together
   setnames(neusF, 'V1', 'wtcpue')
-  neusF = neusF[SEASON=='FALL',] # trim to spring survey only
+  neusF = neusF[SEASON=='FALL',] # trim to fall survey only
   spp[,c('ITISSPP', 'COMNAME', 'AUTHOR') := NULL] # remove some columns from spp data.table
   neusF = merge(neusF, spp, by='SVSPP') # add species names
   neusF = as.data.frame(neusF) # this makes the calculations less efficient... but avoids having to rewrite the code for data.tables
@@ -419,7 +419,8 @@ high_quality_strata = function () {
   goa <<- goa[!(goa$STRATUM %in% c(50, 210, 410, 420, 430, 440, 450, 510, 520, 530, 540, 550)),] # strata to remove.
   neus <<- neus[neus$STRATUM %in% c("1010", "1020", "1030", "1040", "1050", "1060", "1070", "1080", "1090", "1100", "1110", "1130", "1140", "1150", "1160", "1170", "1190", "1200", "1210", "1220", "1230", "1240", "1250", "1260", "1270", "1280", "1290", "1300", "1340", "1360", "1370", "1380", "1400", "1650", "1660", "1670", "1680", "1690", "1700", "1710", "1730", "1740", "1750"), ] # strata to keep (based on Nye et al. MEPS)
   
-  strat.counts <- apply(table(neusF$YEAR, neusF$STRATUM), 2, function(x)sum(x>0))
+  inds <- neusF$YEAR >= 1967 # trim to 1967 and later, since more strata were sampled starting then
+  strat.counts <- apply(table(neusF$YEAR[inds], neusF$STRATUM[inds]), 2, function(x)sum(x>0))
   strat.names <- names(strat.counts)
   strat.select <- strat.names[strat.counts>=max(strat.counts)]
   neusF <<- neusF[neusF$STRATUM %in% c(strat.select), ] 
@@ -438,6 +439,7 @@ high_quality_years = function () {
   #These items were hand chosen.
   # Trim to high-quality years (sample all strata)  
   goa <<- goa[!(goa$YEAR %in% 2001),] # 2001 didn't sample many strata
+  neusF <<- neusF[!(neusF$YEAR < 1967),] # many strata in the Mid-Atlantic Bight weren't sampled until 1967
   gmex <<- gmex[!(gmex$year %in% c(1982, 1983)),] # 1982 and 1983 didn't sample many strata
   seusSPRING <<- seusSPRING[!(seusSPRING$year %in% c(1989, 2013)),] # Many strata in 1989 only had one tow, plus spring sampled at night. 2013 did not sample all strata.
   seusSUMMER <<- seusSUMMER[!(seusSUMMER$year %in% 1989),] # Many strata in 1989 only had one tow.
