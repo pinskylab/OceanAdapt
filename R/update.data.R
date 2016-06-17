@@ -4,6 +4,7 @@
 # =================
 library(data.table)
 library(rbLib) # library(devtools); install_github("rBatt/rbLib")
+library(bit64)
 
 
 # ===============================
@@ -100,22 +101,33 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, ...){
 	# Get a list of csv files in the dir
 	files <- list.files(zipdir, rec=TRUE, pattern=pattern)
 	
+	read_func <- function(f){
+		fp <- file.path(zipdir, f)
+		dat <- tryCatch(fread(fp, ...), error=function(cond)as.data.table(read.csv(fp, ...)))
+		if(nrow(dat)==0){
+			dat <- as.data.table(read.csv(fp, ...))
+		}
+		return(dat)
+	}
+	
 	# Create a list of the imported csv files
 	if(SIMPLIFY){
 		csv.data <- sapply(files, 
-			function(f){
-			    fp <- file.path(zipdir, f)
-				dat <- fread(fp, ...)
-			    return(dat)
-			}
+			# function(f){
+# 			    fp <- file.path(zipdir, f)
+# 				dat <- fread(fp, ...)
+# 			    return(dat)
+# 			}
+			read_func
 		)
 	}else{
 		csv.data <- lapply(files, 
-			function(f){
-			    fp <- file.path(zipdir, f)
-				dat <- fread(fp, ...)
-			    return(dat)
-			}
+			# function(f){
+			#     fp <- file.path(zipdir, f)
+			# 	dat <- fread(fp, ...)
+			#     return(dat)
+			# }
+			read_func
 		)
 	}
 	
@@ -135,7 +147,7 @@ zipFiles <- file.info(list.files("./data_updates", full=TRUE, patt="^Data_.+.zip
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 # upData <- read.csv.zip(recentZip, integer64="character")
 data.vis <- sort(list.files("./data_download",pattern="Data_Vis_.[0-9,_]*.zip", full=T),dec=T)[1] # grab most recent data.viz 
-upData <- read.csv.zip(data.vis) # TODO This should probably go back to using recentZip
+upData <- read.csv.zip(data.vis, SIMPLIFY=T) # TODO This should probably go back to using recentZip
 old.csv.names <- names(upData)
 
 
