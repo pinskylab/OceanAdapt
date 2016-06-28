@@ -72,7 +72,14 @@ neus_fold <- "neus"
 neus.raw.path.top <- file.path(new_data_loc,neus_fold)
 neus.fileS <- list.files(neus.raw.path.top, full.names=T, pattern=date.zip.patt)
 new_data_raw_neus <- sort(neus.fileS, dec=T)[1]
-# neus.file <- "Survdat.RData"
+
+neus_surv_rdata <- "Survdat.RData"
+neus_spp_rdata <- "SVSPP.RData"
+neus_strata_rdata <- "Strata.RData"
+
+neus_surv_csv <- "neus_neus.csv"
+neus_spp_csv <- "neus_svspp.csv"
+neus_strata_csv <- "neus_strata.csv"
 
 
 # WC
@@ -86,6 +93,9 @@ wcann.fish.pattern <- "FishCatch\\.csv$"
 wcann.haul.pattern <- "Hauls\\.csv$"
 wcann.invert.pattern <- "InvertebrateCatch\\.csv$"
 
+wcann_fish_set_cn <- c("Trawl Id","Species","Haul Weight (kg)","Individual Average Weight (kg)")
+wcann_haul_set_cn <- c("Survey","Survey Cycle","Vessel","Cruise Leg","Trawl Id","Trawl Performance","Trawl Date","Trawl Start Time","Best Latitude (dd)","Best Longitude (dd)","Best Position Type","Best Depth (m)","Best Depth Type","Trawl Duration (min)","Area Swept by the Net (hectares)","Temperature At the Gear (degs C)")
+wcann_invert_set_cn <- c("Trawl Id","Species","Haul Weight (kg)","Individual Average Weight (kg)")
 
 # ====================================================
 # = Function to Trim Trailing and Leading Whitespace =
@@ -201,16 +211,19 @@ if(!file.exists(new.zip.folder)){
 # these .csv's are from data vis
 # they are used for the bonus files like ebs_strata.csv, or neus_strata.csv
 # these are files that are not reaquired during the data updating procedure (from raw file collection)
-unzip(normalizePath(recentZip), exdir=new.zip.folder, junkpaths=TRUE, setTimes=TRUE)
+# unzip(normalizePath(recentZip), exdir=new.zip.folder, junkpaths=TRUE, setTimes=TRUE)
 
 
+# ================================
+# = Function for alaskan regions =
+# ================================
 update_ai_goa_ebs <- function(new_data_raw_reg, reg=c("ai","ebs","goa")){
 	reg <- match.arg(reg)
 	
 	reg_name_dat <- paste0(reg,"_data.csv") # for saving data
 	reg_name_strat <- paste0(reg,"_strata.csv") # for saving strat
 	
-	cat("\nReading new files\n")
+	cat("Reading new files\n")
 	newREG0 <- read.csv.zip(new_data_raw_reg, SIMPLIFY=FALSE)
 	
 	
@@ -221,7 +234,7 @@ update_ai_goa_ebs <- function(new_data_raw_reg, reg=c("ai","ebs","goa")){
 	updated_newREG_data <- newREG_data[,names(oldREG_data),with=FALSE] # drop any columns not in old
 	setkeyv(newREG_data, names(newREG_data)) # sort, and define which columns determine uniqueness of rows
 	updated_newREG_data <- unique(newREG_data) # drops redundant rows
-	cat("\nSaving new data files\n")
+	cat("Saving new data files\n")
 	write.csv(updated_newREG_data, file=paste(new.zip.folder,reg_name_dat,sep="/"), row.names=FALSE, quote=FALSE)
 
 	# ---- update strata file ----
@@ -231,40 +244,17 @@ update_ai_goa_ebs <- function(new_data_raw_reg, reg=c("ai","ebs","goa")){
 	updated_newREG_strata <- newREG_strata[,names(newREG_strata),with=F]
 	setkeyv(updated_newREG_strata, names(updated_newREG_strata))
 	updated_newREG_strata <- unique(updated_newREG_strata)
-	cat("\nSaving new strata files\n")
+	cat("Saving new strata files\n")
 	write.csv(updated_newREG_strata, file=paste(new.zip.folder,reg_name_strat,sep="/"), row.names=FALSE, quote=FALSE)
 	
 	invisible(NULL)
 }
-update_ai_goa_ebs(new_data_raw_ai, "ai")
+
 
 # =============
 # = Update AI =
 # =============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-# ---- update general data file ----
-# oldAI_data <- upData$ai_data.csv
-# if(length(ai.fileS)>=1){ # if not 0 will be true
-# 	newAI0 <- read.csv.zip(new_data_raw_ai, SIMPLIFY=FALSE)
-# 	newAI_data <- newAI0[names(newAI0)!="aiStrata.csv"] # non-strata files
-# 	newAI_data <- rbindlist(newAI_data) # combine files into 1 data.table
-# 	stopifnot(all(names(newAI_data)%in%names(oldAI_data))) # make sure new data have all columns in old data
-# 	updated_newAI_data <- newAI_data[,names(oldAI_data),with=FALSE] # drop any columns not in old
-# 	setkeyv(newAI_data, names(newAI_data)) # sort, and define which columns determine uniqueness of rows
-# 	updated_newAI_data <- unique(newAI_data) # drops redundant rows
-# 	write.csv(updated_newAI_data, file=paste(new.zip.folder,"ai_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
-# }
-#
-# # ---- update strata file ----
-# oldAI_strata <- upData$ai_strata.csv
-# if(file.exists(ai.file2)){
-# 	newAI_strata <- newAI0[names(newAI0)=="aiStrata.csv"][[1]]
-# 	stopifnot(all(names(newAI_strata)%in%names(oldAI_strata)))
-# 	updated_newAI_strata <- newAI_strata[,(newAI_strata_names),with=F]
-# 	setkeyv(updated_newAI_strata, names(updated_newAI_strata))
-# 	updated_newAI_strata <- unique(updated_newAI_strata)
-# 	write.csv(updated_newAI_strata, file=paste(new.zip.folder,"ai_strata.csv",sep="/"), row.names=FALSE, quote=FALSE)
-# }
 update_ai_goa_ebs(new_data_raw_ai, "ai")
 
 
@@ -272,29 +262,6 @@ update_ai_goa_ebs(new_data_raw_ai, "ai")
 # = Update EBS =
 # ==============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-# ---- update general data file ----
-# oldEBS_data <- upData$ebs_data.csv
-# if(length(ebs.fileS)>=1){
-# 	newEBS0 <- read.csv.zip(new_data_raw_ebs, SIMPLIFY=FALSE)
-# 	newEBS_data <- newEBS0[names(newEBS0)!="ebsStrata.csv"] # non-strata files
-# 	newEBS_data <- rbindlist(newEBS_data) # combine files into 1 data.table
-# 	stopifnot(all(names(newEBS_data)%in%names(oldEBS_data))) # make sure new data have all columns in old data
-# 	updated_newEBS_data <- newEBS_data[,names(oldEBS_data),with=FALSE] # drop any columns not in old
-# 	setkeyv(newEBS_data, names(newEBS_data)) # sort, and define which columns determine uniqueness of rows
-# 	updated_newEBS_data <- unique(newEBS_data) # drops redundant rows
-# 	write.csv(updated_newEBS_data, file=paste(new.zip.folder,"ebs_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
-# }
-#
-# # ---- update strata file ----
-# oldEBS_strata <- upData$ebs_strata.csv
-# if(file.exists(ebs.file2)){
-# 	newEBS_strata <- newEBS0[names(newEBS0)=="ebsStrata.csv"][[1]]
-# 	stopifnot(all(names(newEBS_strata)%in%names(oldEBS_strata)))
-# 	updated_newEBS_strata <- newEBS_strata[,names(newEBS_strata),with=F]
-# 	setkeyv(updated_newEBS_strata, names(updated_newEBS_strata))
-# 	updated_newEBS_strata <- unique(updated_newEBS_strata)
-# 	write.csv(updated_newEBS_strata, file=paste(new.zip.folder,"ebs_strata.csv",sep="/"), row.names=FALSE, quote=FALSE)
-# }
 update_ai_goa_ebs(new_data_raw_ebs, "ebs")
 
 
@@ -302,29 +269,6 @@ update_ai_goa_ebs(new_data_raw_ebs, "ebs")
 # = Update GOA =
 # ==============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-
-
-# ---- update general data file ----
-# oldGOA_data <- upData$goa_data.csv
-# if(length(goa.fileS)>=1){
-# 	newGOA0 <- read.csv.zip(new_data_raw_goa, SIMPLIFY=FALSE)
-# 	newGOA_data <- newGOA0[names(newGOA0)!="goaStrata.csv"] # non-strata files
-# 	newGOA_data <- rbindlist(newGOA_data) # combine files into 1 data.table
-# 	stopifnot(all(names(newGOA_data)%in%names(oldGOA_data))) # make sure new data have all columns in old data
-# 	updated_newGOA_data <- newGOA_data[,names(oldGOA_data),with=FALSE] # drop any columns not in old
-# 	setkeyv(newGOA_data, names(newGOA_data)) # sort, and define which columns determine uniqueness of rows
-# 	updated_newGOA_data <- unique(newGOA_data) # drops redundant rows
-# 	write.csv(updated_newGOA_data, file=paste(new.zip.folder,"goa_data.csv",sep="/"), row.names=FALSE, quote=FALSE)
-# }
-#
-# # ---- update strata file ----
-# oldGOA_strata <- upData$goa_strata.csv
-# newGOA_strata <- newGOA0[names(newGOA0)=="goaStrata.csv"][[1]]
-# stopifnot(all(names(newGOA_strata)%in%names(oldGOA_strata)))
-# updated_newGOA_strata <- newGOA_strata[,names(newGOA_strata),with=F]
-# setkeyv(updated_newGOA_strata, names(updated_newGOA_strata))
-# updated_newGOA_strata <- unique(updated_newGOA_strata)
-# write.csv(updated_newGOA_strata, file=paste(new.zip.folder,"goa_strata.csv",sep="/"), row.names=FALSE, quote=FALSE)
 update_ai_goa_ebs(new_data_raw_goa, "goa")
 
 
@@ -334,44 +278,62 @@ update_ai_goa_ebs(new_data_raw_goa, "goa")
 # http://seamap.gsmfc.org/
 newGMEX <- read.csv.zip(new_data_raw_gmex)
 
+update_gmex <- function(readFile, writeFile){
+	# needs newGMEX, old_upData_colNames, new.zip.folder (getting from parent.frame())
+	old_names <- old_upData_colNames[[writeFile]]
+	new_data <- newGMEX[[readFile]][,old_names, with=FALSE]
+	stopifnot(all(old_names%in%names(new_data)))
+	cat("\tWriting",writeFile,"\n")
+	write.csv(new_data, file=file.path(new.zip.folder,writeFile), row.names=FALSE, quote=FALSE)
+	invisible(NULL)
+}
+
 # ---- bio ----
-oldGMEX.bio <- upData$gmex_bio.csv # only uses old data files for names
-newGMEX.bio0 <- newGMEX[[gmex.bio.file]]
-stopifnot(all(names(oldGMEX.bio)%in%names(newGMEX.bio0)))
-gmex.bio.names <- names(oldGMEX.bio)
-newGMEX.bio <- newGMEX.bio0[,(gmex.bio.names), with=FALSE]
-write.csv(newGMEX.bio, file=paste(new.zip.folder,"gmex_bio.csv",sep="/"), row.names=FALSE, quote=FALSE)
+# newGMEX.bio <- newGMEX[[gmex.bio.file]][,old_gmexBio_names, with=FALSE]
+# stopifnot(all(old_gmexBio_names%in%names(newGMEX.bio)))
+# write.csv(newGMEX.bio, file=paste(new.zip.folder,"gmex_bio.csv",sep="/"), row.names=FALSE, quote=FALSE)
+update_gmex(readFile=gmex.bio.file, writeFile="gmex_bio.csv")
 
 # ---- cruise ----
-oldGMEX.cruise <- upData$gmex_cruise.csv
-newGMEX.cruise0 <- newGMEX[[gmex.cruise.file]]
-# Had problems with the names in this file; 
-# so I couldn't rely on the names used in the previous .csv
-# as a proper guide for naming convention required for OA
-# Thus, I am not doing the same approach for getting and checking
-# the column names, and am specifying them explicitly
-# But gmex still won't upload to OA
-gmex.cruise.names <- c("CRUISEID", "YR", "SOURCE", "VESSEL", "CRUISE_NO", "STARTCRU", "ENDCRU", "TITLE", "NOTE", "INGEST_SOURCE", "INGEST_PROGRAM_VER") # from .docx from Lucas
-stopifnot(all(gmex.cruise.names%in%names(newGMEX.cruise0)))
-newGMEX.cruise <- newGMEX.cruise0[,(gmex.cruise.names), with=FALSE]
-write.csv(newGMEX.cruise, file=paste(new.zip.folder,"gmex_cruise.csv",sep="/"), row.names=FALSE, quote=FALSE)
+# newGMEX.cruise <- newGMEX[[gmex.cruise.file]][,old_gmexCruise_names, with=FALSE]
+# stopifnot(all(old_gmexCruise_names%in%names(newGMEX.cruise)))
+# write.csv(newGMEX.cruise, file=paste(new.zip.folder,"gmex_cruise.csv",sep="/"), row.names=FALSE, quote=FALSE)
+update_gmex(readFile=gmex.cruise.file, writeFile="gmex_cruise.csv")
 
 # ---- spp ----
-oldGMEX.spp <- upData$gmex_spp.csv
-newGMEX.spp0 <- newGMEX[[gmex.spp.file]]
-stopifnot(all(names(oldGMEX.spp)%in%names(newGMEX.spp0)))
-gmex.spp.names <- names(oldGMEX.spp)
-newGMEX.spp <- newGMEX.spp0[,(gmex.spp.names), with=FALSE]
-write.csv(newGMEX.spp, file=paste(new.zip.folder,"gmex_spp.csv",sep="/"), row.names=FALSE, quote=FALSE)
+# newGMEX.spp <- newGMEX[[gmex.spp.file]][,old_gmexSpp_names,with=FALSE]
+# stopifnot(all(old_gmexSpp_names%in%names(newGMEX.spp)))
+# write.csv(newGMEX.spp, file=paste(new.zip.folder,"gmex_spp.csv",sep="/"), row.names=FALSE, quote=FALSE)
+update_gmex(readFile=gmex.spp.file, writeFile="gmex_spp.csv")
 
 # ---- station ----
-oldGMEX.station <- upData$gmex_station.csv
+# can't read this file in normally
+# because it has bad characters
+# so need to go through each step and use lower-level functions
+# to surgically remove the bad \" and replace with ""
+gmex_zipdir <- tempfile()
+dir.create(gmex_zipdir)
+unzip(new_data_raw_gmex, exdir=gmex_zipdir)
+gmex.station.file.path <- list.files(gmex_zipdir, rec=TRUE, full=TRUE, pattern=gsub("\\.", "\\\\.", gmex.station.file))
+gmex.station.file.path <- normalizePath(gmex.station.file.path)
+gmexStation_raw <- readLines(gmex.station.file.path)
+esc_patt <- "\\\\\\\""
+esc_replace <- "\\\"\\\""
+gmexStation_noEsc <- gsub(esc_patt, esc_replace, gmexStation_raw)
+gmex.station.file.new <- file.path(new.zip.folder,"gmex_station.csv")
+cat(gmexStation_noEsc, file=gmex.station.file.new, sep="\n")
+
+# nwo start over from the no-escape version
+new_gmexStation <- as.data.table(read.csv(gmex.station.file.new))[,old_upData_colNames[["gmex_station.csv"]], with=FALSE]
+write.csv(new_gmexStation, file=gmex.station.file.new, row.names=FALSE, quote=FALSE)
+
+
 # I've had some problems loading this .csv into R,
 # so if you get this file updated, be sure to listen
 # to the following message ...
-msg1 <- "WAIT! You need to open"
-msg2 <- 'in a text editor (e.g., TextWrangler), then search&replace \\" with "", then resave it for the file to load properly.'
-message("\n",msg1,gmex.station.file, msg2, "\n")
+# msg1 <- "WAIT! You need to open"
+# msg2 <- 'in a text editor (e.g., TextWrangler), then search&replace \\" with "", then resave it for the file to load properly.'
+# message("\n",msg1,gmex.station.file, msg2, "\n")
 # Reading in and writing out the station file creates problems with quoted fields. Using quote=TRUE in the write.csv may work, but copying the file is even simpler (MLP 2015-09-08)
 #	newGMEX.station0 <- as.data.table(read.csv(gmex.station.file))
 #	stopifnot(all(names(oldGMEX.station)%in%names(newGMEX.station0)))
@@ -379,102 +341,94 @@ message("\n",msg1,gmex.station.file, msg2, "\n")
 #	newGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
 #	write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=FALSE)
 
-gmex_zipdir <- tempfile()
-dir.create(gmex_zipdir)
-unzip(new_data_raw_gmex, exdir=gmex_zipdir)
-gmex.station.file.path <- list.files(gmex_zipdir, rec=TRUE, full=TRUE, pattern=gsub("\\.", "\\\\.", gmex.station.file))
-file.copy(from=gmex.station.file.path, to=paste(new.zip.folder,"gmex_station.csv",sep="/"), overwrite=TRUE)
+
+# file.copy(from=gmex.station.file.path, to=paste(new.zip.folder,"gmex_station.csv",sep="/"), overwrite=TRUE)
 
 # file.copy(from=gmex.station.file, to=paste(new.zip.folder,"gmex_station.csv",sep="/"))
 
 
 # ---- tow ----
-oldGMEX.tow <- upData$gmex_tow.csv
-newGMEX.tow0 <- newGMEX[[gmex.tow.file]]
-stopifnot(all(names(oldGMEX.tow)%in%names(newGMEX.tow0)))
-gmex.tow.names <- names(oldGMEX.tow)
-newGMEX.tow <- newGMEX.tow0[,(gmex.tow.names), with=FALSE]
-write.csv(newGMEX.tow, file=paste(new.zip.folder,"gmex_tow.csv",sep="/"), row.names=FALSE, quote=FALSE)
+# oldGMEX.tow <- upData$gmex_tow.csv
+# newGMEX.tow0 <- newGMEX[[gmex.tow.file]]
+# stopifnot(all(names(oldGMEX.tow)%in%names(newGMEX.tow0)))
+# gmex.tow.names <- names(oldGMEX.tow)
+# newGMEX.tow <- newGMEX.tow0[,(gmex.tow.names), with=FALSE]
+# write.csv(newGMEX.tow, file=paste(new.zip.folder,"gmex_tow.csv",sep="/"), row.names=FALSE, quote=FALSE)
+update_gmex(readFile=gmex.tow.file, writeFile="gmex_tow.csv")
 
 
 # ========
 # = NEUS =
 # ========
 # NEUS Data
-oldNEUS <- upData$neus_data.csv
 if(file.exists(new_data_raw_neus)){
 	neus_zipdir <- tempfile()
 	dir.create(neus_zipdir)
 	unzip(new_data_raw_neus, exdir=neus_zipdir)
-	neus_files <- list.files(neus_zipdir, rec=TRUE, pattern="\\.RData", full=TRUE)
 	
-	# The NEUS data updates come in the form of
-	# .RData files; load the file in a 
-	# local environment to ensure that it doesn't
-	# override a local variable, because there are no guarantees
-	# that the object name in this file will be consistent as
-	# we continue to get updates in future
-	# inside the local environment, take the 1 object in the data file
-	# and save it outside the local environment as newNEUS, then 
-	# remove whatever object came with the data.file
+	# .csv files will just be copied, b/c new files come as .RData
+	neus_csv_files <- list.files(neus_zipdir, rec=TRUE, pattern="\\.csv$", full=TRUE)
+	neus_csv_files <- sapply(neus_csv_files, normalizePath, USE.NAMES=FALSE)
+	
+	# .RData files are considered to be potentially new, so will be processed
+	neus_rdata_files <- list.files(neus_zipdir, rec=TRUE, pattern="\\.RData", full=TRUE)
+	neus_rdata_files <- sapply(neus_rdata_files, normalizePath, USE.NAMES=FALSE)
+	
+	# Load RData files
 	local({
-		for(i in 1:length(neus_files)){
-			load(neus_files[i])
+		for(i in 1:length(neus_rdata_files)){
+			load(neus_rdata_files[i])
 		}
-		# stopifnot(length(ls())==1)
 		rm(list='i')
 		newNEUS <<- mget(ls())
 		rm(list=ls())
 	})
-	newNEUS_data <- newNEUS$survdat
-	newNEUS_spp <- newNEUS$spp
 	
-	# OK, proceed with more standard approach to updating data
-	neus.names <- names(oldNEUS)
-	stopifnot(all(neus.names%in%names(newNEUS_data)))
+	# ---- process or copy survey file ----
+	if(neus_surv_rdata%in%basename(neus_rdata_files)){
+		newNEUS_data <- copy(newNEUS$survdat)
+		# Need to add a leading column named ""
+		newNEUS_data <- data.table(X=NA, newNEUS_data)
+		
+		stopifnot(all(old_upData_colNames$neus_neus.csv%in%names(newNEUS_data))) # upData$neus_neus.csv
+		updated_newNEUS_data <- newNEUS_data[,old_upData_colNames$neus_neus.csv,with=FALSE]
+		setnames(updated_newNEUS_data, "X", "\"\"") # rename the NA column as ""
+		setnames(updated_newNEUS_data, names(updated_newNEUS_data)[-1], wrap.quotes(names(updated_newNEUS_data))[-1])
+		cat("\tWriting",neus_surv_csv,"\n")
+		write.csv(updated_newNEUS_data, file=file.path(new.zip.folder,neus_surv_csv), row.names=FALSE, quote=FALSE) 
+	}else{
+		stopifnot(neus_surv_csv%in%basename(neus_csv_files))
+		
+	}
 	
-	# Subset and rearrange to old column names/ order
-	updated_newNEUS_data <- newNEUS_data[,neus.names,with=F]
+	# ---- process or copy spp file ----
+	if(neus_spp_rdata%in%basename(neus_rdata_files)){
+		newNEUS_spp <- copy(newNEUS$spp)
+		newNEUS_spp[,AUTHOR:=wrap.quotes(AUTHOR)]
+		setnames(newNEUS_spp, names(newNEUS_spp), wrap.quotes(names(newNEUS_spp)))
+		newNEUS_spp <- data.table(X=NA, newNEUS_spp)
+		setnames(newNEUS_spp, "X", "\"\"")
+		cat("\tWriting",neus_spp_csv,"\n")
+		write.csv(newNEUS_spp, file=file.path(new.zip.folder,neus_spp_csv), row.names=FALSE, quote=FALSE)
+	}else{
+		svspp_ind <- neus_spp_csv==basename(neus_csv_files)
+		stopifnot(any(svspp_ind))
+		cat("\tCopying",neus_spp_csv,"\n")
+		result <- file.copy(from=neus_csv_files[svspp_ind], to=file.path(new.zip.folder, neus_spp_csv), overwrite=TRUE)
+		if(result){cat("\tSuccessfully copied",neus_spp_csv,"\n")}else{cat("\tFailed to copy",neus_spp_csv,"\n")}
+	}
 	
-	# Turn into a data.table to enable easy/ quick
-	# sorting and dropping of any potential duplicate rows
-	updated_newNEUS_data <- as.data.table(updated_newNEUS_data)
-	setkeyv(updated_newNEUS_data, names(updated_newNEUS_data))
-	updated_newNEUS_data <- unique(updated_newNEUS_data)
+	# ---- process or copy strata file ----
+	if(neus_strata_rdata%in%basename(neus_rdata_files)){
+		# I don't have a .RData file for the strata
+	}else{
+		strata_ind <- neus_strata_csv==basename(neus_csv_files)
+		stopifnot(any(strata_ind))
+		cat("\tCopying",neus_strata_csv,"\n")
+		result <- file.copy(from=neus_csv_files[strata_ind], to=file.path(new.zip.folder, neus_strata_csv), overwrite=TRUE)
+		if(result){cat("\tSuccessfully copied",neus_strata_csv,"\n")}else{cat("\tFailed to copy",neus_strata_csv,"\n")}
+	}
 	
-	# Rename column headers to be wrapped in extra quotes, 
-	# as per Lucas's .docx column names file indicates
-	new.neus.names <- paste0("\"",names(updated_newNEUS_data),"\"") # put names in extra quotes
-	setnames(updated_newNEUS_data, names(updated_newNEUS_data), new.neus.names)
-	
-	# Need to add a leading column named ""
-	updated_newNEUS_data <- cbind(NA, updated_newNEUS_data) # NA's for the values in that oclumn
-	setnames(updated_newNEUS_data, "V1", "\"\"") # rename the NA column as ""
-	
-	# Save NEUS
-	write.csv(updated_newNEUS_data, file=paste(new.zip.folder,"neus_neus.csv",sep="/"), row.names=FALSE, quote=FALSE) # neus breaks the naming convention
-} # WORKS 2015-08-27 RDB
-
-# Fix up NEUS's svspp.csv file
-# This was not originally in right format, but 
-# I did not receive any updates to this file, so 
-# the default is to not run this section of code
-# Also, the NEUS uplaod isn't working still
-if(FALSE){
-	neus.svspp.csv <- read.csv(paste(new.zip.folder,"neus_svspp.csv",sep="/"))
-	
-	# Need to add quotes around author field
-	neus.svspp.csv[,"AUTHOR"] <- wrap.quotes(neus.svspp.csv[,"AUTHOR"])
-	
-	# Wrap column names in quotes
-	names(neus.svspp.csv) <- paste0("\"",names(neus.svspp.csv),"\"")
-	
-	# Add "" column as first column
-	neus.svspp.csv2 <- cbind(NA, neus.svspp.csv)
-	names(neus.svspp.csv2)[1] <- "\"\""
-	
-	# Save csv
-	write.csv(neus.svspp.csv2, file=paste(new.zip.folder,"neus_svspp.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 
@@ -487,28 +441,38 @@ if(FALSE){
 # ===============
 # = Update WFSC =
 # ===============
-oldWCANN <- upData[grepl("wcann", names(upData))]
 if(file.exists(new_data_raw_wcann)){
 	newWCANN <- read.csv.zip(new_data_raw_wcann) # custom function to read from zip
-	namesWC <- c("wcann_fish.csv","wcann_haul.csv","wcann_invert.csv")
 	names(newWCANN)[grepl(wcann.fish.pattern, names(newWCANN))] <- "wcann_fish.csv"
 	names(newWCANN)[grepl(wcann.invert.pattern, names(newWCANN))] <- "wcann_invert.csv"
 	names(newWCANN)[grepl(wcann.haul.pattern, names(newWCANN))] <- "wcann_haul.csv"
+	
+	fix_wc_colnames <- function(X, fullNames){
+		mn <- names(X)
+		mn_fn <- make.names(fullNames)
+		has_matches <- mn %in% mn_fn
+		match_names <- match(mn[has_matches], mn_fn)
+		setnames(X, mn[has_matches], fullNames[match_names])
+	}
+	
 
 	# WC Ann Fish
-	oldWCANN_fish_names <- names(oldWCANN$wcann_fish.csv)
+	oldWCANN_fish_names <- old_upData_colNames$wcann_fish.csv #names(oldWCANN$wcann_fish.csv)
 	stopifnot(all(oldWCANN_fish_names%in%names(newWCANN$wcann_fish.csv)))
-	newWCANN_fish <- newWCANN[["wcann_fish.csv"]][,oldWCANN_fish_names,with=F]
+	newWCANN_fish <- newWCANN[["wcann_fish.csv"]][,oldWCANN_fish_names,with=FALSE]
+	fix_wc_colnames(newWCANN_fish, wcann_fish_set_cn)
 
 	# WC Ann Haul
-	oldWCANN_haul_names <- names(oldWCANN$wcann_haul.csv)
+	oldWCANN_haul_names <- old_upData_colNames$wcann_haul.csv #names(oldWCANN$wcann_haul.csv)
 	stopifnot(all(oldWCANN_haul_names%in%names(newWCANN$wcann_haul.csv)))
-	newWCANN_haul <- newWCANN[["wcann_haul.csv"]][,oldWCANN_haul_names,with=F]
+	newWCANN_haul <- newWCANN[["wcann_haul.csv"]][,oldWCANN_haul_names,with=FALSE]
+	fix_wc_colnames(newWCANN_haul, wcann_haul_set_cn)
 
 	# WC Ann Invert
-	oldWCANN_invert_names <- names(oldWCANN$wcann_invert.csv)
+	oldWCANN_invert_names <- old_upData_colNames$wcann_invert.csv #names(oldWCANN$wcann_invert.csv)
 	stopifnot(all(oldWCANN_invert_names%in%names(newWCANN$wcann_invert.csv)))
 	newWCANN_invert <- newWCANN[["wcann_invert.csv"]][,oldWCANN_invert_names,with=F]
+	fix_wc_colnames(newWCANN_invert, wcann_invert_set_cn)
 	
 	# Write files as .csv's
 	write.csv(newWCANN_fish, file=paste(new.zip.folder,"wcann_fish.csv",sep="/"), row.names=FALSE, quote=FALSE)
