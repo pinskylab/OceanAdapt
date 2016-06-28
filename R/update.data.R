@@ -153,7 +153,12 @@ data.vis <- sort(list.files("../data_download",pattern="Data_Vis_.[0-9,_]*.zip",
 # upData <- read.csv.zip(data.vis, SIMPLIFY=T) # TODO This should probably go back to using recentZip
 downData <- read.csv.zip(data.vis, SIMPLIFY=T, iterate=TRUE)
 upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE)
-old.csv.names <- names(upData)
+
+old_upData_colNames <- lapply(upData, names)
+old_downData_colNames <- lapply(downData, names)
+
+old_upData_colClasses <- lapply(upData, function(x)sapply(x, class))
+old_downData_colClasses <- lapply(downData, function(x)sapply(x, class))
 
 
 # ===========================
