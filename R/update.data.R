@@ -63,7 +63,7 @@ new_data_raw_gmex <- sort(gmex.fileS, dec=T)[1]
 gmex.bio.file <- "BGSREC.csv"
 gmex.cruise.file <- "CRUISES.csv"
 gmex.spp.file <- "NEWBIOCODESBIG.csv"
-gmex.station.file <- "STAREC.csv"
+gmex.station.file <- "STAREC_noescapes.csv" #"STAREC.csv"
 gmex.tow.file <- "INVREC.csv"
 
 # NEUS
@@ -72,7 +72,7 @@ neus_fold <- "neus"
 neus.raw.path.top <- file.path(new_data_loc,neus_fold)
 neus.fileS <- list.files(neus.raw.path.top, full.names=T, pattern=date.zip.patt)
 new_data_raw_neus <- sort(neus.fileS, dec=T)[1]
-neus.file <- "Survdat.RData"
+# neus.file <- "Survdat.RData"
 
 
 # WC
@@ -82,12 +82,9 @@ wcann.raw.path.top <- file.path(new_data_loc,wcann_fold)
 wcann.fileS <- list.files(wcann.raw.path.top, full.names=TRUE, pattern=date.zip.patt)
 new_data_raw_wcann <- sort(wcann.fileS, dec=T)[1]
 # zipFiles_wc <- file.info(list.files(wcann.raw.path.top, full=TRUE, patt="^Comprehensive.+.zip"))
-wc.match <- c(
-	wcann_fish.csv="ComprehensiveDataPkg_20150722FishCatch.csv",
-	wcann_haul.csv="ComprehensiveDataPkg_20150722Hauls.csv",
-	wcann_invert.csv="ComprehensiveDataPkg_20150722_InvertebrateCatch.csv"
-)
-wcann.zip.file <- row.names(zipFiles_wc[order(zipFiles_wc$mtime, zipFiles_wc$ctime, zipFiles_wc$atime, decreasing=TRUE)[1],])
+wcann.fish.pattern <- "FishCatch\\.csv$"
+wcann.haul.pattern <- "Hauls\\.csv$"
+wcann.invert.pattern <- "InvertebrateCatch\\.csv$"
 
 
 # ====================================================
@@ -108,7 +105,7 @@ wrap.quotes <- function(x){gsub("(.+)", "\"\\1\"", x)}
 # ===================================
 # = Function to read files from zip =
 # ===================================
-read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, ...){
+read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALSE, ...){
 	
 	# Create a name for the dir where we'll unzip
 	zipdir <- tempfile()
@@ -133,24 +130,22 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, ...){
 	}
 	
 	# Create a list of the imported csv files
-	if(SIMPLIFY){
-		csv.data <- sapply(files, 
-			# function(f){
-# 			    fp <- file.path(zipdir, f)
-# 				dat <- fread(fp, ...)
-# 			    return(dat)
-# 			}
-			read_func
-		)
+	if(iterate){
+		csv.data <- structure(vector("list",length(files)), .Names=basename(files))
+		for(i in 1:length(files)){
+			if(i ==14){next}
+			t_file <- basename(files)[i]
+			cat("\tReading",t_file,"\n")
+			csv.data[[t_file]] <- read_func(files[i])
+		}
 	}else{
-		csv.data <- lapply(files, 
-			# function(f){
-			#     fp <- file.path(zipdir, f)
-			# 	dat <- fread(fp, ...)
-			#     return(dat)
-			# }
-			read_func
-		)
+		if(SIMPLIFY){
+			csv.data <- sapply(files, read_func)
+		}else{
+			csv.data <- lapply(files,read_func)
+	}
+	
+
 	}
 	
 	
@@ -170,6 +165,8 @@ recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$a
 # upData <- read.csv.zip(recentZip, integer64="character")
 data.vis <- sort(list.files("../data_download",pattern="Data_Vis_.[0-9,_]*.zip", full=T),dec=T)[1] # grab most recent data.viz 
 upData <- read.csv.zip(data.vis, SIMPLIFY=T) # TODO This should probably go back to using recentZip
+# downData <- read.csv.zip(data.vis, SIMPLIFY=T, iterate=TRUE)
+# upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE)
 old.csv.names <- names(upData)
 
 
@@ -390,7 +387,14 @@ message("\n",msg1,gmex.station.file, msg2, "\n")
 #	gmex.station.names <- names(oldGMEX.station)
 #	newGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
 #	write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=FALSE)
-file.copy(from=gmex.station.file, to=paste(new.zip.folder,"gmex_station.csv",sep="/"))
+
+gmex_zipdir <- tempfile()
+dir.create(gmex_zipdir)
+unzip(new_data_raw_gmex, exdir=gmex_zipdir)
+gmex.station.file.path <- list.files(gmex_zipdir, rec=TRUE, full=TRUE, pattern=gsub("\\.", "\\\\.", gmex.station.file))
+file.copy(from=gmex.station.file.path, to=paste(new.zip.folder,"gmex_station.csv",sep="/"), overwrite=TRUE)
+
+# file.copy(from=gmex.station.file, to=paste(new.zip.folder,"gmex_station.csv",sep="/"))
 
 
 # ---- tow ----
@@ -407,7 +411,11 @@ write.csv(newGMEX.tow, file=paste(new.zip.folder,"gmex_tow.csv",sep="/"), row.na
 # ========
 # NEUS Data
 oldNEUS <- upData$neus_data.csv
-if(file.exists(neus.file)){
+if(file.exists(new_data_raw_neus)){
+	neus_zipdir <- tempfile()
+	dir.create(neus_zipdir)
+	unzip(new_data_raw_neus, exdir=neus_zipdir)
+	neus_files <- list.files(neus_zipdir, rec=TRUE, pattern="\\.RData", full=TRUE)
 	
 	# The NEUS data updates come in the form of
 	# .RData files; load the file in a 
@@ -419,36 +427,41 @@ if(file.exists(neus.file)){
 	# and save it outside the local environment as newNEUS, then 
 	# remove whatever object came with the data.file
 	local({
-		load(neus.file)
-		stopifnot(length(ls())==1)
-		newNEUS <<- get(ls())
+		for(i in 1:length(neus_files)){
+			load(neus_files[i])
+		}
+		# stopifnot(length(ls())==1)
+		rm(list='i')
+		newNEUS <<- mget(ls())
 		rm(list=ls())
 	})
+	newNEUS_data <- newNEUS$survdat
+	newNEUS_spp <- newNEUS$spp
 	
 	# OK, proceed with more standard approach to updating data
 	neus.names <- names(oldNEUS)
-	stopifnot(all(neus.names%in%names(newNEUS)))
+	stopifnot(all(neus.names%in%names(newNEUS_data)))
 	
 	# Subset and rearrange to old column names/ order
-	updatedNEUS <- newNEUS[,neus.names,with=F]
+	updated_newNEUS_data <- newNEUS_data[,neus.names,with=F]
 	
 	# Turn into a data.table to enable easy/ quick
 	# sorting and dropping of any potential duplicate rows
-	updatedNEUS <- as.data.table(updatedNEUS)
-	setkeyv(updatedNEUS, names(updatedNEUS))
-	updatedNEUS <- unique(updatedNEUS)
+	updated_newNEUS_data <- as.data.table(updated_newNEUS_data)
+	setkeyv(updated_newNEUS_data, names(updated_newNEUS_data))
+	updated_newNEUS_data <- unique(updated_newNEUS_data)
 	
 	# Rename column headers to be wrapped in extra quotes, 
 	# as per Lucas's .docx column names file indicates
-	new.neus.names <- paste0("\"",names(updatedNEUS),"\"") # put names in extra quotes
-	setnames(updatedNEUS, names(updatedNEUS), new.neus.names)
+	new.neus.names <- paste0("\"",names(updated_newNEUS_data),"\"") # put names in extra quotes
+	setnames(updated_newNEUS_data, names(updated_newNEUS_data), new.neus.names)
 	
 	# Need to add a leading column named ""
-	updatedNEUS2 <- cbind(NA, updatedNEUS) # NA's for the values in that oclumn
-	setnames(updatedNEUS2, "V1", "\"\"") # rename the NA column as ""
+	updated_newNEUS_data <- cbind(NA, updated_newNEUS_data) # NA's for the values in that oclumn
+	setnames(updated_newNEUS_data, "V1", "\"\"") # rename the NA column as ""
 	
 	# Save NEUS
-	write.csv(updatedNEUS2, file=paste(new.zip.folder,"neus_neus.csv",sep="/"), row.names=FALSE, quote=FALSE) # neus breaks the naming convention
+	write.csv(updated_newNEUS_data, file=paste(new.zip.folder,"neus_neus.csv",sep="/"), row.names=FALSE, quote=FALSE) # neus breaks the naming convention
 } # WORKS 2015-08-27 RDB
 
 # Fix up NEUS's svspp.csv file
@@ -471,7 +484,7 @@ if(FALSE){
 	
 	# Save csv
 	write.csv(neus.svspp.csv2, file=paste(new.zip.folder,"neus_svspp.csv",sep="/"), row.names=FALSE, quote=FALSE)
-} # NO TEST 2015-08-27 RDB
+}
 
 
 # ======
@@ -483,30 +496,33 @@ if(FALSE){
 # ===============
 # = Update WFSC =
 # ===============
-oldWC <- upData[grepl("wcann", names(upData))]
-
-if(nrow(zipFiles_wc)>=1){
-	
-	# Data for WC Ann come in a zip file (in 2015, it contained 3 files)
-	newWC <- read.csv.zip(wcann.zip.file, integer64="character") # custom function to read from zip
+oldWCANN <- upData[grepl("wcann", names(upData))]
+if(file.exists(new_data_raw_wcann)){
+	newWCANN <- read.csv.zip(new_data_raw_wcann) # custom function to read from zip
 	namesWC <- c("wcann_fish.csv","wcann_haul.csv","wcann_invert.csv")
+	names(newWCANN)[grepl(wcann.fish.pattern, names(newWCANN))] <- "wcann_fish.csv"
+	names(newWCANN)[grepl(wcann.invert.pattern, names(newWCANN))] <- "wcann_invert.csv"
+	names(newWCANN)[grepl(wcann.haul.pattern, names(newWCANN))] <- "wcann_haul.csv"
 
 	# WC Ann Fish
-	wcann_fish.names <- names(oldWC$wcann_fish.csv)
-	new_wcann_fish <- newWC[[wc.match["wcann_fish.csv"]]][,wcann_fish.names,with=F]
+	oldWCANN_fish_names <- names(oldWCANN$wcann_fish.csv)
+	stopifnot(all(oldWCANN_fish_names%in%names(newWCANN$wcann_fish.csv)))
+	newWCANN_fish <- newWCANN[["wcann_fish.csv"]][,oldWCANN_fish_names,with=F]
 
 	# WC Ann Haul
-	wcann_haul.names <- names(oldWC$wcann_haul.csv)
-	new_wcann_haul <- newWC[[wc.match["wcann_haul.csv"]]][,wcann_haul.names,with=F]
+	oldWCANN_haul_names <- names(oldWCANN$wcann_haul.csv)
+	stopifnot(all(oldWCANN_haul_names%in%names(newWCANN$wcann_haul.csv)))
+	newWCANN_haul <- newWCANN[["wcann_haul.csv"]][,oldWCANN_haul_names,with=F]
 
 	# WC Ann Invert
-	wcann_invert.names <- names(oldWC$wcann_invert.csv)
-	new_wcann_invert <- newWC[[wc.match["wcann_invert.csv"]]][,wcann_invert.names,with=F]
+	oldWCANN_invert_names <- names(oldWCANN$wcann_invert.csv)
+	stopifnot(all(oldWCANN_invert_names%in%names(newWCANN$wcann_invert.csv)))
+	newWCANN_invert <- newWCANN[["wcann_invert.csv"]][,oldWCANN_invert_names,with=F]
 	
 	# Write files as .csv's
-	write.csv(new_wcann_fish, file=paste(new.zip.folder,"wcann_fish.csv",sep="/"), row.names=FALSE, quote=FALSE)
-	write.csv(new_wcann_invert, file=paste(new.zip.folder,"wcann_invert.csv",sep="/"), row.names=FALSE, quote=FALSE)
-	write.csv(new_wcann_haul, file=paste(new.zip.folder,"wcann_haul.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	write.csv(newWCANN_fish, file=paste(new.zip.folder,"wcann_fish.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	write.csv(newWCANN_invert, file=paste(new.zip.folder,"wcann_invert.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	write.csv(newWCANN_haul, file=paste(new.zip.folder,"wcann_haul.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 
