@@ -107,25 +107,14 @@ wrap.quotes <- function(x){gsub("(.+)", "\"\\1\"", x)}
 # ===================================
 read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALSE, ...){
 	
-	# Create a name for the dir where we'll unzip
-	zipdir <- tempfile()
-	
-	# Create the dir using that name
-	dir.create(zipdir)
-	
-	# Unzip the file into the dir
-	unzip(zipfile, exdir=zipdir)
-	
-	# Get a list of csv files in the dir
-	files <- list.files(zipdir, rec=TRUE, pattern=pattern)
+	zipdir <- tempfile()# Create a name for the dir where we'll unzip
+	dir.create(zipdir)# Create the dir using that name
+	unzip(zipfile, exdir=zipdir)# Unzip the file into the dir
+	files <- list.files(zipdir, rec=TRUE, pattern=pattern)# Get a list of csv files in the dir
 	
 	read_func <- function(f){
 		fp <- file.path(zipdir, f)
-		# dat <- tryCatch(fread(fp, ...), error=function(cond)as.data.table(read.csv(fp, ...)))
 		dat <- as.data.table(read.csv(fp, ...))
-		# if(nrow(dat)==0){
-		# 	dat <- as.data.table(read.csv(fp, ...))
-		# }
 		return(dat)
 	}
 	
@@ -143,11 +132,8 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALS
 			csv.data <- sapply(files, read_func)
 		}else{
 			csv.data <- lapply(files,read_func)
+		}
 	}
-	
-
-	}
-	
 	
 	# Use csv names to name list elements
 	names(csv.data) <- basename(files)
@@ -164,9 +150,9 @@ zipFiles <- file.info(list.files("../data_updates", full=TRUE, patt="^Data_.+.zi
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 # upData <- read.csv.zip(recentZip, integer64="character")
 data.vis <- sort(list.files("../data_download",pattern="Data_Vis_.[0-9,_]*.zip", full=T),dec=T)[1] # grab most recent data.viz 
-upData <- read.csv.zip(data.vis, SIMPLIFY=T) # TODO This should probably go back to using recentZip
-# downData <- read.csv.zip(data.vis, SIMPLIFY=T, iterate=TRUE)
-# upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE)
+# upData <- read.csv.zip(data.vis, SIMPLIFY=T) # TODO This should probably go back to using recentZip
+downData <- read.csv.zip(data.vis, SIMPLIFY=T, iterate=TRUE)
+upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE)
 old.csv.names <- names(upData)
 
 
