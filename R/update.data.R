@@ -115,7 +115,7 @@ wrap.quotes <- function(x){gsub("(.+)", "\"\\1\"", x)}
 # ===================================
 # = Function to read files from zip =
 # ===================================
-read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALSE, ...){
+read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALSE, rawHeader=FALSE, ...){
 	
 	zipdir <- tempfile()# Create a name for the dir where we'll unzip
 	dir.create(zipdir)# Create the dir using that name
@@ -131,17 +131,21 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALS
 	# Create a list of the imported csv files
 	if(iterate){
 		csv.data <- structure(vector("list",length(files)), .Names=basename(files))
+		csv.header <- structure(vector("list",length(files)), .Names=basename(files))
 		for(i in 1:length(files)){
-			if(i ==14){next}
+			# if(i ==14){next}
 			t_file <- basename(files)[i]
 			cat("\tReading",t_file,"\n")
-			csv.data[[t_file]] <- read_func(files[i])
+			csv.data[[t_file]] <- tryCatch(read_func(files[i]), error=function(cond)NA)
+			csv.header[[t_file]] <- tryCatch(readLines(file.path(zipdir, files[i]), n=1), error=function(cond)NA)
 		}
 	}else{
 		if(SIMPLIFY){
 			csv.data <- sapply(files, read_func)
+			csv.header <- sapply(file.path(zipdir, files), readLines, n=1)
 		}else{
 			csv.data <- lapply(files,read_func)
+			csv.header <- lapply(file.path(zipdir, files), readLines, n=1)
 		}
 	}
 	
@@ -149,7 +153,13 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALS
 	names(csv.data) <- basename(files)
 	
 	# Return data
+	if(rawHeader){
+		for(i in 1:length(csv.data)){
+			attr(csv.data[[i]], which="rawHeader") <- csv.header[[i]]
+		}
+	}
 	return(csv.data)
+	
 }
 
 
@@ -160,13 +170,13 @@ zipFiles <- file.info(list.files("../data_updates", full=TRUE, patt="^Data_.+.zi
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 data.vis <- sort(list.files("../data_download",pattern="Data_Vis_.[0-9,_]*.zip", full=T),dec=T)[1] # grab most recent data.viz 
 # downData <- read.csv.zip(data.vis, SIMPLIFY=T, iterate=TRUE)
-upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE)
+upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE, rawHeader=TRUE)
 
 old_upData_colNames <- lapply(upData, names)
-old_downData_colNames <- lapply(downData, names)
+# old_downData_colNames <- lapply(downData, names)
 
 old_upData_colClasses <- lapply(upData, function(x)sapply(x, class))
-old_downData_colClasses <- lapply(downData, function(x)sapply(x, class))
+# old_downData_colClasses <- lapply(downData, function(x)sapply(x, class))
 
 
 # ===========================
@@ -286,23 +296,10 @@ update_gmex <- function(readFile, writeFile){
 	invisible(NULL)
 }
 
-# ---- bio ----
-# newGMEX.bio <- newGMEX[[gmex.bio.file]][,old_gmexBio_names, with=FALSE]
-# stopifnot(all(old_gmexBio_names%in%names(newGMEX.bio)))
-# write.csv(newGMEX.bio, file=paste(new.zip.folder,"gmex_bio.csv",sep="/"), row.names=FALSE, quote=FALSE)
-update_gmex(readFile=gmex.bio.file, writeFile="gmex_bio.csv")
-
-# ---- cruise ----
-# newGMEX.cruise <- newGMEX[[gmex.cruise.file]][,old_gmexCruise_names, with=FALSE]
-# stopifnot(all(old_gmexCruise_names%in%names(newGMEX.cruise)))
-# write.csv(newGMEX.cruise, file=paste(new.zip.folder,"gmex_cruise.csv",sep="/"), row.names=FALSE, quote=FALSE)
-update_gmex(readFile=gmex.cruise.file, writeFile="gmex_cruise.csv")
-
-# ---- spp ----
-# newGMEX.spp <- newGMEX[[gmex.spp.file]][,old_gmexSpp_names,with=FALSE]
-# stopifnot(all(old_gmexSpp_names%in%names(newGMEX.spp)))
-# write.csv(newGMEX.spp, file=paste(new.zip.folder,"gmex_spp.csv",sep="/"), row.names=FALSE, quote=FALSE)
-update_gmex(readFile=gmex.spp.file, writeFile="gmex_spp.csv")
+update_gmex(readFile=gmex.bio.file, writeFile="gmex_bio.csv")# ---- bio ----
+update_gmex(readFile=gmex.cruise.file, writeFile="gmex_cruise.csv")# ---- cruise ----
+update_gmex(readFile=gmex.spp.file, writeFile="gmex_spp.csv")# ---- spp ----
+update_gmex(readFile=gmex.tow.file, writeFile="gmex_tow.csv")# ---- tow ----
 
 # ---- station ----
 # can't read this file in normally
@@ -325,7 +322,6 @@ cat(gmexStation_noEsc, file=gmex.station.file.new, sep="\n")
 new_gmexStation <- as.data.table(read.csv(gmex.station.file.new))[,old_upData_colNames[["gmex_station.csv"]], with=FALSE]
 write.csv(new_gmexStation, file=gmex.station.file.new, row.names=FALSE, quote=FALSE)
 
-
 # I've had some problems loading this .csv into R,
 # so if you get this file updated, be sure to listen
 # to the following message ...
@@ -339,20 +335,9 @@ write.csv(new_gmexStation, file=gmex.station.file.new, row.names=FALSE, quote=FA
 #	newGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
 #	write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=FALSE)
 
-
 # file.copy(from=gmex.station.file.path, to=paste(new.zip.folder,"gmex_station.csv",sep="/"), overwrite=TRUE)
 
 # file.copy(from=gmex.station.file, to=paste(new.zip.folder,"gmex_station.csv",sep="/"))
-
-
-# ---- tow ----
-# oldGMEX.tow <- upData$gmex_tow.csv
-# newGMEX.tow0 <- newGMEX[[gmex.tow.file]]
-# stopifnot(all(names(oldGMEX.tow)%in%names(newGMEX.tow0)))
-# gmex.tow.names <- names(oldGMEX.tow)
-# newGMEX.tow <- newGMEX.tow0[,(gmex.tow.names), with=FALSE]
-# write.csv(newGMEX.tow, file=paste(new.zip.folder,"gmex_tow.csv",sep="/"), row.names=FALSE, quote=FALSE)
-update_gmex(readFile=gmex.tow.file, writeFile="gmex_tow.csv")
 
 
 # ========
@@ -497,7 +482,6 @@ if(FALSE){
 	wctri_haul.csv <- read.csv(file.path(new.zip.folder,"wctri_haul.csv"))
 	names(wctri_haul.csv) <- paste0("\"",names(wctri_haul.csv),"\"")
 	write.csv(wctri_haul.csv, file.path(new.zip.folder,"wctri_haul.csv"), row.names=FALSE, quote=FALSE)
-	
 	
 	wctri_species.csv <- read.csv(file.path(new.zip.folder,"wctri_species.csv"))
 	names(wctri_species.csv) <- paste0("\"",names(wctri_species.csv),"\"")
