@@ -81,6 +81,17 @@ neus_surv_csv <- "neus_neus.csv"
 neus_spp_csv <- "neus_svspp.csv"
 neus_strata_csv <- "neus_strata.csv"
 
+# SEUS
+seus_fold <- "seus"
+seus.raw.path.top <- file.path(new_data_loc,seus_fold)
+seus.fileS <- list.files(seus.raw.path.top, full.names=T, pattern=date.zip.patt)
+new_data_raw_seus <- sort(seus.fileS, dec=T)[1]
+
+seus.catch.file <- "seus_catch.csv"
+seus.haule.file <- "seus_haul.csv"
+seus.strata.file <- "seus_strata.csv"
+
+
 
 # WC
 # Email Beth Horness <Beth.Horness@noaa.gov>
@@ -439,10 +450,22 @@ if(file.exists(new_data_raw_neus)){
 }
 
 
-# ======
-# = SA =
-# ======
-# gl hf Jim ;)
+# ========
+# = SEUS =
+# ========
+newSEUS <- read.csv.zip(new_data_raw_seus)
+update_seus <- function(readFile, writeFile){
+	# needs newSEUS, old_upData_colNames, new.zip.folder (getting from parent.frame())
+	# old_names <- old_upData_colNames[[writeFile]]
+	new_data <- newSEUS[[readFile]]#[,old_names, with=FALSE]
+	# stopifnot(all(old_names%in%names(new_data)))
+	cat("\tWriting",writeFile,"\n")
+	write.csv(new_data, file=file.path(new.zip.folder,writeFile), row.names=FALSE, quote=FALSE)
+	invisible(NULL)
+}
+update_seus(seus.catch.file, seus.catch.file)
+update_seus(seus.haule.file, seus.haule.file)
+update_seus(seus.strata.file, seus.strata.file)
 
 
 # ===============
@@ -573,7 +596,7 @@ setwd(oldwd)
 # = Reorganize Updated Data for Upload to OA =
 # ============================================
 # For each region, create a new directory
-regions2upload <- c("ai","ebs","goa","gmex","neus","wcann","wctri")
+regions2upload <- c("ai","ebs","goa","gmex","neus", "seus", "wcann","wctri")
 files.matched <- c()
 file.headers <- structure(vector("list",length(regions2upload)), .Names=regions2upload)
 
