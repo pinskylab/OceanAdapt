@@ -27,7 +27,6 @@ date.zip.patt <- "[0-9]{4}-[0-9]{2}-[0-9]{2}.zip"
 
 # AI
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-# ai.file <- "~/Downloads/ai2014.csv" # TODO pointless
 ai_fold <- "ai"
 ai.raw.path.top <- file.path(new_data_loc,ai_fold)
 ai.fileS <- list.files(ai.raw.path.top, full.names=T, pattern=date.zip.patt)
@@ -37,7 +36,6 @@ new_data_raw_ai <- sort(ai.fileS, dec=T)[1]
 
 # EBS
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-# ebs.file <- "~/Downloads/ebs201_20143.csv"
 ebs_fold <- "ebs"
 ebs.raw.path.top <- file.path(new_data_loc,ebs_fold)
 ebs.fileS <- list.files(ebs.raw.path.top, full.names=T, pattern=date.zip.patt)
@@ -46,7 +44,6 @@ new_data_raw_ebs <- sort(ebs.fileS, dec=T)[1]
 
 # GOA
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
-# goa.file <- "~/Downloads/goa2007_2013.csv"
 goa_fold <- "goa"
 goa.raw.path.top <- file.path(new_data_loc,goa_fold)
 goa.fileS <- list.files(goa.raw.path.top, full.names=T, pattern=date.zip.patt)
@@ -99,7 +96,7 @@ wcann_fold <- "wcann"
 wcann.raw.path.top <- file.path(new_data_loc,wcann_fold)
 wcann.fileS <- list.files(wcann.raw.path.top, full.names=TRUE, pattern=date.zip.patt)
 new_data_raw_wcann <- sort(wcann.fileS, dec=T)[1]
-# zipFiles_wc <- file.info(list.files(wcann.raw.path.top, full=TRUE, patt="^Comprehensive.+.zip"))
+
 wcann.fish.pattern <- "FishCatch\\.csv$"
 wcann.haul.pattern <- "Hauls\\.csv$"
 wcann.invert.pattern <- "InvertebrateCatch\\.csv$"
@@ -243,7 +240,6 @@ update_ai_goa_ebs <- function(new_data_raw_reg, reg=c("ai","ebs","goa")){
 	cat("Reading new files\n")
 	newREG0 <- read.csv.zip(new_data_raw_reg, SIMPLIFY=FALSE)
 	
-	
 	oldREG_data <- upData[[reg_name_dat]]
 	newREG_data <- newREG0[names(newREG0)!=reg_name_strat] # non-strata files
 	newREG_data <- rbindlist(newREG_data) # combine files into 1 data.table
@@ -351,28 +347,6 @@ if(!interactive()){
 	# write.csv(new_gmexStation, file=gmex.station.file.new, row.names=FALSE, quote=TRUE)
 	
 }
-
-
-# nwo start over from the no-escape version
-# new_gmexStation <- as.data.table(read.csv(gmex.station.file.new))[,old_upData_colNames[["gmex_station.csv"]], with=FALSE]
-# write.csv(new_gmexStation, file=gmex.station.file.new, row.names=FALSE, quote=FALSE)
-
-# I've had some problems loading this .csv into R,
-# so if you get this file updated, be sure to listen
-# to the following message ...
-# msg1 <- "WAIT! You need to open"
-# msg2 <- 'in a text editor (e.g., TextWrangler), then search&replace \\" with "", then resave it for the file to load properly.'
-# message("\n",msg1,gmex.station.file, msg2, "\n")
-# Reading in and writing out the station file creates problems with quoted fields. Using quote=TRUE in the write.csv may work, but copying the file is even simpler (MLP 2015-09-08)
-#	newGMEX.station0 <- as.data.table(read.csv(gmex.station.file))
-#	stopifnot(all(names(oldGMEX.station)%in%names(newGMEX.station0)))
-#	gmex.station.names <- names(oldGMEX.station)
-#	newGMEX.station <- newGMEX.station0[,(gmex.station.names), with=FALSE]
-#	write.csv(newGMEX.station, file=paste(new.zip.folder,"gmex_station.csv",sep="/"), row.names=FALSE, quote=FALSE)
-
-# file.copy(from=gmex.station.file.path, to=paste(new.zip.folder,"gmex_station.csv",sep="/"), overwrite=TRUE)
-
-# file.copy(from=gmex.station.file, to=paste(new.zip.folder,"gmex_station.csv",sep="/"))
 
 
 # ========
@@ -542,54 +516,10 @@ if(FALSE){
 # Zip up and rename
 oldwd <- getwd()
 setwd(dirname(new.zip.folder)) # new.zip.folder is "./data_updates/Data_Updated"
-
 zip(basename(new.zip.folder), files=list.files(basename(new.zip.folder),full=TRUE))
 new.zip.file0 <- paste0(basename(new.zip.folder),".zip")
 file.rename(new.zip.file0, renameNow(new.zip.file0))
-
 setwd(oldwd)
-
-
-# # ======================================
-# # = Zip File for Amphiprion (Raw Data) =
-# # ======================================
-# # Copy, Zip, & Ship! Then delete.
-#
-# # Create directory to hold raw files locally
-# raw.dir <- "./Raw_Files_Updated_on" # directory to hold raw files
-# if(file.exists(raw.dir)){
-# 	sapply(list.files(raw.dir, full=T), file.remove)
-# }else{
-# 	dir.create(raw.dir) # create directory
-# }
-#
-# # Determine which files are available
-# raw2copy0 <- unlist(sapply(ls()[grepl("\\.file$",ls())], get))
-# raw2copy <- raw2copy0[file.exists(raw2copy0)]
-#
-# # Copy raw files into local holding folder
-# file.copy(from=raw2copy, to=paste(raw.dir, basename(raw2copy),sep="/"))
-#
-# # Zip local holding folder, and rename with date
-# # oldwd <- getwd()
-# # setwd("./data_updates")
-# zip(raw.dir, files=list.files(raw.dir, full=TRUE))
-# # setwd(oldwd)
-#
-# # Rename the file that is to be push (add date)
-# raw.dir.zip <- paste0(raw.dir,".zip")
-# raw.dir.zip.now <- renameNow(raw.dir.zip)
-# file.rename(raw.dir.zip, raw.dir.zip.now)
-#
-# # Push to Amphiprion
-# localPath <- normalizePath(raw.dir.zip.now)
-# remoteName <- "ryanb@amphiprion.deenr.rutgers.edu"
-# remotePath <- "/local/shared/pinsky_lab/trawl_surveys/OA_rawData_Updates"
-# push(path=localPath, remoteName=remoteName, path2=remotePath)
-#
-# # Cleanup by deleting holding folder and zipped holding folder
-# file.remove(localPath) # delete local zip
-# sapply(c(list.files(normalizePath(raw.dir), full=T),normalizePath(raw.dir)), file.remove) # delete local folder and its files
 
 
 # ============================================
@@ -660,15 +590,6 @@ for(i in 1:length(regions2upload)){
 	# sapply(c(list.files(t.dest.dir, full=T),t.dest.dir), file.remove)
 	unlink(t.dest.dir, recursive=TRUE)
 }
-
-# To finish the process for preparing for the OA upload,
-# mark the folder as containing the .zip files that are ready
-# to be uplaoded
-# r2u.dir <- paste(normalizePath(new.zip.folder),"ready2upload",sep="_")
-# if(file.exists(r2u.dir)){
-# 	sapply(list.files(r2u.dir, full=TRUE), file.remove)
-# }
-# file.rename(normalizePath(new.zip.folder), r2u.dir)
 
 
 # =======================================================
