@@ -63,7 +63,7 @@ new_data_raw_gmex <- sort(gmex.fileS, dec=T)[1]
 gmex.bio.file <- "BGSREC.csv"
 gmex.cruise.file <- "CRUISES.csv"
 gmex.spp.file <- "NEWBIOCODESBIG.csv"
-gmex.station.file <- "STAREC_noescapes.csv" #"STAREC.csv"
+gmex.station.file <- "STAREC.csv" #"STAREC.csv"
 gmex.tow.file <- "INVREC.csv"
 
 # NEUS
@@ -173,10 +173,8 @@ data.vis <- sort(list.files("../data_download",pattern="Data_Vis_.[0-9,_]*.zip",
 upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE, rawHeader=TRUE)
 
 old_upData_colNames <- lapply(upData, names)
-# old_downData_colNames <- lapply(downData, names)
-
+old_upData_rawHeader <- lapply(upData, function(x)attributes(x)$rawHeader)
 old_upData_colClasses <- lapply(upData, function(x)sapply(x, class))
-# old_downData_colClasses <- lapply(downData, function(x)sapply(x, class))
 
 
 # ===========================
@@ -311,16 +309,42 @@ dir.create(gmex_zipdir)
 unzip(new_data_raw_gmex, exdir=gmex_zipdir)
 gmex.station.file.path <- list.files(gmex_zipdir, rec=TRUE, full=TRUE, pattern=gsub("\\.", "\\\\.", gmex.station.file))
 gmex.station.file.path <- normalizePath(gmex.station.file.path)
-gmexStation_raw <- readLines(gmex.station.file.path)
-esc_patt <- "\\\\\\\""
-esc_replace <- "\\\"\\\""
-gmexStation_noEsc <- gsub(esc_patt, esc_replace, gmexStation_raw)
-gmex.station.file.new <- file.path(new.zip.folder,"gmex_station.csv")
-cat(gmexStation_noEsc, file=gmex.station.file.new, sep="\n")
+if(!interactive()){
+	
+	gmexStation_raw <- readLines(gmex.station.file.path)
+	esc_patt <- "\\\\\\\""
+	esc_replace <- "\\\"\\\""
+	gmexStation_noEsc <- gsub(esc_patt, esc_replace, gmexStation_raw)
+	gmex.station.file.new <- file.path(new.zip.folder,"gmex_station.csv")
+	cat(gmexStation_noEsc, file=gmex.station.file.new, sep="\n")
+}else{
+	m1 <- paste0("\tThe following GMEX file needs to be fixed by replacing \\\" with \"\":\n\t\t",gmex.station.file.path,"\n\tEnter one of the following responses:\n")
+	m1.o1 <- "\t\t 'system' to open the file with a text editor whose GUI can be initiated via command line\n"
+	m1.o2 <- "\t\t 'done' if you have fixed the file and are ready for the script to proceed\n\t\t"
+	r1 <- readline(cat(m1, m1.o1, m1.o2))
+	m2 <- switch(r1,
+		system = readline("You have selected to open the file via command line. Please enter the command to open in a text editor, e.g., 'open' (generic) or 'mate' (if textmate command line tools)\n"),
+		done = cat("You should have now edited file, and Ocean Adapt update is proceeding\n")
+	)
+	switch(r1,
+		system = {
+			system2(m2, gmex.station.file.path)
+			readline(paste0("You have selected ",m2,", please type 'done' when you have edited the file\n"))
+		},
+		done = ""
+	)
+	
+	cat("Copying and renaming edited GMEX station file\n")
+	file.copy(from=gmex.station.file.path, to=paste(new.zip.folder,"gmex_station.csv",sep="/"), overwrite=TRUE)
+	# new_gmexStation <- as.data.table(read.csv(gmex.station.file.new))[,old_upData_colNames[["gmex_station.csv"]], with=FALSE]
+	# write.csv(new_gmexStation, file=gmex.station.file.new, row.names=FALSE, quote=TRUE)
+	
+}
+
 
 # nwo start over from the no-escape version
-new_gmexStation <- as.data.table(read.csv(gmex.station.file.new))[,old_upData_colNames[["gmex_station.csv"]], with=FALSE]
-write.csv(new_gmexStation, file=gmex.station.file.new, row.names=FALSE, quote=FALSE)
+# new_gmexStation <- as.data.table(read.csv(gmex.station.file.new))[,old_upData_colNames[["gmex_station.csv"]], with=FALSE]
+# write.csv(new_gmexStation, file=gmex.station.file.new, row.names=FALSE, quote=FALSE)
 
 # I've had some problems loading this .csv into R,
 # so if you get this file updated, be sure to listen
