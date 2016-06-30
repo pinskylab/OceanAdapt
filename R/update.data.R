@@ -297,7 +297,7 @@ update_gmex <- function(readFile, writeFile){
 	new_data <- newGMEX[[readFile]][,old_names, with=FALSE]
 	stopifnot(all(old_names%in%names(new_data)))
 	cat("\tWriting",writeFile,"\n")
-	write.csv(new_data, file=file.path(new.zip.folder,writeFile), row.names=FALSE, quote=FALSE)
+	write.csv(new_data, file=file.path(new.zip.folder,writeFile), row.names=FALSE, quote=TRUE)
 	invisible(NULL)
 }
 
