@@ -8,7 +8,7 @@ The data sources are as follows (see links):
   + [GMEX](http://seamap.gsmfc.org/)  
   + WCANN ("Beth Horness" <beth.horness@noaa.gov>)  
   + *WCTRI no longer udpated*  
-  + [SA/ SEUS](google.com)  
+  + [SA/ SEUS](in progress, ask Jim Morley for what to do)  
  
 Sub-directories within each update are found here:
 * ai: Aleutian Islands  
