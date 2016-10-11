@@ -222,6 +222,9 @@ compile_GMEX = function () {
   return(gmex)
 }
 
+# SEUS regions updated with data through 2015, and code adjusted for recent changes_Jim_Oct_11_2016
+# Need to make sure csv files referenced below match up.
+
 compile_SEUSSpr = function () { 
   #Southeast US
   #function returns seusSPRING
@@ -237,7 +240,7 @@ compile_SEUSSpr = function () {
   seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
                           
   #Create a 'SEASON' column using 'MONTH' as a criteria
-  seus$DATE <- as.Date(seus$DATE, "%m/%d/%Y")
+  seus$DATE <- as.Date(seus$DATE, "%m/%d/%y")
   seus = cbind(seus, MONTH = month(seus$DATE))
   SEASON = as.yearqtr(seus$DATE)
   seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
@@ -245,14 +248,16 @@ compile_SEUSSpr = function () {
   #seus has some unique data corrections that are dealt with here
   #Occasions where weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
   seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 20010106 & seus$SPECIESCODE == 8713050104, 31.9) # roughtail stingray
-  seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT) & seus$SPECIESCODE == 5802010101] <- 0 # these 'NA' weights needed to first be converted to 0
-  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9) # horseshoe crabs
-  seus = seus[!is.na(seus$SPECIESTOTALWEIGHT),] # remove long line fish from dataset which have 'NA' for weight
+  seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT)] <- 0 # these 'NA' weights needed to first be converted to 0
+  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- 1.9) # horseshoe crabs
+  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46.99) # Loggerhead seaturtles
+  
   #Three hauls have 0 or NA for 'EFFORT', which are data entry errors, the following corrects these values
   seus$EFFORT[seus$COLLECTIONNUMBER == 19910105] <- 1.71273
   seus$EFFORT[seus$COLLECTIONNUMBER == 19990065] <- 0.53648
   seus$EFFORT[seus$COLLECTIONNUMBER == 20070177] <- 0.99936
-   
+  seus$EFFORT[seus$COLLECTIONNUMBER == 19900119] <- 2.78478
+  
   #Separate the the spring season and convert to dataframe
   seusSPRING = seus[seus$SEASON == "spring",]
   seusSPRING = data.frame(seusSPRING)
@@ -274,7 +279,7 @@ compile_SEUSSum = function () {
   seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
   
   #Create a 'SEASON' column using 'MONTH' as a criteria
-  seus$DATE <- as.Date(seus$DATE, "%m/%d/%Y")
+  seus$DATE <- as.Date(seus$DATE, "%m/%d/%y")
   seus = cbind(seus, MONTH = month(seus$DATE))
   SEASON = as.yearqtr(seus$DATE)
   seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
@@ -283,17 +288,15 @@ compile_SEUSSum = function () {
   
   #seus has some unique data corrections that are dealt with here
   #Occasions where weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
-  seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT) & seus$SPECIESCODE == 5802010101] <- 0 # these 'NA' weights needed to first be converted to 0
-  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9) # horseshoe crabs
-  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 19940236 & seus$SPECIESCODE == 9002050101, 204) # leatherback sea turtle
-  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46) # loggerhead
+  seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT)] <- 0 # these 'NA' weights needed to first be converted to 0
+  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- 1.9) # horseshoe crabs
+  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 19940236 & seus$SPECIESCODE == 9002050101, 203.8) # leatherback sea turtle
+  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46.99) # Loggerhead seaturtles
+  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$COLLECTIONNUMBER == 20130188 & seus$SPECIESCODE == 9002040401, 12.77) # Kemp's Ridley Turtle
   
-  seus = seus[!is.na(seus$SPECIESTOTALWEIGHT),] # remove long line fish from dataset which have 'NA' for weight
-   
   #Four hauls have 0 or NA for 'EFFORT', which are data entry errors, the following corrects these values
   seus$EFFORT[seus$COLLECTIONNUMBER == 19950335] <- 0.9775
   seus$EFFORT[seus$COLLECTIONNUMBER == 20110393] <- 1.65726
-  seus$EFFORT[seus$EVENTNAME == 2014325] <- 1.755
   seus$EFFORT[seus$EVENTNAME == 1992219] <- 1.796247
   #Data entry error fixes for lat/lon coordinates
   seus$LONGITUDESTART[seus$EVENTNAME == 2010233] <- -81.006
@@ -320,7 +323,7 @@ compile_SEUSFal = function () {
   seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
   
   #Create a 'SEASON' column using 'MONTH' as a criteria
-  seus$DATE <- as.Date(seus$DATE, "%m/%d/%Y")
+  seus$DATE <- as.Date(seus$DATE, "%m/%d/%y")
   seus = cbind(seus, MONTH = month(seus$DATE))
   SEASON = as.yearqtr(seus$DATE)
   seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
@@ -329,15 +332,13 @@ compile_SEUSFal = function () {
   
   #seus has some unique data corrections that are dealt with here
   #Occasions where weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
-  seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT) & seus$SPECIESCODE == 5802010101] <- 0 # these 'NA' weights needed to first be converted to 0
-  seus <- within(seus, SPECIESTOTALWEIGHT[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101] <- NUMBERTOTAL[SPECIESTOTALWEIGHT == 0 & SPECIESCODE == 5802010101]*1.9) # horseshoe crab
-  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46) 
-  
-  seus = seus[!is.na(seus$SPECIESTOTALWEIGHT),] # remove long line fish from dataset which have 'NA' for weight
-  
+  seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT)] <- 0 # these 'NA' weights needed to first be converted to 0
+  seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46.99) # Loggerhead seaturtles
+
   #Two hauls have 0 or NA for 'EFFORT', which are data entry errors, the following corrects these values
-  seus$EFFORT[seus$COLLECTIONNUMBER == 19910423] <- 0.50031
-  seus$EFFORT[seus$COLLECTIONNUMBER == 20010431] <- 0.25099
+  seus$EFFORT[seus$EVENTNAME == 1991423] <- 2.29
+  seus$EFFORT[seus$EVENTNAME == 2001431] <- 3.18
+  
   #Data entry error fix for lat/lon coordinates
   seus$LONGITUDESTART[seus$EVENTNAME == 1998467] <- -79.01
   
