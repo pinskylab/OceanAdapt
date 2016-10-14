@@ -85,7 +85,7 @@ seus.fileS <- list.files(seus.raw.path.top, full.names=T, pattern=date.zip.patt)
 new_data_raw_seus <- sort(seus.fileS, dec=T)[1]
 
 seus.catch.file <- "seus_catch.csv"
-seus.haule.file <- "seus_haul.csv"
+seus.haul.file <- "seus_haul.csv"
 seus.strata.file <- "seus_strata.csv"
 
 
@@ -97,13 +97,35 @@ wcann.raw.path.top <- file.path(new_data_loc,wcann_fold)
 wcann.fileS <- list.files(wcann.raw.path.top, full.names=TRUE, pattern=date.zip.patt)
 new_data_raw_wcann <- sort(wcann.fileS, dec=T)[1]
 
-wcann.fish.pattern <- "FishCatch\\.csv$"
-wcann.haul.pattern <- "Hauls\\.csv$"
-wcann.invert.pattern <- "InvertebrateCatch\\.csv$"
+wcann.catch.pattern <- "wcann_catch\\.csv$"
+wcann.haul.pattern <- "TrawlHaulChars\\.csv$"
 
-wcann_fish_set_cn <- c("Trawl Id","Species","Haul Weight (kg)","Individual Average Weight (kg)")
-wcann_haul_set_cn <- c("Survey","Survey Cycle","Vessel","Cruise Leg","Trawl Id","Trawl Performance","Trawl Date","Trawl Start Time","Best Latitude (dd)","Best Longitude (dd)","Best Position Type","Best Depth (m)","Best Depth Type","Trawl Duration (min)","Area Swept by the Net (hectares)","Temperature At the Gear (degs C)")
-wcann_invert_set_cn <- c("Trawl Id","Species","Haul Weight (kg)","Individual Average Weight (kg)")
+
+# wcann_fish_set_cn <- c("Trawl Id"="TowID","Species"="Sci","Haul Weight (kg)"="Wt","Individual Average Weight (kg)")
+# old columns names as the names, current column names (that match) as the elements
+# if NA, means that there doesn't seem to be an appropriate equivalent in the new data format
+# column in the new data format that don't have a match in the old are not listed here
+wcann_catch_cn_key <- c("Trawl Id"="TowID","Species"="Sci","Haul Weight (kg)"="Wt","Individual Average Weight (kg)"=NA)
+wcann_haul_cn_key <- c( 
+	"Survey" = "operation_dim$project_name",
+	"Survey Cycle" = "date_dim$year", # CHANGED this used to be "Cycle 2004", now would be "2004"; was only used for the year in complete_r_script
+	"Vessel" = "operation_dim$vessel",
+	"Cruise Leg" = "operation_dim$leg",
+	"Trawl Id" = "operation_dim$operation_id", # becomes haulid
+	"Trawl Performance" = "operation_dim$performance_result",
+	"Trawl Date" = "date_dim$yyyymmdd", # TODO format different from before
+	"Trawl Start Time" = "sampling_start_time_dim$hh24miss",
+	"Best Latitude (dd)" = "haul_latitude_dim$latitude_in_degrees",  # used to make stratum grid
+	"Best Longitude (dd)" = "haul_longitude_dim$longitude_in_degrees", # not used for wcann
+	"Best Position Type" = NA, # 
+	"Best Depth (m)" = "seafloor_depth_m_der", # used to make stratum grid
+	"Best Depth Type" = NA, 
+	"Trawl Duration (min)" = NA, # TODO if duration is needed, will need to calculate it from start and end times
+	"Area Swept by the Net (hectares)" = "area_swept_ha_der",
+	"Temperature At the Gear (degs C)" = "temperature_at_gear_c_der"
+)
+# wcann_haul_set_cn <- c("Survey","Survey Cycle","Vessel","Cruise Leg","Trawl Id","Trawl Performance","Trawl Date","Trawl Start Time","Best Latitude (dd)","Best Longitude (dd)","Best Position Type","Best Depth (m)","Best Depth Type","Trawl Duration (min)","Area Swept by the Net (hectares)","Temperature At the Gear (degs C)")
+# wcann_invert_set_cn <- c("Trawl Id","Species","Haul Weight (kg)","Individual Average Weight (kg)")
 
 # ====================================================
 # = Function to Trim Trailing and Leading Whitespace =
@@ -447,40 +469,48 @@ update_seus(seus.strata.file, seus.strata.file)
 # ===============
 if(file.exists(new_data_raw_wcann)){
 	newWCANN <- read.csv.zip(new_data_raw_wcann) # custom function to read from zip
-	names(newWCANN)[grepl(wcann.fish.pattern, names(newWCANN))] <- "wcann_fish.csv"
-	names(newWCANN)[grepl(wcann.invert.pattern, names(newWCANN))] <- "wcann_invert.csv"
+	names(newWCANN)[grepl(wcann.catch.pattern, names(newWCANN))] <- "wcann_catch.csv"
+	# names(newWCANN)[grepl(wcann.fish.pattern, names(newWCANN))] <- "wcann_fish.csv"
+	# names(newWCANN)[grepl(wcann.invert.pattern, names(newWCANN))] <- "wcann_invert.csv"
 	names(newWCANN)[grepl(wcann.haul.pattern, names(newWCANN))] <- "wcann_haul.csv"
 	
 	fix_wc_colnames <- function(X, fullNames){
-		mn <- names(X)
-		mn_fn <- make.names(fullNames)
-		has_matches <- mn %in% mn_fn
-		match_names <- match(mn[has_matches], mn_fn)
-		setnames(X, mn[has_matches], fullNames[match_names])
+		current_2set <- make.names(unname(fullNames)[!is.na(fullNames)])
+		stopifnot(all(current_2set%in%names(X)))
+		new_2set <- names(fullNames)[!is.na(fullNames)]
+		mn_fn <- make.names(new_2set)
+		setnames(X, current_2set, mn_fn)
 	}
-	
 
-	# WC Ann Fish
-	oldWCANN_fish_names <- old_upData_colNames$wcann_fish.csv #names(oldWCANN$wcann_fish.csv)
-	stopifnot(all(oldWCANN_fish_names%in%names(newWCANN$wcann_fish.csv)))
-	newWCANN_fish <- newWCANN[["wcann_fish.csv"]][,oldWCANN_fish_names,with=FALSE]
-	fix_wc_colnames(newWCANN_fish, wcann_fish_set_cn)
+	# WC Ann Catch
+	# oldWCANN_catch_names <- c("Wt","Num","Year","Sci","Lat","Long","TowID","Proj","Vessel") # taken directly from FishData::download_catch_rates.R; could change in future; commenting out just b/c I don't think it's needed
+	# stopifnot(all(oldWCANN_catch_names%in%names(newWCANN$wcann_catch.csv)))
+	newWCANN_catch <- newWCANN[["wcann_catch.csv"]]#[,oldWCANN_catch_names,with=FALSE]
+	fix_wc_colnames(newWCANN_catch, wcann_catch_cn_key)	
+	names(newWCANN_catch)[names(newWCANN_catch)=="Vessel"] <- "Vessel.Id"
+
+	# # WC Ann Fish
+	# oldWCANN_fish_names <- old_upData_colNames$wcann_fish.csv #names(oldWCANN$wcann_fish.csv)
+	# stopifnot(all(oldWCANN_fish_names%in%names(newWCANN$wcann_fish.csv)))
+	# newWCANN_fish <- newWCANN[["wcann_fish.csv"]][,oldWCANN_fish_names,with=FALSE]
+	# fix_wc_colnames(newWCANN_fish, wcann_fish_set_cn)
 
 	# WC Ann Haul
-	oldWCANN_haul_names <- old_upData_colNames$wcann_haul.csv #names(oldWCANN$wcann_haul.csv)
-	stopifnot(all(oldWCANN_haul_names%in%names(newWCANN$wcann_haul.csv)))
-	newWCANN_haul <- newWCANN[["wcann_haul.csv"]][,oldWCANN_haul_names,with=FALSE]
-	fix_wc_colnames(newWCANN_haul, wcann_haul_set_cn)
+	# oldWCANN_haul_names <- old_upData_colNames$wcann_haul.csv #names(oldWCANN$wcann_haul.csv)
+	# stopifnot(all(oldWCANN_haul_names%in%names(newWCANN$wcann_haul.csv)))
+	newWCANN_haul <- newWCANN[["wcann_haul.csv"]]#[,oldWCANN_haul_names,with=FALSE]
+	fix_wc_colnames(newWCANN_haul, wcann_haul_cn_key)
 
 	# WC Ann Invert
-	oldWCANN_invert_names <- old_upData_colNames$wcann_invert.csv #names(oldWCANN$wcann_invert.csv)
-	stopifnot(all(oldWCANN_invert_names%in%names(newWCANN$wcann_invert.csv)))
-	newWCANN_invert <- newWCANN[["wcann_invert.csv"]][,oldWCANN_invert_names,with=F]
-	fix_wc_colnames(newWCANN_invert, wcann_invert_set_cn)
+	# oldWCANN_invert_names <- old_upData_colNames$wcann_invert.csv #names(oldWCANN$wcann_invert.csv)
+	# stopifnot(all(oldWCANN_invert_names%in%names(newWCANN$wcann_invert.csv)))
+	# newWCANN_invert <- newWCANN[["wcann_invert.csv"]][,oldWCANN_invert_names,with=F]
+	# fix_wc_colnames(newWCANN_invert, wcann_invert_set_cn)
 	
 	# Write files as .csv's
-	write.csv(newWCANN_fish, file=paste(new.zip.folder,"wcann_fish.csv",sep="/"), row.names=FALSE, quote=FALSE)
-	write.csv(newWCANN_invert, file=paste(new.zip.folder,"wcann_invert.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	write.csv(newWCANN_catch, file=paste(new.zip.folder,"wcann_catch.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	# write.csv(newWCANN_fish, file=paste(new.zip.folder,"wcann_fish.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	# write.csv(newWCANN_invert, file=paste(new.zip.folder,"wcann_invert.csv",sep="/"), row.names=FALSE, quote=FALSE)
 	write.csv(newWCANN_haul, file=paste(new.zip.folder,"wcann_haul.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
@@ -508,6 +538,12 @@ if(FALSE){
 	names(wctri_species.csv) <- paste0("\"",names(wctri_species.csv),"\"")
 	write.csv(wctri_species.csv, file.path(new.zip.folder,"wctri_species.csv"), row.names=FALSE, quote=FALSE)
 }
+
+
+# =================
+# = Copy Taxonomy =
+# =================
+
 
 
 # =======================
