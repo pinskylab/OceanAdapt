@@ -495,6 +495,7 @@ if(FALSE){
 # =================
 # = Copy Taxonomy =
 # =================
+file.copy(from="../data_raw/taxonomy/spptaxonomy.csv", to="../data_updates/Data_Updated", overwrite=TRUE)
 
 
 
