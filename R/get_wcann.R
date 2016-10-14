@@ -1,11 +1,10 @@
-library("devtools")
 
-# devtools::install_github("james-thorson/FishData")
-library("FishData")
+library("jsonlite")
 
 wcann_save_loc <- "../data_raw/wcann"
 save_date <- Sys.Date()
-file_name <- paste("wcann", save_date, "catch.csv", sep="_")
+catch_file_name <- paste("wcann", "catch.csv", sep="_")
+haul_file_name <- paste("wcann", "haul.csv", sep="_")
 
 old_names <- c("Anoplopoma fimbria", "Antimora microlepis", "Apristurus brunneus",
 "Bathyagonus nigripinnis", "Bathyraja kincaidii (formerly B. interrupta)",
@@ -147,11 +146,21 @@ old_names <- c("Anoplopoma fimbria", "Antimora microlepis", "Apristurus brunneus
 "Bathymaster signatus", "Eurypharynx pelecanoides", "Trachipteridae",
 "Saccopharynx sp.", "Amblyraja badia")
 
+#
+# wcann_catch <- as.data.table(download_catch_rates(survey="WCGBTS", add_zeros=FALSE, species_set=500))
+# wcann_catch[,TowID:=as.character(TowID)]
+# new_names <- wcann_catch[,unique(Sci)]
+url_catch <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003"
+data_catch <- jsonlite::fromJSON( url_catch )
 
-wcann_catch <- as.data.table(download_catch_rates(survey="WCGBTS", add_zeros=FALSE, species_set=500))
-wcann_catch[,TowID:=as.character(TowID)]
-new_names <- wcann_catch[,unique(Sci)]
+url_haul <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.operation_haul_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003"
+data_haul <- jsonlite::fromJSON( url_haul )
 
-write.csv(wcann_catch, file=file.path(wcann_save_loc, save_date, file_name))
+if(!dir.exists(file.path(wcann_save_loc, save_date))){
+	dir.create(file.path(wcann_save_loc, save_date))
+}
+
+write.csv(data_catch, file=file.path(wcann_save_loc, save_date, catch_file_name), row.names=FALSE)
+write.csv(data_haul, file=file.path(wcann_save_loc, save_date, haul_file_name), row.names=FALSE)
 
 
