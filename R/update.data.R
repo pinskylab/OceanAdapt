@@ -89,9 +89,18 @@ seus.haul.file <- "seus_haul.csv"
 seus.strata.file <- "seus_strata.csv"
 
 
+# WCTRI
+wctri_fold <- "wctri"
+wctri.raw.path.top <- file.path(new_data_loc,wctri_fold)
+wctri.fileS <- list.files(wctri.raw.path.top, full.names=TRUE, pattern=date.zip.patt)
+new_data_raw_wctri <- sort(wctri.fileS, dec=T)[1]
 
-# WC
-# Email Beth Horness <Beth.Horness@noaa.gov>
+wctri.catch.file <- "CATCHWCTRIALLCOAST.csv"
+wctri.haul.file <- "HAULWCTRIALLCOAST.csv"
+wctri.species.file <- "RACEBASE_SPECIES.csv"
+
+
+# WCANN
 wcann_fold <- "wcann"
 wcann.raw.path.top <- file.path(new_data_loc,wcann_fold)
 wcann.fileS <- list.files(wcann.raw.path.top, full.names=TRUE, pattern=date.zip.patt)
@@ -179,8 +188,6 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALS
 # ============================================
 zipFiles <- file.info(list.files("../data_updates", full=TRUE, patt="^Data_.+.zip")) # zipFiles only used in next few lines; intended to find old data sets, which is used both for main data (which we're now just redownloading every year), as well as for the strata files etc.
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
-data.vis <- sort(list.files("../data_download",pattern="Data_Vis_.[0-9,_]*.zip", full=T),dec=T)[1] # grab most recent data.viz 
-# downData <- read.csv.zip(data.vis, SIMPLIFY=T, iterate=TRUE)
 upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE, rawHeader=TRUE)
 
 old_upData_colNames <- lapply(upData, names)
@@ -467,28 +474,20 @@ if(file.exists(new_data_raw_wcann)){
 }
 
 
-# ========================
-# = WC Tri Structure Fix =
-# ========================
-# This was added simply to add quotes in the region's files' 
-# column names, ala Lucas's .docx file
-# I orginally had trouble getting this region to upload to OA,
-# But was able to get it to work on commit:
-# f6b6660265ab634c411ce1932771d66ff61735c8
-# This region is not receiving regular updates,
-# So default is to skip this section
-if(FALSE){
-	wctri_catch.csv <- read.csv(file.path(new.zip.folder,"wctri_catch.csv"))
-	names(wctri_catch.csv) <- paste0("\"",names(wctri_catch.csv),"\"")
-	write.csv(wctri_catch.csv, file.path(new.zip.folder,"wctri_catch.csv"), row.names=FALSE, quote=FALSE)
+# =========
+# = WCTRI =
+# =========
+# This is just a read and re-write
+# Could copy and rename, but this will just repeat the processing of reading into R, possibly serving as a check and providing a template for more detailed checks on data format if later desired
+if(file.exists(new_data_raw_wctri)){
+	newWCTRI <- read.csv.zip(new_data_raw_wctri)
+	names(newWCTRI)[names(newWCTRI)==wctri.catch.file] <- "wctri_catch.csv"
+	names(newWCTRI)[names(newWCTRI)==wctri.haul.file] <- "wctri_haul.csv"
+	names(newWCTRI)[names(newWCTRI)==wctri.species.file] <- "wctri_species.csv"
 	
-	wctri_haul.csv <- read.csv(file.path(new.zip.folder,"wctri_haul.csv"))
-	names(wctri_haul.csv) <- paste0("\"",names(wctri_haul.csv),"\"")
-	write.csv(wctri_haul.csv, file.path(new.zip.folder,"wctri_haul.csv"), row.names=FALSE, quote=FALSE)
-	
-	wctri_species.csv <- read.csv(file.path(new.zip.folder,"wctri_species.csv"))
-	names(wctri_species.csv) <- paste0("\"",names(wctri_species.csv),"\"")
-	write.csv(wctri_species.csv, file.path(new.zip.folder,"wctri_species.csv"), row.names=FALSE, quote=FALSE)
+	write.csv(newWCTRI[["wctri_catch.csv"]], file=paste(new.zip.folder,"wctri_catch.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	write.csv(newWCTRI[["wctri_haul.csv"]], file=paste(new.zip.folder,"wctri_haul.csv",sep="/"), row.names=FALSE, quote=FALSE)
+	write.csv(newWCTRI[["wctri_species.csv"]], file=paste(new.zip.folder,"wctri_species.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
 
@@ -510,91 +509,91 @@ new.zip.file0 <- paste0(basename(new.zip.folder),".zip")
 file.rename(new.zip.file0, renameNow(new.zip.file0))
 setwd(oldwd)
 
+#
+# # ============================================
+# # = Reorganize Updated Data for Upload to OA =
+# # ============================================
+# # For each region, create a new directory
+# regions2upload <- c("ai","ebs","goa","gmex","neus", "seus", "wcann","wctri")
+# files.matched <- c()
+# file.headers <- structure(vector("list",length(regions2upload)), .Names=regions2upload)
+#
+# # get a list of all files in
+# # "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/"
+# # these should be the .csv's from each region, as well as complete_r_script.R (?)
+# t.files0 <- list.files(normalizePath(new.zip.folder),full=T)
+#
+# for(i in 1:length(regions2upload)){
+#
+# 	# Define region for this iteration
+# 	t.reg <- regions2upload[i]
+#
+# 	# Create a directory where current region can
+# 	# have its files safely renamed to somethign generic, like data.csv
+# 	# So it creates things like:
+# 	# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/ai"
+# 	# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/ebs"
+# 	# etc ...
+# 	dir.create(paste0(normalizePath(new.zip.folder),"/",t.reg))
+#
+# 	# Identify files for this region, and remember which files found
+# 	t.files <- t.files0[grepl(paste0(t.reg,"_"),t.files0)] # files w/ current region in name
+# 	if(length(t.files)==0){warning(paste("skipping region",t.reg)); next} # skip w/ warning if region isn't found
+# 	files.matched <- c(files.matched, t.files) # accumulate file names that were found
+#
+# 	# Define names for files as they will appear for upload;
+# 	# I.e., t.files typically  has a name like goa_data.csv,
+# 	# whereas the corresponding t.dest.file would have
+# 	# the name data.csv, and would be placed in the t.dest.dir,
+# 	# which is 'goa'. This safeguards against overwriting
+# 	t.dest.dir <- paste(dirname(t.files[1]), t.reg, sep="/")
+# 	t.dest.file0 <- paste(t.dest.dir, basename(t.files),sep="/")
+# 	t.dest.file <- gsub(paste0(t.reg,"_"), "", t.dest.file0) # strip region name for OA upload
+#
+# 	# Loop through the files that have been processed,
+# 	# reading in the first line of each (the header),
+# 	# and saving those header names into a list (to be saved
+# 	# as a .txt metadata file later)
+# 	file.headers[[i]] <- structure(vector("list", length(t.files)), .Names=basename(t.dest.file))
+# 	for(j in 1:length(t.files)){
+# 		file.headers[[i]][[j]] <- scan(t.files[j],nlines=1, sep=",", what="character", quote="", quiet=T)
+# 	}
+#
+# 	# Copy a region's files to a folder named after that region,
+# 	# and while copying, rename the file to the generic name
+# 	# required for OA upload
+# 	# Note that I do not rename before the move in order to
+# 	# safeguard against overwriting (several regions have a data.csv, e.g.)
+# 	# Lastly, remove the old copy of the file
+# 	file.copy(from=t.files, to=t.dest.file)
+# 	file.remove(t.files)
+#
+# 	# Zip a region's files into a a file named after that region
+# 	oldwd <- getwd()
+# 	setwd(paste(new.zip.folder,basename(t.dest.dir),sep="/"))
+# 	zip(file.path("..",t.reg), files=basename(t.dest.file))
+# 	setwd(oldwd)
+#
+# 	# Delete local folder
+# 	# sapply(c(list.files(t.dest.dir, full=T),t.dest.dir), file.remove)
+# 	unlink(t.dest.dir, recursive=TRUE)
+# }
 
-# ============================================
-# = Reorganize Updated Data for Upload to OA =
-# ============================================
-# For each region, create a new directory
-regions2upload <- c("ai","ebs","goa","gmex","neus", "seus", "wcann","wctri")
-files.matched <- c()
-file.headers <- structure(vector("list",length(regions2upload)), .Names=regions2upload)
-
-# get a list of all files in
-# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/"
-# these should be the .csv's from each region, as well as complete_r_script.R (?)
-t.files0 <- list.files(normalizePath(new.zip.folder),full=T)
-
-for(i in 1:length(regions2upload)){
-	
-	# Define region for this iteration
-	t.reg <- regions2upload[i]
-	
-	# Create a directory where current region can
-	# have its files safely renamed to somethign generic, like data.csv
-	# So it creates things like:
-	# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/ai"
-	# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/ebs"
-	# etc ...
-	dir.create(paste0(normalizePath(new.zip.folder),"/",t.reg))
-	
-	# Identify files for this region, and remember which files found
-	t.files <- t.files0[grepl(paste0(t.reg,"_"),t.files0)] # files w/ current region in name
-	if(length(t.files)==0){warning(paste("skipping region",t.reg)); next} # skip w/ warning if region isn't found
-	files.matched <- c(files.matched, t.files) # accumulate file names that were found
-	
-	# Define names for files as they will appear for upload;
-	# I.e., t.files typically  has a name like goa_data.csv, 
-	# whereas the corresponding t.dest.file would have
-	# the name data.csv, and would be placed in the t.dest.dir,
-	# which is 'goa'. This safeguards against overwriting
-	t.dest.dir <- paste(dirname(t.files[1]), t.reg, sep="/")
-	t.dest.file0 <- paste(t.dest.dir, basename(t.files),sep="/")
-	t.dest.file <- gsub(paste0(t.reg,"_"), "", t.dest.file0) # strip region name for OA upload
-	
-	# Loop through the files that have been processed,
-	# reading in the first line of each (the header),
-	# and saving those header names into a list (to be saved
-	# as a .txt metadata file later)
-	file.headers[[i]] <- structure(vector("list", length(t.files)), .Names=basename(t.dest.file))
-	for(j in 1:length(t.files)){
-		file.headers[[i]][[j]] <- scan(t.files[j],nlines=1, sep=",", what="character", quote="", quiet=T)
-	}
-	
-	# Copy a region's files to a folder named after that region,
-	# and while copying, rename the file to the generic name 
-	# required for OA upload
-	# Note that I do not rename before the move in order to
-	# safeguard against overwriting (several regions have a data.csv, e.g.)
-	# Lastly, remove the old copy of the file
-	file.copy(from=t.files, to=t.dest.file)
-	file.remove(t.files)
-	
-	# Zip a region's files into a a file named after that region
-	oldwd <- getwd()
-	setwd(paste(new.zip.folder,basename(t.dest.dir),sep="/"))
-	zip(file.path("..",t.reg), files=basename(t.dest.file))
-	setwd(oldwd)
-	
-	# Delete local folder
-	# sapply(c(list.files(t.dest.dir, full=T),t.dest.dir), file.remove)
-	unlink(t.dest.dir, recursive=TRUE)
-}
-
-
-# =======================================================
-# = Save the Column Headers for human-readable metadata =
-# =======================================================
-sink("./metadata/oa_upload_colNames.txt",type=c(type="output"))
-for(i in 1:length(regions2upload)){
-	cat(names(file.headers)[i], "\n")
-	for(j in 1:length(file.headers[[i]])){
-		cat("\t",names(file.headers[[i]])[j], "\n", paste0("\t\t",file.headers[[i]][[j]],"\n"),"\n")
-	}
-	if(i!=length(regions2upload)){
-		cat("\n\n")
-	}
-}
-sink(NULL)
+#
+# # =======================================================
+# # = Save the Column Headers for human-readable metadata =
+# # =======================================================
+# sink("./metadata/oa_upload_colNames.txt",type=c(type="output"))
+# for(i in 1:length(regions2upload)){
+# 	cat(names(file.headers)[i], "\n")
+# 	for(j in 1:length(file.headers[[i]])){
+# 		cat("\t",names(file.headers[[i]])[j], "\n", paste0("\t\t",file.headers[[i]][[j]],"\n"),"\n")
+# 	}
+# 	if(i!=length(regions2upload)){
+# 		cat("\n\n")
+# 	}
+# }
+# sink(NULL)
 
 
 
