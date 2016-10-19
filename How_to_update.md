@@ -4,10 +4,10 @@ We follow these steps to update the OceanAdapt data annually.
 1. Acquire new data
    1. We want the full dataset every single time, from the start of the survey through the most recent year. This helps catch any updates the surveys have made to past years (they sometimes catch and fix old errors). 
    2. Alaska Fisheries Science Center: download Aleutian Islands ([ai](http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm)), Eastern Bering Sea ([ebs](http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm)), and Gulf of Alaska ([goa](http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm))
-   3. Northwest Fisheries Science Center: submit a data request form to Beth Horness (<beth.horness@noaa.gov>, see examples in metaData/docs/wcann/) for the West Coast Groundfish Bottom Trawl Survey (wctri).
+   3. Northwest Fisheries Science Center: download using get_wcann.R. Using a GUI/ map you can download one species at a time [here](https://www.nwfsc.noaa.gov/data/)
    4. Gulf of Mexico SEAMAP (gmex): download Microsoft Access database (or, preferably, CSV outputs) from [here](http://seamap.gsmfc.org/) or email Jeff Rester (<jrester@gsmfc.org>) for .CSV outputs
    5. Northeast U.S. (neus): email Sean Tracey (<sean.tracey@noaa.gov>, preferred) or Jon Hare (<jon.hare@noaa.gov>) for latest survdata.RData file
-   6. Southeast U.S. (seus): in progress, ask Jim Morley for what to do
+   6. Southeast U.S. (seus): download from [website](https://www2.dnr.sc.gov/seamap/Account/LogOn?ReturnUrl=%2fseamap%2fReports); need to delete last lines in each file manually
    7. West Coast Triennial (wctri): *no longer updated*. Used to be operated by the Alaska Fishery Science Center.
 
 2. Organize new data files into data_raw/ directory
