@@ -74,7 +74,7 @@ neus_surv_rdata <- "Survdat.RData"
 neus_spp_rdata <- "SVSPP.RData"
 neus_strata_rdata <- "Strata.RData"
 
-neus_surv_csv <- "neus_neus.csv"
+neus_surv_csv <- "neus_data.csv"
 neus_spp_csv <- "neus_svspp.csv"
 neus_strata_csv <- "neus_strata.csv"
 
@@ -191,6 +191,9 @@ recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$a
 upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE, rawHeader=TRUE)
 
 old_upData_colNames <- lapply(upData, names)
+if("neus_neus.csv"%in%names(old_upData_colNames)){
+	names(old_upData_colNames)[names(old_upData_colNames)=="neus_neus.csv"] <- "neus_data.csv"
+}
 old_upData_rawHeader <- lapply(upData, function(x)attributes(x)$rawHeader)
 old_upData_colClasses <- lapply(upData, function(x)sapply(x, class))
 
@@ -392,8 +395,8 @@ if(file.exists(new_data_raw_neus)){
 		# Need to add a leading column named ""
 		newNEUS_data <- data.table(X=NA, newNEUS_data)
 		
-		stopifnot(all(old_upData_colNames$neus_neus.csv%in%names(newNEUS_data))) # upData$neus_neus.csv
-		updated_newNEUS_data <- newNEUS_data[,old_upData_colNames$neus_neus.csv,with=FALSE]
+		stopifnot(all(old_upData_colNames$neus_data.csv%in%names(newNEUS_data))) # upData$neus_data.csv
+		updated_newNEUS_data <- newNEUS_data[,old_upData_colNames$neus_data.csv,with=FALSE]
 		setnames(updated_newNEUS_data, "X", "\"\"") # rename the NA column as ""
 		setnames(updated_newNEUS_data, names(updated_newNEUS_data)[-1], wrap.quotes(names(updated_newNEUS_data))[-1])
 		cat("\tWriting",neus_surv_csv,"\n")
@@ -448,7 +451,7 @@ update_seus <- function(readFile, writeFile){
 	invisible(NULL)
 }
 update_seus(seus.catch.file, seus.catch.file)
-update_seus(seus.haule.file, seus.haule.file)
+update_seus(seus.haul.file, seus.haul.file)
 update_seus(seus.strata.file, seus.strata.file)
 
 
