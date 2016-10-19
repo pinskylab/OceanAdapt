@@ -28,7 +28,13 @@ require(lubridate) # for manipulating 'DATE' and extracting 'SEASON' with sues
 require(zoo) # allows 'SEASON' to be extracted from 'DATE' with seus
 
 ### IMPORTANT VARIABLES
-WORKING_DIRECTORY = getwd()
+zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip"))
+recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
+unzip(recentZip)
+stopifnot(dir.exists("Data_Updated"))
+WORKING_DIRECTORY = file.path(getwd(), "Data_Updated")
+
+
 
 #FLAGS, please make TRUE or FALSE [Yes, in all CAPS].
 PRINT_STATUS = TRUE #DEFAULT: TRUE. Simply uses print() to give a status update to the user. Used by `print_status()`.
