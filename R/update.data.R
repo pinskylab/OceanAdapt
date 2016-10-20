@@ -490,93 +490,14 @@ new.zip.file0 <- paste0(basename(new.zip.folder),".zip")
 file.rename(new.zip.file0, renameNow(new.zip.file0))
 setwd(oldwd)
 
-#
-# # ============================================
-# # = Reorganize Updated Data for Upload to OA =
-# # ============================================
-# # For each region, create a new directory
-# regions2upload <- c("ai","ebs","goa","gmex","neus", "seus", "wcann","wctri")
-# files.matched <- c()
-# file.headers <- structure(vector("list",length(regions2upload)), .Names=regions2upload)
-#
-# # get a list of all files in
-# # "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/"
-# # these should be the .csv's from each region, as well as complete_r_script.R (?)
-# t.files0 <- list.files(normalizePath(new.zip.folder),full=T)
-#
-# for(i in 1:length(regions2upload)){
-#
-# 	# Define region for this iteration
-# 	t.reg <- regions2upload[i]
-#
-# 	# Create a directory where current region can
-# 	# have its files safely renamed to somethign generic, like data.csv
-# 	# So it creates things like:
-# 	# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/ai"
-# 	# "/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated/ebs"
-# 	# etc ...
-# 	dir.create(paste0(normalizePath(new.zip.folder),"/",t.reg))
-#
-# 	# Identify files for this region, and remember which files found
-# 	t.files <- t.files0[grepl(paste0(t.reg,"_"),t.files0)] # files w/ current region in name
-# 	if(length(t.files)==0){warning(paste("skipping region",t.reg)); next} # skip w/ warning if region isn't found
-# 	files.matched <- c(files.matched, t.files) # accumulate file names that were found
-#
-# 	# Define names for files as they will appear for upload;
-# 	# I.e., t.files typically  has a name like goa_data.csv,
-# 	# whereas the corresponding t.dest.file would have
-# 	# the name data.csv, and would be placed in the t.dest.dir,
-# 	# which is 'goa'. This safeguards against overwriting
-# 	t.dest.dir <- paste(dirname(t.files[1]), t.reg, sep="/")
-# 	t.dest.file0 <- paste(t.dest.dir, basename(t.files),sep="/")
-# 	t.dest.file <- gsub(paste0(t.reg,"_"), "", t.dest.file0) # strip region name for OA upload
-#
-# 	# Loop through the files that have been processed,
-# 	# reading in the first line of each (the header),
-# 	# and saving those header names into a list (to be saved
-# 	# as a .txt metadata file later)
-# 	file.headers[[i]] <- structure(vector("list", length(t.files)), .Names=basename(t.dest.file))
-# 	for(j in 1:length(t.files)){
-# 		file.headers[[i]][[j]] <- scan(t.files[j],nlines=1, sep=",", what="character", quote="", quiet=T)
-# 	}
-#
-# 	# Copy a region's files to a folder named after that region,
-# 	# and while copying, rename the file to the generic name
-# 	# required for OA upload
-# 	# Note that I do not rename before the move in order to
-# 	# safeguard against overwriting (several regions have a data.csv, e.g.)
-# 	# Lastly, remove the old copy of the file
-# 	file.copy(from=t.files, to=t.dest.file)
-# 	file.remove(t.files)
-#
-# 	# Zip a region's files into a a file named after that region
-# 	oldwd <- getwd()
-# 	setwd(paste(new.zip.folder,basename(t.dest.dir),sep="/"))
-# 	zip(file.path("..",t.reg), files=basename(t.dest.file))
-# 	setwd(oldwd)
-#
-# 	# Delete local folder
-# 	# sapply(c(list.files(t.dest.dir, full=T),t.dest.dir), file.remove)
-# 	unlink(t.dest.dir, recursive=TRUE)
-# }
 
-#
-# # =======================================================
-# # = Save the Column Headers for human-readable metadata =
-# # =======================================================
-# sink("./metadata/oa_upload_colNames.txt",type=c(type="output"))
-# for(i in 1:length(regions2upload)){
-# 	cat(names(file.headers)[i], "\n")
-# 	for(j in 1:length(file.headers[[i]])){
-# 		cat("\t",names(file.headers[[i]])[j], "\n", paste0("\t\t",file.headers[[i]][[j]],"\n"),"\n")
-# 	}
-# 	if(i!=length(regions2upload)){
-# 		cat("\n\n")
-# 	}
-# }
-# sink(NULL)
-
-
+# ======================================
+# = Delete Folder/ Files after Zipping =
+# ======================================
+if(file.exists(new.zip.folder)){
+	# delete all of directory's contents & directory
+	unlink(new.zip.folder, recursive=TRUE)
+}
 
 
 
