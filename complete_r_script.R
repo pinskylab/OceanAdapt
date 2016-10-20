@@ -1316,3 +1316,11 @@ if(isTRUE(OPTIONAL_PLOT_CHARTS)) {
 
 print_status('PROGRAM COMPLETED SUCCESSFULLY.')  
 
+# =========================================
+# = Clean-up Unzipped Updated Data Folder =
+# =========================================
+if(file.exists("Data_Updated")){
+	# delete all of directory's contents & directory
+	unlink("Data_Updated", recursive=TRUE)
+}
+
