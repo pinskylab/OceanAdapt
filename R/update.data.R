@@ -423,6 +423,7 @@ update_seus <- function(readFile, writeFile){
 	# old_names <- old_upData_colNames[[writeFile]]
 	new_data <- newSEUS[[readFile]]#[,old_names, with=FALSE]
 	# stopifnot(all(old_names%in%names(new_data)))
+	new_data <- lapply(new_data, function(x)gsub("^=","",x)) # remove leading = signs
 	cat("\tWriting",writeFile,"\n")
 	write.csv(new_data, file=file.path(new.zip.folder,writeFile), row.names=FALSE, quote=FALSE)
 	invisible(NULL)
