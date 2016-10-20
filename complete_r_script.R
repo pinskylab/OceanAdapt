@@ -246,9 +246,9 @@ compile_SEUSSpr = function () {
   seus = cbind(seus, STRATA = as.integer(str_sub(string = seus$STATIONCODE, start = 1, end = 2))) #Create STRATA column
   seus = seus[seus$DEPTHZONE != "OUTER",] # Drop OUTER depth zone because it was only sampled for 10 years
   seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
-                          
+	
   #Create a 'SEASON' column using 'MONTH' as a criteria
-  seus$DATE <- as.Date(seus$DATE, "%m/%d/%y")
+  seus$DATE <- as.Date(seus$DATE, "%m-%d-%Y")
   seus = cbind(seus, MONTH = month(seus$DATE))
   SEASON = as.yearqtr(seus$DATE)
   seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
@@ -287,7 +287,7 @@ compile_SEUSSum = function () {
   seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
   
   #Create a 'SEASON' column using 'MONTH' as a criteria
-  seus$DATE <- as.Date(seus$DATE, "%m/%d/%y")
+  seus$DATE <- as.Date(seus$DATE, "%m-%d-%Y")
   seus = cbind(seus, MONTH = month(seus$DATE))
   SEASON = as.yearqtr(seus$DATE)
   seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
@@ -331,7 +331,7 @@ compile_SEUSFal = function () {
   seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
   
   #Create a 'SEASON' column using 'MONTH' as a criteria
-  seus$DATE <- as.Date(seus$DATE, "%m/%d/%y")
+  seus$DATE <- as.Date(seus$DATE, "%m-%d-%Y")
   seus = cbind(seus, MONTH = month(seus$DATE))
   SEASON = as.yearqtr(seus$DATE)
   seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
