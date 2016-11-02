@@ -1,4 +1,6 @@
 # OceanAdapt
+Note: these instructions are now out of date (September 2016). We are transitioning to a new system based directly off the raw data files we get from each region.
+
 We follow these steps to update the OceanAdapt data annually.
 
 1. Acquire new data

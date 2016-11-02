@@ -1,4 +1,4 @@
-These are the raw data files for each bottom trawl survey, as originally provided by each data source. Each sub-directory has a dated zip file with the complete set of data files from that survey as of that date.
+These are the raw data files for each bottom trawl survey, as originally provided by each data source. Each sub-directory corresponds to an update (generally annually). Inside are sub-directories for each survey, each of which contains a dated zip file with the complete set of data files from that survey as of that date.
 
 The data sources are as follows (see links):  
   + [AI](http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm)  
@@ -8,19 +8,15 @@ The data sources are as follows (see links):
   + [GMEX](http://seamap.gsmfc.org/)  
   + WCANN ("Beth Horness" <beth.horness@noaa.gov>)  
   + *WCTRI no longer udpated*  
-  + [SA/ SEUS](google.com)  
+  + [SA/ SEUS]: in progress, ask Jim Morley for what to do
  
-Sub-directories found here:
+Sub-directories within each update are found here:
 * ai: Aleutian Islands  
 * ebs: Eastern Bering Sea  
 * gmex: Gulf of Mexico  
 * goa: Gulf of Alaska  
 * neus: northeast US  
-* newf: Newfoundland  
-* ngulf: Northern Gulf of St. Lawrence  
-* scot: Scotian Shelf  
 * seus: Southeast US  
-* sgulf: Southern Gulf of St. Lawrence  
 * taxonomy: taxonomy files  
 * wcann: west coast annual survey (run by NWFSC)  
 * wctri: west coast triennial survey (run by AFSC, now stopped)  
