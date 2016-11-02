@@ -7,6 +7,7 @@
 #   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with your data and run the script. 
 
 # RDB quality of life enhancer "~/Documents/School&Work/pinskyPost/OceanAdapt/data_download/Data_Vis_2015_09_04"
+# setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated")
        
  
 ### File Structure
@@ -27,7 +28,13 @@ require(lubridate) # for manipulating 'DATE' and extracting 'SEASON' with sues
 require(zoo) # allows 'SEASON' to be extracted from 'DATE' with seus
 
 ### IMPORTANT VARIABLES
-WORKING_DIRECTORY = getwd()
+zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip"))
+recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
+unzip(recentZip)
+stopifnot(dir.exists("Data_Updated"))
+WORKING_DIRECTORY = file.path(getwd(), "Data_Updated")
+
+
 
 #FLAGS, please make TRUE or FALSE [Yes, in all CAPS].
 PRINT_STATUS = TRUE #DEFAULT: TRUE. Simply uses print() to give a status update to the user. Used by `print_status()`.
@@ -186,10 +193,11 @@ compile_WCTri = function () {
 compile_WCAnn = function () {
   #function returns wcann
   # West Coast annual
-  wcannfish = read.csv(paste(WORKING_DIRECTORY, '/wcann_fish.csv', sep=''))
+  wcanncatch = read.csv(paste(WORKING_DIRECTORY, '/wcann_catch.csv', sep='')) # CHANGED just "catch" now
+	# names(wcanncatch)[names(wcanncatch)=="Vessel"] <- "Vessel.Id"
   wcannhaul = read.csv(paste(WORKING_DIRECTORY, '/wcann_haul.csv', sep=''))
-  wcanninvert = read.csv(paste(WORKING_DIRECTORY, '/wcann_invert.csv', sep=''))
-  wcanncatch = rbind(wcannfish[,names(wcanninvert)], wcanninvert) # wcannfish has an extra column, so trim it out while combining with inverts
+  # wcanninvert = read.csv(paste(WORKING_DIRECTORY, '/wcann_invert.csv', sep='')) # CHANGED the new format doesn't have this anymore
+  # wcanncatch = rbind(wcannfish[,names(wcanninvert)], wcanninvert) # wcannfish has an extra column, so trim it out while combining with inverts
   wcann = merge(wcannhaul, wcanncatch)
   return(wcann)
   
@@ -238,9 +246,9 @@ compile_SEUSSpr = function () {
   seus = cbind(seus, STRATA = as.integer(str_sub(string = seus$STATIONCODE, start = 1, end = 2))) #Create STRATA column
   seus = seus[seus$DEPTHZONE != "OUTER",] # Drop OUTER depth zone because it was only sampled for 10 years
   seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
-                          
+	
   #Create a 'SEASON' column using 'MONTH' as a criteria
-  seus$DATE <- as.Date(seus$DATE, "%m/%d/%y")
+  seus$DATE <- as.Date(seus$DATE, "%m-%d-%Y")
   seus = cbind(seus, MONTH = month(seus$DATE))
   SEASON = as.yearqtr(seus$DATE)
   seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
@@ -279,7 +287,7 @@ compile_SEUSSum = function () {
   seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
   
   #Create a 'SEASON' column using 'MONTH' as a criteria
-  seus$DATE <- as.Date(seus$DATE, "%m/%d/%y")
+  seus$DATE <- as.Date(seus$DATE, "%m-%d-%Y")
   seus = cbind(seus, MONTH = month(seus$DATE))
   SEASON = as.yearqtr(seus$DATE)
   seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
@@ -323,7 +331,7 @@ compile_SEUSFal = function () {
   seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
   
   #Create a 'SEASON' column using 'MONTH' as a criteria
-  seus$DATE <- as.Date(seus$DATE, "%m/%d/%y")
+  seus$DATE <- as.Date(seus$DATE, "%m-%d-%Y")
   seus = cbind(seus, MONTH = month(seus$DATE))
   SEASON = as.yearqtr(seus$DATE)
   seus = cbind(seus, SEASON = factor(format(SEASON, "%q"), levels = 1:4, labels = c("winter", "spring", "summer", "fall")))
@@ -361,7 +369,7 @@ create_haul_id = function  () {
   neus$haulid <<- paste(formatC(neus$CRUISE6, width=6, flag=0), formatC(neus$STATION, width=3, flag=0), formatC(neus$STRATUM, width=4, flag=0), sep='-')
   neusF$haulid <<- paste(formatC(neusF$CRUISE6, width=6, flag=0), formatC(neusF$STATION, width=3, flag=0), formatC(neusF$STRATUM, width=4, flag=0), sep='-')  
   wctri$haulid <<- paste(formatC(wctri$VESSEL, width=3, flag=0), formatC(wctri$CRUISE, width=3, flag=0), formatC(wctri$HAUL, width=3, flag=0), sep='-')
-  wcann$haulid <<- wcann$Trawl.Id
+  wcann$haulid <<- wcann$trawl_id
   gmex$haulid <<- paste(formatC(gmex$VESSEL, width=3, flag=0), formatC(gmex$CRUISE_NO, width=3, flag=0), formatC(gmex$P_STA_NO, width=5, flag=0, format='d'), sep='-')
   seusSPRING$haulid <<- seusSPRING$EVENTNAME
   seusSUMMER$haulid <<- seusSUMMER$EVENTNAME
@@ -386,7 +394,7 @@ gmex_calculate_decimal_lat_lon = function () {
 extract_year = function () {
   # Extract year where needed
   wctri$year <<- as.numeric(substr(wctri$CRUISE, 1,4))
-  wcann$year <<- as.numeric(gsub('Cycle ', '', wcann$Survey.Cycle))
+  # wcann$year <<- wcann$Survey.Cycle # edit2: new data already has year column, and i don't feel like faking it anymore #as.numeric(gsub('Cycle ', '', wcann$Survey.Cycle)) # TODO Now this will just have "year" for everything with the new website format 
   gmex$year <<- as.numeric(unlist(strsplit(as.character(gmex$MO_DAY_YR), split='-'))[seq(1,by=3,length=nrow(gmex))])
   seusSPRING$year <<- as.numeric(substr(seusSPRING$EVENTNAME, 1,4))
   seusSUMMER$year <<- as.numeric(substr(seusSUMMER$EVENTNAME, 1,4))
@@ -401,8 +409,8 @@ add_stratum = function () {
   stratdepthgrid = floor(wctri$BOTTOM_DEPTH/100)*100 + 50 # 100 m bins
   wctri$stratum <<- paste(stratlatgrid, stratdepthgrid, sep='-') # no need to use lon grids on west coast (so narrow)
   
-  stratlatgrid = floor(wcann$Best.Latitude..dd.)+0.5 # degree bins
-  stratdepthgrid = floor(wcann$Best.Depth..m./100)*100 + 50 # 100 m bins
+  stratlatgrid = floor(wcann$latitude_dd)+0.5 # could also use latitude_hi_prec_dd from haul set # degree bins
+  stratdepthgrid = floor(wcann$depth_m/100)*100 + 50 # 100 m bins
   wcann$stratum <<- paste(stratlatgrid, stratdepthgrid, sep='-') # no need to use lon grids on west coast (so narrow)
   
   stratlatgrid = floor(gmex$lat)+0.5 # degree bins
@@ -463,7 +471,7 @@ calculate_stratum_area = function () {
   wctristrats = summarize(wctri[,c('START_LONGITUDE', 'START_LATITUDE')], by=list(stratum=wctri$stratum), FUN=calcarea, stat.name = 'stratumarea')
   wctri <<- merge(wctri, wctristrats[,c('stratum', 'stratumarea')], by.x='stratum', by.y='stratum', all.x=TRUE)
   
-  wcannstrats = summarize(wcann[,c('Best.Longitude..dd.', 'Best.Latitude..dd.')], by=list(stratum=wcann$stratum), FUN=calcarea, stat.name = 'stratumarea')
+  wcannstrats = summarize(wcann[,c('longitude_dd', 'latitude_dd')], by=list(stratum=wcann$stratum), FUN=calcarea, stat.name = 'stratumarea')
   wcann <<- merge(wcann, wcannstrats[,c('stratum', 'stratumarea')], by.x='stratum', by.y='stratum', all.x=TRUE)
   
   gmexstrats = summarize(gmex[,c('lon', 'lat')], by=list(stratum=gmex$stratum), FUN=calcarea, stat.name = 'stratumarea')
@@ -522,10 +530,10 @@ column_names_updated = function () {
   names(wctri)[names(wctri) == 'SPECIES_NAME'] <<- 'spp'
   names(wctri)[names(wctri)=='WEIGHT'] <<- 'wtcpue'
   
-  names(wcann)[names(wcann)=='Best.Latitude..dd.'] <<- 'lat'
-  names(wcann)[names(wcann)=='Best.Longitude..dd.'] <<- 'lon'
-  names(wcann)[names(wcann)=='Best.Depth..m.'] <<- 'depth'
-  names(wcann)[names(wcann)=='Species'] <<- 'spp'
+  names(wcann)[names(wcann)=='latitude_dd'] <<- 'lat'
+  names(wcann)[names(wcann)=='longitude_dd'] <<- 'lon'
+  names(wcann)[names(wcann)=='depth_m'] <<- 'depth'
+  names(wcann)[names(wcann)=='scientific_name'] <<- 'spp'
   
   names(gmex)[names(gmex)=='TAXONOMIC'] <<- 'spp'
   
@@ -564,7 +572,7 @@ adjust_tow_area = function () {
   
   # Adjust for towed area where needed
   wctri$wtcpue <<- wctri$wtcpue*10000/(wctri$DISTANCE_FISHED*1000*wctri$NET_WIDTH) # weight per hectare (10,000 m2)	
-  wcann$wtcpue <<- wcann$Haul.Weight..kg./wcann$Area.Swept.by.the.Net..hectares. # kg per hectare (10,000 m2)	
+  wcann$wtcpue <<- wcann$total_catch_wt_kg/wcann$area_swept_ha_der # kg per hectare (10,000 m2)	
   gmex$wtcpue <<- 10000*gmex$SELECT_BGS /(gmex$VESSEL_SPD * 1.85200 * 1000 * gmex$MIN_FISH / 60 * gmex$GEAR_SIZE * 0.3048) # kg per 10000m2. calc area trawled in m2: knots * 1.8 km/hr/knot * 1000 m/km * minutes * 1 hr/60 min * width of gear in feet * 0.3 m/ft # biomass per standard tow
   return(TRUE)
 }
@@ -1307,4 +1315,12 @@ if(isTRUE(OPTIONAL_PLOT_CHARTS)) {
 }
 
 print_status('PROGRAM COMPLETED SUCCESSFULLY.')  
+
+# =========================================
+# = Clean-up Unzipped Updated Data Folder =
+# =========================================
+if(file.exists("Data_Updated")){
+	# delete all of directory's contents & directory
+	unlink("Data_Updated", recursive=TRUE)
+}
 
