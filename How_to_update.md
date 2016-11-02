@@ -18,20 +18,24 @@ We follow these steps to update the OceanAdapt data annually.
    3. Put all the files for that survey in that new folder.
    4. Copy over the strata file from the previous version from this region (presumably, it has not changed). There are no strata files for gmex, wctri, or wcann.
    5. If you are updating NEUS, copy over SVSPP.Rdata from the previous version of neus (assuming it is not in the update).
-   6. If you are updating GMEX, open the STAREC.csv file in a text editor (e.g., TextWrangler) and search/replace \" with "". We do this because R can't understand escaped double quotes.
    6. Zip the survey's sub-directory up
    7. Delete the original folder (keeping the .zip)
 
-3. Prepare the raw data for uploading to OceanAdapt website
-   1. Eventually, the update.data.R script should handle everything from here. It is not quite there yet.
-   2. The script will check the headers in the files and make sure they are correct. It also does a minor amount of concatenating files together. It spits out .zip files containing .csv files, all ready and properly named for uploading to OceanAdapt
+3. Prepare the raw data for processing
+   1. Open R/update.data.r. The working directory should be set to this script's directory (R/)
+   2. The script does a lot of formatting and checking:
+      * The script will check the headers in the files and make sure they are correct, and to only continue saving/ processing columns needed by OA 
+			* It strips problematic character formats from files (e.g., escaped quotes)
+			* It concatenates files together (e.g., the AI region has files for different years) 
+			* It formates files to be .csv (NEUS comes as .RData) 
+			* It normalizes file names across regions (creating, e.g., ai_data.csv). 
+			* It creates a .zip file containing the formatted data files for each region.
    3. The script will produce a new file called data_updates/Data_Updated_YYYY-MM-DD_HH-MM-SS-EDT.zip
+4. Run complete R script
+   1. Make sure the directory is set to the folder containing complete_r_script.R, which should be the top level
+	 2. From here, complete_r_script.R will access the updated files, making specific corrections/ standardizations to data format and content, and calculating statistics etc.
 
 4. Upload to website
-   1. Unzip the latest data_updates/Data_Updated_YYYY-MM-DD_HH-MM-SS-EDT.zip file
-   2. Log in to the OceanAdapt management portal
-   3. Click “Data Upload”
-   4. Select a region to upload
-   5. In the dialog box, select the appropriate .zip file from data_updates/Data_Updated_YYYY-MM-DD_HH-MM-SS-EDT/
+   1. Eventually the website should only need the complete_r_script.R and the most recent data_updated zip file; but a good goal is to provide the folder structure of the github repo, so that helper scripts can be easily incorporated in the future.
    6. Repeat for each region.
    7. After midnight has passed (and the update script has run), make sure it all worked (look at graphs on OceanAdapt)
