@@ -203,7 +203,7 @@
         </attribute>
         <attribute>
           <attributeName>BIOMASS</attributeName>
-          <attributeDefinition>the weight (mass) of all items in the net (may be extrapolated)</attributeDefinition>
+          <attributeDefinition>the weight (mass) of all items in the net, converted to kg/tow for the Albatross research vessel (one two is approximately 0.0384 km^2)</attributeDefinition>
           <measurementScale>
             <ratio>
               <unit>
