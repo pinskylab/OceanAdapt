@@ -7,7 +7,7 @@
 #   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with your data and run the script. 
 
 # RDB quality of life enhancer "~/Documents/School&Work/pinskyPost/OceanAdapt/data_download/Data_Vis_2015_09_04"
-# setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/Data_Updated")
+# setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/")
        
  
 ### File Structure
@@ -1287,6 +1287,8 @@ print_status('>Species data complete.')
 # ===========
 # = Add 0's =
 # ===========
+td_factorColumns <- sapply(trimmed_dat, is.factor)
+trimmed_dat[,td_factorColumns] <- lapply(trimmed_dat[,td_factorColumns], as.character)
 dat.exploded <- as.data.table(trimmed_dat)[,explode0(.SD), by="region"]
 # write.csv(dat.exploded, file.path(WORKING_DIRECTORY, "..", "..", "dat.exploded.csv")) # this will be ~600MB
 
