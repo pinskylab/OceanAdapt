@@ -22,12 +22,12 @@ We follow these steps to update the OceanAdapt data annually.
         * A non-preferred alternative is to get the Microsoft Access database from the website
         * Another non-preferred alternative is to email Jeff Rester (<jrester@gsmfc.org>) for .CSV outputs
       2. There are usually a lot more files in this zip than what you need. You need to keep the following:
-        a. BGSREC.csv
-        b. CRUISES.csv
-        c. INVREC.csv
-        d. NEWBIOCODESBIG.csv
-        e. STAREC.csv
-      3. The R script you'll eventually run requires that the files are named as in 2a-e, but to date those have been the default file names (in the unzipped "public_seamap_csvs.zip"), and therefore should not require renaming.
+        1. BGSREC.csv
+        2. CRUISES.csv
+        3. INVREC.csv
+        4. NEWBIOCODESBIG.csv
+        5. STAREC.csv
+      3. The R script you'll eventually run requires that the files are named as above, but to date those have been the default file names (in the unzipped "public_seamap_csvs.zip"), and therefore should not require renaming.
    5. Northeast Fisheries Science Center has data for Northeast U.S. (neus): 
       1. Email Sean Lucey (<sean.lucey@noaa.gov>, preferred) or Jon Hare (<jon.hare@noaa.gov>), and ask for latest survdata.RData file
       2. Other needed data files should be carried over from previous years
