@@ -1,13 +1,12 @@
 ### READ THIS FIRST TO RUN THIS FILE
 # This script runs using the RAW data as downloaded from the OceanAdapt website (http://oceanadapt.rutgers.edu)
-# All of the raw data files need to be in the same directory.
+# Put the zipped data files that you downloaded from OceanAdapt in a directory called data_updates/ and put this script in the enclosing directory. Note that if you have cloned the Git repository, this is the structure that already exists. No need to unzip anything.
 # There are then three ways to run the script, from easiest to somewhat more advanced:
-#   1) Put this script in the same directory as the data files and use `source('PATH/complete_r_script.R', chdir=TRUE)`, where PATH is replaced with the path to the script (even easier on some systems: drag and drop this script onto the R window and it will source it automatically). The chdir option will temporarily change the working directory to where the script is located. Please use command `?source` for more information.
-#   2) Open R, manually change the working directory to the directory with the data files, and run all the code in this script. 
-#   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with your data and run the script. 
+#   1) Use `source('PATH/complete_r_script.R', chdir=TRUE)`, where PATH is replaced with the path to the script (even easier on some systems: drag and drop this script onto the R window and it will source it automatically). The chdir option will temporarily change the working directory to where the script is located. Please use command `?source` for more information.
+#   2) Open R, manually change the working directory to the directory with the complete_r_script.r, and run all the code in this script. 
+#   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with the script and run it. 
 
-# RDB quality of life enhancer "~/Documents/School&Work/pinskyPost/OceanAdapt/data_download/Data_Vis_2015_09_04"
-# setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/data_updates/")
+# setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/")
        
  
 ### File Structure
@@ -32,7 +31,7 @@ zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip")
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 unzip(recentZip)
 stopifnot(dir.exists("Data_Updated"))
-WORKING_DIRECTORY = file.path(getwd(), "Data_Updated")
+WORKING_DIRECTORY = file.path(getwd(), "data_updates/Data_Updated")
 
 
 
@@ -1126,6 +1125,7 @@ if(!exists('OVERRIDE_COMPILING') || !isTRUE(OVERRIDE_COMPILING) ) {
     
     ai = compile_AI()
     print_status('>AI done.')
+
     ebs = compile_EBS()
     print_status('>EBS done.')
     
@@ -1157,7 +1157,7 @@ if(!exists('OVERRIDE_COMPILING') || !isTRUE(OVERRIDE_COMPILING) ) {
     print_status('>SEUSFal done.')
     
   }, error=function(e) {
-    print("[HINT] Please run the program with chdir=TRUE. (e.g. `source('C:/Users/YOUR_USER_NAME/../complete_r_script.R', chdir=TRUE)`")
+    print("[HINT] Please run the program with chdir=TRUE. (e.g. `source('C:/Users/YOUR_USER_NAME/../complete_r_script.R', chdir=TRUE)` and make sure your zipped data files are in a sub-directory called data_updates.")
     stop("[ERROR] One or more files were missing.")
   })
   
