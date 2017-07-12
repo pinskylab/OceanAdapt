@@ -4,9 +4,6 @@ Git repository to support documentation and development of [Ocean Adapt](http://
 * [`complete_r_script.R`](https://github.com/mpinsky/OceanAdapt/blob/master/complete_r_script.R): 
    * the master script that analyzes data for OceanAdapt
    * Comments at head of script provide for instructions on how to run it
-* [`data_download/`](https://github.com/mpinsky/OceanAdapt/tree/master/data_download): 
-   * The trawl data, as downloaded from OceanAdapt
-   * Most recent `Data_Vis_YYYY_MM_DD.zip` contains data files for use with `complete_r_script.R`  
 * [`data_updates/`](https://github.com/mpinsky/OceanAdapt/tree/master/data_updates): 
    * The trawl data, ready to be uploaded to the OceanAdapt website
    * Each `Data_Updated_YYYY-MM-DD_HH-MM-SS-EDT.zip` file contains (or should eventually contain, once we fix some bugs) a set of zip files. Each zip file is for a particular trawl survey and is in the format that the OceanAdapt website expects upon uploading.
