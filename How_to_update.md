@@ -3,7 +3,8 @@
 We follow these steps to update the OceanAdapt data annually.
 ---
 ## Prepare data_raw/ directory for new data files
-The first step is to create the folders that will contain the updated data sets. Most of these folders exist. However, the general arrangement is OceanAdapt/data_raw/REGION/DATE, where "REGION" is one of the region abbreviations, and "DATE" is the date the updated data were acquired/ downloaded. Eventually the DATE folder will be compressed into a zip file, and the folder deleted (so you will note see DATE folders for previous years).
+The first step is to make sure the folders that will contain the updated data sets exist.  The directory structure is OceanAdapt/data_raw/REGION  where "REGION" is one of the region abbreviations. 
+
 1. Within data_raw/, each survey has a sub-directory. 
       1. ai (Aleutian Islands)
       2. ebs (Eastern Bering Sea)
@@ -14,21 +15,19 @@ The first step is to create the folders that will contain the updated data sets.
       7. taxonomy (not a region/ survey, but this folder should exist)
       8. wcann (West Coast Annual)
       9. wctri (West Coast Triennial)
-2. Within each survey's sub-directory (*except* "taxonomy"), you should create a folder with naming format exactly `YYYY-MM-DD`, reflecting the date on which you downloaded the latest files for this survey. A date folder should have a full set of data. If you download half the `wcann` data on 2016-10-12, and the other half on 2016-10-14, then just pick one of the dates to use as a folder name, and put all of the data in there. However, if you downloaded the full data set for `wcann` on each of those dates, it's OK to have multiple DATE folders per region-year ([see example here](https://github.com/mpinsky/OceanAdapt/tree/master/data_raw/wcann)). When running the updating scripts, R will look for the most recent folder for each region, and use that. Though it won't cause problems to have multiple date folders for a given year, R will only use the most recent folder and will expect it to contain the full data set for that region.
-3. As new data files are acquired for each region, place them in their respective region/date folders.
-4. Copy over the strata file from the previous version from this region (presumably it has not changed). There are no strata files for gmex, wctri, or wcann.
-5. If you are updating NEUS, copy over SVSPP.Rdata from the previous version of neus (assuming it is not in the update).
-6. Zip the survey's sub-directory up
-7. Delete the original folder (keeping the .zip)
 
+2. Within each survey's sub-directory (*except* "taxonomy"), create a folder with naming format exactly `YYYY-MM-DD`, reflecting the date on which you downloaded the latest files for this survey. A date folder should have a full set of data. If you download half the `wcann` data on 2016-10-12, and the other half on 2016-10-14, then just pick one of the dates to use as a folder name, and put all of the data in there. However, if you downloaded the full data set for `wcann` on each of those dates, it's OK to have multiple DATE folders per region-year ([see example here](https://github.com/mpinsky/OceanAdapt/tree/master/data_raw/wcann)). When running the updating scripts, R will look for the most recent folder for each region, and use that. Though it won't cause problems to have multiple date folders for a given year, R will only use the most recent folder and will expect it to contain the full data set for that region.
 
 ---
 ## Acquire new data.  
 We want the full dataset every single time, from the start of the survey through the most recent year. This helps catch any updates the surveys have made to past years (they sometimes catch and fix old errors). 
 1. **Aleutian Islands** ([ai](http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm))
+   * Click “Download Data” at the top of the page.
+   * Click the links for all of the files under the Aleutian Islands heading on the table except metadata.
+   * If the files didn’t download directly into the ai/DATE folder, move them there.
    * Unzip downloaded files (e.g. "ai1983_200.zip", which will contain same name w/ .csv extension)
    * The files shouldn't need renaming after unzipping. For example, an OK file name would be "ai1983_2000.csv". Just make sure the region name abbreviation is at the start, is followed by numbers, and ends in .csv.
-   * Copy over last year's "ai_strata.csv" into this year's folder (data_raw/ai/DATE/)
+   * Unzip last year’s folder and copy over "ai_strata.csv" into this year's folder (data_raw/ai/DATE/)
 2. **Eastern Bering Sea** ([ebs](http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm))
    * Repeat the unzipping, renaming, and copying steps of AI (don't forget to copy last year's "ebs_strata.csv")
 3. **Gulf of Alaska** ([goa](http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm))
@@ -51,8 +50,8 @@ We want the full dataset every single time, from the start of the survey through
       5. STAREC.csv
    3. The R script you'll eventually run requires that the files are named as above, but to date those have been the default file names (in the unzipped "public_seamap_csvs.zip"), and therefore should not require renaming.
 6. **Northeast US** (neus) data are from the Northeast Fisheries Science Center: 
-   1. Email Sean Lucey (<sean.lucey@noaa.gov>, preferred) or Jon Hare (<jon.hare@noaa.gov>), and ask for latest survdata.RData file
-   2. Other needed data files should be carried over from previous years
+   1. Email Sean Lucey (<sean.lucey@noaa.gov>, preferred) or Jon Hare (<jon.hare@noaa.gov>), and ask for latest survdata.RData file - Sean responded within an hour of emailing.
+   2. Other needed data files should be carried over from previous years 
       1. Copy neus_strata.csv
       2. Copy neus_svspp.csv (might be redundant with SVSPP.RData)
       3. Copy SVSPP.RData (might be redundant with neus_svspp.csv)
@@ -63,14 +62,16 @@ We want the full dataset every single time, from the start of the survey through
    4. In the "Type of Data" menu, you need 2 things: 
       1. Event Information 
       2. Abundance and Biomass
-   5. For reach of these, select all values in all other fields, EXCEPT "Depth Zone", for which only "Inner" is needed (get it on the left side). You could do both depth zones, but I was getting errors in 2017 trying to do both depth zones. We only use inner, though.
-      * Note: It'll play whack-a-mole with you … have fun! (If you don't encounter this annoyance, don't worry)
+   5. For the list of data values, click the |<- button on the right and it will move all of the values over to the left.
+        * Note: It'll play whack-a-mole with you (meaning once you have moved fields to the left, they will pop back over to the right) … have fun! (If you don't encounter this annoyance, don't worry)
    6. There are 3 files you need:
-      1. seus_catch.csv  This comes from the "Abundance and Biomass" type of data (need to rename file downloaded from website)
-      2. seus_haul.csv This comes from the "Event Information" type of data (need to rename file downloaded from website)
-      3. seus_strata.csv This is already in the repo, just copy over from previous year
-   7. In the two downloaded files, you need to delete last lines in each file manually (i.e., open them up in a text editor, delete, save)
+      1. Rename the "Event Information" download as seus_haul.csv
+      2. Rename the "Abundance and Biomass" download as seus_catch.csv
+      3. Unzip the previous year and copy over the seus_strata.csv
+   7. In the two downloaded files, you need to delete last blank line in each file manually (i.e., open them up in a text editor, delete, save)
 8. **West Coast Triennial** (wctri): *no longer updated*. Used to be operated by the Alaska Fishery Science Center. But still copy the files over to new year (copy wctri_catch.csv, wctri_haul.csv, wctri_species.csv from data_raw/wctri/2017-06-16.zip [or whatever the previous year's .zip is]).
+9. Zip the survey's sub-directory up
+10. Delete the original folder (keeping the .zip)
 
 
 ---
