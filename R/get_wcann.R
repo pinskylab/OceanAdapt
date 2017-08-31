@@ -1,7 +1,7 @@
 
 library("jsonlite")
 
-wcann_save_loc <- "../data_raw/wcann"
+wcann_save_loc <- "data_raw/wcann"
 save_date <- Sys.Date()
 catch_file_name <- paste("wcann", "catch.csv", sep="_")
 haul_file_name <- paste("wcann", "haul.csv", sep="_")
