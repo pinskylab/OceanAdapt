@@ -7,16 +7,17 @@ library(rbLib) # library(devtools); install_github("rBatt/rbLib")
 library(bit64)
 
 
-# ===============================
-# = Guess appropriate directory =
-# ===============================
-if(Sys.info()["sysname"]=="Linux"){
-	setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
-}else{
-	setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
-}
+# # ===============================
+# # = Guess appropriate directory =
+# # ===============================
+# if(Sys.info()["sysname"]=="Linux"){
+# 	setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
+# }else{
+# 	setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
+# }
 
-new_data_loc <- "../data_raw"
+new_data_loc <- "data_raw"
+
 
 
 
