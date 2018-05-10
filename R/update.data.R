@@ -476,7 +476,7 @@ if(file.exists(new_data_raw_wctri)){
 # =================
 # = Copy Taxonomy =
 # =================
-file.copy(from="../data_raw/taxonomy/spptaxonomy.csv", to="../data_updates/Data_Updated", overwrite=TRUE)
+file.copy(from="data_raw/taxonomy/spptaxonomy.csv", to="data_updates/Data_Updated", overwrite=TRUE)
 
 
 
