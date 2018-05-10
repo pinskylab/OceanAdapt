@@ -39,7 +39,7 @@ We want the full dataset every single time, from the start of the survey through
    2. Using a GUI/ map you can download one species at a time (yuck) [here](https://www.nwfsc.noaa.gov/data/)
    3. When you run the R code, you should first set your directory to OceanAdapt/R (or any other directory whose parent is OceanAdapt/). Furthermore, before running the script make sure you create a directory that is OceanAdapt/data_raw/wcann, because the script saves the files there.
 5. **Gulf of Mexico** (gmex) is from SEAMAP
-   1. These data can be acquired as CSV files from [here](http://seamap.gsmfc.org/); the file is named "public_seamap_csvs.zip" 
+   1. These data can be acquired as CSV files from [here](http://seamap.gsmfc.org/); the file is named "public_seamap_csvs.zip" - click on "**Download** the SEAMAP Trawl/Plankton, Bottom Longline"
       * A non-preferred alternative is to get the Microsoft Access database from the website
       * Another non-preferred alternative is to email Jeff Rester (<jrester@gsmfc.org>) for .CSV outputs
    2. There are usually a lot more files in this zip than what you need. You need to keep the following:
