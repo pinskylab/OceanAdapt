@@ -191,6 +191,8 @@ zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip")
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE, rawHeader=TRUE)
 
+# first waiting spot ####
+
 old_upData_colNames <- lapply(upData, names)
 if("neus_neus.csv"%in%names(old_upData_colNames)){
 	names(old_upData_colNames)[names(old_upData_colNames)=="neus_neus.csv"] <- "neus_data.csv"
@@ -284,6 +286,7 @@ update_ai_goa_ebs <- function(new_data_raw_reg, reg=c("ai","ebs","goa")){
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 update_ai_goa_ebs(new_data_raw_ai, "ai")
 
+# wait ####
 
 # ==============
 # = Update EBS =
@@ -291,19 +294,23 @@ update_ai_goa_ebs(new_data_raw_ai, "ai")
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 update_ai_goa_ebs(new_data_raw_ebs, "ebs")
 
+# wait ####
 
 # ==============
 # = Update GOA =
 # ==============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 update_ai_goa_ebs(new_data_raw_goa, "goa")
-
+ 
+# wait ####
 
 # ===============
 # = Update GMEX =
 # ===============
 # http://seamap.gsmfc.org/
 newGMEX <- read.csv.zip(new_data_raw_gmex)
+
+# wait ####
 
 update_gmex <- function(readFile, writeFile){
 	# needs newGMEX, old_upData_colNames, new.zip.folder (getting from parent.frame())
@@ -316,6 +323,7 @@ update_gmex <- function(readFile, writeFile){
 }
 
 update_gmex(readFile=gmex.bio.file, writeFile="gmex_bio.csv")# ---- bio ----
+# wait ###
 update_gmex(readFile=gmex.cruise.file, writeFile="gmex_cruise.csv")# ---- cruise ----
 update_gmex(readFile=gmex.spp.file, writeFile="gmex_spp.csv")# ---- spp ----
 update_gmex(readFile=gmex.tow.file, writeFile="gmex_tow.csv")# ---- tow ----
@@ -333,6 +341,7 @@ gmex.station.file.path <- normalizePath(gmex.station.file.path)
 
 # deal with escaped quotes by doing an automated find-and-replace
 gmexStation_raw <- readLines(gmex.station.file.path)
+
 esc_patt <- "\\\\\\\""
 esc_replace <- "\\\"\\\""
 gmexStation_noEsc <- gsub(esc_patt, esc_replace, gmexStation_raw)
@@ -429,7 +438,9 @@ update_seus <- function(readFile, writeFile){
 	write.csv(new_data, file=file.path(new.zip.folder,writeFile), row.names=FALSE, quote=FALSE)
 	invisible(NULL)
 }
+# wait ###
 update_seus(seus.catch.file, seus.catch.file)
+# wait ###
 update_seus(seus.haul.file, seus.haul.file)
 update_seus(seus.strata.file, seus.strata.file)
 
@@ -455,6 +466,7 @@ if(file.exists(new_data_raw_wcann)){
 	write.csv(newWCANN_haul, file=paste(new.zip.folder,"wcann_haul.csv",sep="/"), row.names=FALSE, quote=FALSE)
 }
 
+# wait ####
 
 # =========
 # = WCTRI =
@@ -487,6 +499,8 @@ file.copy(from="data_raw/taxonomy/spptaxonomy.csv", to="data_updates/Data_Update
 oldwd <- getwd()
 setwd(dirname(new.zip.folder)) # new.zip.folder is "./data_updates/Data_Updated"
 zip(basename(new.zip.folder), files=list.files(basename(new.zip.folder),full=TRUE))
+# wait ####
+
 new.zip.file0 <- paste0(basename(new.zip.folder),".zip")
 file.rename(new.zip.file0, renameNow(new.zip.file0))
 setwd(oldwd)
