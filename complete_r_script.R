@@ -7,8 +7,8 @@
 #   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with the script and run it. 
 
 # setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/")
-       
- 
+
+
 ### File Structure
 #In this file: the top contains required variables and libraries and flags.
 #The middle contains all functions used by this file
@@ -193,7 +193,7 @@ compile_WCAnn = function () {
   #function returns wcann
   # West Coast annual
   wcanncatch = read.csv(paste(WORKING_DIRECTORY, '/wcann_catch.csv', sep='')) # CHANGED just "catch" now
-	# names(wcanncatch)[names(wcanncatch)=="Vessel"] <- "Vessel.Id"
+  # names(wcanncatch)[names(wcanncatch)=="Vessel"] <- "Vessel.Id"
   wcannhaul = read.csv(paste(WORKING_DIRECTORY, '/wcann_haul.csv', sep=''))
   # wcanninvert = read.csv(paste(WORKING_DIRECTORY, '/wcann_invert.csv', sep='')) # CHANGED the new format doesn't have this anymore
   # wcanncatch = rbind(wcannfish[,names(wcanninvert)], wcanninvert) # wcannfish has an extra column, so trim it out while combining with inverts
@@ -245,7 +245,7 @@ compile_SEUSSpr = function () {
   seus = cbind(seus, STRATA = as.integer(str_sub(string = seus$STATIONCODE, start = 1, end = 2))) #Create STRATA column
   seus = seus[seus$DEPTHZONE != "OUTER",] # Drop OUTER depth zone because it was only sampled for 10 years
   seus = merge(x=seus, y=seusstrata, by='STRATA', all.x=TRUE) #add STRATAHECTARE to main file 
-	
+  
   #Create a 'SEASON' column using 'MONTH' as a criteria
   seus$DATE <- as.Date(seus$DATE, "%m-%d-%Y")
   seus = cbind(seus, MONTH = month(seus$DATE))
@@ -341,7 +341,7 @@ compile_SEUSFal = function () {
   #Occasions where weight wasn't provided for a given species; here weight is calculated based on average weight for that species,
   seus$SPECIESTOTALWEIGHT[is.na(seus$SPECIESTOTALWEIGHT)] <- 0 # these 'NA' weights needed to first be converted to 0
   seus$SPECIESTOTALWEIGHT <- replace(seus$SPECIESTOTALWEIGHT, seus$SPECIESTOTALWEIGHT == 0 & seus$SPECIESCODE == 9002040101, 46.99) # Loggerhead seaturtles
-
+  
   #Two hauls have 0 or NA for 'EFFORT', which are data entry errors, the following corrects these values
   seus$EFFORT[seus$EVENTNAME == 1991423] <- 2.29
   seus$EFFORT[seus$EVENTNAME == 2001431] <- 3.18
@@ -440,7 +440,7 @@ high_quality_strata = function () {
   gmex <<- gmex[gmex$stratum %in% c("26.5--96.5-50", "26.5--97.5-50", "27.5--96.5-50", "27.5--97.5-50", "28.5--90.5-50", "28.5--91.5-50", "28.5--92.5-50", "28.5--93.5-50", "28.5--94.5-50", "28.5--95.5-50", "28.5--96.5-50", "29.5--88.5-50", "29.5--89.5-50", "29.5--92.5-50", "29.5--93.5-50", "29.5--94.5-50"),]
   
   # all seus strata are retained
-    
+  
   return(TRUE)
 }
 high_quality_years = function () {
@@ -666,7 +666,7 @@ adjust_spp_names = function () {
   i = gmex$spp %in% c('ROSSIA BULLISI'); gmex$spp[i] <<- 'ROSSIA'
   i = gmex$spp %in% c('SOLENOCERA ATLANTIDIS', 'SOLENOCERA NECOPINA', 'SOLENOCERA VIOSCAI'); gmex$spp[i] <<- 'SOLENOCERA'
   i = gmex$spp %in% c('TRACHYPENEUS CONSTRICTUS', 'TRACHYPENEUS SIMILIS'); gmex$spp[i] <<- 'TRACHYPENEUS'
-
+  
   seusSPRING$spp[seusSPRING$spp %in% c('ANCHOA HEPSETUS','ANCHOA MITCHILLI','ANCHOA LYOLEPIS')] <<- 'ANCHOA'
   seusSPRING$spp[seusSPRING$spp %in% c('LIBINIA DUBIA','LIBINIA EMARGINATA')] <<- 'LIBINIA'
   seusSUMMER$spp[seusSUMMER$spp %in% c('ANCHOA HEPSETUS','ANCHOA MITCHILLI','ANCHOA LYOLEPIS')] <<- 'ANCHOA'
@@ -723,26 +723,26 @@ calculate_corrected_longitude = function () {
 add_region_column = function () {
   
   # Add a region column
-    ai$region <<- "Aleutian Islands"
-    ebs$region <<- "Eastern Bering Sea"
-    goa$region <<- "Gulf of Alaska"
-    neus$region <<- "Northeast US Spring"
-	  neusF$region <<- "Northeast US Fall"
-    wctri$region <<- "West Coast Triennial"
-    wcann$region <<- "West Coast Annual"
-    gmex$region <<- "Gulf of Mexico"
-    seusSPRING$region <<- "Southeast US Spring"
-  	seusSUMMER$region <<- "Southeast US Summer"
-	  seusFALL$region <<- "Southeast US Fall"
-	
+  ai$region <<- "Aleutian Islands"
+  ebs$region <<- "Eastern Bering Sea"
+  goa$region <<- "Gulf of Alaska"
+  neus$region <<- "Northeast US Spring"
+  neusF$region <<- "Northeast US Fall"
+  wctri$region <<- "West Coast Triennial"
+  wcann$region <<- "West Coast Annual"
+  gmex$region <<- "Gulf of Mexico"
+  seusSPRING$region <<- "Southeast US Spring"
+  seusSUMMER$region <<- "Southeast US Summer"
+  seusFALL$region <<- "Southeast US Fall"
+  
   #Here are the default names that we're not using currently
-#   ai$region <<- "AFSC_Aleutians"
-#   ebs$region <<- "AFSC_EBS"
-#   goa$region <<- "AFSC_GOA"
-#   neus$region <<- "NEFSC_NEUSSpring"
-#   wctri$region <<- "AFSC_WCTri"
-#   wcann$region <<- "NWFSC_WCAnn"
-#   gmex$region <<- "SEFSC_GOMex"
+  #   ai$region <<- "AFSC_Aleutians"
+  #   ebs$region <<- "AFSC_EBS"
+  #   goa$region <<- "AFSC_GOA"
+  #   neus$region <<- "NEFSC_NEUSSpring"
+  #   wctri$region <<- "AFSC_WCTri"
+  #   wcann$region <<- "NWFSC_WCAnn"
+  #   gmex$region <<- "SEFSC_GOMex"
   return(TRUE)
 } 
 
@@ -791,8 +791,8 @@ create_master_table = function () {
 #Functions to calculate [by region by species], by region, and by national
 trim_species_data = function(dat) {
   #Returns dat, but trimmed only to species with sufficient data
-
-
+  
+  
   ## Find a standard set of species (present at least 3/4 of the years in a region)
   presyr = aggregate(list(pres = dat$wtcpue>0), by=list(region = dat$region, spp=dat$spp, common=dat$common, year=dat$year), FUN=sum, na.rm=TRUE) # find which species are present in which years
   presyrsum = aggregate(list(presyr = presyr$pres>0), by=list(region=presyr$region, spp=presyr$spp, common=presyr$common), FUN=sum) # presyr col holds # years in which spp was present
@@ -805,14 +805,14 @@ trim_species_data = function(dat) {
   
   return(trimmed)
 }
-  
+
 species_data = function (dat) {
   #Returns species data
   
   ######################################################
   ## Calculate mean position through time for species ##
   ######################################################
-
+  
   # Calculate mean latitude and depth of each species by year within each survey/region
   datstrat = with(dat[!duplicated(dat[,c('region', 'stratum', 'haulid')]),], aggregate(list(lat = lat, lon = lon, depth = depth, stratumarea = stratumarea), by=list(stratum = stratum, region = region), FUN=meanna)) # mean lat/lon/depth for each stratum
   
@@ -848,36 +848,36 @@ species_data = function (dat) {
 # = Add 0's =
 # ===========
 explode0 <- function(x, by=c("region")){
-	# x <- copy(x)
-	stopifnot(is.data.table(x))
-	
-	# print(x[1])
-	
-	# x <- as.data.table(x)
-	# x <- as.data.table(dat)[region=="Eastern Bering Sea"]
-	# setkey(x, haulid, stratum, year, lat, lon, stratumarea, depth)
-	setorder(x, haulid, stratum, year, lat, lon, stratumarea, depth)
-	
-	u.spp <- x[,as.character(unique(spp))]
-	u.cmmn <- x[,common[!duplicated(as.character(spp))]]
-
-	x.loc <- x[,list(haulid, year, stratum, stratumarea, lat, lon, depth)]
-	setkey(x.loc, haulid, year)
-
-	x.skele <- x.loc[,list(spp=u.spp, common=u.cmmn), by=eval(colnames(x.loc))]
-	setkey(x.skele, haulid, year, spp)
-	x.skele <- unique(x.skele)
-	setcolorder(x.skele, c("haulid","year","spp", "common", "stratum", "stratumarea","lat","lon","depth"))
-	
-	x.spp.dat <- x[,list(haulid, year, spp, wtcpue)]
-	setkey(x.spp.dat, haulid, year, spp)
-	x.spp.dat <- unique(x.spp.dat)
-	
-	out <- x.spp.dat[x.skele]
-	
-	out$wtcpue[is.na(out$wtcpue)] <- 0
-	
-	out
+  # x <- copy(x)
+  stopifnot(is.data.table(x))
+  
+  # print(x[1])
+  
+  # x <- as.data.table(x)
+  # x <- as.data.table(dat)[region=="Eastern Bering Sea"]
+  # setkey(x, haulid, stratum, year, lat, lon, stratumarea, depth)
+  setorder(x, haulid, stratum, year, lat, lon, stratumarea, depth)
+  
+  u.spp <- x[,as.character(unique(spp))]
+  u.cmmn <- x[,common[!duplicated(as.character(spp))]]
+  
+  x.loc <- x[,list(haulid, year, stratum, stratumarea, lat, lon, depth)]
+  setkey(x.loc, haulid, year)
+  
+  x.skele <- x.loc[,list(spp=u.spp, common=u.cmmn), by=eval(colnames(x.loc))]
+  setkey(x.skele, haulid, year, spp)
+  x.skele <- unique(x.skele)
+  setcolorder(x.skele, c("haulid","year","spp", "common", "stratum", "stratumarea","lat","lon","depth"))
+  
+  x.spp.dat <- x[,list(haulid, year, spp, wtcpue)]
+  setkey(x.spp.dat, haulid, year, spp)
+  x.spp.dat <- unique(x.spp.dat)
+  
+  out <- x.spp.dat[x.skele]
+  
+  out$wtcpue[is.na(out$wtcpue)] <- 0
+  
+  out
 }
 
 
@@ -979,8 +979,8 @@ national_data = function (centbio) {
 
 plot_species = function(centbio) {
   # Species
-
-	# for latitude
+  
+  # for latitude
   #quartz(width = 10, height = 8)
   print("Starting latitude plots for species")
   pdf(file=paste(WORKING_DIRECTORY, '/sppcentlatstrat_', Sys.Date(), '.pdf', sep=''), width=10, height=8)
@@ -1011,8 +1011,8 @@ plot_species = function(centbio) {
   }
   
   dev.off()
-
-	# for depth
+  
+  # for depth
   print("Starting depth plots for species")
   pdf(file=paste(WORKING_DIRECTORY, '/sppcentdepthstrat_', Sys.Date(), '.pdf', sep=''), width=10, height=8)
   
@@ -1042,7 +1042,7 @@ plot_species = function(centbio) {
   }
   
   dev.off()
-
+  
 }
 
 plot_regional = function(regcentbio) {
@@ -1064,7 +1064,7 @@ plot_regional = function(regcentbio) {
     polygon(c(regcentbio$year[inds], rev(regcentbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
     lines(regcentbio$year[inds], regcentbio$lat[inds], col='#D95F02', lwd=2)
   }
-
+  
   par(mfrow=c(3,3)) # page 2: depth
   regs = sort(unique(regcentbio$region))
   for(i in 1:length(regs)){
@@ -1078,7 +1078,7 @@ plot_regional = function(regcentbio) {
     polygon(c(regcentbio$year[inds], rev(regcentbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
     lines(regcentbio$year[inds], regcentbio$depth[inds], col='#D95F02', lwd=2)
   }
-
+  
   
   dev.off()
 }
@@ -1125,7 +1125,7 @@ if(!exists('OVERRIDE_COMPILING') || !isTRUE(OVERRIDE_COMPILING) ) {
     
     ai = compile_AI()
     print_status('>AI done.')
-
+    
     ebs = compile_EBS()
     print_status('>EBS done.')
     
@@ -1134,7 +1134,7 @@ if(!exists('OVERRIDE_COMPILING') || !isTRUE(OVERRIDE_COMPILING) ) {
     
     neus = compile_NEUS()
     print_status('>NEUS done.')
-	
+    
     neusF = compile_NEUSF()
     print_status('>NEUSF done.')
     
@@ -1187,9 +1187,9 @@ print_status('Done.')
 if(isTRUE(HQ_DATA_ONLY)) {
   print_status('Removing Low-Quality Data.')
   hq_strata_complete = high_quality_strata()
-    print_status('>Low-Quality Strata removed.')
+  print_status('>Low-Quality Strata removed.')
   hq_years_complete = high_quality_years()
-    print_status('>Low-Quality Years removed.')
+  print_status('>Low-Quality Years removed.')
   print_status('Done.')
 }else{
   print_status('Skipping removal of Low-Quality Data.')
@@ -1229,7 +1229,7 @@ print_status('Done.')
 print_status('Adjust spp names where changed or modified.')
 adjust_spp_names_complete = adjust_spp_names()
 print_status('Done.')
-             
+
 print_status('Calculate corrected longitude where needed.')
 calculate_corrected_longitude_complete = calculate_corrected_longitude()
 print_status('Done.')
@@ -1322,7 +1322,6 @@ print_status('PROGRAM COMPLETED SUCCESSFULLY.')
 # = Clean-up Unzipped Updated Data Folder =
 # =========================================
 if(file.exists("Data_Updated")){
-	# delete all of directory's contents & directory
-	unlink("Data_Updated", recursive=TRUE)
+  # delete all of directory's contents & directory
+  unlink("Data_Updated", recursive=TRUE)
 }
-
