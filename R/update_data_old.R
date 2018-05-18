@@ -10,13 +10,14 @@ library(bit64)
 # ===============================
 # = Guess appropriate directory =
 # ===============================
-if(Sys.info()["sysname"]=="Linux"){
-  setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
-}else{
-  setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
-}
+# if(Sys.info()["sysname"]=="Linux"){
+#   setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
+# }else{
+#   setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
+# }
 
-new_data_loc <- "../data_raw"
+# working directory is project directory downloaded from github ####
+new_data_loc <- "./data_raw"
 
 
 
