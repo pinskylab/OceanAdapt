@@ -24,8 +24,13 @@ library(lubridate) # for manipulating 'DATE' and extracting 'SEASON' with sues
 library(zoo) # allows 'SEASON' to be extracted from 'DATE' with seus
 
 ### IMPORTANT VARIABLES
+
+# make sure this list is populated
 zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip"))
+
+# make sure this is pointing to the correct file
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
+
 unzip(recentZip)
 stopifnot(dir.exists("Data_Updated"))
 WORKING_DIRECTORY = file.path(getwd(), "data_updates/Data_Updated")
@@ -807,7 +812,7 @@ species_data = function (dat) {
   #Returns species data
   
   ######################################################
-  ## Calculate mean position through time for species ##
+  ## Calculate mean position through time for species ## ####
   ######################################################
   
   # Calculate mean latitude and depth of each species by year within each survey/region
@@ -842,7 +847,7 @@ species_data = function (dat) {
 }
 
 # ===========
-# = Add 0's =
+# = Add 0's =####
 # ===========
 explode0 <- function(x, by=c("region")){
   # x <- copy(x)
@@ -1108,7 +1113,7 @@ plot_national = function(natcentbio) {
 
 
 #  [ programfunction ]
-#Begin Preparation Protocol:
+#Begin Preparation Protocol: ####
 
 #Combine/compile data into single tables based on region.
 
@@ -1164,6 +1169,8 @@ if(!exists('OVERRIDE_COMPILING') || !isTRUE(OVERRIDE_COMPILING) ) {
 
 
 print_status('Region compiling complete.')
+
+# wait ####
 
 print_status('Create Haul IDs for each region.')
 haul_id_complete = create_haul_id()
@@ -1227,6 +1234,8 @@ print_status('Adjust spp names where changed or modified.')
 adjust_spp_names_complete = adjust_spp_names()
 print_status('Done.')
 
+# wait ####
+
 print_status('Calculate corrected longitude where needed.')
 calculate_corrected_longitude_complete = calculate_corrected_longitude()
 print_status('Done.')
@@ -1239,8 +1248,6 @@ print_status('Done.')
 print_status('Rearrange and Trim Columns.')
 rearrange_and_trim_complete = rearrange_and_trim_columns()
 print_status('Done.')
-
-
 
 #Master data set 
 print_status('Creating master database table.')
