@@ -1,11 +1,13 @@
-
+# setup libraries ####
 library("jsonlite")
 
+# setup save location and file names ####
 wcann_save_loc <- "data_raw/wcann"
 save_date <- Sys.Date()
 catch_file_name <- paste("wcann", "catch.csv", sep="_")
 haul_file_name <- paste("wcann", "haul.csv", sep="_")
 
+# define old names ####
 old_names <- c("Anoplopoma fimbria", "Antimora microlepis", "Apristurus brunneus",
 "Bathyagonus nigripinnis", "Bathyraja kincaidii (formerly B. interrupta)",
 "Careproctus melanurus", "Chauliodus macouni", "Glyptocephalus zachirus",
@@ -150,16 +152,20 @@ old_names <- c("Anoplopoma fimbria", "Antimora microlepis", "Apristurus brunneus
 # wcann_catch <- as.data.table(download_catch_rates(survey="WCGBTS", add_zeros=FALSE, species_set=500))
 # wcann_catch[,TowID:=as.character(TowID)]
 # new_names <- wcann_catch[,unique(Sci)]
+
+# define the urls for data and pull the data from the website ####
 url_catch <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003"
 data_catch <- jsonlite::fromJSON( url_catch )
 
 url_haul <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.operation_haul_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003"
 data_haul <- jsonlite::fromJSON( url_haul )
 
+# create folder to save data if it does not yet exist
 if(!dir.exists(file.path(wcann_save_loc, save_date))){
 	dir.create(file.path(wcann_save_loc, save_date))
 }
 
+# write the data to csv files ####
 write.csv(data_catch, file=file.path(wcann_save_loc, save_date, catch_file_name), row.names=FALSE)
 write.csv(data_haul, file=file.path(wcann_save_loc, save_date, haul_file_name), row.names=FALSE)
 
