@@ -19,9 +19,9 @@ library(data.table) # much of this code could be sped up by converting to data.t
 library(PBSmapping) # for calculating stratum areas
 library(maptools) # for calculating stratum areas
 library(Hmisc)
-require(stringr) # allow 'STRATA' to be extracted from 'STATIONCODE' with seus
-require(lubridate) # for manipulating 'DATE' and extracting 'SEASON' with sues
-require(zoo) # allows 'SEASON' to be extracted from 'DATE' with seus
+library(stringr) # allow 'STRATA' to be extracted from 'STATIONCODE' with seus
+library(lubridate) # for manipulating 'DATE' and extracting 'SEASON' with sues
+library(zoo) # allows 'SEASON' to be extracted from 'DATE' with seus
 
 ### IMPORTANT VARIABLES
 zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip"))
