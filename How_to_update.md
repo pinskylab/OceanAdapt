@@ -78,7 +78,7 @@ We want the full dataset every single time, from the start of the survey through
 
 ---
 ## Prepare the raw data for processing
-**Make sure the ai 2014-2016 file no longer contains the blank 1st line! **
+**Make sure the raw ai data files no longer contain the blank 1st line! This started in 2018**
 
 1. Open [R/update.data.R](https://github.com/mpinsky/OceanAdapt/blob/master/R/update.data.R). The working directory should be set to this script's directory ([R/](https://github.com/mpinsky/OceanAdapt/tree/master/R)) --- MRS has found that the script runs best when the working directory is the OceanAdapt directory, not the directory called "R" level.
 2. The script does a lot of formatting and checking:  
