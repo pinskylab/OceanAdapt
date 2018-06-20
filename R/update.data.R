@@ -507,10 +507,15 @@ file.copy(from="data_raw/taxonomy/spptaxonomy.csv", to="data_updates/Data_Update
 # Zip up and rename
 # oldwd <- getwd()
 # setwd(dirname(new.zip.folder)) # new.zip.folder is "./data_updates/Data_Updated"
+
+# zip the files
 zip(new.zip.folder, files=list.files(new.zip.folder,full=TRUE))
 # wait ####
 
-new.zip.file0 <- paste0(basename(new.zip.folder), "_",Sys.Date(),".zip") 
+# define the name of the newly zipped file
+new.zip.file0 <- paste0(new.zip.folder,".zip") 
+
+# rename the newly zipped file with the current date and time
 file.rename(new.zip.file0, renameNow(new.zip.file0))
 # setwd(oldwd)
 
@@ -518,6 +523,8 @@ file.rename(new.zip.file0, renameNow(new.zip.file0))
 # ======================================
 # = Delete Folder/ Files after Zipping =
 # ======================================
+
+# delete the unzipped folder 
 if(file.exists(new.zip.folder)){
 	# delete all of directory's contents & directory
 	unlink(new.zip.folder, recursive=TRUE)
