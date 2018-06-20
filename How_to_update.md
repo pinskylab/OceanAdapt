@@ -71,13 +71,16 @@ We want the full dataset every single time, from the start of the survey through
    7. In the two downloaded files, you need to delete last blank line in each file manually (i.e., open them up in a text editor, delete, save)
 8. **West Coast Triennial** (wctri): *no longer updated*. Used to be operated by the Alaska Fishery Science Center. But still copy the files over to new year (copy wctri_catch.csv, wctri_haul.csv, wctri_species.csv from data_raw/wctri/2017-06-16.zip [or whatever the previous year's .zip is]).
 <br>
-9. Zip the survey's sub-directory (the YYYY-MM-DD directory)
-10. Delete the original folder (keeping the .zip)
+**9. Zip the survey's sub-directory (the YYYY-MM-DD directory)**
+<br>
+**10. Delete the original folder (keeping the .zip)**
 
 
 ---
 ## Prepare the raw data for processing
-1. Open [R/update.data.R](https://github.com/mpinsky/OceanAdapt/blob/master/R/update.data.R). The working directory should be set to this script's directory ([R/](https://github.com/mpinsky/OceanAdapt/tree/master/R)) --- MRS has found that the script runs best when the working directory is the OceanAdapt directory, not the R level.
+**Make sure the ai 2014-2016 file no longer contains the blank 1st line! **
+
+1. Open [R/update.data.R](https://github.com/mpinsky/OceanAdapt/blob/master/R/update.data.R). The working directory should be set to this script's directory ([R/](https://github.com/mpinsky/OceanAdapt/tree/master/R)) --- MRS has found that the script runs best when the working directory is the OceanAdapt directory, not the directory called "R" level.
 2. The script does a lot of formatting and checking:  
    * The script will check the headers in the files and make sure they are correct, and to only continue saving/ processing columns needed by OA  
    * It strips problematic character formats from files (e.g., escaped quotes)  
