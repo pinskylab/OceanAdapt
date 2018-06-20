@@ -7,18 +7,10 @@ library(bit64)
 
 
 # # ===============================
-# # = Guess appropriate directory = ####
+# # = Set appropriate directory = ####
 # # ===============================
-# if(Sys.info()["sysname"]=="Linux"){
-# 	setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
-# }else{
-# 	setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
-# }
 
 new_data_loc <- "data_raw"
-
-
-
 
 # =======================================
 # = Names & Locations of New Data Files = ####
@@ -309,7 +301,6 @@ update_ai_goa_ebs(new_data_raw_goa, "goa")
 # = Update GMEX = ####
 # ===============
 # http://seamap.gsmfc.org/
-debugonce(read.csv.zip)
 newGMEX <- read.csv.zip(new_data_raw_gmex)
 # MRS 2018-06-20: getting this warning message at the point in the function when rawHeader is called, does not appear to affect data:
 # Warning message:
@@ -529,6 +520,3 @@ if(file.exists(new.zip.folder)){
 	# delete all of directory's contents & directory
 	unlink(new.zip.folder, recursive=TRUE)
 }
-
-
-
