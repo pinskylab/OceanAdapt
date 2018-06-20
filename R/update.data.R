@@ -1,6 +1,5 @@
-
 # =================
-# = Load Packages =
+# = Load Packages = ####
 # =================
 library(data.table)
 library(rbLib) # library(devtools); install_github("rBatt/rbLib")
@@ -8,7 +7,7 @@ library(bit64)
 
 
 # # ===============================
-# # = Guess appropriate directory =
+# # = Guess appropriate directory = ####
 # # ===============================
 # if(Sys.info()["sysname"]=="Linux"){
 # 	setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
@@ -22,11 +21,11 @@ new_data_loc <- "data_raw"
 
 
 # =======================================
-# = Names & Locations of New Data Files =
+# = Names & Locations of New Data Files = ####
 # =======================================
 date.zip.patt <- "[0-9]{4}-[0-9]{2}-[0-9]{2}.zip"
 
-# AI
+# AI ####
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 ai_fold <- "ai"
 ai.raw.path.top <- file.path(new_data_loc,ai_fold)
@@ -35,7 +34,7 @@ ai.file2 <- "ai_strata.csv"
 new_data_raw_ai <- sort(ai.fileS, dec=T)[1]
 
 
-# EBS
+# EBS ####
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 ebs_fold <- "ebs"
 ebs.raw.path.top <- file.path(new_data_loc,ebs_fold)
@@ -43,7 +42,8 @@ ebs.fileS <- list.files(ebs.raw.path.top, full.names=T, pattern=date.zip.patt)
 ebs.file2 <- "ebs_strata.csv"
 new_data_raw_ebs <- sort(ebs.fileS, dec=T)[1]
 
-# GOA
+
+# GOA ####
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 goa_fold <- "goa"
 goa.raw.path.top <- file.path(new_data_loc,goa_fold)
@@ -51,7 +51,8 @@ goa.fileS <- list.files(goa.raw.path.top, full.names=T, pattern=date.zip.patt)
 goa.file2 <- "goa_strata.csv"
 new_data_raw_goa <- sort(goa.fileS, dec=T)[1]
 
-# GMEX
+
+# GMEX ####
 # http://seamap.gsmfc.org/
 gmex_fold <- "gmex"
 gmex.raw.path.top <- file.path(new_data_loc,gmex_fold)
@@ -64,7 +65,7 @@ gmex.spp.file <- "NEWBIOCODESBIG.csv"
 gmex.station.file <- "STAREC.csv" #"STAREC.csv"
 gmex.tow.file <- "INVREC.csv"
 
-# NEUS
+# NEUS ####
 # Sean Lucey - NOAA Federal <sean.lucey@noaa.gov>
 neus_fold <- "neus"
 neus.raw.path.top <- file.path(new_data_loc,neus_fold)
@@ -79,7 +80,7 @@ neus_surv_csv <- "neus_data.csv"
 neus_spp_csv <- "neus_svspp.csv"
 neus_strata_csv <- "neus_strata.csv"
 
-# SEUS
+# SEUS ####
 seus_fold <- "seus"
 seus.raw.path.top <- file.path(new_data_loc,seus_fold)
 seus.fileS <- list.files(seus.raw.path.top, full.names=T, pattern=date.zip.patt)
@@ -90,7 +91,7 @@ seus.haul.file <- "seus_haul.csv"
 seus.strata.file <- "seus_strata.csv"
 
 
-# WCTRI
+# WCTRI ####
 wctri_fold <- "wctri"
 wctri.raw.path.top <- file.path(new_data_loc,wctri_fold)
 wctri.fileS <- list.files(wctri.raw.path.top, full.names=TRUE, pattern=date.zip.patt)
@@ -101,7 +102,7 @@ wctri.haul.file <- "HAULWCTRIALLCOAST.csv"
 wctri.species.file <- "RACEBASE_SPECIES.csv"
 
 
-# WCANN
+# WCANN ####
 wcann_fold <- "wcann"
 wcann.raw.path.top <- file.path(new_data_loc,wcann_fold)
 wcann.fileS <- list.files(wcann.raw.path.top, full.names=TRUE, pattern=date.zip.patt)
@@ -109,6 +110,8 @@ new_data_raw_wcann <- sort(wcann.fileS, dec=T)[1]
 
 wcann.catch.pattern <- "wcann_catch\\.csv$"
 wcann.haul.pattern <- "wcann_haul\\.csv$"
+
+# go down the list of new_data_raw and make sure all are pointing to the correct date
 
 
 # wcann_fish_set_cn <- c("Trawl Id"="TowID","Species"="Sci","Haul Weight (kg)"="Wt","Individual Average Weight (kg)")
@@ -119,7 +122,7 @@ wcann.haul.pattern <- "wcann_haul\\.csv$"
 # wcann_invert_set_cn <- c("Trawl Id","Species","Haul Weight (kg)","Individual Average Weight (kg)")
 
 # ====================================================
-# = Function to Trim Trailing and Leading Whitespace =
+# = Function to Trim Trailing and Leading Whitespace = ####
 # ====================================================
 # http://stackoverflow.com/questions/2261079/how-to-trim-leading-and-trailing-whitespace-in-r
 # Simple regex, but the answer also provides some other handy tricks
@@ -128,13 +131,13 @@ trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
 
 # ==============================
-# = Function to Wrap in Quotes =
+# = Function to Wrap in Quotes = ####
 # ==============================
 wrap.quotes <- function(x){gsub("(.+)", "\"\\1\"", x)}
 
 
 # ===================================
-# = Function to read files from zip =
+# = Function to read files from zip = ####
 # ===================================
 read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALSE, rawHeader=FALSE, ...){
 	
@@ -185,7 +188,7 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALS
 
 
 # ============================================
-# = Read in Old Data Sets (currently zipped) =
+# = Read in Old Data Sets (currently zipped) = ####
 # ============================================
 zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip")) # zipFiles only used in next few lines; intended to find old data sets, which is used both for main data (which we're now just redownloading every year), as well as for the strata files etc.
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
@@ -202,7 +205,7 @@ old_upData_colClasses <- lapply(upData, function(x)sapply(x, class))
 
 
 # ===========================
-# = Identify New Zip Folder =
+# = Identify New Zip Folder = ####
 # ===========================
 # new.zip.folder is where all the newly-gathered .csv's will be written
 # for NEUS, is also where the helper data file (strat or spp id file) will be read
@@ -213,7 +216,7 @@ new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
 
 
 # ========================================================
-# = Prepare the Directory that will be Focus of Updates  =
+# = Prepare the Directory that will be Focus of Updates  = ####
 # ========================================================
 	# ensure clean start by deleting this directory and all of its contents, the recreating it
 if(file.exists(new.zip.folder)){
@@ -235,7 +238,7 @@ if(!file.exists(new.zip.folder)){
 
 
 # ======================================
-# = Unzip Most Recent Zip File Locally =
+# = Unzip Most Recent Zip File Locally = ####
 # ======================================
 # create explosion of .csv files inside data_updates
 # these .csv's are from data vis
@@ -245,7 +248,7 @@ if(!file.exists(new.zip.folder)){
 
 
 # ================================
-# = Function for alaskan regions =
+# = Function for alaskan regions = ####
 # ================================
 update_ai_goa_ebs <- function(new_data_raw_reg, reg=c("ai","ebs","goa")){
 	reg <- match.arg(reg)
@@ -281,15 +284,13 @@ update_ai_goa_ebs <- function(new_data_raw_reg, reg=c("ai","ebs","goa")){
 
 
 # =============
-# = Update AI =
+# = Update AI = ####
 # =============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 update_ai_goa_ebs(new_data_raw_ai, "ai")
 
-# wait ####
-
 # ==============
-# = Update EBS =
+# = Update EBS = ####
 # ==============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 update_ai_goa_ebs(new_data_raw_ebs, "ebs")
@@ -297,7 +298,7 @@ update_ai_goa_ebs(new_data_raw_ebs, "ebs")
 # wait ####
 
 # ==============
-# = Update GOA =
+# = Update GOA = ####
 # ==============
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 update_ai_goa_ebs(new_data_raw_goa, "goa")
@@ -305,11 +306,15 @@ update_ai_goa_ebs(new_data_raw_goa, "goa")
 # wait ####
 
 # ===============
-# = Update GMEX =
+# = Update GMEX = ####
 # ===============
 # http://seamap.gsmfc.org/
+debugonce(read.csv.zip)
 newGMEX <- read.csv.zip(new_data_raw_gmex)
-
+# MRS 2018-06-20: getting this warning message at the point in the function when rawHeader is called, does not appear to affect data:
+# Warning message:
+# In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
+    # EOF within quoted string
 # wait ####
 
 update_gmex <- function(readFile, writeFile){
@@ -350,7 +355,7 @@ cat(gmexStation_noEsc, file=gmex.station.file.new, sep="\n")
 
 
 # ========
-# = NEUS =
+# = NEUS = ####
 # ========
 # NEUS Data
 if(file.exists(new_data_raw_neus)){
@@ -423,11 +428,15 @@ if(file.exists(new_data_raw_neus)){
 	
 }
 
+# wait ####
 
 # ========
-# = SEUS =
+# = SEUS = ####
 # ========
 newSEUS <- read.csv.zip(new_data_raw_seus)
+
+# wait #
+
 update_seus <- function(readFile, writeFile){
 	# needs newSEUS, old_upData_colNames, new.zip.folder (getting from parent.frame())
 	# old_names <- old_upData_colNames[[writeFile]]
@@ -438,15 +447,15 @@ update_seus <- function(readFile, writeFile){
 	write.csv(new_data, file=file.path(new.zip.folder,writeFile), row.names=FALSE, quote=FALSE)
 	invisible(NULL)
 }
-# wait ###
+# wait #
 update_seus(seus.catch.file, seus.catch.file)
-# wait ###
+# wait #
 update_seus(seus.haul.file, seus.haul.file)
 update_seus(seus.strata.file, seus.strata.file)
 
 
 # ===============
-# = Update WFSC =
+# = Update WFSC = ####
 # ===============
 if(file.exists(new_data_raw_wcann)){
 	newWCANN <- read.csv.zip(new_data_raw_wcann) # custom function to read from zip
@@ -469,7 +478,7 @@ if(file.exists(new_data_raw_wcann)){
 # wait ####
 
 # =========
-# = WCTRI =
+# = WCTRI = ####
 # =========
 # This is just a read and re-write
 # Could copy and rename, but this will just repeat the processing of reading into R, possibly serving as a check and providing a template for more detailed checks on data format if later desired
@@ -496,14 +505,14 @@ file.copy(from="data_raw/taxonomy/spptaxonomy.csv", to="data_updates/Data_Update
 # = Zip File for GitHub =
 # =======================
 # Zip up and rename
-oldwd <- getwd()
-setwd(dirname(new.zip.folder)) # new.zip.folder is "./data_updates/Data_Updated"
-zip(basename(new.zip.folder), files=list.files(basename(new.zip.folder),full=TRUE))
+# oldwd <- getwd()
+# setwd(dirname(new.zip.folder)) # new.zip.folder is "./data_updates/Data_Updated"
+zip(new.zip.folder, files=list.files(new.zip.folder,full=TRUE))
 # wait ####
 
-new.zip.file0 <- paste0(basename(new.zip.folder),".zip")
+new.zip.file0 <- paste0(basename(new.zip.folder), "_",Sys.Date(),".zip") 
 file.rename(new.zip.file0, renameNow(new.zip.file0))
-setwd(oldwd)
+# setwd(oldwd)
 
 
 # ======================================
