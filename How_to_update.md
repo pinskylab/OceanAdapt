@@ -70,7 +70,8 @@ We want the full dataset every single time, from the start of the survey through
       3. Unzip the previous year and copy over the seus_strata.csv
    7. In the two downloaded files, you need to delete last blank line in each file manually (i.e., open them up in a text editor, delete, save)
 8. **West Coast Triennial** (wctri): *no longer updated*. Used to be operated by the Alaska Fishery Science Center. But still copy the files over to new year (copy wctri_catch.csv, wctri_haul.csv, wctri_species.csv from data_raw/wctri/2017-06-16.zip [or whatever the previous year's .zip is]).
-9. Zip the survey's sub-directory up
+<br>
+9. Zip the survey's sub-directory (the YYYY-MM-DD directory)
 10. Delete the original folder (keeping the .zip)
 
 
