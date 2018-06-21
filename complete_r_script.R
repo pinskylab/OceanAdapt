@@ -32,7 +32,7 @@ zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip")
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 
 unzip(recentZip)
-stopifnot(dir.exists("Data_Updated"))
+stopifnot(dir.exists("data_updates/Data_Updated"))
 WORKING_DIRECTORY = file.path(getwd(), "data_updates/Data_Updated")
 
 
@@ -1322,10 +1322,17 @@ if(isTRUE(OPTIONAL_PLOT_CHARTS)) {
 
 print_status('PROGRAM COMPLETED SUCCESSFULLY.')  
 
+# test
+# test <- read.csv("data_updates/Data_Updated/ebs_data.csv")
+# make sure most recent year data is present
+
 # =========================================
 # = Clean-up Unzipped Updated Data Folder =
 # =========================================
-if(file.exists("Data_Updated")){
+if(file.exists("data_updates/Data_Updated")){
   # delete all of directory's contents & directory
-  unlink("Data_Updated", recursive=TRUE)
+  unlink("data_updates/Data_Updated", recursive=TRUE)
 }
+
+
+
