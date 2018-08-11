@@ -64,6 +64,7 @@ We want the full dataset every single time, from the start of the survey through
       2. Abundance and Biomass
    5. For the list of data values, click the |<- button on the right and it will move all of the values over to the left.
         * Note: It'll play whack-a-mole with you (meaning once you have moved fields to the left, they will pop back over to the right) … have fun! (If you don't encounter this annoyance, don't worry)
+        * If the selections end at seasons and dont' show species, it is giving an incomplete report and you might need to reload the page or switch browsers (chrome is still buggy but can give better results than safari, for example).
    6. There are 3 files you need:
       1. Rename the "Event Information" download as seus_haul.csv
       2. Rename the "Abundance and Biomass" download as seus_catch.csv
