@@ -15,6 +15,8 @@ library(bit64)
 #   setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
 # }
 
+oldwd2 <- getwd()
+
 setwd("R")
 new_data_loc <- "../data_raw"
 
@@ -493,3 +495,4 @@ if(file.exists(new.zip.folder)){
 }
 
 
+setwd(oldwd2)
