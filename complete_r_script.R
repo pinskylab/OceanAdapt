@@ -1117,6 +1117,14 @@ plot_national = function(natcentbio) {
 
 print_status('Begin region compiling.')
 
+# 2018-09-19 - MRS received error message because Data_Updated unzipped into OceanAdapt folder instead of inside data_updates:
+# Error in value[[3L]](cond) : [ERROR] One or more files were missing.
+# In addition: Warning message:
+#   In file(file, "rt") :
+#   cannot open file '/Users/macair/Documents/OceanAdapt/data_updates/Data_Updated/spptaxonomy.csv': No such file or directory
+
+### Manually unzip Data_Updated so that it unzips within data_updates ####
+
 if(!exists('OVERRIDE_COMPILING') || !isTRUE(OVERRIDE_COMPILING) ) {
   tryCatch({
     
