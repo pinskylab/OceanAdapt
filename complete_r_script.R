@@ -1294,6 +1294,11 @@ print_status('Begin calculating by species, region, and national data')
 trimmed_dat <- trim_species_data(dat) # trim to species with enough data
 BY_SPECIES_DATA = species_data(trimmed_dat) #NOTE: Might take a little bit depending on processor speed
 print_status('>Species data complete.')
+# 2018-09-19 - MRS produced warning message: ####
+# Warning message:
+#   In sqrt(wtd.var(x = x[, 1], weights = x[, 2], na.rm = TRUE, normwt = TRUE)) :
+#   NaNs produced
+
 
 # ===========
 # = Add 0's =
@@ -1336,3 +1341,4 @@ if(file.exists("Data_Updated")){
   # delete all of directory's contents & directory
   unlink("Data_Updated", recursive=TRUE)
 }
+
