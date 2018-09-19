@@ -10,12 +10,13 @@ library(bit64)
 # ===============================
 # = Guess appropriate directory =
 # ===============================
-if(Sys.info()["sysname"]=="Linux"){
-  setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
-}else{
-  setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
-}
+# if(Sys.info()["sysname"]=="Linux"){
+#   setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
+# }else{
+#   setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
+# }
 
+setwd("R")
 new_data_loc <- "../data_raw"
 
 
