@@ -7,6 +7,7 @@
 #   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with the script and run it. 
 
 # setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/")
+setwd("/Users/macair/Documents/OceanAdapt/")
 
 
 ### File Structure
@@ -236,6 +237,8 @@ compile_SEUSSpr = function () {
   #Southeast US
   #function returns seusSPRING
   survcatch = data.table(read.csv(file=paste(WORKING_DIRECTORY, '/seus_catch.csv', sep=''), stringsAsFactors=FALSE))
+  
+  
   survhaul = data.table(read.csv(paste(WORKING_DIRECTORY, '/seus_haul.csv', sep=''), stringsAsFactors=FALSE)) # only needed for DEPTHSTART
   survhaul <- unique(data.table(EVENTNAME = survhaul$EVENTNAME, DEPTHSTART = survhaul$DEPTHSTART))
   seusstrata = data.table(read.csv(paste(WORKING_DIRECTORY, '/seus_strata.csv', sep=''))) # contains strata areas
