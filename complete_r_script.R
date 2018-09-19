@@ -7,7 +7,7 @@
 #   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with the script and run it. 
 
 # setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/")
-setwd("/Users/macair/Documents/OceanAdapt/")
+# setwd("/Users/macair/Documents/OceanAdapt/")
 
 
 ### File Structure
