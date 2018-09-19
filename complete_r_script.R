@@ -1,10 +1,13 @@
 ### READ THIS FIRST TO RUN THIS FILE
 # This script runs using the RAW data as downloaded from the OceanAdapt website (http://oceanadapt.rutgers.edu)
-# Put the zipped data files that you downloaded from OceanAdapt in a directory called data_updates/ and put this script in the enclosing directory (one level up). Note that if you have cloned the Git repository, this is the structure that already exists. No need to unzip anything.
+# Put the zipped data files that you downloaded from OceanAdapt in a directory called data_updates/ and put this script in the enclosing directory. Note that if you have cloned the Git repository, this is the structure that already exists. No need to unzip anything.
 # There are then three ways to run the script, from easiest to somewhat more advanced:
 #   1) Use `source('PATH/complete_r_script.R', chdir=TRUE)`, where PATH is replaced with the path to the script (even easier on some systems: drag and drop this script onto the R window and it will source it automatically). The chdir option will temporarily change the working directory to where the script is located. Please use command `?source` for more information.
 #   2) Open R, manually change the working directory to the directory with the complete_r_script.r, and run all the code in this script. 
 #   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with the script and run it. 
+
+# setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/")
+
 
 ### File Structure
 #In this file: the top contains required variables and libraries and flags.
@@ -19,20 +22,15 @@ library(data.table) # much of this code could be sped up by converting to data.t
 library(PBSmapping) # for calculating stratum areas
 library(maptools) # for calculating stratum areas
 library(Hmisc)
-library(stringr) # allow 'STRATA' to be extracted from 'STATIONCODE' with seus
-library(lubridate) # for manipulating 'DATE' and extracting 'SEASON' with sues
-library(zoo) # allows 'SEASON' to be extracted from 'DATE' with seus
+require(stringr) # allow 'STRATA' to be extracted from 'STATIONCODE' with seus
+require(lubridate) # for manipulating 'DATE' and extracting 'SEASON' with sues
+require(zoo) # allows 'SEASON' to be extracted from 'DATE' with seus
 
 ### IMPORTANT VARIABLES
-
-# make sure this list is populated
 zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip"))
-
-# make sure this is pointing to the correct file
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
-
 unzip(recentZip)
-stopifnot(dir.exists("data_updates/Data_Updated"))
+stopifnot(dir.exists("Data_Updated"))
 WORKING_DIRECTORY = file.path(getwd(), "data_updates/Data_Updated")
 
 
@@ -812,7 +810,7 @@ species_data = function (dat) {
   #Returns species data
   
   ######################################################
-  ## Calculate mean position through time for species ## ####
+  ## Calculate mean position through time for species ##
   ######################################################
   
   # Calculate mean latitude and depth of each species by year within each survey/region
@@ -847,7 +845,7 @@ species_data = function (dat) {
 }
 
 # ===========
-# = Add 0's =####
+# = Add 0's =
 # ===========
 explode0 <- function(x, by=c("region")){
   # x <- copy(x)
@@ -1113,7 +1111,7 @@ plot_national = function(natcentbio) {
 
 
 #  [ programfunction ]
-#Begin Preparation Protocol: ####
+#Begin Preparation Protocol:
 
 #Combine/compile data into single tables based on region.
 
@@ -1169,8 +1167,6 @@ if(!exists('OVERRIDE_COMPILING') || !isTRUE(OVERRIDE_COMPILING) ) {
 
 
 print_status('Region compiling complete.')
-
-# wait ####
 
 print_status('Create Haul IDs for each region.')
 haul_id_complete = create_haul_id()
@@ -1234,8 +1230,6 @@ print_status('Adjust spp names where changed or modified.')
 adjust_spp_names_complete = adjust_spp_names()
 print_status('Done.')
 
-# wait ####
-
 print_status('Calculate corrected longitude where needed.')
 calculate_corrected_longitude_complete = calculate_corrected_longitude()
 print_status('Done.')
@@ -1248,6 +1242,8 @@ print_status('Done.')
 print_status('Rearrange and Trim Columns.')
 rearrange_and_trim_complete = rearrange_and_trim_columns()
 print_status('Done.')
+
+
 
 #Master data set 
 print_status('Creating master database table.')
@@ -1322,17 +1318,10 @@ if(isTRUE(OPTIONAL_PLOT_CHARTS)) {
 
 print_status('PROGRAM COMPLETED SUCCESSFULLY.')  
 
-# test
-# test <- read.csv("data_updates/Data_Updated/ebs_data.csv")
-# make sure most recent year data is present
-
 # =========================================
 # = Clean-up Unzipped Updated Data Folder =
 # =========================================
-if(file.exists("data_updates/Data_Updated")){
+if(file.exists("Data_Updated")){
   # delete all of directory's contents & directory
-  unlink("data_updates/Data_Updated", recursive=TRUE)
+  unlink("Data_Updated", recursive=TRUE)
 }
-
-
-
