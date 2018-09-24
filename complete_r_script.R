@@ -32,7 +32,7 @@ zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip")
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 unzip(recentZip)
 stopifnot(dir.exists("Data_Updated"))
-WORKING_DIRECTORY = file.path(getwd(), "data_updates/Data_Updated")
+WORKING_DIRECTORY = file.path(getwd(), "Data_Updated")
 
 
 
@@ -812,9 +812,9 @@ trim_species_data = function(dat) {
 species_data = function (dat) {
   #Returns species data
   
-  ######################################################
-  ## Calculate mean position through time for species ##
-  ######################################################
+  
+  ## Calculate mean position through time for species ####
+  
   
   # Calculate mean latitude and depth of each species by year within each survey/region
   datstrat = with(dat[!duplicated(dat[,c('region', 'stratum', 'haulid')]),], aggregate(list(lat = lat, lon = lon, depth = depth, stratumarea = stratumarea), by=list(stratum = stratum, region = region), FUN=meanna)) # mean lat/lon/depth for each stratum
@@ -847,9 +847,9 @@ species_data = function (dat) {
   
 }
 
-# ===========
-# = Add 0's =
-# ===========
+
+# = Add 0's =####
+
 explode0 <- function(x, by=c("region")){
   # x <- copy(x)
   stopifnot(is.data.table(x))
@@ -889,9 +889,9 @@ region_data = function (centbio) {
   #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
   
   
-  ######################################################
-  ## Calculate mean position through time for regions ##
-  ######################################################
+  
+  ## Calculate mean position through time for regions ####
+  
   ## Find a standard set of species (present every year in a region)
   presyr = aggregate(list(pres = dat$wtcpue>0), by=list(region = dat$region, spp=dat$spp, year=dat$year), FUN=sum, na.rm=TRUE) # find which species are present in which years
   presyrsum = aggregate(list(presyr = presyr$pres>0), by=list(region=presyr$region, spp=presyr$spp), FUN=sum) # presyr col holds # years in which spp was present
@@ -932,9 +932,9 @@ region_data = function (centbio) {
 national_data = function (centbio) {
   #Returns national data
   #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
-  #####################################################
-  ## Calculate mean position through time for the US ##
-  #####################################################
+  
+  ## Calculate mean position through time for the US #####
+  
   
   #WHEN USING ENGLISH NAMES FROM add_region_column(), UNCOMMENT NEXT LINE:
   regstouse = c('Eastern Bering Sea', 'Northeast US Spring', 'Northeast US Fall') # Only include regions not constrained by geography in which surveys have consistent methods through time
@@ -1113,14 +1113,14 @@ plot_national = function(natcentbio) {
 }
 
 
-#  [ programfunction ]
+#  [ programfunction ] ####
 #Begin Preparation Protocol:
 
 #Combine/compile data into single tables based on region.
 
 print_status('Begin region compiling.')
 
-# 2018-09-19 - MRS received error message because Data_Updated unzipped into OceanAdapt folder instead of inside data_updates:
+# 2018-09-19  - MRS received error message because Data_Updated unzipped into OceanAdapt folder instead of inside data_updates: ####
 # Error in value[[3L]](cond) : [ERROR] One or more files were missing.
 # In addition: Warning message:
 #   In file(file, "rt") :
