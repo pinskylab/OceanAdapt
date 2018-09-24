@@ -588,12 +588,25 @@ remove_paired_tows = function () {
   
   #In seus there are two 'COLLECTIONNUMBERS' per 'EVENTNAME', with no exceptions; EFFORT is always the same for each COLLECTIONNUMBER
   # We sum the two tows in seus
-  seusSPRING <<- aggregate(list(BIOMASS = seusSPRING$SPECIESTOTALWEIGHT), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, SEASON = seusSPRING$SEASON, EFFORT = seusSPRING$EFFORT, spp = seusSPRING$spp), FUN=sum)
-  seusSPRING$wtcpue <<- seusSPRING$BIOMASS/(seusSPRING$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
-  seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, EFFORT = seusSUMMER$EFFORT, spp = seusSUMMER$spp), FUN=sum)
-  seusSUMMER$wtcpue <<- seusSUMMER$BIOMASS/(seusSUMMER$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
-  seusFALL <<- aggregate(list(BIOMASS = seusFALL$SPECIESTOTALWEIGHT), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, SEASON = seusFALL$SEASON, EFFORT = seusFALL$EFFORT, spp = seusFALL$spp), FUN=sum)
-  seusFALL$wtcpue <<- seusFALL$BIOMASS/(seusFALL$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  ### As of 2018-09-24 MRS found that SEUS is producing raw abundance data with all NA's in the effort column.  Have emailed them to make sure this is intentional.  in the meantime, adjusting script to reflect lack of effort data
+  # original code ________________________________________####
+  # seusSPRING <<- aggregate(list(BIOMASS = seusSPRING$SPECIESTOTALWEIGHT), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, SEASON = seusSPRING$SEASON, EFFORT = seusSPRING$EFFORT, spp = seusSPRING$spp), FUN=sum)
+  # seusSPRING$wtcpue <<- seusSPRING$BIOMASS/(seusSPRING$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  # seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, EFFORT = seusSUMMER$EFFORT, spp = seusSUMMER$spp), FUN=sum)
+  # seusSUMMER$wtcpue <<- seusSUMMER$BIOMASS/(seusSUMMER$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  # seusFALL <<- aggregate(list(BIOMASS = seusFALL$SPECIESTOTALWEIGHT), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, SEASON = seusFALL$SEASON, EFFORT = seusFALL$EFFORT, spp = seusFALL$spp), FUN=sum)
+  # seusFALL$wtcpue <<- seusFALL$BIOMASS/(seusFALL$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  #________________________________________________________
+  # temp code _______________________________________####
+seusSPRING <<- aggregate(list(BIOMASS = seusSPRING$SPECIESTOTALWEIGHT), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, SEASON = seusSPRING$SEASON, spp = seusSPRING$spp), FUN=sum)
+  seusSPRING$wtcpue <<- seusSPRING$BIOMASS
+  #yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, spp = seusSUMMER$spp), FUN=sum)
+  seusSUMMER$wtcpue <<- seusSUMMER$BIOMASS #yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  seusFALL <<- aggregate(list(BIOMASS = seusFALL$SPECIESTOTALWEIGHT), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, SEASON = seusFALL$SEASON, spp = seusFALL$spp), FUN=sum)
+  seusFALL$wtcpue <<- seusFALL$BIOMASS#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  #___________________________________________________
+  
   
   return(TRUE)
 }
@@ -1113,8 +1126,8 @@ plot_national = function(natcentbio) {
 }
 
 
-#  [ programfunction ] ####
-#Begin Preparation Protocol:
+#  [ programfunction ]
+#Begin Preparation Protocol: ####
 
 #Combine/compile data into single tables based on region.
 
@@ -1298,11 +1311,12 @@ print_status('>Species data complete.')
 # Warning message:
 #   In sqrt(wtd.var(x = x[, 1], weights = x[, 2], na.rm = TRUE, normwt = TRUE)) :
 #   NaNs produced
+# this line in the function is causing that error: centbiodepthse = summarize(datstratyr[, c('depth', 'wttot')], by = list(region = datstratyr$region, spp = datstratyr$spp, common=datstratyr$common, year = datstratyr$year), FUN = wgtse, na.rm=TRUE, stat.name = 'depthse') # SE for depth
 
 
-# ===========
-# = Add 0's =
-# ===========
+
+# = Add 0's = ####
+
 td_factorColumns <- sapply(trimmed_dat, is.factor)
 trimmed_dat[,td_factorColumns] <- lapply(trimmed_dat[,td_factorColumns], as.character)
 dat.exploded <- as.data.table(trimmed_dat)[,explode0(.SD), by="region"]
