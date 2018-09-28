@@ -13,14 +13,30 @@ dir <- list.dirs(target)
 # list the files within that directory
 files <- list.files(dir)
   
-file.copy(from=paste0(dir,"/BGSREC.csv"), to=file.path("data_updates/Data_Updated/gmex_bio.csv"), overwrite=TRUE)
-# check to make sure these files are identical
- 
-      }
-  }
-  readr::write_csv(dat, path = paste0("data_updates/Data_Updated/", dirs[i], "_data.csv"))
-  
+bio <-read.csv(paste0(dir,"/BGSREC.csv"), stringsAsFactors = F) %>% 
+  select(-INVRECID, -X)
+readr::write_csv(bio, path = "data_updates/Data_Updated/gmex_bio.csv")
+
+cruise <-read.csv(paste0(dir,"/CRUISES.csv"), stringsAsFactors = F) %>% 
+  select(-X)
+readr::write_csv(cruise, path = "data_updates/Data_Updated/gmex_cruise.csv")
+
+spp <-read.csv(paste0(dir,"/NEWBIOCODESBIG.csv"), stringsAsFactors = F) %>% 
+select(-X, -tsn_accepted)
+readr::write_csv(spp, path = "data_updates/Data_Updated/gmex_spp.csv")
+
+gmexStation_raw <- readLines(paste0(dir,"/STAREC.csv"))
+esc_patt <- "\\\\\\\""
+esc_replace <- "\\\"\\\""
+gmexStation_noEsc <- gsub(esc_patt, esc_replace, gmexStation_raw)
+gmex.station.file.new <- file.path(new.zip.folder,"gmex_station.csv")
+cat(gmexStation_noEsc, file="data_updates/Data_Updated/gmex_station.csv", sep="\n")
+
+tow <-read.csv(paste0(dir,"/INVREC.csv"), stringsAsFactors = F) %>% 
+  select(-X)
+readr::write_csv(tow, path = "data_updates/Data_Updated/gmex_tow.csv")
     
-    print(paste0("completed ", dirs[i]))
+
+print(paste0("completed ", dirs))
 
 

@@ -20,6 +20,9 @@ source("R/update_alaska.R")
 # Update gmex ----
 source("R/update_gmex.R")
 
+# Update neus ----
+source("R/update_neus.R")
+
 
 source("R/fix_seus.R")
 

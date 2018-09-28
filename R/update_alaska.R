@@ -15,6 +15,7 @@ for (i in seq(dirs)){
   dir <- list.dirs(target)
   # list the files within that directory
   files <- list.files(dir)
+  # change to full.names = T?####
   
   # create blank table
   dat <- tibble()
