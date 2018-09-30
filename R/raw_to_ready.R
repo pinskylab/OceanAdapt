@@ -2,10 +2,9 @@
 
 
 
-## Make sure that all files have been downloaded from icloud ####
+# Make sure that all files have been downloaded from icloud ####
 
-
-
+# Create an empty folder called Data_Updated in the data_updates directory
 
 # Setup ----
 library(dplyr)
@@ -44,3 +43,5 @@ source("R/update_wctri.R")
 
 # = Copy Taxonomy =====
 file.copy(from="data_raw/taxonomy/spptaxonomy.csv", to="data_updates/Data_Updated", overwrite=TRUE)
+
+# zip the Data_Update directory including the date in the zip file name
