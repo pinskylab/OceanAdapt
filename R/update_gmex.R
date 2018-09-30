@@ -8,6 +8,7 @@
 
 # define file path
 target <- paste0("data_raw/gmex/", params$date)
+
 # list the directory at that file path
 dir <- list.dirs(target)
 # list the files within that directory
@@ -29,7 +30,6 @@ gmexStation_raw <- readLines(paste0(dir,"/STAREC.csv"))
 esc_patt <- "\\\\\\\""
 esc_replace <- "\\\"\\\""
 gmexStation_noEsc <- gsub(esc_patt, esc_replace, gmexStation_raw)
-gmex.station.file.new <- file.path(new.zip.folder,"gmex_station.csv")
 cat(gmexStation_noEsc, file="data_updates/Data_Updated/gmex_station.csv", sep="\n")
 
 tow <-read.csv(paste0(dir,"/INVREC.csv"), stringsAsFactors = F) %>% 
@@ -37,6 +37,6 @@ tow <-read.csv(paste0(dir,"/INVREC.csv"), stringsAsFactors = F) %>%
 readr::write_csv(tow, path = "data_updates/Data_Updated/gmex_tow.csv")
     
 
-print(paste0("completed ", dirs))
+print(paste0("completed gmex"))
 
 
