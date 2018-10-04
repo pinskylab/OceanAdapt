@@ -25,6 +25,28 @@ download_ak <- function(region, ak_files){
     # delete the downloaded zip file
     file.remove(file)
   }
+  #Unzip the most recent zip and copy over the strata file.
+  
+  # list all of the zip files for this region
+  zipFiles <- file.info(list.files(paste0("data_raw/", region), full=TRUE, patt=".zip"))
+  
+  # define the most recent zip file
+  recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1], ])
+  
+  # define a temporary space to unzip the file
+  zipdir <- tempfile()# Create a name for the dir where we'll unzip
+  
+  # create the temporary space
+  dir.create(zipdir)# Create the dir using that name
+  
+  # unzip the file into that temp space
+  unzip(recentZip, exdir=zipdir)# Unzip the file into the dir
+  
+  # list any files that contain strata in the name
+  strat<- list.files(zipdir, recursive = T, pattern = "strata", full = T)
+  
+  # copy over the strat file
+  file.copy(from=strat, to=new_dir)
 }
 
 # Define Regions of Interest ####
@@ -50,8 +72,9 @@ ai_files <- tibble(survey = c(
   "ai2014_2016.zip"
 ))
 
-# 2. Download the raw data from the website
-download_ak(region, ai_files)
+# 2. Download the raw data from the website and copy over the strata file
+download_ak("ai", ai_files)
 
-# 3. Unzip the most recent zip and copy over the strata file.
+
+
 
