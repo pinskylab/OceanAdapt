@@ -5,14 +5,19 @@
 # especially when that repository is loaded as a project into RStudio.
 # The working directory is assumed to be the OceanAdapt directory of this repository.
 
+# what is the working date of the update (what is the date of the folders, downloads)
+work_date <- "2018-10-04"
+
 library(tidyverse)
 library(jsonlite)
 library(data.table)
 
+
+
 # Functions ====
 download_ak <- function(region, ak_files){
   # define the destination folder
-  new_dir <- file.path(paste0("data_raw/", region, "/", Sys.Date()))
+  new_dir <- file.path(paste0("data_raw/", region, "/", ))
   # create the destination folder
   dir.create(new_dir)
   for (i in seq(ak_files$survey)){
@@ -120,7 +125,7 @@ dir.create(file.path("data_updates/Data_Updated/"))
 
 for (i in seq(dirs)){
   # define file path
-  target <- paste0("data_raw/", dirs[i], "/", Sys.Date())
+  target <- paste0("data_raw/", dirs[i], "/", work_date)
   # list the directory at that file path
   dir <- list.dirs(target)
   # list the files within that directory
@@ -156,7 +161,7 @@ rm(ai_files, dat, ebs_files, goa_files, temp2, dir, dirs, files, i, j, new_dir, 
 # Download WCANN ====
 
 wcann_save_loc <- "data_raw/wcann"
-save_date <- Sys.Date()
+save_date <- work_date
 catch_file_name <- paste("wcann", "catch.csv", sep="_")
 haul_file_name <- paste("wcann", "haul.csv", sep="_")
 
@@ -315,7 +320,7 @@ write.csv(data_haul, file=file.path(wcann_save_loc, save_date, haul_file_name), 
 
 # Update WCANN ====
 # define the file we are looking for
-target <- paste0("data_raw/wcann/", Sys.Date())
+target <- paste0("data_raw/wcann/", work_date)
 # get the directory
 dir <- list.dirs(target)
 # list the files in that directory
@@ -346,7 +351,7 @@ rm(catch, data_catch, data_haul, haul, test, catch_file_name, dir, files, full_f
 # Have to go to the website (cmd+click) http://seamap.gsmfc.org/
 
 # Pull in the data from your Downloads folder
-new_dir <- file.path(paste0("data_raw/gmex/", Sys.Date()))
+new_dir <- file.path(paste0("data_raw/gmex/", work_date))
 # create the destination folder
 dir.create(new_dir)
 
@@ -391,3 +396,96 @@ readr::write_csv(tow, path = "data_updates/Data_Updated/gmex_tow.csv")
 
 print(paste0("completed gmex"))
 
+# Download NEUS ====
+# Email Sean Lucey,  sean.lucey@noaa.gov , to get the latest survdata.RData file - Sean responded within an hour of emailing.
+
+# Pull in the data from your Downloads folder
+new_dir <- file.path(paste0("data_raw/neus/", work_date))
+# create the destination folder
+dir.create(new_dir)
+
+file.copy(from = "~/Downloads/Survdat.RData", to = new_dir)
+
+#Unzip the most recent zip and copy over the strata file.
+
+# list all of the zip files for this region
+zipFiles <- file.info(list.files(paste0("data_raw/neus"), full=TRUE, patt=".zip"))
+
+# define the most recent zip file
+recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1], ])
+
+# define a temporary space to unzip the file
+zipdir <- tempfile()# Create a name for the dir where we'll unzip
+
+# create the temporary space
+dir.create(zipdir)# Create the dir using that name
+
+# unzip the file into that temp space
+unzip(recentZip, exdir=zipdir)# Unzip the file into the dir
+
+# list any files that contain strata in the name
+strat<- list.files(zipdir, recursive = T, pattern = "strata", full = T)
+
+# get the other data files
+lower <- list.files(zipdir, recursive = T, pattern = "svspp", full = T)
+upper <- list.files(zipdir, recursive = T, pattern = "SVSPP", full = T)
+
+# copy over the strat file
+file.copy(from=strat, to=new_dir)
+# copy over spp files
+file.copy(from=lower, to=new_dir)
+file.copy(from=upper, to=new_dir)
+
+
+# Update neus ====
+target <- new_dir
+# list the directory at that file path
+dir <- list.dirs(target)
+# list the files within that directory
+files <- list.files(dir, full.names = T)
+
+for (i in seq(files)){
+  if (grepl("Survdat", files[i])){
+    load(files[i])
+  }
+  if (grepl("SVSPP", files[i])){
+    load(files[i])
+  }
+  if (grepl("strata", files[i])){
+    file.copy(from=files[i], to=file.path("data_updates/Data_Updated/"), overwrite=TRUE)
+  }
+  if (grepl("svspp", files[i])){
+    file.copy(from=files[i], to=file.path("data_updates/Data_Updated/"), overwrite=TRUE)
+  }
+}
+
+# ---- process or copy survey and spp files ----
+
+# Need to add a leading column named ""
+survdat <- survdat %>% 
+  mutate(X = NA) %>% 
+  select(X, CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX, SVVESSEL, YEAR, SEASON, LAT, LON, DEPTH, SURFTEMP, SURFSALIN, BOTTEMP, BOTSALIN, ABUNDANCE, BIOMASS, LENGTH, NUMLEN)
+
+# # rename the X-NA column as ""
+# setnames(survdat, "X", "\"\"") 
+# # wrap all column names in quotes
+# setnames(survdat, names(survdat)[-1], wrap.quotes(names(survdat))[-1])
+
+readr::write_csv(survdat, path = "data_updates/Data_Updated/neus_data.csv")
+
+
+# repeat for spp file ----
+spp <- spp %>%
+  # add a leading column 
+  mutate(X = NA) %>% 
+  select(X, everything())
+
+# # rename the X-NA column as ""
+# setnames(spp, "X", "\"\"") 
+# # wrap all column names in quotes
+# setnames(spp, names(spp), wrap.quotes(names(spp)))
+
+readr::write_csv(spp, path = paste0("data_updates/Data_Updated/neus_svspp.csv"))
+
+
+print(paste0("completed neus"))
