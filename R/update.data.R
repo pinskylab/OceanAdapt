@@ -1,28 +1,30 @@
 
-# =================
-# = Load Packages =
-# =================
+
+# = Load Packages ====
+
 library(data.table)
 library(rbLib) # library(devtools); install_github("rBatt/rbLib")
 library(bit64)
 
 
-# ===============================
-# = Guess appropriate directory =
-# ===============================
-if(Sys.info()["sysname"]=="Linux"){
-  setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
-}else{
-  setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
-}
+# = Guess appropriate directory ====
 
+# if(Sys.info()["sysname"]=="Linux"){
+#   setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
+# }else{
+#   setwd("~/Documents/School&Work/pinskyPost/OceanAdapt/R")
+# }
+
+oldwd2 <- getwd()
+
+setwd("R")
 new_data_loc <- "../data_raw"
 
 
 
-# =======================================
-# = Names & Locations of New Data Files =
-# =======================================
+
+# = Names & Locations of New Data Files ====
+
 date.zip.patt <- "[0-9]{4}-[0-9]{2}-[0-9]{2}.zip"
 
 # AI
@@ -117,24 +119,21 @@ wcann.haul.pattern <- "wcann_haul\\.csv$"
 # wcann_haul_set_cn <- c("Survey","Survey Cycle","Vessel","Cruise Leg","Trawl Id","Trawl Performance","Trawl Date","Trawl Start Time","Best Latitude (dd)","Best Longitude (dd)","Best Position Type","Best Depth (m)","Best Depth Type","Trawl Duration (min)","Area Swept by the Net (hectares)","Temperature At the Gear (degs C)")
 # wcann_invert_set_cn <- c("Trawl Id","Species","Haul Weight (kg)","Individual Average Weight (kg)")
 
-# ====================================================
-# = Function to Trim Trailing and Leading Whitespace =
-# ====================================================
+
+# = Function to Trim Trailing and Leading Whitespace =====
+
 # http://stackoverflow.com/questions/2261079/how-to-trim-leading-and-trailing-whitespace-in-r
 # Simple regex, but the answer also provides some other handy tricks
 # and explanation if others are interested in learning more
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
 
-# ==============================
-# = Function to Wrap in Quotes =
-# ==============================
+
+# = Function to Wrap in Quotes =====
 wrap.quotes <- function(x){gsub("(.+)", "\"\\1\"", x)}
 
+# = Function to read files from zip =====
 
-# ===================================
-# = Function to read files from zip =
-# ===================================
 read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALSE, rawHeader=FALSE, ...){
   
   zipdir <- tempfile()# Create a name for the dir where we'll unzip
@@ -183,9 +182,8 @@ read.csv.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, iterate=FALS
 }
 
 
-# ============================================
-# = Read in Old Data Sets (currently zipped) =
-# ============================================
+
+# = Read in Old Data Sets (currently zipped) ====
 zipFiles <- file.info(list.files("../data_updates", full=TRUE, patt="^Data_.+.zip")) # zipFiles only used in next few lines; intended to find old data sets, which is used both for main data (which we're now just redownloading every year), as well as for the strata files etc.
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 upData <- read.csv.zip(recentZip, SIMPLIFY=T, iterate=TRUE, rawHeader=TRUE)
@@ -198,9 +196,8 @@ old_upData_rawHeader <- lapply(upData, function(x)attributes(x)$rawHeader)
 old_upData_colClasses <- lapply(upData, function(x)sapply(x, class))
 
 
-# ===========================
-# = Identify New Zip Folder =
-# ===========================
+
+# = Identify New Zip Folder =====
 # new.zip.folder is where all the newly-gathered .csv's will be written
 # for NEUS, is also where the helper data file (strat or spp id file) will be read
 # is where a lot of the other data organization processes occur
@@ -209,9 +206,9 @@ zip.folder <- gsub("(\\.[^.]+$)", "", recentZip)
 new.zip.folder <- paste0(dirname(zip.folder),"/Data_Updated")
 
 
-# ========================================================
-# = Prepare the Directory that will be Focus of Updates  =
-# ========================================================
+
+# = Prepare the Directory that will be Focus of Updates  =====
+
 # ensure clean start by deleting this directory and all of its contents, the recreating it
 if(file.exists(new.zip.folder)){
   # delete all of directory's contents & directory
@@ -231,9 +228,9 @@ if(!file.exists(new.zip.folder)){
 }
 
 
-# ======================================
-# = Unzip Most Recent Zip File Locally =
-# ======================================
+
+# = Unzip Most Recent Zip File Locally =====
+
 # create explosion of .csv files inside data_updates
 # these .csv's are from data vis
 # they are used for the bonus files like ebs_strata.csv, or neus_strata.csv
@@ -241,9 +238,9 @@ if(!file.exists(new.zip.folder)){
 # unzip(normalizePath(recentZip), exdir=new.zip.folder, junkpaths=TRUE, setTimes=TRUE)
 
 
-# ================================
-# = Function for alaskan regions =
-# ================================
+
+# = Function for alaskan regions =====
+
 update_ai_goa_ebs <- function(new_data_raw_reg, reg=c("ai","ebs","goa")){
   reg <- match.arg(reg)
   
@@ -277,32 +274,34 @@ update_ai_goa_ebs <- function(new_data_raw_reg, reg=c("ai","ebs","goa")){
 }
 
 
-# =============
-# = Update AI =
-# =============
+
+# = Update AI ====
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 update_ai_goa_ebs(new_data_raw_ai, "ai")
 
 
-# ==============
-# = Update EBS =
-# ==============
+
+# = Update EBS =====
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 update_ai_goa_ebs(new_data_raw_ebs, "ebs")
 
 
-# ==============
-# = Update GOA =
-# ==============
+
+# = Update GOA =====
 # http://www.afsc.noaa.gov/RACE/groundfish/survey_data/data.htm
 update_ai_goa_ebs(new_data_raw_goa, "goa")
 
 
-# ===============
-# = Update GMEX =
-# ===============
+
+# = Update GMEX =====
+
 # http://seamap.gsmfc.org/
 newGMEX <- read.csv.zip(new_data_raw_gmex)
+
+# 2018-09-19 - MRS gets the warning message: ####
+# Warning message:
+#   In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
+#       EOF within quoted string
 
 update_gmex <- function(readFile, writeFile){
   # needs newGMEX, old_upData_colNames, new.zip.folder (getting from parent.frame())
@@ -339,9 +338,9 @@ gmex.station.file.new <- file.path(new.zip.folder,"gmex_station.csv")
 cat(gmexStation_noEsc, file=gmex.station.file.new, sep="\n")
 
 
-# ========
-# = NEUS =
-# ========
+
+# = NEUS =====
+
 # NEUS Data
 if(file.exists(new_data_raw_neus)){
   neus_zipdir <- tempfile()
@@ -414,9 +413,8 @@ if(file.exists(new_data_raw_neus)){
 }
 
 
-# ========
-# = SEUS =
-# ========
+
+# = SEUS =====
 newSEUS <- read.csv.zip(new_data_raw_seus)
 update_seus <- function(readFile, writeFile){
   # needs newSEUS, old_upData_colNames, new.zip.folder (getting from parent.frame())
@@ -433,9 +431,9 @@ update_seus(seus.haul.file, seus.haul.file)
 update_seus(seus.strata.file, seus.strata.file)
 
 
-# ===============
-# = Update WFSC =
-# ===============
+
+# = Update WFSC ====
+
 if(file.exists(new_data_raw_wcann)){
   newWCANN <- read.csv.zip(new_data_raw_wcann) # custom function to read from zip
   names(newWCANN)[grepl(wcann.catch.pattern, names(newWCANN))] <- "wcann_catch.csv"
@@ -455,9 +453,9 @@ if(file.exists(new_data_raw_wcann)){
 }
 
 
-# =========
-# = WCTRI =
-# =========
+
+# = WCTRI =====
+
 # This is just a read and re-write
 # Could copy and rename, but this will just repeat the processing of reading into R, possibly serving as a check and providing a template for more detailed checks on data format if later desired
 if(file.exists(new_data_raw_wctri)){
@@ -472,16 +470,14 @@ if(file.exists(new_data_raw_wctri)){
 }
 
 
-# =================
-# = Copy Taxonomy =
-# =================
+
+# = Copy Taxonomy =====
 file.copy(from="../data_raw/taxonomy/spptaxonomy.csv", to="../data_updates/Data_Updated", overwrite=TRUE)
 
 
 
-# =======================
-# = Zip File for GitHub =
-# =======================
+
+# = Zip File for GitHub =====
 # Zip up and rename
 oldwd <- getwd()
 setwd(dirname(new.zip.folder)) # new.zip.folder is "./data_updates/Data_Updated"
@@ -491,12 +487,12 @@ file.rename(new.zip.file0, renameNow(new.zip.file0))
 setwd(oldwd)
 
 
-# ======================================
-# = Delete Folder/ Files after Zipping =
-# ======================================
+
+# = Delete Folder/ Files after Zipping =====
 if(file.exists(new.zip.folder)){
   # delete all of directory's contents & directory
   unlink(new.zip.folder, recursive=TRUE)
 }
 
 
+setwd(oldwd2)

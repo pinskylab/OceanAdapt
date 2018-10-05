@@ -7,6 +7,7 @@
 #   3) Manually change the WORKING_DIRECTORY variable (line 27) to the directory with the script and run it. 
 
 # setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/")
+# setwd("/Users/macair/Documents/OceanAdapt/")
 
 
 ### File Structure
@@ -31,7 +32,7 @@ zipFiles <- file.info(list.files("data_updates", full=TRUE, patt="^Data_.+.zip")
 recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1],])
 unzip(recentZip)
 stopifnot(dir.exists("Data_Updated"))
-WORKING_DIRECTORY = file.path(getwd(), "data_updates/Data_Updated")
+WORKING_DIRECTORY = file.path(getwd(), "Data_Updated")
 
 
 
@@ -236,6 +237,8 @@ compile_SEUSSpr = function () {
   #Southeast US
   #function returns seusSPRING
   survcatch = data.table(read.csv(file=paste(WORKING_DIRECTORY, '/seus_catch.csv', sep=''), stringsAsFactors=FALSE))
+  
+  
   survhaul = data.table(read.csv(paste(WORKING_DIRECTORY, '/seus_haul.csv', sep=''), stringsAsFactors=FALSE)) # only needed for DEPTHSTART
   survhaul <- unique(data.table(EVENTNAME = survhaul$EVENTNAME, DEPTHSTART = survhaul$DEPTHSTART))
   seusstrata = data.table(read.csv(paste(WORKING_DIRECTORY, '/seus_strata.csv', sep=''))) # contains strata areas
@@ -585,12 +588,25 @@ remove_paired_tows = function () {
   
   #In seus there are two 'COLLECTIONNUMBERS' per 'EVENTNAME', with no exceptions; EFFORT is always the same for each COLLECTIONNUMBER
   # We sum the two tows in seus
-  seusSPRING <<- aggregate(list(BIOMASS = seusSPRING$SPECIESTOTALWEIGHT), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, SEASON = seusSPRING$SEASON, EFFORT = seusSPRING$EFFORT, spp = seusSPRING$spp), FUN=sum)
-  seusSPRING$wtcpue <<- seusSPRING$BIOMASS/(seusSPRING$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
-  seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, EFFORT = seusSUMMER$EFFORT, spp = seusSUMMER$spp), FUN=sum)
-  seusSUMMER$wtcpue <<- seusSUMMER$BIOMASS/(seusSUMMER$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
-  seusFALL <<- aggregate(list(BIOMASS = seusFALL$SPECIESTOTALWEIGHT), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, SEASON = seusFALL$SEASON, EFFORT = seusFALL$EFFORT, spp = seusFALL$spp), FUN=sum)
-  seusFALL$wtcpue <<- seusFALL$BIOMASS/(seusFALL$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  ### As of 2018-09-24 MRS found that SEUS is producing raw abundance data with all NA's in the effort column.  Have emailed them to make sure this is intentional.  in the meantime, adjusting script to reflect lack of effort data
+  # original code ________________________________________####
+  # seusSPRING <<- aggregate(list(BIOMASS = seusSPRING$SPECIESTOTALWEIGHT), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, SEASON = seusSPRING$SEASON, EFFORT = seusSPRING$EFFORT, spp = seusSPRING$spp), FUN=sum)
+  # seusSPRING$wtcpue <<- seusSPRING$BIOMASS/(seusSPRING$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  # seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, EFFORT = seusSUMMER$EFFORT, spp = seusSUMMER$spp), FUN=sum)
+  # seusSUMMER$wtcpue <<- seusSUMMER$BIOMASS/(seusSUMMER$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  # seusFALL <<- aggregate(list(BIOMASS = seusFALL$SPECIESTOTALWEIGHT), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, SEASON = seusFALL$SEASON, EFFORT = seusFALL$EFFORT, spp = seusFALL$spp), FUN=sum)
+  # seusFALL$wtcpue <<- seusFALL$BIOMASS/(seusFALL$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  #________________________________________________________
+  # temp code _______________________________________####
+seusSPRING <<- aggregate(list(BIOMASS = seusSPRING$SPECIESTOTALWEIGHT), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, SEASON = seusSPRING$SEASON, spp = seusSPRING$spp), FUN=sum)
+  seusSPRING$wtcpue <<- seusSPRING$BIOMASS
+  #yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, spp = seusSUMMER$spp), FUN=sum)
+  seusSUMMER$wtcpue <<- seusSUMMER$BIOMASS #yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  seusFALL <<- aggregate(list(BIOMASS = seusFALL$SPECIESTOTALWEIGHT), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, SEASON = seusFALL$SEASON, spp = seusFALL$spp), FUN=sum)
+  seusFALL$wtcpue <<- seusFALL$BIOMASS#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+  #___________________________________________________
+  
   
   return(TRUE)
 }
@@ -809,9 +825,9 @@ trim_species_data = function(dat) {
 species_data = function (dat) {
   #Returns species data
   
-  ######################################################
-  ## Calculate mean position through time for species ##
-  ######################################################
+  
+  ## Calculate mean position through time for species ####
+  
   
   # Calculate mean latitude and depth of each species by year within each survey/region
   datstrat = with(dat[!duplicated(dat[,c('region', 'stratum', 'haulid')]),], aggregate(list(lat = lat, lon = lon, depth = depth, stratumarea = stratumarea), by=list(stratum = stratum, region = region), FUN=meanna)) # mean lat/lon/depth for each stratum
@@ -844,9 +860,9 @@ species_data = function (dat) {
   
 }
 
-# ===========
-# = Add 0's =
-# ===========
+
+# = Add 0's =####
+
 explode0 <- function(x, by=c("region")){
   # x <- copy(x)
   stopifnot(is.data.table(x))
@@ -886,9 +902,9 @@ region_data = function (centbio) {
   #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
   
   
-  ######################################################
-  ## Calculate mean position through time for regions ##
-  ######################################################
+  
+  ## Calculate mean position through time for regions ####
+  
   ## Find a standard set of species (present every year in a region)
   presyr = aggregate(list(pres = dat$wtcpue>0), by=list(region = dat$region, spp=dat$spp, year=dat$year), FUN=sum, na.rm=TRUE) # find which species are present in which years
   presyrsum = aggregate(list(presyr = presyr$pres>0), by=list(region=presyr$region, spp=presyr$spp), FUN=sum) # presyr col holds # years in which spp was present
@@ -929,9 +945,9 @@ region_data = function (centbio) {
 national_data = function (centbio) {
   #Returns national data
   #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
-  #####################################################
-  ## Calculate mean position through time for the US ##
-  #####################################################
+  
+  ## Calculate mean position through time for the US #####
+  
   
   #WHEN USING ENGLISH NAMES FROM add_region_column(), UNCOMMENT NEXT LINE:
   regstouse = c('Eastern Bering Sea', 'Northeast US Spring', 'Northeast US Fall') # Only include regions not constrained by geography in which surveys have consistent methods through time
@@ -1111,11 +1127,19 @@ plot_national = function(natcentbio) {
 
 
 #  [ programfunction ]
-#Begin Preparation Protocol:
+#Begin Preparation Protocol: ####
 
 #Combine/compile data into single tables based on region.
 
 print_status('Begin region compiling.')
+
+# 2018-09-19  - MRS received error message because Data_Updated unzipped into OceanAdapt folder instead of inside data_updates: ####
+# Error in value[[3L]](cond) : [ERROR] One or more files were missing.
+# In addition: Warning message:
+#   In file(file, "rt") :
+#   cannot open file '/Users/macair/Documents/OceanAdapt/data_updates/Data_Updated/spptaxonomy.csv': No such file or directory
+
+### Manually unzip Data_Updated so that it unzips within data_updates ####
 
 if(!exists('OVERRIDE_COMPILING') || !isTRUE(OVERRIDE_COMPILING) ) {
   tryCatch({
@@ -1283,10 +1307,16 @@ print_status('Begin calculating by species, region, and national data')
 trimmed_dat <- trim_species_data(dat) # trim to species with enough data
 BY_SPECIES_DATA = species_data(trimmed_dat) #NOTE: Might take a little bit depending on processor speed
 print_status('>Species data complete.')
+# 2018-09-19 - MRS produced warning message: ####
+# Warning message:
+#   In sqrt(wtd.var(x = x[, 1], weights = x[, 2], na.rm = TRUE, normwt = TRUE)) :
+#   NaNs produced
+# this line in the function is causing that error: centbiodepthse = summarize(datstratyr[, c('depth', 'wttot')], by = list(region = datstratyr$region, spp = datstratyr$spp, common=datstratyr$common, year = datstratyr$year), FUN = wgtse, na.rm=TRUE, stat.name = 'depthse') # SE for depth
 
-# ===========
-# = Add 0's =
-# ===========
+
+
+# = Add 0's = ####
+
 td_factorColumns <- sapply(trimmed_dat, is.factor)
 trimmed_dat[,td_factorColumns] <- lapply(trimmed_dat[,td_factorColumns], as.character)
 dat.exploded <- as.data.table(trimmed_dat)[,explode0(.SD), by="region"]
@@ -1325,3 +1355,4 @@ if(file.exists("Data_Updated")){
   # delete all of directory's contents & directory
   unlink("Data_Updated", recursive=TRUE)
 }
+

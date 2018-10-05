@@ -1,7 +1,7 @@
 
 library("jsonlite")
 
-wcann_save_loc <- "../data_raw/wcann"
+wcann_save_loc <- "data_raw/wcann"
 save_date <- Sys.Date()
 catch_file_name <- paste("wcann", "catch.csv", sep="_")
 haul_file_name <- paste("wcann", "haul.csv", sep="_")
@@ -162,4 +162,14 @@ if(!dir.exists(file.path(wcann_save_loc, save_date))){
 
 write.csv(data_catch, file=file.path(wcann_save_loc, save_date, catch_file_name), row.names=FALSE)
 write.csv(data_haul, file=file.path(wcann_save_loc, save_date, haul_file_name), row.names=FALSE)
+
+# 2018-09-19 - get the error messages:
+## Error in file(file, ifelse(append, "a", "w")) : cannot open the connection In
+## addition: Warning messages: 1: In dir.create(file.path(wcann_save_loc,
+## save_date)) : cannot create dir '../data_raw/wcann/2018-09-19', reason 'No
+## such file or directory' 2: In file(file, ifelse(append, "a", "w")) : cannot
+## open file '../data_raw/wcann/2018-09-19/wcann_catch.csv': No such file or
+## directory
+
+# this directory does exist but the script cannot find it based on the way the save_loc is set up at the top. Changing.
 
