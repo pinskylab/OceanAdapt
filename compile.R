@@ -152,6 +152,7 @@ cols <- cols(
   CRUISE = col_character(),
   HAUL = col_character()
 )
+
 # Update AI ====
 files <- list.files(path = "data_raw/", pattern = "ai")
 # create blank table
@@ -161,9 +162,11 @@ for (j in seq(files)){
   if(files[j] == "ai2014_2016.csv"){
     temp <- read_lines("data_raw/ai2014_2016.csv")
     temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
-    write_lines(temp_fixed, "data_raw/ai2014_2016.csv")
+    write_lines(temp_fixed, "temporary.csv")
+    temp <- read_csv("temporary.csv", col_types = cols)
+    ai_data <- rbind(ai_data, temp)
   }
-  if(!grepl("strata", files[j])){
+  if(!grepl("strata", files[j]) & !grepl("ai2014", files[j])){
     # read the csv
     temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
     ai_data <- rbind(ai_data, temp)
@@ -171,7 +174,6 @@ for (j in seq(files)){
     ai_strata <- read_csv(paste0("data_raw/", files[j]))
   }
 }
-# it is ok if ai2014_2016.csv returns warnings for 4 rows where columns were not the number expected.  Those will be fixed below.  This is caused because there is a note for Stone et al, 2011 and the comma causes the line to parse strangely.
 
 ai_data <- ai_data %>% 
   # remove any data rows that have headers as data rows
@@ -222,68 +224,235 @@ goa_data <- goa_data %>%
   filter(LATITUDE != "LATITUDE")
 
 # clean up
-rm(files, temp, j)
+rm(files, temp, j, cols)
 
 # Update WCANN ====
-# define the file we are looking for
-target <- paste0("data_raw/wcann/", work_date)
-# get the directory
-dir <- list.dirs(target)
-# list the files in that directory
-files <- list.files(dir)
-full_files <- list.files(dir, full.names = T)
-
-catch <- read.csv(paste0(dir, "/wcann_catch.csv"), stringsAsFactors = F)
-catch <- catch %>% 
+wcann_catch <- read_csv("data_raw/wcann_catch.csv", col_types = cols(
+  catch_id = col_integer(),
+  common_name = col_character(),
+  cpue_kg_per_ha_der = col_double(),
+  cpue_numbers_per_ha_der = col_double(),
+  date_yyyymmdd = col_integer(),
+  depth_m = col_double(),
+  latitude_dd = col_double(),
+  longitude_dd = col_double(),
+  pacfin_spid = col_character(),
+  partition = col_character(),
+  performance = col_character(),
+  program = col_character(),
+  project = col_character(),
+  sampling_end_hhmmss = col_character(),
+  sampling_start_hhmmss = col_character(),
+  scientific_name = col_character(),
+  station_code = col_double(),
+  subsample_count = col_integer(),
+  subsample_wt_kg = col_double(),
+  total_catch_numbers = col_integer(),
+  total_catch_wt_kg = col_double(),
+  tow_end_timestamp = col_datetime(format = ""),
+  tow_start_timestamp = col_datetime(format = ""),
+  trawl_id = col_double(),
+  vessel = col_character(),
+  vessel_id = col_integer(),
+  year = col_integer(),
+  year_stn_invalid = col_integer()
+)) %>% 
   select("trawl_id","year","longitude_dd","latitude_dd","depth_m","scientific_name","total_catch_wt_kg","cpue_kg_per_ha_der")
 
-haul <- read.csv(paste0(dir, "/wcann_haul.csv"), stringsAsFactors = F)
-haul <- haul %>% 
+wcann_haul <- read_csv("data_raw/wcann_haul.csv", col_types = cols(
+  area_swept_ha_der = col_double(),
+  date_yyyymmdd = col_integer(),
+  depth_hi_prec_m = col_double(),
+  invertebrate_weight_kg = col_double(),
+  latitude_hi_prec_dd = col_double(),
+  longitude_hi_prec_dd = col_double(),
+  mean_seafloor_dep_position_type = col_character(),
+  midtow_position_type = col_character(),
+  nonspecific_organics_weight_kg = col_double(),
+  performance = col_character(),
+  program = col_character(),
+  project = col_character(),
+  sample_duration_hr_der = col_double(),
+  sampling_end_hhmmss = col_character(),
+  sampling_start_hhmmss = col_character(),
+  station_code = col_double(),
+  tow_end_timestamp = col_datetime(format = ""),
+  tow_start_timestamp = col_datetime(format = ""),
+  trawl_id = col_double(),
+  vertebrate_weight_kg = col_double(),
+  vessel = col_character(),
+  vessel_id = col_integer(),
+  year = col_integer(),
+  year_stn_invalid = col_integer()
+)) %>% 
   select("trawl_id","year","longitude_hi_prec_dd","latitude_hi_prec_dd","depth_hi_prec_m","area_swept_ha_der")
 
 # this merge needs to be successful for complete_r_script to have a chance at working  
-test <- merge(catch, haul, by=c("trawl_id","year"), all.x=TRUE, all.y=FALSE, allow.cartesian=TRUE) 
+test <- merge(wcann_catch, wcann_haul, by=c("trawl_id","year"), all.x=TRUE, all.y=FALSE, allow.cartesian=TRUE) 
 
-# Write files as .csv's
-readr::write_csv(catch, path = "data_updates/Data_Updated/wcann_catch.csv")
-readr::write_csv(haul, path = "data_updates/Data_Updated/wcann_haul.csv")  
-
-print(paste0("completed WCANN"))
-
-#clean up
-rm(catch, data_catch, data_haul, haul, test, catch_file_name, dir, files, full_files, haul_file_name, old_names, save_date, target, url_catch, url_haul, wcann_save_loc)
+# clean up
+rm(test)
 
 # Update GMEX ====
+gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(
+  BGSID = col_integer(),
+  CRUISEID = col_integer(),
+  STATIONID = col_integer(),
+  VESSEL = col_integer(),
+  CRUISE_NO = col_integer(),
+  P_STA_NO = col_character(),
+  CATEGORY = col_integer(),
+  GENUS_BGS = col_character(),
+  SPEC_BGS = col_character(),
+  BGSCODE = col_character(),
+  CNT = col_integer(),
+  CNTEXP = col_integer(),
+  SAMPLE_BGS = col_double(),
+  SELECT_BGS = col_double(),
+  BIO_BGS = col_integer(),
+  NODC_BGS = col_integer(),
+  IS_SAMPLE = col_character(),
+  TAXONID = col_character(),
+  INVRECID = col_character(),
+  X20 = col_character()
+)) %>% 
+  select(-INVRECID, -X20)
 
-# list the directory at that file path
-dir <- list.dirs("data_raw")
-# list the files within that directory
-files <- list.files(dir)
+# problems should be 0 obs
+problems <- problems(gmex_bio) %>% 
+  filter(!is.na(col))
 
-bio <-read.csv(paste0(dir,"/BGSREC.csv"), stringsAsFactors = F) %>% 
-  select(-INVRECID, -X)
-readr::write_csv(bio, path = "data_updates/Data_Updated/gmex_bio.csv")
+gmex_cruise <-read_csv("data_raw/gmex_CRUISES.csv", col_types = cols(
+  CRUISEID = col_integer(),
+  YR = col_integer(),
+  SOURCE = col_character(),
+  VESSEL = col_character(),
+  CRUISE_NO = col_character(),
+  STARTCRU = col_date(format = ""),
+  ENDCRU = col_date(format = ""),
+  TITLE = col_character(),
+  NOTE = col_integer(),
+  INGEST_SOURCE = col_character(),
+  INGEST_PROGRAM_VER = col_character(),
+  X12 = col_character()
+)) %>% 
+  select(-X12)
 
-cruise <-read.csv(paste0(dir,"/CRUISES.csv"), stringsAsFactors = F) %>% 
-  select(-X)
-readr::write_csv(cruise, path = "data_updates/Data_Updated/gmex_cruise.csv")
-
-spp <-read.csv(paste0(dir,"/NEWBIOCODESBIG.csv"), stringsAsFactors = F) %>% 
-  select(-X, -tsn_accepted)
-readr::write_csv(spp, path = "data_updates/Data_Updated/gmex_spp.csv")
-
-gmexStation_raw <- readLines(paste0(dir,"/STAREC.csv"))
-esc_patt <- "\\\\\\\""
-esc_replace <- "\\\"\\\""
-gmexStation_noEsc <- gsub(esc_patt, esc_replace, gmexStation_raw)
-cat(gmexStation_noEsc, file="data_updates/Data_Updated/gmex_station.csv", sep="\n")
-
-tow <-read.csv(paste0(dir,"/INVREC.csv"), stringsAsFactors = F) %>% 
-  select(-X)
-readr::write_csv(tow, path = "data_updates/Data_Updated/gmex_tow.csv")
+# problems should be 0 obs
+problems <- problems(gmex_cruise) %>% 
+  filter(!is.na(col))
 
 
-print(paste0("completed gmex"))
+gmex_spp <-read_csv("data_raw/gmex_NEWBIOCODESBIG.csv", col_types = cols(
+  Key1 = col_integer(),
+  TAXONOMIC = col_character(),
+  CODE = col_integer(),
+  TAXONSIZECODE = col_character(),
+  isactive = col_integer(),
+  common_name = col_character(),
+  tsn = col_integer(),
+  tsn_accepted = col_integer(),
+  X9 = col_character()
+)) %>% 
+  select(-X9, -tsn_accepted)
+
+# problems should be 0 obs
+problems <- problems(gmex_cruise) %>% 
+  filter(!is.na(col))
+
+gmex_station_raw <- read_lines("data_raw/gmex_STAREC.csv")
+gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
+write_lines(gmex_station_clean, "temporary.csv")
+gmex_station <- read_csv("temporary.csv", col_types = cols(
+  STATIONID = col_integer(),
+  CRUISEID = col_integer(),
+  VESSEL = col_character(),
+  CRUISE_NO = col_integer(),
+  P_STA_NO = col_character(),
+  TIME_ZN = col_integer(),
+  TIME_MIL = col_character(),
+  S_LATD = col_integer(),
+  S_LATM = col_double(),
+  S_LATH = col_character(),
+  S_LOND = col_integer(),
+  S_LONM = col_double(),
+  S_LONH = col_character(),
+  DEPTH_SSTA = col_double(),
+  S_STA_NO = col_character(),
+  MO_DAY_YR = col_date(format = ""),
+  TIME_EMIL = col_character(),
+  E_LATD = col_integer(),
+  E_LATM = col_double(),
+  E_LATH = col_character(),
+  E_LOND = col_integer(),
+  E_LONM = col_double(),
+  E_LONH = col_character(),
+  DEPTH_ESTA = col_double(),
+  GEARS = col_character(),
+  TEMP_SSURF = col_double(),
+  TEMP_BOT = col_double(),
+  TEMP_SAIR = col_double(),
+  B_PRSSR = col_double(),
+  WIND_SPD = col_double(),
+  WIND_DIR = col_double(),
+  WAVE_HT = col_double(),
+  SEA_COND = col_integer(),
+  DBTYPE = col_character(),
+  DATA_CODE = col_character(),
+  VESSEL_SPD = col_double(),
+  FAUN_ZONE = col_integer(),
+  STAT_ZONE = col_integer(),
+  TOW_NO = col_integer(),
+  NET_NO = col_integer(),
+  COMSTAT = col_character(),
+  DECSLAT = col_double(),
+  DECSLON = col_double(),
+  DECELAT = col_double(),
+  DECELON = col_double(),
+  START_DATE = col_datetime(format = ""),
+  END_DATE = col_datetime(format = ""),
+  HAULVALUE = col_character(),
+  X49 = col_character()
+))
+
+problems <- problems(gmex_station) %>% 
+  filter(!is.na(col))
+
+gmex_tow <-read_csv("data_raw/gmex_INVREC.csv", col_types = cols(
+  INVRECID = col_integer(),
+  STATIONID = col_integer(),
+  CRUISEID = col_integer(),
+  VESSEL = col_integer(),
+  CRUISE_NO = col_integer(),
+  P_STA_NO = col_character(),
+  GEAR_SIZE = col_integer(),
+  GEAR_TYPE = col_character(),
+  MESH_SIZE = col_double(),
+  OP = col_character(),
+  MIN_FISH = col_integer(),
+  WBCOLOR = col_character(),
+  BOT_TYPE = col_character(),
+  BOT_REG = col_character(),
+  TOT_LIVE = col_double(),
+  FIN_CATCH = col_double(),
+  CRUS_CATCH = col_double(),
+  OTHR_CATCH = col_double(),
+  T_SAMPLEWT = col_double(),
+  T_SELECTWT = col_double(),
+  FIN_SMP_WT = col_double(),
+  FIN_SEL_WT = col_double(),
+  CRU_SMP_WT = col_double(),
+  CRU_SEL_WT = col_double(),
+  OTH_SMP_WT = col_double(),
+  OTH_SEL_WT = col_double(),
+  COMBIO = col_character(),
+  X28 = col_character()
+)) %>% 
+  select(-X28)
+
+problems <- problems(gmex_tow) %>% 
+  filter(!is.na(col)) # 2 problems are that there are weird delimiters in the note column COMBIO, ignoring for now.
+
 
 # Update NEUS ====
 target <- "data_raw"
