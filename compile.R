@@ -77,23 +77,85 @@ rm(ai_files, ebs_files, goa_files, file, i)
 
 # Download WCANN ====
 
-catch_file_name <- "data_raw/wcann_catch.csv"
 haul_file_name <- "data_raw/wcann_haul.csv"
 
 url_catch <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003"
-data_catch <- jsonlite::fromJSON( url_catch )
+data_catch <- jsonlite::fromJSON(url_catch)
 
-download.file(url_catch, catch_file_name)
+###TAKES MANY MINUTES ###
 
 url_haul <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.operation_haul_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003"
-data_haul <- jsonlite::fromJSON( url_haul )
+data_haul <- jsonlite::fromJSON(url_haul)
 
-if(!dir.exists(file.path(wcann_save_loc, save_date))){
-  dir.create(file.path(wcann_save_loc, save_date))
+write_csv(data_catch, "data_raw/wcann_catch.csv")
+write.csv(data_haul,  "data_raw/wcann_haul.csv")
+
+
+# Download GMEX ====
+# Have to go to the website (cmd+click) http://seamap.gsmfc.org/
+
+# copy the file from the downloads folder into the current day's directory
+file.copy(from = "~/Downloads/public_seamap_csvs/BGSREC.csv", to = "data_raw/gmex_BGSREC.csv", overwrite = T)
+file.copy(from = "~/Downloads/public_seamap_csvs/CRUISES.csv", to = "data_raw/gmex_CRUISES.csv", overwrite = T)
+file.copy(from = "~/Downloads/public_seamap_csvs/NEWBIOCODESBIG.csv", to = "data_raw/gmex_NEWBIOCODESBIG.csv", overwrite = T)
+file.copy(from = "~/Downloads/public_seamap_csvs/STAREC.csv", to = "data_raw/gmex_STAREC.csv", overwrite = T)
+file.copy(from = "~/Downloads/public_seamap_csvs/INVREC.csv", to = "data_raw/gmex_INVREC.csv", overwrite = T)
+
+
+
+# Download NEUS ====
+# Email Sean Lucey,  sean.lucey_at_noaa.gov , to get the latest survdata.RData file - Sean responded within an hour of emailing.
+
+file.copy(from = "~/Downloads/Survdat.RData", to = "data_raw/neus_Survdat.Rdata", overwrite = T)
+
+
+# Download SEUS ====
+# The whack-a-mole site
+# Download the data from the website (cmd+click):
+# (https://www2.dnr.sc.gov/seamap/Account/LogOn?ReturnUrl=%2fseamap%2fReports)
+# In the "Type of Data" menu, you need 2 things: 
+#   1. Event Information 
+#   2. Abundance and Biomass
+#         For the list of data values, click the |<- button on the right and it will move all of the values over to the left.
+# * Note: It'll play whack-a-mole with you (meaning once you have moved fields to the left, they will pop back over to the right) … have fun! (If you don't encounter this annoyance, don't worry)
+
+file.copy(from = "~/Downloads/pinsky", to = "data_raw/seus_catch.csv", overwrite = T)
+file.copy(from = "~/Downloads/pinsky", to = "data_raw/seus_haul.csv", overwrite = T)
+
+
+# Update Alaska ====
+# munge the regional Alaska data into one table per region and save to the Data_Updated directory
+
+
+
+
+  
+  # create blank table
+  dat <- tibble()
+  for (j in seq(files)){
+    # if the file is not the strata file (which is assumed to not need correction)
+    if(!grepl("strata", files[j])){
+      # read the csv
+      temp2 <- read.csv(paste0(dir,"/", files[j]), stringsAsFactors = F)
+      # remove any data rows that have the value "LATITUDE" as data
+      temp2 <- filter(temp2, LATITUDE != "LATITUDE", 
+        # remove any data rows that are blank for LONGITUDE (blank data row)
+        !is.na(LONGITUDE))
+      dat <- rbind(dat, temp2)
+    }else{
+      file.copy(from=paste0(dir,"/", files[j]), to=file.path("data_updates/Data_Updated/"), overwrite=TRUE)
+      
+    }
+  }
+  readr::write_csv(dat, path = paste0("data_updates/Data_Updated/", dirs[i], "_data.csv"))
+  
+  
+  print(paste0("completed ", dirs[i]))
 }
 
-write.csv(data_catch, file=file.path(wcann_save_loc, save_date, catch_file_name), row.names=FALSE)
-write.csv(data_haul, file=file.path(wcann_save_loc, save_date, haul_file_name), row.names=FALSE)
+# clean up
+rm(ai_files, dat, ebs_files, goa_files, temp2, dir, dirs, files, i, j, "data_raw", target)
+
 
 # Update WCANN ====
 # define the file we are looking for
@@ -123,16 +185,6 @@ print(paste0("completed WCANN"))
 
 #clean up
 rm(catch, data_catch, data_haul, haul, test, catch_file_name, dir, files, full_files, haul_file_name, old_names, save_date, target, url_catch, url_haul, wcann_save_loc)
-
-# Download GMEX ====
-# Have to go to the website (cmd+click) http://seamap.gsmfc.org/
-
-# copy the file from the downloads folder into the current day's directory
-file.copy(from = "~/Downloads/public_seamap_csvs/BGSREC.csv", to = "data_raw")
-file.copy(from = "~/Downloads/public_seamap_csvs/CRUISES.csv", to = "data_raw")
-file.copy(from = "~/Downloads/public_seamap_csvs/NEWBIOCODESBIG.csv", to = "data_raw")
-file.copy(from = "~/Downloads/public_seamap_csvs/STAREC.csv", to = "data_raw")
-file.copy(from = "~/Downloads/public_seamap_csvs/INVREC.csv", to = "data_raw")
 
 # Update GMEX ====
 
@@ -165,42 +217,6 @@ readr::write_csv(tow, path = "data_updates/Data_Updated/gmex_tow.csv")
 
 
 print(paste0("completed gmex"))
-
-# Download NEUS ====
-# Email Sean Lucey,  sean.lucey@noaa.gov , to get the latest survdata.RData file - Sean responded within an hour of emailing.
-
-file.copy(from = "~/Downloads/Survdat.RData", to = "data_raw")
-
-#Unzip the most recent zip and copy over the strata file.
-
-# list all of the zip files for this region
-zipFiles <- file.info(list.files(paste0("data_raw/neus"), full=TRUE, patt=".zip"))
-
-# define the most recent zip file
-recentZip <- row.names(zipFiles[order(zipFiles$mtime, zipFiles$ctime, zipFiles$atime, decreasing=TRUE)[1], ])
-
-# define a temporary space to unzip the file
-zipdir <- tempfile()# Create a name for the dir where we'll unzip
-
-# create the temporary space
-dir.create(zipdir)# Create the dir using that name
-
-# unzip the file into that temp space
-unzip(recentZip, exdir=zipdir)# Unzip the file into the dir
-
-# list any files that contain strata in the name
-strat<- list.files(zipdir, recursive = T, pattern = "strata", full = T)
-
-# get the other data files
-lower <- list.files(zipdir, recursive = T, pattern = "svspp", full = T)
-upper <- list.files(zipdir, recursive = T, pattern = "SVSPP", full = T)
-
-# copy over the strat file
-file.copy(from=strat, to="data_raw")
-# copy over spp files
-file.copy(from=lower, to="data_raw")
-file.copy(from=upper, to="data_raw")
-
 
 # Update NEUS ====
 target <- "data_raw"
@@ -258,58 +274,4 @@ print(paste0("completed neus"))
 #clean up
 rm(spp, survdat, zipFiles, dir, files, i, lower, "data_raw", recentZip, strat, target, upper, zipdir)
 
-# Download SEUS ====
-# The whack-a-mole site
-# Download the data from the website (cmd+click):
-# (https://www2.dnr.sc.gov/seamap/Account/LogOn?ReturnUrl=%2fseamap%2fReports)
-# In the "Type of Data" menu, you need 2 things: 
-#   1. Event Information 
-#   2. Abundance and Biomass
-#         For the list of data values, click the |<- button on the right and it will move all of the values over to the left.
-# * Note: It'll play whack-a-mole with you (meaning once you have moved fields to the left, they will pop back over to the right) … have fun! (If you don't encounter this annoyance, don't worry)
-
-
-
-# Update Alaska ====
-# munge the regional Alaska data into one table per region and save to the Data_Updated directory
-dirs <- c("ai", "goa", "ebs")
-
-
-# create the destination folder
-dir.create(file.path("data_updates/Data_Updated/"))
-
-for (i in seq(dirs)){
-  # define file path
-  target <- paste0("data_raw/", dirs[i], "/", work_date)
-  # list the directory at that file path
-  dir <- list.dirs(target)
-  # list the files within that directory
-  files <- list.files(dir)
-  # files <- list.files(dir, full = T) # don't need full names?
-  
-  # create blank table
-  dat <- tibble()
-  for (j in seq(files)){
-    # if the file is not the strata file (which is assumed to not need correction)
-    if(!grepl("strata", files[j])){
-      # read the csv
-      temp2 <- read.csv(paste0(dir,"/", files[j]), stringsAsFactors = F)
-      # remove any data rows that have the value "LATITUDE" as data
-      temp2 <- filter(temp2, LATITUDE != "LATITUDE", 
-        # remove any data rows that are blank for LONGITUDE (blank data row)
-        !is.na(LONGITUDE))
-      dat <- rbind(dat, temp2)
-    }else{
-      file.copy(from=paste0(dir,"/", files[j]), to=file.path("data_updates/Data_Updated/"), overwrite=TRUE)
-      
-    }
-  }
-  readr::write_csv(dat, path = paste0("data_updates/Data_Updated/", dirs[i], "_data.csv"))
-  
-  
-  print(paste0("completed ", dirs[i]))
-}
-
-# clean up
-rm(ai_files, dat, ebs_files, goa_files, temp2, dir, dirs, files, i, j, "data_raw", target)
 
