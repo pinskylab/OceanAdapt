@@ -190,7 +190,7 @@ ai <- left_join(ai_data, ai_strata, by = "STRATUM")
 # clean up
 rm(files, temp, j, temp_fixed, ai_data, ai_strata)
 
-# Update EBS ====
+# Compile EBS ====
 files <- list.files(path = "data_raw/", pattern = "ebs")
 # create blank table
 ebs_data <- tibble()
@@ -217,7 +217,7 @@ ebs <- left_join(ebs_data, ebs_strata, by = "STRATUM")
 rm(files, temp, j, ebs_data, ebs_strata, temp)
 
 
-# Update GOA ====
+# Compile GOA ====
 files <- list.files(path = "data_raw/", pattern = "goa")
 # create blank table
 goa_data <- tibble()
@@ -310,6 +310,8 @@ test <- merge(wcann_catch, wcann_haul, by=c("trawl_id","year"), all.x=TRUE, all.
 # clean up
 rm(test)
 
+wcann <- left_join(wcann_haul, wcann_catch, by = c("trawl_id", "year"))
+  
 # Update GMEX ====
 gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(
   BGSID = col_integer(),
