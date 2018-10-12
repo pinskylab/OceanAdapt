@@ -475,17 +475,66 @@ problems <- problems(gmex_tow) %>%
 load("data_raw/neus_Survdat.RData")
 load("data_raw/neus_SVSPP.RData")
 
-# Need to add a leading column named ""
-survdat <- survdat %>% 
-  mutate(X = NA) %>% 
-  select(X, CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX, SVVESSEL, YEAR, SEASON, LAT, LON, DEPTH, SURFTEMP, SURFSALIN, BOTTEMP, BOTSALIN, ABUNDANCE, BIOMASS, LENGTH, NUMLEN)
+neus_survdat <- survdat %>% 
+  # select specific columns
+  select(CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX, SVVESSEL, YEAR, SEASON, LAT, LON, DEPTH, SURFTEMP, SURFSALIN, BOTTEMP, BOTSALIN, ABUNDANCE, BIOMASS) %>% 
+  # remove duplicates
+  distinct() 
+  
+# sum different sexes of same spp together
+neus_bio <- neus_survdat %>% 
+  group_by(YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP) %>% 
+  summarise(BIOMASS = sum(BIOMASS)) 
+neus_survdat <- left_join(select(neus_survdat, -BIOMASS), neus_bio, by = c("CRUISE6", "STATION", "STRATUM", "SVSPP", "YEAR", "SEASON", "LAT", "LON", "DEPTH"))
+rm(neus_bio)
+
+
+
 
 
 # repeat for spp file 
-spp <- spp %>%
+neus_spp <- spp %>%
   # add a leading column 
   mutate(X = NA) %>% 
   select(X, everything())
+
+neus_strata <- read_csv("data_raw/neus_strata.csv")
+
+
+  setnames(neus, 'V1', 'wtcpue')
+  neus = neus[SEASON=='SPRING',] # trim to spring survey only
+  spp[,c('ITISSPP', 'COMNAME', 'AUTHOR') := NULL] # remove some columns from spp data.table
+  neus = merge(neus, spp, by='SVSPP') # add species names
+  neus = as.data.frame(neus) # this makes the calculations less efficient... but avoids having to rewrite the code for data.tables
+  neus = merge(neus, neusstrata[,c('StratumCode', 'Areanmi2')], by.x='STRATUM', by.y = 'StratumCode', all.x=TRUE)
+  
+  return(neus)
+}
+
+compile_NEUSF = function () {
+  #Northeast US
+  #function returns neus
+  survdat = data.table(read.csv(paste(WORKING_DIRECTORY, '/neus_data.csv', sep='')))
+  neusstrata = read.csv(paste(WORKING_DIRECTORY, '/neus_strata.csv', sep=''))
+  spp = data.table(read.csv(paste(WORKING_DIRECTORY, '/neus_svspp.csv', sep='')))
+  
+  setkey(survdat, CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX)
+  neusF <- unique(survdat) # drops length data
+  neusF[, c('LENGTH', 'NUMLEN') := NULL] # remove length columns
+  neusF = neusF[,sum(BIOMASS),by=list(YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP)] # sum different sexes of same spp together
+  setnames(neusF, 'V1', 'wtcpue')
+  neusF = neusF[SEASON=='FALL',] # trim to fall survey only
+  spp[,c('ITISSPP', 'COMNAME', 'AUTHOR') := NULL] # remove some columns from spp data.table
+  neusF = merge(neusF, spp, by='SVSPP') # add species names
+  neusF = as.data.frame(neusF) # this makes the calculations less efficient... but avoids having to rewrite the code for data.tables
+  neusF = merge(neusF, neusstrata[,c('StratumCode', 'Areanmi2')], by.x='STRATUM', by.y = 'StratumCode', all.x=TRUE)
+  
+  return(neusF)
+}
+
+
+
+
 
 # compile TAX ====
 tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
