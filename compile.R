@@ -1,3 +1,8 @@
+# Answer the following questions to direct the actions of the script ====
+
+# 1. Download the raw data from the source sites instead of OceanAdapt?
+download <- "NO"
+
 ## Workspace setup ====
 # This script works best when the repository is downloaded from github, 
 # especially when that repository is loaded as a project into RStudio.
@@ -23,6 +28,9 @@ download_ak <- function(region, ak_files){
   }
 }
 
+
+if (download == "YES"){
+  
 
 ## Acquire new data ====
 # We want the full dataset every single time, from the start of the survey through the most recent year. This helps catch any updates the surveys have made to past years (they sometimes catch and fix old errors). 
@@ -82,12 +90,13 @@ haul_file_name <- "data_raw/wcann_haul.csv"
 url_catch <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003"
 data_catch <- jsonlite::fromJSON(url_catch)
 
-###TAKES MANY MINUTES ###
+###TAKES ~13 MINUTES ###
 
 url_haul <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.operation_haul_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003"
 data_haul <- jsonlite::fromJSON(url_haul)
 
 write_csv(data_catch, "data_raw/wcann_catch.csv")
+
 write.csv(data_haul,  "data_raw/wcann_haul.csv")
 
 
@@ -121,41 +130,99 @@ file.copy(from = "~/Downloads/Survdat.RData", to = "data_raw/neus_Survdat.Rdata"
 
 file.copy(from = "~/Downloads/pinsky", to = "data_raw/seus_catch.csv", overwrite = T)
 file.copy(from = "~/Downloads/pinsky", to = "data_raw/seus_haul.csv", overwrite = T)
-
-
-# Update Alaska ====
-# munge the regional Alaska data into one table per region and save to the Data_Updated directory
-
-
-
-
-  
-  # create blank table
-  dat <- tibble()
-  for (j in seq(files)){
-    # if the file is not the strata file (which is assumed to not need correction)
-    if(!grepl("strata", files[j])){
-      # read the csv
-      temp2 <- read.csv(paste0(dir,"/", files[j]), stringsAsFactors = F)
-      # remove any data rows that have the value "LATITUDE" as data
-      temp2 <- filter(temp2, LATITUDE != "LATITUDE", 
-        # remove any data rows that are blank for LONGITUDE (blank data row)
-        !is.na(LONGITUDE))
-      dat <- rbind(dat, temp2)
-    }else{
-      file.copy(from=paste0(dir,"/", files[j]), to=file.path("data_updates/Data_Updated/"), overwrite=TRUE)
-      
-    }
-  }
-  readr::write_csv(dat, path = paste0("data_updates/Data_Updated/", dirs[i], "_data.csv"))
-  
-  
-  print(paste0("completed ", dirs[i]))
 }
 
-# clean up
-rm(ai_files, dat, ebs_files, goa_files, temp2, dir, dirs, files, i, j, "data_raw", target)
+# Update Alaska ====
+cols <- cols(
+  LATITUDE = col_character(),
+  LONGITUDE = col_character(),
+  STATION = col_character(),
+  STRATUM = col_character(),
+  YEAR = col_character(),
+  DATETIME = col_character(),
+  WTCPUE = col_character(),
+  NUMCPUE = col_character(),
+  COMMON = col_character(),
+  SCIENTIFIC = col_character(),
+  SID = col_character(),
+  BOT_DEPTH = col_character(),
+  BOT_TEMP = col_character(),
+  SURF_TEMP = col_character(),
+  VESSEL = col_character(),
+  CRUISE = col_character(),
+  HAUL = col_character()
+)
+# Update AI ====
+files <- list.files(path = "data_raw/", pattern = "ai")
+# create blank table
+ai_data <- tibble()
+for (j in seq(files)){
+  # if the file is not the strata file (which is assumed to not need correction)
+  if(files[j] == "ai2014_2016.csv"){
+    temp <- read_lines("data_raw/ai2014_2016.csv")
+    temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
+    write_lines(temp_fixed, "data_raw/ai2014_2016.csv")
+  }
+  if(!grepl("strata", files[j])){
+    # read the csv
+    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
+    ai_data <- rbind(ai_data, temp)
+  }else{
+    ai_strata <- read_csv(paste0("data_raw/", files[j]))
+  }
+}
+# it is ok if ai2014_2016.csv returns warnings for 4 rows where columns were not the number expected.  Those will be fixed below.  This is caused because there is a note for Stone et al, 2011 and the comma causes the line to parse strangely.
 
+ai_data <- ai_data %>% 
+  # remove any data rows that have headers as data rows
+  filter(LATITUDE != "LATITUDE")
+
+
+# clean up
+rm(files, temp, j, temp_fixed)
+
+# Update EBS ====
+files <- list.files(path = "data_raw/", pattern = "ebs")
+# create blank table
+ebs_data <- tibble()
+for (j in seq(files)){
+  if(!grepl("strata", files[j])){
+    # read the csv
+    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
+    ebs_data <- rbind(ebs_data, temp)
+  }else{
+    ebs_strata <- read_csv(paste0("data_raw/", files[j]))
+  }
+}
+ebs_data <- ebs_data %>% 
+  # remove any data rows that have headers as data rows
+  filter(LATITUDE != "LATITUDE")
+
+
+# clean up
+rm(files, temp, j)
+
+
+# Update GOA ====
+files <- list.files(path = "data_raw/", pattern = "goa")
+# create blank table
+goa_data <- tibble()
+for (j in seq(files)){
+  if(!grepl("strata", files[j])){
+    # read the csv
+    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
+    goa_data <- rbind(goa_data, temp)
+  }else{
+    goa_strata <- read_csv(paste0("data_raw/", files[j]))
+  }
+}
+
+goa_data <- goa_data %>% 
+  # remove any data rows that have headers as data rows
+  filter(LATITUDE != "LATITUDE")
+
+# clean up
+rm(files, temp, j)
 
 # Update WCANN ====
 # define the file we are looking for
