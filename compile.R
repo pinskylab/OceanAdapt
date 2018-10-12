@@ -578,7 +578,9 @@ wctri <- left_join(wctri, wctri_species, by = "SPECIES_CODE")
 
 # trim to standard hauls and good performance
 wctri <- wctri %>% 
-  filter(HAUL_TYPE==3 & PERFORMANCE==0)
+  filter(HAUL_TYPE == 3 & PERFORMANCE == 0)
+
+rm(wctri_catch, wctri_haul, wctri_species)
 
 # compile TAX ====
 tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
