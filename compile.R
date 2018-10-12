@@ -488,53 +488,97 @@ neus_bio <- neus_survdat %>%
 neus_survdat <- left_join(select(neus_survdat, -BIOMASS), neus_bio, by = c("CRUISE6", "STATION", "STRATUM", "SVSPP", "YEAR", "SEASON", "LAT", "LON", "DEPTH"))
 rm(neus_bio)
 
-
-
-
-
 # repeat for spp file 
 neus_spp <- spp %>%
-  # add a leading column 
-  mutate(X = NA) %>% 
-  select(X, everything())
+  select(-ITISSPP, -COMNAME, -AUTHOR)
 
-neus_strata <- read_csv("data_raw/neus_strata.csv")
+# remove some columns from spp data.table
+neus_strata <- read_csv("data_raw/neus_strata.csv") %>% 
+  select(StratumCode, Areanmi2) %>% 
+  rename(STRATUM = StratumCode)
 
+neus <- left_join(neus_survdat, spp, by = "SVSPP")
+neus <- left_join(neus, neus_strata, by = "STRATUM")
 
-  setnames(neus, 'V1', 'wtcpue')
-  neus = neus[SEASON=='SPRING',] # trim to spring survey only
-  spp[,c('ITISSPP', 'COMNAME', 'AUTHOR') := NULL] # remove some columns from spp data.table
-  neus = merge(neus, spp, by='SVSPP') # add species names
-  neus = as.data.frame(neus) # this makes the calculations less efficient... but avoids having to rewrite the code for data.tables
-  neus = merge(neus, neusstrata[,c('StratumCode', 'Areanmi2')], by.x='STRATUM', by.y = 'StratumCode', all.x=TRUE)
+neusS <- neus %>% 
+  filter(SEASON == "SPRING")
+
+neusF <- neus %>% 
+  filter(SEASON == "FALL")
+
+# Compile WCTRI ====
+wctri_catch <- read_csv("data_raw/wctri_catch.csv", col_types = cols(
+  CRUISEJOIN = col_integer(),
+  HAULJOIN = col_integer(),
+  CATCHJOIN = col_integer(),
+  REGION = col_character(),
+  VESSEL = col_integer(),
+  CRUISE = col_integer(),
+  HAUL = col_integer(),
+  SPECIES_CODE = col_integer(),
+  WEIGHT = col_double(),
+  NUMBER_FISH = col_integer(),
+  SUBSAMPLE_CODE = col_character(),
+  VOUCHER = col_character(),
+  AUDITJOIN = col_integer()
+)) %>% 
+  select('CRUISEJOIN', 'HAULJOIN', 'VESSEL', 'CRUISE', 'HAUL', 'SPECIES_CODE', 'WEIGHT')
   
-  return(neus)
-}
+wctri_haul <- read_csv("data_raw/wctri_haul.csv", col_types = 
+                         cols(
+                           CRUISEJOIN = col_integer(),
+                           HAULJOIN = col_integer(),
+                           REGION = col_character(),
+                           VESSEL = col_integer(),
+                           CRUISE = col_integer(),
+                           HAUL = col_integer(),
+                           HAUL_TYPE = col_integer(),
+                           PERFORMANCE = col_double(),
+                           START_TIME = col_character(),
+                           DURATION = col_double(),
+                           DISTANCE_FISHED = col_double(),
+                           NET_WIDTH = col_double(),
+                           NET_MEASURED = col_character(),
+                           NET_HEIGHT = col_double(),
+                           STRATUM = col_integer(),
+                           START_LATITUDE = col_double(),
+                           END_LATITUDE = col_double(),
+                           START_LONGITUDE = col_double(),
+                           END_LONGITUDE = col_double(),
+                           STATIONID = col_character(),
+                           GEAR_DEPTH = col_integer(),
+                           BOTTOM_DEPTH = col_integer(),
+                           BOTTOM_TYPE = col_integer(),
+                           SURFACE_TEMPERATURE = col_double(),
+                           GEAR_TEMPERATURE = col_double(),
+                           WIRE_LENGTH = col_integer(),
+                           GEAR = col_integer(),
+                           ACCESSORIES = col_integer(),
+                           SUBSAMPLE = col_integer(),
+                           AUDITJOIN = col_integer()
+                         )) %>% 
+  select('CRUISEJOIN', 'HAULJOIN', 'VESSEL', 'CRUISE', 'HAUL', 'HAUL_TYPE', 'PERFORMANCE', 'START_TIME', 'DURATION', 'DISTANCE_FISHED', 'NET_WIDTH', 'STRATUM', 'START_LATITUDE', 'END_LATITUDE', 'START_LONGITUDE', 'END_LONGITUDE', 'STATIONID', 'BOTTOM_DEPTH')
 
-compile_NEUSF = function () {
-  #Northeast US
-  #function returns neus
-  survdat = data.table(read.csv(paste(WORKING_DIRECTORY, '/neus_data.csv', sep='')))
-  neusstrata = read.csv(paste(WORKING_DIRECTORY, '/neus_strata.csv', sep=''))
-  spp = data.table(read.csv(paste(WORKING_DIRECTORY, '/neus_svspp.csv', sep='')))
+wctri_species <- read_csv("data_raw/wctri_species.csv", col_types = cols(
+  SPECIES_CODE = col_integer(),
+  SPECIES_NAME = col_character(),
+  COMMON_NAME = col_character(),
+  REVISION = col_character(),
+  BS = col_character(),
+  GOA = col_character(),
+  WC = col_character(),
+  AUDITJOIN = col_integer()
+)) %>% 
+  select('SPECIES_CODE', 'SPECIES_NAME', 'COMMON_NAME')
   
-  setkey(survdat, CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX)
-  neusF <- unique(survdat) # drops length data
-  neusF[, c('LENGTH', 'NUMLEN') := NULL] # remove length columns
-  neusF = neusF[,sum(BIOMASS),by=list(YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP)] # sum different sexes of same spp together
-  setnames(neusF, 'V1', 'wtcpue')
-  neusF = neusF[SEASON=='FALL',] # trim to fall survey only
-  spp[,c('ITISSPP', 'COMNAME', 'AUTHOR') := NULL] # remove some columns from spp data.table
-  neusF = merge(neusF, spp, by='SVSPP') # add species names
-  neusF = as.data.frame(neusF) # this makes the calculations less efficient... but avoids having to rewrite the code for data.tables
-  neusF = merge(neusF, neusstrata[,c('StratumCode', 'Areanmi2')], by.x='STRATUM', by.y = 'StratumCode', all.x=TRUE)
-  
-  return(neusF)
-}
+# Add haul info to catch data
+wctri <- left_join(wctri_catch, wctri_haul, by = c("CRUISEJOIN", "HAULJOIN", "VESSEL", "CRUISE", "HAUL"))
+#  add species names
+wctri <- left_join(wctri, wctri_species, by = "SPECIES_CODE")
 
-
-
-
+# trim to standard hauls and good performance
+wctri <- wctri %>% 
+  filter(HAUL_TYPE==3 & PERFORMANCE==0)
 
 # compile TAX ====
 tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
