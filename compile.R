@@ -200,16 +200,21 @@ for (j in seq(files)){
     temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
     ebs_data <- rbind(ebs_data, temp)
   }else{
-    ebs_strata <- read_csv(paste0("data_raw/", files[j]))
+    ebs_strata <- read_csv(paste0("data_raw/", files[j])) %>% 
+      select(StratumCode, Areakm2) %>% 
+      rename(STRATUM = StratumCode)
   }
 }
 ebs_data <- ebs_data %>% 
   # remove any data rows that have headers as data rows
-  filter(LATITUDE != "LATITUDE")
+  filter(LATITUDE != "LATITUDE") %>% 
+  mutate(STRATUM = as.integer(STRATUM))
 
+
+ebs <- left_join(ebs_data, ebs_strata, by = "STRATUM")
 
 # clean up
-rm(files, temp, j)
+rm(files, temp, j, ebs_data, ebs_strata, temp)
 
 
 # Update GOA ====
@@ -222,16 +227,21 @@ for (j in seq(files)){
     temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
     goa_data <- rbind(goa_data, temp)
   }else{
-    goa_strata <- read_csv(paste0("data_raw/", files[j]))
+    goa_strata <- read_csv(paste0("data_raw/", files[j])) %>% 
+      select(StratumCode, Areakm2) %>% 
+      rename(STRATUM = StratumCode)
   }
 }
 
 goa_data <- goa_data %>% 
   # remove any data rows that have headers as data rows
-  filter(LATITUDE != "LATITUDE")
+  filter(LATITUDE != "LATITUDE")%>% 
+  mutate(STRATUM = as.integer(STRATUM))
+
+goa <- left_join(goa_data, goa_strata, by = "STRATUM")
 
 # clean up
-rm(files, temp, j, cols)
+rm(files, temp, j, cols, goa_data, goa_strata)
 
 # Update WCANN ====
 wcann_catch <- read_csv("data_raw/wcann_catch.csv", col_types = cols(
