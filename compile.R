@@ -153,7 +153,7 @@ cols <- cols(
   HAUL = col_character()
 )
 
-# Update AI ====
+# Compile AI ====
 files <- list.files(path = "data_raw/", pattern = "ai")
 # create blank table
 ai_data <- tibble()
@@ -170,18 +170,25 @@ for (j in seq(files)){
     # read the csv
     temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
     ai_data <- rbind(ai_data, temp)
-  }else{
+  }
+  if(files[j] == "ai_strata.csv"){
     ai_strata <- read_csv(paste0("data_raw/", files[j]))
+    ai_strata <- ai_strata %>% 
+      select(StratumCode, Areakm2) %>% 
+      rename(STRATUM = StratumCode)
   }
 }
 
 ai_data <- ai_data %>% 
   # remove any data rows that have headers as data rows
-  filter(LATITUDE != "LATITUDE")
+  filter(LATITUDE != "LATITUDE") %>% 
+  mutate(STRATUM = as.integer(STRATUM))
+
+ai <- left_join(ai_data, ai_strata, by = "STRATUM")
 
 
 # clean up
-rm(files, temp, j, temp_fixed)
+rm(files, temp, j, temp_fixed, ai_data, ai_strata)
 
 # Update EBS ====
 files <- list.files(path = "data_raw/", pattern = "ebs")
