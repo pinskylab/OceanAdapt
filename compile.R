@@ -470,3 +470,19 @@ spp <- spp %>%
   mutate(X = NA) %>% 
   select(X, everything())
 
+# compile TAX ====
+tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
+  taxon = col_character(),
+  species = col_character(),
+  genus = col_character(),
+  family = col_character(),
+  order = col_character(),
+  class = col_character(),
+  superclass = col_character(),
+  subphylum = col_character(),
+  phylum = col_character(),
+  kingdom = col_character(),
+  name = col_character(),
+  common = col_character()
+))
+
