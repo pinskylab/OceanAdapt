@@ -243,7 +243,7 @@ goa <- left_join(goa_data, goa_strata, by = "STRATUM")
 # clean up
 rm(files, temp, j, cols, goa_data, goa_strata)
 
-# Update WCANN ====
+# Compile WCANN ====
 wcann_catch <- read_csv("data_raw/wcann_catch.csv", col_types = cols(
   catch_id = col_integer(),
   common_name = col_character(),
@@ -312,7 +312,7 @@ rm(test)
 
 wcann <- left_join(wcann_haul, wcann_catch, by = c("trawl_id", "year"))
   
-# Update GMEX ====
+# Compile GMEX ====
 gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(
   BGSID = col_integer(),
   CRUISEID = col_integer(),
@@ -335,7 +335,12 @@ gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(
   INVRECID = col_character(),
   X20 = col_character()
 )) %>% 
-  select(-INVRECID, -X20)
+  select('CRUISEID', 'STATIONID', 'VESSEL', 'CRUISE_NO', 'P_STA_NO', 'GENUS_BGS', 'SPEC_BGS', 'BGSCODE', 'BIO_BGS', 'SELECT_BGS') %>% 
+  # trim out young of year records (only useful for count data) and those with UNKNOWN species
+  filter(BGSCODE != "T" & GENUS_BGS != "UNKNOWN") %>% 
+  # remove the few rows that are still duplicates
+  distinct()
+
 
 # problems should be 0 obs
 problems <- problems(gmex_bio) %>% 
@@ -345,7 +350,7 @@ gmex_cruise <-read_csv("data_raw/gmex_CRUISES.csv", col_types = cols(
   CRUISEID = col_integer(),
   YR = col_integer(),
   SOURCE = col_character(),
-  VESSEL = col_character(),
+  VESSEL = col_integer(),
   CRUISE_NO = col_character(),
   STARTCRU = col_date(format = ""),
   ENDCRU = col_date(format = ""),
@@ -355,7 +360,7 @@ gmex_cruise <-read_csv("data_raw/gmex_CRUISES.csv", col_types = cols(
   INGEST_PROGRAM_VER = col_character(),
   X12 = col_character()
 )) %>% 
-  select(-X12)
+  select(CRUISEID, VESSEL, TITLE)
 
 # problems should be 0 obs
 problems <- problems(gmex_cruise) %>% 
@@ -432,7 +437,8 @@ gmex_station <- read_csv("temporary.csv", col_types = cols(
   END_DATE = col_datetime(format = ""),
   HAULVALUE = col_character(),
   X49 = col_character()
-))
+)) %>% 
+  select('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')
 
 problems <- problems(gmex_station) %>% 
   filter(!is.na(col))
@@ -467,13 +473,50 @@ gmex_tow <-read_csv("data_raw/gmex_INVREC.csv", col_types = cols(
   COMBIO = col_character(),
   X28 = col_character()
 )) %>% 
-  select(-X28)
+  select('STATIONID', 'CRUISE_NO', 'P_STA_NO', 'INVRECID', 'GEAR_SIZE', 'GEAR_TYPE', 'MESH_SIZE', 'MIN_FISH', 'OP') %>% 
+  filter(GEAR_TYPE=='ST')
 
 problems <- problems(gmex_tow) %>% 
-  filter(!is.na(col)) # 2 problems are that there are weird delimiters in the note column COMBIO, ignoring for now.
+  filter(!is.na(col)) 
+# 2 problems are that there are weird delimiters in the note column COMBIO, ignoring for now.
+
+# make two combined records where multiple species records share the same species code
+newspp <- tibble(
+  Key1 = c(503,5770), 
+  TAXONOMIC = c('ANTHIAS TENUIS AND WOODSI', 'MOLLUSCA AND UNID.OTHER #01'), 
+  CODE = c(170026003, 300000000), 
+  TAXONSIZECODE = NA, 
+  isactive = -1, 
+  common_name = c('threadnose and swallowtail bass', 'molluscs or unknown'), 
+  tsn = NA) 
+
+# remove the duplicates that were just combined  
+gmex_spp <- gmex_spp %>% 
+  distinct(CODE, .keep_all = T)
+# add the combined records on to the end. trim out extra columns from gmexspp
+gmex_spp <- rbind(gmex_spp, newspp) %>% 
+  select(CODE, TAXONOMIC) %>% 
+  rename(BIO_BGS = CODE)
+  
+# merge tow information with catch data, but only for shrimp trawl tows (ST)
+gmex <- left_join(gmex_bio, gmex_tow, by = c("STATIONID", "CRUISE_NO", "P_STA_NO"))
+# add station location and related data
+gmex <- left_join(gmex, gmex_station, by = c("CRUISEID", "STATIONID", "CRUISE_NO", "P_STA_NO"))
+# add scientific name
+gmex <- left_join(gmex, gmex_spp, by = "BIO_BGS")
+# add cruise title
+gmex <- left_join(gmex, gmex_cruise, by = c("CRUISEID", "VESSEL"))
+
+# Trim to high quality SEAMAP summer trawls, based off the subset used by Jeff Rester's GS_TRAWL_05232011.sas
+gmex <- gmex %>% 
+  filter(grepl("Summer", TITLE) & 
+           GEAR_SIZE == 40 & 
+           MESH_SIZE == 1.63 &
+           # OP has no letter value
+           !grepl("[A-Z]", OP))
 
 
-# Update NEUS ====
+# Compile NEUS ====
 load("data_raw/neus_Survdat.RData")
 load("data_raw/neus_SVSPP.RData")
 
