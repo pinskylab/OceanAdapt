@@ -1,0 +1,389 @@
+ai 
+	 data.csv 
+ 		LATITUDE
+ 		LONGITUDE
+ 		STATION
+ 		STRATUM
+ 		YEAR
+ 		DATETIME
+ 		WTCPUE
+ 		NUMCPUE
+ 		COMMON
+ 		SCIENTIFIC
+ 		SID
+ 		BOT_DEPTH
+ 		BOT_TEMP
+ 		SURF_TEMP
+ 		VESSEL
+ 		CRUISE
+ 		HAUL
+ 
+	 strata.csv 
+ 		NPFMCArea
+ 		SubareaDescription
+ 		StratumCode
+ 		DepthIntervalm
+ 		Areakm2
+ 
+
+
+ebs 
+	 data.csv 
+ 		LATITUDE
+ 		LONGITUDE
+ 		STATION
+ 		STRATUM
+ 		YEAR
+ 		DATETIME
+ 		WTCPUE
+ 		NUMCPUE
+ 		COMMON
+ 		SCIENTIFIC
+ 		SID
+ 		BOT_DEPTH
+ 		BOT_TEMP
+ 		SURF_TEMP
+ 		VESSEL
+ 		CRUISE
+ 		HAUL
+ 
+	 strata.csv 
+ 		SubareaDescription
+ 		StratumCode
+ 		Areakm2
+ 
+
+
+goa 
+	 data.csv 
+ 		LATITUDE
+ 		LONGITUDE
+ 		STATION
+ 		STRATUM
+ 		YEAR
+ 		DATETIME
+ 		WTCPUE
+ 		NUMCPUE
+ 		COMMON
+ 		SCIENTIFIC
+ 		SID
+ 		BOT_DEPTH
+ 		BOT_TEMP
+ 		SURF_TEMP
+ 		VESSEL
+ 		CRUISE
+ 		HAUL
+ 
+	 strata.csv 
+ 		SubareaDescription
+ 		StratumCode
+ 		DepthIntervalm
+ 		Areakm2
+ 
+
+
+gmex 
+	 bio.csv 
+ 		BGSID
+ 		CRUISEID
+ 		STATIONID
+ 		VESSEL
+ 		CRUISE_NO
+ 		P_STA_NO
+ 		CATEGORY
+ 		GENUS_BGS
+ 		SPEC_BGS
+ 		BGSCODE
+ 		CNT
+ 		CNTEXP
+ 		SAMPLE_BGS
+ 		SELECT_BGS
+ 		BIO_BGS
+ 		NODC_BGS
+ 		IS_SAMPLE
+ 		TAXONID
+ 
+	 cruise.csv 
+ 		CRUISEID
+ 		YR
+ 		SOURCE
+ 		VESSEL
+ 		CRUISE_NO
+ 		STARTCRU
+ 		ENDCRU
+ 		TITLE
+ 		NOTE
+ 		INGEST_SOURCE
+ 		INGEST_PROGRAM_VER
+ 
+	 spp.csv 
+ 		Key1
+ 		TAXONOMIC
+ 		CODE
+ 		TAXONSIZECODE
+ 		isactive
+ 		common_name
+ 		tsn
+ 
+	 station.csv 
+ 		"STATIONID"
+ 		"CRUISEID"
+ 		"VESSEL"
+ 		"CRUISE_NO"
+ 		"P_STA_NO"
+ 		"TIME_ZN"
+ 		"TIME_MIL"
+ 		"S_LATD"
+ 		"S_LATM"
+ 		"S_LATH"
+ 		"S_LOND"
+ 		"S_LONM"
+ 		"S_LONH"
+ 		"DEPTH_SSTA"
+ 		"S_STA_NO"
+ 		"MO_DAY_YR"
+ 		"TIME_EMIL"
+ 		"E_LATD"
+ 		"E_LATM"
+ 		"E_LATH"
+ 		"E_LOND"
+ 		"E_LONM"
+ 		"E_LONH"
+ 		"DEPTH_ESTA"
+ 		"GEARS"
+ 		"TEMP_SSURF"
+ 		"TEMP_BOT"
+ 		"TEMP_SAIR"
+ 		"B_PRSSR"
+ 		"WIND_SPD"
+ 		"WIND_DIR"
+ 		"WAVE_HT"
+ 		"SEA_COND"
+ 		"DBTYPE"
+ 		"DATA_CODE"
+ 		"VESSEL_SPD"
+ 		"FAUN_ZONE"
+ 		"STAT_ZONE"
+ 		"TOW_NO"
+ 		"NET_NO"
+ 		"COMSTAT"
+ 		"DECSLAT"
+ 		"DECSLON"
+ 		"DECELAT"
+ 		"DECELON"
+ 		"START_DATE"
+ 		"END_DATE"
+ 		"HAULVALUE"
+ 		
+ 
+	 tow.csv 
+ 		INVRECID
+ 		STATIONID
+ 		CRUISEID
+ 		VESSEL
+ 		CRUISE_NO
+ 		P_STA_NO
+ 		GEAR_SIZE
+ 		GEAR_TYPE
+ 		MESH_SIZE
+ 		OP
+ 		MIN_FISH
+ 		WBCOLOR
+ 		BOT_TYPE
+ 		BOT_REG
+ 		TOT_LIVE
+ 		FIN_CATCH
+ 		CRUS_CATCH
+ 		OTHR_CATCH
+ 		T_SAMPLEWT
+ 		T_SELECTWT
+ 		FIN_SMP_WT
+ 		FIN_SEL_WT
+ 		CRU_SMP_WT
+ 		CRU_SEL_WT
+ 		OTH_SMP_WT
+ 		OTH_SEL_WT
+ 		COMBIO
+ 
+
+
+neus 
+	 neus.csv 
+ 		""
+ 		"CRUISE6"
+ 		"STATION"
+ 		"STRATUM"
+ 		"SVSPP"
+ 		"CATCHSEX"
+ 		"SVVESSEL"
+ 		"YEAR"
+ 		"SEASON"
+ 		"LAT"
+ 		"LON"
+ 		"DEPTH"
+ 		"SURFTEMP"
+ 		"SURFSALIN"
+ 		"BOTTEMP"
+ 		"BOTSALIN"
+ 		"ABUNDANCE"
+ 		"BIOMASS"
+ 		"LENGTH"
+ 		"NUMLEN"
+ 
+	 strata.csv 
+ 		StratumCode
+ 		OldStratumCode
+ 		DepthIntervalm
+ 		Areanmi2
+ 
+	 svspp.csv 
+ 		""
+ 		"SCINAME"
+ 		"SVSPP"
+ 		"ITISSPP"
+ 		"COMNAME"
+ 		"AUTHOR"
+ 
+
+
+seus 
+	 catch.csv 
+ 		PROJECTNAME
+ 		PROJECTAGENCY
+ 		DATE
+ 		EVENTNAME
+ 		COLLECTIONNUMBER
+ 		VESSELNAME
+ 		GEARNAME
+ 		GEARCODE
+ 		SPECIESCODE
+ 		MRRI_CODE
+ 		SPECIESSCIENTIFICNAME
+ 		SPECIESCOMMONNAME
+ 		NUMBERTOTAL
+ 		SPECIESTOTALWEIGHT
+ 		SPECIESSUBWEIGHT
+ 		SPECIESWGTPROCESSED
+ 		WEIGHTMETHODDESC
+ 		ORGWTUNITS
+ 		EFFORT
+ 		CATCHSUBSAMPLED
+ 		CATCHWEIGHT
+ 		CATCHSUBWEIGHT
+ 		TIMESTART
+ 		DURATION
+ 		TOWTYPETEXT
+ 		LOCATION
+ 		REGION
+ 		DEPTHZONE
+ 		ACCSPGRIDCODE
+ 		STATIONCODE
+ 		EVENTTYPEDESCRIPTION
+ 		TEMPSURFACE
+ 		TEMPBOTTOM
+ 		SALINITYSURFACE
+ 		SALINITYBOTTOM
+ 		SDO
+ 		BDO
+ 		TEMPAIR
+ 		LATITUDESTART
+ 		LATITUDEEND
+ 		LONGITUDESTART
+ 		LONGITUDEEND
+ 		SPECSTATUSDESCRIPTION
+ 		LASTUPDATED
+ 
+	 haul.csv 
+ 		PROJECTNAME
+ 		PROJECTAGENCY
+ 		DATE
+ 		EVENTNAME
+ 		COLLECTIONNUMBER
+ 		VESSELNAME
+ 		GEARNAME
+ 		GEARCODE
+ 		TOWTYPETEXT
+ 		LOCATION
+ 		REGION
+ 		DEPTHZONE
+ 		STATIONCODE
+ 		EVENTTYPEDESCRIPTION
+ 		TEMPSURFACE
+ 		TEMPBOTTOM
+ 		SALINITYSURFACE
+ 		SALINITYBOTTOM
+ 		LIGHTPHASE
+ 		TIMESTART
+ 		TIMEZONE
+ 		DURATION
+ 		DEPTHSTART
+ 		DEPTHEND
+ 		PRESSURE
+ 		WINDSPEED
+ 		WINDDIRECTION
+ 		WAVEHEIGHT
+ 		TEMPAIR
+ 		PRECIPITATION
+ 		ESTIMATEDLOC
+ 		LATITUDESTART
+ 		LATITUDEEND
+ 		LONGITUDESTART
+ 		LONGITUDEEND
+ 		SDO
+ 		BDO
+ 		SEDSIZEDESC
+ 		BTMCOMPDESC
+ 		WEATHERDESC
+ 		WATERLVLDESC
+ 		ALTERATIONDESC
+ 		ACTIVITYDESC
+ 		NUMBERREP
+ 		ACCSPGRIDCODE
+ 		COMMENTS
+ 		LASTUPDATED
+ 
+	 strata.csv 
+ 		STRATA
+ 		STRATAHECTARE
+ 
+
+
+wcann 
+	 fish.csv 
+ 		Trawl Id
+ 		Species
+ 		Haul Weight (kg)
+ 		Individual Average Weight (kg)
+ 
+	 haul.csv 
+ 		Survey
+ 		Survey Cycle
+ 		Vessel
+ 		Cruise Leg
+ 		Trawl Id
+ 		Trawl Performance
+ 		Trawl Date
+ 		Trawl Start Time
+ 		Best Latitude (dd)
+ 		Best Longitude (dd)
+ 		Best Position Type
+ 		Best Depth (m)
+ 		Best Depth Type
+ 		Trawl Duration (min)
+ 		Area Swept by the Net (hectares)
+ 		Temperature At the Gear (degs C)
+ 
+	 invert.csv 
+ 		Trawl Id
+ 		Species
+ 		Haul Weight (kg)
+ 
+
+
+wctri 
+	 
+ 		
+ 
+	 
+ 		
+ 
