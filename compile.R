@@ -187,6 +187,9 @@ ai_data <- ai_data %>%
 
 ai <- left_join(ai_data, ai_strata, by = "STRATUM")
 
+# Create a unique haulid
+ai <- ai %>% 
+  mutate(haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'))
 
 # clean up
 rm(files, temp, j, temp_fixed, ai_data, ai_strata)
@@ -214,6 +217,13 @@ ebs_data <- ebs_data %>%
 
 ebs <- left_join(ebs_data, ebs_strata, by = "STRATUM")
 
+# Create a unique haulid
+ebs <- ebs %>% 
+  mutate(
+    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-')    
+  )
+
+
 # clean up
 rm(files, temp, j, ebs_data, ebs_strata, temp)
 
@@ -240,6 +250,14 @@ goa_data <- goa_data %>%
   mutate(STRATUM = as.integer(STRATUM))
 
 goa <- left_join(goa_data, goa_strata, by = "STRATUM")
+
+# Create a unique haulid
+goa <- goa %>%
+  mutate(
+    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-')    
+  )
+  
+
 
 # clean up
 rm(files, temp, j, cols, goa_data, goa_strata)
@@ -312,6 +330,11 @@ test <- merge(wcann_catch, wcann_haul, by=c("trawl_id","year"), all.x=TRUE, all.
 rm(test)
 
 wcann <- left_join(wcann_haul, wcann_catch, by = c("trawl_id", "year"))
+wcann <- wcann %>% 
+  mutate(
+    haulid = trawl_id
+  )
+  
   
 # Compile GMEX ====
 gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(
@@ -514,7 +537,11 @@ gmex <- gmex %>%
            GEAR_SIZE == 40 & 
            MESH_SIZE == 1.63 &
            # OP has no letter value
-           !grepl("[A-Z]", OP))
+           !grepl("[A-Z]", OP)) %>% 
+  mutate(
+    # Create a unique haulid
+    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE_NO, width=3, flag=0), formatC(P_STA_NO, width=5, flag=0, format='d'), sep='-')
+  )
 rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, gmexbio, gmexspp)
 
 
@@ -546,6 +573,12 @@ neus_strata <- read_csv("data_raw/neus_strata.csv") %>%
 
 neus <- left_join(neus_survdat, spp, by = "SVSPP")
 neus <- left_join(neus, neus_strata, by = "STRATUM")
+
+neus <- neus %>%
+  mutate(
+    # Create a unique haulid
+    haulid = paste(formatC(CRUISE6, width=6, flag=0), formatC(STATION, width=3, flag=0), formatC(STRATUM, width=4, flag=0), sep='-')  
+  )
 
 neusS <- neus %>% 
   filter(SEASON == "SPRING")
@@ -734,8 +767,9 @@ seus <- seus %>%
 # calculate effort = mean area swept
 # EFFORT = 0 where the boat didn't move, distance_m = 0
 seus <- seus %>% 
-  mutate(EFFORT = (13.5 * distance_m)/10000)
-
+  mutate(EFFORT = (13.5 * distance_m)/10000, 
+         # Create a unique haulid
+         haulid = EVENTNAME)
 
 # SEUS spring ====
 #Separate the the spring season and convert to dataframe
@@ -825,7 +859,12 @@ wctri <- left_join(wctri, wctri_species, by = "SPECIES_CODE")
 
 # trim to standard hauls and good performance
 wctri <- wctri %>% 
-  filter(HAUL_TYPE == 3 & PERFORMANCE == 0)
+  filter(HAUL_TYPE == 3 & PERFORMANCE == 0) %>% 
+  # Create a unique haulid
+  mutate(
+    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-')  
+  )
+  
 
 rm(wctri_catch, wctri_haul, wctri_species)
 
@@ -844,4 +883,3 @@ tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
   name = col_character(),
   common = col_character()
 ))
-
