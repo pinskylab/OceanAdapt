@@ -10,6 +10,7 @@ download <- "NO"
 
 # what is the working date of the update (what is the date of the folders, downloads)
 library(tidyverse)
+library(lubridate)
 
 # Functions ====
 download_ak <- function(region, ak_files){
@@ -514,6 +515,7 @@ gmex <- gmex %>%
            MESH_SIZE == 1.63 &
            # OP has no letter value
            !grepl("[A-Z]", OP))
+rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, gmexbio, gmexspp)
 
 
 # Compile NEUS ====
@@ -550,6 +552,206 @@ neusS <- neus %>%
 
 neusF <- neus %>% 
   filter(SEASON == "FALL")
+
+rm(neus_spp, neus_strata, neus_survdat)
+
+# compile SEUS ====
+
+seus_catch <- read_csv("data_raw/seus_catch.csv", col_types = cols(
+  PROJECTNAME = col_character(),
+  PROJECTAGENCY = col_character(),
+  DATE = col_character(),
+  EVENTNAME = col_character(),
+  COLLECTIONNUMBER = col_character(),
+  VESSELNAME = col_character(),
+  GEARNAME = col_character(),
+  GEARCODE = col_character(),
+  SPECIESCODE = col_character(),
+  MRRI_CODE = col_character(),
+  SPECIESSCIENTIFICNAME = col_character(),
+  SPECIESCOMMONNAME = col_character(),
+  NUMBERTOTAL = col_integer(),
+  SPECIESTOTALWEIGHT = col_double(),
+  SPECIESSUBWEIGHT = col_double(),
+  SPECIESWGTPROCESSED = col_character(),
+  WEIGHTMETHODDESC = col_character(),
+  ORGWTUNITS = col_character(),
+  EFFORT = col_character(),
+  CATCHSUBSAMPLED = col_logical(),
+  CATCHWEIGHT = col_double(),
+  CATCHSUBWEIGHT = col_double(),
+  TIMESTART = col_character(),
+  DURATION = col_integer(),
+  TOWTYPETEXT = col_character(),
+  LOCATION = col_character(),
+  REGION = col_character(),
+  DEPTHZONE = col_character(),
+  ACCSPGRIDCODE = col_character(),
+  STATIONCODE = col_character(),
+  EVENTTYPEDESCRIPTION = col_character(),
+  TEMPSURFACE = col_double(),
+  TEMPBOTTOM = col_double(),
+  SALINITYSURFACE = col_double(),
+  SALINITYBOTTOM = col_double(),
+  SDO = col_character(),
+  BDO = col_character(),
+  TEMPAIR = col_double(),
+  LATITUDESTART = col_double(),
+  LATITUDEEND = col_double(),
+  LONGITUDESTART = col_double(),
+  LONGITUDEEND = col_double(),
+  SPECSTATUSDESCRIPTION = col_character(),
+  LASTUPDATED = col_character()
+))
+
+seus_haul <- read_csv("data_raw/seus_haul.csv", col_types = cols(
+  PROJECTNAME = col_character(),
+  PROJECTAGENCY = col_character(),
+  DATE = col_character(),
+  EVENTNAME = col_character(),
+  COLLECTIONNUMBER = col_character(),
+  VESSELNAME = col_character(),
+  GEARNAME = col_character(),
+  GEARCODE = col_character(),
+  TOWTYPETEXT = col_character(),
+  LOCATION = col_character(),
+  REGION = col_character(),
+  DEPTHZONE = col_character(),
+  STATIONCODE = col_character(),
+  EVENTTYPEDESCRIPTION = col_character(),
+  TEMPSURFACE = col_double(),
+  TEMPBOTTOM = col_double(),
+  SALINITYSURFACE = col_double(),
+  SALINITYBOTTOM = col_double(),
+  LIGHTPHASE = col_character(),
+  TIMESTART = col_character(),
+  TIMEZONE = col_character(),
+  DURATION = col_integer(),
+  DEPTHSTART = col_integer(),
+  DEPTHEND = col_integer(),
+  PRESSURE = col_double(),
+  WINDSPEED = col_integer(),
+  WINDDIRECTION = col_integer(),
+  WAVEHEIGHT = col_integer(),
+  TEMPAIR = col_double(),
+  PRECIPITATION = col_character(),
+  ESTIMATEDLOC = col_character(),
+  LATITUDESTART = col_double(),
+  LATITUDEEND = col_double(),
+  LONGITUDESTART = col_double(),
+  LONGITUDEEND = col_double(),
+  SDO = col_character(),
+  BDO = col_character(),
+  SEDSIZEDESC = col_character(),
+  BTMCOMPDESC = col_character(),
+  WEATHERDESC = col_character(),
+  WATERLVLDESC = col_character(),
+  ALTERATIONDESC = col_character(),
+  ACTIVITYDESC = col_character(),
+  NUMBERREP = col_character(),
+  ACCSPGRIDCODE = col_character(),
+  COMMENTS = col_character(),
+  LASTUPDATED = col_character()
+)) %>% 
+  distinct(EVENTNAME, DEPTHSTART)
+
+# contains strata areas
+seus_strata <- read_csv("data_raw/seus_strata.csv", col_types = cols(
+  STRATA = col_integer(),
+  STRATAHECTARE = col_double()
+))
+  
+seus <- left_join(seus_catch, seus_haul, by = "EVENTNAME")  
+#Create STRATA column
+seus <- seus %>% 
+  mutate(STRATA = str_sub(STATIONCODE, 1, 2)) %>% 
+# Drop OUTER depth zone because it was only sampled for 10 years
+  filter(DEPTHZONE != "OUTER")
+
+#add STRATAHECTARE to main file 
+seus <- left_join(seus, seus_strata, by = "STRATA") 
+  
+#Create a 'SEASON' column using 'MONTH' as a criteria
+#Create a 'SEASON' column using 'MONTH' as a criteria
+seus <- seus %>% 
+  mutate(DATE = as.Date(DATE, "%m-%d-%Y"), 
+         MONTH = month(DATE))
+
+seus <- seus %>%
+  # create season column
+  mutate(SEASON = NA, 
+         SEASON = ifelse(MONTH >= 1 & MONTH <= 3, "winter", SEASON), 
+         SEASON = ifelse(MONTH >= 4 & MONTH <= 6, "spring", SEASON),
+         SEASON = ifelse(MONTH >= 7 & MONTH <= 8, "summer", SEASON),
+         #September EVENTS were grouped with summer, should be fall because all
+         #hauls made in late-September during fall-survey
+         SEASON = ifelse(MONTH >= 9 & MONTH <= 12, "fall", SEASON))  
+
+# find rows where weight wasn't provided for a species
+misswt <- seus %>% 
+  filter(is.na(SPECIESTOTALWEIGHT)) %>% 
+  select(SPECIESCODE, SPECIESSCIENTIFICNAME) %>% 
+  distinct()
+
+# calculate the mean weight for those species
+meanwt <- seus %>% 
+  filter(SPECIESCODE %in% misswt$SPECIESCODE) %>% 
+  group_by(SPECIESCODE) %>% 
+  summarise(meanwt = mean(SPECIESTOTALWEIGHT, na.rm = T))
+
+# add the calculated mean weight into the main table with a for loop
+for (i in seq(meanwt$SPECIESCODE)){
+  seus <- seus %>% 
+    mutate(SPECIESTOTALWEIGHT = ifelse(is.na(SPECIESTOTALWEIGHT) &
+                                         SPECIESCODE == meanwt$SPECIESCODE[i], 
+                                       meanwt$meanwt[i], 
+                                       SPECIESTOTALWEIGHT))
+}
+
+#Data entry error fixes for lat/lon coordinates
+seus <- seus %>%
+  mutate(
+    # longitudes of less than -360 (like -700), do not exist.  This is a missing decimal.
+    LONGITUDESTART = ifelse(LONGITUDESTART < -360, paste0(substr(LONGITUDESTART, 1, 3), ".", substr(LONGITUDESTART, 4, 10)), LONGITUDESTART), 
+    LONGITUDEEND = ifelse(LONGITUDEEND < -360, paste0(substr(LONGITUDEEND, 1, 3), ".", substr(LONGITUDEEND, 4, 10)), LONGITUDEEND), 
+    # latitudes of more than 100 are outside the range of this survey.  This is a missing decimal.
+    LATITUDESTART = ifelse(LATITUDESTART > 100, paste0(substr(LATITUDESTART, 1, 2), ".", substr(LATITUDESTART, 3, 10)), LATITUDESTART), 
+    LATITUDEEND = ifelse(LATITUDEEND  > 100, paste0(substr(LATITUDEEND, 1, 2), ".", substr(LATITUDEEND, 3, 10)), LATITUDEEND)
+  )
+
+# calculate trawl distance in order to calculate effort
+# create a matrix of starting positions
+start <- matrix(as.numeric(seus$LONGITUDESTART), seus$LATITUDESTART, nrow = nrow(seus), ncol = 2)
+# create a matrix of ending positions
+end <- matrix(as.numeric(seus$LONGITUDEEND), as.numeric(seus$LATITUDEEND), nrow = nrow(seus), ncol = 2)
+# add distance to seus table
+seus <- seus %>%
+  mutate(distance_m = geosphere::distHaversine(p1 = start, p2 = end),
+         distance_km = distance_m / 1000.0, 
+         distance_mi = distance_m / 1609.344
+  )
+
+# calculate effort = mean area swept
+# EFFORT = 0 where the boat didn't move, distance_m = 0
+seus <- seus %>% 
+  mutate(EFFORT = (13.5 * distance_m)/10000)
+
+
+# SEUS spring ====
+#Separate the the spring season and convert to dataframe
+seusSPRING <- seus %>% 
+  filter(SEASON == "spring")
+
+# SEUS summer ====
+#Separate the summer season and convert to dataframe
+seusSUMMER <- seus %>% 
+  filter(SEASON == "summer")
+
+# SEUS fall ====
+seusFALL <- seus %>% 
+  filter(SEASON == "fall")
+
+rm(seus_catch, seus_haul, seus_strata, end, start)
 
 # Compile WCTRI ====
 wctri_catch <- read_csv("data_raw/wctri_catch.csv", col_types = cols(
