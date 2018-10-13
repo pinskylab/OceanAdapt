@@ -539,6 +539,16 @@ gmex <- gmex %>%
     stratum = paste(floor(lat)+0.5,floor(lon)+0.5, floor(depth/100)*100 + 50, sep= "-")
   )
 
+# fix speed
+# Trim out or fix speed and duration records
+# trim out tows of 0, >60, or unknown minutes
+gmex <- gmex %>% 
+  filter(MIN_FISH <= 60 & MIN_FISH > 0 & !is.na(MIN_FISH)) %>% 
+  # fix typo according to Jeff Rester: 30 = 3	
+  mutate(VESSEL_SPD = ifelse(VESSEL_SPD == 30, 3, VESSEL_SPD)) %>% 
+  # trim out vessel speeds 0, unknown, or >5 (need vessel speed to calculate area trawled)
+  filter(VESSEL_SPD <= 5 & VESSEL_SPD > 0  & !is.na(VESSEL_SPD))
+
 rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean)
 
 # Compile NEUS ====
