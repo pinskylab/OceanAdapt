@@ -840,7 +840,10 @@ tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
 
 # keep HQ data ====
 if(HQ_DATA_ONLY == TRUE){
+  
+  # find high quality strata
 #These items were hand chosen.
+  
 # Trim to high quality strata 
 # UPDATE TO SET ALASKA STRATA TO POSITIVE CHOICES
 ai <- ai %>% 
@@ -893,7 +896,45 @@ wcann <- wcann %>%
 gmex <- gmex %>% 
   filter(stratum %in% c("26.5--96.5-50", "26.5--97.5-50", "27.5--96.5-50", "27.5--97.5-50", "28.5--90.5-50", "28.5--91.5-50", "28.5--92.5-50", "28.5--93.5-50", "28.5--94.5-50", "28.5--95.5-50", "28.5--96.5-50", "29.5--88.5-50", "29.5--89.5-50", "29.5--92.5-50", "29.5--93.5-50", "29.5--94.5-50"))
   
-  # all seus strata are retained  
+  # all seus strata are retained 
+
+# find high quality years  #These items were hand chosen.
+  # Trim to high-quality years (sample all strata)  
+
+# 2001 didn't sample many strata
+goa <- goa %>% 
+  filter(YEAR != 2001)
+  
+# many strata in the Mid-Atlantic Bight weren't sampled until 1967
+neus <- neus %>% 
+  filter(YEAR >= 1967)
+
+# # 1982 and 1983 didn't sample many strata
+gmex <- gmex %>% 
+  filter(!year %in% c(1982, 1983))
+
+# if we are looking for years where all strata were not sampled, a better code might be
+# which strata are there?
+num_strata <- seus %>% 
+  select(STRATA) %>% 
+  distinct()
+
+# how many strata were sampled each year? 24 each year
+yearly <- seus %>% 
+  select(year, STRATA, SEASON) %>% 
+  distinct() %>% 
+  group_by(year, SEASON) %>% 
+  summarise(count = n()) %>% 
+  filter(count != nrow(num_strata))
+
+for (i in seq(yearly$year)){
+  seus <- seus %>% 
+    filter(year != yearly$year[i] & SEASON != yearly$SEASON[i])
+}
+# 1989 was a year when sampling was inconsistent
+seus <- filter(seus, year != 1989)
+
+rm(yearly, num_strata)
 }
 
 # now that lines have been removed from the main data set, can split out seasons
