@@ -26,6 +26,18 @@ library(tidyverse)
 library(lubridate)
 
 # Functions ====
+# function to calculate convex hull area in km2
+#developed from http://www.nceas.ucsb.edu/files/scicomp/GISSeminar/UseCases/CalculateConvexHull/CalculateConvexHullR.html
+calcarea = function(lonlat){
+  hullpts = chull(x=lonlat[,1], y=lonlat[,2]) # find indices of vertices
+  hullpts = c(hullpts,hullpts[1]) # close the loop
+  ps = appendPolys(NULL,mat=as.matrix(lonlat[hullpts,]),1,1,FALSE) # create a Polyset object
+  attr(ps,"projection") = "LL" # set projection to lat/lon
+  psUTM = convUL(ps, km=TRUE) # convert to UTM in km
+  polygonArea = calcArea(psUTM,rollup=1)
+  return(polygonArea$area)
+}
+
 download_ak <- function(region, ak_files){
   # define the destination folder
   for (i in seq(ak_files$survey)){
@@ -588,8 +600,14 @@ neus <- left_join(neus, neus_strata, by = "STRATUM")
 neus <- neus %>%
   mutate(
     # Create a unique haulid
-    haulid = paste(formatC(CRUISE6, width=6, flag=0), formatC(STATION, width=3, flag=0), formatC(STRATUM, width=4, flag=0), sep='-')  
-  )
+    haulid = paste(formatC(CRUISE6, width=6, flag=0), formatC(STATION, width=3, flag=0), formatC(STRATUM, width=4, flag=0), sep='-'),  
+    # Calculate stratum area where needed (use convex hull approach)
+    # convert square nautical miles to square kilometers
+    stratumarea = Areanmi2 * 3.429904 
+      )
+
+
+
 
 rm(neus_spp, neus_strata, neus_survdat, survdat, spp)
 
@@ -823,16 +841,22 @@ wctri <- wctri %>%
     haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
     # Extract year where needed
     year = substr(CRUISE, 1, 4), 
-    # Add "strata" (define by lat, lon and depth bands) where needed
-     # degree bins
-     # 100 m bins
-    # no need to use lon grids on west coast (so narrow)
+    # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(START_LATITUDE)+0.5, floor(BOTTOM_DEPTH/100)*100 + 50, sep= "-")
   )
 
+# Calculate stratum area where needed (use convex hull approach)
+wctri <- wctri %>% 
+  mutate(START_LATITUDE = as.double(START_LATITUDE), 
+         START_LONGITUDE = as.double(START_LONGITUDE))
+wctristrats = Hmisc::summarize(wctri[,c('START_LONGITUDE', 'START_LATITUDE')], by=list(stratum=wctri$stratum), FUN=calcarea, stat.name = 'stratumarea')
+
+wctri <- left_join(wctri, wctristrats[,c('stratum', 'stratumarea')], by = "stratum")
+
+
 rm(wctri_catch, wctri_haul, wctri_species)
 
-# compile TAX ====
+# Compile TAX ====
 tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
   taxon = col_character(),
   species = col_character(),
@@ -969,3 +993,17 @@ seusSUMMER <- seus %>%
 # SEUS fall ====
 seusFALL <- seus %>% 
   filter(SEASON == "fall")
+
+
+
+  # Calculate stratum area where needed (use convex hull approach)
+  wctristrats = summarize(wctri[,c('START_LONGITUDE', 'START_LATITUDE')], by=list(stratum=wctri$stratum), FUN=calcarea, stat.name = 'stratumarea')
+  wctri <<- merge(wctri, wctristrats[,c('stratum', 'stratumarea')], by.x='stratum', by.y='stratum', all.x=TRUE)
+  
+  wcannstrats = summarize(wcann[,c('longitude_dd', 'latitude_dd')], by=list(stratum=wcann$stratum), FUN=calcarea, stat.name = 'stratumarea')
+  wcann <<- merge(wcann, wcannstrats[,c('stratum', 'stratumarea')], by.x='stratum', by.y='stratum', all.x=TRUE)
+  
+  gmexstrats = summarize(gmex[,c('lon', 'lat')], by=list(stratum=gmex$stratum), FUN=calcarea, stat.name = 'stratumarea')
+  gmex <<- merge(gmex, gmexstrats[,c('stratum', 'stratumarea')], by.x='stratum', by.y='stratum', all.x=TRUE)
+  return(TRUE)
+}
