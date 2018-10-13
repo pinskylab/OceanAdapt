@@ -542,7 +542,16 @@ gmex <- gmex %>%
     # Create a unique haulid
     haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE_NO, width=3, flag=0), formatC(P_STA_NO, width=5, flag=0, format='d'), sep='-'), 
     # Extract year where needed
-    year = year(MO_DAY_YR)
+    year = year(MO_DAY_YR),
+    # Calculate decimal lat and lon, depth in m, where needed
+    S_LATD = ifelse(S_LATD == 0, NA, S_LATD), 
+    S_LOND = ifelse(S_LOND == 0, NA, S_LOND), 
+    E_LATD = ifelse(E_LATD == 0, NA, E_LATD), 
+    E_LOND = ifelse(E_LOND == 0, NA, E_LOND),
+    lat = rowMeans(cbind(S_LATD + S_LATM/60, E_LATD + E_LATM/60), na.rm=T), 
+    lon = -rowMeans(cbind(S_LOND + S_LONM/60, E_LOND + E_LONM/60), na.rm=T), 
+    # convert fathoms to meters
+    depth = DEPTH_SSTA * 1.8288
   )
 
 rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, gmexbio, gmexspp)
