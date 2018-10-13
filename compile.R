@@ -540,8 +540,11 @@ gmex <- gmex %>%
            !grepl("[A-Z]", OP)) %>% 
   mutate(
     # Create a unique haulid
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE_NO, width=3, flag=0), formatC(P_STA_NO, width=5, flag=0, format='d'), sep='-')
+    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE_NO, width=3, flag=0), formatC(P_STA_NO, width=5, flag=0, format='d'), sep='-'), 
+    # Extract year where needed
+    year = year(MO_DAY_YR)
   )
+
 rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, gmexbio, gmexspp)
 
 
@@ -769,7 +772,10 @@ seus <- seus %>%
 seus <- seus %>% 
   mutate(EFFORT = (13.5 * distance_m)/10000, 
          # Create a unique haulid
-         haulid = EVENTNAME)
+         haulid = EVENTNAME, 
+         # Extract year where needed
+         year = substr(EVENTNAME, 1,4)
+         )
 
 # SEUS spring ====
 #Separate the the spring season and convert to dataframe
@@ -862,9 +868,10 @@ wctri <- wctri %>%
   filter(HAUL_TYPE == 3 & PERFORMANCE == 0) %>% 
   # Create a unique haulid
   mutate(
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-')  
+    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
+    # Extract year where needed
+    year = substr(CRUISE, 1, 4)
   )
-  
 
 rm(wctri_catch, wctri_haul, wctri_species)
 
