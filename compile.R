@@ -184,7 +184,13 @@ for (j in seq(files)){
     ai_data <- rbind(ai_data, temp)
   }
   if(files[j] == "ai_strata.csv"){
-    ai_strata <- read_csv(paste0("data_raw/", files[j]))
+    ai_strata <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
+      NPFMCArea = col_character(),
+      SubareaDescription = col_character(),
+      StratumCode = col_integer(),
+      DepthIntervalm = col_character(),
+      Areakm2 = col_integer()
+    ))
     ai_strata <- ai_strata %>% 
       select(StratumCode, Areakm2) %>% 
       rename(STRATUM = StratumCode)
@@ -215,7 +221,11 @@ for (j in seq(files)){
     temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
     ebs_data <- rbind(ebs_data, temp)
   }else{
-    ebs_strata <- read_csv(paste0("data_raw/", files[j])) %>% 
+    ebs_strata <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
+      SubareaDescription = col_character(),
+      StratumCode = col_integer(),
+      Areakm2 = col_integer()
+    )) %>% 
       select(StratumCode, Areakm2) %>% 
       rename(STRATUM = StratumCode)
   }
@@ -249,7 +259,12 @@ for (j in seq(files)){
     temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
     goa_data <- rbind(goa_data, temp)
   }else{
-    goa_strata <- read_csv(paste0("data_raw/", files[j])) %>% 
+    goa_strata <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
+      SubareaDescription = col_character(),
+      StratumCode = col_integer(),
+      DepthIntervalm = col_character(),
+      Areakm2 = col_integer()
+    )) %>% 
       select(StratumCode, Areakm2) %>% 
       rename(STRATUM = StratumCode)
   }
@@ -349,60 +364,42 @@ wcann <- wcann %>%
     stratum = paste(floor(latitude_dd)+0.5, floor(depth_m/100)*100 + 50, sep= "-")
     )
 
+# cleanup
+rm(wcann_catch, wcann_haul)
+
 # Compile GMEX ====
-gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(
-  BGSID = col_integer(),
-  CRUISEID = col_integer(),
-  STATIONID = col_integer(),
-  VESSEL = col_integer(),
-  CRUISE_NO = col_integer(),
-  P_STA_NO = col_character(),
-  CATEGORY = col_integer(),
-  GENUS_BGS = col_character(),
-  SPEC_BGS = col_character(),
-  BGSCODE = col_character(),
-  CNT = col_integer(),
-  CNTEXP = col_integer(),
-  SAMPLE_BGS = col_double(),
-  SELECT_BGS = col_double(),
-  BIO_BGS = col_integer(),
-  NODC_BGS = col_integer(),
-  IS_SAMPLE = col_character(),
-  TAXONID = col_character(),
-  INVRECID = col_character(),
-  X20 = col_character()
-)) %>% 
+gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(.default = col_character())) %>% 
   select('CRUISEID', 'STATIONID', 'VESSEL', 'CRUISE_NO', 'P_STA_NO', 'GENUS_BGS', 'SPEC_BGS', 'BGSCODE', 'BIO_BGS', 'SELECT_BGS') %>% 
   # trim out young of year records (only useful for count data) and those with UNKNOWN species
   filter(BGSCODE != "T" & GENUS_BGS != "UNKNOWN") %>% 
   # remove the few rows that are still duplicates
   distinct()
 
-
 # problems should be 0 obs
 problems <- problems(gmex_bio) %>% 
   filter(!is.na(col))
 
-gmex_cruise <-read_csv("data_raw/gmex_CRUISES.csv", col_types = cols(
+gmex_bio <- type_convert(gmex_bio, cols(
   CRUISEID = col_integer(),
-  YR = col_integer(),
-  SOURCE = col_character(),
+  STATIONID = col_integer(),
   VESSEL = col_integer(),
-  CRUISE_NO = col_character(),
-  STARTCRU = col_date(format = ""),
-  ENDCRU = col_date(format = ""),
-  TITLE = col_character(),
-  NOTE = col_integer(),
-  INGEST_SOURCE = col_character(),
-  INGEST_PROGRAM_VER = col_character(),
-  X12 = col_character()
-)) %>% 
+  CRUISE_NO = col_integer(),
+  P_STA_NO = col_character(),
+  GENUS_BGS = col_character(),
+  SPEC_BGS = col_character(),
+  BGSCODE = col_character(),
+  BIO_BGS = col_integer(),
+  SELECT_BGS = col_double()
+))
+
+gmex_cruise <-read_csv("data_raw/gmex_CRUISES.csv", col_types = cols(.default = col_character())) %>% 
   select(CRUISEID, VESSEL, TITLE)
 
 # problems should be 0 obs
 problems <- problems(gmex_cruise) %>% 
   filter(!is.na(col))
 
+gmex_cruise <- type_convert(gmex_cruise, col_types = cols(CRUISEID = col_integer(), VESSEL = col_character(), TITLE = col_character()))
 
 gmex_spp <-read_csv("data_raw/gmex_NEWBIOCODESBIG.csv", col_types = cols(
   Key1 = col_integer(),
@@ -424,61 +421,33 @@ problems <- problems(gmex_cruise) %>%
 gmex_station_raw <- read_lines("data_raw/gmex_STAREC.csv")
 gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
 write_lines(gmex_station_clean, "temporary.csv")
-gmex_station <- read_csv("temporary.csv", col_types = cols(
+gmex_station <- read_csv("temporary.csv", col_types = cols(.default = col_character())) %>% 
+  select('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')
+
+problems <- problems(gmex_station) %>% 
+  filter(!is.na(col))
+
+gmex_station <- type_convert(gmex_station, col_types = cols(
   STATIONID = col_integer(),
   CRUISEID = col_integer(),
-  VESSEL = col_character(),
-  CRUISE_NO = col_integer(),
+  CRUISE_NO = col_character(),
   P_STA_NO = col_character(),
   TIME_ZN = col_integer(),
   TIME_MIL = col_character(),
   S_LATD = col_integer(),
   S_LATM = col_double(),
-  S_LATH = col_character(),
   S_LOND = col_integer(),
   S_LONM = col_double(),
-  S_LONH = col_character(),
-  DEPTH_SSTA = col_double(),
-  S_STA_NO = col_character(),
-  MO_DAY_YR = col_date(format = ""),
-  TIME_EMIL = col_character(),
   E_LATD = col_integer(),
   E_LATM = col_double(),
-  E_LATH = col_character(),
   E_LOND = col_integer(),
   E_LONM = col_double(),
-  E_LONH = col_character(),
-  DEPTH_ESTA = col_double(),
-  GEARS = col_character(),
-  TEMP_SSURF = col_double(),
-  TEMP_BOT = col_double(),
-  TEMP_SAIR = col_double(),
-  B_PRSSR = col_double(),
-  WIND_SPD = col_double(),
-  WIND_DIR = col_double(),
-  WAVE_HT = col_double(),
-  SEA_COND = col_integer(),
-  DBTYPE = col_character(),
-  DATA_CODE = col_character(),
+  DEPTH_SSTA = col_double(),
+  MO_DAY_YR = col_date(format = ""),
   VESSEL_SPD = col_double(),
-  FAUN_ZONE = col_integer(),
-  STAT_ZONE = col_integer(),
-  TOW_NO = col_integer(),
-  NET_NO = col_integer(),
-  COMSTAT = col_character(),
-  DECSLAT = col_double(),
-  DECSLON = col_double(),
-  DECELAT = col_double(),
-  DECELON = col_double(),
-  START_DATE = col_datetime(format = ""),
-  END_DATE = col_datetime(format = ""),
-  HAULVALUE = col_character(),
-  X49 = col_character()
-)) %>% 
-  select('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')
+  COMSTAT = col_character()
+))
 
-problems <- problems(gmex_station) %>% 
-  filter(!is.na(col))
 
 gmex_tow <-read_csv("data_raw/gmex_INVREC.csv", col_types = cols(
   INVRECID = col_integer(),
@@ -570,7 +539,7 @@ gmex <- gmex %>%
     stratum = paste(floor(lat)+0.5,floor(lon)+0.5, floor(depth/100)*100 + 50, sep= "-")
   )
 
-rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, gmexbio, gmexspp)
+rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean)
 
 # Compile NEUS ====
 load("data_raw/neus_Survdat.RData")
@@ -594,7 +563,12 @@ neus_spp <- spp %>%
   select(-ITISSPP, -COMNAME, -AUTHOR)
 
 # remove some columns from spp data.table
-neus_strata <- read_csv("data_raw/neus_strata.csv") %>% 
+neus_strata <- read_csv("data_raw/neus_strata.csv", col_types = cols(
+  StratumCode = col_integer(),
+  OldStratumCode = col_integer(),
+  DepthIntervalm = col_character(),
+  Areanmi2 = col_integer()
+)) %>% 
   select(StratumCode, Areanmi2) %>% 
   rename(STRATUM = StratumCode)
 
@@ -607,11 +581,16 @@ neus <- neus %>%
     haulid = paste(formatC(CRUISE6, width=6, flag=0), formatC(STATION, width=3, flag=0), formatC(STRATUM, width=4, flag=0), sep='-')  
   )
 
-rm(neus_spp, neus_strata, neus_survdat)
+rm(neus_spp, neus_strata, neus_survdat, survdat, spp)
 
-# compile SEUS ====
+# Compile SEUS ====
 
-seus_catch <- read_csv("data_raw/seus_catch.csv", col_types = cols(
+seus_catch <- read_csv("data_raw/seus_catch.csv", col_types = cols(.default = col_character()))  %>% 
+  # turns everything into a character so import as character anyway
+  mutate_all(funs(str_replace(., "=", "")))
+
+# convert the columns to their correct formats
+seus_catch <- type_convert(seus_catch, col_types = cols(
   PROJECTNAME = col_character(),
   PROJECTAGENCY = col_character(),
   DATE = col_character(),
@@ -658,56 +637,15 @@ seus_catch <- read_csv("data_raw/seus_catch.csv", col_types = cols(
   LASTUPDATED = col_character()
 ))
 
-seus_haul <- read_csv("data_raw/seus_haul.csv", col_types = cols(
-  PROJECTNAME = col_character(),
-  PROJECTAGENCY = col_character(),
-  DATE = col_character(),
+seus_haul <- read_csv("data_raw/seus_haul.csv", col_types = cols(.default = col_character())) %>% 
+  distinct(EVENTNAME, DEPTHSTART)  %>% 
+  mutate_all(funs(str_replace(., "=", "")))
+
+seus_haul <- type_convert(seus_haul, col_types = cols(
   EVENTNAME = col_character(),
-  COLLECTIONNUMBER = col_character(),
-  VESSELNAME = col_character(),
-  GEARNAME = col_character(),
-  GEARCODE = col_character(),
-  TOWTYPETEXT = col_character(),
-  LOCATION = col_character(),
-  REGION = col_character(),
-  DEPTHZONE = col_character(),
-  STATIONCODE = col_character(),
-  EVENTTYPEDESCRIPTION = col_character(),
-  TEMPSURFACE = col_double(),
-  TEMPBOTTOM = col_double(),
-  SALINITYSURFACE = col_double(),
-  SALINITYBOTTOM = col_double(),
-  LIGHTPHASE = col_character(),
-  TIMESTART = col_character(),
-  TIMEZONE = col_character(),
-  DURATION = col_integer(),
-  DEPTHSTART = col_integer(),
-  DEPTHEND = col_integer(),
-  PRESSURE = col_double(),
-  WINDSPEED = col_integer(),
-  WINDDIRECTION = col_integer(),
-  WAVEHEIGHT = col_integer(),
-  TEMPAIR = col_double(),
-  PRECIPITATION = col_character(),
-  ESTIMATEDLOC = col_character(),
-  LATITUDESTART = col_double(),
-  LATITUDEEND = col_double(),
-  LONGITUDESTART = col_double(),
-  LONGITUDEEND = col_double(),
-  SDO = col_character(),
-  BDO = col_character(),
-  SEDSIZEDESC = col_character(),
-  BTMCOMPDESC = col_character(),
-  WEATHERDESC = col_character(),
-  WATERLVLDESC = col_character(),
-  ALTERATIONDESC = col_character(),
-  ACTIVITYDESC = col_character(),
-  NUMBERREP = col_character(),
-  ACCSPGRIDCODE = col_character(),
-  COMMENTS = col_character(),
-  LASTUPDATED = col_character()
-)) %>% 
-  distinct(EVENTNAME, DEPTHSTART)
+  DEPTHSTART = col_integer()
+))
+   
 
 # contains strata areas
 seus_strata <- read_csv("data_raw/seus_strata.csv", col_types = cols(
@@ -718,7 +656,7 @@ seus_strata <- read_csv("data_raw/seus_strata.csv", col_types = cols(
 seus <- left_join(seus_catch, seus_haul, by = "EVENTNAME")  
 #Create STRATA column
 seus <- seus %>% 
-  mutate(STRATA = str_sub(STATIONCODE, 1, 2)) %>% 
+  mutate(STRATA = as.numeric(str_sub(STATIONCODE, 1, 2))) %>% 
 # Drop OUTER depth zone because it was only sampled for 10 years
   filter(DEPTHZONE != "OUTER")
 
@@ -766,18 +704,18 @@ for (i in seq(meanwt$SPECIESCODE)){
 seus <- seus %>%
   mutate(
     # longitudes of less than -360 (like -700), do not exist.  This is a missing decimal.
-    LONGITUDESTART = ifelse(LONGITUDESTART < -360, paste0(substr(LONGITUDESTART, 1, 3), ".", substr(LONGITUDESTART, 4, 10)), LONGITUDESTART), 
-    LONGITUDEEND = ifelse(LONGITUDEEND < -360, paste0(substr(LONGITUDEEND, 1, 3), ".", substr(LONGITUDEEND, 4, 10)), LONGITUDEEND), 
+    LONGITUDESTART = ifelse(LONGITUDESTART < -360, LONGITUDESTART/10, LONGITUDESTART), 
+    LONGITUDEEND = ifelse(LONGITUDEEND < -360, LONGITUDEEND/10, LONGITUDEEND), 
     # latitudes of more than 100 are outside the range of this survey.  This is a missing decimal.
-    LATITUDESTART = ifelse(LATITUDESTART > 100, paste0(substr(LATITUDESTART, 1, 2), ".", substr(LATITUDESTART, 3, 10)), LATITUDESTART), 
-    LATITUDEEND = ifelse(LATITUDEEND  > 100, paste0(substr(LATITUDEEND, 1, 2), ".", substr(LATITUDEEND, 3, 10)), LATITUDEEND)
+    LATITUDESTART = ifelse(LATITUDESTART > 100, LATITUDESTART/10, LATITUDESTART), 
+    LATITUDEEND = ifelse(LATITUDEEND  > 100, LATITUDEEND/10, LATITUDEEND)
   )
 
 # calculate trawl distance in order to calculate effort
 # create a matrix of starting positions
-start <- matrix(as.numeric(seus$LONGITUDESTART), seus$LATITUDESTART, nrow = nrow(seus), ncol = 2)
+start <- matrix(seus$LONGITUDESTART, seus$LATITUDESTART, nrow = nrow(seus), ncol = 2)
 # create a matrix of ending positions
-end <- matrix(as.numeric(seus$LONGITUDEEND), as.numeric(seus$LATITUDEEND), nrow = nrow(seus), ncol = 2)
+end <- matrix(seus$LONGITUDEEND, seus$LATITUDEEND, nrow = nrow(seus), ncol = 2)
 # add distance to seus table
 seus <- seus %>%
   mutate(distance_m = geosphere::distHaversine(p1 = start, p2 = end),
@@ -795,7 +733,7 @@ seus <- seus %>%
          year = substr(EVENTNAME, 1,4)
          )
 
-rm(seus_catch, seus_haul, seus_strata, end, start)
+rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt)
 
 # Compile WCTRI ====
 wctri_catch <- read_csv("data_raw/wctri_catch.csv", col_types = cols(
