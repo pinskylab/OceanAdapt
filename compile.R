@@ -1,7 +1,20 @@
-# Answer the following questions to direct the actions of the script ====
+# Answer the following questions using all caps TRUE or FALSE to direct the actions of the script ====
 
 # 1. Download the raw data from the source sites instead of OceanAdapt?
-download <- "NO"
+download <- FALSE
+
+# 2. Some strata and years have very little data, should they be removed? #DEFAULT: TRUE. 
+HQ_DATA_ONLY <- TRUE 
+
+# 3. #DEFAULT: FALSE Remove ai,ebs,gmex,goa,neus,wcann,wctri. Keep `dat`
+REMOVE_REGION_DATASETS <- FALSE 
+
+# 4. #OPTIONAL, DEFAULT:FALSE, creates graphs based on the data like shown on the website and outputs them to pdf.
+OPTIONAL_PLOT_CHARTS = FALSE 
+
+# 5. #OPTIONAL, DEFAULT:FALSE, Outputs the dat into an rdata file
+OPTIONAL_OUTPUT_DAT_MASTER_TABLE = FALSE 
+
 
 ## Workspace setup ====
 # This script works best when the repository is downloaded from github, 
@@ -30,9 +43,7 @@ download_ak <- function(region, ak_files){
 }
 
 
-if (download == "YES"){
-  
-
+if (download == TRUE){
 ## Acquire new data ====
 # We want the full dataset every single time, from the start of the survey through the most recent year. This helps catch any updates the surveys have made to past years (they sometimes catch and fix old errors). 
 
@@ -332,7 +343,7 @@ rm(test)
 wcann <- left_join(wcann_haul, wcann_catch, by = c("trawl_id", "year"))
 wcann <- wcann %>% 
   mutate(
-    haulid = trawl_id
+    haulid = trawl_id,
     # Add "strata" (define by lat, lon and depth bands) where needed
     # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(latitude_dd)+0.5, floor(depth_m/100)*100 + 50, sep= "-")
@@ -596,12 +607,6 @@ neus <- neus %>%
     haulid = paste(formatC(CRUISE6, width=6, flag=0), formatC(STATION, width=3, flag=0), formatC(STRATUM, width=4, flag=0), sep='-')  
   )
 
-neusS <- neus %>% 
-  filter(SEASON == "SPRING")
-
-neusF <- neus %>% 
-  filter(SEASON == "FALL")
-
 rm(neus_spp, neus_strata, neus_survdat)
 
 # compile SEUS ====
@@ -790,20 +795,6 @@ seus <- seus %>%
          year = substr(EVENTNAME, 1,4)
          )
 
-# SEUS spring ====
-#Separate the the spring season and convert to dataframe
-seusSPRING <- seus %>% 
-  filter(SEASON == "spring")
-
-# SEUS summer ====
-#Separate the summer season and convert to dataframe
-seusSUMMER <- seus %>% 
-  filter(SEASON == "summer")
-
-# SEUS fall ====
-seusFALL <- seus %>% 
-  filter(SEASON == "fall")
-
 rm(seus_catch, seus_haul, seus_strata, end, start)
 
 # Compile WCTRI ====
@@ -908,3 +899,84 @@ tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
   name = col_character(),
   common = col_character()
 ))
+
+# keep HQ data ====
+if(HQ_DATA_ONLY == TRUE){
+#These items were hand chosen.
+# Trim to high quality strata 
+# UPDATE TO SET ALASKA STRATA TO POSITIVE CHOICES
+ai <- ai %>% 
+  # these stratum look like most of them have -9999 for NUMCPUE, but some have values.  What makes them low quality?  How were they chosen?
+  # could this be replaced with 
+  # filter(NUMCPUE != -9999)
+  filter(!STRATUM %in% c(221, 411, 421, 521, 611))
+
+ebs <- ebs %>% 
+  filter(!STRATUM %in% c(82,90))
+
+# there aren't any stratum in goa that match these numbers.
+# test <- goa %>%
+#   filter(STRATUM %in% c(50, 210, 410, 420, 430, 440, 450, 510, 520, 530, 540, 550))
+  # filter(NUMCPUE == "-9999") this returns 90244 lines
+
+# neus <- neus %>%
+  # strata to keep (based on Nye et al. MEPS)
+  # this encompasses all stratum in neus
+  # filter(STRATUM %in% c("1010", "1020", "1030", "1040", "1050", "1060", "1070", "1080", "1090", "1100", "1110", "1130", "1140", "1150", "1160", "1170", "1190", "1200", "1210", "1220", "1230", "1240", "1250", "1260", "1270", "1280", "1290", "1300", "1340", "1360", "1370", "1380", "1400", "1650", "1660", "1670", "1680", "1690", "1700", "1710", "1730", "1740", "1750"))
+
+# count the number of years each stratum occurs 
+num_years <- neus %>% 
+  # trim to 1967 and later, since more strata were sampled starting then
+  filter(YEAR >= 1967) %>% 
+  select(YEAR, STRATUM) %>%
+  # remove duplicates
+  distinct() %>% 
+  # count the number of times each STRATUM occurs
+  group_by(STRATUM) %>% 
+  summarise(count = n())
+# determine the most number of years
+max_years <- num_years %>% 
+  summarise(max = max(count))
+# which stratums occur the max number of years
+max_strat <- num_years %>% 
+  filter(count == max_years$max)
+# keep only those strata in neus
+neus <- neus %>% 
+  filter(STRATUM %in% max_strat$STRATUM)
+
+# all of the rows cut out have a performance of 0, but so do those kept, can't see why one is kept and one isn't.
+wctri <- wctri %>% 
+  filter(stratum %in% c("36.5-50", "37.5-150", "37.5-50", "38.5-150", "38.5-250", "38.5-350", "38.5-50", "39.5-150", "39.5-50", "40.5-150", "40.5-250", "41.5-150", "41.5-250", "41.5-50", "42.5-150", "42.5-250", "42.5-50", "43.5-150", "43.5-250", "43.5-350", "43.5-50", "44.5-150", "44.5-250", "44.5-350", "44.5-50", "45.5-150", "45.5-350", "45.5-50", "46.5-150", "46.5-250", "46.5-50", "47.5-150", "47.5-50", "48.5-150", "48.5-250", "48.5-50"))
+
+# trim wcann to same footprint as wctri  
+wcann <- wcann %>% 
+  filter(stratum %in% c("36.5-50", "37.5-150", "37.5-50", "38.5-150", "38.5-250", "38.5-350", "38.5-50", "39.5-150", "39.5-50", "40.5-150", "40.5-250", "41.5-150", "41.5-250", "41.5-50", "42.5-150", "42.5-250", "42.5-50", "43.5-150", "43.5-250", "43.5-350", "43.5-50", "44.5-150", "44.5-250", "44.5-350", "44.5-50", "45.5-150", "45.5-350", "45.5-50", "46.5-150", "46.5-250", "46.5-50", "47.5-150", "47.5-50", "48.5-150", "48.5-250", "48.5-50"))
+  
+gmex <- gmex %>% 
+  filter(stratum %in% c("26.5--96.5-50", "26.5--97.5-50", "27.5--96.5-50", "27.5--97.5-50", "28.5--90.5-50", "28.5--91.5-50", "28.5--92.5-50", "28.5--93.5-50", "28.5--94.5-50", "28.5--95.5-50", "28.5--96.5-50", "29.5--88.5-50", "29.5--89.5-50", "29.5--92.5-50", "29.5--93.5-50", "29.5--94.5-50"))
+  
+  # all seus strata are retained  
+}
+
+# now that lines have been removed from the main data set, can split out seasons
+# NEUS spring ====
+neusS <- neus %>% 
+  filter(SEASON == "SPRING")
+
+# NEUS Fall ====
+neusF <- neus %>% 
+  filter(SEASON == "FALL")
+
+# SEUS spring ====
+#Separate the the spring season and convert to dataframe
+seusSPRING <- seus %>% 
+  filter(SEASON == "spring")
+
+# SEUS summer ====
+#Separate the summer season and convert to dataframe
+seusSUMMER <- seus %>% 
+  filter(SEASON == "summer")
+
+# SEUS fall ====
+seusFALL <- seus %>% 
+  filter(SEASON == "fall")
