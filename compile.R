@@ -333,9 +333,11 @@ wcann <- left_join(wcann_haul, wcann_catch, by = c("trawl_id", "year"))
 wcann <- wcann %>% 
   mutate(
     haulid = trawl_id
-  )
-  
-  
+    # Add "strata" (define by lat, lon and depth bands) where needed
+    # no need to use lon grids on west coast (so narrow)
+    stratum = paste(floor(latitude_dd)+0.5, floor(depth_m/100)*100 + 50, sep= "-")
+    )
+
 # Compile GMEX ====
 gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(
   BGSID = col_integer(),
@@ -551,11 +553,13 @@ gmex <- gmex %>%
     lat = rowMeans(cbind(S_LATD + S_LATM/60, E_LATD + E_LATM/60), na.rm=T), 
     lon = -rowMeans(cbind(S_LOND + S_LONM/60, E_LOND + E_LONM/60), na.rm=T), 
     # convert fathoms to meters
-    depth = DEPTH_SSTA * 1.8288
+    depth = DEPTH_SSTA * 1.8288, 
+    # Add "strata" (define by lat, lon and depth bands) where needed
+    # degree bins, # degree bins, # 100 m bins
+    stratum = paste(floor(lat)+0.5,floor(lon)+0.5, floor(depth/100)*100 + 50, sep= "-")
   )
 
 rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, gmexbio, gmexspp)
-
 
 # Compile NEUS ====
 load("data_raw/neus_Survdat.RData")
@@ -879,7 +883,12 @@ wctri <- wctri %>%
   mutate(
     haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
     # Extract year where needed
-    year = substr(CRUISE, 1, 4)
+    year = substr(CRUISE, 1, 4), 
+    # Add "strata" (define by lat, lon and depth bands) where needed
+     # degree bins
+     # 100 m bins
+    # no need to use lon grids on west coast (so narrow)
+    stratum = paste(floor(START_LATITUDE)+0.5, floor(BOTTOM_DEPTH/100)*100 + 50, sep= "-")
   )
 
 rm(wctri_catch, wctri_haul, wctri_species)
