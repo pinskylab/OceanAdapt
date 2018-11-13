@@ -6,14 +6,14 @@ download <- FALSE
 # 2. Some strata and years have very little data, should they be removed? #DEFAULT: TRUE. 
 HQ_DATA_ONLY <- TRUE 
 
-# 3. #DEFAULT: FALSE Remove ai,ebs,gmex,goa,neus,wcann,wctri. Keep `dat`
+# 3. #DEFAULT: FALSE Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri. Keep `dat`
 REMOVE_REGION_DATASETS <- FALSE 
 
-# 4. #OPTIONAL, DEFAULT:FALSE, creates graphs based on the data like shown on the website and outputs them to pdf.
-OPTIONAL_PLOT_CHARTS = FALSE 
+# 4. #DEFAULT:FALSE, creates graphs based on the data like shown on the website and outputs them to pdf.
+OPTIONAL_PLOT_CHARTS = TRUE 
 
 # 5. #OPTIONAL, DEFAULT:FALSE, Outputs the dat into an rdata file
-OPTIONAL_OUTPUT_DAT_MASTER_TABLE = FALSE 
+OPTIONAL_OUTPUT_DAT_MASTER_TABLE = TRUE 
 
 
 ## Workspace setup ====
@@ -24,13 +24,15 @@ OPTIONAL_OUTPUT_DAT_MASTER_TABLE = FALSE
 # what is the working date of the update (what is the date of the folders, downloads)
 library(tidyverse)
 library(lubridate)
+library(PBSmapping) # for calculating stratum areas
 
 # Functions ====
 # function to calculate convex hull area in km2
 #developed from http://www.nceas.ucsb.edu/files/scicomp/GISSeminar/UseCases/CalculateConvexHull/CalculateConvexHullR.html
-calcarea = function(lonlat){
-  hullpts = chull(x=lonlat[,1], y=lonlat[,2]) # find indices of vertices
+calcarea = function(lon,lat){
+  hullpts = chull(x=lon, y=lat) # find indices of vertices
   hullpts = c(hullpts,hullpts[1]) # close the loop
+  lonlat <- data.frame(cbind(lon, lat))
   ps = appendPolys(NULL,mat=as.matrix(lonlat[hullpts,]),1,1,FALSE) # create a Polyset object
   attr(ps,"projection") = "LL" # set projection to lat/lon
   psUTM = convUL(ps, km=TRUE) # convert to UTM in km
@@ -157,25 +159,6 @@ file.copy(from = "~/Downloads/pinsky", to = "data_raw/seus_haul.csv", overwrite 
 }
 
 # Update Alaska ====
-cols <- cols(
-  LATITUDE = col_character(),
-  LONGITUDE = col_character(),
-  STATION = col_character(),
-  STRATUM = col_character(),
-  YEAR = col_character(),
-  DATETIME = col_character(),
-  WTCPUE = col_character(),
-  NUMCPUE = col_character(),
-  COMMON = col_character(),
-  SCIENTIFIC = col_character(),
-  SID = col_character(),
-  BOT_DEPTH = col_character(),
-  BOT_TEMP = col_character(),
-  SURF_TEMP = col_character(),
-  VESSEL = col_character(),
-  CRUISE = col_character(),
-  HAUL = col_character()
-)
 
 # Compile AI ====
 files <- list.files(path = "data_raw/", pattern = "ai")
@@ -187,12 +170,48 @@ for (j in seq(files)){
     temp <- read_lines("data_raw/ai2014_2016.csv")
     temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
     write_lines(temp_fixed, "temporary.csv")
-    temp <- read_csv("temporary.csv", col_types = cols)
+    temp <- read_csv("temporary.csv", col_types = cols(
+      LATITUDE = col_character(),
+      LONGITUDE = col_character(),
+      STATION = col_character(),
+      STRATUM = col_character(),
+      YEAR = col_character(),
+      DATETIME = col_character(),
+      WTCPUE = col_character(),
+      NUMCPUE = col_character(),
+      COMMON = col_character(),
+      SCIENTIFIC = col_character(),
+      SID = col_character(),
+      BOT_DEPTH = col_character(),
+      BOT_TEMP = col_character(),
+      SURF_TEMP = col_character(),
+      VESSEL = col_character(),
+      CRUISE = col_character(),
+      HAUL = col_character()
+    ))
     ai_data <- rbind(ai_data, temp)
   }
   if(!grepl("strata", files[j]) & !grepl("ai2014", files[j])){
     # read the csv
-    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
+    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
+      LATITUDE = col_character(),
+      LONGITUDE = col_character(),
+      STATION = col_character(),
+      STRATUM = col_character(),
+      YEAR = col_character(),
+      DATETIME = col_character(),
+      WTCPUE = col_character(),
+      NUMCPUE = col_character(),
+      COMMON = col_character(),
+      SCIENTIFIC = col_character(),
+      SID = col_character(),
+      BOT_DEPTH = col_character(),
+      BOT_TEMP = col_character(),
+      SURF_TEMP = col_character(),
+      VESSEL = col_character(),
+      CRUISE = col_character(),
+      HAUL = col_character()
+    ))
     ai_data <- rbind(ai_data, temp)
   }
   if(files[j] == "ai_strata.csv"){
@@ -218,7 +237,26 @@ ai <- left_join(ai_data, ai_strata, by = "STRATUM")
 
 # Create a unique haulid
 ai <- ai %>% 
-  mutate(haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'))
+  mutate(haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
+         WTCPUE = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
+  rename(stratum = STRATUM,
+    year = YEAR, 
+    lat = LATITUDE, 
+    lon = LONGITUDE, 
+    depth = BOT_DEPTH, 
+    spp = SCIENTIFIC, 
+    wtcpue = WTCPUE,
+    stratumarea = Areakm2) %>% 
+  # remove rows that aren't fish
+  filter(spp != '' &
+           !spp %in% c("Decapodiformesunid.egg", "Decapodiformes unid. egg", "Volutopsiussp.eggs", "Volutopsius sp. eggs", "Bathyrajaaleuticaeggcase", "Bathyrajainterruptaeggcase", "Bathyrajamaculataeggcase", "Bathyraja maculata egg case", "Bathyraja mariposa egg case", "Bathyrajaparmiferaeggcase", "Bathyrajasp.", "Bathyrajasp.eggcase", "Bathyrajataranetzieggcase", "Bathyraja taranetzi egg case", "Beringiussp.eggs", "Beringius sp. eggs", "Buccinumsp.Eggs", "Fusitritonoregonensiseggs", "Fusitriton oregonensis eggs", "gastropodeggs", "Hemitripterusbolinieggs", "Hemitripterus bolini eggs", "Naticidaeeggs", "Naticidae eggs", "Neptuneasp.eggs", "Pyrulofusussp.eggs", "Rajabadiaeggcase", "Rossiapacificaeggs", "Bathyraja aleutica egg case", "Bathyraja interrupta egg case", "Bathyraja parmifera egg case", "Bathyraja sp. egg case", "Bathyraja sp. cf. parmifera egg case", "gastropod eggs", "Neptunea sp. eggs", "Rajarhinaeggcase", "Rajasp.eggcase", "Raja badia egg case", "Apristurus brunneus egg case", "Selachimorpha egg case", "Pyrulofusus sp. eggs", "Rossia pacifica eggs")
+  ) %>% 
+  # adjust spp names
+  mutate(spp = ifelse(grepl("Atheresthes", spp), 'Atheresthes sp.', spp), 
+         spp = ifelse(spp %in% c('Lepidopsetta polyxystra', 'Lepidopsetta bilineata'), 'Lepidopsetta sp.', spp),
+         spp = ifelse(spp %in% c('Myoxocephalusjaok', 'Myoxocephalusniger', 'Myoxocephaluspolyacanthocephalus', 'Myoxocephalusquadricornis', 'Myoxocephalusverrucosus'), 'Myoxocephalussp.', spp),
+         spp = ifelse(spp %in% c('Bathyrajaabyssicola', 'Bathyrajaaleutica', 'Bathyrajainterrupta', 'Bathyrajalindbergi', 'Bathyrajamaculata', 'Bathyrajamariposa', 'Bathyrajaminispinosa', 'Bathyrajaparmifera', 'Bathyrajasmirnovi', 'Bathyrajasp.cf.parmifera(Orretal.)', 'Bathyrajaspinosissima', 'Bathyrajataranetzi', 'Bathyrajatrachura', 'Bathyrajaviolacea'), 'Bathyrajasp.', spp)
+  )
 
 # clean up
 rm(files, temp, j, temp_fixed, ai_data, ai_strata)
@@ -230,7 +268,25 @@ ebs_data <- tibble()
 for (j in seq(files)){
   if(!grepl("strata", files[j])){
     # read the csv
-    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
+    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
+      LATITUDE = col_character(),
+      LONGITUDE = col_character(),
+      STATION = col_character(),
+      STRATUM = col_character(),
+      YEAR = col_character(),
+      DATETIME = col_character(),
+      WTCPUE = col_character(),
+      NUMCPUE = col_character(),
+      COMMON = col_character(),
+      SCIENTIFIC = col_character(),
+      SID = col_character(),
+      BOT_DEPTH = col_character(),
+      BOT_TEMP = col_character(),
+      SURF_TEMP = col_character(),
+      VESSEL = col_character(),
+      CRUISE = col_character(),
+      HAUL = col_character()
+    ))
     ebs_data <- rbind(ebs_data, temp)
   }else{
     ebs_strata <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
@@ -254,11 +310,22 @@ ebs <- left_join(ebs_data, ebs_strata, by = "STRATUM")
 ebs <- ebs %>% 
   mutate(
     haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-')    
+  , 
+  WTCPUE = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>%  
+  rename(stratum = STRATUM,
+         year = YEAR, 
+         lat = LATITUDE, 
+         lon = LONGITUDE, 
+         depth = BOT_DEPTH, 
+         spp = SCIENTIFIC, 
+         wtcpue = WTCPUE,
+         stratumarea = Areakm2) %>% 
+  filter(spp != '' &
+           !spp %in% c("Decapodiformesunid.egg", "Volutopsiussp.eggs", "Volutopsius sp. eggs", "Bathyrajaaleuticaeggcase", "Bathyrajainterruptaeggcase", "Bathyrajamaculataeggcase", "Bathyrajaparmiferaeggcase", "Bathyrajasp.", "Bathyrajasp.eggcase", "Bathyrajataranetzieggcase", "Bathyraja taranetzi egg case", "Beringiussp.eggs", "Buccinumsp.Eggs", "Fusitritonoregonensiseggs", "gastropodeggs", "Hemitripterusbolinieggs", "Naticidaeeggs", "Naticidae eggs", "Neptuneasp.eggs", "Pyrulofusussp.eggs", "Rajabadiaeggcase", "Rossiapacificaeggs", "Bathyraja aleutica egg case", "Bathyraja interrupta egg case", "Bathyraja parmifera egg case", "Bathyraja sp. egg case", "gastropod eggs", "Neptunea sp. eggs", "Rajarhinaeggcase", "Raja binoculata egg case", "Rajasp.eggcase", "Apristurus brunneus egg case", "Selachimorpha egg case")
   )
 
-
 # clean up
-rm(files, temp, j, ebs_data, ebs_strata, temp)
+rm(files, temp, j, ebs_data, ebs_strata)
 
 
 # Compile GOA ====
@@ -268,7 +335,25 @@ goa_data <- tibble()
 for (j in seq(files)){
   if(!grepl("strata", files[j])){
     # read the csv
-    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols)
+    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
+      LATITUDE = col_character(),
+      LONGITUDE = col_character(),
+      STATION = col_character(),
+      STRATUM = col_character(),
+      YEAR = col_character(),
+      DATETIME = col_character(),
+      WTCPUE = col_character(),
+      NUMCPUE = col_character(),
+      COMMON = col_character(),
+      SCIENTIFIC = col_character(),
+      SID = col_character(),
+      BOT_DEPTH = col_character(),
+      BOT_TEMP = col_character(),
+      SURF_TEMP = col_character(),
+      VESSEL = col_character(),
+      CRUISE = col_character(),
+      HAUL = col_character()
+    ))
     goa_data <- rbind(goa_data, temp)
   }else{
     goa_strata <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
@@ -292,11 +377,21 @@ goa <- left_join(goa_data, goa_strata, by = "STRATUM")
 # Create a unique haulid
 goa <- goa %>%
   mutate(
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-')    
+    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'),    
+    WTCPUE = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
+  rename(stratum = STRATUM,
+         year = YEAR, 
+         lat = LATITUDE, 
+         lon = LONGITUDE, 
+         depth = BOT_DEPTH, 
+         spp = SCIENTIFIC, 
+         wtcpue = WTCPUE,
+         stratumarea = Areakm2) %>% 
+  filter(
+    spp != '' & 
+      !spp %in% c("Decapodiformesunid.egg", "Volutopsiussp.eggs", "Bathyrajaaleuticaeggcase", "Bathyrajainterruptaeggcase", "Bathyrajamaculataeggcase", "Bathyrajaparmiferaeggcase", "Bathyrajasp.", "Bathyrajasp.eggcase", "Bathyrajataranetzieggcase", "Beringiussp.eggs", "Buccinumsp.Eggs", "Fusitritonoregonensiseggs", "gastropodeggs", "Hemitripterusbolinieggs", "Naticidaeeggs", "Neptuneasp.eggs", "Pyrulofusussp.eggs", "Rajabadiaeggcase", "Rossiapacificaeggs", "Bathyraja aleutica egg case", "Bathyraja interrupta egg case", "Bathyraja parmifera egg case", "Bathyraja sp. egg case", "gastropod eggs", "Neptunea sp. eggs", "Rajarhinaeggcase", "Rajasp.eggcase", "Apristurus brunneus egg case", "Selachimorpha egg case", "Bathyraja taranetzi egg case", "Bathyraja trachura egg case", "Beringius sp. eggs", "Cephalopoda unid. egg", "Fusitriton oregonensis eggs", "Hemitripterus bolini eggs", "Hydrolagus colliei egg case", "Naticidae eggs", "Pyrulofusus sp. eggs", "Raja binoculata egg case", "Raja rhina egg case", "Raja sp. egg case", "Volutopsius sp. eggs")
   )
   
-
-
 # clean up
 rm(files, temp, j, cols, goa_data, goa_strata)
 
@@ -370,14 +465,33 @@ rm(test)
 wcann <- left_join(wcann_haul, wcann_catch, by = c("trawl_id", "year"))
 wcann <- wcann %>% 
   mutate(
+    # create haulid
     haulid = trawl_id,
-    # Add "strata" (define by lat, lon and depth bands) where needed
-    # no need to use lon grids on west coast (so narrow)
-    stratum = paste(floor(latitude_dd)+0.5, floor(depth_m/100)*100 + 50, sep= "-")
+    # Add "strata" (define by lat, lon and depth bands) where needed # no need to use lon grids on west coast (so narrow)
+    stratum = paste(floor(latitude_dd)+0.5, floor(depth_m/100)*100 + 50, sep= "-"), 
+    # adjust for tow area # kg per hectare (10,000 m2)	
+    wtcpue = total_catch_wt_kg/area_swept_ha_der 
     )
 
+wcann_strats <- wcann %>% 
+  filter(!is.na(longitude_dd)) %>% 
+  group_by(stratum) %>% 
+  summarise(stratumarea = calcarea(longitude_dd, latitude_dd), na.rm = T)
+  
+wcann <- left_join(wcann, wcann_strats, by = "stratum")
+
+wcann <- wcann %>% 
+  rename(lat = latitude_dd, 
+    lon = longitude_dd, 
+    depth = depth_m, 
+    spp = scientific_name) %>% 
+  filter(
+    spp != '' & 
+      !spp %in% c("Apristurus brunneus egg case", "gastropod eggs", "Selachimorpha egg case", "Bathyraja sp. egg case", "fish eggs unident.", "Hydrolagus colliei egg case", "Raja binoculata egg case", "Raja sp. egg case", "Rajiformes egg case", "Shark egg case unident.")
+  )
+
 # cleanup
-rm(wcann_catch, wcann_haul)
+rm(wcann_catch, wcann_haul, wcann_strats)
 
 # Compile GMEX ====
 gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(.default = col_character())) %>% 
@@ -411,7 +525,7 @@ gmex_cruise <-read_csv("data_raw/gmex_CRUISES.csv", col_types = cols(.default = 
 problems <- problems(gmex_cruise) %>% 
   filter(!is.na(col))
 
-gmex_cruise <- type_convert(gmex_cruise, col_types = cols(CRUISEID = col_integer(), VESSEL = col_character(), TITLE = col_character()))
+gmex_cruise <- type_convert(gmex_cruise, col_types = cols(CRUISEID = col_integer(), VESSEL = col_integer(), TITLE = col_character()))
 
 gmex_spp <-read_csv("data_raw/gmex_NEWBIOCODESBIG.csv", col_types = cols(
   Key1 = col_integer(),
@@ -442,7 +556,7 @@ problems <- problems(gmex_station) %>%
 gmex_station <- type_convert(gmex_station, col_types = cols(
   STATIONID = col_integer(),
   CRUISEID = col_integer(),
-  CRUISE_NO = col_character(),
+  CRUISE_NO = col_integer(),
   P_STA_NO = col_character(),
   TIME_ZN = col_integer(),
   TIME_MIL = col_character(),
@@ -561,7 +675,43 @@ gmex <- gmex %>%
   # trim out vessel speeds 0, unknown, or >5 (need vessel speed to calculate area trawled)
   filter(VESSEL_SPD <= 5 & VESSEL_SPD > 0  & !is.na(VESSEL_SPD))
 
-rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean)
+gmex_strats <- gmex %>%
+  group_by(stratum) %>% 
+  summarise(stratumarea = calcarea(lon, lat))
+gmex <- left_join(gmex, gmex_strats, by = "stratum")
+
+gmex <- gmex %>% 
+  rename(spp = TAXONOMIC) %>% 
+  # adjust for area towed
+  mutate(
+    # kg per 10000m2. calc area trawled in m2: knots * 1.8 km/hr/knot * 1000 m/km * minutes * 1 hr/60 min * width of gear in feet * 0.3 m/ft # biomass per standard tow
+    wtcpue = 10000*SELECT_BGS/(VESSEL_SPD * 1.85200 * 1000 * MIN_FISH / 60 * GEAR_SIZE * 0.3048) 
+  ) %>% 
+  filter(
+  spp != '' | !is.na(spp),
+  # remove unidentified spp
+  !spp %in% c('UNID CRUSTA', 'UNID OTHER', 'UNID.FISH', 'CRUSTACEA(INFRAORDER) BRACHYURA', 'MOLLUSCA AND UNID.OTHER #01', 'ALGAE', 'MISCELLANEOUS INVERTEBR', 'OTHER INVERTEBRATES')
+)
+
+# remove paired tows
+# Remove a tow when paired tows exist (same lat/lon/year but different haulid, only Gulf of Mexico)
+# identify duplicate tows at same year/lat/lon
+dups <- gmex %>% 
+  group_by(year, lat, lon) %>% 
+  filter(n() > 1) %>% 
+  group_by(haulid) %>% 
+  filter(n() == 1)
+# as of 2018 none of the tows have different haulids for the same year, lat, lon
+
+# old code for if there are duplicate tows
+# # Remove a tow when paired tows exist (same lat/lon/year but different haulid, only Gulf of Mexico)
+# dups = which(duplicated(gmex[,c('year', 'lat', 'lon')]) & !duplicated(gmex$haulid)) # identify duplicate tows at same year/lat/lon
+# dupped = gmex[paste(gmex$year, gmex$lat, gmex$lon) %in% paste(gmex$year[dups], gmex$lat[dups], gmex$lon[dups]),] # all tows at these year/lat/lon
+# # sum(!duplicated(dupped$haulid)) # 26 (13 pairs of haulids)
+# # remove the port haul (this is arbitrary, but seems to be right based on the notes associated with these hauls)
+# gmex <<- gmex[!(gmex$haulid %in% unique(dupped$haulid[grep('PORT', dupped$COMSTAT)])),] 
+
+rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean, gmex_strats)
 
 # Compile NEUS ====
 load("data_raw/neus_Survdat.RData")
@@ -604,10 +754,20 @@ neus <- neus %>%
     # Calculate stratum area where needed (use convex hull approach)
     # convert square nautical miles to square kilometers
     stratumarea = Areanmi2 * 3.429904 
-      )
-
-
-
+      ) %>% 
+  rename(
+    year = YEAR,
+    spp = SCINAME,
+    lat = LAT, 
+    lon = LON, 
+    depth = DEPTH,
+    stratum = STRATUM
+  ) %>% 
+  filter(
+    # remove unidentified spp and non-species
+    spp != '' | !is.na(spp), 
+    !spp %in% c('UNIDENTIFIED FISH', 'ILLEX ILLECEBROSUS EGG MOPS', 'LOLIGO PEALEII EGG MOPS')
+  )
 
 rm(neus_spp, neus_strata, neus_survdat, survdat, spp)
 
@@ -692,7 +852,6 @@ seus <- seus %>%
 seus <- left_join(seus, seus_strata, by = "STRATA") 
   
 #Create a 'SEASON' column using 'MONTH' as a criteria
-#Create a 'SEASON' column using 'MONTH' as a criteria
 seus <- seus %>% 
   mutate(DATE = as.Date(DATE, "%m-%d-%Y"), 
          MONTH = month(DATE))
@@ -759,7 +918,39 @@ seus <- seus %>%
          haulid = EVENTNAME, 
          # Extract year where needed
          year = substr(EVENTNAME, 1,4)
-         )
+         ) %>% 
+  rename(
+    stratum = STRATA, 
+    lat = LATITUDESTART, 
+    lon = LONGITUDESTART, 
+    depth = DEPTHSTART, 
+    spp = SPECIESSCIENTIFICNAME, 
+    stratumarea = STRATAHECTARE)
+
+#In seus there are two 'COLLECTIONNUMBERS' per 'EVENTNAME', with no exceptions; EFFORT is always the same for each COLLECTIONNUMBER
+# We sum the two tows in seus
+### As of 2018-09-24 MRS found that SEUS is producing raw abundance data with all NA's in the effort column.  Have emailed them to make sure this is intentional.  in the meantime, adjusting script to reflect lack of effort data
+# original code ________________________________________####
+# seusSPRING <<- aggregate(list(BIOMASS = seusSPRING$SPECIESTOTALWEIGHT), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, SEASON = seusSPRING$SEASON, EFFORT = seusSPRING$EFFORT, spp = seusSPRING$spp), FUN=sum)
+# seusSPRING$wtcpue <<- seusSPRING$BIOMASS/(seusSPRING$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+# seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, EFFORT = seusSUMMER$EFFORT, spp = seusSUMMER$spp), FUN=sum)
+# seusSUMMER$wtcpue <<- seusSUMMER$BIOMASS/(seusSUMMER$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+# seusFALL <<- aggregate(list(BIOMASS = seusFALL$SPECIESTOTALWEIGHT), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, SEASON = seusFALL$SEASON, EFFORT = seusFALL$EFFORT, spp = seusFALL$spp), FUN=sum)
+# seusFALL$wtcpue <<- seusFALL$BIOMASS/(seusFALL$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+#________________________________________________________
+# temp code _______________________________________####
+#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+biomass <- seus %>% 
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, SEASON, spp) %>% 
+  summarise(wtcpue = sum(SPECIESTOTALWEIGHT)) 
+
+seus <- left_join(seus, biomass, by = c("haulid", "stratum", "stratumarea", "year", "lat", "lon", "depth", "SEASON", "spp"))
+# double check that column numbers haven't changed by more than 1.  
+
+seus <- seus %>% 
+  filter(
+    !spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','MICROPANOPE NUTTINGI','ALGAE','DYSPANOPEUS SAYI', 'PSEUDOMEDAEUS AGASSIZII')
+  )
 
 rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt)
 
@@ -842,19 +1033,32 @@ wctri <- wctri %>%
     # Extract year where needed
     year = substr(CRUISE, 1, 4), 
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
-    stratum = paste(floor(START_LATITUDE)+0.5, floor(BOTTOM_DEPTH/100)*100 + 50, sep= "-")
+    stratum = paste(floor(START_LATITUDE)+0.5, floor(BOTTOM_DEPTH/100)*100 + 50, sep= "-"), 
+    # adjust for tow area # weight per hectare (10,000 m2)	
+    wtcpue = WEIGHT*10000/DISTANCE_FISHED*1000*NET_WIDTH
   )
 
 # Calculate stratum area where needed (use convex hull approach)
+wctri_strats <- wctri %>% 
+  group_by(stratum) %>% 
+  summarise(stratumarea = calcarea(START_LONGITUDE, START_LATITUDE))
+
+wctri <- left_join(wctri, wctri_strats, by = "stratum")
+
 wctri <- wctri %>% 
-  mutate(START_LATITUDE = as.double(START_LATITUDE), 
-         START_LONGITUDE = as.double(START_LONGITUDE))
-wctristrats = Hmisc::summarize(wctri[,c('START_LONGITUDE', 'START_LATITUDE')], by=list(stratum=wctri$stratum), FUN=calcarea, stat.name = 'stratumarea')
+  rename(
+    svvessel = VESSEL,
+    lat = START_LATITUDE, 
+    lon = START_LONGITUDE,
+    depth = BOTTOM_DEPTH, 
+    spp = SPECIES_NAME
+  ) %>% 
+  filter(
+    spp != '' & 
+      !spp %in% c("Apristurus brunneus egg case", "fish eggs unident.", "Raja binoculata egg case", "Raja sp. egg case", "Rajiformes egg case", "Shark egg case unident.", "Bathyraja sp. egg case", "gastropod eggs", "Hydrolagus colliei egg case", "Selachimorpha egg case")
+  )
 
-wctri <- left_join(wctri, wctristrats[,c('stratum', 'stratumarea')], by = "stratum")
-
-
-rm(wctri_catch, wctri_haul, wctri_species)
+rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 
 # Compile TAX ====
 tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
