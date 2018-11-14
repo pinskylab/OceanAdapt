@@ -1,5 +1,8 @@
 # Answer the following questions using all caps TRUE or FALSE to direct the actions of the script ====
 
+# a note on species name adjustment #### 
+# at some point in time during certain surveys it was realized that what was believed to be one speices was actually a different species or more than one species.  Because of this, species have been lumped together as a genus in those instances.
+
 # 1. Download the raw data from the source sites instead of OceanAdapt?
 download <- FALSE
 
@@ -10,10 +13,10 @@ HQ_DATA_ONLY <- TRUE
 REMOVE_REGION_DATASETS <- FALSE 
 
 # 4. #DEFAULT:FALSE, creates graphs based on the data like shown on the website and outputs them to pdf.
-OPTIONAL_PLOT_CHARTS = TRUE 
+OPTIONAL_PLOT_CHARTS <- TRUE 
 
 # 5. #OPTIONAL, DEFAULT:FALSE, Outputs the dat into an rdata file
-OPTIONAL_OUTPUT_DAT_MASTER_TABLE = TRUE 
+OPTIONAL_OUTPUT_DAT_MASTER_TABLE <- TRUE 
 
 
 ## Workspace setup ====
@@ -25,6 +28,7 @@ OPTIONAL_OUTPUT_DAT_MASTER_TABLE = TRUE
 library(tidyverse)
 library(lubridate)
 library(PBSmapping) # for calculating stratum areas
+library(ggplot2)
 
 # Functions ====
 # function to calculate convex hull area in km2
@@ -56,6 +60,11 @@ download_ak <- function(region, ak_files){
   }
 }
 
+sumna = function(x){
+  #acts like sum(na.rm=T) but returns NA if all are NA
+  if(!all(is.na(x))) return(sum(x, na.rm=T))
+  if(all(is.na(x))) return(NA)
+}
 
 if (download == TRUE){
 ## Acquire new data ====
@@ -240,23 +249,38 @@ ai <- ai %>%
   mutate(haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
          WTCPUE = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
   rename(stratum = STRATUM,
-    year = YEAR, 
-    lat = LATITUDE, 
-    lon = LONGITUDE, 
-    depth = BOT_DEPTH, 
-    spp = SCIENTIFIC, 
-    wtcpue = WTCPUE,
-    stratumarea = Areakm2) %>% 
+         year = YEAR, 
+         lat = LATITUDE, 
+         lon = LONGITUDE, 
+         depth = BOT_DEPTH, 
+         spp = SCIENTIFIC, 
+         wtcpue = WTCPUE,
+         stratumarea = Areakm2) %>% 
   # remove rows that aren't fish
-  filter(spp != '' &
-           !spp %in% c("Decapodiformesunid.egg", "Decapodiformes unid. egg", "Volutopsiussp.eggs", "Volutopsius sp. eggs", "Bathyrajaaleuticaeggcase", "Bathyrajainterruptaeggcase", "Bathyrajamaculataeggcase", "Bathyraja maculata egg case", "Bathyraja mariposa egg case", "Bathyrajaparmiferaeggcase", "Bathyrajasp.", "Bathyrajasp.eggcase", "Bathyrajataranetzieggcase", "Bathyraja taranetzi egg case", "Beringiussp.eggs", "Beringius sp. eggs", "Buccinumsp.Eggs", "Fusitritonoregonensiseggs", "Fusitriton oregonensis eggs", "gastropodeggs", "Hemitripterusbolinieggs", "Hemitripterus bolini eggs", "Naticidaeeggs", "Naticidae eggs", "Neptuneasp.eggs", "Pyrulofusussp.eggs", "Rajabadiaeggcase", "Rossiapacificaeggs", "Bathyraja aleutica egg case", "Bathyraja interrupta egg case", "Bathyraja parmifera egg case", "Bathyraja sp. egg case", "Bathyraja sp. cf. parmifera egg case", "gastropod eggs", "Neptunea sp. eggs", "Rajarhinaeggcase", "Rajasp.eggcase", "Raja badia egg case", "Apristurus brunneus egg case", "Selachimorpha egg case", "Pyrulofusus sp. eggs", "Rossia pacifica eggs")
-  ) %>% 
+  filter(spp != "" &
+           # remove all spp that contain the word "egg"
+           !grepl("egg", spp)) %>% 
   # adjust spp names
-  mutate(spp = ifelse(grepl("Atheresthes", spp), 'Atheresthes sp.', spp), 
-         spp = ifelse(spp %in% c('Lepidopsetta polyxystra', 'Lepidopsetta bilineata'), 'Lepidopsetta sp.', spp),
-         spp = ifelse(spp %in% c('Myoxocephalusjaok', 'Myoxocephalusniger', 'Myoxocephaluspolyacanthocephalus', 'Myoxocephalusquadricornis', 'Myoxocephalusverrucosus'), 'Myoxocephalussp.', spp),
-         spp = ifelse(spp %in% c('Bathyrajaabyssicola', 'Bathyrajaaleutica', 'Bathyrajainterrupta', 'Bathyrajalindbergi', 'Bathyrajamaculata', 'Bathyrajamariposa', 'Bathyrajaminispinosa', 'Bathyrajaparmifera', 'Bathyrajasmirnovi', 'Bathyrajasp.cf.parmifera(Orretal.)', 'Bathyrajaspinosissima', 'Bathyrajataranetzi', 'Bathyrajatrachura', 'Bathyrajaviolacea'), 'Bathyrajasp.', spp)
-  )
+  mutate(
+    # catch A. stomias and A. evermanii (as of 2018 both spp appear as "valid" so not sure why they are being changed)
+    spp = ifelse(grepl("Atheresthes", spp), "Atheresthes sp.", spp), 
+    # catch L. polystryxa (valid in 2018), and L. bilineata (valid in 2018)
+    spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
+    # catch M. jaok (valid in 2018), M. niger (valid in 2018), M. polyacanthocephalus (valid in 2018), M. quadricornis (valid in 2018), M. verrucosus (changed to scorpius), M. scorpioides (valid in 2018), M. scorpius (valid in 2018) (M. scorpius is in the data set but not on the list so it is excluded from the change)
+    spp = ifelse(grepl("Myoxocephalus", spp ) & !grepl("scorpius", spp), "Myoxocephalus sp.", spp),
+    # catch B. maculata (valid in 2018), abyssicola (valid in 2018), aleutica (valid in 2018), interrupta (valid in 2018), lindbergi (valid in 2018), mariposa (valid in 2018), minispinosa (valid in 2018), parmifera (valid in 2018), smirnovi (valid in 2018), cf parmifera (Orretal), spinosissima (valid in 2018), taranetzi (valid in 2018), trachura (valid in 2018), violacea (valid in 2018)
+    # B. panthera is not on the list of spp to change
+    spp = ifelse(grepl("Bathyraja", spp) & !grepl("panthera", spp), 'Bathyraja sp.', spp)
+  ) %>% 
+  type_convert() %>% 
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  # Calculate a corrected longitude for Aleutians (all in western hemisphere coordinates)
+  # had to add this ungroup line because I was getting an error that lon was a grouping variable, if you aren't getting that error you don't need the ungroup line
+  ungroup() %>% 
+  mutate(lon = ifelse(lon > 0, lon - 360, lon), 
+         region = "Aleutian Islands") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
 
 # clean up
 rm(files, temp, j, temp_fixed, ai_data, ai_strata)
@@ -306,12 +330,13 @@ ebs_data <- ebs_data %>%
 
 ebs <- left_join(ebs_data, ebs_strata, by = "STRATUM")
 
-# Create a unique haulid
 ebs <- ebs %>% 
   mutate(
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-')    
-  , 
-  WTCPUE = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>%  
+    # Create a unique haulid
+    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
+    # convert -9999 to NA 
+    WTCPUE = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>%  
+  # rename columns
   rename(stratum = STRATUM,
          year = YEAR, 
          lat = LATITUDE, 
@@ -320,9 +345,22 @@ ebs <- ebs %>%
          spp = SCIENTIFIC, 
          wtcpue = WTCPUE,
          stratumarea = Areakm2) %>% 
+  # remove non-fish
   filter(spp != '' &
-           !spp %in% c("Decapodiformesunid.egg", "Volutopsiussp.eggs", "Volutopsius sp. eggs", "Bathyrajaaleuticaeggcase", "Bathyrajainterruptaeggcase", "Bathyrajamaculataeggcase", "Bathyrajaparmiferaeggcase", "Bathyrajasp.", "Bathyrajasp.eggcase", "Bathyrajataranetzieggcase", "Bathyraja taranetzi egg case", "Beringiussp.eggs", "Buccinumsp.Eggs", "Fusitritonoregonensiseggs", "gastropodeggs", "Hemitripterusbolinieggs", "Naticidaeeggs", "Naticidae eggs", "Neptuneasp.eggs", "Pyrulofusussp.eggs", "Rajabadiaeggcase", "Rossiapacificaeggs", "Bathyraja aleutica egg case", "Bathyraja interrupta egg case", "Bathyraja parmifera egg case", "Bathyraja sp. egg case", "gastropod eggs", "Neptunea sp. eggs", "Rajarhinaeggcase", "Raja binoculata egg case", "Rajasp.eggcase", "Apristurus brunneus egg case", "Selachimorpha egg case")
-  )
+           !grepl("egg", spp)) %>% 
+  # adjust spp names
+  mutate(spp = ifelse(grepl("Atheresthes", spp), "Atheresthes sp.", spp), 
+    spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
+    spp = ifelse(grepl("Myoxocephalus", spp), "Myoxocephalus sp.", spp),
+    spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp), 
+    spp = ifelse(grepl("Hippoglossoides", spp), "Hippoglossoides sp.", spp)) %>% 
+  # change from all character to fitting column types
+  type_convert()  %>%  
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  # add region column
+  mutate(region = "Eastern Bering Sea") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
 
 # clean up
 rm(files, temp, j, ebs_data, ebs_strata)
@@ -387,11 +425,22 @@ goa <- goa %>%
          spp = SCIENTIFIC, 
          wtcpue = WTCPUE,
          stratumarea = Areakm2) %>% 
+  # remove non-fish
   filter(
     spp != '' & 
-      !spp %in% c("Decapodiformesunid.egg", "Volutopsiussp.eggs", "Bathyrajaaleuticaeggcase", "Bathyrajainterruptaeggcase", "Bathyrajamaculataeggcase", "Bathyrajaparmiferaeggcase", "Bathyrajasp.", "Bathyrajasp.eggcase", "Bathyrajataranetzieggcase", "Beringiussp.eggs", "Buccinumsp.Eggs", "Fusitritonoregonensiseggs", "gastropodeggs", "Hemitripterusbolinieggs", "Naticidaeeggs", "Neptuneasp.eggs", "Pyrulofusussp.eggs", "Rajabadiaeggcase", "Rossiapacificaeggs", "Bathyraja aleutica egg case", "Bathyraja interrupta egg case", "Bathyraja parmifera egg case", "Bathyraja sp. egg case", "gastropod eggs", "Neptunea sp. eggs", "Rajarhinaeggcase", "Rajasp.eggcase", "Apristurus brunneus egg case", "Selachimorpha egg case", "Bathyraja taranetzi egg case", "Bathyraja trachura egg case", "Beringius sp. eggs", "Cephalopoda unid. egg", "Fusitriton oregonensis eggs", "Hemitripterus bolini eggs", "Hydrolagus colliei egg case", "Naticidae eggs", "Pyrulofusus sp. eggs", "Raja binoculata egg case", "Raja rhina egg case", "Raja sp. egg case", "Volutopsius sp. eggs")
-  )
-  
+      !grepl("egg", spp)) %>% 
+  # adjust spp names
+  mutate(
+    spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
+    spp = ifelse(grepl("Myoxocephalus", spp ) & !grepl("scorpius", spp), "Myoxocephalus sp.", spp),
+    spp = ifelse(grepl("Bathyraja", spp) & !grepl("panthera", spp), 'Bathyraja sp.', spp)
+  ) %>% 
+  type_convert()  %>% 
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  mutate(region = "Gulf of Alaska") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
+
 # clean up
 rm(files, temp, j, cols, goa_data, goa_strata)
 
@@ -485,10 +534,21 @@ wcann <- wcann %>%
     lon = longitude_dd, 
     depth = depth_m, 
     spp = scientific_name) %>% 
+  # remove non-fish
   filter(
     spp != '' & 
-      !spp %in% c("Apristurus brunneus egg case", "gastropod eggs", "Selachimorpha egg case", "Bathyraja sp. egg case", "fish eggs unident.", "Hydrolagus colliei egg case", "Raja binoculata egg case", "Raja sp. egg case", "Rajiformes egg case", "Shark egg case unident.")
-  )
+      !grepl("egg", spp)
+  ) %>% 
+  # adjust spp names
+  mutate(
+    spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
+    spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp)
+  ) %>%
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+# add region column
+  mutate(region = "West Coast Annual") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
 
 # cleanup
 rm(wcann_catch, wcann_haul, wcann_strats)
@@ -687,20 +747,45 @@ gmex <- gmex %>%
     # kg per 10000m2. calc area trawled in m2: knots * 1.8 km/hr/knot * 1000 m/km * minutes * 1 hr/60 min * width of gear in feet * 0.3 m/ft # biomass per standard tow
     wtcpue = 10000*SELECT_BGS/(VESSEL_SPD * 1.85200 * 1000 * MIN_FISH / 60 * GEAR_SIZE * 0.3048) 
   ) %>% 
+  # remove non-fish
   filter(
   spp != '' | !is.na(spp),
   # remove unidentified spp
   !spp %in% c('UNID CRUSTA', 'UNID OTHER', 'UNID.FISH', 'CRUSTACEA(INFRAORDER) BRACHYURA', 'MOLLUSCA AND UNID.OTHER #01', 'ALGAE', 'MISCELLANEOUS INVERTEBR', 'OTHER INVERTEBRATES')
-)
+) %>% 
+  # adjust spp names
+  mutate(
+    spp = ifelse(GENUS_BGS == 'PELAGIA' & SPEC_BGS == 'NOCTUL', 'PELAGIA NOCTILUCA', spp), 
+    BIO_BGS = ifelse(spp == "PELAGIA NOCTILUCA", 618030201, BIO_BGS), 
+    spp = ifelse(GENUS_BGS == 'MURICAN' & SPEC_BGS == 'FULVEN', 'MURICANTHUS FULVESCENS', spp), 
+    BIO_BGS = ifelse(spp == "MURICANTHUS FULVESCENS", 308011501, BIO_BGS), 
+    spp = ifelse(grepl("APLYSIA", spp), "APLYSIA", spp), 
+    spp = ifelse(grepl("AURELIA", spp), "AURELIA", spp), 
+    spp = ifelse(grepl("BOTHUS", spp), "BOTHUS", spp), 
+    spp = ifelse(grepl("CLYPEASTER", spp), "CLYPEASTER", spp), 
+    spp = ifelse(grepl("CONUS", spp), "CONUS", spp), 
+    spp = ifelse(grepl("CYNOSCION", spp), "CYNOSCION", spp), 
+    spp = ifelse(grepl("ECHINASTER", spp), "ECHINASTER", spp),
+    spp = ifelse(grepl("OPISTOGNATHUS", spp), "OPISTOGNATHUS", spp), 
+    spp = ifelse(grepl("OPSANUS", spp), "OPSANUS", spp), 
+    spp = ifelse(grepl("ROSSIA", spp), "ROSSIA", spp), 
+    spp = ifelse(grepl("SOLENOCERA", spp), "SOLENOCERA", spp), 
+    spp = ifelse(grepl("TRACHYPENEUS", spp), "TRACHYPENEUS", spp)
+  ) %>% 
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  # add region column
+  mutate(region = "Gulf of Mexico") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
 
-# remove paired tows
+# remove paired tows - as of 2018 there are no duplicate tows
 # Remove a tow when paired tows exist (same lat/lon/year but different haulid, only Gulf of Mexico)
 # identify duplicate tows at same year/lat/lon
-dups <- gmex %>% 
-  group_by(year, lat, lon) %>% 
-  filter(n() > 1) %>% 
-  group_by(haulid) %>% 
-  filter(n() == 1)
+# dups <- gmex %>% 
+#   group_by(year, lat, lon) %>% 
+#   filter(n() > 1) %>% 
+#   group_by(haulid) %>% 
+#   filter(n() == 1)
 # as of 2018 none of the tows have different haulids for the same year, lat, lon
 
 # old code for if there are duplicate tows
@@ -724,11 +809,10 @@ neus_survdat <- survdat %>%
   distinct() 
   
 # sum different sexes of same spp together
-neus_bio <- neus_survdat %>% 
+neus_survdat <- neus_survdat %>% 
   group_by(YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP) %>% 
-  summarise(BIOMASS = sum(BIOMASS)) 
-neus_survdat <- left_join(select(neus_survdat, -BIOMASS), neus_bio, by = c("CRUISE6", "STATION", "STRATUM", "SVSPP", "YEAR", "SEASON", "LAT", "LON", "DEPTH"))
-rm(neus_bio)
+  summarise(wtcpue = sum(BIOMASS)) 
+
 
 # repeat for spp file 
 neus_spp <- spp %>%
@@ -753,21 +837,23 @@ neus <- neus %>%
     haulid = paste(formatC(CRUISE6, width=6, flag=0), formatC(STATION, width=3, flag=0), formatC(STRATUM, width=4, flag=0), sep='-'),  
     # Calculate stratum area where needed (use convex hull approach)
     # convert square nautical miles to square kilometers
-    stratumarea = Areanmi2 * 3.429904 
-      ) %>% 
-  rename(
-    year = YEAR,
+    stratumarea = Areanmi2 * 3.429904) %>% 
+  rename(year = YEAR,
     spp = SCINAME,
     lat = LAT, 
     lon = LON, 
     depth = DEPTH,
-    stratum = STRATUM
-  ) %>% 
+    stratum = STRATUM) %>% 
   filter(
     # remove unidentified spp and non-species
     spp != '' | !is.na(spp), 
-    !spp %in% c('UNIDENTIFIED FISH', 'ILLEX ILLECEBROSUS EGG MOPS', 'LOLIGO PEALEII EGG MOPS')
-  )
+    !grepl("EGG", spp), 
+    !grepl("UNIDENTIFIED", spp)) %>%
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  # add temporary region column (this will be replaced with seasonal name)
+  mutate(region = "Northeast US") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
 
 rm(neus_spp, neus_strata, neus_survdat, survdat, spp)
 
@@ -854,9 +940,7 @@ seus <- left_join(seus, seus_strata, by = "STRATA")
 #Create a 'SEASON' column using 'MONTH' as a criteria
 seus <- seus %>% 
   mutate(DATE = as.Date(DATE, "%m-%d-%Y"), 
-         MONTH = month(DATE))
-
-seus <- seus %>%
+         MONTH = month(DATE)) %>%
   # create season column
   mutate(SEASON = NA, 
          SEASON = ifelse(MONTH >= 1 & MONTH <= 3, "winter", SEASON), 
@@ -907,12 +991,9 @@ end <- matrix(seus$LONGITUDEEND, seus$LATITUDEEND, nrow = nrow(seus), ncol = 2)
 seus <- seus %>%
   mutate(distance_m = geosphere::distHaversine(p1 = start, p2 = end),
          distance_km = distance_m / 1000.0, 
-         distance_mi = distance_m / 1609.344
-  )
-
+         distance_mi = distance_m / 1609.344) %>% 
 # calculate effort = mean area swept
 # EFFORT = 0 where the boat didn't move, distance_m = 0
-seus <- seus %>% 
   mutate(EFFORT = (13.5 * distance_m)/10000, 
          # Create a unique haulid
          haulid = EVENTNAME, 
@@ -948,9 +1029,20 @@ seus <- left_join(seus, biomass, by = c("haulid", "stratum", "stratumarea", "yea
 # double check that column numbers haven't changed by more than 1.  
 
 seus <- seus %>% 
+  # remove non-fish
   filter(
     !spp %in% c('MISCELLANEOUS INVERTEBRATES','XANTHIDAE','MICROPANOPE NUTTINGI','ALGAE','DYSPANOPEUS SAYI', 'PSEUDOMEDAEUS AGASSIZII')
-  )
+  ) %>% 
+  # adjust spp names
+  mutate(
+    spp = ifelse(grepl("ANCHOA", spp), "ANCHOA", spp), 
+    spp = ifelse(grepl("LIBINIA", spp), "LIBINIA", spp)
+  )  %>% 
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  # add temporary region column that will be converted to seasonal
+  mutate(region = "Southeast US") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
 
 rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt)
 
@@ -1054,9 +1146,17 @@ wctri <- wctri %>%
     spp = SPECIES_NAME
   ) %>% 
   filter(
-    spp != '' & 
-      !spp %in% c("Apristurus brunneus egg case", "fish eggs unident.", "Raja binoculata egg case", "Raja sp. egg case", "Rajiformes egg case", "Shark egg case unident.", "Bathyraja sp. egg case", "gastropod eggs", "Hydrolagus colliei egg case", "Selachimorpha egg case")
-  )
+    spp != "" & 
+      !grepl("egg", spp)
+  ) %>% 
+  # adjust spp names
+  mutate(spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
+    spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp)) %>%
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  # add region column
+  mutate(region = "West Coast Triennial") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
 
 rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 
@@ -1080,38 +1180,44 @@ tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
 if(HQ_DATA_ONLY == TRUE){
   
   # find high quality strata
-#These items were hand chosen.
+
   
 # Trim to high quality strata 
-# UPDATE TO SET ALASKA STRATA TO POSITIVE CHOICES
+
+  
+  ggplot(ai, aes(x = stratum, y = year)) +
+    geom_point()
+  
+  
 ai <- ai %>% 
   # these stratum look like most of them have -9999 for NUMCPUE, but some have values.  What makes them low quality?  How were they chosen?
   # could this be replaced with 
   # filter(NUMCPUE != -9999)
-  filter(!STRATUM %in% c(221, 411, 421, 521, 611))
+  filter(!stratum %in% c(221, 411, 421, 521, 611))
 
 ebs <- ebs %>% 
-  filter(!STRATUM %in% c(82,90))
+  filter(!stratum %in% c(82,90))
 
 # there aren't any stratum in goa that match these numbers.
-# test <- goa %>%
-#   filter(STRATUM %in% c(50, 210, 410, 420, 430, 440, 450, 510, 520, 530, 540, 550))
+goa <- goa %>%
+  filter(!stratum %in% c(50, 210, 410, 420, 430, 440, 450, 510, 520, 530, 540, 550))
   # filter(NUMCPUE == "-9999") this returns 90244 lines
 
-# neus <- neus %>%
+neus <- neus %>%
   # strata to keep (based on Nye et al. MEPS)
   # this encompasses all stratum in neus
-  # filter(STRATUM %in% c("1010", "1020", "1030", "1040", "1050", "1060", "1070", "1080", "1090", "1100", "1110", "1130", "1140", "1150", "1160", "1170", "1190", "1200", "1210", "1220", "1230", "1240", "1250", "1260", "1270", "1280", "1290", "1300", "1340", "1360", "1370", "1380", "1400", "1650", "1660", "1670", "1680", "1690", "1700", "1710", "1730", "1740", "1750"))
+  filter(!stratum %in% c("1010", "1020", "1030", "1040", "1050", "1060", "1070", "1080", "1090", "1100", "1110", "1130", "1140", "1150", "1160", "1170", "1190", "1200", "1210", "1220", "1230", "1240", "1250", "1260", "1270", "1280", "1290", "1300", "1340", "1360", "1370", "1380", "1400", "1650", "1660", "1670", "1680", "1690", "1700", "1710", "1730", "1740", "1750"))
 
 # count the number of years each stratum occurs 
 num_years <- neus %>% 
+  ungroup() %>% 
   # trim to 1967 and later, since more strata were sampled starting then
-  filter(YEAR >= 1967) %>% 
-  select(YEAR, STRATUM) %>%
+  filter(year >= 1967) %>% 
+  select(year, stratum) %>%
   # remove duplicates
   distinct() %>% 
   # count the number of times each STRATUM occurs
-  group_by(STRATUM) %>% 
+  group_by(stratum) %>% 
   summarise(count = n())
 # determine the most number of years
 max_years <- num_years %>% 
@@ -1121,7 +1227,7 @@ max_strat <- num_years %>%
   filter(count == max_years$max)
 # keep only those strata in neus
 neus <- neus %>% 
-  filter(STRATUM %in% max_strat$STRATUM)
+  filter(stratum %in% max_strat$stratum)
 
 # all of the rows cut out have a performance of 0, but so do those kept, can't see why one is kept and one isn't.
 wctri <- wctri %>% 
@@ -1141,11 +1247,11 @@ gmex <- gmex %>%
 
 # 2001 didn't sample many strata
 goa <- goa %>% 
-  filter(YEAR != 2001)
+  filter(year != 2001)
   
 # many strata in the Mid-Atlantic Bight weren't sampled until 1967
 neus <- neus %>% 
-  filter(YEAR >= 1967)
+  filter(year >= 1967)
 
 # # 1982 and 1983 didn't sample many strata
 gmex <- gmex %>% 
@@ -1154,7 +1260,8 @@ gmex <- gmex %>%
 # if we are looking for years where all strata were not sampled, a better code might be
 # which strata are there?
 num_strata <- seus %>% 
-  select(STRATA) %>% 
+  ungroup() %>% 
+  select(stratum) %>% 
   distinct()
 
 # how many strata were sampled each year? 24 each year
@@ -1178,7 +1285,8 @@ rm(yearly, num_strata)
 # now that lines have been removed from the main data set, can split out seasons
 # NEUS spring ====
 neusS <- neus %>% 
-  filter(SEASON == "SPRING")
+  filter(SEASON == "SPRING") %>% 
+  mutate(region = )
 
 # NEUS Fall ====
 neusF <- neus %>% 
