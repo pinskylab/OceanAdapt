@@ -67,37 +67,24 @@ sumna <- function(x){
 }
 
 hqstrat <- function(df){
-  # how many years are there in the survey?
-  num_years <- df %>% 
-    select(year) %>% 
-    distinct() %>% 
-    summarise(num = n())
-  
-  # select only strata that are represented every year
-  hq_strat <- df %>% 
-    select(year, stratum) %>% 
-    distinct() %>% 
-    group_by(stratum) %>% 
-    summarise(count = n()) %>% 
-    filter(count >= num_years$num)
-  return(hq_strat)
-}
-
-hqyear <- function(df){
-  # how many strata are there in the survey?
-  num_strat <- df %>% 
+  strat <- df %>% 
     select(stratum) %>% 
     distinct() %>% 
-    summarise(num = n())
+    arrange(stratum)
+  years <- df %>% 
+    select(year) %>% 
+    distinct() %>% 
+    arrange(year)
   
-  # select only strata that are represented every year
-  hq_year <- df %>% 
+  full_strat <- tibble(year = rep(years$year, nrow(strat)), stratum = rep(strat$stratum, nrow(years)))
+  done_strats <- df %>% 
     select(year, stratum) %>% 
     distinct() %>% 
-    group_by(year) %>% 
-    summarise(count = n()) %>% 
-    filter(count >= num_strat$num)
-  return(hq_year)
+    mutate(surveyed = "YES")
+  
+  full <- left_join(full_strat, done_strats, by = c("year", "stratum"), .keep_all = T)
+  
+  return(full)
 }
 
 if (download == TRUE){
@@ -317,42 +304,20 @@ ai <- ai %>%
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
   ungroup()
 
-
-
-########################
-# Malin wants to plot years vs strata to see quality of data
-strat <- ai %>% 
-  select(stratum) %>% 
-  distinct() %>% 
-  arrange(stratum)
-years <- ai %>% 
-  select(year) %>% 
-  distinct() %>% 
-  arrange(year)
-
-full_strat <- tibble(year = rep(years$year, nrow(strat)), stratum = rep(strat$stratum, nrow(years)))
-done_strats <- ai %>% 
-  select(year, stratum) %>% 
-  distinct() %>% 
-  mutate(surveyed = "YES")
-
-full <- left_join(full_strat, done_strats, by = c("year", "stratum"))
-
-ggplot(full, aes(x = stratum, y = year, col = surveyed)) + 
-  geom_jitter() 
-
-
 if (HQ_DATA_ONLY == TRUE){
   hq_strat <- hqstrat(ai)
-  ai <- ai %>% 
-    filter(stratum %in% hq_strat$stratum)
   
-  hq_year <- hqyear(ai)
+  ggplot(hq_strat, aes(x = stratum, y = year, col = surveyed)) + 
+    geom_jitter() 
+  
+  # for AI in 2018, this looks like specific years (1983, 1986) are more of a problem than specific strata (more missing from years (horizontally) than from strata (vertically))
+  bad_years <- c(1983, 1986)
+  
   ai <- ai %>% 
-    filter(year %in% hq_year$year)
+    filter(!year %in% bad_years)
 }
 # clean up
-rm(files, temp, j, temp_fixed, ai_data, ai_strata)
+rm(files, temp, j, temp_fixed, ai_data, ai_strata, bad_years, hq_strat)
 
 # Compile EBS ====
 files <- list.files(path = "data_raw/", pattern = "ebs")
@@ -434,16 +399,15 @@ ebs <- ebs %>%
 
 if (HQ_DATA_ONLY == TRUE){
   hq_strat <- hqstrat(ebs)
-  ebs <- ebs %>% 
-    filter(stratum %in% hq_strat$stratum)
   
-  hq_year <- hqyear(ebs)
-  ebs <- ebs %>% 
-    filter(year %in% hq_year$year)
+  
+  ggplot(hq_strat, aes(x = stratum, y = year, col = surveyed)) + 
+    geom_jitter() 
+  # for EBS in 2018, it looks like all strata were surveyed in all years
 }
 
 # clean up
-rm(files, temp, j, ebs_data, ebs_strata)
+rm(files, temp, j, ebs_data, ebs_strata, hq_strat)
 
 
 # Compile GOA ====
@@ -524,16 +488,32 @@ goa <- goa %>%
 
 if (HQ_DATA_ONLY == TRUE){
   hq_strat <- hqstrat(goa)
-  goa <- goa %>% 
-    filter(stratum %in% hq_strat$stratum)
   
-  hq_year <- hqyear(goa)
+  ggplot(hq_strat, aes(x = stratum, y = year, col = surveyed)) + 
+    geom_jitter() 
+  
+  # for GOA in 2018, this looks like both strata and years are a problem 
+  test <- hq_strat %>% 
+    filter(is.na(surveyed)) %>% 
+    arrange(year, stratum)
+  
+  # can see in the test table that there are a lot of strata missing in these bad years
+  bad_years <- c(1990, 1993, 1996, 2001)
+  
+  test <- hq_strat %>% 
+    filter(is.na(surveyed), 
+           !year %in% bad_years) %>% 
+    arrange(stratum, year)
+  # stratum 50 is only missing from 1984, cut it? Can see from the test table above which strata are missing from many years
+bad_strat <- c(510, 520, 530, 540, 550)  
+  
   goa <- goa %>% 
-    filter(year %in% hq_year$year)
+    filter(!year %in% bad_years, 
+           !stratum %in% bad_strat)
 }
 
 # clean up
-rm(files, temp, j, goa_data, goa_strata)
+rm(files, temp, j, goa_data, goa_strata, test, bad_strat, bad_years, hq_strat)
 
 # Compile WCTRI ====
 wctri_catch <- read_csv("data_raw/wctri_catch.csv", col_types = cols(
@@ -649,14 +629,34 @@ wctri <- wctri %>%
   ungroup()
 
 if (HQ_DATA_ONLY == TRUE){
-  hq_strat_wctri <- hqstrat(wctri)
-  wctri <- wctri %>% 
-    filter(stratum %in% hq_strat$stratum)
+  hq_strat <- hqstrat(wctri)
   
-  # checking for hq years removes all data
+  ggplot(hq_strat, aes(x = stratum, y = year, col = surveyed)) + 
+    geom_jitter ()
+
+  
+  # for WCTRI in 2018, this looks like both strata and years are a problem 
+  test <- hq_strat %>% 
+    filter(is.na(surveyed)) %>% 
+    arrange(year, stratum)
+  
+  # can see in the test table that there are a lot of strata missing in these bad years
+  bad_years <- c(1980, 1983, 1986, 1989, 1992, 2004)
+  
+  test <- hq_strat %>% 
+    filter(is.na(surveyed), 
+           !year %in% bad_years) %>% 
+    arrange(stratum, year)
+  
+  # can see from the test table above which strata are missing from many years
+  bad_strat <- test$stratum
+  
+  wctri <- wctri %>% 
+    filter(!year %in% bad_years, 
+           !stratum %in% bad_strat)
 }
 
-rm(wctri_catch, wctri_haul, wctri_species, wctri_strats, hq_strat_wctri, hq_year_wctri)
+rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 
 # Compile WCANN ====
 wcann_catch <- read_csv("data_raw/wcann_catch.csv", col_types = cols(
@@ -768,11 +768,12 @@ wcann <- wcann %>%
 if (HQ_DATA_ONLY == TRUE){
   # keep the same footprint as wctri
   wcann <- wcann %>% 
-    filter(stratum %in% hq_strat_wctri$stratum)
+    filter(!year %in% bad_years, 
+           !stratum %in% bad_strat)
 }
 
 # cleanup
-rm(wcann_catch, wcann_haul, wcann_strats)
+rm(wcann_catch, wcann_haul, wcann_strats, bad_strat, bad_years)
 
 # Compile GMEX ====
 gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(.default = col_character())) %>% 
@@ -1002,32 +1003,29 @@ gmex <- gmex %>%
   ungroup()
 
 if (HQ_DATA_ONLY == TRUE){
-  # For gmex, none of the strata are surveyed every single year.  The original
-  # complete_r_script kept 16 strata, which is most strata observed in 5 or more
-  # years.  Because the max number of years of the survey in 2018 is 10, we are
-  # going to keep strata that are observed in half of the surveys, which gives
-  # us 18 strata.
+  hq_strat <- hqstrat(gmex)
   
-  # how many years are there in the survey?
-  num_years <- gmex %>% 
-    select(year) %>% 
-    distinct() %>% 
-    summarise(num = n())
+  ggplot(hq_strat, aes(x = stratum, y = year, col = surveyed)) + 
+    geom_point() 
   
-  # select only strata that are represented every year
-  hq_strat_gmex <- gmex %>% 
-    select(year, stratum) %>% 
-    distinct() %>% 
-    group_by(stratum) %>% 
-    summarise(count = n()) %>% 
-    filter(count >= (num_years$num/2))
+  # for gmex in 2018, this looks like both strata and years are a problem 
+  test <- hq_strat %>% 
+    filter(is.na(surveyed)) %>% 
+    arrange(year, stratum)
+  
+  # can see in the test table that there are a lot of strata missing in these bad years
+  bad_years <- c(1996, 1997, 1998, 2000, 2001, 2002, 2005, 2006, 2007)
+  
+  test <- hq_strat %>% 
+    filter(is.na(surveyed), 
+           !year %in% bad_years) %>% 
+    arrange(stratum, year)
+  # stratum 50 is only missing from 1984, cut it? Can see from the test table above which strata are missing from many years
+  bad_strat <- test$stratum
   
   gmex <- gmex %>% 
-    filter(stratum %in% hq_strat_gmex$stratum)
-  
-  hq_year <- hqyear(gmex)
-  gmex <- gmex %>% 
-    filter(year %in% hq_year$year)
+    filter(!year %in% bad_years, 
+           !stratum %in% bad_strat)
 }
 
 # remove paired tows - as of 2018 there are no duplicate tows
@@ -1118,12 +1116,20 @@ neusS <- neus %>%
 
 if (HQ_DATA_ONLY == TRUE){
   hq_strat <- hqstrat(neusS)
-  neusS <- neusS %>% 
-    filter(stratum %in% hq_strat$stratum)
   
-  hq_year <- hqyear(neusS)
+  ggplot(hq_strat, aes(x = stratum, y = year, col = surveyed)) + 
+    geom_point() 
+  
+  # for neusS in 2018, it looked like there were a few problem years but mostly problem strat
+  test <- hq_strat %>% 
+    filter(is.na(surveyed)) %>% 
+    arrange(stratum, year)
+  
+  # can see in the test table that there are a lot of strata missing in these bad years
+  bad_strat <- test$stratum
+  
   neusS <- neusS %>% 
-    filter(year %in% hq_year$year)
+    filter(!stratum %in% bad_strat)
 }
 
 # NEUS Fall ====
@@ -1135,15 +1141,23 @@ neusF <- neus %>%
 
 if (HQ_DATA_ONLY == TRUE){
   hq_strat <- hqstrat(neusF)
-  neusF <- neusF %>% 
-    filter(stratum %in% hq_strat$stratum)
+
+  ggplot(hq_strat, aes(x = stratum, y = year, col = surveyed)) + 
+    geom_point() 
   
-  hq_year <- hqyear(neusF)
+  # for neusS in 2018, it looked like there were a few problem years but mostly problem strat
+  test <- hq_strat %>% 
+    filter(is.na(surveyed)) %>% 
+    arrange(stratum, year)
+  
+  # can see in the test table that there are a lot of strata missing in these bad years
+  bad_strat <- test$stratum
+  
   neusF <- neusF %>% 
-    filter(year %in% hq_year$year)
+    filter(!stratum %in% bad_strat)
 }
 
-rm(neus_spp, neus_strata, neus_survdat, survdat, spp)
+rm(neus_spp, neus_strata, neus_survdat, survdat, spp, hq_strat)
 
 # Compile SEUS ====
 
@@ -1343,12 +1357,20 @@ seusSPRING <- seus %>%
 
 if (HQ_DATA_ONLY == TRUE){
   hq_strat <- hqstrat(seusSPRING)
-  seusSPRING <- seusSPRING %>% 
-    filter(stratum %in% hq_strat$stratum)
   
-  hq_year <- hqyear(seusSPRING)
+  ggplot(hq_strat, aes(x = stratum, y = year, col = surveyed)) + 
+    geom_jitter() 
+  
+  # for neusS in 2018, it looked like there were a few problem years but mostly problem strat
+  test <- hq_strat %>% 
+    filter(is.na(surveyed)) %>% 
+    arrange(stratum, year)
+  
+  # can see in the test table that there are a lot of strata missing in these bad years
+  bad_strat <- test$stratum
+  
   seusSPRING <- seusSPRING %>% 
-    filter(year %in% hq_year$year)
+    filter(!stratum %in% bad_strat)
 }
 
 # SEUS summer ====
@@ -1360,12 +1382,12 @@ seusSUMMER <- seus %>%
 
 if (HQ_DATA_ONLY == TRUE){
   hq_strat <- hqstrat(seusSUMMER)
-  seusSUMMER <- seusSUMMER %>% 
-    filter(stratum %in% hq_strat$stratum)
   
-  hq_year <- hqyear(seusSUMMER)
-  seusSUMMER <- seusSUMMER %>% 
-    filter(year %in% hq_year$year)
+  ggplot(hq_strat, aes(x = stratum, y = year, col = surveyed)) + 
+    geom_jitter() 
+  
+  # for seusSummer, everything was surveyed
+
 }
 
 # SEUS fall ====
@@ -1376,15 +1398,23 @@ seusFALL <- seus %>%
 
 if (HQ_DATA_ONLY == TRUE){
   hq_strat <- hqstrat(seusFALL)
-  seusFALL <- seusFALL %>% 
-    filter(stratum %in% hq_strat$stratum)
   
-  hq_year <- hqyear(seusFALL)
+  ggplot(hq_strat, aes(x = stratum, y = year, col = surveyed)) + 
+    geom_jitter() 
+  
+  # for neusS in 2018, it looked like there were a few problem years but mostly problem strat
+  test <- hq_strat %>% 
+    filter(is.na(surveyed)) %>% 
+    arrange(stratum, year)
+  
+  # can see in the test table that there are a lot of strata missing in these bad years
+  bad_strat <- test$stratum
+  
   seusFALL <- seusFALL %>% 
-    filter(year %in% hq_year$year)
+    filter(!stratum %in% bad_strat)
 }
 
-rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, hq_year, hq_strat)
+rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, hq_strat, test, bad_strat, bad_years, i)
 
 # Compile TAX ====
 tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
@@ -1410,11 +1440,31 @@ dat <- dat %>%
   filter(!is.na(wtcpue))
 
 # add a nice spp and common name
-dat2 <- left_join(dat, select(tax, taxon, name, common), by = c("spp" = "taxon"))  
+dat2 <- left_join(dat, select(tax, taxon, name, common), by = c("spp" = "taxon")) 
+dat2 <- dat2 %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, common, wtcpue)
 
-dat2$spp = dat2$name
-dat2 = dat2[,c('region', 'haulid', 'year', 'lat', 'lon', 'stratum', 'stratumarea', 'depth', 'spp', 'common', 'wtcpue')]
+# check for errors in name matching
+if(sum(dat2$spp == 'NA') > 0 | sum(is.na(dat2$spp)) > 0){
+  warning('>>create_master_table(): Did not match on some taxon [Variable: `tax`] names.')
+}
+
+# replace dat with dat2
+dat <- dat2
 
 
+if(isTRUE(REMOVE_REGION_DATASETS)) {
+  rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER)
+}
 
-               
+if(isTRUE(OPTIONAL_OUTPUT_DAT_MASTER_TABLE)){
+  save(dat, file = paste("trawl_allregions_", Sys.Date(), ".RData", sep = ""))
+}
+
+#At this point, we have a compiled `dat` master table on which we can begin our analysis.
+#If you have not cleared the regional datasets {By setting REMOVE_REGION_DATASETS=FALSE at the top}, 
+#you are free to do analysis on those sets individually as well.
+
+##FEEL FREE TO ADD, MODIFY, OR DELETE ANYTHING BELOW THIS LINE
+
+
