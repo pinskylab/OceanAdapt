@@ -1533,6 +1533,8 @@ dat_strat_yr <- left_join(dat_strat_yr, dat_strat, by = c("region", "stratum"))
 dat_strat_yr <- dat_strat_yr %>% 
   mutate(wttot = wtcpue * stratumarea)
 
+############# this is where I leave you ###############
+
 datstrat = with(dat[!duplicated(dat[,c('region', 'stratum', 'haulid')]),], aggregate(list(lat = lat, lon = lon, depth = depth, stratumarea = stratumarea), by=list(stratum = stratum, region = region), FUN=meanna)) # mean lat/lon/depth for each stratum  
 datstratyr = aggregate(list(wtcpue = dat$wtcpue), by=list(region = dat$region, spp = dat$spp, common=dat$common, stratum = dat$stratum, year=dat$year), FUN=meanna) 
 datstratyr = merge(datstratyr, datstrat) 
