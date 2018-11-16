@@ -1583,5 +1583,48 @@ cent_bio_lon_se <- dat_strat_yr %>%
 
 cent_bio <- left_join(cent_bio, cent_bio_lon_se, by = c("region", "spp", "year"))
 
-cent_bio <- cent_bio %>%
+BY_SPECIES_DATA <- cent_bio %>%
   arrange(region, spp, year)
+
+#  Add 0's ####
+
+u_spp <- trimmed_dat %>% 
+  select(spp) %>% 
+  distinct()
+
+u_cmmn <- trimmed_dat %>% 
+  select(common) %>% 
+  distinct()
+  
+dat_exploded <- trimmed_dat %>% 
+  group_by(haulid, stratum, year, lat, lon, stratumarea, depth) %>% 
+  arrange(haulid, stratum, year, lat, lon, stratumarea, depth)
+
+
+u.cmmn <- trimmed_dat[,"common"[!duplicated(as.character("spp"))]]
+
+  
+    
+  x.loc <- x[,list(haulid, year, stratum, stratumarea, lat, lon, depth)]
+  setkey(x.loc, haulid, year)
+  
+  x.skele <- x.loc[,list(spp=u.spp, common=u.cmmn), by=eval(colnames(x.loc))]
+  setkey(x.skele, haulid, year, spp)
+  x.skele <- unique(x.skele)
+  setcolorder(x.skele, c("haulid","year","spp", "common", "stratum", "stratumarea","lat","lon","depth"))
+  
+  x.spp.dat <- x[,list(haulid, year, spp, wtcpue)]
+  setkey(x.spp.dat, haulid, year, spp)
+  x.spp.dat <- unique(x.spp.dat)
+  
+  out <- x.spp.dat[x.skele]
+  
+  out$wtcpue[is.na(out$wtcpue)] <- 0
+  
+  out
+}
+
+
+
+# write.csv(dat.exploded, file.path(WORKING_DIRECTORY, "..", "..", "dat.exploded.csv")) # this will be ~600MB
+
