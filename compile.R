@@ -95,6 +95,18 @@ hqstrat <- function(df){
   return(full)
 }
 
+wgtse = function(x, na.rm=TRUE){ 
+  if(sum(!is.na(x[,1]) & !is.na(x[,2]))>1){
+    if(na.rm){
+      return(sqrt(wtd.var(x=x[,1], weights=x[,2], na.rm=TRUE, normwt=TRUE))/sqrt(sum(!is.na(x[,1] & !is.na(x[,2])))))
+    } else {
+      return(sqrt(wtd.var(x=x[,1], weights=x[,2], na.rm=FALSE, normwt=TRUE))/sqrt(length(x))) # may choke on wtd.var without removing NAs
+    }
+  } else {
+    return(NA) # NA if vector doesn't have at least 2 values
+  }
+}
+
 if (download == TRUE){
 ## Acquire new data ====
 # We want the full dataset every single time, from the start of the survey through the most recent year. This helps catch any updates the surveys have made to past years (they sometimes catch and fix old errors). 
@@ -1533,31 +1545,43 @@ dat_strat_yr <- left_join(dat_strat_yr, dat_strat, by = c("region", "stratum"))
 dat_strat_yr <- dat_strat_yr %>% 
   mutate(wttot = wtcpue * stratumarea)
 
-############# this is where I leave you ###############
+# calculate mean lat
+cent_bio_lat <- dat_strat_yr %>% 
+  group_by(region, spp, common, year) %>% 
+  summarise(lat = questionr::wtd.mean(lat, wttot, na.rm = T))
 
-datstrat = with(dat[!duplicated(dat[,c('region', 'stratum', 'haulid')]),], aggregate(list(lat = lat, lon = lon, depth = depth, stratumarea = stratumarea), by=list(stratum = stratum, region = region), FUN=meanna)) # mean lat/lon/depth for each stratum  
-datstratyr = aggregate(list(wtcpue = dat$wtcpue), by=list(region = dat$region, spp = dat$spp, common=dat$common, stratum = dat$stratum, year=dat$year), FUN=meanna) 
-datstratyr = merge(datstratyr, datstrat) 
-datstratyr$wttot = datstratyr$wtcpue * datstratyr$stratumarea 
+# mean depth
+cent_bio_depth <- dat_strat_yr %>% 
+  group_by(region, spp, common, year) %>% 
+  summarise(depth = questionr::wtd.mean(depth, wttot, na.rm = T))
 
-centbiolat = Hmisc::summarize(datstratyr[, c('lat', 'wttot')], by = list(region = datstratyr$region, spp = datstratyr$spp, common=datstratyr$common, year = datstratyr$year), FUN = wgtmean, na.rm=TRUE, stat.name = 'lat') # calculate mean lat
-centbiodepth = summarize(datstratyr[, c('depth', 'wttot')], by = list(region = datstratyr$region, spp = datstratyr$spp, common=datstratyr$common, year = datstratyr$year), FUN = wgtmean, na.rm=TRUE, stat.name = 'depth') # mean depth
-centbiolon = summarize(datstratyr[, c('lon', 'wttot')], by = list(region = datstratyr$region, spp = datstratyr$spp, common=datstratyr$common, year = datstratyr$year), FUN = wgtmean, na.rm=TRUE, stat.name = 'lon') # mean depth
-centbio = merge(centbiolat, centbiodepth) # merge together
-centbio = merge(centbio, centbiolon) # merge together
+# mean lon
+cent_bio_lon <- dat_strat_yr %>% 
+  group_by(region, spp, common, year) %>% 
+  summarise(lon = questionr::wtd.mean(lon, wttot, na.rm = T))
 
-centbiolatse = summarize(datstratyr[, c('lat', 'wttot')], by = list(region = datstratyr$region, spp = datstratyr$spp, year = datstratyr$year), FUN = wgtse, na.rm=TRUE, stat.name = 'latse') # standard error for lat
-centbio = merge(centbio, centbiolatse) # merge together
+# merge
+cent_bio <- left_join(cent_bio_lat, cent_bio_depth, by = c("region", "spp", "common", "year"))
+cent_bio <- left_join(cent_bio, cent_bio_lon, by = c("region", "spp", "common", "year"))
 
-centbiodepthse = summarize(datstratyr[, c('depth', 'wttot')], by = list(region = datstratyr$region, spp = datstratyr$spp, common=datstratyr$common, year = datstratyr$year), FUN = wgtse, na.rm=TRUE, stat.name = 'depthse') # SE for depth
-centbio = merge(centbio, centbiodepthse) # merge together
+# standard error for lat
+cent_bio_lat_se <- dat_strat_yr %>%
+  group_by(region, spp, year) %>% 
+  summarise(lat_se = sqrt(questionr::wtd.var(lat, wttot, na.rm=TRUE, normwt=TRUE))/sqrt(sum(!is.na(lat) & !is.na(wttot))))
 
-centbiolonse = summarize(datstratyr[, c('lon', 'wttot')], by = list(region = datstratyr$region, spp = datstratyr$spp, year = datstratyr$year), FUN = wgtse, na.rm=TRUE, stat.name = 'lonse') # standard error for lon
-centbio = merge(centbio, centbiolonse) # merge together
+cent_bio <- left_join(cent_bio, cent_bio_lat_se, by = c("region", "spp", "year"))
 
+cent_bio_depth_se <- dat_strat_yr %>%
+  group_by(region, spp, year) %>% 
+  summarise(depth_se = sqrt(questionr::wtd.var(depth, wttot, na.rm=TRUE, normwt=TRUE))/sqrt(sum(!is.na(depth) & !is.na(wttot))))
 
-# order by region, species, year
-centbio = centbio[order(centbio$region, centbio$spp, centbio$year),]
+cent_bio <- left_join(cent_bio, cent_bio_depth_se, by = c("region", "spp", "year"))
 
-return(centbio)
-  
+cent_bio_lon_se <- dat_strat_yr %>%
+  group_by(region, spp, year) %>% 
+  summarise(lon_se = sqrt(questionr::wtd.var(lon, wttot, na.rm=TRUE, normwt=TRUE))/sqrt(sum(!is.na(lon) & !is.na(wttot))))
+
+cent_bio <- left_join(cent_bio, cent_bio_lon_se, by = c("region", "spp", "year"))
+
+cent_bio <- cent_bio %>%
+  arrange(region, spp, year)
