@@ -1481,6 +1481,8 @@ if(isTRUE(OPTIONAL_OUTPUT_DAT_MASTER_TABLE)){
   save(dat, file = paste("trawl_allregions_", Sys.Date(), ".RData", sep = ""))
 }
 
+load(file = "trawl_allregions_2018-11-14.RData")
+
 #At this point, we have a compiled `dat` master table on which we can begin our analysis.
 #If you have not cleared the regional datasets {By setting REMOVE_REGION_DATASETS=FALSE at the top}, 
 #you are free to do analysis on those sets individually as well.
@@ -1588,31 +1590,39 @@ BY_SPECIES_DATA <- cent_bio %>%
 
 #  Add 0's ####
 
+# get a list of unique species names
 u_spp <- trimmed_dat %>% 
   select(spp) %>% 
   distinct()
 
+# get a list of unique common names
 u_cmmn <- trimmed_dat %>% 
-  select(common) %>% 
-  distinct()
+  select(common, spp) %>% 
+  distinct(common, spp)
+
+# get a list of data grouped by haul_id and year
+x_loc <- trimmed_dat %>% 
+  select(haulid, year, stratum, stratumarea, lat, lon, depth) %>% 
+  group_by(haulid, year)
+
+# get a list of data 
+x.skele <- x.loc[,list(spp=u.spp, common=u.cmmn), by=eval(colnames(x.loc))]
+setkey(x.skele, haulid, year, spp)
+x.skele <- unique(x.skele)
+setcolorder(x.skele, c("haulid","year","spp", "common", "stratum", "stratumarea","lat","lon","depth"))
+
   
 dat_exploded <- trimmed_dat %>% 
   group_by(haulid, stratum, year, lat, lon, stratumarea, depth) %>% 
   arrange(haulid, stratum, year, lat, lon, stratumarea, depth)
 
 
-u.cmmn <- trimmed_dat[,"common"[!duplicated(as.character("spp"))]]
+
 
   
-    
-  x.loc <- x[,list(haulid, year, stratum, stratumarea, lat, lon, depth)]
-  setkey(x.loc, haulid, year)
+
   
-  x.skele <- x.loc[,list(spp=u.spp, common=u.cmmn), by=eval(colnames(x.loc))]
-  setkey(x.skele, haulid, year, spp)
-  x.skele <- unique(x.skele)
-  setcolorder(x.skele, c("haulid","year","spp", "common", "stratum", "stratumarea","lat","lon","depth"))
-  
+   
   x.spp.dat <- x[,list(haulid, year, spp, wtcpue)]
   setkey(x.spp.dat, haulid, year, spp)
   x.spp.dat <- unique(x.spp.dat)
