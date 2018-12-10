@@ -432,23 +432,23 @@ high_quality_strata = function () {
   
   neusF <<- dplyr::filter(neusF, YEAR >= 1972, YEAR != 2017) # trim to 1972 and later, omit 2017, since more strata were sampled starting then
   temp <- dplyr:: group_by(neusF, STRATUM) %>% 
-    mutate(
+    dplyr::mutate(
       meanstratlat = round(mean(LAT), 5)
       # this bit only needed if graphing
       # , 
       # meanstratlat = as.factor(as.numeric(meanstratlat))
       ) %>% # produces as many values as there are in stratum--same number of rows
-    ungroup() %>% 
-    select(YEAR, meanstratlat, STRATUM) %>% 
-    distinct()
+    dplyr::ungroup() %>% 
+    dplyr::select(YEAR, meanstratlat, STRATUM) %>% 
+    dplyr::distinct()
   # remove any strata that were not observed more than 37 times and see what the graph looks like
   summa <- temp %>% 
-    group_by(meanstratlat) %>% 
-    summarise(count = n()) %>% 
-    filter(count >= 38)
+    dplyr::group_by(meanstratlat) %>% 
+    dplyr::summarise(count = n()) %>% 
+    dplyr::filter(count >= 38)
   temp <- dplyr::filter(temp, meanstratlat %in% summa$meanstratlat)
   
-  neusF <<- left_join(select(temp, YEAR, STRATUM), neusF, by = c("YEAR", "STRATUM"))
+  neusF <<- dplyr::left_join(dplyr::select(temp, YEAR, STRATUM), neusF, by = c("YEAR", "STRATUM"))
   
   wctri <<- wctri[wctri$stratum %in% c("36.5-50", "37.5-150", "37.5-50", "38.5-150", "38.5-250", "38.5-350", "38.5-50", "39.5-150", "39.5-50", "40.5-150", "40.5-250", "41.5-150", "41.5-250", "41.5-50", "42.5-150", "42.5-250", "42.5-50", "43.5-150", "43.5-250", "43.5-350", "43.5-50", "44.5-150", "44.5-250", "44.5-350", "44.5-50", "45.5-150", "45.5-350", "45.5-50", "46.5-150", "46.5-250", "46.5-50", "47.5-150", "47.5-50", "48.5-150", "48.5-250", "48.5-50"),]
   
@@ -824,8 +824,8 @@ trim_species_data = function(dat) {
   
   
   ## Find a standard set of species (present at least 3/4 of the years in a region)
-  presyr = aggregate(list(pres = dat$wtcpue>0), by=list(region = dat$region, spp=dat$spp, common=dat$common, year=dat$year), FUN=sum, na.rm=TRUE) # find which species are present in which years
-  presyrsum = aggregate(list(presyr = presyr$pres>0), by=list(region=presyr$region, spp=presyr$spp, common=presyr$common), FUN=sum) # presyr col holds # years in which spp was present
+  presyr = aggregate(list(pres = dat$wtcpue > 0), by=list(region = dat$region, spp=dat$spp, common=dat$common, year=dat$year), FUN=sum, na.rm=TRUE) # find which species are present in which years
+  presyrsum = aggregate(list(presyr = presyr$pres > 0), by=list(region=presyr$region, spp=presyr$spp, common=presyr$common), FUN=sum) # presyr col holds # years in which spp was present
   maxyrs = aggregate(list(maxyrs = presyrsum$presyr), by=list(region = presyrsum$region), FUN=max) # max # years of survey in each region
   presyrsum = merge(presyrsum, maxyrs) # merge in max years
   spplist = presyrsum[presyrsum$presyr >= presyrsum$maxyrs*3/4,c('region', 'spp', 'common')] # retain all spp present at least 3/4 of the available years in a survey
@@ -850,6 +850,7 @@ species_data = function (dat) {
   
   datstratyr = merge(datstratyr, datstrat) # add stratum lat/lon/depth/area
   datstratyr$wttot = datstratyr$wtcpue * datstratyr$stratumarea # index of biomass per stratum: mean wtcpue times area
+  datstratyr <- dplyr::filter(datstratyr, wttot != 0)
   
   centbiolat = summarize(datstratyr[, c('lat', 'wttot')], by = list(region = datstratyr$region, spp = datstratyr$spp, common=datstratyr$common, year = datstratyr$year), FUN = wgtmean, na.rm=TRUE, stat.name = 'lat') # calculate mean lat
   centbiodepth = summarize(datstratyr[, c('depth', 'wttot')], by = list(region = datstratyr$region, spp = datstratyr$spp, common=datstratyr$common, year = datstratyr$year), FUN = wgtmean, na.rm=TRUE, stat.name = 'depth') # mean depth
