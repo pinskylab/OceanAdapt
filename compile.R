@@ -1481,7 +1481,7 @@ if(isTRUE(OPTIONAL_OUTPUT_DAT_MASTER_TABLE)){
   save(dat, file = paste("trawl_allregions_", Sys.Date(), ".RData", sep = ""))
 }
 
-load(file = "trawl_allregions_2018-11-14.RData")
+load(file = "trawl_allregions_2018-12-07.RData")
 
 #At this point, we have a compiled `dat` master table on which we can begin our analysis.
 #If you have not cleared the regional datasets {By setting REMOVE_REGION_DATASETS=FALSE at the top}, 
@@ -1589,6 +1589,9 @@ BY_SPECIES_DATA <- cent_bio %>%
   arrange(region, spp, year)
 
 #  Add 0's ####
+
+# For every haulid, year, stratum, stratumarea lat lon depth have a species with
+# a wtcpue of the recorded value or zero if that was not observed.
 
 # get a list of unique species names
 u_spp <- trimmed_dat %>% 
