@@ -430,11 +430,25 @@ high_quality_strata = function () {
   goa <<- goa[!(goa$STRATUM %in% c(50, 210, 410, 420, 430, 440, 450, 510, 520, 530, 540, 550)),] # strata to remove.
   neus <<- neus[neus$STRATUM %in% c("1010", "1020", "1030", "1040", "1050", "1060", "1070", "1080", "1090", "1100", "1110", "1130", "1140", "1150", "1160", "1170", "1190", "1200", "1210", "1220", "1230", "1240", "1250", "1260", "1270", "1280", "1290", "1300", "1340", "1360", "1370", "1380", "1400", "1650", "1660", "1670", "1680", "1690", "1700", "1710", "1730", "1740", "1750"), ] # strata to keep (based on Nye et al. MEPS)
   
-  inds <- neusF$YEAR >= 1967 # trim to 1967 and later, since more strata were sampled starting then
-  strat.counts <- apply(table(neusF$YEAR[inds], neusF$STRATUM[inds]), 2, function(x)sum(x>0))
-  strat.names <- names(strat.counts)
-  strat.select <- strat.names[strat.counts>=max(strat.counts)]
-  neusF <<- neusF[neusF$STRATUM %in% c(strat.select), ] 
+  neusF <<- dplyr::filter(neusF, YEAR >= 1972, YEAR != 2017) # trim to 1972 and later, omit 2017, since more strata were sampled starting then
+  temp <- dplyr:: group_by(neusF, STRATUM) %>% 
+    mutate(
+      meanstratlat = round(mean(LAT), 5)
+      # this bit only needed if graphing
+      # , 
+      # meanstratlat = as.factor(as.numeric(meanstratlat))
+      ) %>% # produces as many values as there are in stratum--same number of rows
+    ungroup() %>% 
+    select(YEAR, meanstratlat, STRATUM) %>% 
+    distinct()
+  # remove any strata that were not observed more than 37 times and see what the graph looks like
+  summa <- temp %>% 
+    group_by(meanstratlat) %>% 
+    summarise(count = n()) %>% 
+    filter(count >= 38)
+  temp <- dplyr::filter(temp, meanstratlat %in% summa$meanstratlat)
+  
+  neusF <<- left_join(select(temp, YEAR, STRATUM), neusF, by = c("YEAR", "STRATUM"))
   
   wctri <<- wctri[wctri$stratum %in% c("36.5-50", "37.5-150", "37.5-50", "38.5-150", "38.5-250", "38.5-350", "38.5-50", "39.5-150", "39.5-50", "40.5-150", "40.5-250", "41.5-150", "41.5-250", "41.5-50", "42.5-150", "42.5-250", "42.5-50", "43.5-150", "43.5-250", "43.5-350", "43.5-50", "44.5-150", "44.5-250", "44.5-350", "44.5-50", "45.5-150", "45.5-350", "45.5-50", "46.5-150", "46.5-250", "46.5-50", "47.5-150", "47.5-50", "48.5-150", "48.5-250", "48.5-50"),]
   
