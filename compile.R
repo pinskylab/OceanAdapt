@@ -1436,6 +1436,161 @@ if (HQ_DATA_ONLY == TRUE){
 
 rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, hq_strat, test, bad_strat, bad_years, i)
 
+# Compile Scotian Shelf ====
+scot_sumr <- read_csv("data_raw/ADAPT_Canada_Atlantic_Summer_2016.csv", col_types = cols(
+  .default = col_double(),
+  Stratum = col_integer(),
+  Mission = col_character(),
+  SurveyYear = col_integer(),
+  Season = col_character(),
+  SurveyDate = col_character(),
+  SetNumber = col_integer(),
+  Gear = col_character(),
+  MinimumDepth_Fathoms = col_integer(),
+  MaximumDepth_Fathoms = col_integer(),
+  Species = col_integer(),
+  TaxonomicSerialNumber = col_integer(),
+  ScientificName = col_character(),
+  TaxonomicNameAuthor = col_character()
+))
+
+scot_fall <- read_csv("data_raw/ADAPT_Canada_Atlantic_Fall_2016.csv", col_types = cols(
+  .default = col_double(),
+  Stratum = col_integer(),
+  Mission = col_character(),
+  SurveyYear = col_integer(),
+  Season = col_character(),
+  SurveyDate = col_character(),
+  SetNumber = col_integer(),
+  Gear = col_character(),
+  MinimumDepth_Fathoms = col_integer(),
+  MaximumDepth_Fathoms = col_integer(),
+  Species = col_integer(),
+  TaxonomicSerialNumber = col_integer(),
+  ScientificName = col_character(),
+  TaxonomicNameAuthor = col_character()
+))
+scot_spr <- read_csv("data_raw/ADAPT_Canada_Atlantic_Spring_2016.csv", col_types = cols(
+  .default = col_double(),
+  Stratum = col_integer(),
+  Mission = col_character(),
+  SurveyYear = col_integer(),
+  Season = col_character(),
+  SurveyDate = col_character(),
+  SetNumber = col_integer(),
+  Gear = col_character(),
+  MinimumDepth_Fathoms = col_integer(),
+  MaximumDepth_Fathoms = col_integer(),
+  Species = col_integer(),
+  TaxonomicSerialNumber = col_integer(),
+  ScientificName = col_character(),
+  TaxonomicNameAuthor = col_character()
+))
+
+scot <- rbind(scot_fall, scot_spr, scot_sumr)
+
+# convert mission to haul_id
+scot <- scot %>% 
+  rename(haulid = Mission, 
+         wtcpue = TotalWeightStandardized_KG, 
+         stratum = Stratum, 
+         year = SurveyYear, 
+         season = Season, 
+         lat = Latitude_DD, 
+         lon = Longitude_DD, 
+         depth = MaximumDepth_Fathoms, 
+         spp = ScientificName) %>%
+  # create placeholder column to fill in with data at the next step
+  mutate(stratumarea = NA)
+
+# calculate stratum area for each stratum
+strat <- scot %>%
+  select(stratum) %>% 
+  distinct()
+
+for(i in seq(strat$stratum)){
+  temp <- scot %>% 
+    filter(stratum == strat$stratum[i]) %>% 
+    mutate(area = calcarea(lon, lat))
+  scot <- scot %>% 
+    mutate(stratumarea = ifelse(stratum == strat$stratum[i], temp$area[1], stratumarea))
+}
+
+# are any spp eggs or non-organism notes? As of 2018, nothing stuck out as needing to be removed
+# test <- scot %>% 
+#   select(spp) %>% 
+#   filter(!is.na(spp)) %>% 
+#   distinct() %>% 
+#   mutate(spp = as.factor(spp))
+
+# combine the wtcpue for each species by haul
+scot <- scot %>% 
+  group_by(haulid, stratum, stratumarea, year, season, lat, lon, depth, spp, ) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  ungroup() %>% 
+  # remove extra columns
+  select(haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue, season)
+
+# split out the seasons
+scot_sumr <- scot %>% 
+  filter(season == "SUMMER") %>% 
+  select(-season) %>% 
+  mutate(region = "Scotian Shelf Summer")
+
+if (HQ_DATA_ONLY == TRUE){
+  # plot the strata by year
+  scot_sumr %>% 
+    select(stratum, year) %>% 
+    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  # there is a very faint blip of white in 1984 which is fewer
+  # species in a trawl, not a missing trawl.
+}  
+
+scot_fall <- scot %>% 
+  filter(season == "FALL") %>% 
+  select(-season) %>% 
+  mutate(region = "Scotian Shelf Fall")
+
+if (HQ_DATA_ONLY == TRUE){
+  # plot the strata by year
+  scot_fall %>% 
+    select(stratum, year) %>% 
+    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+  scot_fall <- scot_fall %>% 
+    filter(year != 1986, year != 1978)
+}  
+
+scot_spr <- scot %>% 
+  filter(season == "SPRING") %>% 
+  select(-season) %>% 
+  mutate(region = "Scotian Shelf Spring")
+
+
+if (HQ_DATA_ONLY == TRUE){
+  # plot the strata by year
+  scot_spr %>% 
+    select(stratum, year) %>% 
+    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+  scot_spr <- scot_spr %>%
+    filter(year < 1985)
+  
+  test <- scot_spr %>% 
+    select(stratum, year) %>% 
+    distinct() %>% 
+    group_by(stratum) %>% 
+    summarise(count = n()) %>% 
+    filter(count < 6)
+  
+  scot_spr <- scot_spr %>% 
+    filter(!stratum %in% test$stratum)
+}  
+
+
 # Compile TAX ====
 tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
   taxon = col_character(),
