@@ -1970,6 +1970,10 @@ startpos <- centbio2 %>%
 # add in starting lat and depth
 centbio2 <- left_join(centbio2, startpos, by = c("region", "spp")) 
 
+# some species were not caught in the first year and so the startlat, etc is NA
+# centbio2 <- centbio2 %>% 
+#   filter(!is.na(startlat))
+
 centbio2 <- centbio2 %>% 
   mutate(latoffset = lat - startlat, 
          lonoffset = lon - startlon,
@@ -2110,73 +2114,73 @@ save(BY_SPECIES_DATA, BY_REGION_DATA, BY_NATIONAL_DATA, file = paste0("centbios"
 
 
 if(isTRUE(OPTIONAL_PLOT_CHARTS)) {
-
-# Plot Species #####
+  
+  # Plot Species #####
   centbio <- BY_SPECIES_DATA
-
-# for latitude
-#quartz(width = 10, height = 8)
-print("Starting latitude plots for species")
-pdf(file=paste("sppcentlatstrat_", Sys.Date(), '.pdf', sep=''), width=10, height=8)
-
-regs = sort(unique(centbio$region))
-for(i in 1:length(regs)){
-  print(i)
-  par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
-  spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
   
-  xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
+  # for latitude
+  #quartz(width = 10, height = 8)
+  print("Starting latitude plots for species")
+  pdf(file=paste("sppcentlatstrat_", Sys.Date(), '.pdf', sep=''), width=10, height=8)
   
-  for(j in 1:length(spps)){
-    inds = centbio$spp == spps[j] & centbio$region == regs[i]
-    minlat = centbio$lat[inds] - centbio$lat_se[inds]
-    maxlat = centbio$lat[inds] + centbio$lat_se[inds]
-    minlat[is.na(minlat) | is.infinite(minlat)] = centbio$lat[inds][is.na(minlat) | is.infinite(minlat)] # fill in missing values so that polygon draws correctly
-    maxlat[is.na(maxlat) | is.infinite(maxlat)] = centbio$lat[inds][is.na(maxlat) | is.infinite(maxlat)]
-    ylims = c(min(minlat, na.rm=TRUE), max(maxlat, na.rm=TRUE))
+  regs = sort(unique(centbio$region))
+  for(i in 1:length(regs)){
+    print(i)
+    par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
+    spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
     
-    plot(0,0, type='l', ylab='Latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
-    polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
-    lines(centbio$year[inds], centbio$lat[inds], col='#D95F02', lwd=2)
+    xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
     
-    if((j-1) %% 6 == 0) mtext(text='Latitude (°N)', side=2, line=2.3, cex=0.6)
-    if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
+    for(j in 1:length(spps)){
+      inds = centbio$spp == spps[j] & centbio$region == regs[i]
+      minlat = centbio$lat[inds] - centbio$lat_se[inds]
+      maxlat = centbio$lat[inds] + centbio$lat_se[inds]
+      minlat[is.na(minlat) | is.infinite(minlat)] = centbio$lat[inds][is.na(minlat) | is.infinite(minlat)] # fill in missing values so that polygon draws correctly
+      maxlat[is.na(maxlat) | is.infinite(maxlat)] = centbio$lat[inds][is.na(maxlat) | is.infinite(maxlat)]
+      ylims = c(min(minlat, na.rm=TRUE), max(maxlat, na.rm=TRUE))
+      
+      plot(0,0, type='l', ylab='Latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
+      polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
+      lines(centbio$year[inds], centbio$lat[inds], col='#D95F02', lwd=2)
+      
+      if((j-1) %% 6 == 0) mtext(text='Latitude (°N)', side=2, line=2.3, cex=0.6)
+      if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
+    }
   }
-}
-
-dev.off()
-
-# for depth
-print("Starting depth plots for species")
-pdf(file=paste('sppcentdepthstrat_', Sys.Date(), '.pdf', sep=''), width=10, height=8)
-
-regs = sort(unique(centbio$region))
-for(i in 1:length(regs)){
-  print(i)
-  par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
-  spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
   
-  xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
+  dev.off()
   
-  for(j in 1:length(spps)){
-    inds = centbio$spp == spps[j] & centbio$region == regs[i]
-    mindep = centbio$depth[inds] - centbio$depth_se[inds]
-    maxdep = centbio$depth[inds] + centbio$depth_se[inds]
-    mindep[is.na(mindep) | is.infinite(mindep)] = centbio$depth[inds][is.na(mindep) | is.infinite(mindep)] # fill in missing values so that polygon draws correctly
-    maxdep[is.na(maxdep) | is.infinite(maxdep)] = centbio$depth[inds][is.na(maxdep) | is.infinite(maxdep)]
-    ylims = c(min(mindep, na.rm=TRUE), max(maxdep, na.rm=TRUE))
+  # for depth
+  print("Starting depth plots for species")
+  pdf(file=paste('sppcentdepthstrat_', Sys.Date(), '.pdf', sep=''), width=10, height=8)
+  
+  regs = sort(unique(centbio$region))
+  for(i in 1:length(regs)){
+    print(i)
+    par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
+    spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
     
-    plot(0,0, type='l', ylab='Depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
-    polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
-    lines(centbio$year[inds], centbio$depth[inds], col='#D95F02', lwd=2)
+    xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
     
-    if((j-1) %% 6 == 0) mtext(text='Depth (m)', side=2, line=2.3, cex=0.6)
-    if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
+    for(j in 1:length(spps)){
+      inds = centbio$spp == spps[j] & centbio$region == regs[i]
+      mindep = centbio$depth[inds] - centbio$depth_se[inds]
+      maxdep = centbio$depth[inds] + centbio$depth_se[inds]
+      mindep[is.na(mindep) | is.infinite(mindep)] = centbio$depth[inds][is.na(mindep) | is.infinite(mindep)] # fill in missing values so that polygon draws correctly
+      maxdep[is.na(maxdep) | is.infinite(maxdep)] = centbio$depth[inds][is.na(maxdep) | is.infinite(maxdep)]
+      ylims = c(min(mindep, na.rm=TRUE), max(maxdep, na.rm=TRUE))
+      
+      plot(0,0, type='l', ylab='Depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
+      polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
+      lines(centbio$year[inds], centbio$depth[inds], col='#D95F02', lwd=2)
+      
+      if((j-1) %% 6 == 0) mtext(text='Depth (m)', side=2, line=2.3, cex=0.6)
+      if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
+    }
   }
-}
-
-dev.off()
-
+  
+  dev.off()
+  
   
   # Plot Regional ####
   #quartz(width=6, height=6)
@@ -2212,30 +2216,30 @@ dev.off()
   
   
   dev.off()
-
-
-  # National
+  
+  
+  # Plot National ####
   #quartz(width=6, height=3.5)
   pdf(file=paste('natcentlatstrat_', Sys.Date(), '.pdf', sep=''), width=6, height=3.5)
   par(mfrow=c(1,2), mai=c(0.8, 0.8, 0.3, 0.2), mgp=c(2.4,0.7,0))
   
-  minlat = natcentbio$lat - natcentbio$lat_se
-  maxlat = natcentbio$lat + natcentbio$lat_se
-  mindepth = natcentbio$depth - natcentbio$depth_se
-  maxdepth = natcentbio$depth + natcentbio$depth_se
+  minlat = natcentbio$lat - natcentbio$latse
+  maxlat = natcentbio$lat + natcentbio$latse
+  mindepth = natcentbio$depth - natcentbio$depthse
+  maxdepth = natcentbio$depth + natcentbio$depthse
   ylims = c(min(minlat), max(maxlat))
-  xlims = range(natcentbio$year)
+  xlims = range(as.numeric(natcentbio$year))
   plot(0,0, type='l', ylab='Offset in latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main='Latitude', cex.lab = 1.5, cex.axis=1.2)
   polygon(c(natcentbio$year, rev(natcentbio$year)), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
   lines(natcentbio$year, natcentbio$lat, col='#D95F02', lwd=2)
   
   ylims = rev(c(min(mindepth), max(maxdepth)))
-  xlims = range(natcentbio$year)
+  xlims = range(as.numeric(natcentbio$year))
   plot(0,0, type='l', ylab='Offset in depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main='Depth', cex.lab = 1.5, cex.axis=1.2)
   polygon(c(natcentbio$year, rev(natcentbio$year)), c(maxdepth, rev(mindepth)), col='#CBD5E8', border=NA)
   lines(natcentbio$year, natcentbio$depth, col='#D95F02', lwd=2)
   
   dev.off()
-
-
-
+  
+}
+  
