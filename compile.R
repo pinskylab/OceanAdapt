@@ -1090,12 +1090,12 @@ if(nrow(test)>0){
       mutate(area = calcarea(as.numeric(LON), as.numeric(LAT)))
     neus <- neus %>% 
       mutate(Areanmi2 = ifelse(STRATUM == missing$STRATUM[i], temp$area[1], Areanmi2))
-    # write new stratum areas to the stratum file?
-    # strat <- neus %>% 
-    #   ungroup() %>% 
-    #   select(STRATUM, Areanmi2)
-    # write_csv(strat, "data_raw/new_neus_strata.csv")
   }
+  # write new stratum areas to the stratum file?
+  # strat <- neus %>% 
+  #   ungroup() %>% 
+  #   select(STRATUM, Areanmi2)
+  # write_csv(strat, "data_raw/new_neus_strata.csv")
 }
 
 
@@ -1970,7 +1970,7 @@ startpos <- centbio2 %>%
 # add in starting lat and depth
 centbio2 <- left_join(centbio2, startpos, by = c("region", "spp")) 
 
-# some species were not caught in the first year and so the startlat, etc is NA
+# some species were not caught in the first year and so the startlat, etc is NA ####
 # centbio2 <- centbio2 %>% 
 #   filter(!is.na(startlat))
 
