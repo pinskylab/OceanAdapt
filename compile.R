@@ -214,7 +214,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum)
   nrow(ai) - nrow(test2)
   # percent that will be lost
-  (nrow(ai) - nrow(test2))/nrow(ai)
+  print((nrow(ai) - nrow(test2))/nrow(ai))
   # 5% seems reasonable 
   ai <- ai %>% 
     filter(stratum %in% test$stratum)
@@ -224,7 +224,7 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
 }
 # clean up
-rm(files, temp, j, temp_fixed, ai_data, ai_strata)
+rm(files, temp, j, temp_fixed, ai_data, ai_strata, test, test2)
 
 # Compile EBS ====
 files <- list.files(path = "data_raw/", pattern = "ebs")
@@ -330,7 +330,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum)
   nrow(ebs) - nrow(test2)
   # percent that will be lost
-  (nrow(ebs) - nrow(test2))/nrow(ebs)
+  print((nrow(ebs) - nrow(test2))/nrow(ebs))
   # 4% seems reasonable 
   ebs <- ebs %>% 
     filter(stratum %in% test$stratum)
@@ -464,7 +464,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum)
   nrow(goa) - nrow(test2)
   # percent that will be lost
-  (nrow(goa) - nrow(test2))/nrow(goa)
+  print ((nrow(goa) - nrow(test2))/nrow(goa))
   # 4% seems reasonable 
   goa <- goa %>% 
     filter(stratum %in% test$stratum) %>%
@@ -615,7 +615,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum)
   nrow(wctri) - nrow(test2)
   # percent that will be lost
-  (nrow(wctri) - nrow(test2))/nrow(wctri)
+  print((nrow(wctri) - nrow(test2))/nrow(wctri))
   # 23% seems like a lot
   wctri <- wctri %>% 
     filter(stratum %in% test$stratum)
@@ -1022,7 +1022,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum)
   nrow(gmex) - nrow(test2)
   # percent that will be lost
-  (nrow(gmex) - nrow(test2))/nrow(gmex)
+  print((nrow(gmex) - nrow(test2))/nrow(gmex))
   # by removing only bad years we loose only 0.2%, adding in strata that 
   # aren't in all years, we lose 33% more
   gmex <- gmex %>%
@@ -1090,6 +1090,11 @@ if(nrow(test)>0){
       mutate(area = calcarea(as.numeric(LON), as.numeric(LAT)))
     neus <- neus %>% 
       mutate(Areanmi2 = ifelse(STRATUM == missing$STRATUM[i], temp$area[1], Areanmi2))
+    # write new stratum areas to the stratum file?
+    # strat <- neus %>% 
+    #   ungroup() %>% 
+    #   select(STRATUM, Areanmi2)
+    # write_csv(strat, "data_raw/new_neus_strata.csv")
   }
 }
 
@@ -1218,9 +1223,17 @@ if (HQ_DATA_ONLY == TRUE){
 rm(neus_spp, neus_strata, neus_survdat, survdat, spp, test, test2, missing, temp)
 
 # Compile SEUS ====
-seus_catch <- read_csv("data_raw/seus_catch.csv", col_types = cols(.default = col_character()))  %>% 
-  # turns everything into a character so import as character anyway
-  mutate_all(funs(str_replace(., "=", "")))
+# turns everything into a character so import as character anyway
+seus_catch <- read_csv("data_raw/seus_catch.csv", col_types = cols(.default = col_character()), quoted_na = T, quote = '"') %>% 
+  # remove symbols
+  mutate_all(funs(str_replace(., "=", ""))) %>% 
+  mutate_all(funs(str_replace(., '"', ''))) %>% 
+  mutate_all(funs(str_replace(., '"', '')))
+
+# problems should have 0 obs
+problems <- problems(seus_catch) %>% 
+  filter(!is.na(col))
+
 
 # convert the columns to their correct formats
 seus_catch <- type_convert(seus_catch, col_types = cols(
@@ -1272,7 +1285,10 @@ seus_catch <- type_convert(seus_catch, col_types = cols(
 
 seus_haul <- read_csv("data_raw/seus_haul.csv", col_types = cols(.default = col_character())) %>% 
   distinct(EVENTNAME, DEPTHSTART)  %>% 
-  mutate_all(funs(str_replace(., "=", "")))
+  # remove symbols
+  mutate_all(funs(str_replace(., "=", ""))) %>% 
+  mutate_all(funs(str_replace(., '"', ''))) %>% 
+  mutate_all(funs(str_replace(., '"', '')))
 
 seus_haul <- type_convert(seus_haul, col_types = cols(
   EVENTNAME = col_character(),
@@ -1440,7 +1456,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum)
   nrow(seusSPRING) - nrow(test2)
   # percent that will be lost
-  (nrow(seusSPRING) - nrow(test2))/nrow(seusSPRING)
+  print((nrow(seusSPRING) - nrow(test2))/nrow(seusSPRING))
   # 6% are removed
   
   seusSPRING <- seusSPRING %>%
@@ -1501,7 +1517,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum)
   nrow(seusFALL) - nrow(test2)
   # percent that will be lost
-  (nrow(seusFALL) - nrow(test2))/nrow(seusFALL)
+  print((nrow(seusFALL) - nrow(test2))/nrow(seusFALL))
   # 2% are removed
   
   seusFALL <- seusFALL %>%
@@ -1517,7 +1533,7 @@ if (HQ_DATA_ONLY == TRUE){
 rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, i, test, test2)
 
 # Compile Scotian Shelf ====
-scot_sumr <- read_csv("data_raw/ADAPT_Canada_Atlantic_Summer_2016.csv", col_types = cols(
+scot_sumr <- read_csv("data_raw/scot_summer.csv", col_types = cols(
   .default = col_double(),
   Stratum = col_integer(),
   Mission = col_character(),
@@ -1534,7 +1550,7 @@ scot_sumr <- read_csv("data_raw/ADAPT_Canada_Atlantic_Summer_2016.csv", col_type
   TaxonomicNameAuthor = col_character()
 ))
 
-scot_fall <- read_csv("data_raw/ADAPT_Canada_Atlantic_Fall_2016.csv", col_types = cols(
+scot_fall <- read_csv("data_raw/scot_fall.csv", col_types = cols(
   .default = col_double(),
   Stratum = col_integer(),
   Mission = col_character(),
@@ -1550,7 +1566,7 @@ scot_fall <- read_csv("data_raw/ADAPT_Canada_Atlantic_Fall_2016.csv", col_types 
   ScientificName = col_character(),
   TaxonomicNameAuthor = col_character()
 ))
-scot_spr <- read_csv("data_raw/ADAPT_Canada_Atlantic_Spring_2016.csv", col_types = cols(
+scot_spr <- read_csv("data_raw/scot_spring.csv", col_types = cols(
   .default = col_double(),
   Stratum = col_integer(),
   Mission = col_character(),
@@ -1597,10 +1613,10 @@ for(i in seq(strat$stratum)){
 }
 
 # are any spp eggs or non-organism notes? As of 2018, nothing stuck out as needing to be removed
-# test <- scot %>% 
-#   select(spp) %>% 
-#   filter(!is.na(spp)) %>% 
-#   distinct() %>% 
+# test <- scot %>%
+#   select(spp) %>%
+#   filter(!is.na(spp)) %>%
+#   distinct() %>%
 #   mutate(spp = as.factor(spp))
 
 # combine the wtcpue for each species by haul
@@ -1623,8 +1639,7 @@ if (HQ_DATA_ONLY == TRUE){
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
-  # there is a very faint blip of white in 1984 which is fewer
-  # species in a trawl, not a missing trawl.
+  # there is a very faint blip of white in 1984 which is fewer species in a trawl, not a missing trawl.
 }  
 
 scot_fall <- scot %>% 
@@ -1653,7 +1668,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum)
   nrow(scot_fall) - nrow(test2)
   # percent that will be lost
-  (nrow(scot_fall) - nrow(test2))/nrow(scot_fall)
+  print((nrow(scot_fall) - nrow(test2))/nrow(scot_fall))
   # 9% are removed
   
   scot_fall <- scot_fall  %>%
@@ -1693,7 +1708,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum)
   nrow(scot_spr) - nrow(test2)
   # percent that will be lost
-  (nrow(scot_spr) - nrow(test2))/nrow(scot_spr)
+  print((nrow(scot_spr) - nrow(test2))/nrow(scot_spr))
   # 51% are removed
   
   scot_spr <- scot_spr  %>%
@@ -1731,9 +1746,6 @@ dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUM
 dat <- dat %>% 
   filter(!is.na(wtcpue))
 
-# # remove zero totals for wtcpue
-# dat <- dat %>% 
-#   filter(wtcpue > 0)
 
 # add a nice spp and common name
 dat2 <- left_join(dat, select(tax, taxon, name, common), by = c("spp" = "taxon")) 
@@ -1757,7 +1769,7 @@ if(isTRUE(OPTIONAL_OUTPUT_DAT_MASTER_TABLE)){
   save(dat, file = paste("trawl_allregions_", Sys.Date(), ".RData", sep = ""))
 }
 
-# load(file = "trawl_allregions_2018-12-18.RData")
+# load(file = "trawl_allregions_2019-01-07.RData")
 
 #At this point, we have a compiled `dat` master table on which we can begin our analysis.
 #If you have not cleared the regional datasets {By setting REMOVE_REGION_DATASETS=FALSE at the top}, 
@@ -1863,46 +1875,49 @@ cent_bio_lon_se <- dat_strat_yr %>%
 cent_bio <- left_join(cent_bio, cent_bio_lon_se, by = c("region", "spp", "year"))
 
 BY_SPECIES_DATA <- cent_bio %>%
+  ungroup() %>% 
   arrange(region, spp, year)
 
 rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr, dat2, strat, temp, tax, test, test2)
 
-#  Add 0's ####
-
-# no columns are factors
-# test <- sapply(trimmed_dat, is.factor)
-
-# For every haulid, year, stratum, stratumarea lat lon depth have a species with
-# a wtcpue of the recorded value or zero if that was not observed.
-dat.exploded <- as.data.table(trimmed_dat)
-
-setorder(dat.exploded, haulid, stratum, year, lat, lon, stratumarea, depth)
-
-u.spp <- dat.exploded[,as.character(unique(spp))]
-u.cmmn <- dat.exploded[,common[!duplicated(as.character(spp))]]
-
-x.loc <- dat.exploded[,list(haulid, year, stratum, stratumarea, lat, lon, depth)]
-setkey(x.loc, haulid, year)
-
-# the following command 
-x.skele <- x.loc[,list(spp=u.spp, common=u.cmmn), by=eval(colnames(x.loc))]
-setkey(x.skele, haulid, year, spp)
-x.skele <- unique(x.skele)
-setcolorder(x.skele, c("haulid","year","spp", "common", "stratum", "stratumarea","lat","lon","depth"))
-
-x.spp.dat <- dat.exploded[,list(haulid, year, spp, wtcpue)]
-setkey(x.spp.dat, haulid, year, spp)
-x.spp.dat <- unique(x.spp.dat)
-
-
-dat.exploded <- left_join(x.skele, x.spp.dat, by = c("haulid", "year", "spp"))
-# test <- x.spp.dat[x.skele]
-
-dat.exploded <- dat.exploded %>% 
-  mutate(wtcpue = ifelse(is.na(wtcpue), 0, wtcpue))
-rm(x.loc, x.skele, x.spp.dat)
+# #  Add 0's ####
+# 
+# # no columns are factors
+# # test <- sapply(trimmed_dat, is.factor)
+# 
+# # For every haulid, year, stratum, stratumarea lat lon depth have a species with
+# # a wtcpue of the recorded value or zero if that was not observed.
+# dat.exploded <- as.data.table(trimmed_dat)
+# 
+# setorder(dat.exploded, haulid, stratum, year, lat, lon, stratumarea, depth)
+# 
+# u.spp <- dat.exploded[,as.character(unique(spp))]
+# u.cmmn <- dat.exploded[,common[!duplicated(as.character(spp))]]
+# 
+# x.loc <- dat.exploded[,list(haulid, year, stratum, stratumarea, lat, lon, depth)]
+# setkey(x.loc, haulid, year)
+# 
+# # the following command 
+# x.skele <- x.loc[,list(spp=u.spp, common=u.cmmn), by=eval(colnames(x.loc))]
+# setkey(x.skele, haulid, year, spp)
+# x.skele <- unique(x.skele)
+# setcolorder(x.skele, c("haulid","year","spp", "common", "stratum", "stratumarea","lat","lon","depth"))
+# 
+# x.spp.dat <- dat.exploded[,list(haulid, year, spp, wtcpue)]
+# setkey(x.spp.dat, haulid, year, spp)
+# x.spp.dat <- unique(x.spp.dat)
+# 
+# 
+# dat.exploded <- left_join(x.skele, x.spp.dat, by = c("haulid", "year", "spp"))
+# # test <- x.spp.dat[x.skele]
+# 
+# dat.exploded <- dat.exploded %>% 
+#   mutate(wtcpue = ifelse(is.na(wtcpue), 0, wtcpue))
+# rm(x.loc, x.skele, x.spp.dat)
 # write_csv(dat.exploded, path = paste0(Sys.Date(), "_dat_exploded.csv"))
 # rm(dat.exploded)
+
+
 #By region data ####
 #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
 ## Calculate mean position through time for regions ####
@@ -1970,12 +1985,13 @@ regcentbio <- centbio2 %>%
 
 regcentbiose <- centbio2 %>% 
   group_by(year, region) %>% 
-  summarise(latse = se(latoffset), 
-            depthse = se(depthoffset), 
+  summarise(lat_se = se(latoffset), 
+            depth_se = se(depthoffset), 
             lonse = se(lonoffset))
 
 # calc number of species per region
 regcentbiospp <- centbio2 %>% 
+  ungroup() %>% 
   select(region, spp) %>% 
   distinct() %>% 
   group_by(region) %>% 
@@ -2080,8 +2096,8 @@ natcentbio <- centbio3 %>%
 
 natcentbiose <- centbio3 %>% 
   group_by(year) %>% 
-  summarise(latse = se(latoffset), 
-            depthse = se(depthoffset), 
+  summarise(lat_se = se(latoffset), 
+            depth_se = se(depthoffset), 
             lonse = se(lonoffset))
 
 natcentbio <- left_join(natcentbio, natcentbiose, by = "year")
@@ -2090,119 +2106,136 @@ natcentbio$numspp = lunique(paste(centbio3$region, centbio3$spp)) # calc number 
 
 BY_NATIONAL_DATA <- natcentbio
 
+save(BY_SPECIES_DATA, BY_REGION_DATA, BY_NATIONAL_DATA, file = paste0("centbios", Sys.Date(), ".Rdata"))
+
+
 if(isTRUE(OPTIONAL_PLOT_CHARTS)) {
-  #These functions are special to these datasets and might not work as intended with custom sets.
-  #For best results you should make your own functions to plot charts.
+
+# Plot Species #####
+  centbio <- BY_SPECIES_DATA
+
+# for latitude
+#quartz(width = 10, height = 8)
+print("Starting latitude plots for species")
+pdf(file=paste("sppcentlatstrat_", Sys.Date(), '.pdf', sep=''), width=10, height=8)
+
+regs = sort(unique(centbio$region))
+for(i in 1:length(regs)){
+  print(i)
+  par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
+  spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
   
-  # Species
-  regs <- BY_SPECIES_DATA %>% 
-    ungroup() %>% 
-    select(region) %>% 
-    distinct() %>% 
-    arrange()
+  xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
   
-  for(i in seq(regs$region)){
-    print(i)
-    # par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
-    x <- BY_SPECIES_DATA %>% 
-      ungroup() %>% 
-      filter(region == regs$region[i]) %>% 
-      select(region, spp, year, lat, lat_se)
+  for(j in 1:length(spps)){
+    inds = centbio$spp == spps[j] & centbio$region == regs[i]
+    minlat = centbio$lat[inds] - centbio$lat_se[inds]
+    maxlat = centbio$lat[inds] + centbio$lat_se[inds]
+    minlat[is.na(minlat) | is.infinite(minlat)] = centbio$lat[inds][is.na(minlat) | is.infinite(minlat)] # fill in missing values so that polygon draws correctly
+    maxlat[is.na(maxlat) | is.infinite(maxlat)] = centbio$lat[inds][is.na(maxlat) | is.infinite(maxlat)]
+    ylims = c(min(minlat, na.rm=TRUE), max(maxlat, na.rm=TRUE))
     
-    spps <- x %>% 
-      select(spp) %>%
-      distinct()
+    plot(0,0, type='l', ylab='Latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
+    polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
+    lines(centbio$year[inds], centbio$lat[inds], col='#D95F02', lwd=2)
     
-    xlims <- x %>% 
-      summarise(min = min(year), 
-                max = max(year))
-    
-    for(j in seq(spps$spp)){
-      inds = x$spp == spps$spp[j] 
-      minlat = x$lat[inds] - x$lat_se[inds]
-      maxlat = x$lat[inds] + x$lat_se[inds]
-      # fill in missing values so that polygon draws correctly - if x$lat - x$lat_se does not return a value, fill in with just x$lat
-      minlat[is.na(minlat) | is.infinite(minlat)] = x$lat[inds][is.na(minlat) | is.infinite(minlat)] 
-      maxlat[is.na(maxlat) | is.infinite(maxlat)] = x$lat[inds][is.na(maxlat) | is.infinite(maxlat)]
-      ylims = c(min(minlat, na.rm=TRUE), max(maxlat, na.rm=TRUE))
-      poly_min <- x %>% 
-        group_by(year) %>% 
-        summarize(lat = min(lat))
-      
-      poly_max <- x %>% 
-        group_by(year) %>% 
-        summarize(lat = max(lat))
-      poly <- rbind(poly_min, poly_max) %>% 
-        arrange(year)
-      
-      
-      ggplot(x) +
-        aes(x=year, y = lat, group = spp) +
-        geom_path() +
-        labs(x = "Year", y = "Latitude(˚)") +
-        ylim(ylims) +
-        geom_polygon(data = poly, aes(group = year, fill = lat))
-      
-      
-      
-      
-    }
+    if((j-1) %% 6 == 0) mtext(text='Latitude (°N)', side=2, line=2.3, cex=0.6)
+    if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
   }
+}
+
+dev.off()
+
+# for depth
+print("Starting depth plots for species")
+pdf(file=paste('sppcentdepthstrat_', Sys.Date(), '.pdf', sep=''), width=10, height=8)
+
+regs = sort(unique(centbio$region))
+for(i in 1:length(regs)){
+  print(i)
+  par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
+  spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
   
-  dev.off()
+  xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
   
-  # for depth
-  print("Starting depth plots for species")
-  pdf(file=paste(WORKING_DIRECTORY, '/sppcentdepthstrat_', Sys.Date(), '.pdf', sep=''), width=10, height=8)
+  for(j in 1:length(spps)){
+    inds = centbio$spp == spps[j] & centbio$region == regs[i]
+    mindep = centbio$depth[inds] - centbio$depth_se[inds]
+    maxdep = centbio$depth[inds] + centbio$depth_se[inds]
+    mindep[is.na(mindep) | is.infinite(mindep)] = centbio$depth[inds][is.na(mindep) | is.infinite(mindep)] # fill in missing values so that polygon draws correctly
+    maxdep[is.na(maxdep) | is.infinite(maxdep)] = centbio$depth[inds][is.na(maxdep) | is.infinite(maxdep)]
+    ylims = c(min(mindep, na.rm=TRUE), max(maxdep, na.rm=TRUE))
+    
+    plot(0,0, type='l', ylab='Depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
+    polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
+    lines(centbio$year[inds], centbio$depth[inds], col='#D95F02', lwd=2)
+    
+    if((j-1) %% 6 == 0) mtext(text='Depth (m)', side=2, line=2.3, cex=0.6)
+    if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
+  }
+}
+
+dev.off()
+
   
-  regs = sort(unique(centbio$region))
+  # Plot Regional ####
+  #quartz(width=6, height=6)
+  pdf(file=paste('regcentlat_depth_strat_', Sys.Date(), '.pdf', sep=''), width=6, height=6)
+  par(mfrow=c(3,3)) # page 1: latitude
+  
+  regs = sort(unique(regcentbio$region))
   for(i in 1:length(regs)){
-    print(i)
-    par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
-    spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
+    inds = regcentbio$region == regs[i]
+    minlat = regcentbio$lat[inds] - regcentbio$lat_se[inds]
+    maxlat = regcentbio$lat[inds] + regcentbio$lat_se[inds]
+    xlims = range(as.numeric(regcentbio$year[regcentbio$region == regs[i]]))
+    ylims = c(min(minlat, na.rm=TRUE), max(maxlat, na.rm=TRUE))
     
-    xlims = range(centbio$year[centbio$region == regs[i]])
-    
-    for(j in 1:length(spps)){
-      inds = centbio$spp == spps[j] & centbio$region == regs[i]
-      mindep = centbio$depth[inds] - centbio$depth_se[inds]
-      maxdep = centbio$depth[inds] + centbio$depth_se[inds]
-      mindep[is.na(mindep) | is.infinite(mindep)] = centbio$depth[inds][is.na(mindep) | is.infinite(mindep)] # fill in missing values so that polygon draws correctly
-      maxdep[is.na(maxdep) | is.infinite(maxdep)] = centbio$depth[inds][is.na(maxdep) | is.infinite(maxdep)]
-      ylims = c(min(mindep, na.rm=TRUE), max(maxdep, na.rm=TRUE))
-      
-      plot(0,0, type='l', ylab='Depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
-      polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
-      lines(centbio$year[inds], centbio$depth[inds], col='#D95F02', lwd=2)
-      
-      if((j-1) %% 6 == 0) mtext(text='Depth (m)', side=2, line=2.3, cex=0.6)
-      if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
-    }
+    plot(0,0, type='l', ylab='Latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main=regs[i], las=1)
+    polygon(c(regcentbio$year[inds], rev(regcentbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
+    lines(regcentbio$year[inds], regcentbio$lat[inds], col='#D95F02', lwd=2)
   }
   
-  dev.off()
+  par(mfrow=c(3,3)) # page 2: depth
+  regs = sort(unique(regcentbio$region))
+  for(i in 1:length(regs)){
+    inds = regcentbio$region == regs[i]
+    mindep = regcentbio$depth[inds] - regcentbio$depth_se[inds]
+    maxdep = regcentbio$depth[inds] + regcentbio$depth_se[inds]
+    xlims = range(as.numeric(regcentbio$year[regcentbio$region == regs[i]]))
+    ylims = c(min(mindep, na.rm=TRUE), max(maxdep, na.rm=TRUE))
+    
+    plot(0,0, type='l', ylab='Depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main=regs[i], las=1)
+    polygon(c(regcentbio$year[inds], rev(regcentbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
+    lines(regcentbio$year[inds], regcentbio$depth[inds], col='#D95F02', lwd=2)
+  }
   
-}
+  
+  dev.off()
 
 
+  # National
+  #quartz(width=6, height=3.5)
+  pdf(file=paste('natcentlatstrat_', Sys.Date(), '.pdf', sep=''), width=6, height=3.5)
+  par(mfrow=c(1,2), mai=c(0.8, 0.8, 0.3, 0.2), mgp=c(2.4,0.7,0))
+  
+  minlat = natcentbio$lat - natcentbio$lat_se
+  maxlat = natcentbio$lat + natcentbio$lat_se
+  mindepth = natcentbio$depth - natcentbio$depth_se
+  maxdepth = natcentbio$depth + natcentbio$depth_se
+  ylims = c(min(minlat), max(maxlat))
+  xlims = range(natcentbio$year)
+  plot(0,0, type='l', ylab='Offset in latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main='Latitude', cex.lab = 1.5, cex.axis=1.2)
+  polygon(c(natcentbio$year, rev(natcentbio$year)), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
+  lines(natcentbio$year, natcentbio$lat, col='#D95F02', lwd=2)
+  
+  ylims = rev(c(min(mindepth), max(maxdepth)))
+  xlims = range(natcentbio$year)
+  plot(0,0, type='l', ylab='Offset in depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main='Depth', cex.lab = 1.5, cex.axis=1.2)
+  polygon(c(natcentbio$year, rev(natcentbio$year)), c(maxdepth, rev(mindepth)), col='#CBD5E8', border=NA)
+  lines(natcentbio$year, natcentbio$depth, col='#D95F02', lwd=2)
+  
+  dev.off()
 
-print_status( paste('>Plotting regional to pdf in `',  WORKING_DIRECTORY, '`.', sep='') )
-plot_regional(BY_REGION_DATA) 
-print_status( paste('>Plotting national to pdf in `',  WORKING_DIRECTORY, '`.', sep='') )
-plot_national(BY_NATIONAL_DATA) 
-
-}else{
-  print_status('Skipping plotting charts.')  
-}
-
-print_status('PROGRAM COMPLETED SUCCESSFULLY.')  
-
-# =========================================
-# = Clean-up Unzipped Updated Data Folder =
-# =========================================
-if(file.exists("Data_Updated")){
-  # delete all of directory's contents & directory
-  unlink("Data_Updated", recursive=TRUE)
-}
 
 

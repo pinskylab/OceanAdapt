@@ -2,6 +2,7 @@
 
 library(tidyverse)
 
+# This function replaces existing ak files in the data_raw folder with the most recent version.
 download_ak <- function(region, ak_files){
   # define the destination folder
   for (i in seq(ak_files$survey)){
@@ -151,7 +152,7 @@ get_DFO_REST <-function(service='ADAPT_Canada_Atlantic_Summer_2016', save_csv=TR
   download_ak("goa", goa_files)
   
   # cleanup
-  rm(ai_files, ebs_files, goa_files, file, i)
+  rm(ai_files, ebs_files, goa_files)
   
   # Download WCANN ====
   
@@ -169,6 +170,9 @@ get_DFO_REST <-function(service='ADAPT_Canada_Atlantic_Summer_2016', save_csv=TR
   
   write.csv(data_haul,  "data_raw/wcann_haul.csv")
   
+  
+  # cleanup
+  rm(data_catch, data_haul, haul_file_name, url_catch, url_haul)
   
   # Download GMEX ====
   # Have to go to the website (cmd+click) http://seamap.gsmfc.org/
@@ -190,16 +194,23 @@ get_DFO_REST <-function(service='ADAPT_Canada_Atlantic_Summer_2016', save_csv=TR
   
   # Download SEUS ====
   # The whack-a-mole site
+  # As of 2019, don't use the safari browser, it downloads strangely.  Use Chrome.
   # Download the data from the website (cmd+click):
   # (https://www2.dnr.sc.gov/seamap/Account/LogOn?ReturnUrl=%2fseamap%2fReports)
+  # Click on Coastal Trawl Survey Extraction
   # In the "Type of Data" menu, you need 2 things: 
   #   1. Event Information 
   #   2. Abundance and Biomass
   #         For the list of data values, click the |<- button on the right and it will move all of the values over to the left.
   # * Note: It'll play whack-a-mole with you (meaning once you have moved fields to the left, they will pop back over to the right) … have fun! (If you don't encounter this annoyance, don't worry)
   
-  file.copy(from = "~/Downloads/pinsky", to = "data_raw/seus_catch.csv", overwrite = T)
-  file.copy(from = "~/Downloads/pinsky", to = "data_raw/seus_haul.csv", overwrite = T)
+haul <- list.files(path = "~/Downloads", pattern = "EVENT", full = T)
+catch <- list.files(path = "~/Downloads", pattern = "ABUNDANCE", full = T)
+  
+  file.copy(from = catch, to = "data_raw/seus_catch.csv", overwrite = T)
+  file.copy(from = haul, to = "data_raw/seus_haul.csv", overwrite = T)
+  
+  rm(catch, haul)
 
  # Get Scotian data ====
   # the summer data takes about 10 minutes
@@ -209,4 +220,7 @@ get_DFO_REST <-function(service='ADAPT_Canada_Atlantic_Summer_2016', save_csv=TR
   
   # This doesn't exist (2017 doesn't exist either)
   # summer2018 <- get_DFO_REST(service = "ADAPT_Canada_Atlantic_Summer_2018", save_csv = TRUE)
+  file.rename("data_raw/ADAPT_Canada_Atlantic_Fall_2016.csv", "data_raw/scot_fall.csv")
+  file.rename("data_raw/ADAPT_Canada_Atlantic_Summer_2016.csv", "data_raw/scot_summer.csv")
+  file.rename("data_raw/ADAPT_Canada_Atlantic_Spring_2016.csv", "data_raw/scot_spring.csv")
   
