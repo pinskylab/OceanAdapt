@@ -18,6 +18,13 @@ OPTIONAL_OUTPUT_DAT_MASTER_TABLE <- TRUE
 # 5. #OPTIONAL, DEFAULT:FALSE, generate raw data from Rdata file
 RAW_DATA_R_DATA <- TRUE
 
+# 6. #OPTIONAL, DEFAULT:FALSE, generate dat.exploded table/file
+DAT_EXPLODED <- FALSE
+
+# 7. #OPTIONAL, DEFAULT:FALSE, view plots of removed strata for HQ_DATA
+# I separated these out because it takes a while to generate these plots.
+HQ_PLOTS <- FALSE
+
 ## Workspace setup ====
 # This script works best when the repository is downloaded from github, 
 # especially when that repository is loaded as a project into RStudio.
@@ -159,10 +166,15 @@ test <- ai %>%
   filter(is.na(Areakm2))
 stopifnot(nrow(test) == 0)
 
-# Create a unique haulid
+
 ai <- ai %>% 
-  mutate(haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
+  
+  mutate(
+    # Create a unique haulid
+    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
+         # change -9999 wtcpue to NA
          WTCPUE = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
+  # rename columns
   rename(stratum = STRATUM,
          year = YEAR, 
          lat = LATITUDE, 
@@ -171,7 +183,7 @@ ai <- ai %>%
          spp = SCIENTIFIC, 
          wtcpue = WTCPUE,
          stratumarea = Areakm2) %>% 
-  # remove rows that aren't fish
+  # remove rows that are eggs
   filter(spp != "" &
            # remove all spp that contain the word "egg"
            !grepl("egg", spp)) %>% 
@@ -187,11 +199,28 @@ ai <- ai %>%
     # B. panthera is not on the list of spp to change
     spp = ifelse(grepl("Bathyraja", spp) & !grepl("panthera", spp), 'Bathyraja sp.', spp)
   ) %>% 
-  type_convert() %>% 
+  type_convert(col_types = cols(
+    lat = col_double(),
+    lon = col_double(),
+    STATION = col_character(),
+    year = col_integer(),
+    DATETIME = col_character(),
+    wtcpue = col_double(),
+    NUMCPUE = col_double(),
+    COMMON = col_character(),
+    spp = col_character(),
+    SID = col_integer(),
+    depth = col_integer(),
+    BOT_TEMP = col_double(),
+    SURF_TEMP = col_double(),
+    VESSEL = col_integer(),
+    CRUISE = col_integer(),
+    HAUL = col_integer(),
+    haulid = col_character()
+  )) %>% 
   group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
   summarise(wtcpue = sumna(wtcpue)) %>% 
   # Calculate a corrected longitude for Aleutians (all in western hemisphere coordinates)
-  # had to add this ungroup line because I was getting an error that lon was a grouping variable, if you aren't getting that error you don't need the ungroup line
   ungroup() %>% 
   mutate(lon = ifelse(lon > 0, lon - 360, lon), 
          region = "Aleutian Islands") %>% 
@@ -227,10 +256,11 @@ if (HQ_DATA_ONLY == TRUE){
   nrow(ai) - nrow(test2)
   # percent that will be lost
   print((nrow(ai) - nrow(test2))/nrow(ai))
-  # 5% seems reasonable 
+  # 5% of rows are removed
   ai <- ai %>% 
     filter(stratum %in% test$stratum)
   
+  # plot the results after editing
   p3 <- ai %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
@@ -240,18 +270,20 @@ if (HQ_DATA_ONLY == TRUE){
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
-
   
+  if (HQ_PLOTS == TRUE){
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
 }
 # clean up
-rm(files, temp, j, temp_fixed, ai_data, ai_strata, test, test2)
+rm(files, temp, j, temp_fixed, ai_data, ai_strata, test, test2, p1, p2, p3, p4)
 
 # Compile EBS ====
 files <- list.files(path = "data_raw/", pattern = "ebs")
 # create blank table
 ebs_data <- tibble()
 for (j in seq(files)){
+  # for data files - if file does not contain the word strata
   if(!grepl("strata", files[j])){
     # read the csv
     temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
@@ -275,6 +307,7 @@ for (j in seq(files)){
     ))
     ebs_data <- rbind(ebs_data, temp)
   }else{
+    # import the strata data
     ebs_strata <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
       SubareaDescription = col_character(),
       StratumCode = col_integer(),
@@ -312,7 +345,7 @@ ebs <- ebs %>%
          spp = SCIENTIFIC, 
          wtcpue = WTCPUE,
          stratumarea = Areakm2) %>% 
-  # remove non-fish
+  # remove eggs
   filter(spp != '' &
            !grepl("egg", spp)) %>% 
   # adjust spp names
@@ -322,7 +355,25 @@ ebs <- ebs %>%
          spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp), 
          spp = ifelse(grepl("Hippoglossoides", spp), "Hippoglossoides sp.", spp)) %>% 
   # change from all character to fitting column types
-  type_convert()  %>%  
+  type_convert(col_types = cols(
+    lat = col_double(),
+    lon = col_double(),
+    STATION = col_character(),
+    year = col_integer(),
+    DATETIME = col_character(),
+    wtcpue = col_double(),
+    NUMCPUE = col_double(),
+    COMMON = col_character(),
+    spp = col_character(),
+    SID = col_integer(),
+    depth = col_integer(),
+    BOT_TEMP = col_double(),
+    SURF_TEMP = col_double(),
+    VESSEL = col_integer(),
+    CRUISE = col_integer(),
+    HAUL = col_integer(),
+    haulid = col_character()
+  ))  %>%  
   group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
   summarise(wtcpue = sumna(wtcpue)) %>% 
   # add region column
@@ -331,7 +382,6 @@ ebs <- ebs %>%
   ungroup()
 
 if (HQ_DATA_ONLY == TRUE){
-  
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
  p1 <- ebs %>% 
@@ -357,12 +407,13 @@ if (HQ_DATA_ONLY == TRUE){
   nrow(ebs) - nrow(test2)
   # percent that will be lost
   print((nrow(ebs) - nrow(test2))/nrow(ebs))
-  # 4% seems reasonable 
+  # 4% of rows are removed
   ebs <- ebs %>% 
     filter(stratum %in% test$stratum)
+  
   p3 <- ebs %>% 
     select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    ggplot(aes(x = as.factor(stratum), y = as.factor(year))) +
     geom_jitter()
   
   p4 <- ebs %>%
@@ -370,11 +421,13 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
 
 } 
 # clean up
-rm(files, temp, j, ebs_data, ebs_strata, test2, test)
+rm(files, temp, j, ebs_data, ebs_strata, test2, test, p1, p2, p3, p4)
 
 
 # Compile GOA ====
@@ -461,7 +514,25 @@ goa <- goa %>%
     spp = ifelse(grepl("Myoxocephalus", spp ) & !grepl("scorpius", spp), "Myoxocephalus sp.", spp),
     spp = ifelse(grepl("Bathyraja", spp) & !grepl("panthera", spp), 'Bathyraja sp.', spp)
   ) %>% 
-  type_convert()  %>% 
+  type_convert(col_types = cols(
+    lat = col_double(),
+    lon = col_double(),
+    STATION = col_character(),
+    year = col_integer(),
+    DATETIME = col_character(),
+    wtcpue = col_double(),
+    NUMCPUE = col_double(),
+    COMMON = col_character(),
+    spp = col_character(),
+    SID = col_integer(),
+    depth = col_integer(),
+    BOT_TEMP = col_double(),
+    SURF_TEMP = col_double(),
+    VESSEL = col_integer(),
+    CRUISE = col_integer(),
+    HAUL = col_integer(),
+    haulid = col_character()
+  ))  %>% 
   group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
   summarise(wtcpue = sumna(wtcpue)) %>% 
   mutate(region = "Gulf of Alaska") %>% 
@@ -499,7 +570,7 @@ if (HQ_DATA_ONLY == TRUE){
   nrow(goa) - nrow(test2)
   # percent that will be lost
   print ((nrow(goa) - nrow(test2))/nrow(goa))
-  # 4% seems reasonable 
+  # 4% of rows are removed
   goa <- goa %>% 
     filter(stratum %in% test$stratum) %>%
     filter(year != 2001)
@@ -514,11 +585,14 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
 
 }
+
 # clean up
-rm(files, temp, j, goa_data, goa_strata, test, test2, goa_strata_2)
+rm(files, temp, j, goa_data, goa_strata, test, test2, goa_strata_2, p1, p2, p3, p4)
 
 # Compile WCTRI ====
 wctri_catch <- read_csv("data_raw/wctri_catch.csv", col_types = cols(
@@ -663,7 +737,7 @@ if (HQ_DATA_ONLY == TRUE){
   nrow(wctri) - nrow(test2)
   # percent that will be lost
   print((nrow(wctri) - nrow(test2))/nrow(wctri))
-  # 23% seems like a lot
+  # 23% of rows are removed
   wctri <- wctri %>% 
     filter(stratum %in% test$stratum)
   
@@ -676,9 +750,13 @@ if (HQ_DATA_ONLY == TRUE){
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
              geom_jitter()
+  
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
 }
 
-rm(wctri_catch, wctri_haul, wctri_species, wctri_strats, test, test2)
+rm(wctri_catch, wctri_haul, wctri_species, wctri_strats, test, test2, p1, p2, p3, p4)
 
 # Compile WCANN ====
 wcann_catch <- read_csv("data_raw/wcann_catch.csv", col_types = cols(
@@ -808,12 +886,14 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, nrow = 1)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, nrow = 2)
+  }
   
 }
 
 # cleanup
-rm(wcann_catch, wcann_haul, wcann_strats)
+rm(wcann_catch, wcann_haul, wcann_strats, p1, p2)
 
 # Compile GMEX ====
 gmex_station_raw <- read_lines("data_raw/gmex_STAREC.csv")
@@ -824,6 +904,7 @@ gmex_station <- read_csv("temporary.csv", col_types = cols(.default = col_charac
 
 problems <- problems(gmex_station) %>% 
   filter(!is.na(col))
+stopifnot(nrow(problems) == 0)
 
 gmex_station <- type_convert(gmex_station, col_types = cols(
   STATIONID = col_integer(),
@@ -884,6 +965,7 @@ gmex_tow <- gmex_tow %>%
 
 problems <- problems(gmex_tow) %>% 
   filter(!is.na(col)) 
+stopifnot(nrow(problems) == 2)
 # 2 problems are that there are weird delimiters in the note column COMBIO, ignoring for now.
 
 gmex_spp <-read_csv("data_raw/gmex_NEWBIOCODESBIG.csv", col_types = cols(
@@ -902,14 +984,14 @@ gmex_spp <-read_csv("data_raw/gmex_NEWBIOCODESBIG.csv", col_types = cols(
 # problems should be 0 obs
 problems <- problems(gmex_spp) %>% 
   filter(!is.na(col))
-
+stopifnot(nrow(problems) == 0)
 gmex_cruise <-read_csv("data_raw/gmex_CRUISES.csv", col_types = cols(.default = col_character())) %>% 
   select(CRUISEID, VESSEL, TITLE)
 
 # problems should be 0 obs
 problems <- problems(gmex_cruise) %>% 
   filter(!is.na(col))
-
+stopifnot(nrow(problems) == 0)
 gmex_cruise <- type_convert(gmex_cruise, col_types = cols(CRUISEID = col_integer(), VESSEL = col_integer(), TITLE = col_character()))
 
 gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(.default = col_character())) %>% 
@@ -923,6 +1005,7 @@ gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(.default = col_
 # problems should be 0 obs
 problems <- problems(gmex_bio) %>% 
   filter(!is.na(col))
+stopifnot(nrow(problems) == 0)
 
 gmex_bio <- type_convert(gmex_bio, cols(
   CRUISEID = col_integer(),
@@ -1088,7 +1171,7 @@ if (HQ_DATA_ONLY == TRUE){
   nrow(gmex) - nrow(test2)
   # percent that will be lost
   print((nrow(gmex) - nrow(test2))/nrow(gmex))
-  # by removing only bad years we loose only 0.2%, adding in strata that aren't in all years, we lose 33% more
+  # lose 19% of rows
   gmex <- gmex %>%
     filter(stratum %in% test$stratum) %>% 
     filter(year >= 2008, year != 2018) 
@@ -1103,11 +1186,13 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
   
 }
 
-rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean, gmex_strats, test, test2, dups)
+rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean, gmex_strats, test, test2, dups, p1, p2, p3, p4)
 
 # Compile NEUS ====
 load("data_raw/neus_Survdat.RData")
@@ -1241,7 +1326,9 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
   
 }
 
@@ -1251,8 +1338,6 @@ neusF <- neus %>%
   filter(SEASON == "FALL") %>% 
   select(-SEASON) %>% 
   mutate(region = "Northeast US Fall")
-
-
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
@@ -1303,23 +1388,26 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
   
 }
-rm(neus_spp, neus_strata, neus_survdat, survdat, spp, test, test2, neus_strata_2)
+rm(neus_spp, neus_strata, neus_survdat, survdat, spp, test, test2, neus_strata_2, p1, p2, p3, p4)
 
 # Compile SEUS ====
 # turns everything into a character so import as character anyway
-seus_catch <- read_csv("data_raw/seus_catch.csv", col_types = cols(.default = col_character()), quoted_na = T, quote = '"') %>% 
+seus_catch <- read_csv("data_raw/seus_catch.csv", col_types = cols(.default = col_character())) %>% 
   # remove symbols
   mutate_all(funs(str_replace(., "=", ""))) %>% 
   mutate_all(funs(str_replace(., '"', ''))) %>% 
   mutate_all(funs(str_replace(., '"', '')))
 
+# The 9 parsing failures are due to the metadata at the end of the file that does not fit into the data columns
 # problems should have 0 obs
 problems <- problems(seus_catch) %>% 
   filter(!is.na(col))
-
+stopifnot(nrow(problems) == 0)
 
 # convert the columns to their correct formats
 seus_catch <- type_convert(seus_catch, col_types = cols(
@@ -1379,6 +1467,7 @@ seus_haul <- read_csv("data_raw/seus_haul.csv", col_types = cols(.default = col_
 # problems should have 0 obs
 problems <- problems(seus_haul) %>% 
   filter(!is.na(col))
+stopifnot(nrow(problems) == 0)
 
 seus_haul <- type_convert(seus_haul, col_types = cols(
   EVENTNAME = col_character(),
@@ -1475,29 +1564,13 @@ seus <- seus %>%
 
 #In seus there are two 'COLLECTIONNUMBERS' per 'EVENTNAME', with no exceptions; EFFORT is always the same for each COLLECTIONNUMBER
 # We sum the two tows in seus
-test <- seus %>% 
-  select(COLLECTIONNUMBER, EVENTNAME, EFFORT)
-
-
-
-### As of 2018-09-24 MRS found that SEUS is producing raw abundance data with all NA's in the effort column.  Have emailed them to make sure this is intentional.  in the meantime, adjusting script to reflect lack of effort data
-# original code ________________________________________####
-
-# seusSPRING$wtcpue <<- seusSPRING$BIOMASS/(seusSPRING$EFFORT*2)
-# seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, EFFORT = seusSUMMER$EFFORT, spp = seusSUMMER$spp), FUN=sum)
-# seusSUMMER$wtcpue <<- seusSUMMER$BIOMASS/(seusSUMMER$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
-# seusFALL <<- aggregate(list(BIOMASS = seusFALL$SPECIESTOTALWEIGHT), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, SEASON = seusFALL$SEASON, EFFORT = seusFALL$EFFORT, spp = seusFALL$spp), FUN=sum)
-# seusFALL$wtcpue <<- seusFALL$BIOMASS/(seusFALL$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
-#________________________________________________________
-# temp code _______________________________________####
-#yields biomass (kg) per hectare for each 'spp' and 'haulid'
 biomass <- seus %>% 
   group_by(haulid, stratum, stratumarea, year, lat, lon, depth, SEASON, spp, EFFORT) %>% 
   summarise(biomass = sum(SPECIESTOTALWEIGHT)) %>% 
   mutate(wtcpue = biomass/(EFFORT*2))
 
 seus <- left_join(seus, biomass, by = c("haulid", "stratum", "stratumarea", "year", "lat", "lon", "depth", "SEASON", "spp", "EFFORT"))
-# double check that column numbers haven't changed by more than 1.  
+# double check that column numbers haven't changed by more than 2.  
 
 seus <- seus %>% 
   # remove non-fish
@@ -1573,7 +1646,9 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
   
 }
 
@@ -1599,7 +1674,9 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, nrow = 1)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, nrow = 2)
+  }
   
   # no missing data
 }
@@ -1653,11 +1730,13 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
   
 }
 
-rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, i, test, test2, problems)
+rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, i, test, test2, problems, p1, p2, p3, p4)
 
 # Compile Scotian Shelf ====
 scot_sumr <- read_csv("data_raw/scot_summer.csv", col_types = cols(
@@ -1755,6 +1834,7 @@ scot <- scot %>%
   select(haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue, season)
 
 # split out the seasons
+# Scotian Summer ####
 scot_sumr <- scot %>% 
   filter(season == "SUMMER") %>% 
   select(-season) %>% 
@@ -1771,10 +1851,13 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, nrow = 1)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, nrow = 2)
+  }
   # there is a very faint blip of white in 1984 which is fewer species in a trawl, not a missing trawl.
 }  
 
+# Scotian Fall ####
 scot_fall <- scot %>% 
   filter(season == "FALL") %>% 
   select(-season) %>% 
@@ -1823,9 +1906,12 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
 }  
 
+# Scotian Spring ####
 scot_spr <- scot %>% 
   filter(season == "SPRING") %>% 
   select(-season) %>% 
@@ -1876,10 +1962,13 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  if (HQ_PLOTS == TRUE){
+    grid.arrange(p1, p2, p3, p4, nrow = 2)
+  }
 }  
 
-rm(p1, p2, p3, p4)
+rm(p1, p2, p3, p4, strat, temp, test, test2, i)
+
 # Compile TAX ====
 tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
   taxon = col_character(),
@@ -1916,10 +2005,10 @@ if(sum(dat2$spp == 'NA') > 0 | sum(is.na(dat2$spp)) > 0){
 
 # replace dat with dat2
 dat <- dat2
-
+rm(dat2)
 
 if(isTRUE(REMOVE_REGION_DATASETS)) {
-  rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER, scot, scot_fall, scot_spr, scot_sumr)
+  rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER, scot, scot_fall, scot_spr, scot_sumr, tax)
 }
 
 if(isTRUE(OPTIONAL_OUTPUT_DAT_MASTER_TABLE)){
@@ -2035,7 +2124,7 @@ BY_SPECIES_DATA <- cent_bio %>%
   ungroup() %>% 
   arrange(region, spp, year)
 
-rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr, dat2, strat, temp, tax, test, test2)
+rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr, dat2, strat, temp, test, test2)
 
 # #  Add 0's ####
 # 
