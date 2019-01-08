@@ -29,6 +29,8 @@ library(lubridate)
 library(PBSmapping) # for calculating stratum areas
 library(ggplot2)
 library(data.table)
+library(gridExtra)
+
 
 # Functions ====
 # function to calculate convex hull area in km2
@@ -71,6 +73,9 @@ wgtse = function(x, na.rm=TRUE){
 }
 
 se <- function(x) sd(x)/sqrt(length(x)) # assumes no NAs
+
+
+  
 
 # Update Alaska ====
 
@@ -194,13 +199,20 @@ ai <- ai %>%
   ungroup()
 
 if (HQ_DATA_ONLY == TRUE){
+  
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
   # plot the strata by year
-  ai %>% 
+ p1 <- ai %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p2 <- ai %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
   
   test <- ai %>% 
     select(stratum, year) %>% 
@@ -218,10 +230,19 @@ if (HQ_DATA_ONLY == TRUE){
   # 5% seems reasonable 
   ai <- ai %>% 
     filter(stratum %in% test$stratum)
-  ai %>% 
+  
+  p3 <- ai %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p4 <- ai%>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
+
+  
 }
 # clean up
 rm(files, temp, j, temp_fixed, ai_data, ai_strata, test, test2)
@@ -313,9 +334,14 @@ if (HQ_DATA_ONLY == TRUE){
   
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
-  ebs %>% 
+ p1 <- ebs %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+ p2 <- ebs %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
   test <- ebs %>% 
@@ -334,10 +360,18 @@ if (HQ_DATA_ONLY == TRUE){
   # 4% seems reasonable 
   ebs <- ebs %>% 
     filter(stratum %in% test$stratum)
-  ebs %>% 
+  p3 <- ebs %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p4 <- ebs %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
+
 } 
 # clean up
 rm(files, temp, j, ebs_data, ebs_strata, test2, test)
@@ -371,6 +405,7 @@ for (j in seq(files)){
     ))
     goa_data <- rbind(goa_data, temp)
   }else{
+    if(!grepl("new", files[j])){
     goa_strata <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
       SubareaDescription = col_character(),
       StratumCode = col_integer(),
@@ -379,6 +414,12 @@ for (j in seq(files)){
     )) %>% 
       select(StratumCode, Areakm2) %>% 
       rename(STRATUM = StratumCode)
+    }else{
+      goa_strata_2 <- read_csv("data_raw/goa_new_strata.csv", col_types = cols(
+        STRATUM = col_integer(),
+        Areakm2 = col_double()
+      ))
+    }
   }
 }
 
@@ -387,27 +428,15 @@ goa_data <- goa_data %>%
   filter(LATITUDE != "LATITUDE")%>% 
   mutate(STRATUM = as.integer(STRATUM))
 
+goa_strata <- rbind(goa_strata, goa_strata_2) %>% 
+  distinct()
+
 goa <- left_join(goa_data, goa_strata, by = "STRATUM")
 
 # are there any strata in the data that are not in the strata file?
 test <- goa %>% 
   filter(is.na(Areakm2))
 stopifnot(nrow(test) == 0)
-if(nrow(test)>0){
-  # find all strata that are missing area
-  missing <- goa %>% 
-    filter(is.na(Areakm2)) %>% 
-    select(STRATUM, LONGITUDE, LATITUDE) %>% 
-    distinct()
-  # for every missing area, calculate the area based on observed lat lons
-  for(i in seq(missing$STRATUM)){
-    temp <- missing %>% 
-      filter(STRATUM == missing$STRATUM[i]) %>% 
-      mutate(area = calcarea(as.numeric(LONGITUDE), as.numeric(LATITUDE)))
-    goa <- goa %>% 
-      mutate(Areakm2 = ifelse(STRATUM == missing$STRATUM[i], temp$area[1], Areakm2))
-  }
-}
 
 # Create a unique haulid
 goa <- goa %>%
@@ -442,9 +471,14 @@ goa <- goa %>%
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
-  goa %>% 
+  p1 <- goa %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+  p2 <- goa %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
   # for GOA in 2018, 2001 missed 27 strata and will be removed, stratum 50 is
@@ -470,13 +504,21 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum) %>%
     filter(year != 2001)
   
-  goa %>% 
+ p3 <-  goa %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p4 <- goa %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
+
 }
 # clean up
-rm(files, temp, j, goa_data, goa_strata, missing, test, test2)
+rm(files, temp, j, goa_data, goa_strata, test, test2, goa_strata_2)
 
 # Compile WCTRI ====
 wctri_catch <- read_csv("data_raw/wctri_catch.csv", col_types = cols(
@@ -598,9 +640,14 @@ if (HQ_DATA_ONLY == TRUE){
   # test group, filtering out of the main data set, and then recreating the
   # graph to see if I had removed enough bad data
   
-  wctri %>% 
+  p1 <- wctri %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+  p2 <- wctri %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
   test <- wctri %>% 
@@ -620,10 +667,15 @@ if (HQ_DATA_ONLY == TRUE){
   wctri <- wctri %>% 
     filter(stratum %in% test$stratum)
   
-  wctri %>% 
+  p3 <- wctri %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p4 <- wctri %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+             geom_jitter()
 }
 
 rm(wctri_catch, wctri_haul, wctri_species, wctri_strats, test, test2)
@@ -746,10 +798,18 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% wctri$stratum)
   
   # see what these data look like - pretty solid
-  wcann %>% 
+  p1 <- wcann %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p2 <- wcann %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, nrow = 1)
+  
 }
 
 # cleanup
@@ -1004,9 +1064,14 @@ if (HQ_DATA_ONLY == TRUE){
   # I used this section by creating the graph, adjusting the parameters of the
   # test group, filtering out of the main data set, and then recreating the
   # graph to see if I had removed enough bad data
-  gmex %>% 
+  p1 <- gmex %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+  p2 <- gmex %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
   test <- gmex %>% 
@@ -1023,16 +1088,23 @@ if (HQ_DATA_ONLY == TRUE){
   nrow(gmex) - nrow(test2)
   # percent that will be lost
   print((nrow(gmex) - nrow(test2))/nrow(gmex))
-  # by removing only bad years we loose only 0.2%, adding in strata that 
-  # aren't in all years, we lose 33% more
+  # by removing only bad years we loose only 0.2%, adding in strata that aren't in all years, we lose 33% more
   gmex <- gmex %>%
     filter(stratum %in% test$stratum) %>% 
     filter(year >= 2008, year != 2018) 
   
-  gmex %>% 
+  p3 <- gmex %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p4 <- gmex %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  
 }
 
 rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean, gmex_strats, test, test2, dups)
@@ -1067,37 +1139,23 @@ neus_strata <- read_csv("data_raw/neus_strata.csv", col_types = cols(
   select(StratumCode, Areanmi2) %>% 
   rename(STRATUM = StratumCode)
 
+neus_strata_2 <- read_csv("data_raw/neus_new_strata.csv", col_types = cols(
+  STRATUM = col_integer(),
+  Areanmi2 = col_double()
+))
+
+neus_strata <- rbind(neus_strata, neus_strata_2) %>% 
+  distinct()
+
+
 neus <- left_join(neus_survdat, spp, by = "SVSPP")
 neus <- left_join(neus, neus_strata, by = "STRATUM")
+
 
 # are there any strata in the data that are not in the strata file?
 test <- neus %>% 
   filter(is.na(Areanmi2))
 stopifnot(nrow(test) == 0)
-if(nrow(test)>0){
-  # find all strata that are missing area
-  missing <- neus %>% 
-    ungroup() %>% 
-    filter(is.na(Areanmi2)) %>% 
-    select(STRATUM) %>% 
-    distinct()
-  # for every missing area, calculate the area based on observed lat lons
-  for(i in seq(missing$STRATUM)){
-    temp <- neus %>% 
-      ungroup() %>% 
-      select(STRATUM, LAT, LON) %>% 
-      filter(STRATUM == missing$STRATUM[i]) %>% 
-      mutate(area = calcarea(as.numeric(LON), as.numeric(LAT)))
-    neus <- neus %>% 
-      mutate(Areanmi2 = ifelse(STRATUM == missing$STRATUM[i], temp$area[1], Areanmi2))
-  }
-  # write new stratum areas to the stratum file?
-  # strat <- neus %>% 
-  #   ungroup() %>% 
-  #   select(STRATUM, Areanmi2)
-  # write_csv(strat, "data_raw/new_neus_strata.csv")
-}
-
 
 neus <- neus %>%
   mutate(
@@ -1137,9 +1195,14 @@ if (HQ_DATA_ONLY == TRUE){
   # test group, filtering out of the main data set, and then recreating the
   # graph to see if I had removed enough bad data
   
-  neusS %>% 
+  p1 <-neusS %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+  p2 <- neusS %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
   # for neus Spring, right away it is apparent that 1972 and earlier be eliminated
@@ -1168,10 +1231,18 @@ if (HQ_DATA_ONLY == TRUE){
   neusS <- neusS %>%
     filter(year %in% test$year)
   
-  neusS %>% 
+  p3 <- neusS %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p4 <- neusS %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  
 }
 
 # NEUS Fall ====
@@ -1181,6 +1252,8 @@ neusF <- neus %>%
   select(-SEASON) %>% 
   mutate(region = "Northeast US Fall")
 
+
+
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
@@ -1188,9 +1261,14 @@ if (HQ_DATA_ONLY == TRUE){
   # test group, filtering out of the main data set, and then recreating the
   # graph to see if I had removed enough bad data
   
-  neusF %>% 
+  p1 <- neusF %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year))) +
+    geom_jitter()
+  
+  p2 <- neusF %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
   test <- neusF %>% 
@@ -1215,12 +1293,20 @@ if (HQ_DATA_ONLY == TRUE){
     filter(year != 2017, year >= 1972) %>% 
     filter(stratum %in% test$stratum) 
   
-  neusF %>% 
+  p3 <- neusF %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p4 <- neusF %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  
 }
-rm(neus_spp, neus_strata, neus_survdat, survdat, spp, test, test2, missing, temp)
+rm(neus_spp, neus_strata, neus_survdat, survdat, spp, test, test2, neus_strata_2)
 
 # Compile SEUS ====
 # turns everything into a character so import as character anyway
@@ -1289,6 +1375,10 @@ seus_haul <- read_csv("data_raw/seus_haul.csv", col_types = cols(.default = col_
   mutate_all(funs(str_replace(., "=", ""))) %>% 
   mutate_all(funs(str_replace(., '"', ''))) %>% 
   mutate_all(funs(str_replace(., '"', '')))
+
+# problems should have 0 obs
+problems <- problems(seus_haul) %>% 
+  filter(!is.na(col))
 
 seus_haul <- type_convert(seus_haul, col_types = cols(
   EVENTNAME = col_character(),
@@ -1359,9 +1449,9 @@ seus <- seus %>%
 
 # calculate trawl distance in order to calculate effort
 # create a matrix of starting positions
-start <- matrix(seus$LONGITUDESTART, seus$LATITUDESTART, nrow = nrow(seus), ncol = 2)
+start <- as.matrix(seus[,c("LONGITUDESTART", "LATITUDESTART")], nrow = nrow(seus), ncol = 2)
 # create a matrix of ending positions
-end <- matrix(seus$LONGITUDEEND, seus$LATITUDEEND, nrow = nrow(seus), ncol = 2)
+end <- as.matrix(seus[,c("LONGITUDEEND", "LATITUDEEND")], nrow = nrow(seus), ncol = 2)
 # add distance to seus table
 seus <- seus %>%
   mutate(distance_m = geosphere::distHaversine(p1 = start, p2 = end),
@@ -1385,10 +1475,15 @@ seus <- seus %>%
 
 #In seus there are two 'COLLECTIONNUMBERS' per 'EVENTNAME', with no exceptions; EFFORT is always the same for each COLLECTIONNUMBER
 # We sum the two tows in seus
+test <- seus %>% 
+  select(COLLECTIONNUMBER, EVENTNAME, EFFORT)
+
+
+
 ### As of 2018-09-24 MRS found that SEUS is producing raw abundance data with all NA's in the effort column.  Have emailed them to make sure this is intentional.  in the meantime, adjusting script to reflect lack of effort data
 # original code ________________________________________####
-# seusSPRING <<- aggregate(list(BIOMASS = seusSPRING$SPECIESTOTALWEIGHT), by=list(haulid = seusSPRING$haulid, stratum = seusSPRING$stratum, stratumarea = seusSPRING$stratumarea, year = seusSPRING$year, lat = seusSPRING$lat, lon = seusSPRING$lon, depth = seusSPRING$depth, SEASON = seusSPRING$SEASON, EFFORT = seusSPRING$EFFORT, spp = seusSPRING$spp), FUN=sum)
-# seusSPRING$wtcpue <<- seusSPRING$BIOMASS/(seusSPRING$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
+
+# seusSPRING$wtcpue <<- seusSPRING$BIOMASS/(seusSPRING$EFFORT*2)
 # seusSUMMER <<- aggregate(list(BIOMASS = seusSUMMER$SPECIESTOTALWEIGHT), by=list(haulid = seusSUMMER$haulid, stratum = seusSUMMER$stratum, stratumarea = seusSUMMER$stratumarea, year = seusSUMMER$year, lat = seusSUMMER$lat, lon = seusSUMMER$lon, depth = seusSUMMER$depth, SEASON = seusSUMMER$SEASON, EFFORT = seusSUMMER$EFFORT, spp = seusSUMMER$spp), FUN=sum)
 # seusSUMMER$wtcpue <<- seusSUMMER$BIOMASS/(seusSUMMER$EFFORT*2)#yields biomass (kg) per hectare for each 'spp' and 'haulid'
 # seusFALL <<- aggregate(list(BIOMASS = seusFALL$SPECIESTOTALWEIGHT), by=list(haulid = seusFALL$haulid, stratum = seusFALL$stratum, stratumarea = seusFALL$stratumarea, year = seusFALL$year, lat = seusFALL$lat, lon = seusFALL$lon, depth = seusFALL$depth, SEASON = seusFALL$SEASON, EFFORT = seusFALL$EFFORT, spp = seusFALL$spp), FUN=sum)
@@ -1397,10 +1492,11 @@ seus <- seus %>%
 # temp code _______________________________________####
 #yields biomass (kg) per hectare for each 'spp' and 'haulid'
 biomass <- seus %>% 
-  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, SEASON, spp) %>% 
-  summarise(wtcpue = sum(SPECIESTOTALWEIGHT)) 
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, SEASON, spp, EFFORT) %>% 
+  summarise(biomass = sum(SPECIESTOTALWEIGHT)) %>% 
+  mutate(wtcpue = biomass/(EFFORT*2))
 
-seus <- left_join(seus, biomass, by = c("haulid", "stratum", "stratumarea", "year", "lat", "lon", "depth", "SEASON", "spp"))
+seus <- left_join(seus, biomass, by = c("haulid", "stratum", "stratumarea", "year", "lat", "lon", "depth", "SEASON", "spp", "EFFORT"))
 # double check that column numbers haven't changed by more than 1.  
 
 seus <- seus %>% 
@@ -1439,9 +1535,14 @@ if (HQ_DATA_ONLY == TRUE){
   # test group, filtering out of the main data set, and then recreating the
   # graph to see if I had removed enough bad data
   
-  seusSPRING %>% 
+  p1 <- seusSPRING %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year))) +
+    geom_jitter()
+  
+  p2 <- seusSPRING %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
   test <- seusSPRING %>% 
@@ -1462,10 +1563,17 @@ if (HQ_DATA_ONLY == TRUE){
   seusSPRING <- seusSPRING %>%
     filter(stratum %in% test$stratum) 
   
-  seusSPRING %>% 
+  p3 <- seusSPRING %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p4 <- seusSPRING %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
   
 }
 
@@ -1481,10 +1589,17 @@ if (HQ_DATA_ONLY == TRUE){
   # test group, filtering out of the main data set, and then recreating the
   # graph to see if I had removed enough missing data
   
-  seusSUMMER %>% 
+  p1 <- seusSUMMER %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year))) +
     geom_jitter()
+  
+  p2 <- seusSUMMER %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, nrow = 1)
   
   # no missing data
 }
@@ -1500,9 +1615,14 @@ if (HQ_DATA_ONLY == TRUE){
   # test group, filtering out of the main data set, and then recreating the
   # graph to see if I had removed enough missing data
   
-  seusFALL %>% 
+  p1 <- seusFALL %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year))) +
+    geom_jitter()
+  
+  p2 <- seusFALL %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
   test <- seusFALL %>% 
@@ -1523,14 +1643,21 @@ if (HQ_DATA_ONLY == TRUE){
   seusFALL <- seusFALL %>%
     filter(stratum %in% test$stratum) 
   
-  seusFALL %>% 
+  p3 <- seusFALL %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
+  p4 <- seusFALL %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  
 }
 
-rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, i, test, test2)
+rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, i, test, test2, problems)
 
 # Compile Scotian Shelf ====
 scot_sumr <- read_csv("data_raw/scot_summer.csv", col_types = cols(
@@ -1613,11 +1740,11 @@ for(i in seq(strat$stratum)){
 }
 
 # are any spp eggs or non-organism notes? As of 2018, nothing stuck out as needing to be removed
-# test <- scot %>%
-#   select(spp) %>%
-#   filter(!is.na(spp)) %>%
-#   distinct() %>%
-#   mutate(spp = as.factor(spp))
+test <- scot %>%
+  select(spp) %>%
+  filter(!is.na(spp)) %>%
+  distinct() %>%
+  mutate(spp = as.factor(spp))
 
 # combine the wtcpue for each species by haul
 scot <- scot %>% 
@@ -1635,10 +1762,16 @@ scot_sumr <- scot %>%
 
 if (HQ_DATA_ONLY == TRUE){
   # plot the strata by year
-  scot_sumr %>% 
+  p1 <- scot_sumr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  p2 <- scot_sumr %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, nrow = 1)
   # there is a very faint blip of white in 1984 which is fewer species in a trawl, not a missing trawl.
 }  
 
@@ -1649,9 +1782,14 @@ scot_fall <- scot %>%
 
 if (HQ_DATA_ONLY == TRUE){
   # plot the strata by year
-  scot_fall %>% 
+  p1 <- scot_fall %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+  p2 <- scot_fall %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
   test <- scot_fall %>% 
@@ -1675,10 +1813,17 @@ if (HQ_DATA_ONLY == TRUE){
     filter(year != 1986, year != 1978) %>% 
     filter(stratum %in% test$stratum) 
   
-  scot_fall %>% 
+  p3 <- scot_fall %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p4 <- scot_fall %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
 }  
 
 scot_spr <- scot %>% 
@@ -1689,9 +1834,14 @@ scot_spr <- scot %>%
 
 if (HQ_DATA_ONLY == TRUE){
   # plot the strata by year
-  scot_spr %>% 
+  p1 <- scot_spr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+  p2 <- scot_spr %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
   test <- scot_spr %>% 
@@ -1715,14 +1865,21 @@ if (HQ_DATA_ONLY == TRUE){
     filter(year <= 1984) %>% 
     filter(stratum %in% test$stratum) 
   
-  scot_spr %>% 
+  p3 <- scot_spr %>% 
     filter(year <= 1984) %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
+  
+  p4 <- scot_spr %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  grid.arrange(p1, p2, p3, p4, nrow = 2)
 }  
 
-
+rm(p1, p2, p3, p4)
 # Compile TAX ====
 tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
   taxon = col_character(),
@@ -1942,9 +2099,8 @@ maxyrs <- presyrsum %>%
 presyrsum <- left_join(presyrsum, maxyrs, by = "region") 
 
 # retain all spp present at least once every time a survey occurs
-# retain all spp present at least 3/4 of the available years in a survey
 spplist <- presyrsum %>% 
-  filter(presyr >= (maxyrs * 3/4)) %>% 
+  filter(presyr >= (maxyrs)) %>% 
   select(region, spp)
 
 # Make a new centbio dataframe for regional use, only has spp in spplist
@@ -1956,6 +2112,7 @@ centbio2 <- BY_SPECIES_DATA %>%
 startyear <- centbio2 %>%
   group_by(region) %>% 
   summarise(startyear = min(year))
+
 # add to dataframe
 centbio2 <- left_join(centbio2, startyear, by = "region")
 # find starting lat and depth by spp
@@ -1970,9 +2127,7 @@ startpos <- centbio2 %>%
 # add in starting lat and depth
 centbio2 <- left_join(centbio2, startpos, by = c("region", "spp")) 
 
-# some species were not caught in the first year and so the startlat, etc is NA ####
-# centbio2 <- centbio2 %>% 
-#   filter(!is.na(startlat))
+
 
 centbio2 <- centbio2 %>% 
   mutate(latoffset = lat - startlat, 
@@ -2199,6 +2354,7 @@ if(isTRUE(OPTIONAL_PLOT_CHARTS)) {
     polygon(c(regcentbio$year[inds], rev(regcentbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
     lines(regcentbio$year[inds], regcentbio$lat[inds], col='#D95F02', lwd=2)
   }
+
   
   par(mfrow=c(3,3)) # page 2: depth
   regs = sort(unique(regcentbio$region))
@@ -2223,10 +2379,10 @@ if(isTRUE(OPTIONAL_PLOT_CHARTS)) {
   pdf(file=paste('natcentlatstrat_', Sys.Date(), '.pdf', sep=''), width=6, height=3.5)
   par(mfrow=c(1,2), mai=c(0.8, 0.8, 0.3, 0.2), mgp=c(2.4,0.7,0))
   
-  minlat = natcentbio$lat - natcentbio$latse
-  maxlat = natcentbio$lat + natcentbio$latse
-  mindepth = natcentbio$depth - natcentbio$depthse
-  maxdepth = natcentbio$depth + natcentbio$depthse
+  minlat = natcentbio$lat - natcentbio$lat_se
+  maxlat = natcentbio$lat + natcentbio$lat_se
+  mindepth = natcentbio$depth - natcentbio$depth_se
+  maxdepth = natcentbio$depth + natcentbio$depth_se
   ylims = c(min(minlat), max(maxlat))
   xlims = range(as.numeric(natcentbio$year))
   plot(0,0, type='l', ylab='Offset in latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main='Latitude', cex.lab = 1.5, cex.axis=1.2)
