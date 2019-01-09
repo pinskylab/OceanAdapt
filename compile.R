@@ -137,7 +137,7 @@ for (j in seq(files)){
     temp <- read_lines("data_raw/ai2014_2016.csv")
     temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
     write_lines(temp_fixed, "data_raw/temporary.csv")
-    temp <- read_csv("temporary.csv", col_types = cols(
+    temp <- read_csv("data_raw/temporary.csv", col_types = cols(
       LATITUDE = col_character(),
       LONGITUDE = col_character(),
       STATION = col_character(),
