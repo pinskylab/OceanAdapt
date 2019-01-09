@@ -136,7 +136,7 @@ for (j in seq(files)){
   if(files[j] == "ai2014_2016.csv"){
     temp <- read_lines("data_raw/ai2014_2016.csv")
     temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
-    write_lines(temp_fixed, "data_raw/ai2014_2016_fixed.csv")
+    write_lines(temp_fixed, "data_raw/temporary.csv")
     temp <- read_csv("temporary.csv", col_types = cols(
       LATITUDE = col_character(),
       LONGITUDE = col_character(),
@@ -157,6 +157,7 @@ for (j in seq(files)){
       HAUL = col_character()
     ))
     ai_data <- rbind(ai_data, temp)
+    file.remove("data_raw/temporary.csv")
   }
   if(!grepl("strata", files[j]) & !grepl("ai2014", files[j])){
     # read the csv
