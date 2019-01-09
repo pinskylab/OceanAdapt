@@ -30,8 +30,8 @@ DAT_EXPLODED <- TRUE
 # I separated these out because it takes a while to generate these plots.
 HQ_PLOTS <- FALSE
 
-# 7. #OPTIONAL, DEFAULT:FALSE, generate the all.objects.Rdata file
-ALL_OBJECTS <- FALSE
+# 7. #OPTIONAL, DEFAULT:FALSE, generate a dat.exploded.csv file
+EXPLODE_CSV <- FALSE
 
 ## Workspace setup ====
 # This script works best when the repository is downloaded from github, 
@@ -136,7 +136,7 @@ for (j in seq(files)){
   if(files[j] == "ai2014_2016.csv"){
     temp <- read_lines("data_raw/ai2014_2016.csv")
     temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
-    write_lines(temp_fixed, "temporary.csv")
+    write_lines(temp_fixed, "data_raw/ai2014_2016_fixed.csv")
     temp <- read_csv("temporary.csv", col_types = cols(
       LATITUDE = col_character(),
       LONGITUDE = col_character(),
@@ -2155,13 +2155,15 @@ Sys.time()
 if (DAT_EXPLODED == TRUE){
   dat.exploded <- as.data.table(trimmed_dat)[,explode0(.SD), by="region"]
   
+  if (EXPLODE_CSV == TRUE){
 write_csv(dat.exploded, path = paste0(Sys.Date(), "_dat_exploded.csv"))
+  }
 
 if (ALL_OBJECTS == FALSE){
   rm(dat.exploded)
 }
 }
-Sys.time()
+
 
 #By region data ####
 #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
@@ -2352,8 +2354,6 @@ natcentbio <- left_join(natcentbio, natcentbiose, by = "year")
 natcentbio$numspp <- lunique(paste(centbio3$region, centbio3$spp)) # calc number of species per region  
 
 BY_NATIONAL_DATA <- natcentbio
-
-save(BY_SPECIES_DATA, BY_REGION_DATA, BY_NATIONAL_DATA, file = paste0("centbios", Sys.Date(), ".Rdata"))
 
 rm(centbio2, centbio3, maxyrs, natcentbio, natcentbiose, presyr, presyrsum, regcentbio, regcentbiospp, spplist, spplist2, startpos, startyear, regcentbiose)
 
