@@ -42,6 +42,7 @@ Sys.time()
 strata <- neus %>% 
   ungroup() %>% 
   select(STRATUM, Areanmi2) %>% 
-  distinct()
+  distinct() %>% 
+  rename(StratumCode = STRATUM)
 
 write_csv(strata, "data_raw/neus_strata_new.csv")
