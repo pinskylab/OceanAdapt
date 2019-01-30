@@ -39,12 +39,14 @@ HQ_PLOTS <- FALSE
 
 # The working directory is assumed to be the OceanAdapt directory of this repository.
 
-library(tidyverse)
-library(lubridate)
-library(PBSmapping) # for calculating stratum areas
-library(ggplot2)
-library(data.table)
-library(gridExtra)
+library(tidyverse) # use ggplot2, tibble, readr, dplyr, stringr
+library(lubridate) # for date manipulation
+library(PBSmapping) # for calculating stratum areas 
+library(data.table) # for dat.exploded
+# library(gridExtra) # 
+library(here) # for relative file paths
+library(questionr) # for the wgtmean function
+library(geosphere) # for calculating trawl distance for SEUS 
 
 # Functions ====
 # function to calculate convex hull area in km2
@@ -2036,9 +2038,11 @@ if(isTRUE(REMOVE_REGION_DATASETS)) {
   rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER, scot, scot_fall, scot_spr, scot_sumr, tax)
 }
 
-if(isTRUE(OPTIONAL_WRITE_CLEAN_DATA)){
+if(isTRUE(WRITE_CLEAN_RDATA)){
   save(dat, file = paste0("trawl_allregions_", Sys.Date(), ".RData"))
-  write_csv(dat, here::here("data_clean", paste0("all-regions_", Sys.Date(), ".csv")))
+}
+if(isTRUE(WRITE_CLEAN_CSV)){
+  write_csv(dat, here::here("data_clean", paste0(Sys.Date(), "_all-regions,csv")))
 }
 
 # load(file = "trawl_allregions_2019-01-08.RData")
@@ -2150,8 +2154,12 @@ BY_SPECIES_DATA <- cent_bio %>%
   ungroup() %>% 
   arrange(region, spp, year)
 
-if(isTRUE(OPTIONAL_WRITE_CLEAN_DATA)){
-  write_csv(BY_SPECIES_DATA, here::here("data_clean", paste0("by-species_", Sys.Date(), ".csv")))
+if(isTRUE(WRITE_CLEAN_RDATA)){
+  saveRDS(BY_SPECIES_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-species.Rdata")))
+}
+
+if(isTRUE(WRITE_CLEAN_CSV)){
+  write_csv(BY_SPECIES_DATA, here::here("data_clean", paste0(Sys.Date, "_by-species.csv")))
 }
 
 rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr)
@@ -2261,8 +2269,12 @@ regcentbio <- left_join(regcentbio, regcentbiospp, by = "region")
 BY_REGION_DATA  <- regcentbio %>% 
   arrange(region, year)
 
-if(isTRUE(OPTIONAL_WRITE_CLEAN_DATA)){
-  write_csv(BY_REGION_DATA, here::here("data_clean", paste0("by-region_", Sys.Date(), ".csv")))
+if(isTRUE(WRITE_CLEAN_RDATA)){
+  saveRDS(BY_REGION_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-region.Rdata")))
+}
+
+if(isTRUE(WRITE_CLEAN_CSV)){
+  write_csv(BY_REGION_DATA, here::here("data_clean", paste0(Sys.Date, "_by-region.csv")))
 }
 
 # By national data ####
@@ -2366,8 +2378,12 @@ natcentbio$numspp <- lunique(paste(centbio3$region, centbio3$spp)) # calc number
 
 BY_NATIONAL_DATA <- natcentbio
 
-if(isTRUE(OPTIONAL_WRITE_CLEAN_DATA)){
-  write_csv(BY_NATIONAL_DATA, here::here("data_clean", paste0("by-national_", Sys.Date(), ".csv")))
+if(isTRUE(WRITE_CLEAN_RDATA)){
+  saveRDS(BY_NATIONAL_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-national.Rdata")))
+}
+
+if(isTRUE(WRITE_CLEAN_CSV)){
+  write_csv(BY_NATIONAL_DATA, here::here("data_clean", paste0(Sys.Date, "_by-national.csv")))
 }
 
 rm(centbio2, centbio3, maxyrs, natcentbio, natcentbiose, presyr, presyrsum, regcentbio, regcentbiospp, spplist, spplist2, startpos, startyear, regcentbiose)
@@ -2380,7 +2396,7 @@ if(isTRUE(ALL_OBJECTS)) {
 # load("all_objects.Rdata")
 
 
-if(isTRUE(OPTIONAL_PLOT_CHARTS)) {
+if(isTRUE(PLOT_CHARTS)) {
   
   # Plot Species #####
   centbio <- BY_SPECIES_DATA
