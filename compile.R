@@ -145,9 +145,7 @@ files <- files[-c(1,5)]
 # combine all of the data files into one table
 ai_data <- files %>% 
   # read in all of the csv's in the files list
-  map(read_csv) %>%
-  # reduce with rbind into one dataframe
-  reduce(rbind) %>% 
+  map_dfr(read_csv) %>%
   # remove any data rows that have headers as data rows
   filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
   mutate(stratum = as.integer(STRATUM))
@@ -266,7 +264,7 @@ if (HQ_DATA_ONLY == TRUE){
   }
 }
 # clean up
-rm(files, temp, j, temp_fixed, ai_data, ai_strata, test, test2, p1, p2, p3, p4)
+rm(files, temp, temp_fixed, ai_data, ai_strata, test, test2, p1, p2, p3, p4)
 
 # Compile EBS ====
 files <- as.list(dir(pattern = "ebs", path = "data_raw", full.names = T))
@@ -277,9 +275,7 @@ files <- files[-1]
 # combine all of the data files into one table
 ebs_data <- files %>% 
   # read in all of the csv's in the files list
-  map(read_csv) %>%
-  # reduce with rbind into one dataframe
-  reduce(rbind) %>% 
+  map_dfr(read_csv) %>%
   # remove any data rows that have headers as data rows
   filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
   mutate(stratum = as.integer(STRATUM))
@@ -395,7 +391,7 @@ if (HQ_DATA_ONLY == TRUE){
 
 } 
 # clean up
-rm(files, temp, j, ebs_data, ebs_strata, test2, test, p1, p2, p3, p4)
+rm(files, temp, ebs_data, ebs_strata, test2, test, p1, p2, p3, p4)
 
 
 # Compile GOA ====
@@ -407,9 +403,7 @@ files <- files[-c(1,2)]
 # combine all of the data files into one table
 goa_data <- files %>% 
   # read in all of the csv's in the files list
-  map(read_csv) %>%
-  # reduce with rbind into one dataframe
-  reduce(rbind) %>% 
+  map_dfr(read_csv) %>%
   # remove any data rows that have headers as data rows
   filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
   mutate(stratum = as.integer(STRATUM))
@@ -531,7 +525,7 @@ if (HQ_DATA_ONLY == TRUE){
 }
 
 # clean up
-rm(files, temp, j, goa_data, goa_strata, test, test2, goa_strata_2, p1, p2, p3, p4)
+rm(files, temp, goa_data, goa_strata, test, test2, goa_strata_2, p1, p2, p3, p4)
 
 # Compile WCTRI ====
 wctri_catch <- read_csv("data_raw/wctri_catch.csv", col_types = cols(
@@ -603,8 +597,9 @@ wctri <- left_join(wctri_catch, wctri_haul, by = c("CRUISEJOIN", "HAULJOIN", "VE
 #  add species names
 wctri <- left_join(wctri, wctri_species, by = "SPECIES_CODE")
 
-# trim to standard hauls and good performance
+
 wctri <- wctri %>% 
+  # trim to standard hauls and good performance
   filter(HAUL_TYPE == 3 & PERFORMANCE == 0) %>% 
   # Create a unique haulid
   mutate(
@@ -1146,26 +1141,19 @@ neus_survdat <- neus_survdat %>%
 
 # repeat for spp file 
 neus_spp <- spp %>%
+  # remove some columns from spp data
   select(-ITISSPP, -COMNAME, -AUTHOR)
 
-# remove some columns from spp data.table
-neus_strata <- read_csv("data_raw/neus_strata.csv", col_types = cols(
-  StratumCode = col_integer(),
-  OldStratumCode = col_integer(),
-  DepthIntervalm = col_character(),
-  Areanmi2 = col_integer()
-)) %>% 
+
+
+files <- as.list(dir(pattern = "neus_strata", path = "data_raw", full.names = T))
+
+
+neus_strata <- files %>%
+  map_dfr(read_csv) %>% 
   select(StratumCode, Areanmi2) %>% 
+  distinct() %>% 
   rename(STRATUM = StratumCode)
-
-neus_strata_2 <- read_csv("data_raw/neus_new_strata.csv", col_types = cols(
-  STRATUM = col_integer(),
-  Areanmi2 = col_double()
-))
-
-neus_strata <- rbind(neus_strata, neus_strata_2) %>% 
-  distinct()
-
 
 neus <- left_join(neus_survdat, spp, by = "SVSPP")
 neus <- left_join(neus, neus_strata, by = "STRATUM")
@@ -1322,7 +1310,7 @@ if (HQ_DATA_ONLY == TRUE){
   }
   
 }
-rm(neus_spp, neus_strata, neus_survdat, survdat, spp, test, test2, neus_strata_2, p1, p2, p3, p4)
+rm(neus_spp, neus_strata, neus_survdat, survdat, spp, test, test2, p1, p2, p3, p4)
 
 # Compile SEUS ====
 # turns everything into a character so import as character anyway
