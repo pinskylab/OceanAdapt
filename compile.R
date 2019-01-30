@@ -14,24 +14,25 @@
 # 1. Some strata and years have very little data, should they be removed? #DEFAULT: TRUE. 
 HQ_DATA_ONLY <- TRUE
 
-# 2. Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`. #DEFAULT: FALSE 
+# 2. View plots of removed strata for HQ_DATA. #OPTIONAL, DEFAULT:FALSE
+# It takes a while to generate these plots.
+HQ_PLOTS <- TRUE
+
+# 3. Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`. #DEFAULT: FALSE 
 REMOVE_REGION_DATASETS <- FALSE
 
-# 3. Create graphs based on the data similar to those shown on the website and outputs them to pdf. #DEFAULT:FALSE
+# 4. Create graphs based on the data similar to those shown on the website and outputs them to pdf. #DEFAULT:FALSE
 PLOT_CHARTS <- TRUE
 
-# 4. Outputs the cleaned data into rdata files. #OPTIONAL DEFAULT:FALSE
+# 5. Outputs the cleaned data into rdata files. #OPTIONAL DEFAULT:FALSE
 WRITE_CLEAN_RDATA <- TRUE 
 
-# 5. Generate csv files of the clean data. #OPTIONAL, DEFAULT:FALSE
+# 6. Generate csv files of the clean data. #OPTIONAL, DEFAULT:FALSE
 WRITE_CLEAN_CSV <- FALSE
 
-# 6. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
+# 7. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
 DAT_EXPLODED <- TRUE
 
-# 7. View plots of removed strata for HQ_DATA. #OPTIONAL, DEFAULT:FALSE
-# It takes a while to generate these plots.
-HQ_PLOTS <- FALSE
 
 ## Workspace setup ====
 # This script works best when the repository is downloaded from github, 
@@ -43,7 +44,7 @@ library(tidyverse) # use ggplot2, tibble, readr, dplyr, stringr
 library(lubridate) # for date manipulation
 library(PBSmapping) # for calculating stratum areas 
 library(data.table) # for dat.exploded
-# library(gridExtra) # 
+library(gridExtra) #grid.arrange plots of HQ data
 library(here) # for relative file paths
 library(questionr) # for the wgtmean function
 library(geosphere) # for calculating trawl distance for SEUS 
@@ -126,107 +127,58 @@ explode0 <- function(x, by=c("region")){
 }
   
 # Compile AI ====
-files <- list.files(path = "data_raw/", pattern = "ai")
-# create blank table
-ai_data <- tibble()
-for (j in seq(files)){
-#if the file is the 2014-2016 file, which contains a comma in the SCIENTIFIC field which causes a shift of columns for the remaining data
-  if(files[j] == "ai2014_2016.csv"){
-    temp <- read_lines("data_raw/ai2014_2016.csv")
-    # replace the string that causes the problem
-    temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
-    # write it back to a temporary file
-    write_lines(temp_fixed, "data_raw/temporary.csv")
-    # read in the fixed data
-    temp <- read_csv("data_raw/temporary.csv", col_types = cols(
-      LATITUDE = col_character(),
-      LONGITUDE = col_character(),
-      STATION = col_character(),
-      STRATUM = col_character(),
-      YEAR = col_character(),
-      DATETIME = col_character(),
-      WTCPUE = col_character(),
-      NUMCPUE = col_character(),
-      COMMON = col_character(),
-      SCIENTIFIC = col_character(),
-      SID = col_character(),
-      BOT_DEPTH = col_character(),
-      BOT_TEMP = col_character(),
-      SURF_TEMP = col_character(),
-      VESSEL = col_character(),
-      CRUISE = col_character(),
-      HAUL = col_character()
-    ))
-    ai_data <- rbind(ai_data, temp)
-    # remove the temporary fix file
-    file.remove("data_raw/temporary.csv")
-  }
-  # if the file is not the strata file (which is assumed to not need correction)
-  if(!grepl("strata", files[j]) & !grepl("ai2014", files[j])){
-    # read the csv
-    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
-      LATITUDE = col_character(),
-      LONGITUDE = col_character(),
-      STATION = col_character(),
-      STRATUM = col_character(),
-      YEAR = col_character(),
-      DATETIME = col_character(),
-      WTCPUE = col_character(),
-      NUMCPUE = col_character(),
-      COMMON = col_character(),
-      SCIENTIFIC = col_character(),
-      SID = col_character(),
-      BOT_DEPTH = col_character(),
-      BOT_TEMP = col_character(),
-      SURF_TEMP = col_character(),
-      VESSEL = col_character(),
-      CRUISE = col_character(),
-      HAUL = col_character()
-    ))
-    ai_data <- rbind(ai_data, temp)
-  }
-  if(files[j] == "ai_strata.csv"){
-    ai_strata <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
-      NPFMCArea = col_character(),
+
+## Special fix
+#there is a comment that contains a comma in the 2014-2016 file that causes the delimiters to read incorrectly.  Fix that here:
+temp <- read_lines("data_raw/ai2014_2016.csv")
+# replace the string that causes the problem
+temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
+# write it back to a temporary file
+write_lines(temp_fixed, "data_raw/ai_temporary.csv")
+## End special fix
+
+files <- as.list(dir(pattern = "ai", path = "data_raw", full.names = T))
+
+# exclude the strata file and the raw 2014-2016 data file which has been fixed in ai_temporary.csv, the 1 and 5 elements
+files <- files[-c(1,5)]
+
+# the output of this is a list of lists, object 1 is the strata file which cannot be joined by rbind.
+ai_data <- files %>% 
+  map(read_csv) %>%
+  # reduce with rbind into one dataframe
+  reduce(rbind) %>% 
+  # remove any data rows that have headers as data rows
+  filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
+  mutate(stratum = as.integer(STRATUM))
+
+ai_strata <- read_csv(here("data_raw", "ai_strata.csv"), col_types = cols(NPFMCArea = col_character(),
       SubareaDescription = col_character(),
       StratumCode = col_integer(),
       DepthIntervalm = col_character(),
       Areakm2 = col_integer()
-    ))
-    ai_strata <- ai_strata %>% 
-      select(StratumCode, Areakm2) %>% 
-      rename(STRATUM = StratumCode)
-  }
-}
+    ))  %>% 
+      select(StratumCode, Areakm2) 
+    
 
-ai_data <- ai_data %>% 
-  # remove any data rows that have headers as data rows
-  filter(LATITUDE != "LATITUDE") %>% 
-  mutate(STRATUM = as.integer(STRATUM))
-
-ai <- left_join(ai_data, ai_strata, by = "STRATUM")
+ai <- left_join(ai_data, ai_strata, by = c("stratum" = "StratumCode"))
 
 # are there any strata in the data that are not in the strata file?
 test <- ai %>% 
   filter(is.na(Areakm2))
 stopifnot(nrow(test) == 0)
 
-
 ai <- ai %>% 
-  
   mutate(
     # Create a unique haulid
     haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
          # change -9999 wtcpue to NA
-         WTCPUE = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
+         wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
   # rename columns
-  rename(stratum = STRATUM,
-         year = YEAR, 
+  rename(year = YEAR, 
          lat = LATITUDE, 
          lon = LONGITUDE, 
          depth = BOT_DEPTH, 
          spp = SCIENTIFIC, 
-         wtcpue = WTCPUE,
          stratumarea = Areakm2) %>% 
   # remove rows that are eggs
   filter(spp != "" &
@@ -244,23 +196,14 @@ ai <- ai %>%
     # B. panthera is not on the list of spp to change
     spp = ifelse(grepl("Bathyraja", spp) & !grepl("panthera", spp), 'Bathyraja sp.', spp)
   ) %>% 
+  select(haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
   type_convert(col_types = cols(
     lat = col_double(),
     lon = col_double(),
-    STATION = col_character(),
     year = col_integer(),
-    DATETIME = col_character(),
     wtcpue = col_double(),
-    NUMCPUE = col_double(),
-    COMMON = col_character(),
     spp = col_character(),
-    SID = col_integer(),
     depth = col_integer(),
-    BOT_TEMP = col_double(),
-    SURF_TEMP = col_double(),
-    VESSEL = col_integer(),
-    CRUISE = col_integer(),
-    HAUL = col_integer(),
     haulid = col_character()
   )) %>% 
   group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
