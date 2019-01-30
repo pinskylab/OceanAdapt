@@ -15,9 +15,10 @@ for(i in seq(missing$STRATUM)){
 }
 strata <- goa %>% 
   select(STRATUM, Areakm2) %>% 
-  distinct()
+  distinct() %>% 
+  rename(StratumCode = STRATUM)
 
-write_csv(strata, "data_raw/goa_new_strata.csv")
+write_csv(strata, "data_raw/goa_strata_new.csv")
 
 # Calculate stratum area for NEUS - takes 4+ minutes ####
 missing <- neus %>% 
@@ -43,4 +44,4 @@ strata <- neus %>%
   select(STRATUM, Areanmi2) %>% 
   distinct()
 
-write_csv(strata, "data_raw/neus_new_strata.csv")
+write_csv(strata, "data_raw/neus_strata_new.csv")
