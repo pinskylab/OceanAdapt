@@ -4,34 +4,34 @@
 # 2. data_raw directory - folder containing all raw data files
 # 3. R directory - folder containing scripts used in the making of this script
 
-# Hopefully the zip file you downloaded created this directory structure for you.
-
-# Answer the following questions using all caps TRUE or FALSE to direct the actions of the script ====
+# The zip file you downloaded created this directory structure for you.
 
 # a note on species name adjustment #### 
-# at some point in time during certain surveys it was realized that what was believed to be one speices was actually a different species or more than one species.  Because of this, species have been lumped together as a genus in those instances.
+# At some point during certain surveys it was realized that what was believed to be one species was actually a different species or more than one species.  Species have been lumped together as a genus in those instances.
+
+# Answer the following questions using all caps TRUE or FALSE to direct the actions of the script ====
 
 # 1. Some strata and years have very little data, should they be removed? #DEFAULT: TRUE. 
 HQ_DATA_ONLY <- TRUE
 
-# 2. #DEFAULT: FALSE Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`
+# 2. Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`. #DEFAULT: FALSE 
 REMOVE_REGION_DATASETS <- FALSE
 
-# 3. #DEFAULT:FALSE, creates graphs based on the data like shown on the website and outputs them to pdf.
-OPTIONAL_PLOT_CHARTS <- FALSE
+# 3. Create graphs based on the data similar to those shown on the website and outputs them to pdf. #DEFAULT:FALSE
+PLOT_CHARTS <- TRUE
 
-# 4. #OPTIONAL, DEFAULT:FALSE, Outputs the dat into an rdata file
-OPTIONAL_OUTPUT_DAT_MASTER_TABLE <- FALSE 
+# 4. Outputs the cleaned data into rdata files. #OPTIONAL DEFAULT:FALSE
+WRITE_CLEAN_RDATA <- TRUE 
 
-# 5. #OPTIONAL, DEFAULT:TRUE, generate dat.exploded table/file.  
+# 5. Generate csv files of the clean data. #OPTIONAL, DEFAULT:FALSE
+WRITE_CLEAN_CSV <- FALSE
+
+# 6. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
 DAT_EXPLODED <- TRUE
 
-# 6. #OPTIONAL, DEFAULT:FALSE, view plots of removed strata for HQ_DATA
-# I separated these out because it takes a while to generate these plots.
+# 7. View plots of removed strata for HQ_DATA. #OPTIONAL, DEFAULT:FALSE
+# It takes a while to generate these plots.
 HQ_PLOTS <- FALSE
-
-# 7. #OPTIONAL, DEFAULT:FALSE, generate a dat.exploded.csv file
-EXPLODE_CSV <- FALSE
 
 ## Workspace setup ====
 # This script works best when the repository is downloaded from github, 
@@ -45,7 +45,6 @@ library(PBSmapping) # for calculating stratum areas
 library(ggplot2)
 library(data.table)
 library(gridExtra)
-
 
 # Functions ====
 # function to calculate convex hull area in km2
@@ -124,19 +123,19 @@ explode0 <- function(x, by=c("region")){
   out
 }
   
-
-# Update Alaska ====
-
 # Compile AI ====
 files <- list.files(path = "data_raw/", pattern = "ai")
 # create blank table
 ai_data <- tibble()
 for (j in seq(files)){
-  # if the file is not the strata file (which is assumed to not need correction)
+#if the file is the 2014-2016 file, which contains a comma in the SCIENTIFIC field which causes a shift of columns for the remaining data
   if(files[j] == "ai2014_2016.csv"){
     temp <- read_lines("data_raw/ai2014_2016.csv")
+    # replace the string that causes the problem
     temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
+    # write it back to a temporary file
     write_lines(temp_fixed, "data_raw/temporary.csv")
+    # read in the fixed data
     temp <- read_csv("data_raw/temporary.csv", col_types = cols(
       LATITUDE = col_character(),
       LONGITUDE = col_character(),
@@ -157,8 +156,10 @@ for (j in seq(files)){
       HAUL = col_character()
     ))
     ai_data <- rbind(ai_data, temp)
+    # remove the temporary fix file
     file.remove("data_raw/temporary.csv")
   }
+  # if the file is not the strata file (which is assumed to not need correction)
   if(!grepl("strata", files[j]) & !grepl("ai2014", files[j])){
     # read the csv
     temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
@@ -2035,8 +2036,9 @@ if(isTRUE(REMOVE_REGION_DATASETS)) {
   rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER, scot, scot_fall, scot_spr, scot_sumr, tax)
 }
 
-if(isTRUE(OPTIONAL_OUTPUT_DAT_MASTER_TABLE)){
-  save(dat, file = paste("trawl_allregions_", Sys.Date(), ".RData", sep = ""))
+if(isTRUE(OPTIONAL_WRITE_CLEAN_DATA)){
+  save(dat, file = paste0("trawl_allregions_", Sys.Date(), ".RData"))
+  write_csv(dat, here::here("data_clean", paste0("all-regions_", Sys.Date(), ".csv")))
 }
 
 # load(file = "trawl_allregions_2019-01-08.RData")
@@ -2148,6 +2150,10 @@ BY_SPECIES_DATA <- cent_bio %>%
   ungroup() %>% 
   arrange(region, spp, year)
 
+if(isTRUE(OPTIONAL_WRITE_CLEAN_DATA)){
+  write_csv(BY_SPECIES_DATA, here::here("data_clean", paste0("by-species_", Sys.Date(), ".csv")))
+}
+
 rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr)
 
 #  Add 0's ####  
@@ -2255,6 +2261,10 @@ regcentbio <- left_join(regcentbio, regcentbiospp, by = "region")
 BY_REGION_DATA  <- regcentbio %>% 
   arrange(region, year)
 
+if(isTRUE(OPTIONAL_WRITE_CLEAN_DATA)){
+  write_csv(BY_REGION_DATA, here::here("data_clean", paste0("by-region_", Sys.Date(), ".csv")))
+}
+
 # By national data ####
 #Returns national data
 #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
@@ -2355,6 +2365,10 @@ natcentbio <- left_join(natcentbio, natcentbiose, by = "year")
 natcentbio$numspp <- lunique(paste(centbio3$region, centbio3$spp)) # calc number of species per region  
 
 BY_NATIONAL_DATA <- natcentbio
+
+if(isTRUE(OPTIONAL_WRITE_CLEAN_DATA)){
+  write_csv(BY_NATIONAL_DATA, here::here("data_clean", paste0("by-national_", Sys.Date(), ".csv")))
+}
 
 rm(centbio2, centbio3, maxyrs, natcentbio, natcentbiose, presyr, presyrsum, regcentbio, regcentbiospp, spplist, spplist2, startpos, startyear, regcentbiose)
 
