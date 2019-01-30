@@ -25,10 +25,11 @@ REMOVE_REGION_DATASETS <- FALSE
 PLOT_CHARTS <- TRUE
 
 # 5. Outputs the cleaned data into rdata files. #OPTIONAL DEFAULT:FALSE
+# RData files are much smaller than csv's
 WRITE_CLEAN_RDATA <- TRUE 
 
 # 6. Generate csv files of the clean data. #OPTIONAL, DEFAULT:FALSE
-WRITE_CLEAN_CSV <- FALSE
+WRITE_CLEAN_CSV <- TRUE
 
 # 7. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
 DAT_EXPLODED <- TRUE
@@ -92,6 +93,30 @@ wgtse = function(x, na.rm=TRUE){
 se <- function(x) sd(x)/sqrt(length(x)) # assumes no NAs
 
 lunique = function(x) length(unique(x)) # number of unique values in a vector
+
+present_every_year <- function(dat, ...){
+  presyr <- dat %>% 
+    filter(wtcpue > 0) %>% 
+    group_by(...) %>% 
+    summarise(pres = n())
+  return(presyr)
+}
+
+num_year_present <- function(presyr, ...){
+  presyrsum <- presyr %>% 
+    filter(pres > 0) %>% 
+    group_by(...) %>% 
+    summarise(presyr = n()) 
+  return(presyrsum)
+}
+
+max_year_surv <- function(presyrsum, ...){
+  maxyrs <- presyrsum %>% 
+    group_by(...) %>% 
+    summarise(maxyrs = max(presyr))
+  return(maxyrs)
+  
+}
 
 explode0 <- function(x, by=c("region")){
   # x <- copy(x)
@@ -1399,6 +1424,7 @@ seus_strata <- read_csv("data_raw/seus_strata.csv", col_types = cols(
 ))
 
 seus <- left_join(seus_catch, seus_haul, by = "EVENTNAME")  
+
 #Create STRATA column
 seus <- seus %>% 
   mutate(STRATA = as.numeric(str_sub(STATIONCODE, 1, 2))) %>% 
@@ -1431,16 +1457,26 @@ misswt <- seus %>%
 meanwt <- seus %>% 
   filter(SPECIESCODE %in% misswt$SPECIESCODE) %>% 
   group_by(SPECIESCODE) %>% 
-  summarise(meanwt = mean(SPECIESTOTALWEIGHT, na.rm = T))
+  summarise(mean_wt = mean(SPECIESTOTALWEIGHT, na.rm = T))
 
-# add the calculated mean weight into the main table with a for loop
-for (i in seq(meanwt$SPECIESCODE)){
-  seus <- seus %>% 
-    mutate(SPECIESTOTALWEIGHT = ifelse(is.na(SPECIESTOTALWEIGHT) &
-                                         SPECIESCODE == meanwt$SPECIESCODE[i], 
-                                       meanwt$meanwt[i], 
-                                       SPECIESTOTALWEIGHT))
-}
+# rows that need to be changed
+change <- seus %>%
+  filter(is.na(SPECIESTOTALWEIGHT))
+
+# remove those rows from SEUS
+seus <- anti_join(seus, change)
+
+# change the rows
+change <- change %>% 
+  select(-SPECIESTOTALWEIGHT)
+
+# update the column values
+change <- left_join(change, meanwt, by = "SPECIESCODE") %>% 
+  rename(SPECIESTOTALWEIGHT = mean_wt)
+
+# rejoin to the data
+seus <- rbind(seus, change)
+
 
 #Data entry error fixes for lat/lon coordinates
 seus <- seus %>%
@@ -1643,63 +1679,16 @@ if (HQ_DATA_ONLY == TRUE){
   
 }
 
-rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, i, test, test2, problems, p1, p2, p3, p4)
+rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, test, test2, problems, p1, p2, p3, p4)
 
 # Compile Scotian Shelf ====
-scot_sumr <- read_csv("data_raw/scot_summer.csv", col_types = cols(
-  .default = col_double(),
-  Stratum = col_integer(),
-  Mission = col_character(),
-  SurveyYear = col_integer(),
-  Season = col_character(),
-  SurveyDate = col_character(),
-  SetNumber = col_integer(),
-  Gear = col_character(),
-  MinimumDepth_Fathoms = col_integer(),
-  MaximumDepth_Fathoms = col_integer(),
-  Species = col_integer(),
-  TaxonomicSerialNumber = col_integer(),
-  ScientificName = col_character(),
-  TaxonomicNameAuthor = col_character()
-))
+files <- as.list(dir(pattern = "scot", path = "data_raw", full.names = T))
 
-scot_fall <- read_csv("data_raw/scot_fall.csv", col_types = cols(
-  .default = col_double(),
-  Stratum = col_integer(),
-  Mission = col_character(),
-  SurveyYear = col_integer(),
-  Season = col_character(),
-  SurveyDate = col_character(),
-  SetNumber = col_integer(),
-  Gear = col_character(),
-  MinimumDepth_Fathoms = col_integer(),
-  MaximumDepth_Fathoms = col_integer(),
-  Species = col_integer(),
-  TaxonomicSerialNumber = col_integer(),
-  ScientificName = col_character(),
-  TaxonomicNameAuthor = col_character()
-))
-scot_spr <- read_csv("data_raw/scot_spring.csv", col_types = cols(
-  .default = col_double(),
-  Stratum = col_integer(),
-  Mission = col_character(),
-  SurveyYear = col_integer(),
-  Season = col_character(),
-  SurveyDate = col_character(),
-  SetNumber = col_integer(),
-  Gear = col_character(),
-  MinimumDepth_Fathoms = col_integer(),
-  MaximumDepth_Fathoms = col_integer(),
-  Species = col_integer(),
-  TaxonomicSerialNumber = col_integer(),
-  ScientificName = col_character(),
-  TaxonomicNameAuthor = col_character()
-))
+scot <- files %>% 
+  map_dfr(read_csv)
 
-scot <- rbind(scot_fall, scot_spr, scot_sumr)
-
-# convert mission to haul_id
 scot <- scot %>% 
+  # convert mission to haul_id
   rename(haulid = Mission, 
          wtcpue = TotalWeightStandardized_KG, 
          stratum = Stratum, 
@@ -1708,22 +1697,14 @@ scot <- scot %>%
          lat = Latitude_DD, 
          lon = Longitude_DD, 
          depth = MaximumDepth_Fathoms, 
-         spp = ScientificName) %>%
-  # create placeholder column to fill in with data at the next step
-  mutate(stratumarea = NA)
+         spp = ScientificName) 
 
 # calculate stratum area for each stratum
-strat <- scot %>%
-  select(stratum) %>% 
-  distinct()
+scot <- scot %>% 
+  group_by(stratum) %>% 
+  mutate(stratumarea = calcarea(lon, lat)) %>% 
+  ungroup()
 
-for(i in seq(strat$stratum)){
-  temp <- scot %>% 
-    filter(stratum == strat$stratum[i]) %>% 
-    mutate(area = calcarea(lon, lat))
-  scot <- scot %>% 
-    mutate(stratumarea = ifelse(stratum == strat$stratum[i], temp$area[1], stratumarea))
-}
 
 # Does the spp column contain any eggs or non-organism notes? As of 2018, nothing stuck out as needing to be removed
 test <- scot %>%
@@ -1895,36 +1876,28 @@ tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
 ))
 
 # Master Data Set ####
-dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot_sumr, scot_fall, scot_spr)
-
+dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot_sumr, scot_fall, scot_spr) %>% 
 # Remove NA values in wtcpue
-dat <- dat %>% 
   filter(!is.na(wtcpue))
 
-
 # add a nice spp and common name
-dat2 <- left_join(dat, select(tax, taxon, name, common), by = c("spp" = "taxon")) 
-dat2 <- dat2 %>% 
+dat <- left_join(dat, select(tax, taxon, name, common), by = c("spp" = "taxon")) %>% 
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, common, wtcpue)
 
 # check for errors in name matching
-if(sum(dat2$spp == 'NA') > 0 | sum(is.na(dat2$spp)) > 0){
+if(sum(dat$spp == 'NA') > 0 | sum(is.na(dat$spp)) > 0){
   warning('>>create_master_table(): Did not match on some taxon [Variable: `tax`] names.')
 }
-
-# replace dat with dat2
-dat <- dat2
-rm(dat2)
 
 if(isTRUE(REMOVE_REGION_DATASETS)) {
   rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER, scot, scot_fall, scot_spr, scot_sumr, tax)
 }
 
 if(isTRUE(WRITE_CLEAN_RDATA)){
-  save(dat, file = paste0("trawl_allregions_", Sys.Date(), ".RData"))
+  save(dat, file = here("data_clean", paste0(Sys.Date(), "_allregions.RData")))
 }
 if(isTRUE(WRITE_CLEAN_CSV)){
-  write_csv(dat, here::here("data_clean", paste0(Sys.Date(), "_all-regions,csv")))
+  write_csv(dat, here("data_clean", paste0(Sys.Date(), "_all-regions.csv")))
 }
 
 # load(file = "trawl_allregions_2019-01-08.RData")
@@ -1939,21 +1912,13 @@ if(isTRUE(WRITE_CLEAN_CSV)){
 
 # Find a standard set of species (present at least 3/4 of the years in a region)
 # this result differs from the original code because it does not include any species that have a pres value of 0.  It does, however, include speices for which the common name is NA.
-presyr <- dat %>% 
-  filter(wtcpue > 0) %>% 
-  group_by(region, spp, common, year) %>% 
-  summarise(pres = n())
+presyr <- present_every_year(dat, region, spp, common, year) 
 
 # years in which spp was present
-presyrsum <- presyr %>% 
-  filter(pres > 0) %>% 
-  group_by(region, spp, common) %>% 
-  summarise(presyr = n())
+presyrsum <- num_year_present(presyr, region, spp, common)
 
 # max num years of survey in each region
-maxyrs <- presyrsum %>% 
-  group_by(region) %>% 
-  summarise(maxyrs = max(presyr))
+maxyrs <- max_year_surv(presyrsum, region)
 
 # merge in max years
 presyrsum <- left_join(presyrsum, maxyrs, by = "region")
@@ -2041,46 +2006,40 @@ if(isTRUE(WRITE_CLEAN_RDATA)){
 }
 
 if(isTRUE(WRITE_CLEAN_CSV)){
-  write_csv(BY_SPECIES_DATA, here::here("data_clean", paste0(Sys.Date, "_by-species.csv")))
+  write_csv(BY_SPECIES_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-species.csv")))
 }
 
 rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr)
 
 #  Add 0's ####  
 Sys.time()
-# This takes about 2 minutes
+# This takes about 5 minutes
 if (DAT_EXPLODED == TRUE){
   dat.exploded <- as.data.table(trimmed_dat)[,explode0(.SD), by="region"]
   
-  if (EXPLODE_CSV == TRUE){
-write_csv(dat.exploded, path = paste0(Sys.Date(), "_dat_exploded.csv"))
+  if (WRITE_CLEAN_RDATA == TRUE){
+    saveRDS(dat.exploded, here("data_clean", paste0(Sys.Date(), "_dat_exploded.Rdata")))
+  }
+  if (WRITE_CLEAN_CSV == TRUE){
+    write_csv(dat.exploded, here("data_clean", paste0(Sys.Date(), "_dat_exploded.csv")))
   }
 
-if (ALL_OBJECTS == FALSE){
-  rm(dat.exploded)
 }
-}
+Sys.time()
 
 
 #By region data ####
 #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
 ## Calculate mean position through time for regions 
 ## Find a standard set of species (present every year in a region)
-presyr <- dat %>% 
-  filter(wtcpue > 0) %>% 
-  group_by(region, spp, year) %>% 
-  summarise(pres = n())
+presyr <- present_every_year(dat, region, spp, year)
 
 # num years in which spp was present
-presyrsum <- presyr %>% 
-  filter(pres > 0) %>% 
-  group_by(region, spp) %>% 
-  summarise(presyr = n())
+presyrsum <- num_year_present(presyr, region, spp)
 
 # max num years of survey in each region
-maxyrs <- presyrsum %>% 
-  group_by(region) %>% 
-  summarise(maxyrs = max(presyr))
+maxyrs <- max_year_surv(presyrsum, region)
+
 
 # merge in max years
 presyrsum <- left_join(presyrsum, maxyrs, by = "region") 
@@ -2156,7 +2115,7 @@ if(isTRUE(WRITE_CLEAN_RDATA)){
 }
 
 if(isTRUE(WRITE_CLEAN_CSV)){
-  write_csv(BY_REGION_DATA, here::here("data_clean", paste0(Sys.Date, "_by-region.csv")))
+  write_csv(BY_REGION_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-region.csv")))
 }
 
 # By national data ####
@@ -2173,40 +2132,32 @@ regstouse <- c('Eastern Bering Sea', 'Northeast US Spring', 'Northeast US Fall')
 natstartyear <- 1982 # a common starting year for the both focal regions
 
 # find the latest year that all regions have in common
-maxyrs <- dat %>% 
+maxyears <- dat %>% 
   filter(region %in% regstouse) %>% 
   group_by(region) %>% 
   summarise(maxyear = max(year))
 
-natendyear <- min(maxyrs$maxyear)
+natendyear <- min(maxyears$maxyear)
 
 ## Find a standard set of species (present every year in the focal regions) for the national analysis
 # For national average, start in prescribed year, only use focal regions
 # find which species are present in which years
-presyr <- dat %>% 
-  filter(year >= natstartyear & year <= natendyear,
-         region %in% regstouse,
-         wtcpue > 0) %>% 
-  group_by(region, spp, year) %>% 
-  summarise(pres = n())
+presyr <- present_every_year(dat, region, spp, year) %>% 
+  filter(year >= natstartyear & year <= natendyear & 
+           region %in% regstouse)  
 
 # num years in which spp was present
-presyrsum <- presyr %>% 
-  filter(pres > 0) %>% 
-  group_by(region, spp) %>% 
-  summarise(presyr = n())
+presyrsum <- num_year_present(presyr, region, spp)
 
 # max num years of survey in each region
-maxyrs <- presyrsum %>% 
-  group_by(region) %>% 
-  summarise(maxyears = max(presyr))
+maxyrs <- max_year_surv(presyrsum, region)
 
 # merge in max years
 presyrsum <- left_join(presyrsum, maxyrs, by = "region") 
 
 # retain all spp present at least once every time a survey occurs
 spplist2 <- presyrsum %>% 
-  filter(presyr == maxyears) %>% 
+  filter(paste0(region,presyr) %in% paste0(maxyrs$region, maxyrs$maxyrs)) %>% 
   select(region, spp)
 
 # Make a new centbio dataframe for regional use, only has spp in spplist
@@ -2265,17 +2216,10 @@ if(isTRUE(WRITE_CLEAN_RDATA)){
 }
 
 if(isTRUE(WRITE_CLEAN_CSV)){
-  write_csv(BY_NATIONAL_DATA, here::here("data_clean", paste0(Sys.Date, "_by-national.csv")))
+  write_csv(BY_NATIONAL_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-national.csv")))
 }
 
 rm(centbio2, centbio3, maxyrs, natcentbio, natcentbiose, presyr, presyrsum, regcentbio, regcentbiospp, spplist, spplist2, startpos, startyear, regcentbiose)
-
-# All objects ####
-if(isTRUE(ALL_OBJECTS)) {
-  save(ai, BY_NATIONAL_DATA, BY_REGION_DATA, BY_SPECIES_DATA, dat, dat.exploded, ebs, gmex, goa, neusF, neusS, seusFALL, seusSPRING, seusSUMMER, tax, trimmed_dat, wcann, wctri, file = "all_objects.Rdata")
-}
-  # if you want to load all objects instead of running the full above script
-# load("all_objects.Rdata")
 
 
 if(isTRUE(PLOT_CHARTS)) {
