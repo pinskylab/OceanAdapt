@@ -142,8 +142,9 @@ files <- as.list(dir(pattern = "ai", path = "data_raw", full.names = T))
 # exclude the strata file and the raw 2014-2016 data file which has been fixed in ai_temporary.csv, the 1 and 5 elements
 files <- files[-c(1,5)]
 
-# the output of this is a list of lists, object 1 is the strata file which cannot be joined by rbind.
+# combine all of the data files into one table
 ai_data <- files %>% 
+  # read in all of the csv's in the files list
   map(read_csv) %>%
   # reduce with rbind into one dataframe
   reduce(rbind) %>% 
@@ -157,10 +158,11 @@ ai_strata <- read_csv(here("data_raw", "ai_strata.csv"), col_types = cols(NPFMCA
       DepthIntervalm = col_character(),
       Areakm2 = col_integer()
     ))  %>% 
-      select(StratumCode, Areakm2) 
+      select(StratumCode, Areakm2) %>% 
+  mutate(stratum = StratumCode)
     
 
-ai <- left_join(ai_data, ai_strata, by = c("stratum" = "StratumCode"))
+ai <- left_join(ai_data, ai_strata, by = "stratum")
 
 # are there any strata in the data that are not in the strata file?
 test <- ai %>% 
@@ -267,51 +269,31 @@ if (HQ_DATA_ONLY == TRUE){
 rm(files, temp, j, temp_fixed, ai_data, ai_strata, test, test2, p1, p2, p3, p4)
 
 # Compile EBS ====
-files <- list.files(path = "data_raw/", pattern = "ebs")
-# create blank table
-ebs_data <- tibble()
-for (j in seq(files)){
-  # for data files - if file does not contain the word strata
-  if(!grepl("strata", files[j])){
-    # read the csv
-    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
-      LATITUDE = col_character(),
-      LONGITUDE = col_character(),
-      STATION = col_character(),
-      STRATUM = col_character(),
-      YEAR = col_character(),
-      DATETIME = col_character(),
-      WTCPUE = col_character(),
-      NUMCPUE = col_character(),
-      COMMON = col_character(),
-      SCIENTIFIC = col_character(),
-      SID = col_character(),
-      BOT_DEPTH = col_character(),
-      BOT_TEMP = col_character(),
-      SURF_TEMP = col_character(),
-      VESSEL = col_character(),
-      CRUISE = col_character(),
-      HAUL = col_character()
-    ))
-    ebs_data <- rbind(ebs_data, temp)
-  }else{
-    # import the strata data
-    ebs_strata <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
-      SubareaDescription = col_character(),
-      StratumCode = col_integer(),
-      Areakm2 = col_integer()
-    )) %>% 
-      select(StratumCode, Areakm2) %>% 
-      rename(STRATUM = StratumCode)
-  }
-}
-ebs_data <- ebs_data %>% 
+files <- as.list(dir(pattern = "ebs", path = "data_raw", full.names = T))
+
+# exclude the strata file which is the 1 element
+files <- files[-1]
+
+# combine all of the data files into one table
+ebs_data <- files %>% 
+  # read in all of the csv's in the files list
+  map(read_csv) %>%
+  # reduce with rbind into one dataframe
+  reduce(rbind) %>% 
   # remove any data rows that have headers as data rows
-  filter(LATITUDE != "LATITUDE") %>% 
-  mutate(STRATUM = as.integer(STRATUM))
+  filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
+  mutate(stratum = as.integer(STRATUM))
 
+# import the strata data
+ebs_strata <- read_csv(here("data_raw", "ebs_strata.csv"), col_types = cols(
+  SubareaDescription = col_character(),
+  StratumCode = col_integer(),
+  Areakm2 = col_integer()
+)) %>% 
+  select(StratumCode, Areakm2) %>% 
+  rename(stratum = StratumCode)
 
-ebs <- left_join(ebs_data, ebs_strata, by = "STRATUM")
+ebs <- left_join(ebs_data, ebs_strata, by = "stratum")
 
 # are there any strata in the data that are not in the strata file?
 test <- ebs %>% 
@@ -323,15 +305,13 @@ ebs <- ebs %>%
     # Create a unique haulid
     haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
     # convert -9999 to NA 
-    WTCPUE = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>%  
+    wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>%  
   # rename columns
-  rename(stratum = STRATUM,
-         year = YEAR, 
+  rename(year = YEAR, 
          lat = LATITUDE, 
          lon = LONGITUDE, 
          depth = BOT_DEPTH, 
          spp = SCIENTIFIC, 
-         wtcpue = WTCPUE,
          stratumarea = Areakm2) %>% 
   # remove eggs
   filter(spp != '' &
@@ -419,78 +399,49 @@ rm(files, temp, j, ebs_data, ebs_strata, test2, test, p1, p2, p3, p4)
 
 
 # Compile GOA ====
-files <- list.files(path = "data_raw/", pattern = "goa")
-# create blank table
-goa_data <- tibble()
-for (j in seq(files)){
-  if(!grepl("strata", files[j])){
-    # read the csv
-    temp <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
-      LATITUDE = col_character(),
-      LONGITUDE = col_character(),
-      STATION = col_character(),
-      STRATUM = col_character(),
-      YEAR = col_character(),
-      DATETIME = col_character(),
-      WTCPUE = col_character(),
-      NUMCPUE = col_character(),
-      COMMON = col_character(),
-      SCIENTIFIC = col_character(),
-      SID = col_character(),
-      BOT_DEPTH = col_character(),
-      BOT_TEMP = col_character(),
-      SURF_TEMP = col_character(),
-      VESSEL = col_character(),
-      CRUISE = col_character(),
-      HAUL = col_character()
-    ))
-    goa_data <- rbind(goa_data, temp)
-  }else{
-    if(!grepl("new", files[j])){
-    goa_strata <- read_csv(paste0("data_raw/", files[j]), col_types = cols(
-      SubareaDescription = col_character(),
-      StratumCode = col_integer(),
-      DepthIntervalm = col_character(),
-      Areakm2 = col_integer()
-    )) %>% 
-      select(StratumCode, Areakm2) %>% 
-      rename(STRATUM = StratumCode)
-    }else{
-      goa_strata_2 <- read_csv("data_raw/goa_new_strata.csv", col_types = cols(
-        STRATUM = col_integer(),
-        Areakm2 = col_double()
-      ))
-    }
-  }
-}
+files <- as.list(dir(pattern = "goa", path = "data_raw", full.names = T))
 
-goa_data <- goa_data %>% 
+# exclude the 2 strata files; the 1 and 2 elements
+files <- files[-c(1,2)]
+
+# combine all of the data files into one table
+goa_data <- files %>% 
+  # read in all of the csv's in the files list
+  map(read_csv) %>%
+  # reduce with rbind into one dataframe
+  reduce(rbind) %>% 
   # remove any data rows that have headers as data rows
-  filter(LATITUDE != "LATITUDE")%>% 
-  mutate(STRATUM = as.integer(STRATUM))
+  filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
+  mutate(stratum = as.integer(STRATUM))
 
-goa_strata <- rbind(goa_strata, goa_strata_2) %>% 
-  distinct()
+# import the strata data
+files <- as.list(dir(pattern = "goa_strata", path = "data_raw", full.names = T))
 
-goa <- left_join(goa_data, goa_strata, by = "STRATUM")
+goa_strata <- files %>% 
+  # read in all of the csv's in the files list
+  map_dfr(read_csv) %>% 
+  select(StratumCode, Areakm2) %>% 
+  distinct() %>% 
+  rename(stratum = StratumCode)
+
+goa <- left_join(goa_data, goa_strata, by = "stratum")
 
 # are there any strata in the data that are not in the strata file?
 test <- goa %>% 
   filter(is.na(Areakm2))
 stopifnot(nrow(test) == 0)
 
-# Create a unique haulid
+
 goa <- goa %>%
   mutate(
+    # Create a unique haulid
     haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'),    
-    WTCPUE = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
-  rename(stratum = STRATUM,
-         year = YEAR, 
+    wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
+  rename(year = YEAR, 
          lat = LATITUDE, 
          lon = LONGITUDE, 
          depth = BOT_DEPTH, 
          spp = SCIENTIFIC, 
-         wtcpue = WTCPUE,
          stratumarea = Areakm2) %>% 
   # remove non-fish
   filter(
