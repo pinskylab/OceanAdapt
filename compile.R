@@ -2150,14 +2150,14 @@ presyr <- present_every_year(dat, region, spp, year) %>%
 presyrsum <- num_year_present(presyr, region, spp)
 
 # max num years of survey in each region
-maxyrs <- max_year_surv(presyrsum, region)
+maxyars <- max_year_surv(presyrsum, region)
 
 # merge in max years
-presyrsum <- left_join(presyrsum, maxyrs, by = "region") 
+presyrsum <- left_join(presyrsum, maxyars, by = "region") 
 
 # retain all spp present at least once every time a survey occurs
 spplist2 <- presyrsum %>% 
-  filter(paste0(region,presyr) %in% paste0(maxyrs$region, maxyrs$maxyrs)) %>% 
+  filter(paste0(region,presyr) %in% paste0(maxyars$region, maxyars$maxyrs)) %>% 
   select(region, spp)
 
 # Make a new centbio dataframe for regional use, only has spp in spplist
@@ -2292,6 +2292,7 @@ if(isTRUE(PLOT_CHARTS)) {
   
   
   # Plot Regional ####
+  regcentbio <- BY_REGION_DATA
   #quartz(width=6, height=6)
   pdf(file=paste('regcentlat_depth_strat_', Sys.Date(), '.pdf', sep=''), width=6, height=6)
   par(mfrow=c(3,3)) # page 1: latitude
@@ -2332,6 +2333,8 @@ if(isTRUE(PLOT_CHARTS)) {
   #quartz(width=6, height=3.5)
   pdf(file=paste('natcentlatstrat_', Sys.Date(), '.pdf', sep=''), width=6, height=3.5)
   par(mfrow=c(1,2), mai=c(0.8, 0.8, 0.3, 0.2), mgp=c(2.4,0.7,0))
+  
+  natcentbio <- BY_NATIONAL_DATA
   
   minlat = natcentbio$lat - natcentbio$lat_se
   maxlat = natcentbio$lat + natcentbio$lat_se
