@@ -1,0 +1,2521 @@
+SPECIES_CODE,SPECIES_NAME,COMMON_NAME,REVISION,BS,GOA,WC,AUDITJOIN
+80015,Evasterias troschelii,mottled sea star,,Y,Y,Y,140
+80018,Diamphiodia occidentalis,,,,Y,,141
+80020,Evasterias echinosoma,giant sea star,,Y,Y,,142
+80105,Orthasterias sp.,,,,Y,,143
+80106,Orthasterias koehleri,redbanded sea star,,Y,Y,,144
+80110,Leptasterias groenlandica,,,Y,,,145
+80111,Leptasterias hexactis,,,Y,,,146
+80112,Leptasterias hylodes,Aleutian sea star,,Y,Y,,147
+80120,Rathbunaster californicus,,,,,Y,148
+80160,Pycnopodia helianthoides,sunflower sea star,,Y,Y,Y,149
+80170,Stylasterias forreri,long-rayed star,,,Y,Y,150
+80171,Stylasterias sp.,,,,Y,,151
+75244,Macoma secta,white-sand macoma,,Y,,,152
+75247,Macoma brota,heavy macoma,,Y,Y,,153
+75264,Siliqua sp.,,,Y,Y,,154
+75266,Siliqua patula,Pacific razor,,Y,,,155
+75267,Siliqua alta,Alaska razor,,Y,Y,,156
+75284,Serripes sp.,,,Y,,,157
+75285,Serripes groenlandicus,Greenland cockle,,Y,Y,,158
+75286,Serripes laperousii,broad cockle,,Y,,,159
+75332,Mya arenaria,softshell,,Y,,,160
+75333,Mya truncata,truncate softshell,A89,Y,,,161
+75335,Mya pseudoarenaria,false softshell,,Y,,,162
+75372,Xylophaga californica,,,,,Y,163
+75381,Teredinidae,Shipworm unident.,A89,,Y,,164
+75382,Bankia setacea,feathery shipworm,A89,,Y,,165
+75410,Lyonsia arenosa,sandy lyonsia,,,Y,,166
+75551,Cardiomya sp.,,,Y,,,167
+75600,Pododesmus macrochisma,Alaska falsejingle,,Y,Y,,168
+75605,Pododesmus sp.,,,Y,Y,,169
+75609,Anomia sp.,,,Y,,,170
+75610,Anomiidae,falsejingles unident.,,Y,Y,,171
+77000,Scaphopoda,scaphopod unident.,,Y,Y,,172
+77011,Dentalium sp.,,,,Y,,173
+77012,Rhabdus dalli,Dall tuskshell,,Y,,,174
+77102,Compressidens stearnsii,Stearns toothshell,,,Y,,175
+78000,Cephalopoda,cephalopod unident.,,Y,Y,Y,176
+78010,Octopodidae,octopus unident.,,Y,Y,Y,178
+78011,,pelagic octopus unident.,,Y,Y,Y,179
+78012,Benthoctopus leioderma,smoothskin octopus,,Y,Y,Y,180
+78030,Opisthoteuthis californiana,flapjack devilfish,A91,Y,Y,Y,181
+78403,Octopus dofleini,giant octopus,,Y,Y,Y,182
+74650,Cardita sp.,,,Y,Y,,183
+74653,Cyclocardia ventricosa,stout cyclocardia,,,Y,,184
+74654,Cyclocardia crassidens,thick carditid,,Y,,,185
+74655,Cyclocardia crebricostata,many-rib cyclocardia,,Y,,,186
+74656,Cyclocardia sp.,,,Y,,,187
+74712,Vesicomya pacifica,,,,,Y,188
+74801,Lasaeidae unident.,,A89,Y,,,189
+74803,Kellia laperousii,La Perouse kellyclam,A89,Y,Y,,190
+74980,Clinocardium sp.,,A89,Y,Y,,191
+74981,,cockle unident.,,Y,Y,Y,192
+74982,Clinocardium nuttallii,Nuttall cockle,,Y,Y,,193
+74983,Clinocardium ciliatum,hairy cockle,,Y,Y,,194
+74985,Clinocardium californiense,California cockle,A87,Y,Y,,195
+74986,Clinocardium blandum,low-rib cockle,,Y,Y,,196
+75016,Compsomyax subdiaphanus,milky venus,,,Y,,197
+75020,Saxidomus nuttalli,Washington clam,,Y,,,198
+75021,Saxidomus gigantea,butter clam,,Y,,,199
+75025,Humilaria kennerleyi,Kennerleys venus,,,Y,,200
+75092,Liocyma fluctosa,wavy liocyma,A89,Y,,,201
+75102,Tresus nuttallii,Pacific gaper,,Y,Y,,202
+75103,Tresus capax,fat gaper,,,,Y,203
+75110,Mactromeris sp.,,,Y,Y,,204
+75111,Mactromeris polynyma,Arctic surfclam,,Y,Y,,205
+75201,Tellina sp.,,,Y,Y,,206
+75202,Tellina carpenteri,carpenter tellin,,Y,,,207
+75203,Tellina nuculoides,salmon tellin,,Y,,,208
+75205,Tellina lutea,Alaska great-tellin,,Y,,,209
+75240,Macoma sp.,,,Y,Y,,210
+75241,Macoma nasuta,bent-nose macoma,,Y,,,211
+75242,Macoma calcarea,chalky macoma,,Y,Y,,212
+74171,Delectopecten vancouverensis,Vancouver scallop,,Y,Y,Y,214
+74175,Parvamussium alaskense,Alaska glass-scallop,,Y,Y,,215
+74176,Cyclopecten sp.,,A89,Y,,Y,216
+74301,Panopea abrupta,Pacific geoduck,,Y,,Y,217
+74310,Hiatella sp.,,,,Y,,218
+74311,Hiatella arctica,Arctic hiatella,,Y,Y,,219
+74320,Panomya arctica,,,Y,,,220
+74333,Nucula tenuis,smooth nutclam,,Y,,,221
+74342,Acila castrensis,divaricate nutclam,,,,Y,222
+74414,Yoldia sp.,,,Y,Y,Y,223
+74415,Yoldia montereyensis,,,,,Y,224
+74416,Yoldia seminuda,crisscrossed yoldia,,Y,Y,,225
+74417,Yoldia myalis,oval yoldia,,Y,Y,,226
+74420,Yoldia hyperborea,northern yoldia,,Y,,,228
+74421,Portlandia sp.,,,Y,,,229
+74425,Yoldiella sp.,,,Y,,,230
+74435,Nuculana sp.,,,Y,Y,,231
+74436,Nuculana pernula,northern nutclam,,Y,Y,,232
+74439,Nuculana fossa,trenched nutclam,,Y,Y,,233
+74440,Nuculana buccata,stout nutclam,,Y,,,234
+74481,Limopsis akutanica,Akutan limops,,,Y,,235
+74560,Musculus sp.,,,Y,,,236
+74561,Musculus niger,black mussel,,Y,Y,,237
+74562,Musculus discors,discordant mussel,,Y,,,238
+74563,Musculus olivaceus,,,Y,,,239
+74564,Crenella seminuda,partly-sculptured crenella,,Y,,,240
+74639,Astarte crenata,crenulate astarte,,Y,Y,,241
+74640,Astarte sp.,,,Y,Y,,242
+74641,Astarte borealis,boreal astarte,,Y,,,243
+74642,Astarte polaris,polar astarte,,Y,,,244
+74644,Tridonta rollandi,Rolland tridonta,,Y,,,245
+72752,Buccinum scalariforme,ladder whelk,,Y,Y,,246
+72755,Buccinum polare,polar whelk,,Y,Y,,247
+72756,Buccinum solenum,,,Y,,,248
+72758,Buccinum glaciale,glacial whelk,,Y,,,249
+72759,Buccinum tenellum,,,Y,,,250
+72760,Buccinum castaneum,chestnut whelk,A95,,Y,,251
+72761,Searlesia dira,dire whelk,A89,Y,,,252
+72790,Arctomelon stearnsii,Alaska volute,,Y,Y,,253
+72795,Volutomitra alaskana,,,Y,,,254
+72800,Velutina undata,wavy lamellaria,,Y,,,255
+72801,Velutina nana,,,Y,,,256
+72802,Velutina plicatilis,oblique lamellaria,,Y,,,257
+72803,Velutina conica,conical lamellaria,,Y,,,258
+72804,Velutina prolongata,elongate lamellaria,,Y,,,259
+72805,Velutina velutina,smooth lamellaria,,Y,,,260
+73183,Admete virdula,northern admete,,Y,,,261
+73185,Admete laevior,,,Y,,,262
+73186,Admete regina,noble admete,,Y,,,263
+73351,Cylichna alba,white chalice-bubble,,Y,,,264
+74000,Bivalvia,bivalve unident.,,Y,Y,Y,265
+74050,Mytilidae,mussel unident.,,Y,Y,Y,266
+74060,Modiolus modiolus,northern horsemussel,,Y,Y,Y,267
+74065,Mytilus sp.,,,Y,Y,,268
+74070,Mytilus californianus,California mussel,,,Y,,269
+74080,Mytilus edulis,blue mussel,,Y,Y,Y,270
+74100,Pectinidae,scallop unident.,,Y,Y,Y,271
+74104,Chlamys sp.,,,Y,Y,Y,272
+74105,Chlamys behringiana,Iceland scallop,,Y,Y,,273
+74106,Chlamys rubida,reddish scallop,,Y,Y,Y,274
+74107,Chlamys hastata,spiny scallop,,,Y,,275
+74112,Chlamys pseudoislandica,false iceland scallop,,Y,,,276
+74120,Patinopecten caurinus,weathervane scallop,,Y,Y,Y,277
+72305,Trichotropis bicarinata,two-keel hairysnail,,Y,,,278
+72370,Iphinoe (=Trichotropis) kroyeri,Kroyer's hairy snail,,Y,,,279
+72380,Torellia ammonia,rams-horn hairysnail,A93,,Y,,280
+72403,Boreotrophon coronatus,,,Y,,,281
+72406,Boreotrophon clathratus,clathrate trophon,,Y,,,282
+72407,Boreotrophon stuarti,winged trophon,A95,,Y,,283
+72420,Boreotrophon sp.,,,Y,Y,,284
+72421,Boreotrophon pacificus,,,Y,,,285
+72423,Ceratostoma foliatum,foliate thornmouth,A89,,Y,,286
+72500,Fusitriton oregonensis,Oregon triton,,Y,Y,Y,287
+72501,Fusitriton sp.,,,Y,Y,Y,288
+72510,,trochid unident.,,Y,,,289
+72511,Calliostoma sp.,,,,Y,,290
+72512,Calliostoma platinum,silvery topsnail,,,,Y,291
+72520,Bathybembix bairdii,,,,Y,Y,292
+72525,Cidarina cidaris,,A95,,Y,,293
+72531,Margarites sp.,,,Y,Y,,294
+72532,Margarites pupillus,little margarite,,Y,,,295
+72533,Margarites giganteus,giant margarite,,Y,,,296
+72534,Margarites argentatus,,,Y,,,297
+72535,Margarites costalis,boreal rosy margarite,,Y,,,298
+72540,Solariella sp.,,,Y,,,299
+72541,Solariella obscura,obscure solarelle,,Y,,,300
+72543,Solariella varicosa,varicose solarelle,,Y,,,301
+72740,Buccinum sp.,,,Y,Y,Y,302
+72741,Buccinum polium,,,Y,,,303
+72742,Buccinum ochotense,Okhotsk whelk,,Y,,,304
+72743,Buccinum angulosum,angular whelk,,Y,,,305
+72744,Buccinum fringillum,finch whelk,,Y,,,306
+72746,Buccinum simulatum,,A95,,Y,,308
+72747,Buccinum oedematum,swollen whelk,A95,,Y,,309
+72748,Buccinum eugrammatum,lirate whelk,A95,,Y,,310
+72750,Buccinum strigillatum,,,Y,Y,Y,311
+72751,Buccinum plectrum,sinuous whelk,,Y,Y,,312
+71771,Beringius frielei,,,Y,,,313
+71772,Beringius beringii,,,Y,Y,,314
+71774,Beringius stimpsoni,,,Y,Y,,315
+71775,Beringius crebricostatus,thick-cord whelk,,Y,Y,,316
+71776,Beringius undatus,,A95,,Y,,317
+71800,Neptunea sp.,,,Y,Y,Y,318
+71810,Neptunea amianta,white neptune,,Y,Y,Y,319
+71820,Neptunea pribiloffensis,Pribilof whelk,,Y,Y,,320
+71835,Neptunea borealis,,,Y,,,321
+71850,Neptunea eulimata,,,Y,,,322
+71860,Neptunea neptunea,,,Y,,,323
+71870,Neptunea lyrata,lyre whelk,,Y,Y,Y,324
+71880,Neptunea vermii,,,Y,,,325
+71882,Neptunea ventricosa,fat whelk,,Y,Y,,326
+71884,Neptunea heros,,,Y,Y,,327
+71886,Clinopegma magnum,helmet whelk,A89,Y,,,328
+71890,Plicifusus sp.,,,Y,,,329
+71891,Plicifusus kroyeri,,,Y,Y,,330
+71892,Plicifusus incisus,,A88,Y,,,331
+71893,Plicifusus brunneus,brown whelk,,Y,,,332
+71894,Plicifusus verkruzeni,,,Y,,,333
+71895,Volutopsius callorhinus,,C97,Y,,,334
+71900,Plicifusus griseus,gray whelk,,Y,,Y,335
+71901,Sulcosinus taphrius,sulcated whelk,A95,Y,Y,,336
+71904,Exilioidea rectirostris,,A91,,,Y,337
+71906,Mohnia robusta,,,,Y,,338
+71910,Liomesus sp.,,A89,Y,,,339
+71911,Liomesus ooides,egg whelk,,Y,,,340
+71960,Ancistrolepis sp.,,,Y,,,341
+72019,Antiplanes sp.,,,Y,,,342
+72022,Antiplanes piona,,A88,,,Y,343
+72059,Aforia sp.,,,Y,Y,,344
+72060,Aforia goodei,,,Y,,,345
+72063,Aforia circinata,keeled aforia,,Y,Y,,346
+72100,Oenopota sp.,,,Y,,,347
+72103,Oenopota harpa,,,Y,,,348
+72181,Obesotoma simplex,,,Y,,,349
+72300,Trichotropidae,,,Y,,,350
+72303,Trichotropis insignis,gray hairysnail,,Y,,,351
+72304,Iphinoe (=Trichotropis) coronata,crowned hairysnail,A88,Y,,,352
+71631,Tachyrhynchus sp.,,,Y,,,353
+71634,Tachyrhynchus erosus,eroded turretsnail,,Y,,,354
+71635,Tachyrhynchus reticulatus,reticulated turretsnail,,Y,,,355
+71640,Crepidula sp.,slipper shell,,Y,,,356
+71681,Crepidula grandis,great slippersnail,,Y,,,357
+71700,,whelk unident.,,Y,Y,Y,358
+71710,Colus sp.,,,Y,Y,Y,359
+71718,Colus periscelidus,garter whelk,A95,,Y,,360
+71719,Colus jordani,,A91,,,Y,361
+71721,Colus herendeenii,thin-ribbed whelk,,Y,,,362
+71722,Colus hypolispus,,,Y,,,363
+71723,Colus ombronius,shady whelk,,Y,,,364
+71724,Colus roseus,rosy whelk,,Y,,,365
+71725,Colus esychus,,,Y,,,366
+71726,Colus spitzbergensis,thick-ribbed whelk,,Y,,,367
+71730,Colus aphelus,oblique whelk,,Y,,,368
+71731,Colus halli,shrew whelk,,Y,,Y,369
+71732,Colus datuzenbergii,,,Y,,,370
+71733,Colus bristolensis,,,Y,,,371
+71740,Japelion aleutica,,A95,,Y,,372
+71748,Habevolutopsius hirasei,,A95,,Y,,373
+71749,Pyrulofusus dexius,,A95,,Y,,374
+71750,Volutopsius sp.,,,Y,Y,,375
+71753,Pyrulofusus deformis,warped whelk,A88,Y,Y,,376
+71755,Pyrulofusus harpa,left-hand whelk,C97,Y,Y,,377
+71756,Volutopsius fragilis,fragile whelk,,Y,,,378
+71757,Volutopsius regularis,regular whelk,A95,,Y,,379
+71759,Volutopsius filosus,threaded whelk,,Y,,,380
+71760,Volutopsius castaneus,volute whelk,,Y,,,381
+71761,Pyrulofusus melonis,,A88,Y,,,382
+71762,Volutopsius simplex,simple whelk,,Y,,,383
+71763,Volutopsius stefanssoni,shouldered whelk,,Y,Y,,384
+71764,Volutopsius middendorffii,tulip whelk,,Y,,,385
+71765,Volutopsius trophonius,frilled whelk,,Y,,,386
+71769,Beringius sp.,,,Y,Y,,387
+71770,Beringius kennicottii,,,Y,Y,,388
+71021,Dendronotus frondosus,frond-aeolis,,Y,,,389
+71022,Dendronotus subramosus,stubby frond-aeolis,,Y,,,390
+71025,Tritonia sp.,,,Y,Y,Y,391
+71030,Tritonia diomedea,rosy tritonia,,Y,Y,Y,392
+71050,Triopha catalinae,sea-clown triopha,,,Y,,393
+71080,Armina californica,California armina,,,Y,Y,394
+71202,Chlamylla sp.,,,,Y,,395
+71230,Anisodoris nobilis,Pacific sea lemon,,Y,Y,Y,396
+71250,Dorididae,dorid nudibranch unident.,,Y,Y,,397
+71260,Archidoris odhneri,white night doris,,Y,Y,,398
+71291,Pleurobranchaea californica,California sea slug,A90,,,Y,399
+71350,Cranopsis major,great puncturella,A95,,Y,,400
+71400,Acmaea sp.,,,,Y,,401
+71405,,limpet unident.,A89,Y,Y,Y,402
+71500,Gastropoda,snail unident.,,Y,Y,Y,403
+71504,Asterophila japonica,,A89,Y,,,404
+71510,Naticidae,,,Y,Y,Y,405
+71515,Bulbus fragilis,fragile moonsnail,,,Y,,406
+71525,Natica sp.,,A87,Y,Y,Y,407
+71530,Natica clausa,,,Y,Y,Y,408
+71535,Cryptonatica (=Natica) aleutica,Aleutian moonsnail,,Y,Y,,409
+71537,Cryptonatica (=Natica) russa,rusty moonsnail,,Y,Y,,410
+71540,Muricidae,,,Y,,,411
+71541,Nucella canaliculata,channelled dogwinkle,,Y,,,412
+71542,Nucella lamellosa,frilled dogwinkle,,,Y,,413
+71570,Euspira lewisii,,,Y,Y,Y,414
+71575,Euspira sp.,,,Y,Y,Y,415
+71580,Euspira pallida,pale moonsnail,,Y,Y,Y,416
+71585,Onchidiopsis glacialis,icy lamellaria,,Y,,,417
+71586,Capulacmaea commoda,widemouth lamellaria,,Y,,,418
+69325,Paralithodes californiensis,California king crab,A87,,,Y,419
+69329,Cryptolithodes sp.,,,,Y,,420
+69330,Paralomis sp.,,,,Y,Y,421
+69335,Paralomis multispina,,,Y,Y,Y,422
+69336,Placetron wosnessenskii,scaled crab,A88,Y,Y,Y,423
+69400,Erimacrus isenbeckii,horsehair crab,,Y,Y,,424
+69520,Hyas sp.,,,Y,Y,Y,425
+69530,Pugettia sp.,kelp crab,,Y,Y,Y,426
+69531,Pugettia gracilis,graceful kelp crab,,Y,Y,Y,427
+69540,Scyra acutifrons,,,Y,Y,,428
+69550,Galatheidae,galatheid crab unident.,A88,,Y,Y,429
+69554,Chirostylus sp.,,A88,,Y,,430
+69556,Munida quadrispina,pinchbug,A88,,Y,Y,431
+69652,Callianassa goniophthalma,,,,,Y,432
+69653,Callianassa californiensis,ghost shrimp,A92,,,Y,433
+69655,Upogebia pugettensis,blue mud shrimp,,,,Y,434
+69900,Pycnogonida,sea spider unident.,A88,Y,Y,,435
+69911,Colossendeis dofleini,,A95,,Y,,436
+70000,Mollusca,mollusk unident.,,Y,Y,,437
+70100,Polyplacophora,chiton unident.,,Y,Y,Y,438
+70108,Cryptochiton stelleri,giant Pacific chiton,A90,,Y,Y,439
+70115,Amicula vestita,,,Y,,,440
+70119,Placiphorella sp.,,,,Y,,441
+70125,Leptochiton alveolus,,A95,,Y,,443
+71001,gastropod eggs,snail  eggs,,Y,Y,Y,444
+71002,Buccinum sp. Eggs,,A93,,Y,,445
+71003,Fusitriton oregonensis eggs,,A93,,Y,,446
+71010,Nudibranchia,nudibranch unident.,,Y,Y,Y,447
+71011,Onchidoris bilamellata,barnacle-eating onchidoris,,Y,,,448
+71012,Tochuina tetraquetra,giant orange tochui,,Y,Y,Y,449
+71018,Dendronotus sp.,,,Y,,,450
+71020,Dendronotus dalli,Dall's dendronotid,,Y,,,451
+69035,Pagurus sp.,,,Y,Y,,452
+69042,Pagurus brandti,sponge hermit,C97,Y,Y,,453
+69060,Pagurus aleuticus,Aleutian hermit,,Y,Y,,454
+69061,Labidochirus splendescens,splendid hermit,,Y,Y,,455
+69070,Pagurus confragosus,knobbyhand hermit,C97,Y,Y,Y,456
+69080,Pagurus cornutus,,,Y,Y,,457
+69082,Pagurus dalli,whiteknee hermit,,Y,Y,,458
+69085,Pagurus kennerlyi,bluespine hermit,,Y,Y,,459
+69086,Pagurus trigonocheirus,fuzzy hermit crab,,Y,Y,,460
+69090,Pagurus ochotensis,Alaskan hermit,,Y,Y,,461
+69095,Pagurus rathbuni,longfinger hermit,,Y,Y,,462
+69100,Pagurus tanneri,longhand hermit,,Y,Y,,463
+69110,Elassochirus tenuimanus,widehand hermit crab,,Y,Y,,464
+69120,Pagurus capillatus,hairy hermit crab,,Y,Y,,465
+69121,Elassochirus cavimanus,purple hermit,,Y,Y,,466
+69122,Elassochirus gilli,Pacific red hermit,,Y,,,467
+69200,Parapagurus pliosimanus,,,,,Y,468
+69250,Lithodidae,stone crab unident.,A88,Y,Y,Y,469
+69260,Lopholithodes sp.,box crab unident.,,,Y,Y,470
+69270,Lopholithodes foraminatus,box crab,,,Y,Y,471
+69280,Lopholithodes mandtii,,,,Y,,472
+69285,Acantholithodes hispidus,fuzzy crab,,,Y,Y,473
+69290,Lithodes sp.,,,,Y,,474
+69300,Lithodes couesi,scarlet king crab,,Y,Y,Y,475
+69310,Lithodes aequispinus,golden king crab,,Y,Y,Y,476
+69312,Dermaturus mandtii,wrinkled crab,,Y,Y,,477
+69315,Hapalogaster sp.,,,Y,,,478
+69316,Hapalogaster grebnitzkii,,,Y,,Y,479
+69317,Rhinolithodes wosnessenskii,rhinoceros crab,,,Y,Y,480
+69321,Paralithodes sp.,,,Y,Y,Y,481
+69322,Paralithodes camtschaticus,red king crab,C97,Y,Y,,482
+69323,Paralithodes platypus,blue king crab,,Y,Y,,483
+66770,Pasiphaea pacifica,Pacific glass shrimp,C97,Y,Y,Y,484
+66772,Pasiphaea tarda,crimson pasiphaeid,,Y,Y,Y,485
+66815,Notostomus japonicus,spinyridge shrimp,,,Y,Y,486
+66839,Hymenodora sp.,,,Y,,,487
+66840,Hymenodora frontalis,Pacific ambereye,,,Y,,488
+66860,Acanthephyra sp.,,,,Y,Y,489
+66875,Systellaspis braueri,Quayle's spinytail,A88,,,Y,490
+68000,,crab unident.,,Y,Y,Y,491
+68010,Cancer sp.,cancer crab unident.,,Y,Y,Y,492
+68020,Cancer magister,Dungeness crab,,Y,Y,Y,493
+68040,Cancer oregonensis,Oregon rock crab,,Y,Y,,494
+68050,Cancer productus,red rock crab,,Y,Y,Y,495
+68060,Cancer gracilis,graceful rock crab,A92,,,Y,496
+68072,Pinnixa occidentalis,pea crab,,,Y,,497
+68100,Mursia gaudichaudii,,,,,Y,498
+68500,Majidae,spider crabs unident.,,Y,Y,Y,499
+68502,Oregonia bifurca,,,Y,Y,Y,500
+68510,Oregonia gracilis,graceful decorator crab,,Y,Y,Y,501
+68515,Loxorhynchus crispatus,spider crab,A92,,,Y,502
+68520,Chorilia longipes,Longhorned decorator crab,C97,Y,Y,,503
+68541,Chionoecetes sp.,tanner crab unident.,,Y,Y,Y,504
+68550,Chionoecetes tanneri,grooved Tanner crab,C97,Y,Y,Y,505
+68560,Chionoecetes bairdi,Tanner crab,C97,Y,Y,Y,506
+68570,Chionoecetes angulatus,triangle Tanner crab,C97,Y,Y,Y,507
+68577,Hyas coarctatus,circumboreal toad crab,,Y,Y,,508
+68578,Hyas lyratus,Pacific lyre crab,C97,Y,Y,Y,509
+68580,Chionoecetes opilio,snow crab,,Y,Y,,510
+68590,Chionoecetes hybrid,hybrid tanner crab,,Y,Y,,511
+68781,Telmessus cheiragonus,helmet crab,,Y,Y,,512
+69000,Anomura,,,,Y,,513
+69010,Paguridae,hermit crab unident.,,Y,Y,Y,514
+66163,Spirontocaris lamellicornis,,,Y,Y,,515
+66165,Spirontocaris snyderi,,,Y,Y,,516
+66170,Eualus sp.,,,Y,Y,Y,517
+66171,Eualus barbatus,barbed eualid,,Y,Y,,518
+66175,Eualus gaimardii,,,Y,,,519
+66179,Eualus macilentus,Greenland shrimp,,Y,,,520
+66180,Eualus macrophthalmus,bigeye eualid,,,Y,Y,521
+66190,Eualus biunguis,deepsea eualid,,,,Y,522
+66192,Eualus stoneyi,,,,Y,,523
+66193,Eualus suckleyi,shortscale eualid,,Y,Y,,524
+66200,Lebbeus sp.,,,Y,Y,,525
+66201,Lebbeus grandimana,candy stripe shrimp,,,Y,,526
+66203,Lebbeus groenlandicus,spiny lebbeid,,Y,Y,,527
+66204,Lebbeus polaris,,,Y,,,528
+66301,Heptacarpus sp.,,,Y,,,529
+66500,Crangonidae,crangonid shrimp unident.,,Y,Y,Y,530
+66502,Crangon sp.,,,Y,Y,Y,531
+66510,Crangon abyssorum,abyssal crangon,,Y,Y,,532
+66512,Crangon alaskensis,shell shrimp,,Y,Y,,533
+66515,Crangon communis,twospine crangon,C97,Y,Y,,534
+66520,Crangon resima,,,,Y,,535
+66530,Crangon dalli,ridged crangon,,Y,Y,,536
+66536,Mesocrangon intermedia,northern spinyhead,,,,Y,537
+66546,Lissocrangon stylirostris,smooth crangon,,Y,,,538
+66548,Crangon septemspinosa,sevenspine bay shrimp,C97,Y,,,539
+66570,Argis sp.,,,Y,Y,,540
+66575,Argis alaskensis,common argid,,Y,Y,,541
+66580,Argis dentata,Arctic argid,,Y,Y,,542
+66600,Sclerocrangon sp.,,,Y,,,543
+66601,Sclerocrangon boreas,sculptured shrimp,C97,Y,Y,,544
+66602,Rhynocrangon alata,saddleback shrimp,,Y,,,545
+66611,Argis lar,kuro argid,,Y,Y,,546
+66612,Argis crassa,rough argid,,Y,Y,,547
+66613,Argis levior,Nelson's argid,,Y,,,548
+66614,Argis ovifer,split-eye argid,,,Y,,549
+66615,Paracrangon echinata,horned shrimp,,,Y,,550
+66750,Pasiphaeidae,pasiphaeid shrimp unident.,,Y,Y,Y,551
+62000,Isopoda,isopod unident.,A88,Y,Y,Y,552
+62020,Saduria entomon,,,Y,,,553
+63000,Cumacea,cumacean unident.,A88,Y,Y,,554
+63500,Euphausiacea,euphausiid unident.,,Y,Y,Y,555
+64011,Neognathophausia gigas,giant red mysid,,Y,Y,,557
+64500,Copepoda,copepod unident.,A88,Y,,,558
+65000,Cirripedia,,,Y,Y,,559
+65100,Thoracica,barnacle unident.,,Y,Y,Y,560
+65101,Lepas sp.,,,Y,Y,,561
+65201,Balanus sp.,,,Y,Y,Y,562
+65202,Balanus balanus,,,Y,,,563
+65203,Balanus evermanni,giant barnacle,A88,Y,Y,,564
+65204,Balanus hesperius,crab barnacle,,Y,Y,,565
+65205,Balanus rostratus,beaked barnacle,,Y,Y,,566
+66000,,shrimp unident.,,Y,Y,Y,567
+66003,Sergestidae,sergestid shrimp unident.,A88,Y,Y,Y,568
+66004,Sergestes sp.,,,Y,Y,Y,569
+66019,Pandalidae,pandalid shrimp unident.,,Y,Y,Y,570
+66020,Pandalus sp.,,,Y,Y,Y,571
+66025,Pandalus danae,dock shrimp,,Y,Y,Y,572
+66030,Pandalus jordani,ocean shrimp,,Y,Y,Y,573
+66031,Pandalus eous (=borealis),Alaskan pink (=northern) shrimp,,Y,Y,Y,574
+66033,Pandalus tridens,yellowleg pandalid,,Y,Y,,575
+66040,Pandalus platyceros,spot shrimp,,Y,Y,Y,576
+66045,Pandalus goniurus,humpy shrimp,,Y,Y,Y,577
+66050,Pandalus hypsinotus,coonstripe shrimp,,Y,Y,Y,578
+66060,Pandalopsis aleutica,,,Y,Y,,579
+66120,Pandalopsis dispar,sidestripe shrimp,,Y,Y,Y,580
+66130,Pandalopsis ampla,,,,Y,,581
+66150,Hippolytidae,hippolytid shrimp unident.,A88,Y,Y,,582
+66160,Spirontocaris sp.,,,Y,Y,Y,583
+43042,Urticina crassicornis,mottled anemone,,Y,,,584
+43082,Cribrinopsis fernaldi,chevron-tentacled anemone,A91,Y,,,585
+44010,Javania borealis,,A95,,Y,,586
+44031,Stylaster verrilli,,A95,,Y,,587
+44080,Errinopora zarhyncha,,A95,,Y,,588
+45000,Ctenophora,comb jelly unident.,A88,Y,Y,Y,589
+50000,Polychaeta,polychaete worm unident.,A88,Y,Y,Y,590
+50010,,tube worm unident.,,Y,Y,Y,591
+50100,Oweniidae,,,Y,,,592
+50160,Aphroditidae,sea mouse unident.,,Y,Y,Y,593
+50190,Aphrodita japonica,,,Y,,,594
+50192,Aphrodita negligens,,,Y,,,595
+52715,Glycera sp.,,,Y,,,596
+53700,Nephtyidae,cat worm unident.,A86,Y,,,597
+54010,Nereis sp.,,,Y,Y,Y,598
+54030,Cheilonereis cyclurus,,,Y,Y,,599
+56300,Polynoidae,scale worm unident.,,Y,Y,,600
+56310,Eunoe sp.,,,Y,,,601
+56311,Eunoe nodosa,giant scale worm,,Y,,,602
+56312,Eunoe depressa,depressed scale worm,,Y,,,603
+57000,Sabellidae,sabellid unident.,A88,Y,,,604
+57410,Serpula vermicularis,,A88,Y,,,605
+59000,,bristle worm unident.,,Y,Y,,606
+59100,Hirudinea,leech unident.,,Y,Y,,607
+59110,Carcinobdella sp.,,,Y,,,608
+59111,Notostomum cyclostomum,striped sea leech,,Y,Y,,609
+59120,Notostomobdella sp.,,,Y,,,610
+60001,Crustacea,crustacean unident.,A88,Y,Y,Y,611
+60100,Amphipoda,amphipod unident.,,Y,Y,,612
+60110,Gammaridae,gammarid amphipod unident.,,Y,,,613
+60130,Melita dentata,,,Y,,,614
+60140,Anonyx sp.,,,Y,,,615
+60145,Caprella sp.,caprellid amphipod unident.,,,Y,,616
+30620,Sebastes simulator,pinkrose rockfish,,,,Y,617
+30630,Sebastes (=Sebastomus) sp.,,,Y,Y,,618
+31501,Scorpaena guttata,California scorpionfish,,,,Y,619
+40001,Cnidaria,coelenterate unident.,,Y,Y,Y,620
+40010,Hydrozoa,,A88,Y,Y,,621
+40011,,hydroid unident.,,Y,Y,Y,622
+40020,Hydractinia sp.,,,Y,,,623
+40050,Sertularia robusta,,,Y,,,624
+40500,Scyphozoa,jellyfish unident.,A88,Y,Y,Y,625
+40501,Chrysaora sp.,chrysaora jellyfish,,Y,Y,Y,626
+40510,Atolla sp.,,,,Y,,627
+40560,Cyanea sp.,,,,Y,Y,628
+40561,Cyanea capillata,lion's mane,,,Y,Y,629
+41000,Anthozoa,,A88,Y,,,630
+41100,Alcyonacea,soft coral unident.,A88,Y,Y,Y,631
+41201,Gersemia sp.,sea raspberry,,Y,Y,,632
+41221,Gersemia rubiformis,,,Y,,,633
+41500,Gorgonacea,gorgonian coral unident.,A88,Y,Y,Y,634
+41520,Primnoa sp.,,,,Y,,635
+41522,Primnoa willeyi,red tree coral,,,Y,,636
+41580,Paragorgia sp.,,,Y,,,637
+41582,Paragorgia arborea,Kamchatka coral,,Y,Y,,638
+41600,Callogorgia sp.,,,,Y,,639
+42000,Pennatulacea,sea pen or sea whip unident.,A88,Y,Y,Y,640
+42001,Virgularia sp.,smoothstem seawhip,,Y,Y,Y,641
+42005,Stylatula gracile,roughstem seawhip,,Y,Y,Y,643
+42008,Halipteris sp.,,,Y,,,644
+42010,Halipteris finmarchia,,,Y,Y,,645
+42017,Ptilosarcus gurneyi,orange sea pen,,,Y,Y,646
+43000,Actiniaria,sea anemone unident.,A88,Y,Y,Y,647
+43010,Metridium sp.,,,Y,Y,Y,648
+43020,Metridium senile,clonal plumose anemone,,Y,Y,Y,649
+43040,Urticina sp.,,,Y,Y,Y,650
+30320,Sebastes maliger,quillback rockfish,,,Y,Y,651
+30330,Sebastes melanops,black rockfish,,,Y,Y,652
+30340,Sebastes melanostomus,blackgill rockfish,,Y,Y,Y,653
+30350,Sebastes miniatus,vermilion rockfish,,,Y,Y,654
+30360,Sebastes mystinus,blue rockfish,,Y,Y,Y,655
+30370,Sebastes nebulosus,China rockfish,,,Y,Y,656
+30380,Sebastes nigrocinctus,tiger rockfish,,,Y,Y,657
+30390,Sebastes ovalis,speckled rockfish,,,,Y,658
+30400,Sebastes paucispinis,bocaccio,,,Y,Y,659
+30410,Sebastes pinniger,canary rockfish,,,Y,Y,660
+30420,Sebastes polyspinis,northern rockfish,,Y,Y,,661
+30430,Sebastes proriger,redstripe rockfish,,Y,Y,Y,662
+30460,Sebastes rosaceus,rosy rockfish,,,,Y,663
+30470,Sebastes ruberrimus,yelloweye rockfish,,,Y,Y,664
+30475,Sebastes babcocki,redbanded rockfish,,Y,Y,Y,665
+30480,Sebastes rubrivinctus,flag rockfish,,,Y,Y,666
+30490,Sebastes saxicola,stripetail rockfish,,,Y,Y,667
+30500,Sebastes semicinctus,halfbanded rockfish,,,,Y,668
+30510,Sebastes serranoides,olive rockfish,,,Y,Y,669
+30535,Sebastes variegatus,harlequin rockfish,,Y,Y,Y,670
+30540,Sebastes vexillaris,whitebelly rockfish,,,,Y,671
+30550,Sebastes wilsoni,pygmy rockfish,,,Y,Y,672
+30560,Sebastes zacentrus,sharpchin rockfish,,,Y,Y,673
+30570,Sebastes phillipsi,chameleon rockfish,,,Y,Y,674
+30575,Sebastes rufus,bank rockfish,,,Y,Y,675
+30576,Sebastes borealis,shortraker rockfish,,Y,Y,Y,676
+30580,,black rockfish unident.,,,Y,Y,677
+30590,,red rockfish unident.,,,Y,Y,678
+30600,Sebastes reedi,yellowmouth rockfish,,Y,Y,Y,679
+30611,Sebastes rosenblatti,greenblotched rockfish,,,,Y,680
+30030,Sebastolobus altivelis,longspine thornyhead,,Y,Y,Y,681
+30040,Sebastes sp.,rockfish unident.,,Y,Y,Y,682
+30050,,rougheye and blackspotted rockfish unid.,,Y,Y,Y,683
+30060,Sebastes alutus,Pacific ocean perch,,Y,Y,Y,684
+30080,Sebastes auriculatus,brown rockfish,,,Y,Y,685
+30090,Sebastes aurora,aurora rockfish,,,Y,Y,686
+30100,Sebastes brevispinis,silvergray rockfish,,,Y,Y,687
+30110,Sebastes carnatus,gopher rockfish,,,,Y,688
+30120,Sebastes caurinus,copper rockfish,,,Y,Y,689
+30130,Sebastes chlorostictus,greenspotted rockfish,,,,Y,690
+30150,,dusky and dark rockfishes unid,,Y,Y,Y,691
+30151,Sebastes ciliatus,dark rockfish,A95,,Y,,692
+30152,Sebastes variabilis,dusky rockfish,,,Y,,693
+30160,Sebastes constellatus,starry rockfish,,,,Y,694
+30170,Sebastes crameri,darkblotched rockfish,,Y,Y,Y,695
+30180,Sebastes dalli,calico rockfish,,,,Y,696
+30190,Sebastes diploproa,splitnose rockfish,,,Y,Y,697
+30200,Sebastes elongatus,greenstriped rockfish,,,Y,Y,698
+30210,Sebastes emphaeus,Puget Sound rockfish,,,Y,,699
+30220,Sebastes entomelas,widow rockfish,,,Y,Y,700
+30230,Sebastes eos,pink rockfish,,,,Y,701
+30240,Sebastes flavidus,yellowtail rockfish,,Y,Y,Y,702
+30250,Sebastes gilli,bronzespotted rockfish,,,,Y,703
+30260,Sebastes goodei,chilipepper,,,,Y,704
+30270,Sebastes helvomaculatus,rosethorn rockfish,,,Y,Y,705
+30280,Sebastes hopkinsi,squarespot rockfish,,,,Y,706
+30290,Sebastes jordani,shortbelly rockfish,,,Y,Y,707
+30295,Sebastes lentiginosus,freckled rockfish,,,,Y,708
+30300,Sebastes levis,cowcod,,,,Y,709
+24187,Lycodes concolor,ebony eelpout,,Y,Y,,710
+24188,Lycodes polaris,Canadian eelpout,,Y,Y,Y,711
+24189,Lycodes turneri,polar eelpout,,Y,,,712
+24190,Lycodes diapterus,black eelpout,,,,Y,713
+24191,Lycodes brevipes,shortfin eelpout,,Y,Y,Y,714
+24192,Gymnelus viridis,fish doctor,,Y,,,715
+24193,Gymnelus sp.,,,Y,,,716
+24194,Gymnelus hemifasciatus,,A91,Y,,,717
+24200,Lycodes pacificus,blackbelly eelpout,,Y,Y,Y,718
+24220,Bothrocara sp.,,,Y,Y,,719
+24230,Lycodapus sp.,,,Y,Y,Y,720
+24232,Lycodapus parviceps,smallhead eelpout,,Y,,,721
+24233,Lycodapus grossidens,bigtooth eelpout,,,Y,,722
+24393,Melanostigma pammelas,midwater eelpout,,,,Y,723
+24394,Puzanovia rubra,coral eelpout,,Y,Y,,724
+24404,Gibbonsia metzi,striped kelpfish,,,,Y,725
+25100,Acipenseridae,sturgeon unident.,,,Y,,726
+25120,Acipenser medirostris,green sturgeon,,,,Y,727
+26050,Malacosteinae,loosejaw unident.,A87,,Y,Y,728
+26053,Aristostomias scintillans,shining loosejaw,,Y,,Y,729
+27020,Lampris guttatus,opah,,,Y,,730
+27028,Stylephorus chordatus,tube-eye,,,,Y,731
+27050,Synodontidae,lizardfish unident.,,,,Y,732
+21373,Myoxocephalus stelleri,frog sculpin,,Y,Y,,1
+21375,Myoxocephalus sp.,,,Y,Y,,2
+21376,Megalocottus platycephalus,belligerent sculpin,,Y,,,3
+21377,Myoxocephalus quadricornis,fourhorn sculpin,,Y,Y,,4
+21378,Myoxocephalus scorpioides,Arctic sculpin,,Y,,,5
+21380,Leptocottus armatus,Pacific staghorn sculpin,,Y,Y,Y,6
+21383,Gilbertidia sigalutes,soft sculpin,,Y,Y,,7
+21384,Enophrys sp.,,,Y,Y,,8
+21386,Enophrys bison,buffalo sculpin,,Y,Y,Y,9
+21387,Enophrys lucasi,leister sculpin,,Y,Y,,10
+21388,Enophrys diceraus,antlered sculpin,,Y,Y,,11
+21389,Enophrys taurina,bull sculpin,,,,Y,12
+21390,Dasycottus setiger,spinyhead sculpin,,Y,Y,Y,13
+21393,Psychrolutes sp.,,,Y,Y,,14
+21394,Psychrolutes paradoxus,tadpole sculpin,,Y,Y,Y,15
+21239,Coryphaenoides longifilis,longfin grenadier,,Y,,,16
+21300,Cottidae,sculpin unident.,,Y,Y,Y,17
+21305,Zesticelus profundorum,flabby sculpin,,Y,,,18
+21308,Thyriscus anoplus,sponge sculpin,,Y,Y,,19
+21309,Icelinus oculatus,frogmouth sculpin,,,Y,Y,20
+21310,Icelinus filamentosus,threadfin sculpin,,,Y,Y,21
+21311,Icelinus borealis,northern sculpin,,Y,Y,Y,22
+21312,Icelinus tenuis,spotfin sculpin,,Y,Y,Y,23
+21313,Gymnocanthus sp.,,,Y,Y,,24
+21314,Gymnocanthus pistilliger,threaded sculpin,,Y,Y,,25
+21315,Gymnocanthus tricuspis,Arctic staghorn sculpin,,Y,Y,,26
+21316,Gymnocanthus galeatus,armorhead sculpin,,Y,Y,,27
+21320,Radulinus asprellus,slim sculpin,,Y,Y,Y,28
+21327,Clinocottus acuticeps,sharpnose sculpin,,Y,,,29
+21329,Gymnocanthus detrisus,purplegray sculpin,A92,Y,,,30
+21330,Scorpaenichthys marmoratus,cabezon,,,,Y,31
+21331,Artediellus sp.,,,Y,Y,,32
+21332,Artediellus miacanthus,bride sculpin,,Y,,,33
+21333,Artediellus pacificus,hookhorn sculpin,,Y,Y,,34
+21334,Artediellus scaber,hamecon,,Y,,,35
+21335,Artediellus uncinatus,Arctic hookear sculpin,,Y,,,36
+21337,Bolinia euryptera,broadfin sculpin,A92,,Y,,37
+21339,Malacocottus sp.,,,Y,Y,,38
+21340,Malacocottus kincaidi,blackfin sculpin,,,,Y,39
+21341,Malacocottus zonurus,darkfin sculpin,,Y,Y,,40
+21342,Hemilepidotus sp.,Irish lord,,Y,Y,,41
+21343,Hemilepidotus gilberti,banded Irish lord,,Y,,,42
+21344,Hemilepidotus spinosus,brown Irish lord,,Y,Y,Y,43
+21345,Hemilepidotus zapus,longfin Irish lord,,Y,Y,,44
+21346,Hemilepidotus hemilepidotus,red Irish lord,,Y,Y,Y,45
+21347,Hemilepidotus jordani,yellow Irish lord,,Y,Y,,46
+20801,Porichthys notatus,plainfin midshipman,,,,Y,47
+20802,Porichthys sp.,,,,,Y,48
+20842,Brama japonica,Pacific pomfret,,,,Y,49
+20871,Bathylaco nigricans,bonythroat,A91,,,Y,50
+20900,Ophidiidae,cusk-eel unident.,,Y,Y,Y,51
+20901,Chilara taylori,spotted cusk-eel,,,,Y,52
+20902,Ophidion scrippsae,basketweave cusk-eel,,,,Y,53
+20905,Lamprogrammus niger,paperbone cusk-eel,A88,,,Y,54
+20910,Dicrolene filamentosa,threadfin cusk-eel,,,,Y,55
+20920,Cataetyx sp.,,,,,Y,56
+20921,Cataetyx rubrirostris,rubynose brotula,,,,Y,57
+20930,Brosmophycis marginata,red brotula,,,,Y,58
+20952,Trachurus symmetricus,jack mackerel,,,,Y,59
+20971,Melanocetus johnsonii,common blackdevil,A91,,,Y,60
+20980,Ceratiidae,seadevils unident.,,Y,,Y,61
+20990,Cetomimidae,flabby whalefishes,,,,Y,62
+21000,Chauliodontinae,viperfish unident.,,Y,Y,Y,63
+21010,Chauliodus macouni,Pacific viperfish,,Y,Y,Y,64
+21110,Clupea pallasi,Pacific herring,,Y,Y,Y,65
+21120,Alosa sapidissima,American shad,,Y,,Y,66
+21130,Sardinops sagax,Pacific sardine,,,,Y,67
+21200,Macrouridae,grenadier unident.,,Y,Y,Y,68
+21201,Nezumia stelgidolepis,California grenadier,,,,Y,69
+21202,Nezumia liolepis,smooth grenadier,,,,Y,70
+21204,Caelorinchus scaphopsis,shoulderspot grenadier,A89,,,Y,71
+80200,Lethasterias nanimensis,blackspined sea star,,Y,Y,,72
+80220,Pedicellaster sp.,,,,Y,,73
+80230,Pedicellaster magister,majestic sea star,,Y,Y,,74
+80250,Stephanasterias albula,,A95,,Y,,75
+80310,Pisaster sp.,,,Y,Y,Y,76
+80311,Pisaster brevispinus,giant pink star,,,,Y,77
+80312,Pisaster ochraceus,purple star,A92,,,Y,78
+80520,Poraniopsis inflata,thorny sea star,,,Y,Y,79
+80540,Henricia sp.,,,Y,Y,Y,80
+80542,Henricia sanguinolenta,sanguine sea star,,Y,Y,,81
+80543,Henricia aspera,ridged blood star,,Y,Y,Y,82
+80544,Henricia leviuscula,blood sea star,,Y,Y,Y,83
+80546,Henricia tumida,tumid sea star,,Y,Y,,84
+80590,Leptasterias polaris,,,Y,Y,,85
+80594,Leptasterias arctica,,,Y,,,86
+80595,Leptasterias sp.,,,Y,Y,,87
+80596,Leptasterias camtschatica,,,Y,,,88
+80602,Gephyreaster swifti,Swift's sea star,,Y,Y,,89
+80610,Pseudarchaster sp.,,,Y,Y,,90
+80630,Hippasteria sp.,,,Y,Y,Y,91
+80640,Hippasteria californica,,,Y,Y,Y,92
+80650,Hippasteria spinosa,spiny red sea star,,Y,Y,Y,93
+80660,Pseudarchaster parelii,scarlet sea star,,Y,Y,Y,94
+80690,Mediaster sp.,,,Y,Y,Y,95
+80710,Mediaster aequalis,vermilion sea star,,,Y,Y,96
+80728,Ceramaster sp.,,,Y,Y,Y,97
+80729,Ceramaster japonicus,red bat star,,Y,Y,Y,98
+80730,Ceramaster patagonicus,orange bat sea star,,Y,Y,Y,99
+80731,Ceramaster arcticus,Arctic bat sea star,,,Y,,100
+80800,Luidia sp.,,,,Y,Y,101
+80810,Luidia foliolata,sand sea star,,,Y,Y,102
+80910,Dermasterias imbricata,leather sea star,,Y,Y,Y,103
+81060,Solaster sp.,,,Y,Y,Y,104
+81061,Solaster endeca,northern sun sea star,,Y,Y,,105
+81062,Solaster hypothrissus,,A95,,Y,,106
+81064,Solaster dawsoni,morning sun sea star,,Y,Y,Y,107
+81065,Solaster stimpsoni,striped sun sea star,,Y,Y,Y,108
+81080,Solaster paxillatus,evening sun sea star,,Y,Y,,109
+81090,Crossaster sp.,,,Y,Y,Y,110
+81092,Crossaster borealis,grooved sea star,,Y,Y,,111
+81095,Crossaster papposus,rose sea star,,Y,Y,Y,112
+78502,Vampyroteuthis infernalis,vampire squid,,Y,Y,Y,113
+79000,Decapodiformes,squid unident.,,Y,Y,Y,114
+79020,Rossia pacifica,eastern Pacific bobtail,,Y,Y,Y,115
+79120,Loligo opalescens,California market squid,,Y,Y,Y,116
+79200,Gonatus sp.,,,Y,Y,Y,117
+79201,Gonatus onyx,clawed armhook squid,,,Y,Y,118
+79202,Gonatus berryi,Berry armhook squid,,,,Y,119
+79203,Gonatus pyros,fiery armhook squid,,,,Y,120
+79204,Gonatus californiensis,California armhook squid,,,,Y,121
+79210,Berryteuthis magister,magistrate armhook squid,,Y,Y,Y,122
+79250,Gonatopsis sp.,,,Y,Y,,123
+79252,Gonatopsis borealis,boreopacific armhook squid,,Y,Y,Y,124
+79254,Gonatopsis makko,makko armhook squid,,,Y,,125
+79260,Ommastrephes bartrami,red flying squid,,,,Y,126
+79302,Moroteuthis robusta,robust clubhook squid,,Y,Y,Y,127
+79311,Onychoteuthis banksii,common clubhook squid,,,,Y,128
+79312,Onychoteuthis borealijaponicus,boreal clubhook squid,,Y,Y,Y,129
+79351,Abraliopsis sp.,,,,,Y,130
+79352,Abraliopsis felis,,,,,Y,131
+79404,Chiroteuthis calyx,,,Y,Y,Y,132
+79442,Taonius pavo,,,Y,Y,Y,133
+79504,Octopoteuthis deletron,,,Y,Y,Y,134
+79510,Histioteuthis heteropsis,,,,,Y,135
+79512,Histioteuthis hoylei,,,,,Y,136
+80000,Asteroidea,sea star unident.,,Y,Y,Y,137
+80005,Ceramaster leptoceramus,,,Y,Y,,138
+80010,Evasterias sp.,,,Y,Y,,139
+80548,Henricia longispina,,A99,,Y,,1434
+80645,Hippasteria heathi,,A99,,Y,,1435
+81063,Solaster sp. B,,A99,,Y,,1436
+81356,Pteraster pulvillus,,A99,,Y,,1437
+81912,Nearchaster variabilis,,A99,,Y,,1438
+81921,Nearchaster pedicellaris,,A99,,Y,,1439
+82511,Strongylocentrotus sp.,,A99,,Y,,1440
+82522,Strongylocentrotus polyacanthus,,A99,,Y,,1441
+83342,Ophiacantha sp.,,A99,,Y,,1442
+85269,Pannychia sp.,,A99,,Y,,1443
+91049,Halichondria sp.,,A99,,Y,,1444
+91088,Neoesperiopsis rigida,soft finger sponge,A99,,Y,,1446
+98220,Botrylloides sp.,,A99,,Y,,1447
+99998,Polychaete tubes,,A99,,Y,,1448
+72764,Bathybuccinum ovulum,,A99,,Y,,1449
+81316,Pteraster jordani,,A99,,Y,,1450
+50001,,worm unident.,A99,,Y,,1451
+81312,Pteraster temnochiton,cushion sea star,A99,,Y,,1452
+85209,Psolidae,,A99,,Y,,1453
+72515,Tegula pulligo,,A99,,Y,,1454
+82761,Florometra acririma,,A99,,Y,,1455
+92400,Acoelida,acoel turbellarian,A99,,Y,,1456
+75606,Hinnites sp.,rock scallops unident,A99,,Y,,1457
+82771,Florometra asperrima,common northern feather star,A99,Y,Y,Y,1458
+69318,Phyllolithodes papillosus,flatspine triangle crab,A99,,Y,,1459
+109,Eptatretus sp.,,A99,,,Y,1460
+421,Raja binoculata egg case,,A99,,,Y,1461
+461,Bathyraja trachura egg case,,A99,,,Y,1462
+20908,Dicrolene sp.,,A99,,,Y,1463
+21598,Pseudoscopelus sp.,,A99,,,Y,1464
+22242,Paraliparis rosaceus,rosy snailfish,A99,,,Y,1466
+23943,Benthodesmus sp.,,A99,,,Y,1467
+43004,Paraphelliactis pabista,,A99,,,Y,1468
+43005,Actinernus sp.,,A99,,,Y,1469
+43006,,purple striated sea anemone,A99,,,Y,1470
+43007,,red striated sea anemone,A99,,,Y,1471
+43032,Stomphia coccinea,swimming anemone,A99,Y,Y,Y,1472
+43041,Urticina coriacea,leathery anemone,A99,,,Y,1473
+43100,Actinostolidae,,A99,Y,Y,Y,1474
+43200,Hormathiidae,,A99,,,Y,1476
+45005,Beroe sp.,,A99,Y,Y,Y,1477
+66865,Acanthephyra curtirostris,peaked shrimp,A99,,,Y,1478
+69013,Paguristes turgidus,,A99,,,Y,1479
+69341,Neolithodes diomedeae,,A99,,,Y,1480
+69326,Paralithodes rathbuni,,A99,,,Y,1481
+69560,Polycheles sculpta,deep-sea lobster,A99,,,Y,1482
+69651,Neotypaera giga,,A99,,,Y,1483
+70060,Neomenia sp.,,A99,Y,Y,Y,1484
+71728,Colus tahwitanus,,A99,,,Y,1485
+71734,Colus trophius,,A99,,,Y,1486
+71822,Neptunea tabulata,tabled whelk,A99,,,Y,1487
+71866,Neptunea stilesi,,A99,,,Y,1488
+78021,Japetella heathi,yellowring octopus,A99,,,Y,1489
+78040,Grimpoteuthis albatrossi,,A99,,,Y,1490
+78210,Octopus californicus,North Pacific bigeye octopus,A99,,,Y,1491
+79340,Galiteuthis phyllura,,A99,Y,Y,Y,1492
+79403,Chiroteuthis sp.,,A99,,,Y,1493
+79440,Taoniinae,,A99,,,Y,1494
+81066,Solaster exiguus,,A99,,,Y,1495
+82002,Brisingella sp.,,A99,,,Y,1496
+82672,,large green heart urchin,A99,,,Y,1497
+82673,,oval heart urchin,A99,,,Y,1498
+83339,Amphiophiura sp.,,A99,,,Y,1499
+85170,Pentamera sp.,,A99,,,Y,1501
+98071,Pyrosoma atlanticum,,A99,,,Y,1502
+98072,Thetys vagina,common salp,A99,,,Y,1503
+70111,Lepidozona beringiana,,A99,,Y,,1504
+80550,Odontohenricia fisheri,,A99,,Y,,1505
+22240,Careproctus candidus,bigeye snailfish,A99,,Y,,1506
+23865,Anoplarchus purpurescens,high cockscomb,A99,,Y,,1507
+24395,Nalbantichthys elongatus,,A99,,Y,,1508
+42012,Halipteris willemoesi,,A99,Y,,,1509
+20041,Podothecus veternus,veteran poacher,A99,Y,,,1510
+83080,Astrochele laevis,,A99,,Y,,1511
+91064,Plicatellopsis amphispicula,firm finger sponge,A99,,Y,,1512
+436,Bathyraja interrupta egg case,,A00,Y,,,1513
+43050,Oractis diomedeae,grape anemone,A99,,,Y,1514
+10111,Atheresthes sp.,,A00,Y,,,1515
+21847,Stomiidae,barbeled dragonfish,A00,Y,,,1516
+91057,,scapula sponge,A02,,Y,,1517
+22222,Careproctus bowersianus,large disk all red snailfish,A00,Y,,,1518
+22223,Careproctus simus,long snouted pink snailfish,A00,Y,,,1519
+22231,Paraliparis ulochir,blackfaced red snailfish,A00,Y,,,1520
+83480,Ophiomusium lymani,,A02,,,Y,1521
+22245,Careproctus sp. G (Orr),tomato snailfish,A00,Y,,,1522
+22251,Careproctus ostentum,microdisk snailfish,A00,Y,,,1523
+22920,Gigantactis vanhoeffeni,whipnose,A00,Y,,,1524
+64010,Neognathophausia sp.,,A00,Y,,,1525
+66174,Eualus fabricii,Arctic eualid,A00,Y,,,1526
+71883,Neptunea insularis,,A00,Y,,,1527
+72765,Buccinum sp. A (McLean & Clark),Katherine's whelk,A00,,Y,,1528
+79406,Cranchiidae,,A00,Y,,,1529
+80190,Tarsaster alaskanus,,A00,Y,,,1530
+81361,Diplopteraster sp.,,A00,Y,,,1531
+85220,Psolus squamatus,whitescaled sea cucumber,A00,Y,,,1532
+78300,Bolitaenidae,,A01,,,Y,1533
+83075,Asteronyx longifissa,,A01,,,Y,1534
+42020,Anthoptilum grandiflorum,,A01,,,Y,1535
+22450,Borostomias panamensis,,A01,,,Y,1536
+82685,Brissopsis pacifica,,A01,,,Y,1537
+81875,Dipsacaster eximus,,A01,,,Y,1538
+21150,Gigantactis sp.,,A01,,,Y,1539
+78352,Graneledone boreopacifica,,A01,,,Y,1540
+70113,Lepidozona sp.,,A01,Y,Y,Y,1541
+22750,Linophrynidae,,A01,,,Y,1542
+20915,Melanonus zugmayeri,arrowtail,A01,,,Y,1543
+69552,Munidopsis sp.,,A01,,,Y,1544
+78404,Octopus rubescens,,A01,,,Y,1545
+83407,Ophiomusium jolliensis,,A01,Y,Y,Y,1546
+43201,,pink hormathiid anemone,A01,,,Y,1547
+22810,Polyacanthonotus challengeri,,A01,,,Y,1548
+40028,Aglaophenia sp.,,A01,,Y,,1549
+82680,Spatangus californicus,,A01,,,Y,1550
+83090,Astrochele sp.,,A01,,Y,,1551
+74109,Chlamys erythocomata,,A01,,Y,,1552
+44042,Cyclohelia sp. A (Clark 1997),,A01,,Y,,1553
+97120,Hemithiris psittacea,black brachiopod,A01,,Y,,1554
+80549,Henricia spiculifera,spiny Henricia,A01,,Y,Y,1555
+80632,Hippasteria armata,,A01,,Y,,1556
+80631,Hippasteria kurilensis,,A01,,Y,,1557
+80633,Hippasteria sp. A (Clark 1999),,A01,,Y,,1558
+91090,,orange papillate sponge,A01,,Y,,1559
+81295,Peribolaster biserialis,,A01,,Y,,1560
+81321,Pteraster marssipus,,A01,,Y,,1561
+81313,Pteraster sp. A (Clark 1999),,A01,,Y,,1562
+81311,Pteraster sp. cf. temnochiton (Clark 1999),,A01,,Y,,1563
+44037,Stylaster campylecus,,A01,,Y,,1564
+44039,Stylaster moseleyana,,A01,,Y,,1565
+71766,Volutopsius pallidus,,A01,,Y,,1566
+43225,Zoanthus sp.,,A01,,Y,,1567
+22263,Prognatholiparis ptychomandibularis,wrinkle-jaw snailfish,A01,,Y,,1568
+40012,Bonneviella sp. A (Clark 2006),champagne flute hydroid,A01,,Y,,1569
+44011,Javania cailleti,,A01,,Y,,1570
+72791,Arctomelon borealis,,A01,,Y,,1571
+74103,Chlamys albida,white scallop,A01,,Y,,1572
+80551,Odontohenricia sp.,,A01,,Y,,1573
+81067,Solaster sp. A (Clark 1997),,A01,,Y,,1574
+82757,Retiometra alascana,Alaskan crinoid,A01,,Y,,1575
+83402,Ophioscolex sp.,,A01,,Y,,1576
+83411,Ophiolebes sp.,,A01,,Y,,1577
+91059,Phakellia dalli,cat-o-nine-tails sponge,A01,,Y,,1578
+21338,Malacocottus aleuticus,whitetail sculpin,A01,,Y,,1579
+43045,Bathyphelia australis,hot dog sea anemone,A01,,Y,,1580
+65206,Balanus nubilus,,A01,,Y,,1581
+68011,Cancer branneri,,A01,,Y,,1582
+69011,Discorsopagurus schmitti,,A01,,Y,,1583
+70126,Mopalia swanii,,A01,,Y,,1584
+71013,Hermissenda crassicornis,thick-horned aeolid,A01,,Y,,1585
+71015,Cadlina luteomarginata,yellow-edged cadlina,A01,,Y,,1586
+71055,Archidoris montereyensis,Monterey dorid,A01,,Y,,1587
+71351,Puncturella rothi,,A01,,Y,,1588
+71741,Japelion sp.,,A01,,Y,,1589
+85167,Eupentacta quinquesemita,,A01,,Y,,1590
+85290,Synallactes challengeri,,A01,,Y,,1591
+95035,Flustrellidra corniculata,,A01,,Y,,1592
+98206,Cnemidocarpa finmarkiensis,broad base tunicate,A01,Y,Y,,1593
+66009,Sicyonia ingentis,ridgeback rock shrimp,A01,,Y,,1594
+66055,Pandalus stenolepis,roughpatch shrimp,A01,,Y,,1595
+21318,Icelinus fimbriatus,fringed sculpin,A02,,,Y,1596
+22224,Careproctus ectenes,shovelhead snailfish,A02,,Y,,1597
+22225,Careproctus canus,gray snailfish,A02,,Y,,1598
+22246,Careproctus comus,comic snailfish,A02,,Y,,1599
+22252,Paraliparis paucidens,toothless snailfish,A02,,Y,,1600
+22253,Lipariscus nanus,pygmy snailfish,A02,Y,Y,,1601
+22254,Paraliparis dipterus,splitfin snailfish,A02,Y,,,1602
+22264,Lopholiparis flerxi,hardhead snailfish,A02,,Y,,1603
+22919,Chaenophryne draco,smooth dreamer,A02,,,Y,1604
+22924,Caulophryne jordani,fanfin angler,A02,,,Y,1605
+23590,Neoscopelus macrolepidotus,glowingfish,A02,,,Y,1606
+40507,Bolinopsis sp.,,A02,,Y,,1607
+41333,Anthomastus sp. cf. japonicus (Bayer et al.),,A02,,Y,,1608
+41510,Ideogorgia sp.,,A02,,Y,,1609
+41523,Primnoa resaediformes,,A02,,Y,,1610
+41571,Swiftia pacifica,,A02,,Y,,1611
+41572,Swiftia simplex,,A02,,Y,,1612
+41583,Paragorgia pacifica,,A02,,Y,,1613
+41750,Clavularia sp.,,A02,,Y,,1614
+41751,Clavularia sp. cf. evagorgiacrustans (Bayer et al.),,A02,,Y,,1615
+44005,Flabellum sp. A (Clark 2006),tan trumpet coral,A02,,Y,,1616
+44045,Stylaster alaskanus,,A02,,Y,,1617
+44046,Stylaster stejnegeri,,A02,,Y,,1618
+44047,Stylaster venustus,,A02,,Y,,1619
+44050,Stylantheca pterograpta,,A02,,Y,,1620
+44052,Stenohelia sp.,,A02,,Y,,1621
+44071,Thouarella sp. 1 (Bayer et al.),,A02,,Y,,1622
+44072,Thouarella sp. 2 (Bayer et al.),,A02,,Y,,1623
+44073,Thouarella sp. 3 (Bayer et al.),,A02,,Y,,1624
+44074,Thouarella sp. 4 (Bayer et al.),,A02,,Y,,1625
+44083,Plumarella sp.,,A02,,Y,,1626
+44092,Muriceides nigra,,A02,,Y,,1627
+44099,Arthrogorgia utinomi,,A02,,Y,,1628
+44103,Muriceides sp. cf. cylindrica (Bayer et al.),,A02,,Y,,1629
+70127,Leptochiton belknapi,,A02,,Y,,1630
+71014,Acanthodoris nanaimoensis,Nanaimo dorid,A02,,Y,,1631
+71016,Diaulula sandiegensis,,A02,,Y,,1632
+71526,Cryptonatica affinis,Arctic moonsnail,A02,,Y,,1635
+71773,Beringius aleuticus,,A02,,Y,,1636
+71896,Plicifusus oceanodromae,seahorse whelk,A02,,Y,,1637
+71912,Pseudoliomesus canaliculatus,,A02,,Y,,1638
+72020,Antiplanes perversa,,A02,,Y,,1639
+72395,Scabrotrophon scitulus,spiny trophon,A02,,Y,,1640
+72753,Buccinum aleuticum,Aleut whelk,A02,,Y,,1641
+72754,Buccinum cnismatum,scratched whelk,A02,,Y,,1642
+72767,Retifusus sp.,,A02,,Y,,1643
+74177,Cyclopecten davidsoni,salmon glass-scallop,A02,,Y,,1644
+74321,Panomya sp.,,A02,,Y,,1645
+74412,Megayoldia sp.,,A02,Y,,,1646
+74490,Samacar sp.,,A02,,Y,,1647
+74552,Solamen columbianum,British Columbia crenella,A02,,Y,,1648
+74643,Astarte elliptica,elliptical astarte,A02,,Y,,1649
+74802,Kellia suborbicularis,suborbicular kellyclam,A02,,Y,,1650
+75030,Protothaca staminea,Pacific littleneck,A02,,Y,,1651
+78020,Octopus sp.,,A02,,Y,,1652
+81345,Pteraster trigonodon,,A02,,Y,,1653
+81831,Leptychaster propinquus,,A02,,Y,,1654
+83343,Ophiacantha enneactis,,A02,,Y,,1655
+85202,Cucumaria frondosa,,A02,,Y,,1656
+95005,Leieschara sp. cf. subgracilis (Bayer et al.),,A02,,Y,,1657
+97111,Frieleia halli,,A02,,Y,,1658
+78452,Benthoctopus sp.,,A02,Y,Y,Y,1659
+23933,Desmodema lorum,,A02,,,Y,1660
+23970,Gigantura indica,,A02,,,Y,1661
+21705,Gadidae,Cod unident.,A02,Y,Y,Y,1662
+21805,Sigmops gracilis,slender fangjaw,A02,Y,,,1663
+21422,Hemitripterus bolini eggs,bigmouth sculpin eggs,A02,Y,,,1664
+24114,Bothrocara nyx,shadow eelpout,A02,Y,,,1665
+24231,Lycodapus poecilus,variform eelpout,A02,Y,,,1666
+71715,Colus calathus,,A02,Y,,,1667
+71751,Volutopsius sp. eggs,,A02,Y,,,1668
+72065,Boreoscala greenlandica,Greenland wentletrap,A02,Y,Y,,1669
+83055,Asteronychidae,,A02,Y,,,1670
+80601,Aleutiaster sp.,,A02,,Y,,1671
+21359,Archistes biseriatus,scaled sculpin,A02,,Y,,1672
+72789,Arctomelon sp.,,A02,,Y,,1673
+81930,Astronebris tatafilius,,A02,,Y,,1674
+72763,Bathybuccinum sp.,,A02,,Y,,1675
+71778,Beringius sp. A (McLean & Clark),Baxter's Beringius,A02,,Y,,1676
+71779,Beringius sp. B (McLean & Clark),two-channeled Beringius,A02,,Y,,1677
+98330,,brown leafy compound tunicate,A02,,Y,,1678
+72738,Buccinum bulimuloideum,,A02,,Y,,1679
+40008,Campanulariidae unid.,campanulariid hydroid,A02,,Y,,1680
+91092,,cheesestick sponge,A02,,Y,,1681
+69910,Colossendeis sp.,,A02,,Y,,1682
+99987,Craniella sp.,puffball sponges,A02,,Y,,1683
+71349,Cranopsis sp.,puncterellas,A02,,Y,,1684
+44038,Crypthelia sp.,,A02,,Y,,1685
+44041,Cyclohelia sp.,,A02,,Y,,1686
+91045,Coelosphaeridae,ginseng sponge,A02,,Y,,1687
+95015,Phidolopora pacifica,lacy bryozoan,A02,,Y,,1688
+71584,Lamellaria sp.,,A02,,Y,,1689
+70124,Leptochiton sp.,,A02,,Y,,1690
+22173,Lethotremus sp.,,A02,,Y,,1691
+81125,Lophaster vexator,crested star,A02,Y,Y,Y,1692
+91039,Mycale sp.,,A02,,Y,,1693
+40509,Phacellophora sp.,,A02,,Y,,1694
+91100,,pita sponge,A02,,Y,,1695
+40009,Plumulariidae,plumulariid hydroids,A02,,Y,,1696
+75601,Pododesmus cepio,abalone jingle,A02,,Y,,1697
+81314,Pteraster sp. B (Clark 1997),,A02,,Y,,1698
+65209,Scalpellum sp.,,A02,,Y,,1699
+40049,Sertulariidae unid.,Sertulariid hydroid,A02,,Y,,1700
+91096,,slimy antler sponge,A02,,Y,,1701
+44028,Stylasteridae unid.,stylasterid corals,A02,,Y,,1702
+39100,Eumetopias jubatus,Steller sea lion,A02,,,,1703
+20121,Bajacalifornia burragei,sharpchin slickhead,A02,,,Y,1704
+21811,Cyclothone atraria,black bristlemouth,A02,Y,,,1705
+21812,Cyclothone pseudopallida,slender bristlemouth,A02,Y,,,1706
+21813,Cyclothone signata,showy bristlemouth,A02,Y,,,1707
+22917,Chaenophryne longiceps,,A02,,,Y,1708
+22918,Chaenophryne melanorhabdus,,A02,,,Y,1709
+22921,Gigantactis microdontis,,A02,,,Y,1710
+21597,Kali normani,needletooth swallower,A02,,,Y,1711
+24153,Lycenchelys ratmanovi,,A02,Y,,,1713
+20179,Maulisia sp.,,A02,Y,,,1714
+20039,Podothecus sp.,,A02,Y,,,1716
+24166,Lycodapus psarostomatus,,A02,,Y,,1717
+23866,Anoplarchus insignis,slender cockscomb,A02,,Y,,1718
+311,Centroscyllium nigrum,combtooth dogfish,A03,,,Y,1719
+20576,Atherinops affinis,topsmelt,A03,,,Y,1720
+20981,Cryptopsaras couesii,triplewart seadevil,A03,,,Y,1721
+21502,Amphistichus rhodoterus,redtail surfperch,A03,,,Y,1722
+21503,Hyperprosopon argenteum,walleye surfperch,A03,,,Y,1723
+21848,Pachystomias microdon,,A03,,,Y,1724
+23964,Bathylychnops exilis,javelin spookfish,A03,,,Y,1725
+24167,Lycodapus pachysoma,stout eelpout,A03,,,Y,1726
+24221,Pachycara lepinium,scalynape eelpout,A03,,,Y,1727
+26051,Photonectes margarita,,A03,,,Y,1728
+28001,Facciolella gilbertii,dogface witch-eel,A03,,,Y,1729
+28002,Venefica sp.,whipsnout eels,A03,,,Y,1730
+28533,Howella brodiei,,A03,,,Y,1731
+44017,Desmophyllum dianthus,,A03,,Y,,1733
+44019,Crispatotrochus foxi,,A03,,Y,,1734
+44022,Caryophyllia arnoldi,,A03,,Y,,1735
+44079,Errinopora pourtalesi,,A03,,Y,,1736
+50020,Spinther alaskensis,,A03,,Y,,1737
+60120,Uschakoviella sp.,,A03,,Y,,1738
+66032,Heptacarpus maxillipes,,A03,,Y,,1739
+66161,Spirontocaris arcuata,Rathbun blade shrimp,A03,,Y,,1740
+66164,Spirontocaris phippsii,punctate blade shrimp,A03,,Y,,1741
+66166,Spirontocaris spinus,parrot shrimp,A03,,Y,,1742
+66172,Eualus avinus,beaked eualid,A03,,Y,,1743
+66173,Eualus townsendi,Townsend eualid,A03,,Y,,1744
+66176,Eualus butleri,sponge eualid,A03,,Y,,1745
+66302,Heptacarpus flexus,slenderbeak coastal shrimp,A03,,Y,,1746
+66303,Heptacarpus moseri,Alaska coastal shrimp,A03,,Y,,1747
+66509,Crangon alba,stout crangon,A03,,Y,,1748
+66535,Metacrangon variabilis,deepsea spinyhead,A03,,Y,,1749
+66604,Rhynocrangon sharpi,,A03,,Y,,1750
+70128,Leptochiton mesogonus,,,,Y,,1751
+70123,Placiphorella rufa,,,,Y,Y,1752
+71090,Colga pacifica,Pacific Colga,,Y,Y,,1753
+71517,Euspira monterona,,,Y,Y,,1755
+71716,Colus martensi,,A03,Y,,,1756
+71913,Liomesus nassula,basket whelk,A03,,Y,,1757
+72398,Scabrotrophon scarlatoi,,,Y,Y,,1758
+72396,Scabrotrophon  rossica,,,,Y,,1759
+72397,Scabrotrophon densicostatus,,,,Y,,1760
+72402,Boreotrophon alaskanus,Alaskan trophon,A03,Y,,,1761
+72405,Boreotrophon elegantulus,,A03,,Y,,1762
+72542,Solariella micraulax,fine-groove solarelle,,,Y,,1763
+72770,Columbella sp.,dovesnails,A03,,Y,,1764
+72792,Arctomelon tamikoae,,,,Y,,1765
+72797,Olivella beatica,beatic dwarf olive,A03,,Y,,1766
+79265,Dosidicus gigas,Humboldt squid,A03,,,Y,1767
+80628,Odontaster sp.,,A03,,Y,,1768
+80733,Ceramaster stellatus,,A03,,Y,,1769
+82772,Psathyrometra fragilis,,A03,,Y,,1770
+83344,Ophiacantha diplasia,,A03,,Y,,1771
+85224,Psolidium bullatum,,A03,,Y,,1772
+91046,Geodia mesotriaena,,A03,,Y,,1773
+91048,Acanthascus sp.,,A03,,Y,,1774
+91089,Neoesperiopsis infundibula,rough China hat sponge,A03,,Y,,1775
+68511,Macroregonia macrochira,giant spider crab,A03,,Y,,1776
+30155,Sebastes chrysomelas,black and yellow rockfish,,,,Y,1777
+30450,Sebastes rastrelliger,grass rockfish,,,,Y,1778
+30045,Sebastes umbrosus,honeycomb rockfish,,,,Y,1779
+30070,Sebastes atrovirens,kelp rockfish,,,,Y,1780
+30315,Sebastes macdonaldi,Mexican rockfish,,,,Y,1781
+30525,Sebastes serriceps,tree rockfish,,,,Y,1782
+74651,Carditidae,,A03,Y,,,1783
+71235,Anisodoris lentiginosa,mottled pale sea-lemon,A03,,Y,,1784
+68501,Oregonia sp.,,A03,Y,,,1785
+22901,Bertella idiomorpha,,A03,,Y,,1786
+23844,Chirolophis tarsodes,,A03,,Y,,1787
+42006,Balticina sp.,,A03,,Y,,1788
+70135,Tonicella insignis,,A03,,Y,,1789
+71040,Acteocina sp.,,A03,,Y,,1790
+78023,Japetella,,A03,,Y,,1791
+82527,Strongylocentrotus sp. A,,A03,,Y,,1792
+82528,Strongylocentrotus sp. B,,A03,,Y,,1793
+40513,Aurelia aurita,,A03,,Y,,1794
+43043,Urticina lofotensis,,A03,,Y,,1795
+65102,Litoscalpellum ursum,,A03,,Y,,1796
+69532,Pugettia producta,,A03,,Y,,1797
+71897,Plicifusus virens,,A03,,Y,,1799
+82676,Brisaster owstoni,,A03,,Y,,1800
+91075,Polymastia pacifica,,A03,,Y,,1801
+66059,Pandalopsis sp.,,A03,,Y,,1802
+69094,Pagurus quaylei,,A03,,,Y,1803
+80811,Astropectinidae,,A03,,,Y,1804
+80159,Asteriidae,,A03,,,Y,1805
+80165,Astrometis sp.,,A03,,,Y,1806
+71017,Acanthodoris brunnea,cedar-scented dorid,A03,,,Y,1807
+41591,Alaskagorgia aleutiana,,A04,,Y,,1808
+483,Bathyraja mariposa,butterfly skate,A04,,Y,,1809
+22111,Idiacanthus sp.,,A04,,,Y,1810
+22218,Allocareproctus tanix,peach snailfish,A04,,Y,,1811
+22234,Careproctus sp. cf. gilberti (Orr),Dominator snailfish,A04,Y,Y,,1812
+24112,Bothrocara zestum,western eelpout,A04,Y,,,1813
+24183,Lycodes akuugun,bicolor eelpout,A04,,Y,,1814
+40040,Turbulariidae,turbulariid hydroids,A04,,Y,,1815
+41584,Plexauridae,plexaurid corals,A04,,Y,,1816
+43224,Epizoanthus scotinus,orange zooanthid,A04,,Y,,1817
+65207,Balanus crenatus,,A04,,Y,,1819
+66034,Pandalus sp. cf. tridens (CAS),,A04,,Y,,1820
+66167,Spirontocaris sp. cf. lamellicornis,,A04,,Y,,1821
+66516,Crangon sp. cf. communis (CAS),,A04,,Y,,1822
+66616,Argis sp. cf. ovifer (CAS),,A04,,Y,,1823
+66617,Argis sp. cf. crassa (CAS),,A04,,Y,,1824
+68575,Chionoecetes japonicus,Japanese Tanner crab,A04,,Y,,1825
+69199,Parapagurus sp.,,A04,,Y,,1826
+69905,Hedgpethia sp.,,A04,,Y,,1827
+71406,Lottiidae,thumbnails,A04,,Y,,1828
+71639,Calyptraeidae,slippersnails,A04,,Y,,1829
+72306,Trichotropis cancellata,,A04,,Y,,1830
+72401,Boreotrophon beringi,Bering trophon,A04,,Y,,1831
+72408,Boreotrophon kamchatkanus,Kamchatka trophon,A04,,Y,,1832
+78022,Japetella diaphana,,A04,,Y,,1833
+78301,Opisthoteuthis sp. cf. californiana (Jorgensen),,A04,,Y,,1834
+78353,Graneledone sp. cf. boreopacifica (Nesis),,A04,Y,,,1835
+79253,Gonatopsis sp. cf. japonica (Kubodera & Okutani),,A04,Y,,,1837
+97010,Hemithyridae,hemithyrid brachiopods,A04,,Y,,1838
+98110,Polycitoridae,polycitorid tunicates,A04,,Y,,1839
+98308,Corellidae,corellid tunicates,A04,,Y,,1840
+98304,Cionidae,cionid tunicates,A04,,Y,,1841
+20577,Antherinopsis californiensis,jacksmelt,A05,,,Y,1842
+20803,Batrachoididae,toadfishes,A05,,,Y,1843
+68012,Cancer anthonyi,Yellow Cancer Crab,A05,,,Y,1844
+81094,Crossaster sp. B (Clark),pink rose star,A05,,Y,,1845
+81121,Lophaster sp. A (Clark),,A05,,Y,Y,1846
+81122,Lophaster sp. B (Clark),,A05,,Y,,1847
+81317,Pteraster sp. C (Clark),,A05,,Y,,1848
+81318,Pteraster sp. D (Clark),,A05,,Y,,1849
+81319,Pteraster sp. E (Clark),,A05,,Y,,1850
+81323,Pteraster sp. F (Clark),,A05,Y,,,1851
+81909,Cheiraster sp. A (Clark 2006),Aleutian fragile sea star,A05,,Y,,1853
+82101,Anteliaster nannodes,,A05,,Y,,1854
+85080,Chiridota sp.,,A05,,Y,,1855
+85289,Synallactes sp.,,A05,Y,Y,,1856
+91047,Geodia sp.,,A05,,Y,,1857
+91081,,Yellow papillate sponge,A05,,Y,,1858
+91091,Neoesperiopsis sp.,,A05,,Y,,1859
+91705,Geodinella robusta,calcareous finger sponge,A05,,Y,,1860
+91701,Staurocalyptus sp.,,A05,Y,Y,,1861
+22256,Careproctus sp. B (Orr),,A05,,Y,,1862
+40015,,pussywillow hydroid,A05,,Y,,1863
+41521,Primnoa pacifica,,A05,Y,Y,,1864
+42016,Ptilosarcus sp.,,A05,Y,Y,,1865
+44021,Caryophyllia sp. A,,A05,,Y,,1866
+62001,Arcturidae unid.,,A05,Y,Y,,1867
+71742,Japelion sp. A,,A05,,Y,,1869
+71743,Japelion sp. B,,A05,,Y,,1870
+71767,Volutopsius sp. A (McLean & Clark),,A05,,Y,,1871
+71768,Volutopsius sp. B (McLean & Clark),,A05,,Y,,1872
+71781,Beringius incisus,,A05,,Y,,1873
+71782,Beringius sp. C(McLean & Clark),,A05,,Y,,1874
+71783,Beringius sp. D (McLean & Clark),,A05,,Y,,1875
+71784,Beringius sp. E (McLean & Clark),,A05,,Y,,1876
+71785,Beringius sp. F (McLean & Clark),,A05,,Y,,1877
+71786,Beringius sp. G (McLean & Clark),,A05,,Y,,1878
+71787,Beringius rotundus,rotund whelk,A05,,Y,,1879
+71788,Beringius sp. H (McLean & Clark),,A05,,Y,,1880
+71789,Beringius sp. I (McLean & Clark),,A05,,Y,,1881
+71792,Beringius sp. J (McLean & Clark),,A05,Y,,,1882
+71793,Beringius sp. K (McLean & Clark),,A05,,Y,,1883
+71887,Neptunea sp. A (McLean & Clark),,A05,,Y,,1884
+27051,Synodus lucioceps,California lizardfish,,,,Y,733
+28532,Howella sherborni,,A94,,Y,,734
+29990,Eurypharynx pelecanoides,umbrellamouth gulper,A92,,,Y,735
+29999,,roundfish unident.,,Y,Y,Y,736
+30000,Scorpaenidae,scorpionfish and rockfish unident.,,,Y,,737
+30010,Sebastolobus sp.,thornyhead unident.,,Y,Y,Y,738
+30020,Sebastolobus alascanus,shortspine thornyhead,,Y,Y,Y,739
+30025,Sebastolobus macrochir,broadfin thornyhead,,Y,Y,,740
+23911,Peprilus simillimus,Pacific pompano,,,,Y,741
+23915,Icichthys lockingtoni,medusafish,,,Y,Y,742
+23932,Trachipterus altivelis,king-of-the-salmon,,Y,Y,Y,743
+23944,Aphanopus arigato,Pacific black scabbardfish,,,,Y,744
+23945,Lepidopus fitchi,scabbardfish,,,,Y,745
+23950,Anguilliformes,eel unident.,,,,Y,746
+23952,leptocephalus,eel larvae unident.,,,,Y,747
+23960,Dolichopteryx sp.,,A90,Y,,Y,748
+23961,Dolichopteryx longipes,brownsnout spookfish,,,,Y,749
+23962,Macropinna microstoma,barreleye,,Y,Y,Y,750
+23963,Bathylychnops sp.,,A93,,,Y,751
+24001,Zaprora silenus,prowfish,,Y,Y,Y,752
+24100,Zoarcidae,eelpout unident.,,Y,Y,Y,753
+24110,Bothrocara brunneum,twoline eelpout,,Y,Y,Y,754
+24111,Bothrocara pusillum,Alaska eelpout,,,Y,,755
+24120,Bothrocara molle,soft eelpout,,,Y,Y,756
+24130,Lycenchelys crotalinus,snakehead eelpout,,Y,Y,Y,757
+24140,Lycodes cortezianus,bigfin eelpout,,Y,Y,Y,758
+24150,Lycenchelys sp.,,,Y,Y,,759
+24151,Lycenchelys jordani,shortjaw eelpout,,,Y,,760
+24152,Lycenchelys camchatica,Kamchatka eelpout,,Y,,Y,761
+24160,Lycodapus fierasfer,blackmouth eelpout,,Y,Y,Y,762
+24170,Lycodapus mandibularis,pallid eelpout,,Y,,Y,763
+24180,Lycodes sp.,,,Y,Y,,764
+24181,Lycodes rossi,,A91,Y,,,765
+24184,Lycodes raridens,marbled eelpout,,Y,,,766
+24185,Lycodes palearis,wattled eelpout,,Y,Y,Y,767
+24186,Lycodes mucosus,saddled eelpout,,Y,,,768
+23620,Scopelosaurus harryi,scaly paperbone,,Y,Y,Y,769
+23621,Scopelosaurus sp.,,A92,,,Y,770
+23657,Alepisaurus ferox,longnose lancetfish,,Y,Y,Y,771
+23700,Platytroctidae,tubeshoulder unident.,,,,Y,772
+23710,Sagamichthys abei,shining tubeshoulder,,,Y,Y,773
+23791,Cryptacanthodes aleutensis,dwarf wrymouth,A90,Y,Y,Y,774
+23792,Cryptacanthodes giganteus,giant wrymouth,A90,Y,Y,Y,775
+23800,Stichaeidae,prickleback unident.,,Y,Y,Y,776
+23801,Lumpenus sp.,,,Y,Y,,777
+23802,Plectobranchus evides,bluebarred prickleback,,,,Y,778
+23803,Eumesogrammus praecisus,fourline snakeblenny,,Y,,,779
+23804,Stichaeus punctatus,Arctic shanny,,Y,,,780
+23805,Lumpenus maculatus,daubed shanny,,Y,Y,,781
+23806,Lumpenus medius,stout eelblenny,,Y,,,782
+23807,Lumpenus fabricii,slender eelblenny,,Y,Y,,783
+23808,Lumpenus sagitta,snake prickleback,,Y,Y,Y,784
+23809,Acantholumpenus mackayi,pighead prickleback,,Y,Y,,785
+23836,Lumpenella longirostris,longsnout prickleback,,Y,Y,Y,786
+23840,Chirolophis sp.,,A91,Y,Y,,787
+23841,Chirolophis decoratus,decorated warbonnet,,Y,Y,,788
+23843,Chirolophis snyderi,bearded warbonnet,,Y,Y,,789
+23850,Poroclinus rothrocki,whitebarred prickleback,,Y,Y,Y,790
+23851,Chirolophis nugator,mosshead warbonnet,,,Y,,791
+23861,Bryozoichthys lysimus,nutcracker prickleback,,,Y,,792
+23862,Bryozoichthys marjorius,pearly prickleback,,,Y,,793
+23863,Bryozoichthys sp.,,A89,,Y,,794
+23871,Pholidae,gunnel unident.,,Y,Y,Y,795
+23873,Pholis laeta,crescent gunnel,A88,,Y,,796
+23900,Stromateidae,butterfish unident.,,,,Y,797
+22951,Paralepididae,barracudina unident.,,,Y,Y,798
+22952,Magnisudis atlantica,duckbill barracudina,,Y,Y,,799
+22955,Lestidiops ringens,slender barracudina,,,,Y,800
+22956,Arctozenus risso,ribbon barracudina,,,,Y,801
+23000,Osmeridae,smelt unident.,,Y,Y,Y,802
+23010,Thaleichthys pacificus,eulachon,,Y,Y,Y,803
+23020,Hypomesus pretiosus,surf smelt,,,Y,Y,804
+23030,Allosmerus elongatus,whitebait smelt,,,Y,Y,805
+23041,Mallotus villosus,capelin,,Y,Y,,806
+23055,Osmerus mordax,rainbow smelt,,Y,Y,Y,807
+23060,Spirinchus starksi,night smelt,,,Y,Y,808
+23061,Spirinchus thaleichthys,longfin smelt,,,Y,Y,809
+23071,Hypomesus olidus,pond smelt,,Y,,,810
+23201,Salmonidae,salmon and trouts unident.,,Y,Y,Y,811
+23220,Oncorhynchus tshawytscha,chinook salmon,,Y,Y,Y,812
+23225,Oncorhynchus kisutch,coho salmon,,Y,Y,Y,813
+23230,Oncorhynchus gorbuscha,pink salmon,,Y,Y,Y,814
+23235,Oncorhynchus keta,chum salmon,,Y,Y,Y,815
+23240,Oncorhynchus nerka,sockeye salmon,,Y,Y,Y,816
+23250,Salvelinus alpinus,Arctic char,,Y,,,817
+23252,Salvelinus malma,Dolly Varden,,Y,Y,,818
+23260,Oncorhynchus mykiss,steelhead,,Y,Y,,819
+23310,Coregonus laurettae,Bering cisco,,Y,,,820
+23402,Genyonemus lineatus,white croaker,,,,Y,821
+23500,Scombridae,mackerel unident.,A87,Y,Y,Y,822
+23524,Scomber japonicus,chub mackerel,,,,Y,823
+23562,Cololabis saira,Pacific saury,,,Y,Y,824
+23602,Benthalbella sp.,,,,Y,Y,825
+23603,Benthalbella dentata,northern pearleye,,Y,Y,Y,826
+22570,Anotopterus nikparini,North Pacific daggertooth,,,Y,Y,827
+22582,Mola mola,ocean sunfish,,,,Y,828
+22595,Scopelengys tristis,blackchin,A88,,,Y,829
+22600,Myctophidae,lanternfish unident.,,Y,Y,Y,830
+22601,Stenobrachius sp.,,,Y,Y,,831
+22602,Stenobrachius leucopsarus,northern lampfish,,Y,Y,Y,832
+22603,Stenobrachius nannochir,garnet lampfish,,Y,Y,Y,833
+22609,Diaphus sp.,,,Y,,Y,834
+22610,Diaphus theta,California headlightfish,,Y,Y,Y,835
+22620,Lampanyctus sp.,,,Y,Y,Y,836
+22623,Nannobrachium ritteri,broadfin lanternfish,,Y,Y,Y,837
+22624,Nannobrachium regale,pinpoint lampfish,,Y,Y,Y,838
+22625,Lampanyctus jordani,brokenline lampfish,,Y,Y,Y,839
+22640,Hygophum reinhardtii,slender lanternfish,,,Y,,840
+22642,Notoscopelus resplendens,patchwork lampfish,,,Y,Y,841
+22647,Protomyctophum crockeri,California flashlightfish,A91,,,Y,842
+22648,Protomyctophum sp.,,,Y,Y,,843
+22649,Protomyctophum thompsoni,northern flashlightfish,,,Y,Y,844
+22650,Tarletonbeania sp.,,,,,Y,845
+22651,Tarletonbeania crenularis,blue lanternfish,,,,Y,846
+22656,Symbolophorus californiensis,California lanternfish,,Y,Y,Y,847
+22701,Nemichthyidae,snipe eel unident.,,Y,,Y,848
+22702,Nemichthys scolopaceus,slender snipe eel,,,,Y,849
+22703,Avocettina sp.,,A89,,Y,Y,850
+22704,Avocettina infans,blackline snipe eel,,,,Y,851
+22721,Serrivomer sector,sawtooth eel,A91,,,Y,852
+22800,Notacanthidae,spiny eel unident.,,,,Y,853
+22900,Oneirodidae,dreamer unident.,,Y,,Y,854
+22912,Oneirodes sp.,,,Y,Y,Y,855
+22913,Oneirodes acanthias,spiny dreamer,,,Y,,856
+22915,Oneirodes thompsoni,,,Y,,,857
+22226,Careproctus phasma,monster snailfish,,Y,Y,,858
+22228,Careproctus cypselurus,blackfin snailfish,,Y,Y,,859
+22229,Careproctus furcellus,emarginate snailfish,,Y,Y,,860
+22230,Careproctus abbreviatus,short snailfish,,Y,,Y,861
+22232,Careproctus scottae,peachskin snailfish,,Y,Y,,862
+22233,Careproctus gilberti,smalldisk snailfish,,Y,Y,Y,863
+22235,Careproctus colletti,Alaska snailfish,,,Y,,864
+22236,Careproctus rastrinus,salmon snailfish,,Y,Y,Y,865
+22237,Careproctus ovigerus,abyssal snailfish,,Y,,,866
+22238,Liparis tunicatus,kelp snailfish,A91,Y,,Y,867
+22239,Careproctus zachirus,paintbrush snailfish,A95,,Y,,868
+22241,Paraliparis dactylosus,red snailfish,,,Y,,869
+22243,Paraliparis deani,prickly snailfish,,,Y,,870
+22244,Paraliparis cephalus,swellhead snailfish,,Y,,Y,871
+22250,Paraliparis sp.,,,Y,Y,Y,872
+22255,Nectoliparis pelagicus,tadpole snailfish,,Y,Y,,873
+22260,Rhinoliparis sp.,,,Y,Y,,874
+22262,Rhinoliparis attenuatus,slim snailfish,,Y,,,875
+22271,Acantholiparis opercularis,spiny snailfish,,,Y,,876
+22300,Melamphaidae,bigscale unident.,,Y,Y,Y,877
+22310,Poromitra curilensis (=crassiceps),crested bigscale,,Y,Y,Y,878
+22320,Melamphaes lugubris,highsnout bigscale,,Y,Y,Y,879
+22390,Allocyttus folletti,oxeye oreo,,Y,,Y,880
+22400,Melanostomiinae,scaleless dragonfish unident.,,Y,,Y,881
+22410,Tactostoma macropus,longfin dragonfish,,Y,Y,Y,882
+22420,Bathophilus flemingi,highfin dragonfish,,,,Y,883
+22461,Caristius macropus,manefish,,Y,,Y,884
+22500,Merluccius productus,Pacific hake,,Y,Y,Y,885
+21935,Hexagrammos decagrammus,kelp greenling,,Y,Y,Y,886
+21936,Zaniolepis latipinnis,longspine combfish,,,,Y,887
+21937,Zaniolepis frenata,shortspine combfish,,Y,Y,Y,888
+22010,Icosteus aenigmaticus,ragfish,,Y,Y,Y,889
+22110,Idiacanthus antrostomus,Pacific blackdragon,,,,Y,890
+22121,Medialuna californiensis,halfmoon,A93,,,Y,891
+22170,Cyclopterinae,lumpsucker unident.,,Y,Y,,892
+22175,Aptocyclus ventricosus,smooth lumpsucker,,Y,Y,,893
+22176,Lethotremus muticus,docked snailfish,,,Y,,894
+22177,Eumicrotremus birulai,round lumpsucker,,Y,Y,,895
+22178,Eumicrotremus orbis,Pacific spiny lumpsucker,,Y,Y,Y,896
+22179,Eumicrotremus derjugini,leatherfin lumpsucker,,Y,Y,,897
+22182,Eumicrotremus andriashevi,pimpled lumpsucker,A86,Y,Y,,898
+22183,Eumicrotremus sp.,spiny lumpsuckers,A95,,Y,,899
+22200,Liparidae,snailfish unident.,,Y,Y,Y,900
+22201,Liparis sp.,,,Y,Y,Y,901
+22202,Liparis fucensis,slipskin snailfish,,Y,Y,,902
+22203,Liparis bristolense,Bristol snailfish,,Y,,,903
+22204,Liparis dennyi,marbled snailfish,,Y,Y,,904
+22205,Liparis gibbus,variegated snailfish,,Y,Y,,905
+22206,Crystallichthys cyclospilus,blotched snailfish,,Y,Y,,906
+22207,Liparis megacephalus,bighead snailfish,,Y,,,907
+22208,Liparis pulchellus,showy snailfish,,Y,Y,Y,908
+22209,Liparis callyodon,spotted snailfish,,Y,Y,,909
+22210,Liparis ochotensis,Okhotsk snailfish,,Y,,,910
+22211,Liparis cyclopus,ribbon snailfish,,Y,Y,,911
+22213,Liparis rutteri,ringtail snailfish,,Y,,,912
+22214,Elassodiscus sp.,,,Y,Y,,913
+22215,Elassodiscus caudatus,humpback snailfish,,,Y,,914
+22216,Elassodiscus tremebundus,blacklip snailfish,,,Y,,915
+22219,Careproctus sp.,,,Y,Y,Y,916
+22220,Careproctus melanurus,blacktail snailfish,,Y,Y,Y,917
+21720,Gadus macrocephalus,Pacific cod,,Y,Y,Y,918
+21725,Boreogadus saida,Arctic cod,,Y,,,919
+21726,Moridae,codlings unident.,,Y,,Y,920
+21727,Halargyreus johnsonii,slender codling,A92,,,Y,921
+21731,Antimora microlepis,Pacific flatnose,,Y,Y,Y,922
+21732,Physiculus rastrelliger,hundred fathom codling,,,,Y,923
+21733,Laemonema longipes,longfin codling,,Y,Y,,924
+21735,Eleginus gracilis,saffron cod,,Y,Y,,925
+21740,Theragra chalcogramma,walleye pollock,,Y,Y,Y,926
+21752,Gasterosteus aculeatus,threespine stickleback,,Y,,,927
+21753,Pungitius pungitius,ninespine stickleback,,Y,,,928
+21760,Syngnathidae,pipefish unident.,,,Y,Y,929
+21770,Gobiidae,goby unident.,,,Y,,930
+21800,Gonostomatidae,bristlemouth unident.,,Y,,Y,931
+21810,Cyclothone sp.,,,Y,Y,,932
+21815,Cyclothone acclinidens,benttooth bristlemouth,,,Y,,933
+21818,Gonostoma sp.,,,,,Y,934
+21820,Sternoptychidae,hatchetfish unident.,,Y,,Y,935
+21822,Argyropelecus sp.,,,,,Y,936
+21823,Argyropelecus lychnus,tropical hatchetfish,,,Y,,937
+21824,Argyropelecus affinis,slender hatchetfish,,,,Y,938
+21825,Sternoptyx diaphana,longspine hatchetfish,,,,Y,939
+21845,Stomias atriventer,blackbelly dragonfish,,,,Y,940
+21900,Hexagrammidae,greenling unident.,,Y,Y,Y,941
+21910,Ophiodon elongatus,lingcod,,,Y,Y,942
+21915,Oxylebius pictus,painted greenling,,,,Y,943
+21921,Pleurogrammus monopterygius,Atka mackerel,,Y,Y,,944
+21930,Hexagrammos sp.,,,Y,Y,Y,945
+21931,Hexagrammos octogrammus,masked greenling,,Y,Y,,946
+21932,Hexagrammos stelleri,whitespotted greenling,,Y,Y,Y,947
+21934,Hexagrammos lagocephalus,rock greenling,,Y,Y,,948
+21395,Psychrolutes phrictus,blob sculpin,,Y,Y,Y,949
+21397,Blepsias bilobus,crested sculpin,,Y,Y,,950
+21398,Blepsias cirrhosus,silverspotted sculpin,,,Y,,951
+21405,Nautichthys pribilovius,eyeshade sculpin,,Y,,,952
+21406,Nautichthys oculofasciatus,sailfin sculpin,,Y,Y,Y,953
+21407,Nautichthys robustus,shortmast sculpin,,Y,,,954
+21415,Rhamphocottus richardsoni,grunt sculpin,,,Y,Y,955
+21420,Hemitripterus bolini,bigmouth sculpin,,Y,Y,,956
+21421,Hemitripterus villosus,sea raven,A92,,Y,,957
+21423,Eurymen gyrinus,smoothcheek sculpin,,Y,Y,,958
+21429,Triglops xenostethus,scalybreasted sculpin,,,Y,,959
+21437,Icelinus burchami,dusky sculpin,,,,Y,960
+21438,Icelus spiniger,thorny sculpin,,Y,Y,Y,961
+21439,Icelus canaliculatus,blacknose sculpin,,Y,Y,,962
+21440,Icelus euryops,wide-eye sculpin,,,Y,,963
+21441,Icelus spatula,spatulate sculpin,,Y,Y,,964
+21443,Icelus uncinalis,uncinate sculpin,,Y,,,965
+21444,Rastrinus scutiger,roughskin sculpin,,Y,Y,,966
+21445,Jordania zonope,longfin sculpin,,,Y,Y,967
+21446,Icelus sp.,,,Y,Y,,968
+21447,Paricelinus hopliticus,thornback sculpin,,,Y,Y,969
+21484,Paralabrax nebulifer,barred sand bass,,Y,,,970
+21500,Embiotocidae,surfperch unident.,,,Y,Y,971
+21501,Amphistichus argenteus,barred surfperch,,,,Y,972
+21506,Embiotoca lateralis,striped surfperch,A88,,,Y,973
+21510,Cymatogaster aggregata,shiner perch,,,Y,Y,974
+21515,Hyperprosopon anale,spotfin surfperch,,,,Y,975
+21521,Rhacochilus vacca,pile perch,,,,Y,976
+21522,Zalembius rosaceus,pink seaperch,,,,Y,977
+21592,Trichodon trichodon,Pacific sandfish,,Y,Y,Y,978
+21595,Kali indica,shortnose swallower,,Y,,Y,979
+21596,Chiasmodon niger,black swallower,A91,,,Y,980
+21710,Microgadus proximus,Pacific tomcod,,Y,Y,Y,981
+21348,Hemilepidotus papilio,butterfly sculpin,,Y,Y,,982
+21349,Archistes plumarius,plumed sculpin,A92,,Y,,983
+21350,Triglops sp.,,,Y,Y,,984
+21352,Triglops forficata,scissortail sculpin,,Y,Y,,985
+21353,Triglops metopias,crescent-tail sculpin,,Y,,,986
+21354,Triglops scepticus,spectacled sculpin,,Y,Y,,987
+21355,Triglops pingeli,ribbed sculpin,,Y,Y,Y,988
+21356,Triglops macellus,roughspine sculpin,,Y,Y,Y,989
+21360,Microcottus sellaris,brightbelly sculpin,,Y,Y,Y,990
+21363,Artedius lateralis,smoothhead sculpin,,,Y,,991
+21366,Chitonotus pugetensis,roughback sculpin,,,,Y,992
+21368,Myoxocephalus verrucosus,warty sculpin,,Y,Y,,993
+21369,Myoxocephalus niger,warthead sculpin,,,Y,,994
+21370,Myoxocephalus polyacanthocephalus,great sculpin,,Y,Y,Y,995
+21371,Myoxocephalus jaok,plain sculpin,,Y,Y,,996
+420,Raja binoculata,big skate,,Y,Y,Y,997
+425,Raja inornata,California skate,,,,Y,998
+10129,Hippoglossoides sp.,,A87,Y,,,999
+10130,Hippoglossoides elassodon,flathead sole,,Y,Y,Y,1000
+10140,Hippoglossoides robustus,Bering flounder,,Y,Y,,1001
+10145,Hypsopsetta guttulata,diamond turbot,,,,Y,1002
+10150,Lyopsetta exilis,slender sole,A87,Y,Y,Y,1003
+10155,Liopsetta glacialis,Arctic flounder,A87,Y,,,1004
+10160,Eopsetta jordani,petrale sole,,,Y,Y,1005
+10170,Parophrys vetulus,English sole,A87,Y,Y,Y,1006
+10180,Microstomus pacificus,Dover sole,,Y,Y,Y,1007
+10190,Embassichthys bathybius,deepsea sole,,Y,Y,Y,1008
+10200,Glyptocephalus zachirus,rex sole,A87,Y,Y,Y,1009
+10201,,rex sole larvae,,,Y,,1010
+10210,Limanda aspera,yellowfin sole,A94,Y,Y,,1011
+10211,Limanda proboscidea,longhead dab,A87,Y,,,1012
+10212,Limanda sakhalinensis,Sakhalin sole,A87,Y,,,1013
+10220,Platichthys stellatus,starry flounder,,Y,Y,Y,1014
+10240,Clidoderma asperrimum,roughscale sole,,Y,Y,,1015
+10250,Psettichthys melanostictus,sand sole,,Y,Y,Y,1016
+10270,Isopsetta isolepis,butter sole,A87,Y,Y,Y,1017
+10280,Pleuronichthys decurrens,curlfin sole,,Y,Y,Y,1018
+10115,Reinhardtius hippoglossoides,Greenland turbot,,Y,Y,,1019
+10120,Hippoglossus stenolepis,Pacific halibut,,Y,Y,Y,1020
+10122,Parophrys vetulus X Platichthys stellatus hybrid,hybrid sole,,,,Y,1021
+1,,fish eggs unident.,A89,Y,,,1022
+2,,fish larvae unident.,,Y,Y,Y,1023
+3,,fish unident.,,Y,Y,Y,1024
+10,Petromyzontidae,lamprey unident.,,Y,Y,Y,1025
+21,Lampetra tridentata,Pacific lamprey,,Y,Y,Y,1026
+100,Myxinidae,hagfish unident.,,Y,Y,Y,1027
+110,Eptatretus deani,black hagfish,,,,Y,1028
+120,Eptatretus stouti,Pacific hagfish,,,,Y,1029
+150,,shark unident.,,Y,Y,Y,1030
+151,Chondrichthyes,cartilaginous fish unident.,,,Y,,1031
+160,Selachimorpha egg case,Shark egg case unident.,,,,Y,1032
+180,Alopias vulpinus,thresher shark,,,,Y,1033
+200,Scyliorhinidae,cat shark unident.,A87,,,Y,1034
+210,Apristurus brunneus,brown cat shark,,,,Y,1035
+211,Parmaturus xaniurus,filetail cat shark,,,,Y,1036
+212,Apristurus kampae,longnose cat shark,,,,Y,1037
+214,Cephaloscyllium ventriosum,swell shark,,,,Y,1038
+222,Hexanchus griseus,sixgill shark,,,,Y,1039
+232,Lamna ditropis,salmon shark,,Y,Y,,1040
+242,Cetorhinus maximus,basking shark,,,Y,,1041
+252,Squatina californica,Pacific angel shark,,,,Y,1042
+310,Squalus acanthias,spiny dogfish,,Y,Y,Y,1043
+320,Somniosus pacificus,Pacific sleeper shark,,Y,Y,Y,1044
+332,Galeorhinus galeus,soupfin shark,,,,Y,1045
+340,Mustelus henlei,brown smoothhound,,,,Y,1046
+341,Mustelus californicus,gray smoothhound,,,,Y,1047
+351,Prionace glauca,blue shark,,,,Y,1048
+355,Triakis semifasciata,leopard shark,,,,Y,1049
+400,Rajidae,skate unident.,,Y,Y,Y,1050
+435,Bathyraja interrupta,Bering skate,,Y,Y,Y,1051
+440,Raja rhina,longnose skate,,Y,Y,Y,1052
+445,Raja badia,roughshoulder skate,,Y,Y,Y,1053
+450,Raja stellulata,starry skate,,Y,Y,Y,1054
+455,Bathyraja taranetzi,mud skate,A92,,Y,,1055
+460,Bathyraja trachura,roughtail skate,,Y,Y,Y,1056
+471,Bathyraja parmifera,Alaska skate,,Y,Y,Y,1057
+472,Bathyraja aleutica,Aleutian skate,,Y,Y,,1058
+475,Bathyraja lindbergi,commander skate,,Y,Y,,1059
+480,Bathyraja maculata,whiteblotched skate,,Y,Y,,1060
+485,Bathyraja minispinosa,whitebrow skate,,Y,Y,,1061
+490,Bathyraja smirnovi,golden skate,,Y,Y,,1062
+495,Bathyraja violacea,Okhotsk skate,,Y,Y,,1063
+610,Torpedo californica,Pacific electric ray,,,,Y,1064
+710,Hydrolagus colliei,spotted ratfish,,,Y,Y,1065
+10001,Pleuronectiformes,flatfish unident.,,Y,Y,Y,1066
+10002,Pleuronectiformes larvae,flatfish larvae,,Y,,Y,1067
+10003,Bothidae,lefteye flounder unident.,,,,Y,1068
+10008,Citharichthys sp.,sanddab unident.,,Y,Y,Y,1069
+10009,Citharichthys xanthostigma,longfin sanddab,,,,Y,1070
+10010,Citharichthys sordidus,Pacific sanddab,,Y,Y,Y,1071
+10020,Citharichthys stigmaeus,speckled sanddab,,,Y,Y,1072
+10041,Hippoglossina stomata,bigmouth sole,,,,Y,1073
+10050,Paralichthys californicus,California halibut,,,,Y,1074
+10060,Xystreurys liolepis,fantail sole,,,,Y,1075
+10100,Pleuronectidae,righteye flounder unident.,,,Y,Y,1076
+10110,Atheresthes stomias,arrowtooth flounder,,Y,Y,Y,1077
+10112,Atheresthes evermanni,Kamchatka flounder,,Y,Y,,1078
+81100,Heterozonias alternatus,cannonball sun star,,Y,Y,Y,1079
+81120,Lophaster sp.,,,Y,,,1080
+81130,Lophaster furcilliger,crested sea star,,Y,,,1081
+81310,Pteraster sp.,,,Y,Y,Y,1082
+81315,Pteraster tesselatus,,,Y,Y,Y,1083
+81320,Pteraster militaris,wrinkled star,,Y,Y,,1084
+81340,Pteraster tesselatus arcuatus,,,Y,Y,,1085
+81355,Pteraster obscurus,obscure sea star,,Y,Y,Y,1086
+81360,Diplopteraster multipes,pincushion sea star,,Y,Y,Y,1087
+81370,Thrissacanthias penicillatus,,,,,Y,1088
+81741,Asterias sp.,,,Y,Y,,1089
+81742,Asterias amurensis,purple-orange sea star,,Y,Y,,1090
+81779,Ctenodiscus sp.,,,Y,Y,,1091
+81780,Ctenodiscus crispatus,common mud star,,Y,Y,Y,1092
+81820,Leptychaster sp.,,,,Y,,1093
+81830,Leptychaster pacificus,,,,Y,,1094
+81835,Leptychaster arcticus,North Pacific sea star,A95,,Y,,1095
+81840,Cladaster validus,,A95,,Y,,1096
+81850,Dipsacaster sp.,,,,Y,,1097
+81870,Dipsacaster borealis,northern sea star,,Y,Y,,1098
+81880,Psilaster pectinatus,,,,,Y,1099
+81910,Cheiraster dawsoni,fragile sea star,,Y,Y,Y,1100
+82000,Brisingella pusilla,,,Y,Y,,1101
+82060,Zoroaster ophiurus,,,,,Y,1102
+82090,Myxoderma platyacanthum,,A95,,,Y,1103
+82500,Echinacea,sea urchin unident.,,Y,Y,Y,1104
+82510,Strongylocentrotus droebachiensis,green sea urchin,,Y,Y,Y,1105
+82515,Strongylocentrotus echinoides,,,,Y,,1106
+82520,Strongylocentrotus franciscanus,red sea urchin,,Y,Y,Y,1107
+82525,Strongylocentrotus purpuratus,purple sea urchin,,,Y,Y,1108
+82526,Strongylocentrotus pallidus,white sea urchin,,Y,Y,Y,1109
+82530,Allocentrotus fragilis,orange-pink sea urchin,,Y,Y,Y,1110
+82535,Allocentrotus sp.,,,,Y,Y,1111
+82650,,heart urchin unident.,,Y,Y,Y,1112
+82660,Brisaster sp.,,,Y,Y,Y,1113
+82670,Brisaster townsendi,,,Y,,,1114
+82675,Brisaster latifrons,heart urchin,,Y,Y,Y,1115
+82730,,sand dollar unident.,,Y,Y,Y,1116
+82740,Echinarachnius parma,parma sand dollar,,Y,Y,,1117
+82750,,crinoid unident.,,Y,Y,Y,1118
+82755,Heliometra glacialis,,A95,,Y,,1119
+83000,Ophiuroidea,brittlestarfish unident.,,Y,Y,Y,1120
+83020,Gorgonocephalus eucnemis,basketstar,,Y,Y,Y,1121
+83060,Asteronyx sp.,,,Y,Y,,1122
+83070,Asteronyx loveni,serpent sea star,,,Y,,1123
+83310,Ophiura sp.,,,Y,,,1124
+83320,Ophiura sarsi,notched brittlestar,,Y,Y,Y,1125
+83340,Stegophiura ponderosa,,,,Y,,1126
+83360,Ophiopholis sp.,,,Y,Y,,1127
+83390,Ophiopholis longispina,,,,Y,,1128
+83400,Ophiopholis aculeata,ubiquitous brittle star,,Y,Y,,1129
+83405,Ophiothrix sp.,,,,Y,,1130
+83406,Ophiothrix spiculata,,,,Y,,1131
+83660,Amphiuridae,burrowing brittle star unident.,,,Y,,1132
+83700,Amphiodia rossica,,,Y,,,1133
+85000,Holothuroidea,sea cucumber unident.,,Y,Y,Y,1134
+85010,Cucumaria japonica,,,Y,Y,,1135
+85015,Parastichopus sp.,,,Y,Y,Y,1136
+85020,Parastichopus californicus,California sea cucumber,,Y,Y,Y,1137
+85060,Pseudostichopus sp.,,,,Y,,1138
+85070,Pseudostichopus mollis,sandy sea cucumber,,Y,Y,Y,1139
+85110,Molpadia arenicola,,,Y,,,1140
+85115,Molpadia sp.,,,Y,Y,Y,1141
+85120,Molpadia intermedia,sweet sea potato,,Y,Y,,1142
+85169,Pentamera lissoplaca,crescent sea cucumber,,Y,,,1143
+85180,Bathyplotes sp.,,,Y,Y,,1144
+85200,Cucumaria sp.,,,Y,Y,Y,1145
+85201,Cucumaria fallax,sea football,,Y,Y,,1146
+85205,Apostichopus japonicus,,,Y,Y,,1147
+85210,Psolus sp.,,,Y,Y,Y,1148
+99997,,unsorted catch and debris,A04,Y,,,1149
+85219,Psolus fabricii,brownscaled sea cucumber,,,Y,,1150
+85222,Psolus japonicus,,A95,,Y,,1151
+85270,Pannychia moseleyi,deep sea papillate cucumber,,Y,Y,Y,1152
+85410,Scotoplanes theeli,,,,,Y,1153
+91000,Porifera,sponge unident.,,Y,Y,Y,1155
+91010,Demospongiae,,,Y,,,1156
+91015,Suberites sp.,,,,Y,,1157
+91016,Suberites ficus,,,Y,Y,,1158
+91020,Suberites domuncula,hermit sponge,,Y,,,1159
+91030,Aphrocallistes vastus,clay pipe sponge,,Y,Y,Y,1160
+91040,Mycale loveni,tree sponge,,Y,Y,Y,1161
+91050,Halichondria panicea,barrel sponge,,Y,Y,,1162
+91056,Phakellia cribrosa,funnel sponge,A95,,Y,,1163
+91060,Myxilla incrustans,scallop sponge,,Y,Y,,1164
+91700,Hexactinellida,glass sponge unident.,,Y,Y,Y,1165
+92000,Platyhelminthes,flatworm unident.,A90,Y,Y,Y,1166
+92021,Polycladida,polyclad flatworm unident.,,Y,Y,Y,1167
+92500,Nemertea,nemertean worm unident.,,Y,Y,,1168
+93100,Priapula,priapulid worm unident.,,Y,,,1169
+93500,Nematoda,nematode worm unident.,,,Y,,1170
+94000,Sipuncula,peanut worm unid.,,Y,Y,Y,1171
+94500,Echiura,echiuroid worm unident.,,Y,Y,Y,1172
+94900,Phoronida,phoronida tube worm unident.,,Y,,,1173
+95000,Bryozoa,bryozoan unident.,,Y,Y,Y,1174
+95010,,bryozoan sp. A unident.,,Y,,,1175
+95020,Eucratea loricata,feathery bryozoan,,Y,Y,,1176
+95030,Flustra serrulata,leafy bryozoan,,Y,Y,,1177
+95040,Myriozoum subgracile,,,,Y,,1178
+95050,Porella compressa,flattened bryozoan,,Y,Y,,1179
+95060,Escharopsis sarsi,,,Y,Y,,1180
+95070,Rhamphostomella costata,ribbed bryozoan,,Y,,,1181
+95080,Cellepora ventricosa,coral bryozoan,,Y,,,1182
+95100,Microporina articulata,,A95,,Y,,1183
+97000,Brachiopoda,lampshell unident.,,Y,Y,Y,1184
+97100,Terebratulina sp.,,,,Y,,1185
+97110,Terebratalia transversa,common brachiopod,,,Y,Y,1186
+97115,Terebratulina unguicula,snakeshead brachiopod,,,Y,,1187
+97116,Laqueus californianus,California lamp shell,,Y,Y,,1188
+98000,Ascidiacea,tunicate unident.,,Y,Y,Y,1189
+98001,Ascidian n. sp. A,cow-eye tunicate,,Y,Y,,1190
+98002,Ascidian n. sp. B,transparent tunicate,,Y,,,1191
+98070,Thaliacea,salp unident.,,Y,Y,Y,1192
+98080,Styela sp.,,,Y,,,1193
+98082,Styela rustica,sea potato,,Y,Y,,1194
+98100,Boltenia sp.,,,Y,Y,,1195
+98101,Boltenia villosa,,,,Y,Y,1196
+98105,Boltenia ovifera,,,Y,Y,,1197
+98200,Halocynthia sp.,sea peach unident.,,Y,Y,Y,1198
+98205,Halocynthia aurantium,sea peach,,Y,Y,,1199
+98300,,compound ascidian unident.,,Y,Y,,1200
+98302,Amaroucium sp.,,,Y,,,1201
+98309,Chelyosoma orientale,,A91,Y,,,1202
+98310,Aplidium sp. A (Clark 2006),sea glob,,Y,Y,,1203
+98311,Aplidium new species a,orange aplidium,,Y,,,1204
+98320,Synoicum sp.,sea blob,,Y,Y,,1205
+99900,Molgula sp.,,,Y,Y,,1206
+99902,Molgula grifithsii,sea grape,,Y,Y,,1207
+99904,Molgula retortiformis,sea clod,,Y,Y,,1208
+99990,,invertebrate unident.,,Y,Y,Y,1209
+99992,,invertebrate eggs unident.,,Y,Y,Y,1210
+99993,,empty bivalve shells,,Y,Y,Y,1211
+99994,,empty gastropod shells,,Y,Y,Y,1212
+99999,,unsorted shab,,Y,Y,Y,1213
+23942,Benthodesmus pacificus,,A96,,,Y,1214
+81890,Benthopectinidae,,A96,,,Y,1215
+80180,Ampheraster sp.,,A96,,,Y,1216
+79310,Onychoteuthidae,,A96,,,Y,1217
+23940,Trichiuridae,,A96,,,Y,1218
+21846,Stomiiformes,,A96,,,Y,1219
+71501,Carinariidae (= Heteropoda),,A96,,,Y,1220
+43090,Liponema brevicornis,tentacle-shedding anemone,A96,Y,Y,Y,1221
+82030,Zoroasteridae,,A96,,,Y,1222
+81920,Nearchaster aciculosus,,A96,,,Y,1223
+10262,Lepidopsetta bilineata,southern rock sole,A96,,Y,Y,1224
+10260,Lepidopsetta sp.,rock sole unident.,A96,Y,Y,Y,1225
+10261,Lepidopsetta polyxystra,northern rock sole,A96,Y,Y,Y,1226
+24158,Lycodapus endemoscotus,deepwater eelpout,A96,,,Y,1227
+24165,Lycodapus dermatinus,looseskin eelpout,A96,,,Y,1228
+24240,Lycodema barbatum,bearded eelpout,A96,,,Y,1229
+82770,Florometra serratissima,featherstar crinoid,A96,Y,Y,Y,1230
+20995,Rondeletia loricata,armored redmouth whalefish,A96,,,Y,1231
+23720,Mirorictus taningi,striped tubeshoulder,A96,,,Y,1232
+22247,Careproctus oregonensis,Oregon snailfish,A96,,,Y,1233
+22248,Careproctus microstomus,smallmouth snailfish,A96,,,Y,1234
+22249,Paraliparis pectoralis,broadfin snailfish,A96,,,Y,1235
+98003,Pyrosoma sp.,green colonial tunicate,A96,,,Y,1236
+44032,Stylaster brochi,,A96,,Y,,1237
+44081,Errinopora sp.,,A96,,Y,,1238
+44040,Cyclohelia lamellata,,A96,,Y,,1239
+44000,Scleractinia,stony coral unident.,A88,Y,Y,Y,1240
+41331,Anthomastus sp. A,red anthomastus,A96,,Y,,1242
+41332,Anthomastus sp. B,gray anthomastus,A96,,Y,,1243
+41102,Alcyonium sp.,,A96,,Y,,1244
+44093,Muriceides sp.,,A96,,Y,,1245
+44098,Arthrogorgia sp.,,A96,,Y,,1246
+44090,Fanellia compressa,,A96,,Y,,1247
+44086,Plumarella sp. 1 (Bayer),,A96,,Y,,1248
+44087,Thouarella sp.,,A96,,Y,,1249
+44094,Amphilaphis sp.,,A96,,Y,,1250
+85175,Paracaudina chilensis,rattail sea cucumber,A96,,,Y,1251
+71790,Neoberingius sp.,,A95,,Y,,1252
+44020,Caryophyllia sp.,,A95,,Y,,1253
+44030,Stylaster sp.,,A95,,Y,,1254
+44060,Distichopora sp.,,A95,,Y,,1255
+41300,Anthomastus sp.,,A95,,Y,,1256
+201,Apristurus brunneus egg case,cat shark egg case,A97,,,Y,1257
+402,Bathyraja sp. egg case,,A97,Y,Y,Y,1258
+711,Hydrolagus colliei egg case,,A97,,,Y,1259
+20660,Leuroglossus sp.,,A97,Y,Y,Y,1260
+21594,Chiasmodontidae,swallowers,A97,,,Y,1261
+41530,Chrysopathes speciosa,,A97,,,Y,1262
+41540,Bathypathes sp.,,A97,,,Y,1263
+41550,Parantipathes sp.,,A97,,,Y,1264
+41570,Swiftia sp.,,A97,Y,Y,Y,1265
+41701,Calcigorgia spiculifera,,A97,,Y,Y,1266
+42015,Ombellula,,A97,Y,Y,Y,1267
+69557,Albuneidae,mole crab,A97,,,Y,1268
+69642,Calastacus investigatoris,,A97,,,Y,1269
+70050,Solengaster sp.,Solengaster unidentified,A97,Y,Y,Y,1270
+71905,Exilioidea kelseyi,,A97,,,Y,1271
+72749,Buccinum viridum,turban whelk,A97,,,Y,1272
+74325,Solemya sp.,awning clam,A97,,,Y,1273
+79001,Taningia danae,rhomboid squid,A97,,,Y,1274
+80670,Cryptopeltaster lepidonotus,,A97,Y,Y,Y,1275
+80182,Ampheraster marianus,,A97,,Y,Y,1276
+82001,Brisingella exilis,,A97,,,Y,1277
+82035,Zoroaster evermanni,Evermann's seastar,A97,,,Y,1278
+82091,Myxoderma sacculatum,,A97,,,Y,1279
+82760,Florometra sp.,,A97,Y,Y,Y,1280
+85016,Parastichopus leukothele,giant orange cucumber,A97,Y,Y,Y,1281
+91070,Hyalonema sp.,fiberoptic sponge,A97,,,Y,1282
+403,Raja sp. egg case,,A97,,Y,,1283
+10221,Platichthys stellatus X Pleuronectes quadrituberculatus,Hybrid starry flounder X Alaska plaice,A97,,Y,,1284
+41700,Calcigorgia sp.,,A97,,Y,,1285
+42003,Virgulariidae,sea whip unident.,A97,,Y,,1286
+43030,Stomphia sp.,,A97,,Y,,1287
+50161,Aphrodita sp.,,A97,,Y,,1288
+65210,Scalpellum cornutum,eared barnacle,A97,,Y,,1289
+69123,Elassochirus sp.,,A97,,Y,,1290
+71004,Neptunea sp. eggs,,A97,,Y,,1291
+71777,Beringius sp. eggs,,A97,,Y,,1292
+91002,,hairy lemon sponge,A97,,Y,,1293
+91005,,vase sponge unident.,A97,,Y,,1294
+91031,,white claypipe sponge,A97,,Y,,1295
+91051,,neon yellow vase sponge,A97,,Y,,1296
+91053,Rhabdocalyptus sp.,cloud sponge,A97,,Y,,1297
+91054,Mycale bellabellensis,lampshade sponge,A97,,Y,,1298
+91055,,brain sponge,A97,,Y,,1299
+91065,Pachastrellidae sp. 1,mushroom sponge,A97,,Y,,1301
+91066,Histodermella sp. A (Clark 2006),spud sponge,A97,,Y,,1302
+91067,,club sponge,A97,,Y,,1303
+91086,Stylissa sp.,drumstick sponge,A97,,Y,,1304
+91068,Leucosolenia blanca,yellow leafy sponge,A97,,Y,,1305
+91069,Tethya sp.,ball sponge,A97,,Y,,1306
+91071,,staghorn sponge,A97,,Y,,1307
+91072,,orange ball sponge,A97,,Y,,1308
+91076,,orange sponge,A97,,Y,,1309
+91077,,yellow bowl sponge,A97,,Y,,1310
+91078,Polymastia pachymastia,black-orange spud sponge,A97,,Y,,1311
+91079,Halichondria sitiens,black papilliate sponge,A97,,Y,,1312
+91080,Halichondria cf. sitiens,yellow green papillate sponge,A97,,Y,,1313
+91083,,orange encrusting sponge,A97,,Y,,1314
+91084,,firm yellow green sponge,A97,,Y,,1315
+98322,Ascidia paratropa,glassy tunicate,A97,,Y,,1316
+98324,Halocynthia hispidus,hairy tunicate,A97,,Y,,1317
+95011,,fluffy sponge,A97,,Y,,1318
+75336,Mya elegans,elegant soft shell,A97,Y,,,1319
+75330,Mya sp.,,A97,,Y,,1320
+72806,Velutina sp.,,A97,Y,,,1321
+213,Apristurus sp.,,A98,,,Y,1322
+20960,Ceratioidei,,A98,,,Y,1323
+29996,Saccopharynx sp.,,A98,,,Y,1324
+66814,Notostomus sp.,,A98,,,Y,1325
+81919,Nearchaster sp.,,A98,,,Y,1326
+20180,Maulisia mauli,,A98,,,Y,1327
+22630,Ceratoscopelus townsendi,,A98,,,Y,1328
+22705,Nemichthys larseni,pale snipe eel,A98,,,Y,1329
+26060,Neonesthes capensis,,A98,,,Y,1330
+21240,Malacocephalus laevis,softhead grenadier,A98,,,Y,1331
+43001,Actinauge verrilli,reticulate anemone,A98,Y,Y,Y,1332
+43002,Paractinostola faeculenta,rough purple sea anemone,A98,Y,Y,Y,1333
+43003,Actinoscyphia sp.,,A98,Y,Y,Y,1334
+43009,Corallimorphus sp.,,A98,Y,Y,Y,1335
+21827,Sternoptyx sp.,,A98,,,Y,1336
+22261,Rhinoliparis barbulifer,longnose snailfish,A98,,,Y,1337
+69559,Polycheles sp.,,A10,,Y,Y,3441
+69331,Paralomis verrilli,,A98,,,Y,1339
+71811,Neptunea smirnia,,A98,,,Y,1340
+80625,Pseudarchaster dissonus,,A98,,,Y,1341
+71795,Calinaticina oldroyi,,A98,,,Y,1342
+71881,Neptunea ithia,,A98,,,Y,1343
+71802,Neptunea phoenicia,,A98,,,Y,1344
+72021,Antiplanes thalea,,A98,,,Y,1345
+72544,Solariella nuda,naked solarelle,A98,,,Y,1346
+74001,Acharax johnsoni,,A98,,,Y,1347
+74326,Solemya reidi,gutless awning clam,A98,,,Y,1348
+80525,Poraniopsis flexilius,,A98,,,Y,1349
+80624,Pseudarchaster pussillus,,A98,,,Y,1350
+80691,Mediaster tenellus,,A98,Y,Y,Y,1351
+81135,Asthenactis fisheri,,A98,,,Y,1352
+81743,Astropecten californicus,,A98,,,Y,1353
+40502,Periphylla sp.,,A98,,,Y,1354
+31550,Prionotus stephanophrys,lumptail searobin,A98,,,Y,1356
+66140,Penaeidae,penaeid shrimps,A98,,,Y,1357
+74130,Crassadoma gigantea,giant rock-scallop,A98,,,Y,1358
+80915,Asterina miniata,bat star,A98,,,Y,1359
+91052,Leucandra heathi,spiny vase sponge,A98,,,Y,1360
+69650,Callianassa sp.,,A98,,,Y,1361
+339,Mustelus sp.,,A98,,,Y,1362
+79002,,squid eggs unident.,A98,,,Y,1363
+79259,Ommastrephidae,,A98,,,Y,1364
+20075,Stellerina xyosterna,pricklebreast poacher,,,Y,,1365
+41525,Antipatheria,black coral,A99,,,Y,1366
+81350,Pteraster coscinopeplus,deepwater pteraster,A99,,,Y,1367
+44085,Isidella sp.,articulated bamboo coral,A99,Y,Y,Y,1368
+81860,Dipsacaster anoplus,,A99,,,Y,1369
+21336,Artediellus gomojunovi,spinyhook sculpin,A99,Y,,,1370
+21379,Trichocottus brashnikovi,hairhead sculpin,A99,Y,,,1371
+22184,Eumicrotremus barbatus,papillose lumpsucker,A99,,Y,,1372
+20713,Bathymaster leurolepis,smallmouth ronquil,A99,,Y,,1374
+24182,Lycodes soldatovi,dipline eelpout,A99,Y,Y,,1375
+72762,Bathybuccinum clarki,Roger's buccinid,A99,,Y,,1377
+79405,Cranchia scabra,sandpaper squid,A99,,Y,Y,1378
+44033,Stylaster cancellatus,,A99,,Y,,1379
+44034,Stylaster elassotomus,,A99,,Y,,1380
+44035,Stylaster polyorchis,,A99,,Y,,1381
+44036,Crypthelia trophostega,,A99,,Y,,1382
+44082,Errinopora nanneca,,A99,,Y,,1383
+44023,Caryophyllia alaskensis,Alaska cup coral,A99,,Y,,1384
+44029,Stylasterina,hydrocoral unident.,A99,,Y,,1385
+44095,Amphilaphis sp. 1,,A99,,Y,,1386
+44096,Amphilaphis sp. 2,,A99,,Y,,1387
+44097,Amphilaphis sp. 3,,A99,,Y,,1388
+44091,Fanellia fraseri,,A99,,Y,,1389
+44088,Keratoisis sp.,Nodal bamboo coral unid.,A99,,Y,,1390
+44089,Fanellia sp.,,A99,,Y,,1391
+22217,Allocareproctus jordani,cherry snailfish,A99,,Y,,1392
+22180,Eumicrotremus gyrinops,Alaskan lumpsucker,A99,,Y,,1393
+22190,Eumicrotremus phrynoides,toad lumpsucker,A99,,Y,,1394
+21307,Icelinus sp.,,A99,,Y,,1395
+44061,Distichopora borealis,,A99,,Y,,1396
+82100,Anteliaster sp.,,A99,,Y,,1397
+80732,Ceramaster clarki,,A99,,Y,,1398
+30035,Adelosebastes latens,Aleutian scorpionfish,A99,,Y,,1399
+22914,Oneirodes bulbosus,hairy-lure dreamer,A99,,Y,,1400
+23202,Oncorhynchus sp.,salmon unident.,A99,,Y,,1401
+23872,Pholis sp.,,A99,,Y,,1402
+23958,Opisthoproctidae,spookfish unident.,A99,,Y,,1403
+40503,Periphylla periphylla,,A99,,Y,,1404
+40504,Chrysaora melanaster,,A99,,Y,,1405
+40505,Phacellophora camtschatica,egg yolk jelly,A99,,Y,,1406
+40506,Aequorea sp.,,A99,,Y,,1407
+40508,Polyorchis sp.,,A99,,Y,,1408
+40511,Aurelia sp.,,A99,,Y,,1409
+40512,Aurelia labiata,,A99,,Y,,1410
+41585,Euplexaura sp.,,A99,,Y,,1411
+41586,Euplexaura marki,,A99,,Y,,1412
+42013,Halipteris californica,,A99,,Y,,1413
+43021,Metridium farcimen (=Metridium giganteum),gigantic anemone,A99,,Y,,1414
+43029,Stomphia didemon,cowardly anemone,A99,,Y,,1415
+54000,Nereididae,,A99,,Y,,1416
+62010,Livoneca sp.,,A99,,Y,,1417
+64012,Neognathophausia ingens,red mysid,A99,Y,Y,,1418
+68065,Xanthidae,,A99,,Y,,1419
+69314,Hapalogaster mertensii,,A99,,Y,,1420
+69328,Cryptolithodes typicus,butterfly crab,A99,,Y,,1421
+70110,Lepidozona trifida,,A99,,Y,,1422
+70112,Lepidozona abyssicola,,A99,,Y,,1423
+70122,Placiphorella pacifica,,A99,,Y,,1424
+71727,Colus georgianus,,A99,,Y,,1425
+71840,Neptunea middendorffii,,A99,,Y,,1426
+72739,Buccinum picturatum,,A99,,Y,,1427
+72757,Buccinum ciliatum,,A99,,Y,,1428
+74482,Empleconia vaginata,vaginated limops,A99,,Y,,1429
+79509,Histioteuthis sp.,jewel squids,A99,,Y,,1430
+80115,Leptasterias coei,,A99,,Y,,1431
+80541,Henricia clarki,,A99,,Y,,1432
+80547,Henricia asthenactis,,A99,,Y,,1433
+66841,Bentheogennema borealis,,A06,,Y,,2603
+69284,Acantholithodes sp.,,A06,,Y,,2604
+69327,Cryptolithodes sitchensis,turtle crab,A06,,Y,,2605
+69332,Paralomis sp. A (Clark 2006),,A06,,Y,,2606
+69333,Paralomis sp. B (Clark 2006),,A06,,Y,,2607
+69334,Paralomis manningi,,A06,,Y,,2608
+69920,Nymphon sp.,,A06,,Y,,2609
+69930,Pycnogonum sp.,,A06,,Y,,2610
+70062,Neomenia cf. yamamoti (Clark 2006),,A06,,Y,,2611
+70114,Lepidozona retiporosa,,A06,,Y,,2612
+70140,Mopalia egretta,,A06,,Y,,2613
+70151,Stenosemus sharpii,,A06,,Y,,2614
+71019,Acanthodoris sp.,,A06,,Y,,2615
+71023,Gastropteron pacificum,Pacific batwing seaslug,A06,,Y,,2616
+71026,Tritonia festiva,festive Tritonia,A06,Y,Y,,2617
+71105,Cadlina modesta,,A06,,Y,,2618
+71212,Dirona aurantia,,A06,,Y,,2619
+71269,Diaulula sp. A (Clark 2006),,A06,,Y,,2620
+71271,Adalaria proxima,,A06,,Y,,2621
+71332,Anatoma baxteri,,A06,,Y,,2622
+71333,Anatoma crispata,crispate scissurelle,A06,,Y,,2623
+71352,Puncturella cooperi,,A06,,Y,,2624
+71353,Puncturella galeata,helmet puncturella,A06,,Y,,2625
+71354,Puncturella multistriata,many-ribbed puncturella,A06,,Y,,2626
+71355,Cranopsis cucullata,hood puncturella,A06,,Y,,2627
+71356,Scelidotoma bella,elegant emarginula,A06,,Y,,2628
+71357,Diadora aspera,,A06,,Y,,2629
+71503,Gastropteron pacifica,,A06,,Y,,2630
+71519,Eulima sp.,eulimas,A06,,Y,,2631
+71520,Amauropsis purpurea,purple moon snail,A06,Y,Y,,2632
+71546,Amphissa colmbiana,wrinkled amphissa,A06,,Y,,2633
+71547,Amphissa reticulata,,A06,,Y,,2634
+71551,Astyris gausapata,,A06,,Y,,2635
+71552,Astyris elegens,elegant dove snail,A06,,Y,,2636
+71587,Onchidiopsis sp. A (Clark & McLean),,A06,,Y,,2637
+71588,Onchidiopsis brevipes,,A06,,Y,,2638
+71589,Onchidiopsis sp. B (Clark & McLean),,A06,,Y,,2639
+71591,Lamellaria sp. A (Clark & McLean),,A06,,Y,,2640
+71592,Lamellaria sp. B (Clark & McLean),,A06,,Y,,2641
+71593,Lamellaria sp. C (Clark & McLean),,A06,,Y,,2642
+71594,Lamellaria sp. D (Clark & McLean),,A06,,Y,,2643
+71595,Lamellaria sp. E (Clark & McLean),,A06,,Y,,2644
+71636,Turritella sp.,,A06,,Y,,2645
+71739,Volutopsius attenuatus,attenuate melon whelk,A06,Y,Y,,2646
+71746,Volutopsius sp. C (Clark & McLean),,A06,,Y,,2647
+71745,Volutopsius sp. D (Clark & McLean),,A06,,Y,,2648
+71885,Neptunea sp. E (Clark & McLean),,A06,,Y,,2649
+71898,Plicifusus stejnegeri,,A06,,Y,,2650
+71899,Plicifusus sp. A (Clark & McLean),,A06,,Y,,2651
+71915,Neptunea sp. D (Clark & McLean),,A06,,Y,,2653
+71916,Neptunea sp. F (Clark & McLean),,A06,,Y,,2654
+71917,Neptunea sp. G (Clark & McLean),,A06,,Y,,2655
+71925,Colus sp. A (Clark & McLean),,A06,,Y,,2656
+71926,Colus sp. B (Clark & McLean),,A06,,Y,,2657
+72024,Antiplanes sp. A (Clark & McLean),,A06,,Y,,2658
+72026,Rectiplanes sp. A (Clark & McLean),,A06,,Y,,2659
+72030,Suavodrillia kennicotti,,A06,,Y,,2660
+72058,Turridae,turrid snails,A06,,Y,,2661
+72064,Epitonium sp.,,A06,,Y,,2662
+72066,Epitonium indianorum,,A06,,Y,,2663
+72070,Carinoturris fortis,,A06,,Y,,2664
+72071,Acirsa sp. A (McLean & Clark),Aleutian Wentletrap,A06,,Y,,2665
+72081,Nitidiscala indianorum,money wentletrap,A06,,Y,,2666
+72104,Oenopota nobilis,,A06,,Y,,2667
+72105,Oenopota fidicula,,A06,,Y,,2668
+72130,Mangelia carlotta,,A06,,Y,,2669
+72301,Trichotropis sp. 1 (Clark & McLean),,A06,,Y,,2670
+72302,Trichotropis borealis,,A06,,Y,,2671
+72307,Trichotropis conica,,A06,,Y,,2672
+72371,Iphinoe pemabilis,,A06,,Y,,2673
+72382,Torellia lineata,,A06,,Y,,2674
+72386,Scabrotrophon sp. A (Clark & McLean),,A06,,Y,,2675
+72387,Scabrotrophon sp. B (Clark & McLean),,A06,,Y,,2676
+72388,Scabrotrophon sp. C (Clark & McLean),,A06,,Y,,2677
+72389,Scabrotrophon sp. D (Clark & McLean),,A06,,Y,,2678
+72390,Scabrotrophon sp. E (Clark & McLean),,A06,,Y,,2679
+72393,Scabrotrophon maltzani,,A06,,Y,,2680
+72394,Scabrotrophon clarki,,A06,,Y,,2681
+72409,Boreotrophon multicostatus,ribbed trophon,A06,,Y,,2682
+72410,Boreotrophon rotundus,,A06,,Y,,2683
+72436,Nipponotrophon sp. A (Clark & McLean),,A06,,Y,,2685
+72513,Calliostoma titanium,,A06,,Y,,2687
+72514,Calliostoma variegatum,,A06,,Y,,2688
+72521,Calliotropis carlotta,,A06,,Y,,2689
+72536,Margarites sp. A (Clark & McLean),,A06,,Y,,2690
+72537,Margarites sp. B (Clark & McLean),,A06,,Y,,2691
+72538,Margarites sp. C (Clark & McLean),,A06,,Y,,2692
+72545,Solariella peramabilis,,A06,,Y,,2693
+72546,Solariella sp. A (Clark & McLean),,A06,,Y,,2694
+72551,Otukaia kiheiziebisu,,A06,,Y,,2695
+72554,Calliostoma ligatum,bluetopsnail,A06,,Y,,2696
+72555,Calliostoma annulatum,,A06,,Y,,2697
+72571,Oligoneria conica,,A06,,Y,,2698
+72731,Amphissa sp.,,A06,,Y,,2699
+72768,Ancistrolepis bicinctus,two-ribbed whelk,A06,,Y,,2700
+72788,Volutomitra sp. B (Clark & McLean),,A06,,Y,,2701
+72794,Arctomelon sp. cf. stearnsii (Clark & McLean),,A06,,Y,,2702
+72796,Volutomitra sp. A (Clark & McLean),,A06,,Y,,2703
+72810,Velutina rubra,,A06,,Y,,2704
+72807,Velutina sp. A (Clark & McLean),,A06,,Y,,2705
+72808,Velutina sp. B (Clark & McLean),,A06,,Y,,2706
+72809,Velutina sp. C (Clark & McLean),,A06,,Y,,2707
+73187,Admete middendorffi,,A06,,Y,,2708
+73188,Admete couthouyi,,A06,,Y,,2709
+73189,Neadmete circumcenta,,A06,,Y,,2710
+73190,Neadmete modesta,,A06,,Y,,2711
+74108,Chlamys sp. cf. unalaskae (Clark &  McLean),,A06,,Y,,2712
+74178,Cyclopecten uschakovi,,A06,,Y,,2713
+74179,Cyclopecten sp. cf. benthalis (Clark & McLean),,A06,,Y,,2714
+74322,Panomya norvegica,Arctic roughmya,A06,,Y,,2715
+74332,Nucula sp.,,A06,,Y,,2716
+74437,Nuculana taphira,,A06,,Y,,2717
+74438,Nuculana conceptionis,,A06,,Y,,2718
+74485,Glycymeris septentrionalis,,A06,,Y,,2719
+74486,Glycymeris subobsoleta,california bittersweet,A06,,Y,,2720
+74511,Lyonsia sp.,,A06,,Y,,2721
+74551,Vilasina seminuda,,A06,,Y,,2722
+74571,Limatula attenuata,,A06,,Y,,2723
+74572,Limatula sp. A (Clark & McLean),,A06,,Y,,2724
+74645,Astarte compacta,,A06,,Y,,2725
+74648,Astarte esquimalti,,A06,,Y,,2726
+74646,Astarte arctica,,A06,,Y,,2727
+74647,Astarte montagui,,A06,,Y,,2728
+74652,Cyclocardia ovata,,A06,,Y,,2729
+74657,Cyclocardia umnaka,,A06,,Y,,2730
+74924,Conchocele bisecta,,A06,,Y,,2731
+75120,Gari californica,,A06,,Y,,2732
+75125,Semele rubropicta,,A06,,Y,,2733
+75204,Tellina modesta,,A06,,Y,,2734
+75206,Tellina bodegensis,,A06,,Y,,2735
+75218,Entoclesma navicula,,A06,,Y,,2736
+75221,Pandora wardiana,,A06,,Y,,2737
+75222,Pandora bilirata,bilirate pandora,A06,,Y,,2738
+75235,Glycymeris sp.,bittersweets,A06,,Y,,2739
+75243,Macoma yoldiaformis,,A06,,Y,,2740
+75245,Macoma carlottensis,,A06,,Y,,2741
+75246,Macoma  moesta,,A06,,Y,,2742
+75248,Macoma inquinata,pointed Macoma,A06,,Y,,2743
+75287,Serripes notabilis,oblique smoothcockle,A06,,Y,,2744
+75331,Mya baxteri,,A06,,Y,,2745
+75340,Thracia trapezoides,,A06,,Y,,2746
+75560,Cuspidaria glacialis,,A06,,Y,,2747
+75570,Halicardia perplicata,,A06,,Y,,2748
+77010,Dentalildae,,A06,,Y,,2750
+77015,Cadulus sp.,,A06,,Y,,2751
+79206,Gonatus kamtschaticus,,A06,,Y,,2752
+79207,Eogonatus tinro,,A06,,Y,,2753
+80201,Lethasterias sp.,,A06,,Y,,2101
+41752,Clavularia incrustans,encrusting coral,A06,,Y,,2102
+44012,Javania sp.,,A06,,Y,,2103
+80735,Goniasteridae,goniasterid sea stars,A06,,Y,,2104
+72404,Boreotrophon rotundatus,rotund trophon,A06,,Y,,2105
+62003,Arcturus longispinis,,A06,,Y,,2106
+69401,Erimacrus sp.,,A06,,Y,,2107
+72399,Scabrotrophon sp.,,A06,,Y,,2108
+72023,Antiplanes vinosus,,A06,,Y,,2109
+75031,Protothaca sp.,,A06,,Y,,2110
+72785,Buccinum transliratum,transect whelk,A06,Y,Y,,2111
+72381,Torellia sp.,hairysnails,A06,,Y,,2112
+74174,Parvamussium sp.,,A06,,Y,,2113
+79208,Gonatus middendorffi,,A06,,Y,,2754
+79211,Berryteuthis anonychus,,A06,,Y,,2755
+82691,Marginoproctus dyakonovi,,A06,,Y,,2756
+82741,Dendraster excentricus,,A06,,Y,,2757
+82751,Ptilocrinus pinnatus,yellow sea lily,A06,,Y,,2758
+82765,Florometra inexpectata,,A06,,Y,,2759
+82773,Psathyrometra profundorum,,A06,,Y,,2760
+82775,Fariometra sp.,dwarf feather star,A06,,Y,,2761
+44084,Isididae unid.,Bamboo coral unid.,A08,Y,Y,,3101
+83021,Gorgonocephalus sp. cf. arcticus,,A06,,Y,,2763
+83025,Astrophyton pardalis,,A06,,Y,,2764
+83065,Astrochema sublavae,,A06,,Y,,2765
+83081,Astrochele sp. A (Clark 2006),,A06,,Y,,2766
+83311,Ophiura cryptolepis,,A06,,Y,,2767
+83312,Ophiura quadrispina,four spined brittle star,A06,,Y,,2768
+83319,Ophiura lutkeni,gray brittle star,A06,,Y,,2769
+83336,Amphiophiura nodosa,,A06,,Y,,2770
+83337,Amphiophiura sp. A (Clark 2006),,A06,,Y,,2771
+83338,Amphiophiura superba,,A06,,Y,,2772
+83341,Ophiacantha normani,,A06,,Y,,2773
+69912,Colossendeis microsetosa,,A05,,Y,,2821
+81829,Leptychaster anomalus,,A05,,Y,,2822
+91125,Tentorium semisuberites,two nipple sponge,A07,,Y,,2941
+91226,Latrunculia sp. A (Clark 2006),green papillate sponge,A06,,Y,,2842
+99982,Craniella spinosa,furry ball sponge,A06,,Y,,2843
+99981,Craniella cranium,baseball sponge,A06,,Y,,2844
+22270,Allocareproctus sp.,,A06,,Y,,2845
+91111,Polymastia robusta,long nippled sponge,A06,,Y,,2846
+91101,Inflatella sp. 1 (Clark 2006),,A06,,Y,,2847
+62005,Arcturus sp.,,A06,,Y,,2848
+80560,Henricia sp. D (Clark 2006),fuzzy henricia,A06,,Y,,2849
+91063,Phakellia beringensis,hat sponge,A06,,Y,,2850
+91082,Polymastia sp. B (Clark 2006),orange nipple ball sponge,A06,,Y,,2851
+91113,Polymastia sp. A (Clark 2006),prolific nipple sponge,A06,,Y,,2852
+91210,Oscarella lobularis,stalked ball sponge,A06,,Y,,2853
+91212,Stylocordyla eous,slender stalked sponge,A06,,Y,,2854
+91215,Plakina tanaga,white convoluted sponge,A06,,Y,,2855
+91710,Aulosaccus schulzei,vase sponge,A06,,Y,,2856
+99983,Tetilla sp. A (Clark 2006),spiky ball sponge,A06,,Y,,2857
+71524,Cryptonatica sp.,,A07,Y,,,2901
+69041,Pagurus armatus,armed hermit,A07,Y,Y,,2921
+69097,Pagurus setosus,setose hermit,A07,Y,Y,,2922
+69098,Pagurus undosus,Priblof hermit,A07,Y,Y,,2923
+72067,Boreoscala sp.,,A08,Y,,,3041
+80561,Henricia sp. E (Clark 2006),slender pale Henricia,A07,,Y,,2943
+91017,Suberites sp. A (Clark 2006),wax sponge,A07,,Y,,2944
+91114,Polymastia sp. C (Clark 2006),red nipple sponge,A07,,Y,,2945
+78455,Benthoctopus oregonensis,,A08,Y,,,3081
+78454,Sasakiopus salebrosus,pygmy benthoctopus,A08,Y,,,3082
+71583,Lamellariidae,lamellarid unident.,A08,Y,Y,,3083
+21850,Rhadinesthes decimus,slender snaggletooth,A08,,Y,,3102
+20181,Maulisia argipalla,pitted tubeshoulder,,,Y,,3121
+22258,Careproctus sp. cf. rastrinus (Orr et al.),,,Y,Y,,3122
+69050,Pagurus townsendi,Townsend hermit crab,A08,Y,,,3141
+66550,Crangon nigricauda,blacktail bay shrimp,A08,,Y,,3142
+43080,Actiniidae unid.,actinid sea anemones unident.,A08,Y,Y,,3143
+50050,Ampharetidae unid.,,A08,Y,,,3201
+55900,Phyllodocidae unid.,,A08,Y,,,3202
+58501,Sternaspis sp.,,A08,Y,,,3203
+58502,Brada sachalina,,A08,Y,,,3204
+58503,Brada granulata,,A08,Y,,,3205
+58504,Stylaroides plumosa,,A08,Y,,,3206
+62012,Idoteidae unid.,,A08,Y,,,3207
+71009,Opisthobranchia unid.,,A08,Y,,,3208
+72308,Trichotropis sp.,,A08,Y,,,3209
+72539,Margarites beringensis,,A08,Y,,,3210
+80030,Urasterias lincki,,A08,Y,,,3211
+83010,Ophiuridae,,A08,Y,,,3212
+85012,Ocnus sp.,,A08,Y,,,3213
+91121,Vulcanella sp.,,A08,Y,,,3214
+93101,Priapulus sp.,,A08,Y,,,3215
+93150,Chaetognatha unid.,Arrow worm unid.,A08,Y,,,3216
+94501,Bonelliopsis alaskana,,A08,Y,,,3217
+95038,Alcyonidium sp.,,A08,Y,,,3218
+95072,Hippodiplosia sp.,,A08,Y,,,3219
+95095,Membranipora sp.,,A08,Y,,,3220
+98085,Dendrodoa aggregata,,A08,Y,,,3221
+98325,Didemnidae unid.,,A08,Y,,,3222
+23711,Holtbyrnia sp.,,,,,Y,2781
+23712,Holtbyrnia innesi,lanternjaw tubeshoulder,,,,Y,2782
+22284,Paraliparis holomelas,ebony snailfish,,,Y,,2783
+446,Raja badia egg case,,A06,,Y,,2858
+91074,Polymastia sp.,,A06,,Y,,2859
+99986,Tetilla sp.,,A06,,Y,,2860
+91213,Stylocordyla sp.,,A06,,Y,,2861
+91044,Geodiidae,,A06,,Y,,2862
+91038,Phakellia sp.,,A06,,Y,,2863
+22212,Liparis fabricii,gelatinous seasnail,A08,Y,,,3162
+40034,Abietinaria sp.,,A06,,Y,,2865
+44048,Stylaster sp. A (Clark 2006),undulate hydrocoral,A06,,Y,,2866
+91018,Suberites montiniger,peach sponge,A06,,Y,,2867
+91036,Heterochone tenerum,crusty tube sponge,A06,,Y,,2868
+91042,Mycale adhaerens,smooth scallop sponge,A06,,Y,,2869
+91062,Myxilla brunnea,soft brown sponge,A06,,Y,,2870
+91110,Polymastia fluegeli,Flugel's nippled spong,A06,,Y,,2871
+91230,Axinella sp.,firm gray sponge,A06,,Y,,2872
+91250,Chondrocladia gigantea,carnivorous cattail sponge,A06,,Y,,2873
+91251,Asbestopluma sp. A (Clark 2006),fuzzy sponge,A06,,Y,,2874
+91255,Melonchela clathriata,lattice sponge,A06,,Y,,2875
+91257,Isodictya palmata,prickly pear sponge,A06,,Y,,2876
+91260,,lobed tree sponge,A06,,Y,,2877
+91721,Farrea beringiana,Bering lace sponge,A06,,Y,,2878
+91725,Regadrella okinoseana,lacy basket sponge,A06,,Y,,2879
+92505,Emplectonema sp. (Clark 2006),black specked ribbon worm,A06,,Y,,2880
+99985,Tetilla sigmoanchoratum,spiny ball sponge,A06,,Y,,2881
+22265,Liparis marmoratus,festive snailfish,A08,Y,,,3163
+21351,Triglops nybelini,bigeye sculpin,A08,Y,,,3164
+24196,Lycodes seminudus,longear eelpout,A08,Y,,,3165
+20007,Leptagonus decagonus,Atlantic poacher,A06,Y,,,2801
+20105,Asquamiceps caeruleus,caerulean slickhead,,,Y,,3062
+91237,Stelodoryx alaskensis,Alaskan lobed sponge,A07,Y,Y,,2961
+80597,Henricia beringiania,Bering Henricia,A07,Y,Y,,2962
+91035,Heterochone calyx,goblet sponge,A08,Y,Y,Y,2981
+91041,Mycale sp. A (Clark 2006),red mycale,A08,,Y,,2982
+91061,Myxilla lacunosa,sulfur sponge,A08,,Y,,2983
+91085,Leucandra sp. A (Clark 2006),hairy vase sponge,A08,,Y,,2984
+91105,Stelletta sp.,stone sponge,A08,,Y,Y,2985
+91109,Mycalecarmia lobata,cotton ball sponge,A08,,Y,Y,2986
+91112,Weberella bursa,pale mammilated sponge,A08,Y,Y,,2987
+91120,Vulcanella sp. 1,fuzzy cratered sponge,A08,,Y,,2988
+91127,Craniella villosa,,A08,,Y,,2989
+91201,Scypha ciliata,hairy urn sponge,A08,Y,Y,,2990
+91211,Stylocordyla borealis,lollypop sponge,A08,Y,Y,,2991
+91220,Cliona sp. A (Clark 2006),rough bread crumb sponge,A08,,Y,,2992
+91227,Latrunculia sp. B (Clark 2006),smooth green sponge,A08,,Y,,2993
+91238,Echinoclathria sp. A (Clark 2006),fuzzy tree sponge,A08,,Y,,2994
+95037,Alcyonidium sp. A,medusa bryozoan,A08,,Y,,2995
+99984,Tetilla sp. B (Clark 2006),knobby ball sponge,A08,,Y,,2996
+78013,Benthoctopus sibiricus,,A08,Y,,,3181
+22257,Gyrinichthys minytremus,smallpore snailfish,A08,,Y,,2998
+24115,Bothrocara hollandi,Japan-sea eelpout,A08,Y,,,2999
+24195,Lycodes beringi,Bering eelpout,A08,Y,Y,,3000
+28700,Pseudopentaceros wheeleri,North Pacific pelagic armorhead,A08,,Y,,3001
+40060,Velella velella,by-the-wind sailor,A08,,Y,,3002
+40515,Chrysaora fuscescens,sea nettle,U08,,Y,,3003
+41099,Octocorallia,,A08,Y,Y,,3004
+43115,Sicyonis sp. A (Clark 2006),orange actinistolid,A08,,Y,,3005
+44004,Caryophylliidae,cup corals,A08,Y,Y,,3006
+44053,Stylaster sp. B (Clark 2006),thick lamellar hydrocoral,A08,,Y,,3007
+44076,Errinopora sp. A (Clark 2006),foliate hydrocoral,A08,,Y,,3008
+44077,Errinopora sp. B (Clark 2006),pale-edged hydrocoral,A08,,Y,,3009
+44078,Errinopora sp. C (Clark 2006),enigmatic hydrocoral,A08,,Y,,3010
+44100,Acanthogorgia sp.,,A08,,Y,,3011
+57409,Serpulidae,serpulid worm,A08,Y,Y,Y,3012
+66005,Sergestes similis,Pacific sergestid,A08,Y,Y,Y,3013
+66202,Lebbeus acudactylus,false candy-striped shrimp,A08,,Y,,3014
+69320,Paralithodes brevipes,Kurile king crab,A08,,Y,,3015
+69551,Munidopsis verrilli,Verrill pinch bug,A08,,Y,,3016
+69553,Munidopsis quadrata,long-armed pinch bug,A08,,Y,,3017
+69555,Gastroptychus iaspis,thorny pinch bug,A08,,Y,,3018
+71596,Lamellaria sp. F (McLean & Clark),white Lamellarid,A08,,Y,,3019
+71702,Sulcosinus sp. A (McLean & Clark),Aleutian sulcated whelk,A08,,Y,,3020
+72062,Aforia kinkaidi,Kinkaid's Aforia,A08,,Y,,3021
+72773,Buccinum costatum,costate whelk,A08,Y,,,3022
+72786,Buccinum rondinum,eroded whelk,A08,,Y,,3023
+72821,Clinopegma unicum,unique whelk,A08,Y,,,3024
+73210,Cerithiopsidae sp. A,horn shell,A08,,Y,,3025
+74323,Panomya ampla,ample roughmya,A08,Y,Y,Y,3026
+74658,Cyclocardia sp. cf. borealis (Clark 2006),northern carditid,A08,Y,Y,,3027
+75420,Lucinoma annulatum,ringed lucine,A08,,Y,Y,3028
+79511,Histioteuthis dofleini,,A08,,Y,Y,3029
+80556,Odontohenricia sp. E (Clark 2006),giant toothed Henricia,A08,,Y,,3030
+80598,Henricia dyscrita,short-spined Henricia,A08,,Y,Y,3031
+80603,Gephyreaster sp.,,A08,Y,Y,,3032
+81365,Hymenaster sp.,pancake star,A08,Y,Y,Y,3033
+82003,Brisingidae,brisingid sea star,A08,Y,Y,Y,3034
+83022,Gorgonocephalus sp.,,A08,Y,Y,,3035
+21849,Opostomias mitsuii,pitgum lanternfish,,,,Y,3061
+71888,Neptunea sp. B (McLean & Clark),,A05,,Y,,1885
+71889,Neptunea sp. C (McLean & Clark),,A05,,Y,,1886
+72775,Buccinum sp. B (McLean & Clark),mega-ribbed chestnut whelk,A05,,Y,,1888
+72776,Buccinum sp. C (McLean & Clark),one-ribbed whelk,A05,,Y,,1889
+72777,Buccinum sp. D (McLean & Clark),many-ribbed chestnut whelk,A05,,Y,,1890
+72778,Buccinum triplostephanum,three-ribbed chestnut whelk,A05,,Y,,1891
+72779,Buccinum sp. E (McLean & Clark),two-ribbed chestnut whelk,A05,,Y,,1892
+72780,Buccinum sp. F (McLean & Clark),crenulated whelk,A05,,Y,,1893
+72781,Buccinum sp. G (McLean & Clark),,A05,,Y,,1894
+72782,Buccinum sp. H (McLean & Clark),,A05,,Y,,1895
+72783,Buccinum sp. I (McLean & Clark),,A05,,Y,,1896
+72784,Buccinum moarchianum,,A05,,Y,,1897
+80012,Evasterias retifera,,A05,,Y,,1898
+80113,Leptasterias stolocantha,,A05,,Y,,1899
+80116,Leptasterias truculenta,giant Aleutian six-rayed star,A05,,Y,,1900
+80117,Leptasterias leptodoma,,A05,,Y,,1901
+80118,Leptasterias sp. A (Clark),,A05,,Y,,1902
+80119,Leptasterias sp. B (Clark),,A05,,Y,,1903
+80535,Henricia sp. A (Clark 2006),lined blood star,A05,,Y,,1904
+80536,Henricia sp. B (Clark 2006),white Henricia,A05,,Y,,1905
+80537,Henricia sp. C (Clark 2006),mottled Henricia,A05,,Y,,1906
+80545,Henricia aleutica,,A05,,Y,,1907
+80552,Odontohenricia sp. A (Clark),,A05,,Y,,1908
+80553,Odontohenricia sp. B (Clark),,A05,,Y,,1909
+80554,Odontohenricia sp. C (Clark),,A05,,Y,,1910
+80555,Odontohenricia sp. D (Clark),,A05,,Y,,1911
+80591,Leptasterias katharinae,,A05,,Y,,1912
+80629,Odontaster sp. B (Clark),,A05,,Y,,1913
+80634,Hippasteria sp. B (Clark),pale spiny star,A05,Y,,,1914
+80635,Hippasteria sp. C (Clark),Bering spiny star,A05,,Y,,1915
+80636,Hippasteria sp. D (Clark),Commander spiny star,A05,,Y,,1916
+80637,Hippasteria sp. E (Clark),Alaskan spiny star,A05,,Y,,1917
+80646,Hippasteria leiopelta,,A05,,Y,,1918
+81068,Solaster sp. C (Clark),beautiful sun star,A05,,Y,,1919
+81069,Solaster sp. D (Clark),serpent sun star,A05,,Y,,1920
+81070,Solaster sp. E (Clark),Kessler sun star,A05,,Y,,1921
+81071,Solaster sp. F (Clark),Fisher sun star,A05,Y,Y,,1922
+81072,Solaster sp. G (Clark),ocher sun star,A05,Y,Y,,1923
+81093,Crossaster sp. A (Clark),white rose star,A05,,Y,,1924
+29997,Saccopharynx lavenbergi,,A05,,,Y,1925
+74419,Yoldia thraciaeformis,broad yoldia,,Y,Y,,227
+72745,Buccinum sigmatopleura,wavy whelk,A92,,Y,,307
+64000,Mysida,opossum shrimps,A88,Y,Y,,556
+42004,Stylatula sp.,slender seawhips,,Y,Y,Y,642
+43110,Actinostola sp.,,A99,,,Y,1475
+22815,Notacanthus chemnitzii,snubnosed spiny eel,A02,,,Y,1715
+71780,Beringius eyerdami,,A03,,Y,,1798
+71511,Naticidae eggs,moonsnail eggs unid.,A05,Y,Y,Y,2021
+71747,Pyrulofusus sp.,,A05,Y,Y,,2041
+69087,Pagurus beringanus,Bering hermit,A04,Y,,,1926
+473,Bathyraja aleutica egg case,Aleutian skate egg case,A04,Y,,,1927
+474,Bathyraja parmifera egg case,Alaska skate egg case,A04,Y,,,1928
+486,Bathyraja minispinosa egg case,whitebrow skate egg case,A04,Y,,,1929
+72769,Ancistrolepis eucosmius,three-ribbed whelk,A04,Y,,,1930
+20130,Rouleina attrita,softskin slickhead,A04,Y,,,1931
+78005,Cephalopoda unid. egg,squid or octopus unid. eggs,A04,Y,,,1932
+66145,Caridea unid.,caridid shrimp unid.,A04,Y,,,1933
+78006,Decapodiformes unid. egg,squid unident. egg,A04,Y,,,1934
+456,Bathyraja taranetzi egg case,mud skate egg case,A04,Y,,,1935
+24109,Bothrocara cf. brunneum group,,A04,Y,,,1936
+71752,Pyrulofusus sp. eggs,,A04,Y,,,1937
+79021,Rossia pacifica eggs,,A04,Y,,,1940
+79199,Gonatidae unid.,,A04,Y,,,1941
+79205,Gonatus madokai,,A04,Y,,,1942
+80620,Pseudarchaster alascensis,,A04,Y,,,1943
+21210,Coryphaenoides sp.,,,Y,Y,,1944
+21220,Coryphaenoides acrolepis,Pacific grenadier,,Y,Y,Y,1945
+21230,Albatrossia pectoralis,giant grenadier,,Y,Y,Y,1946
+21232,Coryphaenoides cinereus,popeye grenadier,,Y,Y,Y,1947
+21238,Coryphaenoides filifer,filamented grenadier,,,Y,Y,1948
+20110,Alepocephalus sp.,,,,Y,Y,1949
+20120,Alepocephalus tenebrosus,California slickhead,,Y,,Y,1950
+20122,Bajacalifornia megalops,,,Y,Y,Y,1951
+20150,Talismania bifurcata,threadfin slickhead,,,Y,Y,1952
+20202,Ammodytes hexapterus,Pacific sand lance,,Y,Y,Y,1953
+20320,Anarrhichthys ocellatus,wolf-eel,,Y,Y,Y,1954
+20322,Anarhichas orientalis,Bering wolffish,,Y,Y,,1955
+20420,Anoplogaster cornuta,fangtooth,,,,Y,1956
+20510,Anoplopoma fimbria,sablefish,,Y,Y,Y,1957
+20542,Aulorhynchus flavidus,tube-snout,,Y,Y,Y,1958
+20571,Argentinidae,argentine unident.,,Y,,Y,1959
+20572,Nansenia candida,bluethroat argentine,,Y,,,1960
+20573,Argentina sialis,Pacific argentine,,,,Y,1961
+20575,Atherinidae,silverside unident.,,,,Y,1962
+20610,Engraulis mordax,northern anchovy,,Y,,Y,1963
+20614,Bathylagidae,deepsea smelt unident.,,Y,Y,Y,1964
+20615,Bathylagus pacificus,Pacific blacksmelt,,Y,Y,Y,1965
+20619,Bathylagus sp.,blacksmelt unident.,A92,Y,,Y,1966
+20620,Bathylagus milleri,robust blacksmelt,,Y,Y,Y,1967
+20622,Leuroglossus schmidti,northern smoothtongue,,Y,Y,,1968
+20624,Bathylagus ochotensis,popeye blacksmelt,,Y,Y,Y,1969
+20662,Leuroglossus stilbius,California smoothtongue,,Y,Y,Y,1970
+20700,Bathymasteridae,ronquil unident.,,Y,Y,,1971
+20702,Ronquilus jordani,northern ronquil,,Y,Y,Y,1972
+20712,Bathymaster caeruleofasciatus,Alaskan ronquil,,,Y,,1973
+20720,Bathymaster signatus,searcher,,Y,Y,Y,1974
+20722,Bathymaster derjugini,bluecheek ronquil,A95,,Y,,1975
+20731,Rathbunella hypoplecta,smooth ronquil,,,Y,,1976
+10281,Pleuronichthys verticalis,hornyhead turbot,,,,Y,1977
+10285,Pleuronectes quadrituberculatus,Alaska plaice,,Y,Y,,1978
+10290,Pleuronichthys coenosus,C-O sole,,,Y,Y,1979
+10291,Pleuronichthys sp.,,,Y,,,1980
+10295,Pleuronichthys ritteri,spotted turbot,,,,Y,1981
+10400,Symphurus atricauda,California tonguefish,,,,Y,1982
+20000,Agonidae,poacher unident.,,Y,Y,Y,1983
+20001,Pallasina barbata,tubenose poacher,,Y,Y,Y,1984
+20002,Percis japonicus,dragon poacher,,Y,Y,,1985
+20004,Leptagonus sp.,,,,Y,,1986
+20005,Leptagonus leptorhynchus,longnose poacher,,Y,Y,,1987
+20006,Leptagonus frenatus,sawback poacher,,Y,Y,Y,1988
+20015,Agonopsis vulsa,northern spearnose poacher,,Y,Y,Y,1989
+20018,Odontopyxis trispinosa,pygmy poacher,,Y,Y,Y,1990
+20020,Xeneretmus latifrons,blacktip poacher,,,Y,Y,1991
+20021,Xeneretmus triacanthus,bluespotted poacher,,,,Y,1992
+20022,Xeneretmus leiops,smootheye poacher,,,,Y,1993
+20023,Xeneretmus sp.,,,,Y,,1994
+20034,Bathyagonus sp.,starsnout poacher unident.,,Y,Y,Y,1995
+20035,Bathyagonus alascanus,gray starsnout,,Y,Y,Y,1996
+20036,Bathyagonus infraspinatus,spinycheek starsnout,,Y,Y,Y,1997
+20037,Bathyagonus pentacanthus,bigeye poacher,,Y,Y,Y,1998
+20038,Bathyagonus nigripinnis,blackfin poacher,,Y,Y,Y,1999
+20040,Podothecus accipenserinus,sturgeon poacher,,Y,Y,Y,2000
+20050,Aspidophoroides bartoni,Aleutian alligatorfish,,Y,Y,,2001
+20051,Ulcina olrikii,Arctic alligatorfish,,Y,,,2002
+20055,Anoplagonus inermis,smooth alligatorfish,,Y,Y,,2003
+20060,Chesnonia verrucosa,warty poacher,,Y,Y,Y,2004
+20061,Occella dodecaedron,Bering poacher,,Y,Y,,2005
+20071,Hypsagonus quadricornis,fourhorn poacher,,Y,Y,,2006
+20100,Alepocephalidae,slickhead unident.,,,Y,Y,2007
+401,,skate egg case unident.,,Y,Y,Y,2008
+404,Raja sp.,,A88,Y,Y,Y,2009
+405,Bathyraja sp.,,,Y,Y,,2010
+406,Bathyraja spinosissima,white skate,,,Y,Y,2011
+410,Bathyraja abyssicola,deepsea skate,,Y,Y,Y,2012
+83345,Ophiacantha cataleimmoida,,A06,,Y,,2459
+83346,Ophiacantha sp. cf. rhachophora,,A06,,Y,,2460
+83347,Ophiacantha sp. A,,A06,,Y,,2461
+441,Raja rhina egg case,longnose skate egg case,A05,,Y,,2084
+69096,Pagurus stevensae,Stevens hermit crab,A05,Y,Y,,2085
+70061,Neomenia efgamatoi,,A05,,Y,,2086
+70134,Tonicella sp.,Tonicella chitons,A05,,Y,,2087
+71259,Archidoris sp.,Archidoris nudibranch,A05,,Y,,2088
+97117,Laqueus vancouverensis,Vancouver lampshell,A05,,Y,,2089
+91093,Neoesperiopsis digitata,,A05,Y,Y,,2090
+83403,Ophioscolex corynetes,,A06,,Y,,2462
+83408,Ophiosphalma sp. cf. jolliensis,,A06,,Y,,2463
+83412,Ophiolebes pachybactra,thick spined brittle star,A06,,Y,,2464
+83413,Ophiolebes brevispina,short spined brittle star,A06,,Y,,2465
+83414,Ophiolebes tylota,,A06,,Y,,2466
+83415,Ophiolebes paucispina,,A06,,Y,,2467
+83416,Ophiolebes sp. A (Clark 2006),,A06,,Y,,2468
+83417,Ophiolebes sp. B (Clark 2006),,A06,,Y,,2469
+83418,Ophiolebes sp. C (Clark 2006),,A06,,Y,,2470
+83419,Ophiolebes sp. D (Clark 2006),,A06,,Y,,2471
+83420,Ophiolebes sp. E (Clark 2006),,A06,,Y,,2472
+83421,Ophiolebes sp. F (Clark 2006),,A06,,Y,,2473
+83501,Astrophiura sp.,,A06,,Y,,2474
+83701,Amphiodia sp.,,A06,,Y,,2475
+85081,Chiridota albatrossii,,A06,,Y,,2476
+85171,Pentamera sp. A (Clark 2006),,A06,,Y,,2477
+85211,Psolus phantapus,,A06,,Y,,2478
+85212,Psolus chitonoides,,A06,,Y,,2479
+85213,Psolus sp. A (Clark 2006),,A06,,Y,,2480
+85221,Psolus peroni,,A06,,Y,,2481
+85260,Thylonidium sp.,,A06,,Y,,2482
+85287,Synallactes sp. A (Clark 2006),,A06,,Y,,2483
+85310,Paelopatides confundens,swimming sea cucumber,A06,,Y,,2484
+85411,Scotoplanes sp.,,A06,,Y,,2485
+92502,Emplectonema sp.,,A06,,Y,,2486
+92511,Tubulanus polymorphus,,A06,,Y,,2487
+92512,Tubulanus sp. A (Clark 2006),,A06,,Y,,2488
+92802,Cerebratulus californienesis,,A06,,Y,,2489
+94011,Phascolosomatidae,,A06,,Y,,2490
+95006,Leieschara orientalis,,A06,,Y,,2491
+95017,Bugula californica,,A06,,Y,,2492
+95036,Alcyonidium pedunculatum,,A06,,Y,,2493
+95045,Idmidronea sp.,,A06,,Y,,2494
+95071,Hippodiplosia insculpta,,A06,,Y,,2495
+95081,Costazia ventricosa,rusty bryozoan,A06,,Y,,2496
+95085,Cellephorina sp.,,A06,,Y,,2497
+95090,Tubiporella sp.,,A06,,Y,,2498
+95101,Microporina borealis,,A06,,Y,,2499
+95105,Dendrobeania sp.,,A06,,Y,,2500
+98083,Styela sp. A (Clark 2006),,A06,,Y,,2501
+98084,Styela sp. B (Clark 2006),,A06,,Y,,2502
+98204,Halocynthia igaboja,,A06,,Y,,2503
+98207,Pyura haustor,wrinkled tunicate,A06,,Y,,2504
+98212,Distaplia occidentalis,,A06,,Y,,2505
+98213,Distaplia smithi,,A06,,Y,,2506
+98214,Distaplia sp. A (Clark 2006),,A06,,Y,,2507
+98219,Aplidium californicum,,A06,,Y,,2508
+98225,Botryllus schlosseri,,A06,,Y,,2509
+98303,Amaroucium soldatovi,,A06,,Y,,2510
+98307,Corella willmeriana,,A06,,Y,,2511
+98321,Trididemnum opacum,,A06,,Y,,2512
+98331,Chelyosoma productum,,A06,,Y,,2513
+99910,,Neon yellow Ascidian,A06,,Y,,2514
+62004,Arcturus sp. 1 (Clark 2006),,A06,,Y,,2515
+411,Bathyraja abyssicola egg case,deepsea skate egg case,A06,,Y,,2516
+476,Bathyraja lindbergi egg case,Commander skate egg case,A06,,Y,,2517
+477,Bathyraja sp. cf. parmifera (Orr et al.),leopard skate,A06,,Y,,2518
+481,Bathyraja maculata egg case,whiteblotched skate egg case,A06,,Y,,2519
+21436,Ruscarius meanyi,Puget Sound sculpin,A06,,Y,Y,2520
+22272,Allocareproctus kallaion,combed snailfish,A06,,Y,,2521
+22273,Allocareproctus ungak,whiskered snailfish,A06,,Y,,2522
+22281,Paraliparis grandis,grand snailfish,A06,,Y,,2523
+22274,Allocareproctus unangas,goldeneye snailfish,A06,,Y,,2524
+22282,Paraliparis sp. cf. pectoralis (Orr and Baldwin),rusty snailfish,A06,,Y,,2525
+22275,Careproctus faunus,mischievous snailfish,A06,,Y,,2526
+22283,Paraliparis sp. cf. dipterus (Orr and Baldwin),comet snailfish,A06,,Y,,2527
+22276,Paraliparis sp. cf. dactylosus (Orr and Baldwin),,A06,,Y,Y,2528
+22277,Paraliparis sp. cf. ulochir (Orr and Baldwin),,A06,,Y,,2529
+22278,Paraliparis sp. cf. grandis (Orr and Baldwin),,A06,,Y,,2530
+22279,Paraliparis adustus,brown snailfish,A06,,Y,,2531
+22280,Paraliparis bullacephalus,bubblehead snailfish,A06,,Y,,2532
+22925,Caulophryne pelagica,,A06,,Y,Y,2533
+30051,Sebastes aleutianus,rougheye rockfish,A06,Y,Y,Y,2534
+30052,Sebastes melanostictus,blackspotted rockfish,A06,Y,Y,Y,2535
+40035,Abietinaria greenei,bushy white hydroid,A06,,Y,,2536
+40036,Abietinaria sp. A (Clark 2006),white tangled hydroid,A06,,Y,,2537
+41104,Alcyonium sp. A (Clark 2006),pink orange mushroom coral,A06,,Y,,2538
+41105,Alcyonium sp. B (Clark 2006),,A06,,Y,,2539
+41541,Bathypathes patula,,A06,,Y,,2540
+41551,Lillipathes lilliei,,A06,,Y,,2541
+41552,Lillipathes sp. A (Clark 2006),,A06,,Y,,2542
+41553,Lillipathes sp. B (Clark 2006),,A06,,Y,,2543
+41573,Swiftia beringi,,A06,,Y,,2544
+41576,,Yellow gorgonian,A06,,Y,,2545
+41587,Paragorgia nodosa,,A06,,Y,,2546
+41595,Cryogorgia koolsae,,A06,,Y,,2547
+41601,Callogorgia kinoshitae,,A06,,Y,,2548
+41605,Parastenella sp. A (Clark 2006),sugar coral,A06,,Y,,2549
+42007,Protoptilum sp.,,A06,,Y,,2550
+42021,Anthoptilum murrayi,Murray sea pen,A06,,Y,,2551
+43044,Urticina columbiana,,A06,,Y,,2552
+43111,Actinistola sp. A (Clark 2006),,A06,,Y,,2553
+43112,Actinistola sp. B (Clark 2006),,A06,,Y,,2554
+43121,,tumbling anemone,A06,,Y,,2555
+44075,Thouarella superba,,A06,,Y,,2557
+44104,Amphilaphis sp. 4 (Clark 2006),,A06,,Y,,2558
+44105,Anthothela grandiflora,,A06,,Y,,2559
+44106,Plumarella sp. 2 (Clark 2006),,A06,,Y,,2560
+44107,Primnoa wingi,,A06,,Y,,2561
+44108,Primnoa sp. 1 (Clark 2006),,A06,,Y,,2562
+44110,Lepidisis sp.,,A06,,Y,,2563
+44114,Arthrogorgia otsukai,,A06,,Y,,2564
+44115,Arthrogorgia kinoshitai,,A06,,Y,,2565
+50005,Eunice valens,,A06,,Y,,2566
+50013,Chaetopterus sp.,,A06,,Y,,2567
+50021,Spinther sp. A (Clark 2006),,A06,,Y,,2568
+50201,Halosydna brevisetosa,,A06,,Y,,2569
+50205,Euphrosine multibranchiata,,A06,,Y,,2570
+50215,Onuphis conchylega,gravel tube worm,A06,,Y,,2571
+50221,Travisia pupa,,A06,,Y,,2572
+50301,Arctonoe vittata,,A06,,Y,,2573
+56313,Eunoe senta,,A06,,Y,,2574
+56321,Gattyana ciliata,,A06,,Y,,2575
+57411,Serpula columbiana,,A06,,Y,,2576
+57412,Serpula sp.,,A06,,Y,,2577
+58001,Pectinaria granulata,,A06,,Y,,2578
+60101,Iphinoe sp.,,A06,,Y,,2579
+60105,Eusirus cuspidatus,,A06,,Y,,2580
+60106,,armored amphipod,A06,,Y,,2581
+60107,Stegocephalus inflatus,,A06,,Y,,2582
+60113,,Red-spotted Amphipod,A06,,Y,,2583
+60116,Paramphithoe polyacantha,,A06,,Y,,2584
+60117,Paramphithoe sp.,,A06,,Y,,2585
+60121,Uschakoviella echinophora,,A06,,Y,,2586
+60122,Uschakoviella sp. 1 (Clark 2006),,A06,,Y,,2587
+62002,Arcturus sp. 2 (Clark 2006),,A06,,Y,,2588
+62015,Gnorimosphaeroma sp.,,A06,,Y,,2589
+62021,Synidotea sp.,gravel isopod,A06,,Y,,2590
+62025,Rocinella angusta,,A06,,Y,,2591
+62050,Anuropus bathypelagica,,A06,,Y,,2592
+63100,Diastylis sp.,,A06,,Y,,2593
+63101,Diastylis alaskensis,,A06,,Y,,2594
+64100,Mysidae,,A06,,Y,,2595
+65211,Scalpellum columbiana,,A06,,Y,,2596
+66061,Pandalopsis longirostris,,A06,,Y,,2597
+66062,Pandalopsis sp. cf. lamelligera,,A06,,Y,,2598
+66304,Heptacarpus stylus,stiletto coastal shrimp,A06,,Y,,2599
+66534,Metacrangon munita,,A06,,Y,,2600
+66618,Paracrangon sp.,,A06,,Y,,2601
+66761,Parapasiphae sulcatifrons,,A06,,Y,,2602
+72025,Rectiplanes sp.,,A09,,Y,,3321
+74987,Nemocardium centifilosum,hundred-line cockle,A09,,,,3322
+91094,Esperiopsis flagrum,,A09,,,,3323
+98323,Ciona savignyi,,A09,,,,3324
+98073,,pineapple tunicate,A10,,,Y,3361
+21328,Artediellus camchaticus,Kamchatka hookear sculpin,A10,,Y,,3362
+21821,Argyropelecus sladeni,silvery hatchetfish,A10,,,Y,3363
+23709,Mentodus eubranchus,,A10,,,Y,3364
+72516,Calliostoma canaliculatum,channeled topsnail,A10,,Y,Y,3365
+66205,Lebbeus mundus,cleaner lebbeid,A10,Y,Y,,3366
+91995,Porifera unid. erect,Erect sponge morphotype,A10,,Y,,3421
+91996,Porifera unid. encrusting,Encrusting sponge morphotype,A10,,Y,,3422
+91997,Porifera unid. ball,Ball sponge morphotype,A10,,Y,,3423
+91998,Porifera unid. tubular,Tubular sponge morphotype,A10,,Y,,3424
+70871,Neptunea gyroscopoides,,A10,Y,,,3462
+43113,Actinostola groenlandica,,A09,,Y,,3241
+71548,Amphissa versicolor,variegate amphissa,A09,,Y,,3242
+70049,Aplacophora unid.,,A09,Y,Y,Y,3243
+71104,Cadlina sp.,cadlina nudibranchs,A09,,Y,,3244
+66177,Eualus pusiolus,doll eualid,A09,Y,Y,Y,3245
+66305,Heptacarpus tenuissimus,slender coastal shrimp,A09,,Y,,3246
+95103,Heteropora sp.,,A09,,Y,,3247
+82690,Marginoproctus sp.,,A09,Y,Y,Y,3248
+66533,Metacrangon sp.,,A09,,Y,,3249
+83409,Ophiomusium sp.,,A09,,Y,,3250
+75223,Pandora filosa,threaded pandora,A09,,Y,,3251
+71358,Puncturella longifissa,long-slot puncturella,A09,,Y,,3252
+65208,Semibalanus cariosus,thatched barnacle,A09,,Y,,3253
+66168,Spirontocaris ochotensis,oval blade shrimp,A09,,Y,,3254
+71798,Volutharpa ampullacea,paper whelk,A09,Y,Y,,3255
+72787,Volutomitra sp.,,A09,Y,Y,,3256
+91073,Leucosolenia sp.,,A09,Y,Y,,3261
+23622,Scopelosaurus adleri,adlers waryfish,A09,Y,Y,,3262
+22626,Nannobrachium sp.,,A09,Y,Y,Y,3281
+22627,Nannobrachium nigrum,black lanternfish,A09,,,Y,3282
+22401,Flagellostomias boureei,,A09,,,Y,3283
+24234,Lycodapus leptus,slender eelpout,A09,Y,,,3301
+22311,Poromitra cristiceps,,A09,Y,,,3302
+21744,Theragra chalcogramma larva,walleye pollock larva,A09,,,,3341
+71590,Onchidiopsis sp.,,A10,Y,,,3481
+45010,Beroe abyssicola,,A10,Y,,,3482
+80539,Henricia derjugini,,A10,Y,,,3483
+80647,Hippasteria pedicellaris,,A10,Y,,,3484
+478,Bathyraja sp. cf. parmifera egg case,Leopard skate egg case,A10,,Y,,3501
+484,Bathyraja mariposa egg case,Butterfly skate egg case,A10,,Y,,3502
+81841,Cladaster sp.,,A10,,Y,,3503
+43051,Oractis sp.,,A10,,Y,,3504
+91097,Leucandra sp.,,A10,,Y,,3505
+98210,Distaplia sp.,,A10,,Y,,3506
+98340,Polyclinum planum,,A10,,Y,,3507
+40013,Bonneviella sp.,,A10,,Y,,3508
+79513,Stigmatoteuthis dofleini,,A10,,Y,,3509
