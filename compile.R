@@ -23,16 +23,29 @@ REMOVE_REGION_DATASETS <- FALSE
 
 # 4. Create graphs based on the data similar to those shown on the website and outputs them to pdf. #DEFAULT:FALSE
 PLOT_CHARTS <- TRUE
+# This used to be called OPTIONAL_PLOT_CHARTS, do I need to change it back?
 
-# 5. Outputs the cleaned data into rdata files. #OPTIONAL DEFAULT:FALSE
-# RData files are much smaller than csv's
-WRITE_CLEAN_RDATA <- TRUE 
+# 5. If you would like to write out the clean data, would you prefer it in Rdata or CSV form?  Note the CSV's are much larger than the Rdata files. #DEFAULT:TRUE, FALSE generates CSV's instead of Rdata.
+PREFER_RDATA <- TRUE
 
-# 6. Generate csv files of the clean data. #OPTIONAL, DEFAULT:FALSE
-WRITE_CLEAN_CSV <- TRUE
+# 5. Output the clean full master data frame. #DEFAULT:FALSE
+WRITE_MASTER_DAT <- TRUE
+# This used to be called OPTIONAL_OUTPUT_DAT_MASTER_TABLE, do I need to change the name back?
+
+# 6. Output the clean trimmed data frame. #DEFAULT:FALSE
+WRITE_TRIMMED_DAT <- TRUE
 
 # 7. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
 DAT_EXPLODED <- TRUE
+
+# 8. Output the dat.exploded table #DEFAULT:FALSE
+WRITE_DAT_EXPLODED <- TRUE
+
+# 9. Output the BY_SPECIES, BY_REGION, and BY_NATIONAL tables. #DEFAULT:FALSE
+WRITE_BY_TABLES <- TRUE
+
+# Update the readme file
+# remove dates from plot outputs and put them into a plots folder
 
 
 ## Workspace setup ====
@@ -854,6 +867,7 @@ rm(wcann_catch, wcann_haul, wcann_strats, p1, p2)
 
 # Compile GMEX ====
 gmex_station_raw <- read_lines("data_raw/gmex_STAREC.csv")
+# remove oddly quoted characters
 gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
 write_lines(gmex_station_clean, "temporary.csv")
 gmex_station <- read_csv("temporary.csv", col_types = cols(.default = col_character())) %>% 
