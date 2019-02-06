@@ -1907,14 +1907,13 @@ if(isTRUE(REMOVE_REGION_DATASETS)) {
   rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER, scot, scot_fall, scot_spr, scot_sumr, tax)
 }
 
-if(isTRUE(WRITE_CLEAN_RDATA)){
-  save(dat, file = here("data_clean", paste0(Sys.Date(), "_allregions.RData")))
+if(isTRUE(WRITE_MASTER_DAT)){
+  if(isTRUE(PREFER_RDATA)){
+    save(dat, file = here("data_clean", "all-regions-full.RData"))
+  }else{
+    write_csv(dat, here("data_clean", "all-regions-full.csv"))
+  }
 }
-if(isTRUE(WRITE_CLEAN_CSV)){
-  write_csv(dat, here("data_clean", paste0(Sys.Date(), "_all-regions.csv")))
-}
-
-# load(file = "trawl_allregions_2019-01-08.RData")
 
 #At this point, we have a compiled `dat` master table on which we can begin our analysis.
 #If you have not cleared the regional datasets {By setting REMOVE_REGION_DATASETS=FALSE at the top}, 
@@ -1946,6 +1945,17 @@ spplist <- presyrsum %>%
 trimmed_dat <- dat %>% 
   filter(paste(region, spp) %in% paste(spplist$region, spplist$spp))
 rm (maxyrs, presyr, presyrsum, spplist)
+
+if(isTRUE(WRITE_TRIMMED_DAT)){
+  if(isTRUE(PREFER_RDATA)){
+    save(dat, file = here("data_clean", "all-regions-trimmed.RData"))
+  }else{
+    write_csv(dat, here("data_clean", "all-regions-trimmed.csv"))
+  }
+}
+
+
+
 
 # BY_SPECIES_DATA ####
 # Calculate mean position through time for species 
@@ -2015,27 +2025,29 @@ BY_SPECIES_DATA <- cent_bio %>%
   ungroup() %>% 
   arrange(region, spp, year)
 
-if(isTRUE(WRITE_CLEAN_RDATA)){
-  saveRDS(BY_SPECIES_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-species.Rdata")))
-}
-
-if(isTRUE(WRITE_CLEAN_CSV)){
-  write_csv(BY_SPECIES_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-species.csv")))
+if(isTRUE(WRITE_BY_TABLES)){
+  if(isTRUE(PREFER_RDATA)){
+    save(dat, file = here("data_clean", "by_species.RData"))
+  }else{
+    write_csv(dat, here("data_clean", "by_species.csv"))
+  }
 }
 
 rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr)
 
 #  Add 0's ####  
+# these Sys.time() flags are here to see how long this section of code takes to run.
 Sys.time()
 # This takes about 5 minutes
 if (DAT_EXPLODED == TRUE){
   dat.exploded <- as.data.table(trimmed_dat)[,explode0(.SD), by="region"]
   
-  if (WRITE_CLEAN_RDATA == TRUE){
-    saveRDS(dat.exploded, here("data_clean", paste0(Sys.Date(), "_dat_exploded.Rdata")))
-  }
-  if (WRITE_CLEAN_CSV == TRUE){
-    write_csv(dat.exploded, here("data_clean", paste0(Sys.Date(), "_dat_exploded.csv")))
+  if(isTRUE(WRITE_DAT_EXPLODED)){
+    if(isTRUE(PREFER_RDATA)){
+      save(dat, file = here("data_clean", "by_species.RData"))
+    }else{
+      write_csv(dat, here("data_clean", "by_species.csv"))
+    }
   }
 
 }
@@ -2124,12 +2136,12 @@ regcentbio <- left_join(regcentbio, regcentbiospp, by = "region")
 BY_REGION_DATA  <- regcentbio %>% 
   arrange(region, year)
 
-if(isTRUE(WRITE_CLEAN_RDATA)){
-  saveRDS(BY_REGION_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-region.Rdata")))
-}
-
-if(isTRUE(WRITE_CLEAN_CSV)){
-  write_csv(BY_REGION_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-region.csv")))
+if(isTRUE(WRITE_BY_TABLES)){
+  if(isTRUE(PREFER_RDATA)){
+    save(dat, file = here("data_clean", "by_region.RData"))
+  }else{
+    write_csv(dat, here("data_clean", "by_region.csv"))
+  }
 }
 
 # By national data ####
@@ -2225,12 +2237,12 @@ natcentbio$numspp <- lunique(paste(centbio3$region, centbio3$spp)) # calc number
 
 BY_NATIONAL_DATA <- natcentbio
 
-if(isTRUE(WRITE_CLEAN_RDATA)){
-  saveRDS(BY_NATIONAL_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-national.Rdata")))
-}
-
-if(isTRUE(WRITE_CLEAN_CSV)){
-  write_csv(BY_NATIONAL_DATA, here::here("data_clean", paste0(Sys.Date(), "_by-national.csv")))
+if(isTRUE(WRITE_BY_TABLES)){
+  if(isTRUE(PREFER_RDATA)){
+    save(dat, file = here("data_clean", "by_national.RData"))
+  }else{
+    write_csv(dat, here("data_clean", "by_national.csv"))
+  }
 }
 
 rm(centbio2, centbio3, maxyrs, natcentbio, natcentbiose, presyr, presyrsum, regcentbio, regcentbiospp, spplist, spplist2, startpos, startyear, regcentbiose)
@@ -2244,7 +2256,7 @@ if(isTRUE(PLOT_CHARTS)) {
   # for latitude
   #quartz(width = 10, height = 8)
   print("Starting latitude plots for species")
-  pdf(file=paste("sppcentlatstrat_", Sys.Date(), '.pdf', sep=''), width=10, height=8)
+  pdf(file = here("plots", "sppcentlatstrat.pdf"), width=10, height=8)
   
   regs = sort(unique(centbio$region))
   for(i in 1:length(regs)){
@@ -2275,7 +2287,7 @@ if(isTRUE(PLOT_CHARTS)) {
   
   # for depth
   print("Starting depth plots for species")
-  pdf(file=paste('sppcentdepthstrat_', Sys.Date(), '.pdf', sep=''), width=10, height=8)
+  pdf(file = here("plots", "sppcentdepthstrat.pdf"), width=10, height=8)
   
   regs = sort(unique(centbio$region))
   for(i in 1:length(regs)){
@@ -2308,7 +2320,7 @@ if(isTRUE(PLOT_CHARTS)) {
   # Plot Regional ####
   regcentbio <- BY_REGION_DATA
   #quartz(width=6, height=6)
-  pdf(file=paste('regcentlat_depth_strat_', Sys.Date(), '.pdf', sep=''), width=6, height=6)
+  pdf(file = here("plots", "regcentlat_depth_strat.pdf"), width=6, height=6)
   par(mfrow=c(3,3)) # page 1: latitude
   
   regs = sort(unique(regcentbio$region))
@@ -2345,7 +2357,7 @@ if(isTRUE(PLOT_CHARTS)) {
   
   # Plot National ####
   #quartz(width=6, height=3.5)
-  pdf(file=paste('natcentlatstrat_', Sys.Date(), '.pdf', sep=''), width=6, height=3.5)
+  pdf(file = here("plots", "natcentlatstrat.pdf"), width=6, height=3.5)
   par(mfrow=c(1,2), mai=c(0.8, 0.8, 0.3, 0.2), mgp=c(2.4,0.7,0))
   
   natcentbio <- BY_NATIONAL_DATA
