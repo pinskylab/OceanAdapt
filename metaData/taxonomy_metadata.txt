@@ -24,10 +24,10 @@ spptaxonomy_2014-07-30.csv
 	common: common name, usually derived from ITIS, but sometimes from Wikipedia or the internet if ITIS came up blank. Alternatively, made up by Malin Pinsky if nothing was available.
 	
 spptaxonomy_2014-10-02_plusManualRDB.csv
-	Developed from spptaxonomy_2014-07-30.csv. Ryan Batt ran taxize() to fill in species names and holes, the manually added common names where necessary.
+	Developed from spptaxonomy_2014-07-30.csv. Ryan Batt ran taxize() to fill in species names and holes, then manually added common names where necessary.
 	
 	His notes:
-		Attached is 1041 unique taxonomic identifiers matched to their full taxonomic classification and common names, in English.
+		Attached are 1041 unique taxonomic identifiers matched to their full taxonomic classification and common names, in English.
 
 		There are still mistakes. When creating this table, I only merged in my package=taxize corrected names (name meaning any column, e.g. "species" or "name" or "subphylum", etc) in cases where you had an NA for that element. So I didn't change anything that you had, I only filled in gaps. However, in some cases I've noticed that 1) your species names were wrong (e.g., missing "n"s); 2) your species names were outdated. 
 
@@ -58,3 +58,6 @@ spptaxonomy_2015-05-05_plusManual copy.csv
 spptaxonomy_2015-05-14_plusManual.csv
 	added "metridium farcimen (=metridium giganteum)" to become metridium farcimen
 	added "pandalus montagui(trans.w/o hr)" to become Pandalus montagui
+	
+spptaxonomy.csv on 2019-02-06
+  changed Aasimus to Anasimus
