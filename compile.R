@@ -22,27 +22,27 @@ HQ_PLOTS <- FALSE
 REMOVE_REGION_DATASETS <- FALSE
 
 # 4. Create graphs based on the data similar to those shown on the website and outputs them to pdf. #DEFAULT:FALSE
-PLOT_CHARTS <- TRUE
+PLOT_CHARTS <- FALSE
 # This used to be called OPTIONAL_PLOT_CHARTS, do I need to change it back?
 
 # 5. If you would like to write out the clean data, would you prefer it in Rdata or CSV form?  Note the CSV's are much larger than the Rdata files. #DEFAULT:TRUE, FALSE generates CSV's instead of Rdata.
 PREFER_RDATA <- TRUE
 
 # 5. Output the clean full master data frame. #DEFAULT:FALSE
-WRITE_MASTER_DAT <- TRUE
+WRITE_MASTER_DAT <- FALSE
 # This used to be called OPTIONAL_OUTPUT_DAT_MASTER_TABLE, do I need to change the name back?
 
 # 6. Output the clean trimmed data frame. #DEFAULT:FALSE
-WRITE_TRIMMED_DAT <- TRUE
+WRITE_TRIMMED_DAT <- FALSE
 
 # 7. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
 DAT_EXPLODED <- TRUE
 
 # 8. Output the dat.exploded table #DEFAULT:FALSE
-WRITE_DAT_EXPLODED <- TRUE
+WRITE_DAT_EXPLODED <- FALSE
 
 # 9. Output the BY_SPECIES, BY_REGION, and BY_NATIONAL tables. #DEFAULT:FALSE
-WRITE_BY_TABLES <- TRUE
+WRITE_BY_TABLES <- FALSE
 
 ## Workspace setup ====
 # This script works best when the repository is downloaded from github, 
@@ -2076,7 +2076,7 @@ if(isTRUE(WRITE_BY_TABLES)){
 
 rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr)
 
-#  Add 0's ####  
+# Dat_exploded -  Add 0's ####  
 # these Sys.time() flags are here to see how long this section of code takes to run.
 Sys.time()
 # This takes about 5 minutes
@@ -2085,9 +2085,9 @@ if (DAT_EXPLODED == TRUE){
   
   if(isTRUE(WRITE_DAT_EXPLODED)){
     if(isTRUE(PREFER_RDATA)){
-      save(dat, file = here("data_clean", "by_species.RData"))
+      save(dat, file = here("data_clean", "dat_exploded.Rdata"))
     }else{
-      write_csv(dat, here("data_clean", "by_species.csv"))
+      write_csv(dat, here("data_clean", "dat_exploded.csv"))
     }
   }
 
