@@ -134,3 +134,5 @@ need_common <- need_common %>%
   select(taxon, species, genus, family, order, class, superclass, subphylum, phylum, kingdom, name, common)
 
 write_csv(need_common, here("data_raw", "spptaxonomy.csv"), append = TRUE)
+
+rm(common_fish, fish, need_common, test)
