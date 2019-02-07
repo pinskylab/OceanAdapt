@@ -16,7 +16,7 @@ HQ_DATA_ONLY <- TRUE
 
 # 2. View plots of removed strata for HQ_DATA. #OPTIONAL, DEFAULT:FALSE
 # It takes a while to generate these plots.
-HQ_PLOTS <- TRUE
+HQ_PLOTS <- FALSE
 
 # 3. Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`. #DEFAULT: FALSE 
 REMOVE_REGION_DATASETS <- FALSE
@@ -43,10 +43,6 @@ WRITE_DAT_EXPLODED <- TRUE
 
 # 9. Output the BY_SPECIES, BY_REGION, and BY_NATIONAL tables. #DEFAULT:FALSE
 WRITE_BY_TABLES <- TRUE
-
-# Update the readme file
-# remove dates from plot outputs and put them into a plots folder
-
 
 ## Workspace setup ====
 # This script works best when the repository is downloaded from github, 
@@ -178,7 +174,7 @@ write_lines(temp_fixed, "data_raw/ai_temporary.csv")
 files <- as.list(dir(pattern = "ai", path = "data_raw", full.names = T))
 
 # exclude the strata file and the raw 2014-2016 data file which has been fixed in ai_temporary.csv, the 1 and 5 elements
-files <- files[-c(1,5)]
+files <- files[-c(grep("strata", files),grep("2014", files))]
 
 # combine all of the data files into one table
 ai_data <- files %>% 
@@ -187,6 +183,8 @@ ai_data <- files %>%
   # remove any data rows that have headers as data rows
   filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
   mutate(stratum = as.integer(STRATUM))
+
+# The warning of 13 parsing failures is pointing to a row in the middle of the data set that contains headers instead of the numbers expected, this row is removed by the filter above.
 
 ai_strata <- read_csv(here("data_raw", "ai_strata.csv"), col_types = cols(NPFMCArea = col_character(),
       SubareaDescription = col_character(),
@@ -298,17 +296,20 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-  grid.arrange(p1, p2, p3, p4, nrow = 2)
+  temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "ai_hq_dat_removed.pdf"))
+    rm(temp)
   }
+  rm(test, test2, p1, p2, p3, p4)
 }
 # clean up
-rm(files, temp, temp_fixed, ai_data, ai_strata, test, test2, p1, p2, p3, p4)
+rm(ai_data, ai_strata, files, temp_fixed)
 
 # Compile EBS ====
 files <- as.list(dir(pattern = "ebs", path = "data_raw", full.names = T))
 
 # exclude the strata file which is the 1 element
-files <- files[-1]
+files <- files[-grep("strata", files)]
 
 # combine all of the data files into one table
 ebs_data <- files %>% 
@@ -424,19 +425,21 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "ebs_hq_dat_removed.pdf"))
+    rm(temp)
   }
-
-} 
+  rm(test, test2, p1, p2, p3, p4)
+}
 # clean up
-rm(files, temp, ebs_data, ebs_strata, test2, test, p1, p2, p3, p4)
+rm(files, ebs_data, ebs_strata)
 
 
 # Compile GOA ====
 files <- as.list(dir(pattern = "goa", path = "data_raw", full.names = T))
 
 # exclude the 2 strata files; the 1 and 2 elements
-files <- files[-c(1,2)]
+files <- files[-grep("strata", files)]
 
 # combine all of the data files into one table
 goa_data <- files %>% 
@@ -557,13 +560,15 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "goa_hq_dat_removed.pdf"))
+
+    rm(temp)
   }
-
+  rm(test, test2, p1, p2, p3, p4)
 }
+rm(files, goa_data, goa_strata)
 
-# clean up
-rm(files, temp, goa_data, goa_strata, test, test2, goa_strata_2, p1, p2, p3, p4)
 
 # Compile WCTRI ====
 wctri_catch <- read_csv("data_raw/wctri_catch.csv", col_types = cols(
@@ -721,11 +726,14 @@ if (HQ_DATA_ONLY == TRUE){
              geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "wctri_hq_dat_removed.pdf"))
+    rm(temp)
   }
+  rm(test, test2, p1, p2, p3, p4)
 }
 
-rm(wctri_catch, wctri_haul, wctri_species, wctri_strats, test, test2, p1, p2, p3, p4)
+rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 
 # Compile WCANN ====
 wcann_catch <- read_csv("data_raw/wcann_catch.csv", col_types = cols(
@@ -787,7 +795,7 @@ wcann_haul <- read_csv("data_raw/wcann_haul.csv", col_types = cols(
   year_stn_invalid = col_integer()
 )) %>% 
   select("trawl_id","year","longitude_hi_prec_dd","latitude_hi_prec_dd","depth_hi_prec_m","area_swept_ha_der")
-# Will get warning message that missing column names filled in: 'X1' [1].  This is ok.
+# It is ok to get warning message that missing column names filled in: 'X1' [1].
 
 # this merge needs to be successful for complete_r_script to have a chance at working  
 test <- merge(wcann_catch, wcann_haul, by=c("trawl_id","year"), all.x=TRUE, all.y=FALSE, allow.cartesian=TRUE) 
@@ -857,13 +865,15 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, nrow = 2)
+    temp <- grid.arrange(p1, p2, nrow = 2)
+      ggsave(plot = temp, filename = here("plots", "wcann_hq_dat_removed.pdf"))
+      rm(temp)
   }
-  
+  rm(p1, p2)
 }
 
 # cleanup
-rm(wcann_catch, wcann_haul, wcann_strats, p1, p2)
+rm(wcann_catch, wcann_haul, wcann_strats)
 
 # Compile GMEX ====
 gmex_station_raw <- read_lines("data_raw/gmex_STAREC.csv")
@@ -1155,12 +1165,13 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "gmex_hq_dat_removed.pdf"))
+    rm(temp)
   }
-  
+  rm(test, test2, p1, p2, p3, p4)
 }
-
-rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean, gmex_strats, test, test2, dups, p1, p2, p3, p4)
+rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean, gmex_strats, dups)
 
 # Compile NEUS ====
 load("data_raw/neus_Survdat.RData")
@@ -1218,7 +1229,7 @@ neus <- neus %>%
          stratum = STRATUM) %>% 
   filter(
     # remove unidentified spp and non-species
-    spp != '' | !is.na(spp), 
+    spp != "" | !is.na(spp), 
     !grepl("EGG", spp), 
     !grepl("UNIDENTIFIED", spp)) %>%
   group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp, SEASON) %>% 
@@ -1286,9 +1297,11 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "neusS_hq_dat_removed.pdf"))
+    rm(temp)
   }
-  
+  rm(test, p1, p2, p3, p4)
 }
 
 # NEUS Fall ====
@@ -1345,11 +1358,13 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "neusF_hq_dat_removed.pdf"))
+    rm(temp)
   }
-  
+  rm(test, test2, p1, p2, p3, p4)
 }
-rm(neus_spp, neus_strata, neus_survdat, survdat, spp, test, test2, p1, p2, p3, p4)
+rm(neus_spp, neus_strata, neus_survdat, neus, survdat, spp,  files)
 
 # Compile SEUS ====
 # turns everything into a character so import as character anyway
@@ -1607,9 +1622,11 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "seusSPR_hq_dat_removed.pdf"))
+    rm(temp)
   }
-  
+  rm(test, p1, p2, p3, p4)
 }
 
 # SEUS summer ====
@@ -1633,11 +1650,13 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "seusSUM_hq_dat_removed.pdf"))
+    rm(temp)
   }
-  
-  # no missing data
+  rm(p1, p2)
 }
+  # no missing data
 
 # SEUS fall ====
 seusFALL <- seus %>% 
@@ -1688,12 +1707,14 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "seusFALL_hq_dat_removed.pdf"))
+    rm(temp)
   }
-  
+  rm(test, test2, p1, p2, p3, p4)
 }
 
-rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, test, test2, problems, p1, p2, p3, p4)
+rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, problems, change, seus)
 
 # Compile Scotian Shelf ====
 files <- as.list(dir(pattern = "scot", path = "data_raw", full.names = T))
@@ -1725,7 +1746,8 @@ test <- scot %>%
   select(spp) %>%
   filter(!is.na(spp)) %>%
   distinct() %>%
-  mutate(spp = as.factor(spp))
+  mutate(spp = as.factor(spp)) %>% 
+  filter(grepl("egg", spp) & grepl("", spp))
 
 # combine the wtcpue for each species by haul
 scot <- scot %>% 
@@ -1755,8 +1777,10 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
+
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, nrow = 2)
+    temp <- grid.arrange(p1, p2, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "scot_sumr-hq_dat_removed.pdf"))
   }
   # there is a very faint blip of white in 1984 which is fewer species in a trawl, not a missing trawl.
 }  
@@ -1811,7 +1835,8 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+      ggsave(plot = temp, filename = here("plots", "scot_fall-hq_dat_removed.pdf"))
   }
 }  
 
@@ -1867,11 +1892,14 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here("plots", "scot_spr-hq_dat_removed.pdf"))
+    rm(temp)
   }
+  rm(p1, p2, p3, p4, test, test2)
 }  
 
-rm(p1, p2, p3, p4, strat, temp, test, test2, i)
+rm(files, scot)
 
 # Compile TAX ====
 tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
@@ -1887,7 +1915,10 @@ tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
   kingdom = col_character(),
   name = col_character(),
   common = col_character()
-))
+)) %>% 
+  select(taxon, name, common) %>% 
+  rename(spp = taxon)
+
 
 # Master Data Set ####
 dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot_sumr, scot_fall, scot_spr) %>% 
@@ -1895,7 +1926,7 @@ dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUM
   filter(!is.na(wtcpue))
 
 # add a nice spp and common name
-dat <- left_join(dat, select(tax, taxon, name, common), by = c("spp" = "taxon")) %>% 
+dat <- left_join(dat, tax, by = "spp") %>% 
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, common, wtcpue)
 
 # check for errors in name matching
@@ -1915,8 +1946,9 @@ if(isTRUE(WRITE_MASTER_DAT)){
   }
 }
 
-#At this point, we have a compiled `dat` master table on which we can begin our analysis.
-#If you have not cleared the regional datasets {By setting REMOVE_REGION_DATASETS=FALSE at the top}, 
+# At this point, we have a compiled `dat` master table on which we can begin our analysis.
+
+# If you have not cleared the regional datasets {By setting REMOVE_REGION_DATASETS=FALSE at the top}, 
 #you are free to do analysis on those sets individually as well.
 
 ##FEEL FREE TO ADD, MODIFY, OR DELETE ANYTHING BELOW THIS LINE
@@ -1943,7 +1975,12 @@ spplist <- presyrsum %>%
 
 # Trim dat to these species (for a given region, spp pair in spplist, in dat, keep only rows that match that region, spp pairing)
 trimmed_dat <- dat %>% 
-  filter(paste(region, spp) %in% paste(spplist$region, spplist$spp))
+  filter(paste(region, spp) %in% paste(spplist$region, spplist$spp)) %>% 
+  # some spp have whitespace - this should potentially be moved up to NEUS section
+  mutate(
+    spp = ifelse(grepl("LIMANDA FERRUGINEA", spp), "LIMANDA FERRUGINEA", spp),
+    spp = ifelse(grepl("PSEUDOPLEURONECTES AMERICANUS", spp), "PSEUDOPLEURONECTES AMERICANUS", spp))
+
 rm (maxyrs, presyr, presyrsum, spplist)
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
@@ -1954,8 +1991,12 @@ if(isTRUE(WRITE_TRIMMED_DAT)){
   }
 }
 
+# are there any spp in trimmed_dat that are not in the taxonomy file?
+test <- anti_join(select(trimmed_dat, spp, common), tax, by = "spp") %>% 
+  distinct()
 
-
+# if test contains more than 0 obs, use the taxonomy.R script to add new taxa to the spptaxonomy.csv and go back to "Compile Tax".
+rm(test)
 
 # BY_SPECIES_DATA ####
 # Calculate mean position through time for species 
