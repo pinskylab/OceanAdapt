@@ -2423,3 +2423,25 @@ if(isTRUE(PLOT_CHARTS)) {
   
 }
   
+#######################################
+# Testing the milk plot ####
+BY_NATIONAL_DATA %>%
+  ggplot(aes(x = year, y = fct_rev(factor(lat)), group = lat)) + 
+  ggridges::geom_density_ridges_gradient(show.legend = FALSE, 
+                                         color = "white", scale = 1.5) + 
+  scale_x_log10(labels = scales::comma) + 
+  scale_y_discrete(expand = c(0,2)) + 
+  scale_fill_viridis_d(option = "D",alpha = 0.9) + 
+  hrbrthemes::theme_modern_rc() + 
+  theme(
+    text = element_text(size = 14, color = "white", family = "Helvetica"),
+    axis.title  = element_text(color = "white", size = "14", face = "bold"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(color = "white", size =0.1),
+    plot.background = element_rect(fill = "black"),
+    panel.background = element_rect(fill = "black"),
+    strip.background = element_rect(fill ="black", color = "black"),
+    strip.text = element_text(color = "white", face = "bold")
+  ) + 
+  facet_wrap(~fct_rev(fct_reorder(region,x = milk_produced, .fun = sum)), ncol = 1, scales = "free_y")
