@@ -879,8 +879,8 @@ rm(wcann_catch, wcann_haul, wcann_strats)
 gmex_station_raw <- read_lines("data_raw/gmex_STAREC.csv")
 # remove oddly quoted characters
 gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
-write_lines(gmex_station_clean, "temporary.csv")
-gmex_station <- read_csv("temporary.csv", col_types = cols(.default = col_character())) %>% 
+write_lines(gmex_station_clean, here("data_raw", "gmex_temporary.csv"))
+gmex_station <- read_csv(here("data_raw","gmex_temporary.csv"), col_types = cols(.default = col_character())) %>% 
   select('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')
 
 problems <- problems(gmex_station) %>% 
@@ -2424,24 +2424,24 @@ if(isTRUE(PLOT_CHARTS)) {
 }
   
 #######################################
-# Testing the milk plot ####
-BY_NATIONAL_DATA %>%
-  ggplot(aes(x = year, y = fct_rev(factor(lat)), group = lat)) + 
-  ggridges::geom_density_ridges_gradient(show.legend = FALSE, 
-                                         color = "white", scale = 1.5) + 
-  scale_x_log10(labels = scales::comma) + 
-  scale_y_discrete(expand = c(0,2)) + 
-  scale_fill_viridis_d(option = "D",alpha = 0.9) + 
-  hrbrthemes::theme_modern_rc() + 
-  theme(
-    text = element_text(size = 14, color = "white", family = "Helvetica"),
-    axis.title  = element_text(color = "white", size = "14", face = "bold"),
-    panel.grid.minor = element_blank(),
-    panel.grid.major.x = element_blank(),
-    panel.grid.major.y = element_line(color = "white", size =0.1),
-    plot.background = element_rect(fill = "black"),
-    panel.background = element_rect(fill = "black"),
-    strip.background = element_rect(fill ="black", color = "black"),
-    strip.text = element_text(color = "white", face = "bold")
-  ) + 
-  facet_wrap(~fct_rev(fct_reorder(region,x = milk_produced, .fun = sum)), ncol = 1, scales = "free_y")
+# # Testing the milk plot ####
+# BY_NATIONAL_DATA %>%
+#   ggplot(aes(x = year, y = fct_rev(factor(lat)), group = lat)) + 
+#   ggridges::geom_density_ridges_gradient(show.legend = FALSE, 
+#                                          color = "white", scale = 1.5) + 
+#   scale_x_log10(labels = scales::comma) + 
+#   scale_y_discrete(expand = c(0,2)) + 
+#   scale_fill_viridis_d(option = "D",alpha = 0.9) + 
+#   hrbrthemes::theme_modern_rc() + 
+#   theme(
+#     text = element_text(size = 14, color = "white", family = "Helvetica"),
+#     axis.title  = element_text(color = "white", size = "14", face = "bold"),
+#     panel.grid.minor = element_blank(),
+#     panel.grid.major.x = element_blank(),
+#     panel.grid.major.y = element_line(color = "white", size =0.1),
+#     plot.background = element_rect(fill = "black"),
+#     panel.background = element_rect(fill = "black"),
+#     strip.background = element_rect(fill ="black", color = "black"),
+#     strip.text = element_text(color = "white", face = "bold")
+#   ) + 
+#   facet_wrap(~fct_rev(fct_reorder(region,x = milk_produced, .fun = sum)), ncol = 1, scales = "free_y")
