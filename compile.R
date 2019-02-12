@@ -159,7 +159,7 @@ explode0 <- function(x, by=c("region")){
   
   out
 }
-  
+
 # Compile AI ====
 
 ## Special fix
@@ -187,14 +187,14 @@ ai_data <- files %>%
 # The warning of 13 parsing failures is pointing to a row in the middle of the data set that contains headers instead of the numbers expected, this row is removed by the filter above.
 
 ai_strata <- read_csv(here("data_raw", "ai_strata.csv"), col_types = cols(NPFMCArea = col_character(),
-      SubareaDescription = col_character(),
-      StratumCode = col_integer(),
-      DepthIntervalm = col_character(),
-      Areakm2 = col_integer()
-    ))  %>% 
-      select(StratumCode, Areakm2) %>% 
+                                                                          SubareaDescription = col_character(),
+                                                                          StratumCode = col_integer(),
+                                                                          DepthIntervalm = col_character(),
+                                                                          Areakm2 = col_integer()
+))  %>% 
+  select(StratumCode, Areakm2) %>% 
   mutate(stratum = StratumCode)
-    
+
 
 ai <- left_join(ai_data, ai_strata, by = "stratum")
 
@@ -207,8 +207,8 @@ ai <- ai %>%
   mutate(
     # Create a unique haulid
     haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
-         # change -9999 wtcpue to NA
-         wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
+    # change -9999 wtcpue to NA
+    wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
   # rename columns
   rename(year = YEAR, 
          lat = LATITUDE, 
@@ -256,7 +256,7 @@ if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
   # plot the strata by year
- p1 <- ai %>% 
+  p1 <- ai %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
@@ -296,7 +296,7 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-  temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
     ggsave(plot = temp, filename = here("plots", "ai_hq_dat_removed.pdf"))
     rm(temp)
   }
@@ -387,12 +387,12 @@ ebs <- ebs %>%
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
- p1 <- ebs %>% 
+  p1 <- ebs %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
- p2 <- ebs %>%
+  p2 <- ebs %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -549,7 +549,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum) %>%
     filter(year != 2001)
   
- p3 <-  goa %>% 
+  p3 <-  goa %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
@@ -562,7 +562,7 @@ if (HQ_DATA_ONLY == TRUE){
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
     ggsave(plot = temp, filename = here("plots", "goa_hq_dat_removed.pdf"))
-
+    
     rm(temp)
   }
   rm(test, test2, p1, p2, p3, p4)
@@ -723,7 +723,7 @@ if (HQ_DATA_ONLY == TRUE){
   p4 <- wctri %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
-             geom_jitter()
+    geom_jitter()
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
@@ -866,8 +866,8 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
-      ggsave(plot = temp, filename = here("plots", "wcann_hq_dat_removed.pdf"))
-      rm(temp)
+    ggsave(plot = temp, filename = here("plots", "wcann_hq_dat_removed.pdf"))
+    rm(temp)
   }
   rm(p1, p2)
 }
@@ -1656,7 +1656,7 @@ if (HQ_DATA_ONLY == TRUE){
   }
   rm(p1, p2)
 }
-  # no missing data
+# no missing data
 
 # SEUS fall ====
 seusFALL <- seus %>% 
@@ -1766,8 +1766,8 @@ scot_sumr <- scot %>%
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
-
-    # plot the strata by year
+  
+  # plot the strata by year
   p1 <- scot_sumr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
@@ -1777,7 +1777,7 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-
+  
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
     ggsave(plot = temp, filename = here("plots", "scot_sumr-hq_dat_removed.pdf"))
@@ -1836,7 +1836,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-      ggsave(plot = temp, filename = here("plots", "scot_fall-hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here("plots", "scot_fall-hq_dat_removed.pdf"))
   }
 }  
 
@@ -1922,7 +1922,7 @@ tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
 
 # Master Data Set ####
 dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot_sumr, scot_fall, scot_spr) %>% 
-# Remove NA values in wtcpue
+  # Remove NA values in wtcpue
   filter(!is.na(wtcpue))
 
 # add a nice spp and common name
@@ -1985,9 +1985,9 @@ rm (maxyrs, presyr, presyrsum, spplist)
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here("data_clean", "all-regions-trimmed.RData"))
+    save(trimmed_dat, file = here("data_clean", "all-regions-trimmed.RData"))
   }else{
-    write_csv(dat, here("data_clean", "all-regions-trimmed.csv"))
+    write_csv(trimmed_dat, here("data_clean", "all-regions-trimmed.csv"))
   }
 }
 
@@ -2068,9 +2068,9 @@ BY_SPECIES_DATA <- cent_bio %>%
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here("data_clean", "by_species.RData"))
+    save(BY_SPECIES_DATA, file = here("data_clean", "by_species.RData"))
   }else{
-    write_csv(dat, here("data_clean", "by_species.csv"))
+    write_csv(BY_SPECIES_DATA, here("data_clean", "by_species.csv"))
   }
 }
 
@@ -2090,7 +2090,7 @@ if (DAT_EXPLODED == TRUE){
       write_csv(dat, here("data_clean", "dat_exploded.csv"))
     }
   }
-
+  
 }
 Sys.time()
 
@@ -2179,9 +2179,9 @@ BY_REGION_DATA  <- regcentbio %>%
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here("data_clean", "by_region.RData"))
+    save(BY_REGION_DATA, file = here("data_clean", "by_region.RData"))
   }else{
-    write_csv(dat, here("data_clean", "by_region.csv"))
+    write_csv(BY_REGION_DATA, here("data_clean", "by_region.csv"))
   }
 }
 
@@ -2280,9 +2280,9 @@ BY_NATIONAL_DATA <- natcentbio
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here("data_clean", "by_national.RData"))
+    save(BY_NATIONAL_DATA, file = here("data_clean", "by_national.RData"))
   }else{
-    write_csv(dat, here("data_clean", "by_national.csv"))
+    write_csv(BY_NATIONAL_DATA, here("data_clean", "by_national.csv"))
   }
 }
 
@@ -2376,7 +2376,7 @@ if(isTRUE(PLOT_CHARTS)) {
     polygon(c(regcentbio$year[inds], rev(regcentbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
     lines(regcentbio$year[inds], regcentbio$lat[inds], col='#D95F02', lwd=2)
   }
-
+  
   
   par(mfrow=c(3,3)) # page 2: depth
   regs = sort(unique(regcentbio$region))
@@ -2422,26 +2422,32 @@ if(isTRUE(PLOT_CHARTS)) {
   dev.off()
   
 }
-  
+
 #######################################
-# # Testing the milk plot ####
-# BY_NATIONAL_DATA %>%
-#   ggplot(aes(x = year, y = fct_rev(factor(lat)), group = lat)) + 
-#   ggridges::geom_density_ridges_gradient(show.legend = FALSE, 
-#                                          color = "white", scale = 1.5) + 
-#   scale_x_log10(labels = scales::comma) + 
-#   scale_y_discrete(expand = c(0,2)) + 
-#   scale_fill_viridis_d(option = "D",alpha = 0.9) + 
-#   hrbrthemes::theme_modern_rc() + 
-#   theme(
-#     text = element_text(size = 14, color = "white", family = "Helvetica"),
-#     axis.title  = element_text(color = "white", size = "14", face = "bold"),
-#     panel.grid.minor = element_blank(),
-#     panel.grid.major.x = element_blank(),
-#     panel.grid.major.y = element_line(color = "white", size =0.1),
-#     plot.background = element_rect(fill = "black"),
-#     panel.background = element_rect(fill = "black"),
-#     strip.background = element_rect(fill ="black", color = "black"),
-#     strip.text = element_text(color = "white", face = "bold")
-#   ) + 
-#   facet_wrap(~fct_rev(fct_reorder(region,x = milk_produced, .fun = sum)), ncol = 1, scales = "free_y")
+# Testing the milk plot ####
+load(here::here("data_clean", "by_species.RData"))
+BY_SPECIES_DATA %>%
+  group_by(region, spp) %>% 
+  ggplot(aes(x = year, y = lat, group = year)) + 
+  ggridges::geom_density_ridges_gradient(show.legend = FALSE, 
+                                         color = "white", scale = 1.5) + 
+  labs(y = "Latitude degrees North", x = "Year", 
+       title = "Location of species by year",
+       subtitle = "ridges indicate range about center",
+       caption = "in testing") +  
+  scale_x_log10(labels = scales::comma) + 
+  scale_y_discrete(expand = c(0,2)) + 
+  scale_fill_viridis_d(option = "D",alpha = 0.9) + 
+  hrbrthemes::theme_modern_rc() + 
+  theme(
+    text = element_text(size = 14, color = "white", family = "Helvetica"),
+    axis.title  = element_text(color = "white", size = "14", face = "bold"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(color = "white", size =0.1),
+    plot.background = element_rect(fill = "black"),
+    panel.background = element_rect(fill = "black"),
+    strip.background = element_rect(fill ="black", color = "black"),
+    strip.text = element_text(color = "white", face = "bold")
+  ) + 
+  facet_wrap(~fct_rev(fct_reorder(region,x = year, .fun = sum)), ncol = 1, scales = "free_y")
