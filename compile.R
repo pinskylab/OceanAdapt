@@ -58,6 +58,7 @@ library(gridExtra) #grid.arrange plots of HQ data
 library(here) # for relative file paths
 library(questionr) # for the wgtmean function
 library(geosphere) # for calculating trawl distance for SEUS 
+library(janitor)
 
 # Functions ====
 # function to calculate convex hull area in km2
@@ -186,49 +187,50 @@ ai_data <- files %>%
 
 # The warning of 13 parsing failures is pointing to a row in the middle of the data set that contains headers instead of the numbers expected, this row is removed by the filter above.
 
-ai_strata <- read_csv(here("data_raw", "ai_strata.csv"), col_types = cols(NPFMCArea = col_character(),
-                                                                          SubareaDescription = col_character(),
-                                                                          StratumCode = col_integer(),
-                                                                          DepthIntervalm = col_character(),
-                                                                          Areakm2 = col_integer()
-))  %>% 
+ai_strata <- read_csv(here("data_raw", "ai_strata.csv"), 
+                      col_types = cols(
+                        NPFMCArea = col_character(), 
+                        SubareaDescription = col_character(), 
+                        StratumCode = col_integer(), 
+                        DepthIntervalm = col_character(), 
+                        Areakm2 = col_integer()))  %>% 
   select(StratumCode, Areakm2) %>% 
   mutate(stratum = StratumCode)
 
 
-ai <- left_join(ai_data, ai_strata, by = "stratum")
+ai <- left_join(ai_data, ai_strata, by = "stratum") %>% 
+  clean_names()
 
 # are there any strata in the data that are not in the strata file?
 test <- ai %>% 
-  filter(is.na(Areakm2))
+  filter(is.na(areakm2))
 stopifnot(nrow(test) == 0)
 
 ai <- ai %>% 
   mutate(
     # Create a unique haulid
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
-    # change -9999 wtcpue to NA
-    wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
+    haulid = paste(formatC(vessel, width=3, flag=0), formatC(cruise, width=3, flag=0), formatC(haul, width=3, flag=0), sep='-'), 
+    # change -9999 wtcpue to NA (as of 2018, none of the wtcpue values are recorded as -9999)
+    wtcpue = na_if(wtcpue, "-9999")) %>% 
   # rename columns
-  rename(year = YEAR, 
-         lat = LATITUDE, 
-         lon = LONGITUDE, 
-         depth = BOT_DEPTH, 
-         spp = SCIENTIFIC, 
-         stratumarea = Areakm2) %>% 
+  rename(lat = latitude, 
+         lon = longitude, 
+         depth = bot_depth, 
+         spp = scientific, 
+         stratumarea = areakm2) %>% 
   # remove rows that are eggs
   filter(spp != "" &
            # remove all spp that contain the word "egg"
            !grepl("egg", spp)) %>% 
-  # adjust spp names
+  # adjust spp names because some surveys changed the way they identified species, so the same fish was called 2 different things depending on the year.
   mutate(
-    # catch A. stomias and A. evermanii (as of 2018 both spp appear as "valid" so not sure why they are being changed)
+    # catch A. stomias and A. evermanii
     spp = ifelse(grepl("Atheresthes", spp), "Atheresthes sp.", spp), 
-    # catch L. polystryxa (valid in 2018), and L. bilineata (valid in 2018)
+    # catch L. polystryxa, and L. bilineata
     spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
-    # catch M. jaok (valid in 2018), M. niger (valid in 2018), M. polyacanthocephalus (valid in 2018), M. quadricornis (valid in 2018), M. verrucosus (changed to scorpius), M. scorpioides (valid in 2018), M. scorpius (valid in 2018) (M. scorpius is in the data set but not on the list so it is excluded from the change)
+    # catch M. jaok, M. niger, M. polyacanthocephalus, M. quadricornis, M. verrucosus (changed to scorpius), M. scorpioides, M. scorpius (M. scorpius is in the data set but not on the list so it is excluded from the change)
     spp = ifelse(grepl("Myoxocephalus", spp ) & !grepl("scorpius", spp), "Myoxocephalus sp.", spp),
-    # catch B. maculata (valid in 2018), abyssicola (valid in 2018), aleutica (valid in 2018), interrupta (valid in 2018), lindbergi (valid in 2018), mariposa (valid in 2018), minispinosa (valid in 2018), parmifera (valid in 2018), smirnovi (valid in 2018), cf parmifera (Orretal), spinosissima (valid in 2018), taranetzi (valid in 2018), trachura (valid in 2018), violacea (valid in 2018)
+    # catch B. maculata, abyssicola, aleutica, interrupta, lindbergi, mariposa, minispinosa, parmifera, smirnovi, cf parmifera (Orretal), spinosissima, taranetzi, trachura, violacea
     # B. panthera is not on the list of spp to change
     spp = ifelse(grepl("Bathyraja", spp) & !grepl("panthera", spp), 'Bathyraja sp.', spp)
   ) %>% 
@@ -248,8 +250,7 @@ ai <- ai %>%
   ungroup() %>% 
   mutate(lon = ifelse(lon > 0, lon - 360, lon), 
          region = "Aleutian Islands") %>% 
-  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
-  ungroup()
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
 
 if (HQ_DATA_ONLY == TRUE){
   
@@ -328,26 +329,26 @@ ebs_strata <- read_csv(here("data_raw", "ebs_strata.csv"), col_types = cols(
   select(StratumCode, Areakm2) %>% 
   rename(stratum = StratumCode)
 
-ebs <- left_join(ebs_data, ebs_strata, by = "stratum")
+ebs <- left_join(ebs_data, ebs_strata, by = "stratum") %>% 
+  clean_names()
 
 # are there any strata in the data that are not in the strata file?
 test <- ebs %>% 
-  filter(is.na(Areakm2))
+  filter(is.na(areakm2))
 stopifnot(nrow(test) == 0)
 
 ebs <- ebs %>% 
   mutate(
     # Create a unique haulid
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
-    # convert -9999 to NA 
-    wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>%  
+    haulid = paste(formatC(vessel, width=3, flag=0), formatC(cruise, width=3, flag=0), formatC(haul, width=3, flag=0), sep='-'), 
+    # change -9999 wtcpue to NA (as of 2018, none of the wtcpue values are recorded as -9999)
+    wtcpue = na_if(wtcpue, "-9999")) %>% 
   # rename columns
-  rename(year = YEAR, 
-         lat = LATITUDE, 
-         lon = LONGITUDE, 
-         depth = BOT_DEPTH, 
-         spp = SCIENTIFIC, 
-         stratumarea = Areakm2) %>% 
+  rename(lat = latitude, 
+         lon = longitude, 
+         depth = bot_depth, 
+         spp = scientific, 
+         stratumarea = areakm2) %>% 
   # remove eggs
   filter(spp != '' &
            !grepl("egg", spp)) %>% 
@@ -357,31 +358,22 @@ ebs <- ebs %>%
          spp = ifelse(grepl("Myoxocephalus", spp), "Myoxocephalus sp.", spp),
          spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp), 
          spp = ifelse(grepl("Hippoglossoides", spp), "Hippoglossoides sp.", spp)) %>% 
+  select(haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
   # change from all character to fitting column types
   type_convert(col_types = cols(
     lat = col_double(),
     lon = col_double(),
-    STATION = col_character(),
     year = col_integer(),
-    DATETIME = col_character(),
     wtcpue = col_double(),
-    NUMCPUE = col_double(),
-    COMMON = col_character(),
     spp = col_character(),
-    SID = col_integer(),
     depth = col_integer(),
-    BOT_TEMP = col_double(),
-    SURF_TEMP = col_double(),
-    VESSEL = col_integer(),
-    CRUISE = col_integer(),
-    HAUL = col_integer(),
+    cruise = col_integer(),
     haulid = col_character()
   ))  %>%  
   group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
   summarise(wtcpue = sumna(wtcpue)) %>% 
   # add region column
-  mutate(region = "Eastern Bering Sea") %>% 
-  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
+  mutate(region = "Eastern Bering Sea")  %>% 
   ungroup()
 
 if (HQ_DATA_ONLY == TRUE){
@@ -459,25 +451,26 @@ goa_strata <- files %>%
   distinct() %>% 
   rename(stratum = StratumCode)
 
-goa <- left_join(goa_data, goa_strata, by = "stratum")
+goa <- left_join(goa_data, goa_strata, by = "stratum") %>% 
+  clean_names()
 
 # are there any strata in the data that are not in the strata file?
 test <- goa %>% 
-  filter(is.na(Areakm2))
+  filter(is.na(areakm2))
 stopifnot(nrow(test) == 0)
 
 
 goa <- goa %>%
   mutate(
     # Create a unique haulid
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'),    
-    wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
-  rename(year = YEAR, 
-         lat = LATITUDE, 
-         lon = LONGITUDE, 
-         depth = BOT_DEPTH, 
-         spp = SCIENTIFIC, 
-         stratumarea = Areakm2) %>% 
+    haulid = paste(formatC(vessel, width=3, flag=0), formatC(cruise, width=3, flag=0), formatC(haul, width=3, flag=0), sep='-'),    
+    # change -9999 wtcpue to NA (as of 2018, none of the wtcpue values are recorded as -9999)
+    wtcpue = na_if(wtcpue, "-9999")) %>% 
+  rename(lat = latitude, 
+         lon = longitude, 
+         depth = bot_depth, 
+         spp = scientific, 
+         stratumarea = areakm2) %>% 
   # remove non-fish
   filter(
     spp != '' & 
@@ -488,29 +481,19 @@ goa <- goa %>%
     spp = ifelse(grepl("Myoxocephalus", spp ) & !grepl("scorpius", spp), "Myoxocephalus sp.", spp),
     spp = ifelse(grepl("Bathyraja", spp) & !grepl("panthera", spp), 'Bathyraja sp.', spp)
   ) %>% 
+  select(haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>%
   type_convert(col_types = cols(
     lat = col_double(),
     lon = col_double(),
-    STATION = col_character(),
     year = col_integer(),
-    DATETIME = col_character(),
     wtcpue = col_double(),
-    NUMCPUE = col_double(),
-    COMMON = col_character(),
     spp = col_character(),
-    SID = col_integer(),
     depth = col_integer(),
-    BOT_TEMP = col_double(),
-    SURF_TEMP = col_double(),
-    VESSEL = col_integer(),
-    CRUISE = col_integer(),
-    HAUL = col_integer(),
     haulid = col_character()
   ))  %>% 
   group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
   summarise(wtcpue = sumna(wtcpue)) %>% 
   mutate(region = "Gulf of Alaska") %>% 
-  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
   ungroup()
 
 if (HQ_DATA_ONLY == TRUE){
@@ -638,37 +621,38 @@ wctri_species <- read_csv("data_raw/wctri_species.csv", col_types = cols(
 # Add haul info to catch data
 wctri <- left_join(wctri_catch, wctri_haul, by = c("CRUISEJOIN", "HAULJOIN", "VESSEL", "CRUISE", "HAUL"))
 #  add species names
-wctri <- left_join(wctri, wctri_species, by = "SPECIES_CODE")
+wctri <- left_join(wctri, wctri_species, by = "SPECIES_CODE") %>% 
+  clean_names()
 
 
 wctri <- wctri %>% 
   # trim to standard hauls and good performance
-  filter(HAUL_TYPE == 3 & PERFORMANCE == 0) %>% 
+  filter(haul_type == 3 & performance == 0) %>% 
   # Create a unique haulid
   mutate(
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
+    haulid = paste(formatC(vessel, width=3, flag=0), formatC(cruise, width=3, flag=0), formatC(haul, width=3, flag=0), sep='-'), 
     # Extract year where needed
-    year = substr(CRUISE, 1, 4), 
+    year = substr(cruise, 1, 4), 
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
-    stratum = paste(floor(START_LATITUDE)+0.5, floor(BOTTOM_DEPTH/100)*100 + 50, sep= "-"), 
+    stratum = paste(floor(start_latitude)+0.5, floor(bottom_depth/100)*100 + 50, sep= "-"), 
     # adjust for tow area # weight per hectare (10,000 m2)	
-    wtcpue = WEIGHT*10000/DISTANCE_FISHED*1000*NET_WIDTH
+    wtcpue = weight*10000/distance_fished*1000*net_width
   )
 
 # Calculate stratum area where needed (use convex hull approach)
 wctri_strats <- wctri %>% 
   group_by(stratum) %>% 
-  summarise(stratumarea = calcarea(START_LONGITUDE, START_LATITUDE))
+  summarise(stratumarea = calcarea(start_longitude, start_latitude))
 
 wctri <- left_join(wctri, wctri_strats, by = "stratum")
 
 wctri <- wctri %>% 
   rename(
-    svvessel = VESSEL,
-    lat = START_LATITUDE, 
-    lon = START_LONGITUDE,
-    depth = BOTTOM_DEPTH, 
-    spp = SPECIES_NAME
+    svvessel = vessel,
+    lat = start_latitude, 
+    lon = start_longitude,
+    depth = bottom_depth, 
+    spp = species_name
   ) %>% 
   filter(
     spp != "" & 
@@ -797,13 +781,9 @@ wcann_haul <- read_csv("data_raw/wcann_haul.csv", col_types = cols(
   select("trawl_id","year","longitude_hi_prec_dd","latitude_hi_prec_dd","depth_hi_prec_m","area_swept_ha_der")
 # It is ok to get warning message that missing column names filled in: 'X1' [1].
 
-# this merge needs to be successful for complete_r_script to have a chance at working  
-test <- merge(wcann_catch, wcann_haul, by=c("trawl_id","year"), all.x=TRUE, all.y=FALSE, allow.cartesian=TRUE) 
+# this join needs to be successful for complete_r_script to have a chance at working  
+wcann <- right_join(wcann_haul, wcann_catch, by = c("trawl_id", "year"))
 
-# clean up
-rm(test)
-
-wcann <- left_join(wcann_haul, wcann_catch, by = c("trawl_id", "year"))
 wcann <- wcann %>% 
   mutate(
     # create haulid
