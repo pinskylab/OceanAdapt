@@ -52,7 +52,8 @@ library(gridExtra) #grid.arrange plots of HQ data
 library(here) # for relative file paths
 library(questionr) # for the wgtmean function
 library(geosphere) # for calculating trawl distance for SEUS 
-library(janitor)
+library(janitor) # for clean_names
+library(tidylog) # to observe changes made by each section
 
 # Functions ====
 # function to calculate convex hull area in km2
