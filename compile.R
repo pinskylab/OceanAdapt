@@ -28,21 +28,15 @@ PLOT_CHARTS <- FALSE
 # 5. If you would like to write out the clean data, would you prefer it in Rdata or CSV form?  Note the CSV's are much larger than the Rdata files. #DEFAULT:TRUE, FALSE generates CSV's instead of Rdata.
 PREFER_RDATA <- TRUE
 
-# 5. Output the clean full master data frame. #DEFAULT:FALSE
-WRITE_MASTER_DAT <- FALSE
+# 5. Output the clean full master data frame, trimmed data, BY_SPECIES, BY_REGION, and BY_NATIONAL data. #DEFAULT:FALSE
+WRITE_CLEAN_DAT <- TRUE
 # This used to be called OPTIONAL_OUTPUT_DAT_MASTER_TABLE, do I need to change the name back?
 
-# 6. Output the clean trimmed data frame. #DEFAULT:FALSE
-WRITE_TRIMMED_DAT <- FALSE
-
-# 7. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
+# 6. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
 DAT_EXPLODED <- TRUE
 
 # 8. Output the dat.exploded table #DEFAULT:FALSE
-WRITE_DAT_EXPLODED <- FALSE
-
-# 9. Output the BY_SPECIES, BY_REGION, and BY_NATIONAL tables. #DEFAULT:FALSE
-WRITE_BY_TABLES <- FALSE
+WRITE_DAT_EXPLODED <- TRUE
 
 ## Workspace setup ====
 # This script works best when the repository is downloaded from github, 
@@ -1918,14 +1912,6 @@ if(isTRUE(REMOVE_REGION_DATASETS)) {
   rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER, scot, scot_fall, scot_spr, scot_sumr, tax)
 }
 
-if(isTRUE(WRITE_MASTER_DAT)){
-  if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here("data_clean", "all-regions-full.RData"))
-  }else{
-    write_csv(dat, here("data_clean", "all-regions-full.csv"))
-  }
-}
-
 # At this point, we have a compiled `dat` master table on which we can begin our analysis.
 
 # If you have not cleared the regional datasets {By setting REMOVE_REGION_DATASETS=FALSE at the top}, 
@@ -1962,14 +1948,6 @@ trimmed_dat <- dat %>%
     spp = ifelse(grepl("PSEUDOPLEURONECTES AMERICANUS", spp), "PSEUDOPLEURONECTES AMERICANUS", spp))
 
 rm (maxyrs, presyr, presyrsum, spplist)
-
-if(isTRUE(WRITE_TRIMMED_DAT)){
-  if(isTRUE(PREFER_RDATA)){
-    save(trimmed_dat, file = here("data_clean", "all-regions-trimmed.RData"))
-  }else{
-    write_csv(trimmed_dat, here("data_clean", "all-regions-trimmed.csv"))
-  }
-}
 
 # are there any spp in trimmed_dat that are not in the taxonomy file?
 test <- anti_join(select(trimmed_dat, spp, common), tax, by = "spp") %>% 
@@ -2046,14 +2024,6 @@ BY_SPECIES_DATA <- cent_bio %>%
   ungroup() %>% 
   arrange(region, spp, year)
 
-if(isTRUE(WRITE_BY_TABLES)){
-  if(isTRUE(PREFER_RDATA)){
-    save(BY_SPECIES_DATA, file = here("data_clean", "by_species.RData"))
-  }else{
-    write_csv(BY_SPECIES_DATA, here("data_clean", "by_species.csv"))
-  }
-}
-
 rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr)
 
 # Dat_exploded -  Add 0's ####  
@@ -2065,9 +2035,9 @@ if (DAT_EXPLODED == TRUE){
   
   if(isTRUE(WRITE_DAT_EXPLODED)){
     if(isTRUE(PREFER_RDATA)){
-      save(dat, file = here("data_clean", "dat_exploded.Rdata"))
+      save(dat.exploded, file = here("data_clean", "dat_exploded.Rdata"))
     }else{
-      write_csv(dat, here("data_clean", "dat_exploded.csv"))
+      write_csv(dat.exploded, here("data_clean", "dat_exploded.csv"))
     }
   }
   
@@ -2157,13 +2127,7 @@ regcentbio <- left_join(regcentbio, regcentbiospp, by = "region")
 BY_REGION_DATA  <- regcentbio %>% 
   arrange(region, year)
 
-if(isTRUE(WRITE_BY_TABLES)){
-  if(isTRUE(PREFER_RDATA)){
-    save(BY_REGION_DATA, file = here("data_clean", "by_region.RData"))
-  }else{
-    write_csv(BY_REGION_DATA, here("data_clean", "by_region.csv"))
-  }
-}
+
 
 # By national data ####
 #Returns national data
@@ -2257,14 +2221,6 @@ natcentbio <- left_join(natcentbio, natcentbiose, by = "year")
 natcentbio$numspp <- lunique(paste(centbio3$region, centbio3$spp)) # calc number of species per region  
 
 BY_NATIONAL_DATA <- natcentbio
-
-if(isTRUE(WRITE_BY_TABLES)){
-  if(isTRUE(PREFER_RDATA)){
-    save(BY_NATIONAL_DATA, file = here("data_clean", "by_national.RData"))
-  }else{
-    write_csv(BY_NATIONAL_DATA, here("data_clean", "by_national.csv"))
-  }
-}
 
 rm(centbio2, centbio3, maxyrs, natcentbio, natcentbiose, presyr, presyrsum, regcentbio, regcentbiospp, spplist, spplist2, startpos, startyear, regcentbiose)
 
@@ -2403,31 +2359,17 @@ if(isTRUE(PLOT_CHARTS)) {
   
 }
 
-#######################################
-# Testing the milk plot ####
-load(here::here("data_clean", "by_species.RData"))
-BY_SPECIES_DATA %>%
-  group_by(region, spp) %>% 
-  ggplot(aes(x = year, y = lat, group = year)) + 
-  ggridges::geom_density_ridges_gradient(show.legend = FALSE, 
-                                         color = "white", scale = 1.5) + 
-  labs(y = "Latitude degrees North", x = "Year", 
-       title = "Location of species by year",
-       subtitle = "ridges indicate range about center",
-       caption = "in testing") +  
-  scale_x_log10(labels = scales::comma) + 
-  scale_y_discrete(expand = c(0,2)) + 
-  scale_fill_viridis_d(option = "D",alpha = 0.9) + 
-  hrbrthemes::theme_modern_rc() + 
-  theme(
-    text = element_text(size = 14, color = "white", family = "Helvetica"),
-    axis.title  = element_text(color = "white", size = "14", face = "bold"),
-    panel.grid.minor = element_blank(),
-    panel.grid.major.x = element_blank(),
-    panel.grid.major.y = element_line(color = "white", size =0.1),
-    plot.background = element_rect(fill = "black"),
-    panel.background = element_rect(fill = "black"),
-    strip.background = element_rect(fill ="black", color = "black"),
-    strip.text = element_text(color = "white", face = "bold")
-  ) + 
-  facet_wrap(~fct_rev(fct_reorder(region,x = year, .fun = sum)), ncol = 1, scales = "free_y")
+if(isTRUE(WRITE_CLEAN_DAT)){
+  if(isTRUE(PREFER_RDATA)){
+    save(dat, trimmed_dat, BY_SPECIES_DATA, BY_REGION_DATA, BY_NATIONAL_DATA, file = here("data_clean", "all_clean.RData"))
+  }else{
+    write_csv(dat, here("data_clean", "all-regions-full.csv"))
+    write_csv(trimmed_dat, here("data_clean", "all-regions-trimmed.csv"))
+    write_csv(BY_SPECIES_DATA, here("data_clean", "by_species.csv"))
+    write_csv(BY_REGION_DATA, here("data_clean", "by_region.csv"))
+    write_csv(BY_NATIONAL_DATA, here("data_clean", "by_national.csv"))
+  }
+}
+
+
+
