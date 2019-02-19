@@ -1097,6 +1097,18 @@ gmex <- gmex %>%
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
   ungroup()
 
+# change species names to upper lower case
+test <- gmex %>%
+  separate(spp, into = c("genus", "spp", "other1")) %>% 
+  mutate(genus = str_to_title(genus), 
+         spp = str_to_lower(spp), 
+         other1 = str_to_lower(other1), 
+         spp = ifelse(!is.na(other1), 
+           paste(genus, spp, other1, sep = " "), 
+           paste(genus, spp))) %>% 
+  select(-genus, other1)
+  
+
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
@@ -2217,9 +2229,10 @@ natcentbiose <- centbio3 %>%
             depth_se = se(depthoffset), 
             lonse = se(lonoffset))
 
-natcentbio <- left_join(natcentbio, natcentbiose, by = "year")
+natcentbio <- left_join(natcentbio, natcentbiose, by = "year") %>% 
+# calc number of species
+  mutate(numspp = lunique(paste(centbio3$region, centbio3$spp)))
 
-natcentbio$numspp <- lunique(paste(centbio3$region, centbio3$spp)) # calc number of species per region  
 
 BY_NATIONAL_DATA <- natcentbio
 
