@@ -1,6 +1,11 @@
 # OceanAdapt
-Git repository to support documentation and development of [Ocean Adapt](http://oceanadapt.rutgers.edu)
+<img src="http://pinsky.marine.rutgers.edu/wp-content/uploads/2016/07/cropped-Himokilan_Cuatros_Islas_MichelleStuart.jpg" width="500">
 
+Git repository to support documentation and development of [Ocean Adapt](http://oceanadapt.rutgers.edu)  
+
+[Download the lastest release (full data and code)](https://github.com/mpinsky/OceanAdapt/releases/tag/2018.1.0)  
+
+Repository navigation:
 * [`complete_r_script.R`](https://github.com/mpinsky/OceanAdapt/blob/master/complete_r_script.R): 
    * the master script that analyzes data for OceanAdapt
    * Comments at head of script provide for instructions on how to run it
