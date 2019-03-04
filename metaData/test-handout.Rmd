@@ -12,7 +12,7 @@ ______
 
 # www.oceanadapt.rutgers.edu
 
-**OceanAdapt is a collaboration between the Pinsky Lab of Rutgers University and the National Marine Fisheries Service (NMFS).  ** 
+**OceanAdapt is a collaboration between the Pinsky Lab of Rutgers University and the National Marine Fisheries Service (NMFS).**  
 
 
 We provide information about the impacts of changing climate and other factors on the distribution of marine life to the National Climate Assessment, fisheries communities, policymakers, and to others.   
