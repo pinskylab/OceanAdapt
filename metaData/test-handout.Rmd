@@ -3,12 +3,13 @@ title: "OceanAdapt at Rutgers University"
 author: "Dr. Malin Pinsky  malin.pinsky@rutgers.edu"
 params:
   alpha: 0.25
-  title_size: 21
   subtitle_size: 14
-  title_colour: "dodgerblue3"
+  title_colour: dodgerblue3
+  title_size: 21
 output:
   github_document: default
   html_document: default
+  pdf_document: default
   word_document: default
 subtitle: Exploring changes in marine species distributions
 ---
