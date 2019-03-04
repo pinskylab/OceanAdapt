@@ -9,13 +9,17 @@ params:
   title_size: 21
 output:
   pdf_document: default
-  html_document: default
   github_document: default
+  html_document: default
   word_document: default
 subtitle: Exploring changes in marine species distributions
 ---
 
 ______
+
+<!-- None of this handout was used in this format, we got rid of all features that required R code and so moved to google docs, which is more GUI formattable.
+https://docs.google.com/document/d/1Z7UwUygCNV6DkxUD8zHlSD9jXtwjYFRObXRMTFd5_uI/edit?usp=sharing
+-->
 
 # [www.oceanadapt.rutgers.edu](http://oceanadapt.rutgers.edu)
 
@@ -75,7 +79,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 ```
 
 
-```{r data prep, echo=FALSE, message=FALSE, warning=FALSE}
+```{r data prep, echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE, include=FALSE}
 oa <- read_csv(here("data_clean", "dat_exploded.csv"), col_types = cols(
   region = col_character(),
   haulid = col_character(),
