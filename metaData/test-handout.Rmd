@@ -1,0 +1,77 @@
+---
+title: "OceanAdapt at Rutgers University"
+author: "Dr. Malin Pinsky  malin.pinsky@rutgers.edu"
+output:
+  github_document: default
+  html_document: default
+  word_document: default
+subtitle: Exploring changes in marine species distributions
+---
+
+______
+
+# www.oceanadapt.rutgers.edu
+
+**OceanAdapt is a collaboration between the Pinsky Lab of Rutgers University and the National Marine Fisheries Service (NMFS).  ** 
+
+
+We provide information about the impacts of changing climate and other factors on the distribution of marine life to the National Climate Assessment, fisheries communities, policymakers, and to others.   
+
+This website hosts an annually updated database of scientific surveys in the United States and provides tools for exploring changes in marine fish and invertebrate distributions. We are continually working to expand the site with new data and visualization tools.
+
+```{r setup, include=FALSE}
+#This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package
+if(!require(pacman))install.packages("pacman")
+
+# change install to true if you want to install any packages listed that you don't currently have.
+pacman::p_load(tidyverse, here, maps, ggthemes, install = FALSE)
+
+# mapdata, maps, ggthemes, gganimate, here, lubridate, magick, 
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='left'}
+oa <- read_csv(here("data_clean", "dat_exploded.csv")) 
+
+# some rows imported with problems of trailing whitespace in the stratum column
+prob <- problems(oa)
+
+prob$actual <- trimws(prob$actual)
+
+# fix those rows in the oa data set
+oa$stratum[prob$row] <- prob$actual
+rm(prob)
+
+bass <- oa %>% 
+  filter(grepl("black sea bass", common))
+
+map_bass <-  bass %>% 
+  group_by(region, year, spp) %>% 
+  summarise(lat = mean(lat), 
+            lon = mean(lon), 
+            wtcpue = mean(wtcpue)) %>% 
+  ungroup() %>% 
+  mutate(year = as.integer(year))
+
+east_coast <- subset(map_data("state"), region %in% c("maine", "vermont", "new hampshire", "massachusets", "connecticut", "rhode island", "new york", "new jersey", "delaware", "maryland", "virginia", "north carolina", "south carolina", "georgia", "florida", "pennsylvania"))
+
+map <- ggplot(data = east_coast)+
+  geom_polygon(aes(x = long, y = lat, group = group), fill = "gray80", colour = "gray85")+
+  coord_fixed(1.3)
+
+map_of_bass <- map + 
+  geom_point(data = map_bass, aes(lon, lat, size = wtcpue
+                                  , color = year)
+             , alpha = 0.1
+             , show.legend = FALSE)+
+  theme_map()+
+  labs(title = "Distribution of black sea bass, Centropristis striata, from 1970-2017") 
+
+
+  map_of_bass + 
+    scale_fill_gradientn(colours = heat.colors(47))
+
+```
+  
+  Size of the circles represent the mean weight per catch effort, color of the circles represent the year of catch with darker being older, location of circled represent the mean latitude and logitude for each year.
+
