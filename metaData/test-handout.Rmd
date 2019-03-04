@@ -1,22 +1,23 @@
 ---
 title: "OceanAdapt at Rutgers University"
 author: "Dr. Malin Pinsky  malin.pinsky@rutgers.edu"
+email: "malin.pinsky@rutgers.edu"
 params:
   alpha: 0.25
   subtitle_size: 14
   title_colour: dodgerblue3
   title_size: 21
 output:
-  github_document: default
-  html_document: default
   pdf_document: default
+  html_document: default
+  github_document: default
   word_document: default
 subtitle: Exploring changes in marine species distributions
 ---
 
 ______
 
-# www.oceanadapt.rutgers.edu
+# [www.oceanadapt.rutgers.edu](http://oceanadapt.rutgers.edu)
 
 **OceanAdapt is a collaboration between the Pinsky Lab of Rutgers University and the National Marine Fisheries Service (NMFS).**  
 
@@ -135,7 +136,7 @@ map_of_bass <- map +
     scale_fill_gradientn(colours = heat.colors(47))
 ```
 
-```{r early, echo=FALSE}
+```{r early, eval=FALSE, include=FALSE, echo=FALSE}
 early <-  bass %>% 
   filter(year <= 1980) %>% 
   group_by(region, year, spp) %>% 
@@ -163,7 +164,7 @@ early_map <- map +
 ```
 
 
-```{r late, echo=FALSE}
+```{r late, eval=FALSE, include=FALSE, echo=FALSE}
 late <-  bass %>% 
   filter(year >= 2010) %>% 
   group_by(region, year, spp) %>% 
@@ -190,15 +191,15 @@ late_map <- map +
   theme(plot.subtitle = element_text(size = params$subtitle_size))
 
 ```
-```{r 2-up, echo=FALSE}
+```{r 2-up, eval=FALSE, include=FALSE, echo=FALSE}
 multiplot(early_map, late_map, cols = 2)
 ```
+<!-- - Size of the circles represent the mean weight caught per unit effort.   -->
+<!-- - Color of the circles represent the year of catch with darker being older.     -->
+<!-- - Location of circled represent the mean latitude and logitude for each year.   -->
 
+### Distribution of Black Sea Bass in the Fall, Northeast US
+![](https://github.com/mpinsky/OceanAdapt/blob/master/metaData/test-handout_files/figure-markdown_github/Screen%20Shot%202019-03-04%20at%203.51.35%20PM.png?raw=true)
 
-
-
-  
-- Size of the circles represent the mean weight per catch effort  
-- Color of the circles represent the year of catch with darker being older  
-- Location of circled represent the mean latitude and logitude for each year.
+![](https://github.com/mpinsky/OceanAdapt/blob/master/metaData/test-handout_files/figure-markdown_github/Screen%20Shot%202019-03-04%20at%203.51.45%20PM.png?raw=true)
 
