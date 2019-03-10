@@ -1,0 +1,63 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+[leaflet](https://csiu.github.io/blog//update/2017/05/17/day82.html)
+```{r setup}
+library(dplyr)
+library(rgdal)
+library(leaflet)
+```
+
+
+# Coordinates for Vancouver, BC
+```{r}
+lng <- -123.1207
+lat <- 49.2827
+
+proj4string <-
+  "+proj=utm +zone=10 +north +ellps=WGS84 +datum=WGS84 +units=m +no_defs "
+```
+
+
+# ------------------------------------------------------------------------------
+# Load & wrangle data
+```{r}
+longlat <- dat %>% 
+  select(region, year, lat, lon, spp, common, wtcpue) %>% 
+  filter(grepl("West", region), 
+         grepl("rockfish", common))
+```
+
+
+# ------------------------------------------------------------------------------
+# Define palette/color
+```{r eval=FALSE}
+city_properties <-
+  c("CAPITAL FUND", "PROPERTY ENDOWMENT FUND", "Vancouver Public Housing Corp")
+pal <- colorFactor(
+  c("navy", "red", "green"),
+  domain = city_properties)
+```
+
+
+# Draw map
+```{r}
+leaflet(longlat) %>%
+  # setView(lng=lng, lat=lat, zoom=11) %>%
+  addTiles() %>%
+  addProviderTiles(providers$Stamen.TonerLite) %>%
+  addCircles(lng = ~lon,
+             lat = ~lat,
+             # weight = wtcpue,
+             # color = ~pal(TYPE),
+             stroke = FALSE,
+             fillOpacity = 0.5)
+# %>%
+#   addLegend("topright",
+#             pal=pal,
+#             values=city_properties,
+#             title = "Property type",
+#             opacity = 1)
+```
+

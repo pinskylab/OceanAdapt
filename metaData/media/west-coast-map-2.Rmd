@@ -1,0 +1,128 @@
+---
+title: "OceanAdapt at Rutgers University"
+author: "Dr. Malin Pinsky  malin.pinsky@rutgers.edu"
+email: "malin.pinsky@rutgers.edu"
+params:
+  alpha: 0.25
+  subtitle_size: 14
+  title_colour: dodgerblue3
+  title_size: 21
+output:
+  html_document: default
+  github_document: default
+  pdf_document: default
+  word_document: default
+subtitle: Exploring changes in marine species distributions
+---
+
+______
+
+<!-- None of this handout was used in this format, we got rid of all features that required R code and so moved to google docs, which is more GUI formattable.
+https://docs.google.com/document/d/1Z7UwUygCNV6DkxUD8zHlSD9jXtwjYFRObXRMTFd5_uI/edit?usp=sharing
+-->
+
+# [www.oceanadapt.rutgers.edu](http://oceanadapt.rutgers.edu)
+
+**OceanAdapt is a collaboration between the Pinsky Lab of Rutgers University and the National Marine Fisheries Service (NMFS).**  
+
+
+We provide information about the impacts of changing climate and other factors on the distribution of marine life to the National Climate Assessment, fisheries communities, policymakers, and to others.   
+
+This website hosts an annually updated database of scientific surveys in the United States and provides tools for exploring changes in marine fish and invertebrate distributions. We are continually working to expand the site with new data and visualization tools.
+
+```{r setup, include=FALSE}
+#This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package
+if(!require(pacman))install.packages("pacman")
+
+# change install to true if you want to install any packages listed that you don't currently have.
+pacman::p_load(tidyverse, here, maps, ggthemes, grid, RColorBrewer, install = FALSE)
+
+```
+
+
+```{r data prep, echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE, include=FALSE}
+oa <- read_csv(here("data_clean", "dat_exploded.csv"), col_types = cols(
+  region = col_character(),
+  haulid = col_character(),
+  year = col_double(),
+  lat = col_double(),
+  lon = col_double(),
+  stratum = col_double(),
+  stratumarea = col_double(),
+  depth = col_double(),
+  spp = col_character(),
+  common = col_character(),
+  wtcpue = col_double()
+))
+
+# # some rows imported with problems of trailing whitespace in the stratum column
+# prob <- problems(oa)
+# 
+# prob$actual <- trimws(prob$actual)
+# 
+# # fix those rows in the oa data set
+# oa$stratum[prob$row] <- prob$actual
+# rm(prob)
+
+regions <- c("West Coast Annual", "Aleutian Islands", "Eastern Bering Sea", "Gulf of Alaska")
+
+oa <- oa %>%
+    filter(region %in% c("West Coast Annual", "Aleutian Islands", "Eastern Bering Sea", "Gulf of Alaska")) %>%
+  mutate(lon = ifelse(region == "Aleutian Islands" & !grepl("-", lon), as.numeric(paste0("-", lon)), lon))
+
+
+west_coast <- map_data("world") %>% 
+  filter(region == "Canada" | region == "USA") %>% 
+  mutate(long = ifelse(!grepl("-", long) & subregion == "Alaska", as.numeric(paste0("-", long)), long)) %>% 
+  filter(long >= -180, long <= -117) 
+```
+
+
+West Coast all species
+```{r west_coast}
+oa_mean <-  oa %>% 
+  group_by(region, year, spp) %>% 
+  summarise(lat = mean(lat), 
+            lon = mean(lon), 
+            wtcpue = mean(wtcpue)) %>% 
+  ungroup() %>% 
+  mutate(year = as.integer(year))
+
+map <- ggplot(data = west_coast)+
+  geom_polygon(aes(x = long, y = lat, group = group), fill = "gray80", colour = "gray85")+
+  coord_fixed(1.3)
+
+early_map <- 
+  map + 
+  geom_point(data = oa_mean, aes(lon, lat, size = wtcpue
+                                  , color = spp)
+             , alpha = params$alpha
+             , show.legend = FALSE)+
+  theme_map()
+
+early_map
+
+# +
+#   scale_color_brewer(palette = "Spectral")
+
+# +
+  # labs(title = "Distribution of black sea bass, Centropristis striata", 
+       # subtitle= "
+       # 1970-1980") +
+  # theme(plot.title = element_text(size = params$title_size, colour = params$title_colour)) +
+  # theme(plot.subtitle = element_text(size = params$subtitle_size))
+```
+Check why the meanwtcpue for Sebastes rufus and Thaliacea is so large
+```{r}
+sr_check <- oa %>% 
+  filter(region == "West Coast Annual" & year == 2003 & spp == "Sebastes rufus") 
+
+
+sr_check <- dat %>% 
+  filter(region == "West Coast Annual" & year == 2003 & spp == "Sebastes rufus") 
+
+sr_check <- wcann %>% 
+  filter(year == 2003 & scientific_name == "Sebastes rufus") 
+```
+
+
