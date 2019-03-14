@@ -1,33 +1,38 @@
 ---
-title: "Map of circles, sized by wtcpue, colored by year"
-author: "Michelle Stuart"
-
+title: "Plot distribution of speices"
 params:
-  alpha: 0.25
-  subtitle_size: 11
-  title_colour: dodgerblue3
-  title_size: 12
-  regions: west_regions
-  title: "Distribution of market squid, Alaska pollock, and canary rockfish"
-output:
-  html_document: default
+  title: "Distribution of seafood"
+  subtitle: "lobster, cod, and black sea bass, 1972-2017"
+  save_file: "east-coast-seafood.png"
+output: 
+  html_notebook: default
   github_document: default
-  pdf_document: default
-  word_document: default
-subtitle: Exploring changes in marine species distributions
 ---
+<!-- To turn this into an R script: -->
+<!-- knitr::purl(map-spp-dist2.Rmd) -->
 
 ```{r setup, include=FALSE}
 #This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package
 if(!require(pacman))install.packages("pacman")
 
-# change install to true if you want to install any packages listed that you don't currently have.
-pacman::p_load(tidyverse, here, maps, ggthemes, grid, RColorBrewer, install = FALSE)
+pacman::p_load('dplyr', 'tidyr', 'gapminder',
+               'ggplot2',  'ggalt',
+               'forcats', 'R.utils', 'png', 
+               'grid', 'ggpubr', 'scales',
+               'bbplot', readr, here, ggthemes,
+               install = FALSE)
 
+# regions_of_interest <- c("West Coast Annual", "West Coast Triennial")
+regions_of_interest <- c("Northeast US Spring", "Northeast US Fall")
+# species_of_interest <- c("Doryteuthis opalescens", "Gadus chalcogrammus", "Sebastes pinniger")
+species_of_interest <- c("HOMARUS AMERICANUS", "Gadus morhua", "GADUS MORHUA", "Homaurs americanus", "CENTROPRISTIS STRIATA")
+# map_regions <- c("Canada", "USA")
+map_regions <- c("USA")
 ```
 
-Bring in data
-```{r data prep, echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE, include=FALSE}
+
+Start with data
+```{r fish data}
 oa <- read_csv(here("data_clean", "dat_exploded.csv"), col_types = cols(
   region = col_character(),
   haulid = col_character(),
@@ -50,60 +55,81 @@ prob$actual <- trimws(prob$actual)
 # fix those rows in the oa data set
 oa$stratum[prob$row] <- prob$actual
 rm(prob)
-```
 
-Define regions
-```{r}
-west_regions <- c("West Coast Annual", "Aleutian Islands", "Eastern Bering Sea", "Gulf of Alaska")
-
-east_regions <- c("Northeast US Spring", "Northeast US Fall", "Southeast US Spring", "Southeast US Fall", "Scotian Shelf Summer", "Scotian Shelf Fall", "Scotian Shelf Spring")
-
+# filter out just what is needed for the map
 oa <- oa %>%
-  filter(region %in% params$regions) %>%
+  filter(region %in% regions_of_interest, 
+         spp %in% species_of_interest) %>%
   mutate(lon = ifelse(region == "Aleutian Islands" & !grepl("-", lon), as.numeric(paste0("-", lon)), lon))
 
-
-west_coast <- map_data("world") %>% 
-  filter(region == "Canada" | region == "USA") %>%
-  # filter(region == "USA") %>% 
-  mutate(long = ifelse(!grepl("-", long) & subregion == "Alaska", paste0("-", long), long), 
-         long = as.numeric(long)) %>% 
-  filter(long >= min(oa$lon), long <= max(oa$lon)) 
-```
-
-Define species
-```{r west_coast}
-species_of_interest <- c("Doryteuthis opalescens", "Gadus chalcogrammus", "Sebastes pinniger")
-
-oa <- oa %>% 
-  filter(spp %in% species_of_interest)
-
+# calculate annual means for each variable
 oa_mean <-  oa %>% 
-  group_by(region, year, spp) %>% 
+  mutate(year = as.integer(year), 
+         spp = ifelse(spp == "HOMARUS AMERICANUS", "Homaurs americanus", spp), 
+         spp = ifelse(spp == "GADUS MORHUA", "Gadus morhua", spp)) %>% 
+  group_by(year, spp, common) %>% 
   summarise(lat = mean(lat), 
             lon = mean(lon), 
             wtcpue = mean(wtcpue)) %>% 
-  ungroup() %>% 
-  mutate(year = as.integer(year))
-
-map <- ggplot(data = west_coast) +
- geom_polygon(aes(x = long, y = lat, group = group), fill = "gray80", colour = "gray85") + coord_fixed(1.3)
-
-
-early_map <- map +
-geom_point(data = oa_mean, aes(lon, lat, size = wtcpue, color = spp, alpha = year), show.legend = TRUE) +
-  # scale_color_gradient(low = "dodgerblue", high = "dodgerblue4")+
-  theme_map() 
-  
-
-early_map + 
-  labs(title = params$title,
-  subtitle= "
-  1982-2017") +
-  theme(plot.title = element_text(size = params$title_size, colour = params$title_colour)) +
-  theme(plot.subtitle = element_text(size = params$subtitle_size))
-
-ggsave("west-coast-squid-pollack-rockfish.pdf")
+  ungroup() 
+```
+```{r map data}
+coastal_map <- map_data("world") %>% 
+  filter(region %in% map_regions) %>%
+  mutate(long = ifelse(!grepl("-", long) & subregion == "Alaska", paste0("-", long), long), 
+         long = as.numeric(long)) %>%
+  filter(long >= min(oa$lon), long <= (max(oa$lon)+4))
 ```
 
+Make the plot
+```{r plot map}
+map <- ggplot(data = coastal_map) +
+ geom_polygon(aes(x = long, y = lat, group = group), fill = "gray80", colour = "gray85") + coord_fixed(1.3) +
+  theme_map()
 
+plot(map)
+```
+
+```{r plot data}
+spp_plot <- map +
+  geom_point(data = oa_mean, aes(lon, lat
+                                 # , size = wtcpue
+                                 # , size = year
+                                 , color = common
+                                 , alpha = year
+                                 )) +
+  scale_color_manual(values = c("olivedrab4", "darkorange3", "dodgerblue3")) + 
+  bbc_style() +
+  theme(legend.position = "none",
+        axis.text.x = element_blank(), 
+        axis.text.y = element_blank()) +
+  labs(title = params$title,
+       subtitle = params$subtitle)+
+  theme(plot.subtitle = element_text(size = 12)) +
+  theme(plot.title = element_text(size = 14)) +
+  theme(legend.position = c(1, 0.25)) +
+  theme(legend.text = element_text(size = 10))
+
+plot(spp_plot)
+
+finalise_plot(
+  plot_name = spp_plot, 
+  source = "Source: Rutgers OceanAdapt", 
+  save_filepath = here("metaData", "media", params$save_file)
+)
+```
+Make a legend that is a barbell plot
+```{r}
+
+#Make plot
+ggplot()+
+  geom_dumbbell(data = oa_mean, aes(x = min(oa_mean$year), xend = max(oa_mean$year), y = common, group = common, alpha = year, color = common)) + 
+   scale_color_manual(values = c("olivedrab4", "darkorange3", "dodgerblue3")) +
+  facet_wrap( ~ common)
+# + 
+#   bbc_style() 
+```
+ 
+ 
+ 
+ 
