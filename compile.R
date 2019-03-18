@@ -167,19 +167,21 @@ explode0 <- function(x, by=c("region")){
 temp <- read_lines("data_raw/ai2014_2016.csv")
 # replace the string that causes the problem
 temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
-# write it back to a temporary file
-write_lines(temp_fixed, "data_raw/ai_temporary.csv")
+# read the result in as a csv
+temp_csv <- read_csv(temp_fixed)
 ## End special fix
 
 files <- as.list(dir(pattern = "ai", path = "data_raw", full.names = T))
 
-# exclude the strata file and the raw 2014-2016 data file which has been fixed in ai_temporary.csv, the 1 and 5 elements
+# exclude the strata file and the raw 2014-2016 data file which has been fixed in temp_csv
 files <- files[-c(grep("strata", files),grep("2014", files))]
 
 # combine all of the data files into one table
 ai_data <- files %>% 
   # read in all of the csv's in the files list
   map_dfr(read_csv) %>%
+  # add in the data fixed above
+  rbind(temp_csv) %>% 
   # remove any data rows that have headers as data rows
   filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
   mutate(stratum = as.integer(STRATUM))
@@ -199,10 +201,9 @@ ai_strata <- read_csv(here("data_raw", "ai_strata.csv"), col_types = cols(NPFMCA
 ai <- left_join(ai_data, ai_strata, by = "stratum")
 
 # are there any strata in the data that are not in the strata file?
-test <- ai %>% 
-  filter(is.na(Areakm2))
-stopifnot(nrow(test) == 0)
+stopifnot(nrow(filter(ai, is.na(Areakm2))) == 0)
 
+# the following chunk of code reformats and fixes this region's data
 ai <- ai %>% 
   mutate(
     # Create a unique haulid
@@ -248,8 +249,7 @@ ai <- ai %>%
   ungroup() %>% 
   mutate(lon = ifelse(lon > 0, lon - 360, lon), 
          region = "Aleutian Islands") %>% 
-  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
-  ungroup()
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
 
 if (HQ_DATA_ONLY == TRUE){
   
@@ -308,7 +308,7 @@ rm(ai_data, ai_strata, files, temp_fixed)
 # Compile EBS ====
 files <- as.list(dir(pattern = "ebs", path = "data_raw", full.names = T))
 
-# exclude the strata file which is the 1 element
+# exclude the strata file
 files <- files[-grep("strata", files)]
 
 # combine all of the data files into one table
@@ -331,9 +331,7 @@ ebs_strata <- read_csv(here("data_raw", "ebs_strata.csv"), col_types = cols(
 ebs <- left_join(ebs_data, ebs_strata, by = "stratum")
 
 # are there any strata in the data that are not in the strata file?
-test <- ebs %>% 
-  filter(is.na(Areakm2))
-stopifnot(nrow(test) == 0)
+stopifnot(nrow(filter(ebs, is.na(Areakm2))) == 0)
 
 ebs <- ebs %>% 
   mutate(
@@ -462,9 +460,8 @@ goa_strata <- files %>%
 goa <- left_join(goa_data, goa_strata, by = "stratum")
 
 # are there any strata in the data that are not in the strata file?
-test <- goa %>% 
-  filter(is.na(Areakm2))
-stopifnot(nrow(test) == 0)
+stopifnot(nrow(filter(goa, is.na(Areakm2))) == 0)
+
 
 
 goa <- goa %>%
@@ -798,10 +795,7 @@ wcann_haul <- read_csv("data_raw/wcann_haul.csv", col_types = cols(
 # It is ok to get warning message that missing column names filled in: 'X1' [1].
 
 # this merge needs to be successful for complete_r_script to have a chance at working  
-test <- merge(wcann_catch, wcann_haul, by=c("trawl_id","year"), all.x=TRUE, all.y=FALSE, allow.cartesian=TRUE) 
-
-# clean up
-rm(test)
+merge(wcann_catch, wcann_haul, by=c("trawl_id","year"), all.x=TRUE, all.y=FALSE, allow.cartesian=TRUE) 
 
 wcann <- left_join(wcann_haul, wcann_catch, by = c("trawl_id", "year"))
 wcann <- wcann %>% 
@@ -879,8 +873,7 @@ rm(wcann_catch, wcann_haul, wcann_strats)
 gmex_station_raw <- read_lines("data_raw/gmex_STAREC.csv")
 # remove oddly quoted characters
 gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
-write_lines(gmex_station_clean, here("data_raw", "gmex_temporary.csv"))
-gmex_station <- read_csv(here("data_raw","gmex_temporary.csv"), col_types = cols(.default = col_character())) %>% 
+gmex_station <- read_csv(gmex_station_clean, col_types = cols(.default = col_character())) %>% 
   select('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')
 
 problems <- problems(gmex_station) %>% 
@@ -1020,13 +1013,13 @@ gmex_spp <- rbind(gmex_spp, newspp) %>%
   rename(BIO_BGS = CODE)
 
 # merge tow information with catch data, but only for shrimp trawl tows (ST)
-gmex <- left_join(gmex_bio, gmex_tow, by = c("STATIONID", "CRUISE_NO", "P_STA_NO"))
-# add station location and related data
-gmex <- left_join(gmex, gmex_station, by = c("CRUISEID", "STATIONID", "CRUISE_NO", "P_STA_NO"))
-# add scientific name
-gmex <- left_join(gmex, gmex_spp, by = "BIO_BGS")
-# add cruise title
-gmex <- left_join(gmex, gmex_cruise, by = c("CRUISEID", "VESSEL"))
+gmex <- left_join(gmex_bio, gmex_tow, by = c("STATIONID", "CRUISE_NO", "P_STA_NO")) %>% 
+  # add station location and related data
+  left_join(gmex_station, by = c("CRUISEID", "STATIONID", "CRUISE_NO", "P_STA_NO")) %>% 
+  # add scientific name
+  left_join(gmex_spp, by = "BIO_BGS") %>% 
+  # add cruise title
+  left_join(gmex_cruise, by = c("CRUISEID", "VESSEL"))
 
 
 gmex <- gmex %>% 
@@ -1181,7 +1174,9 @@ neus_survdat <- survdat %>%
   # select specific columns
   select(CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX, SVVESSEL, YEAR, SEASON, LAT, LON, DEPTH, SURFTEMP, SURFSALIN, BOTTEMP, BOTSALIN, ABUNDANCE, BIOMASS) %>% 
   # remove duplicates
-  distinct() 
+  distinct() %>% 
+  mutate(SVVESSEL = as.character(SVVESSEL), 
+         SEASON = as.character(SEASON))
 
 # sum different sexes of same spp together
 neus_survdat <- neus_survdat %>% 
@@ -1192,12 +1187,10 @@ neus_survdat <- neus_survdat %>%
 # repeat for spp file 
 neus_spp <- spp %>%
   # remove some columns from spp data
-  select(-ITISSPP, -COMNAME, -AUTHOR)
-
-
+  select(-ITISSPP, -COMNAME, -AUTHOR) %>% 
+  mutate(SCINAME = as.character(SCINAME))
 
 files <- as.list(dir(pattern = "neus_strata", path = "data_raw", full.names = T))
-
 
 neus_strata <- files %>%
   map_dfr(read_csv) %>% 
@@ -1205,14 +1198,11 @@ neus_strata <- files %>%
   distinct() %>% 
   rename(STRATUM = StratumCode)
 
-neus <- left_join(neus_survdat, spp, by = "SVSPP")
-neus <- left_join(neus, neus_strata, by = "STRATUM")
-
+neus <- left_join(neus_survdat, neus_spp, by = "SVSPP") %>%
+  left_join(neus_strata, by = "STRATUM")
 
 # are there any strata in the data that are not in the strata file?
-test <- neus %>% 
-  filter(is.na(Areanmi2))
-stopifnot(nrow(test) == 0)
+stopifnot(nrow(filter(neus, is.na(Areanmi2))) == 0)
 
 neus <- neus %>%
   mutate(
@@ -1226,7 +1216,7 @@ neus <- neus %>%
          lat = LAT, 
          lon = LON, 
          depth = DEPTH,
-         stratum = STRATUM) %>% 
+         stratum = STRATUM) %>%
   filter(
     # remove unidentified spp and non-species
     spp != "" | !is.na(spp), 
@@ -1985,9 +1975,9 @@ rm (maxyrs, presyr, presyrsum, spplist)
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here("data_clean", "all-regions-trimmed.RData"))
+    save(trimmed_dat, file = here("data_clean", "all-regions-trimmed.RData"))
   }else{
-    write_csv(dat, here("data_clean", "all-regions-trimmed.csv"))
+    write_csv(trimmed_dat, here("data_clean", "all-regions-trimmed.csv"))
   }
 }
 
@@ -2068,9 +2058,9 @@ BY_SPECIES_DATA <- cent_bio %>%
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here("data_clean", "by_species.RData"))
+    save(BY_SPECIES_DATA, file = here("data_clean", "by_species.RData"))
   }else{
-    write_csv(dat, here("data_clean", "by_species.csv"))
+    write_csv(BY_SPECIES_DATA, here("data_clean", "by_species.csv"))
   }
 }
 
@@ -2085,9 +2075,9 @@ if (DAT_EXPLODED == TRUE){
   
   if(isTRUE(WRITE_DAT_EXPLODED)){
     if(isTRUE(PREFER_RDATA)){
-      save(dat, file = here("data_clean", "dat_exploded.Rdata"))
+      save(dat.exploded, file = here("data_clean", "dat_exploded.Rdata"))
     }else{
-      write_csv(dat, here("data_clean", "dat_exploded.csv"))
+      write_csv(dat.exploded, here("data_clean", "dat_exploded.csv"))
     }
   }
 
@@ -2179,9 +2169,9 @@ BY_REGION_DATA  <- regcentbio %>%
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here("data_clean", "by_region.RData"))
+    save(BY_REGION_DATA, file = here("data_clean", "by_region.RData"))
   }else{
-    write_csv(dat, here("data_clean", "by_region.csv"))
+    write_csv(BY_REGION_DATA, here("data_clean", "by_region.csv"))
   }
 }
 
@@ -2280,9 +2270,9 @@ BY_NATIONAL_DATA <- natcentbio
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here("data_clean", "by_national.RData"))
+    save(BY_NATIONAL_DATA, file = here("data_clean", "by_national.RData"))
   }else{
-    write_csv(dat, here("data_clean", "by_national.csv"))
+    write_csv(BY_NATIONAL_DATA, here("data_clean", "by_national.csv"))
   }
 }
 
@@ -2423,25 +2413,3 @@ if(isTRUE(PLOT_CHARTS)) {
   
 }
   
-#######################################
-# # Testing the milk plot ####
-# BY_NATIONAL_DATA %>%
-#   ggplot(aes(x = year, y = fct_rev(factor(lat)), group = lat)) + 
-#   ggridges::geom_density_ridges_gradient(show.legend = FALSE, 
-#                                          color = "white", scale = 1.5) + 
-#   scale_x_log10(labels = scales::comma) + 
-#   scale_y_discrete(expand = c(0,2)) + 
-#   scale_fill_viridis_d(option = "D",alpha = 0.9) + 
-#   hrbrthemes::theme_modern_rc() + 
-#   theme(
-#     text = element_text(size = 14, color = "white", family = "Helvetica"),
-#     axis.title  = element_text(color = "white", size = "14", face = "bold"),
-#     panel.grid.minor = element_blank(),
-#     panel.grid.major.x = element_blank(),
-#     panel.grid.major.y = element_line(color = "white", size =0.1),
-#     plot.background = element_rect(fill = "black"),
-#     panel.background = element_rect(fill = "black"),
-#     strip.background = element_rect(fill ="black", color = "black"),
-#     strip.text = element_text(color = "white", face = "bold")
-#   ) + 
-#   facet_wrap(~fct_rev(fct_reorder(region,x = milk_produced, .fun = sum)), ncol = 1, scales = "free_y")
