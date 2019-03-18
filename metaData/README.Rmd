@@ -94,3 +94,53 @@ generates tables that vary slightly from the orignal raw data.  All of these tab
 
 ## plots
 This folder holds plots used to check that the data is being processed as expected. 
+
+## metaData folder
+This folder contains many documents related to the collection and calculation of the data found on the OceanAdapt website.
+- [00-scripts]()  
+    
+    - [gen-cols-units]() - a helper script to define units for generating Ecological Metadata Language (EML) documents.  
+    - metaData.template.R
+- [ai]()  
+    
+    - adp_codebook_2011.pdf  
+    - AFSC_Aleutians_metadata.txt
+    - ai_345fd2.csv - a sample data set  
+    - metaData.ai.R - a script for generating an EML file for the ai data set.  
+    - metaData_AI.xml - an EML file for the ai data set.  
+    - Orr et al. 2014 species identification in GoA and AI surveys.pdf
+    - species_codebook_2011.pdf  
+    - Stauffer 2003 groundfish protocols.pdf
+    - von Szalay et al. 2011.pdf
+    - Wayne Palsson 2012-03-29 Meaning of STATION.pdf  
+- [ebs]()  
+    
+    - AFSC EBS strata map.jpg
+    - AFSC_EBS_metadata.txt  
+    - EBS Spp ID Confidence 2009-04.pdf  
+    - ebs_121213.csv - sample data  
+    - Kotwicki & Lauth in prep.pdf  
+    - Lauth 2010 NOAA-TM-AFSC-227.pdf  
+    - metaData.ebs.R - a script for generating an EML file for this data set  
+    - metaData_EBS.xml - an EML file for this dataset.  
+- [gmex]()  
+    
+    - filedef.doc  
+    - filestr.doc  
+    - gmex_25d0f9.csv - sample data  
+    - Grace et al. 2010 Marine Fish Review.pdf  
+    - metaData.gmex.R - a script for generating an EML file for this data set  
+    - metaData_gmex.xml - an EML doc for this dataset.  
+    - Rester 2012-06-28-SEAMAP data.pdf  
+    - SEAMAP-gmex_metadata.txt
+    - SEDAR7_DW1.pdf  
+    - SEDAR7_DW53.pdf  
+- [goa]()  
+- [neus]()  
+- [ocean_adapt_docs]()  
+- [scot]()  
+- [seus]()  
+- [taxonomy]()  
+- [wcann]()  
+- [wctri]()  
+

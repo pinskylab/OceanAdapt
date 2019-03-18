@@ -21,3 +21,5 @@ The data sources are as follows (see links):
 * scot
 * wcann
 * wctri
+
+### The Alaskan strata.csv files were hand typed based on appendix A-1 of the von Szalay et al. 2010 paper found in the docs folder of the metadata.
