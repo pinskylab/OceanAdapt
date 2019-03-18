@@ -136,8 +136,39 @@ This folder contains many documents related to the collection and calculation of
     - SEDAR7_DW1.pdf  
     - SEDAR7_DW53.pdf  
 - [goa]()  
+
+    - AFSC_GOA_metadata.txt  
+    - goa_2f7db6.csv - sample data
+    - metaData.goa.R - a script for writing an EML document
+    - metaData_GOA.xml - an EML document  
+    - von Szalay et al. 2010 NOAA-TM-AFSC-208.pdf - this document was used to define the stratum areas for goa, hand typed into the goa_strata.csv file.
 - [neus]()  
+
+    - flescher1980 common trawl-caught fish.pdf
+    - metaData.neus.R - a script for writing an EML file
+    - metaData_NEUS.xml - an EML file
+    - NEFSC trawl strata.pdf  
+    - NEFSC_metadata.txt  
+    - NEFSC_overview_www.gulfofmaine-census.org.html  
+    - NEUS_6f90fb.csv  
+    - neus_strata_map.gif  
+    - neusStrata.csv  
+    - SeanLucycode folder  
+          
+          - bigelow_fall_calibration.csv
+          - bigelow_spring_calibration.csv
+          - Survdat_calibrate.r
+          - survey.r
+    - Sosebee & Cardin 2006 inshore bottom trawl survey.pdf
+    - strata_shapefile folder - contains GIS layers  
+    - SVDBS Elements by Table and Column.docx
+    - SVDBSvariabledefinitions.pdf
+    - svspp.tsv  
+    - SWG 1988 evaluation of bottom trawl - NMFS.pdf
 - [ocean_adapt_docs]()  
+
+    - oa_upload_colNames.txt
+    - Ocean Adapt Report - 6-30-2016.docx
 - [scot]()  
 - [seus]()  
 - [taxonomy]()  
