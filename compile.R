@@ -1,3 +1,4 @@
+# If running from R instead of RStudio, please set the working directory to the folder containing this script before running this script.
 # This script is designed to run within the following directory structure:
 # Directory 1 contains:
 # 1. compile.R script - this script
