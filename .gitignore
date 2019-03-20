@@ -1,6 +1,5 @@
 .Rapp.history
 .DS_Store
-*.csv
 .Rhistory
 .Rproj.user/
 thermal.env_Aug 26.rdata
