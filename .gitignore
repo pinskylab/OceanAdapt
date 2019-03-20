@@ -1,9 +1,7 @@
 .Rapp.history
 .DS_Store
-*.csv
 .Rhistory
 .Rproj.user/
-OceanAdapt.Rproj
 thermal.env_Aug 26.rdata
 .Rproj.user
 Updating the Indicators 3.docx

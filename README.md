@@ -1,4 +1,18 @@
 # OceanAdapt
+
+### To run the compile script, please make sure your working directory is set to the folder containing the compile.R script.  Also, the packages within this script require that R is at least version 3.5.  
+
+### The package versions used in the compile.R script are:
+package | verison
+tidyverse | 1.2.1
+lubridate | 1.7.4
+PBSmapping | 2.70.5
+data.table | 1.12.0
+gridExtra | 2.3
+here | 0.1
+questionr | 0.6.3
+geosphere | 1.5-7
+
 Git repository to support documentation and development of [Ocean Adapt](http://oceanadapt.rutgers.edu)
 
 * [`compile.R`](https://github.com/mpinsky/OceanAdapt/blob/master/compile.R): 

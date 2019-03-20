@@ -1,3 +1,4 @@
+# If running from R instead of RStudio, please set the working directory to the folder containing this script before running this script.
 # This script is designed to run within the following directory structure:
 # Directory 1 contains:
 # 1. compile.R script - this script
@@ -164,7 +165,7 @@ explode0 <- function(x, by=c("region")){
 
 ## Special fix
 #there is a comment that contains a comma in the 2014-2016 file that causes the delimiters to read incorrectly.  Fix that here:
-temp <- read_lines("data_raw/ai2014_2016.csv")
+temp <- read_lines(here("data_raw", "ai2014_2016.csv"))
 # replace the string that causes the problem
 temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
 # read the result in as a csv
@@ -568,7 +569,7 @@ rm(files, goa_data, goa_strata)
 
 
 # Compile WCTRI ====
-wctri_catch <- read_csv("data_raw/wctri_catch.csv", col_types = cols(
+wctri_catch <- read_csv(here("data_raw", "wctri_catch.csv"), col_types = cols(
   CRUISEJOIN = col_integer(),
   HAULJOIN = col_integer(),
   CATCHJOIN = col_integer(),
@@ -585,7 +586,7 @@ wctri_catch <- read_csv("data_raw/wctri_catch.csv", col_types = cols(
 )) %>% 
   select('CRUISEJOIN', 'HAULJOIN', 'VESSEL', 'CRUISE', 'HAUL', 'SPECIES_CODE', 'WEIGHT')
 
-wctri_haul <- read_csv("data_raw/wctri_haul.csv", col_types = 
+wctri_haul <- read_csv(here("data_raw", "wctri_haul.csv"), col_types = 
                          cols(
                            CRUISEJOIN = col_integer(),
                            HAULJOIN = col_integer(),
@@ -620,7 +621,7 @@ wctri_haul <- read_csv("data_raw/wctri_haul.csv", col_types =
                          )) %>% 
   select('CRUISEJOIN', 'HAULJOIN', 'VESSEL', 'CRUISE', 'HAUL', 'HAUL_TYPE', 'PERFORMANCE', 'START_TIME', 'DURATION', 'DISTANCE_FISHED', 'NET_WIDTH', 'STRATUM', 'START_LATITUDE', 'END_LATITUDE', 'START_LONGITUDE', 'END_LONGITUDE', 'STATIONID', 'BOTTOM_DEPTH')
 
-wctri_species <- read_csv("data_raw/wctri_species.csv", col_types = cols(
+wctri_species <- read_csv(here("data_raw", "wctri_species.csv"), col_types = cols(
   SPECIES_CODE = col_integer(),
   SPECIES_NAME = col_character(),
   COMMON_NAME = col_character(),
@@ -733,7 +734,7 @@ if (HQ_DATA_ONLY == TRUE){
 rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 
 # Compile WCANN ====
-wcann_catch <- read_csv("data_raw/wcann_catch.csv", col_types = cols(
+wcann_catch <- read_csv(here("data_raw", "wcann_catch.csv"), col_types = cols(
   catch_id = col_integer(),
   common_name = col_character(),
   cpue_kg_per_ha_der = col_double(),
@@ -765,7 +766,7 @@ wcann_catch <- read_csv("data_raw/wcann_catch.csv", col_types = cols(
 )) %>% 
   select("trawl_id","year","longitude_dd","latitude_dd","depth_m","scientific_name","total_catch_wt_kg","cpue_kg_per_ha_der")
 
-wcann_haul <- read_csv("data_raw/wcann_haul.csv", col_types = cols(
+wcann_haul <- read_csv(here("data_raw", "wcann_haul.csv"), col_types = cols(
   area_swept_ha_der = col_double(),
   date_yyyymmdd = col_integer(),
   depth_hi_prec_m = col_double(),
@@ -870,7 +871,7 @@ if (HQ_DATA_ONLY == TRUE){
 rm(wcann_catch, wcann_haul, wcann_strats)
 
 # Compile GMEX ====
-gmex_station_raw <- read_lines("data_raw/gmex_STAREC.csv")
+gmex_station_raw <- read_lines(here("data_raw", "gmex_STAREC.csv"))
 # remove oddly quoted characters
 gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
 gmex_station <- read_csv(gmex_station_clean, col_types = cols(.default = col_character())) %>% 
@@ -902,7 +903,7 @@ gmex_station <- type_convert(gmex_station, col_types = cols(
 ))
 
 
-gmex_tow <-read_csv("data_raw/gmex_INVREC.csv", col_types = cols(
+gmex_tow <-read_csv(here("data_raw", "gmex_INVREC.csv"), col_types = cols(
   INVRECID = col_integer(),
   STATIONID = col_integer(),
   CRUISEID = col_integer(),
@@ -942,7 +943,7 @@ problems <- problems(gmex_tow) %>%
 stopifnot(nrow(problems) == 2)
 # 2 problems are that there are weird delimiters in the note column COMBIO, ignoring for now.
 
-gmex_spp <-read_csv("data_raw/gmex_NEWBIOCODESBIG.csv", col_types = cols(
+gmex_spp <-read_csv(here("data_raw","gmex_NEWBIOCODESBIG.csv"), col_types = cols(
   Key1 = col_integer(),
   TAXONOMIC = col_character(),
   CODE = col_integer(),
@@ -959,7 +960,7 @@ gmex_spp <-read_csv("data_raw/gmex_NEWBIOCODESBIG.csv", col_types = cols(
 problems <- problems(gmex_spp) %>% 
   filter(!is.na(col))
 stopifnot(nrow(problems) == 0)
-gmex_cruise <-read_csv("data_raw/gmex_CRUISES.csv", col_types = cols(.default = col_character())) %>% 
+gmex_cruise <-read_csv(here("data_raw", "gmex_CRUISES.csv"), col_types = cols(.default = col_character())) %>% 
   select(CRUISEID, VESSEL, TITLE)
 
 # problems should be 0 obs
@@ -968,7 +969,7 @@ problems <- problems(gmex_cruise) %>%
 stopifnot(nrow(problems) == 0)
 gmex_cruise <- type_convert(gmex_cruise, col_types = cols(CRUISEID = col_integer(), VESSEL = col_integer(), TITLE = col_character()))
 
-gmex_bio <-read_csv("data_raw/gmex_BGSREC.csv", col_types = cols(.default = col_character())) %>% 
+gmex_bio <-read_csv(here("data_raw", "gmex_BGSREC.csv"), col_types = cols(.default = col_character())) %>% 
   select('CRUISEID', 'STATIONID', 'VESSEL', 'CRUISE_NO', 'P_STA_NO', 'GENUS_BGS', 'SPEC_BGS', 'BGSCODE', 'BIO_BGS', 'SELECT_BGS') %>%
   # trim out young of year records (only useful for count data) and those with UNKNOWN species
   filter(BGSCODE != "T" | is.na(BGSCODE),
@@ -1358,7 +1359,7 @@ rm(neus_spp, neus_strata, neus_survdat, neus, survdat, spp,  files)
 
 # Compile SEUS ====
 # turns everything into a character so import as character anyway
-seus_catch <- read_csv("data_raw/seus_catch.csv", col_types = cols(.default = col_character())) %>% 
+seus_catch <- read_csv(here("data_raw", "seus_catch.csv"), col_types = cols(.default = col_character())) %>% 
   # remove symbols
   mutate_all(funs(str_replace(., "=", ""))) %>% 
   mutate_all(funs(str_replace(., '"', ''))) %>% 
@@ -1418,7 +1419,7 @@ seus_catch <- type_convert(seus_catch, col_types = cols(
   LASTUPDATED = col_character()
 ))
 
-seus_haul <- read_csv("data_raw/seus_haul.csv", col_types = cols(.default = col_character())) %>% 
+seus_haul <- read_csv(here("data_raw", "seus_haul.csv"), col_types = cols(.default = col_character())) %>% 
   distinct(EVENTNAME, DEPTHSTART)  %>% 
   # remove symbols
   mutate_all(funs(str_replace(., "=", ""))) %>% 
@@ -1437,7 +1438,7 @@ seus_haul <- type_convert(seus_haul, col_types = cols(
 
 
 # contains strata areas
-seus_strata <- read_csv("data_raw/seus_strata.csv", col_types = cols(
+seus_strata <- read_csv(here("data_raw", "seus_strata.csv"), col_types = cols(
   STRATA = col_integer(),
   STRATAHECTARE = col_double()
 ))
@@ -1892,7 +1893,7 @@ if (HQ_DATA_ONLY == TRUE){
 rm(files, scot)
 
 # Compile TAX ====
-tax <- read_csv("data_raw/spptaxonomy.csv", col_types = cols(
+tax <- read_csv(here("data_raw", "spptaxonomy.csv"), col_types = cols(
   taxon = col_character(),
   species = col_character(),
   genus = col_character(),
