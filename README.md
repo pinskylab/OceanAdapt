@@ -1,4 +1,7 @@
 # OceanAdapt
+
+### To run the compile script, please make sure your working directory is set to the folder containing the compile.R script.  Also, the packages within this script require that R is at least version 3.5.   
+
 Git repository to support documentation and development of [Ocean Adapt](http://oceanadapt.rutgers.edu)
 
 * [`compile.R`](https://github.com/mpinsky/OceanAdapt/blob/master/compile.R): 
