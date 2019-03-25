@@ -107,17 +107,17 @@ rm(common, common_fish, common_life, common1, dup_codes, dups, fish_genus, life_
 rm(x, get_common_script)
 
 # Check fish by species ------------------------------------------------
-fish_spp <- left_join(need_common, fish, by = "species") 
+# fish_spp <- left_join(need_common, fish, by = "species") 
+# 
+# fish_spp <- fish_spp %>%
+#   filter(substr(genus.x, 1, 6) == substr(genus.y, 1, 6)) 
+# # none of these have an FBname
 
-fish_spp <- fish_spp %>%
-  filter(substr(genus.x, 1, 6) == substr(genus.y, 1, 6)) 
-# none of these have an FBname
+# life_spp <- left_join(need_common, sealife, by = "species") 
+# 
+# life_spp <- life_spp %>%
+#   filter(substr(genus.x, 1, 6) == substr(genus.y, 1, 6)) 
 
-life_spp <- left_join(need_common, sealife, by = "species") 
-
-life_spp <- life_spp %>%
-  filter(substr(genus.x, 1, 6) == substr(genus.y, 1, 6)) 
-# none of these have an FBname
 
 # a lot of these are just genus names with no species.  Many don't have common names in fish base or sealife base.  
 
