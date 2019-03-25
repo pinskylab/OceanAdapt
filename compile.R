@@ -10,7 +10,7 @@
 # a note on species name adjustment #### 
 # At some point during certain surveys it was realized that what was believed to be one species was actually a different species or more than one species.  Species have been lumped together as a genus in those instances.
 
-# Answer the following questions using all caps TRUE or FALSE to direct the actions of the script ====
+# Answer the following questions using all caps TRUE or FALSE to direct the actions of the script =====================================
 
 # 1. Some strata and years have very little data, should they be removed? #DEFAULT: TRUE. 
 HQ_DATA_ONLY <- TRUE
@@ -45,7 +45,8 @@ WRITE_DAT_EXPLODED <- FALSE
 # 9. Output the BY_SPECIES, BY_REGION, and BY_NATIONAL tables. #DEFAULT:FALSE
 WRITE_BY_TABLES <- FALSE
 
-## Workspace setup ====
+## Workspace setup ==================================================
+
 # This script works best when the repository is downloaded from github, 
 # especially when that repository is loaded as a project into RStudio.
 
@@ -60,7 +61,8 @@ library(here) # for relative file paths
 library(questionr) # for the wgtmean function
 library(geosphere) # for calculating trawl distance for SEUS 
 
-# Functions ====
+# Functions ===========================================================
+
 # function to calculate convex hull area in km2
 #developed from http://www.nceas.ucsb.edu/files/scicomp/GISSeminar/UseCases/CalculateConvexHull/CalculateConvexHullR.html
 calcarea <- function(lon,lat){
@@ -161,11 +163,11 @@ explode0 <- function(x, by=c("region")){
   out
 }
   
-# Compile AI ====
+# Compile AI =====================================================
 
 ## Special fix
 #there is a comment that contains a comma in the 2014-2016 file that causes the delimiters to read incorrectly.  Fix that here:
-temp <- read_lines(here("data_raw", "ai2014_2016.csv"))
+temp <- read_lines(here("data_raw", "ai2014_2018.csv"))
 # replace the string that causes the problem
 temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
 # read the result in as a csv
@@ -281,7 +283,7 @@ if (HQ_DATA_ONLY == TRUE){
   nrow(ai) - nrow(test2)
   # percent that will be lost
   print((nrow(ai) - nrow(test2))/nrow(ai))
-  # 5% of rows are removed
+  # 0% of rows are removed
   ai <- ai %>% 
     filter(stratum %in% test$stratum)
   
@@ -304,7 +306,7 @@ if (HQ_DATA_ONLY == TRUE){
   rm(test, test2, p1, p2, p3, p4)
 }
 # clean up
-rm(ai_data, ai_strata, files, temp_fixed)
+rm(ai_data, ai_strata, files, temp_fixed, temp_csv)
 
 # Compile EBS ====
 files <- as.list(dir(pattern = "ebs", path = "data_raw", full.names = T))
@@ -734,7 +736,7 @@ if (HQ_DATA_ONLY == TRUE){
 rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 
 # Compile WCANN ====
-wcann_catch <- read_csv(here("data_raw", "wcann_catch.csv"), col_types = cols(
+wcann_catch <- read_csv(unz(here("data_raw", "wcann_catch.csv.zip"), "wcann_catch.csv"), col_types = cols(
   catch_id = col_integer(),
   common_name = col_character(),
   cpue_kg_per_ha_der = col_double(),
@@ -969,7 +971,7 @@ problems <- problems(gmex_cruise) %>%
 stopifnot(nrow(problems) == 0)
 gmex_cruise <- type_convert(gmex_cruise, col_types = cols(CRUISEID = col_integer(), VESSEL = col_integer(), TITLE = col_character()))
 
-gmex_bio <-read_csv(here("data_raw", "gmex_BGSREC.csv"), col_types = cols(.default = col_character())) %>% 
+gmex_bio <-read_csv(unz(here("data_raw", "gmex_BGSREC.csv.zip"), "gmex_BGSREC.csv"), col_types = cols(.default = col_character())) %>% 
   select('CRUISEID', 'STATIONID', 'VESSEL', 'CRUISE_NO', 'P_STA_NO', 'GENUS_BGS', 'SPEC_BGS', 'BGSCODE', 'BIO_BGS', 'SELECT_BGS') %>%
   # trim out young of year records (only useful for count data) and those with UNKNOWN species
   filter(BGSCODE != "T" | is.na(BGSCODE),
@@ -1359,13 +1361,14 @@ rm(neus_spp, neus_strata, neus_survdat, neus, survdat, spp,  files)
 
 # Compile SEUS ====
 # turns everything into a character so import as character anyway
-seus_catch <- read_csv(here("data_raw", "seus_catch.csv"), col_types = cols(.default = col_character())) %>% 
+seus_catch <- read_csv(unz(here("data_raw", "seus_catch.csv.zip"), "seus_catch.csv"), col_types = cols(.default = col_character())) %>% 
   # remove symbols
   mutate_all(funs(str_replace(., "=", ""))) %>% 
   mutate_all(funs(str_replace(., '"', ''))) %>% 
   mutate_all(funs(str_replace(., '"', '')))
 
 # The 9 parsing failures are due to the metadata at the end of the file that does not fit into the data columns
+
 # problems should have 0 obs
 problems <- problems(seus_catch) %>% 
   filter(!is.na(col))
@@ -1641,7 +1644,7 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, nrow = 2)
     ggsave(plot = temp, filename = here("plots", "seusSUM_hq_dat_removed.pdf"))
     rm(temp)
   }
@@ -1732,7 +1735,7 @@ scot <- scot %>%
   ungroup()
 
 
-# Does the spp column contain any eggs or non-organism notes? As of 2018, nothing stuck out as needing to be removed
+# Does the spp column contain any eggs or non-organism notes? As of 2019, nothing stuck out as needing to be removed
 test <- scot %>%
   select(spp) %>%
   filter(!is.na(spp)) %>%
@@ -1986,7 +1989,7 @@ if(isTRUE(WRITE_TRIMMED_DAT)){
 test <- anti_join(select(trimmed_dat, spp, common), tax, by = "spp") %>% 
   distinct()
 
-# if test contains more than 0 obs, use the taxonomy.R script to add new taxa to the spptaxonomy.csv and go back to "Compile Tax".
+# if test contains more than 0 obs, use the add-spp-to-taxonomy.R script to add new taxa to the spptaxonomy.csv and go back to "Compile Tax".
 rm(test)
 
 # BY_SPECIES_DATA ####
