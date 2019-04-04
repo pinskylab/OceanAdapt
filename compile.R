@@ -1710,7 +1710,10 @@ if (HQ_DATA_ONLY == TRUE){
 
 rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, problems, change, seus)
 
-# Compile Scotian Shelf ====
+
+# Compile Scotian Shelf ---------------------------------------------------
+scot_summer <- read_csv(unz(here("data_raw", "scot_summer.csv.zip"), "scot_summer.csv")) 
+
 files <- as.list(dir(pattern = "scot", path = "data_raw", full.names = T))
 
 scot <- files %>% 
