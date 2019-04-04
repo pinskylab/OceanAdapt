@@ -208,7 +208,9 @@ catch <- list.files(path = "~/Downloads", pattern = "ABUNDANCE", full = T)
   
   # This doesn't exist (2017 doesn't exist either)
   # summer2018 <- get_DFO_REST(service = "ADAPT_Canada_Atlantic_Summer_2018", save_csv = TRUE)
-  file.rename("data_raw/ADAPT_Canada_Atlantic_Fall_2018.csv", "data_raw/scot_fall.csv")
-  file.rename("data_raw/ADAPT_Canada_Atlantic_Summer_2018.csv", "data_raw/scot_summer.csv")
-  file.rename("data_raw/ADAPT_Canada_Atlantic_Spring_2018.csv", "data_raw/scot_spring.csv")
+  
+# as of 2019 (the 2018 download) the script saves the file in the OceanAdapt directory so they need to renamed and moved  
+  file.rename("ADAPT_Canada_Atlantic_Fall_2018.csv", "data_raw/scot_fall.csv")
+  file.rename("ADAPT_Canada_Atlantic_Summer_2018.csv", "data_raw/scot_summer.csv")
+  file.rename("ADAPT_Canada_Atlantic_Spring_2018.csv", "data_raw/scot_spring.csv")
   
