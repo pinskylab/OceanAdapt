@@ -1791,7 +1791,6 @@ if (HQ_DATA_ONLY == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
     ggsave(plot = temp, filename = here("plots", "scot_sumr-hq_dat_removed.pdf"))
   }
-  # there is a very faint blip of white in 1984 which is fewer species in a trawl, not a missing trawl.
 }  
 
 # Scotian Fall ####
@@ -1812,7 +1811,8 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  test <- scot_fall %>% 
+  # find strata sampled every year 
+  annual_strata <- scot_fall %>% 
     filter(year != 1986, year != 1978) %>% 
     select(stratum, year) %>% 
     distinct() %>% 
@@ -1821,17 +1821,17 @@ if (HQ_DATA_ONLY == TRUE){
     filter(count >= 6)
   
   # how many rows will be lost if only stratum trawled ever year are kept?
-  test2 <- scot_fall %>% 
+  test <- scot_fall %>% 
     filter(year != 1986, year != 1978) %>% 
-    filter(stratum %in% test$stratum)
-  nrow(scot_fall) - nrow(test2)
+    filter(stratum %in% annual_strata$stratum)
+  nrow(scot_fall) - nrow(test)
   # percent that will be lost
-  print((nrow(scot_fall) - nrow(test2))/nrow(scot_fall))
-  # 9% are removed
+  print((nrow(scot_fall) - nrow(test))/nrow(scot_fall))
+  # 19% are removed
   
   scot_fall <- scot_fall  %>%
     filter(year != 1986, year != 1978) %>% 
-    filter(stratum %in% test$stratum) 
+    filter(stratum %in% annual_strata$stratum) 
   
   p3 <- scot_fall %>% 
     select(stratum, year) %>% 
@@ -1883,7 +1883,7 @@ if (HQ_DATA_ONLY == TRUE){
   nrow(scot_spr) - nrow(test2)
   # percent that will be lost
   print((nrow(scot_spr) - nrow(test2))/nrow(scot_spr))
-  # 51% are removed
+  # 58% are removed
   
   scot_spr <- scot_spr  %>%
     filter(year <= 1984) %>% 
@@ -1908,7 +1908,7 @@ if (HQ_DATA_ONLY == TRUE){
   rm(p1, p2, p3, p4, test, test2)
 }  
 
-rm(files, scot)
+rm(files, scot, annual_strata, temp, scot_summer)
 
 # Compile TAX ====
 tax <- read_csv(here("data_raw", "spptaxonomy.csv"), col_types = cols(

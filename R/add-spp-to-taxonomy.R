@@ -23,7 +23,8 @@ common_fish <- left_join(need_common, fish, by = c("genus", "species")) %>%
          phylum = NA, 
          kingdom = NA, 
          name = ifelse(!is.na(species), paste(genus, species, sep = " "), genus)) %>% 
-  select(taxon, species, genus, family, order, class, superclass, subphylum, phylum, kingdom, name, common)
+  select(taxon, species, genus, family, order, class, superclass, subphylum, phylum, kingdom, name, common) %>% 
+  distinct()
 
 # add to spptaxonomy.csv
 write_csv(common_fish, here("data_raw", "spptaxonomy.csv"), append = TRUE)
