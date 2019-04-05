@@ -1717,19 +1717,29 @@ scot_summer <- read_csv(unz(here("data_raw", "scot_summer.csv.zip"), "scot_summe
 files <- as.list(dir(pattern = "scot", path = "data_raw", full.names = T))
 
 scot <- files %>% 
-  map_dfr(read_csv)
+  map_dfr(~ read_csv(.x, col_types = cols(
+    .default = col_double(),
+    MISSION = col_character(),
+    SEASON = col_character(),
+    SURVEYDATE = col_character(),
+    GEAR = col_character(),
+    SCIENTIFICNAME = col_character(),
+    TAXONOMICNAMEAUTHOR = col_character()
+  ))) %>% 
+  rbind(scot_summer) 
+
+names(scot) <- tolower(names(scot))
 
 scot <- scot %>% 
   # convert mission to haul_id
-  rename(haulid = Mission, 
-         wtcpue = TotalWeightStandardized_KG, 
-         stratum = Stratum, 
-         year = SurveyYear, 
-         season = Season, 
-         lat = Latitude_DD, 
-         lon = Longitude_DD, 
-         depth = MaximumDepth_Fathoms, 
-         spp = ScientificName) 
+  rename(haulid = mission, 
+         wtcpue = totalweightstandardized_kg, 
+         year = surveyyear, 
+         season = season, 
+         lat = latitude_dd, 
+         lon = longitude_dd, 
+         depth = maximumdepth_fathoms, 
+         spp = scientificname) 
 
 # calculate stratum area for each stratum
 scot <- scot %>% 
@@ -1745,6 +1755,8 @@ test <- scot %>%
   distinct() %>%
   mutate(spp = as.factor(spp)) %>% 
   filter(grepl("egg", spp) & grepl("", spp))
+stopifnot(nrow(test)==0)
+
 
 # combine the wtcpue for each species by haul
 scot <- scot %>% 
