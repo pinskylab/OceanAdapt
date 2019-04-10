@@ -2301,134 +2301,172 @@ rm(centbio2, centbio3, maxyrs, natcentbio, natcentbiose, presyr, presyrsum, regc
 if(isTRUE(PLOT_CHARTS)) {
   
   # Plot Species #####
-  centbio <- BY_SPECIES_DATA
+
+  spp_lat_depth <- BY_SPECIES_DATA %>%
+    mutate(year = as.numeric(year),
+           mindpeth = depth - depth_se,
+           maxdepth = depth + depth_se,
+           minlat = lat - lat_se,
+           maxlat = lat + lat_se, 
+           minlat = ifelse(is.na(minlat), lat, minlat), 
+           maxlat = ifelse(is.na(maxlat), lat, maxlat), 
+           mindepth = ifelse(is.na(mindpeth), depth, mindpeth),
+           maxdepth = ifelse(is.na(maxdepth), depth, maxdepth))
   
-  # for latitude
-  #quartz(width = 10, height = 8)
-  print("Starting latitude plots for species")
-  pdf(file = here("plots", "sppcentlatstrat.pdf"), width=10, height=8)
   
-  regs = sort(unique(centbio$region))
-  for(i in 1:length(regs)){
-    print(i)
-    par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
-    spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
+  spp_lat_plot <- spp_lat_depth %>% 
+    group_by(region) %>% 
+    ggplot(aes(x=year, y=lat, ymin=minlat, ymax=maxlat)) + 
+    geom_line(color = "#D95F02") + 
+    geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
+    theme_bw ()+
+    theme(
+      panel.border = element_rect(),
+      plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.title = element_text(size = "12", hjust = 0.5)
+    ) +
+    xlab("Year") + 
+    ylab("Latitude (N°)") +
+    ggtitle("Latitude by Species") +
+    facet_grid(vars(region, spp)) +
+    scale_x_continuous(limit=c(1970,2020)
+                       ,breaks=seq(1970,2020,15)
+    ) 
+  
+  ggsave(spp_lat_plot, filename =  here("plots", "species-lat.png"))
     
-    xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
-    
-    for(j in 1:length(spps)){
-      inds = centbio$spp == spps[j] & centbio$region == regs[i]
-      minlat = centbio$lat[inds] - centbio$lat_se[inds]
-      maxlat = centbio$lat[inds] + centbio$lat_se[inds]
-      minlat[is.na(minlat) | is.infinite(minlat)] = centbio$lat[inds][is.na(minlat) | is.infinite(minlat)] # fill in missing values so that polygon draws correctly
-      maxlat[is.na(maxlat) | is.infinite(maxlat)] = centbio$lat[inds][is.na(maxlat) | is.infinite(maxlat)]
-      ylims = c(min(minlat, na.rm=TRUE), max(maxlat, na.rm=TRUE))
-      
-      plot(0,0, type='l', ylab='Latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
-      polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
-      lines(centbio$year[inds], centbio$lat[inds], col='#D95F02', lwd=2)
-      
-      if((j-1) %% 6 == 0) mtext(text='Latitude (°N)', side=2, line=2.3, cex=0.6)
-      if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
-    }
-  }
   
-  dev.off()
+  spp_depth_plot <- ggplot(data = reg_lat_depth, aes(x=year, y=depth, ymin=mindepth, ymax=maxdepth)) + 
+    geom_line(color = "#D95F02") + 
+    geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
+    theme_bw ()+
+    theme(
+      panel.border = element_rect(),
+      plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.title = element_text(size = "12", hjust = 0.5)
+    ) +
+    xlab("Year") + 
+    ylab("Depth (m)") +
+    ggtitle("Depth by Species") +
+    facet_grid(vars(region, spp)) +
+    scale_x_continuous(limit=c(1970,2020),breaks=seq(1970,2020,15))
   
-  # for depth
-  print("Starting depth plots for species")
-  pdf(file = here("plots", "sppcentdepthstrat.pdf"), width=10, height=8)
+  ggsave(reg_depth_plot, filename =  here("plots", "species-depth.png"), width = 11, height = 11)
   
-  regs = sort(unique(centbio$region))
-  for(i in 1:length(regs)){
-    print(i)
-    par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
-    spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
-    
-    xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
-    
-    for(j in 1:length(spps)){
-      inds = centbio$spp == spps[j] & centbio$region == regs[i]
-      mindep = centbio$depth[inds] - centbio$depth_se[inds]
-      maxdep = centbio$depth[inds] + centbio$depth_se[inds]
-      mindep[is.na(mindep) | is.infinite(mindep)] = centbio$depth[inds][is.na(mindep) | is.infinite(mindep)] # fill in missing values so that polygon draws correctly
-      maxdep[is.na(maxdep) | is.infinite(maxdep)] = centbio$depth[inds][is.na(maxdep) | is.infinite(maxdep)]
-      ylims = c(min(mindep, na.rm=TRUE), max(maxdep, na.rm=TRUE))
-      
-      plot(0,0, type='l', ylab='Depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
-      polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
-      lines(centbio$year[inds], centbio$depth[inds], col='#D95F02', lwd=2)
-      
-      if((j-1) %% 6 == 0) mtext(text='Depth (m)', side=2, line=2.3, cex=0.6)
-      if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
-    }
-  }
-  
-  dev.off()
   
   
   # Plot Regional ####
-  regcentbio <- BY_REGION_DATA
-  #quartz(width=6, height=6)
-  pdf(file = here("plots", "regcentlat_depth_strat.pdf"), width=6, height=6)
-  par(mfrow=c(3,3)) # page 1: latitude
+
+  reg_lat_depth <- BY_REGION_DATA %>%
+    ungroup() %>%
+    mutate(year = as.numeric(year),
+           mindpeth = depth - depth_se,
+           maxdepth = depth + depth_se,
+           minlat = lat - lat_se,
+           maxlat = lat + lat_se, 
+           minlat = ifelse(is.na(minlat), lat, minlat), 
+           maxlat = ifelse(is.na(maxlat), lat, maxlat), 
+           mindepth = ifelse(is.na(mindpeth), depth, mindpeth),
+           maxdepth = ifelse(is.na(maxdepth), depth, maxdepth))
   
-  regs = sort(unique(regcentbio$region))
-  for(i in 1:length(regs)){
-    inds = regcentbio$region == regs[i]
-    minlat = regcentbio$lat[inds] - regcentbio$lat_se[inds]
-    maxlat = regcentbio$lat[inds] + regcentbio$lat_se[inds]
-    xlims = range(as.numeric(regcentbio$year[regcentbio$region == regs[i]]))
-    ylims = c(min(minlat, na.rm=TRUE), max(maxlat, na.rm=TRUE))
-    
-    plot(0,0, type='l', ylab='Latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main=regs[i], las=1)
-    polygon(c(regcentbio$year[inds], rev(regcentbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
-    lines(regcentbio$year[inds], regcentbio$lat[inds], col='#D95F02', lwd=2)
-  }
+  
+  reg_lat_plot <- ggplot(data = reg_lat_depth, aes(x=year, y=lat, ymin=minlat, ymax=maxlat)) + 
+    geom_line(color = "#D95F02") + 
+    geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
+    theme_bw ()+
+    theme(
+      panel.border = element_rect(),
+      plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.title = element_text(size = "12", hjust = 0.5, )
+    ) +
+    xlab("Year") + 
+    ylab("Offset in latitude (°)") +
+    ggtitle("Regional Latitude Offset") +
+    facet_wrap(vars(region)) +
+    scale_x_continuous(limit=c(1970,2020)
+                       ,breaks=seq(1970,2020,15)
+    )
+  ggsave(reg_lat_plot, filename =  here("plots", "regional-lat.png"), width = 8.5, height = 11)
+  
+  reg_depth_plot <- ggplot(data = reg_lat_depth, aes(x=year, y=depth, ymin=mindepth, ymax=maxdepth)) + 
+    geom_line(color = "#D95F02") + 
+    geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
+    theme_bw ()+
+    theme(
+      panel.border = element_rect(),
+      plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.title = element_text(size = "12", hjust = 0.5)
+    ) +
+    xlab("Year") + 
+    ylab("Offset in depth (m)") +
+    ggtitle("Regional Depth Offset") +
+    facet_wrap(vars(region)) +
+    scale_x_continuous(limit=c(1970,2020)
+                       ,breaks=seq(1970,2020,15)
+    )
+  ggsave(reg_depth_plot, filename =  here("plots", "regional-depth.png"), width = 8.5, height = 11)
 
   
-  par(mfrow=c(3,3)) # page 2: depth
-  regs = sort(unique(regcentbio$region))
-  for(i in 1:length(regs)){
-    inds = regcentbio$region == regs[i]
-    mindep = regcentbio$depth[inds] - regcentbio$depth_se[inds]
-    maxdep = regcentbio$depth[inds] + regcentbio$depth_se[inds]
-    xlims = range(as.numeric(regcentbio$year[regcentbio$region == regs[i]]))
-    ylims = c(min(mindep, na.rm=TRUE), max(maxdep, na.rm=TRUE))
-    
-    plot(0,0, type='l', ylab='Depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main=regs[i], las=1)
-    polygon(c(regcentbio$year[inds], rev(regcentbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
-    lines(regcentbio$year[inds], regcentbio$depth[inds], col='#D95F02', lwd=2)
-  }
-  
-  
-  dev.off()
-  
-  
   # Plot National ####
-  #quartz(width=6, height=3.5)
-  pdf(file = here("plots", "natcentlatstrat.pdf"), width=6, height=3.5)
-  par(mfrow=c(1,2), mai=c(0.8, 0.8, 0.3, 0.2), mgp=c(2.4,0.7,0))
   
-  natcentbio <- BY_NATIONAL_DATA
+  nat_lat_depth <- BY_NATIONAL_DATA %>%
+    ungroup() %>%
+    mutate(year = as.numeric(year),
+           mindpeth = depth - depth_se,
+           maxdepth = depth + depth_se,
+           minlat = lat - lat_se,
+           maxlat = lat + lat_se, 
+           minlat = ifelse(is.na(minlat), lat, minlat), 
+           maxlat = ifelse(is.na(maxlat), lat, maxlat), 
+           mindepth = ifelse(is.na(mindpeth), depth, mindpeth),
+           maxdepth = ifelse(is.na(maxdepth), depth, maxdepth))
   
-  minlat = natcentbio$lat - natcentbio$lat_se
-  maxlat = natcentbio$lat + natcentbio$lat_se
-  mindepth = natcentbio$depth - natcentbio$depth_se
-  maxdepth = natcentbio$depth + natcentbio$depth_se
-  ylims = c(min(minlat), max(maxlat))
-  xlims = range(as.numeric(natcentbio$year))
-  plot(0,0, type='l', ylab='Offset in latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main='Latitude', cex.lab = 1.5, cex.axis=1.2)
-  polygon(c(natcentbio$year, rev(natcentbio$year)), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
-  lines(natcentbio$year, natcentbio$lat, col='#D95F02', lwd=2)
   
-  ylims = rev(c(min(mindepth), max(maxdepth)))
-  xlims = range(as.numeric(natcentbio$year))
-  plot(0,0, type='l', ylab='Offset in depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main='Depth', cex.lab = 1.5, cex.axis=1.2)
-  polygon(c(natcentbio$year, rev(natcentbio$year)), c(maxdepth, rev(mindepth)), col='#CBD5E8', border=NA)
-  lines(natcentbio$year, natcentbio$depth, col='#D95F02', lwd=2)
-  
-  dev.off()
-  
+  nat_lat_plot <- ggplot(data = nat_lat_depth, aes(x=year, y=lat, ymin=minlat, ymax=maxlat)) + 
+    geom_line(color = "#D95F02") + 
+    geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
+    theme_bw ()+
+    theme(
+      panel.border = element_rect(),
+      plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.title = element_text(size = "12", hjust = 0.5, )
+    ) +
+    xlab("Year") + 
+    ylab("Offset in latitude (°)") +
+    ggtitle("National Latitude Offset") +
+    scale_x_continuous(limit=c(1980,2020)
+                       ,breaks=seq(1980,2020,15)
+    )
+  ggsave(nat_lat_plot, filename =  here("plots", "national-lat.png"), width = 6, height = 3.5)
+
+  nat_depth_plot <- ggplot(data = nat_lat_depth, aes(x=year, y=depth, ymin=mindepth, ymax=maxdepth)) + 
+    geom_line(color = "#D95F02") + 
+    geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
+    theme_bw ()+
+    theme(
+      panel.border = element_rect(),
+      plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.title = element_text(size = "12", hjust = 0.5)
+    ) +
+    xlab("Year") + 
+    ylab("Offset in depth (m)") +
+    ggtitle("National Depth Offset") +
+    scale_x_continuous(limit=c(1980,2020)
+                       ,breaks=seq(1980,2020,15)
+    )
+  ggsave(nat_depth_plot, filename =  here("plots", "national-depth.png"), width = 6, height = 3.5)
+
 }
   
