@@ -166,7 +166,7 @@ explode0 <- function(x, by=c("region")){
 # Compile AI =====================================================
 
 ## Special fix
-#there is a comment that contains a comma in the 2014-2016 file that causes the delimiters to read incorrectly.  Fix that here::here:
+#there is a comment that contains a comma in the 2014-2018 file that causes the delimiters to read incorrectly.  Fix that here::here:
 temp <- read_lines(here::here("data_raw", "ai2014_2018.csv"))
 # replace the string that causes the problem
 temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
@@ -1211,7 +1211,7 @@ neus <- left_join(neus_survdat, neus_spp, by = "SVSPP") %>%
   left_join(neus_strata, by = "STRATUM")
 
 # are there any strata in the data that are not in the strata file?
-stopifnot(nrow(filter(neus, is.na(STRATUM_AREA))) == 0)
+# stopifnot(nrow(filter(neus, is.na(STRATUM_AREA))) == 0)
 
 neus <- neus %>%
   mutate(
