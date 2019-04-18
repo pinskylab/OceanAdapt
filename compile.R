@@ -57,9 +57,9 @@ library(lubridate) # for date manipulation
 library(PBSmapping) # for calculating stratum areas 
 library(data.table) # for dat.exploded
 library(gridExtra) #grid.arrange plots of HQ data
-library(here) # for relative file paths
 library(questionr) # for the wgtmean function
 library(geosphere) # for calculating trawl distance for SEUS 
+library(here) # for relative file paths
 
 # Functions ===========================================================
 
@@ -166,8 +166,8 @@ explode0 <- function(x, by=c("region")){
 # Compile AI =====================================================
 
 ## Special fix
-#there is a comment that contains a comma in the 2014-2016 file that causes the delimiters to read incorrectly.  Fix that here:
-temp <- read_lines(here("data_raw", "ai2014_2018.csv"))
+#there is a comment that contains a comma in the 2014-2016 file that causes the delimiters to read incorrectly.  Fix that here::here:
+temp <- read_lines(here::here("data_raw", "ai2014_2018.csv"))
 # replace the string that causes the problem
 temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
 # read the result in as a csv
@@ -191,7 +191,7 @@ ai_data <- files %>%
 
 # The warning of 13 parsing failures is pointing to a row in the middle of the data set that contains headers instead of the numbers expected, this row is removed by the filter above.
 
-ai_strata <- read_csv(here("data_raw", "ai_strata.csv"), col_types = cols(NPFMCArea = col_character(),
+ai_strata <- read_csv(here::here("data_raw", "ai_strata.csv"), col_types = cols(NPFMCArea = col_character(),
       SubareaDescription = col_character(),
       StratumCode = col_integer(),
       DepthIntervalm = col_character(),
@@ -300,7 +300,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
   temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "ai_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "ai_hq_dat_removed.pdf"))
     rm(temp)
   }
   rm(test, test2, p1, p2, p3, p4)
@@ -323,7 +323,7 @@ ebs_data <- files %>%
   mutate(stratum = as.integer(STRATUM))
 
 # import the strata data
-ebs_strata <- read_csv(here("data_raw", "ebs_strata.csv"), col_types = cols(
+ebs_strata <- read_csv(here::here("data_raw", "ebs_strata.csv"), col_types = cols(
   SubareaDescription = col_character(),
   StratumCode = col_integer(),
   Areakm2 = col_integer()
@@ -427,7 +427,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "ebs_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "ebs_hq_dat_removed.pdf"))
     rm(temp)
   }
   rm(test, test2, p1, p2, p3, p4)
@@ -561,7 +561,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "goa_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "goa_hq_dat_removed.pdf"))
 
     rm(temp)
   }
@@ -571,7 +571,7 @@ rm(files, goa_data, goa_strata)
 
 
 # Compile WCTRI ====
-wctri_catch <- read_csv(here("data_raw", "wctri_catch.csv"), col_types = cols(
+wctri_catch <- read_csv(here::here("data_raw", "wctri_catch.csv"), col_types = cols(
   CRUISEJOIN = col_integer(),
   HAULJOIN = col_integer(),
   CATCHJOIN = col_integer(),
@@ -588,7 +588,7 @@ wctri_catch <- read_csv(here("data_raw", "wctri_catch.csv"), col_types = cols(
 )) %>% 
   select('CRUISEJOIN', 'HAULJOIN', 'VESSEL', 'CRUISE', 'HAUL', 'SPECIES_CODE', 'WEIGHT')
 
-wctri_haul <- read_csv(here("data_raw", "wctri_haul.csv"), col_types = 
+wctri_haul <- read_csv(here::here("data_raw", "wctri_haul.csv"), col_types = 
                          cols(
                            CRUISEJOIN = col_integer(),
                            HAULJOIN = col_integer(),
@@ -623,7 +623,7 @@ wctri_haul <- read_csv(here("data_raw", "wctri_haul.csv"), col_types =
                          )) %>% 
   select('CRUISEJOIN', 'HAULJOIN', 'VESSEL', 'CRUISE', 'HAUL', 'HAUL_TYPE', 'PERFORMANCE', 'START_TIME', 'DURATION', 'DISTANCE_FISHED', 'NET_WIDTH', 'STRATUM', 'START_LATITUDE', 'END_LATITUDE', 'START_LONGITUDE', 'END_LONGITUDE', 'STATIONID', 'BOTTOM_DEPTH')
 
-wctri_species <- read_csv(here("data_raw", "wctri_species.csv"), col_types = cols(
+wctri_species <- read_csv(here::here("data_raw", "wctri_species.csv"), col_types = cols(
   SPECIES_CODE = col_integer(),
   SPECIES_NAME = col_character(),
   COMMON_NAME = col_character(),
@@ -727,7 +727,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "wctri_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "wctri_hq_dat_removed.pdf"))
     rm(temp)
   }
   rm(test, test2, p1, p2, p3, p4)
@@ -736,7 +736,7 @@ if (HQ_DATA_ONLY == TRUE){
 rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 
 # Compile WCANN ====
-wcann_catch <- read_csv(unz(here("data_raw", "wcann_catch.csv.zip"), "wcann_catch.csv"), col_types = cols(
+wcann_catch <- read_csv(unz(here::here("data_raw", "wcann_catch.csv.zip"), "wcann_catch.csv"), col_types = cols(
   catch_id = col_integer(),
   common_name = col_character(),
   cpue_kg_per_ha_der = col_double(),
@@ -766,9 +766,9 @@ wcann_catch <- read_csv(unz(here("data_raw", "wcann_catch.csv.zip"), "wcann_catc
   year = col_integer(),
   year_stn_invalid = col_integer()
 )) %>% 
-  select("trawl_id","year","longitude_dd","latitude_dd","depth_m","scientific_name","total_catch_wt_kg","cpue_kg_per_ha_der")
+  select("trawl_id","year","longitude_dd","latitude_dd","depth_m","scientific_name","total_catch_wt_kg","cpue_kg_per_ha_der", "partition")
 
-wcann_haul <- read_csv(here("data_raw", "wcann_haul.csv"), col_types = cols(
+wcann_haul <- read_csv(here::here("data_raw", "wcann_haul.csv"), col_types = cols(
   area_swept_ha_der = col_double(),
   date_yyyymmdd = col_integer(),
   depth_hi_prec_m = col_double(),
@@ -824,10 +824,7 @@ wcann <- wcann %>%
          depth = depth_m, 
          spp = scientific_name) %>% 
   # remove non-fish
-  filter(
-    spp != '' & 
-      !grepl("egg", spp)
-  ) %>% 
+  filter(!grepl("Egg", partition)) %>% 
   # adjust spp names
   mutate(
     spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
@@ -863,7 +860,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
-      ggsave(plot = temp, filename = here("plots", "wcann_hq_dat_removed.pdf"))
+      ggsave(plot = temp, filename = here::here("plots", "wcann_hq_dat_removed.pdf"))
       rm(temp)
   }
   rm(p1, p2)
@@ -873,7 +870,7 @@ if (HQ_DATA_ONLY == TRUE){
 rm(wcann_catch, wcann_haul, wcann_strats)
 
 # Compile GMEX ====
-gmex_station_raw <- read_lines(here("data_raw", "gmex_STAREC.csv"))
+gmex_station_raw <- read_lines(here::here("data_raw", "gmex_STAREC.csv"))
 # remove oddly quoted characters
 gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
 gmex_station <- read_csv(gmex_station_clean, col_types = cols(.default = col_character())) %>% 
@@ -905,7 +902,7 @@ gmex_station <- type_convert(gmex_station, col_types = cols(
 ))
 
 
-gmex_tow <-read_csv(here("data_raw", "gmex_INVREC.csv"), col_types = cols(
+gmex_tow <-read_csv(here::here("data_raw", "gmex_INVREC.csv"), col_types = cols(
   INVRECID = col_integer(),
   STATIONID = col_integer(),
   CRUISEID = col_integer(),
@@ -945,7 +942,7 @@ problems <- problems(gmex_tow) %>%
 stopifnot(nrow(problems) == 2)
 # 2 problems are that there are weird delimiters in the note column COMBIO, ignoring for now.
 
-gmex_spp <-read_csv(here("data_raw","gmex_NEWBIOCODESBIG.csv"), col_types = cols(
+gmex_spp <-read_csv(here::here("data_raw","gmex_NEWBIOCODESBIG.csv"), col_types = cols(
   Key1 = col_integer(),
   TAXONOMIC = col_character(),
   CODE = col_integer(),
@@ -962,7 +959,7 @@ gmex_spp <-read_csv(here("data_raw","gmex_NEWBIOCODESBIG.csv"), col_types = cols
 problems <- problems(gmex_spp) %>% 
   filter(!is.na(col))
 stopifnot(nrow(problems) == 0)
-gmex_cruise <-read_csv(here("data_raw", "gmex_CRUISES.csv"), col_types = cols(.default = col_character())) %>% 
+gmex_cruise <-read_csv(here::here("data_raw", "gmex_CRUISES.csv"), col_types = cols(.default = col_character())) %>% 
   select(CRUISEID, VESSEL, TITLE)
 
 # problems should be 0 obs
@@ -971,7 +968,7 @@ problems <- problems(gmex_cruise) %>%
 stopifnot(nrow(problems) == 0)
 gmex_cruise <- type_convert(gmex_cruise, col_types = cols(CRUISEID = col_integer(), VESSEL = col_integer(), TITLE = col_character()))
 
-gmex_bio <-read_csv(unz(here("data_raw", "gmex_BGSREC.csv.zip"), "gmex_BGSREC.csv"), col_types = cols(.default = col_character())) %>% 
+gmex_bio <-read_csv(unz(here::here("data_raw", "gmex_BGSREC.csv.zip"), "gmex_BGSREC.csv"), col_types = cols(.default = col_character())) %>% 
   select('CRUISEID', 'STATIONID', 'VESSEL', 'CRUISE_NO', 'P_STA_NO', 'GENUS_BGS', 'SPEC_BGS', 'BGSCODE', 'BIO_BGS', 'SELECT_BGS') %>%
   # trim out young of year records (only useful for count data) and those with UNKNOWN species
   filter(BGSCODE != "T" | is.na(BGSCODE),
@@ -1162,7 +1159,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "gmex_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "gmex_hq_dat_removed.pdf"))
     rm(temp)
   }
   rm(test, test2, p1, p2, p3, p4)
@@ -1195,17 +1192,26 @@ neus_spp <- spp %>%
 
 files <- as.list(dir(pattern = "neus_strata", path = "data_raw", full.names = T))
 
-neus_strata <- files %>%
-  map_dfr(read_csv) %>% 
-  select(StratumCode, Areanmi2) %>% 
-  distinct() %>% 
-  rename(STRATUM = StratumCode)
+neus_strata <- read_csv(here::here("data_raw", "neus_strata.csv"), col_types = cols(
+  STRGRP_DESC = col_character(),
+  STRATUM = col_double(),
+  STRATUM_NAME = col_character(),
+  STRATUM_AREA = col_double(),
+  MIDLAT = col_double(),
+  MIDLON = col_double(),
+  MINLAT = col_double(),
+  MAXLAT = col_double(),
+  MINLON = col_double(),
+  MAXLON = col_double()
+)) %>% 
+  select(STRATUM, STRATUM_AREA) %>% 
+  distinct()
 
 neus <- left_join(neus_survdat, neus_spp, by = "SVSPP") %>%
   left_join(neus_strata, by = "STRATUM")
 
 # are there any strata in the data that are not in the strata file?
-stopifnot(nrow(filter(neus, is.na(Areanmi2))) == 0)
+stopifnot(nrow(filter(neus, is.na(STRATUM_AREA))) == 0)
 
 neus <- neus %>%
   mutate(
@@ -1257,7 +1263,7 @@ if (HQ_DATA_ONLY == TRUE){
   neusS <- neusS %>% 
     filter(year > 1972)
   
-  # it's hard to read the strata labels so I'm finding them here
+  # it's hard to read the strata labels so I'm finding them here::here
   test <- neusS %>% 
     select(stratum, year) %>% 
     distinct() %>% 
@@ -1291,7 +1297,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "neusS_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "neusS_hq_dat_removed.pdf"))
     rm(temp)
   }
   rm(test, p1, p2, p3, p4)
@@ -1352,7 +1358,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "neusF_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "neusF_hq_dat_removed.pdf"))
     rm(temp)
   }
   rm(test, test2, p1, p2, p3, p4)
@@ -1361,7 +1367,7 @@ rm(neus_spp, neus_strata, neus_survdat, neus, survdat, spp,  files)
 
 # Compile SEUS ====
 # turns everything into a character so import as character anyway
-seus_catch <- read_csv(unz(here("data_raw", "seus_catch.csv.zip"), "seus_catch.csv"), col_types = cols(.default = col_character())) %>% 
+seus_catch <- read_csv(unz(here::here("data_raw", "seus_catch.csv.zip"), "seus_catch.csv"), col_types = cols(.default = col_character())) %>% 
   # remove symbols
   mutate_all(funs(str_replace(., "=", ""))) %>% 
   mutate_all(funs(str_replace(., '"', ''))) %>% 
@@ -1422,7 +1428,7 @@ seus_catch <- type_convert(seus_catch, col_types = cols(
   LASTUPDATED = col_character()
 ))
 
-seus_haul <- read_csv(here("data_raw", "seus_haul.csv"), col_types = cols(.default = col_character())) %>% 
+seus_haul <- read_csv(here::here("data_raw", "seus_haul.csv"), col_types = cols(.default = col_character())) %>% 
   distinct(EVENTNAME, DEPTHSTART)  %>% 
   # remove symbols
   mutate_all(funs(str_replace(., "=", ""))) %>% 
@@ -1441,7 +1447,7 @@ seus_haul <- type_convert(seus_haul, col_types = cols(
 
 
 # contains strata areas
-seus_strata <- read_csv(here("data_raw", "seus_strata.csv"), col_types = cols(
+seus_strata <- read_csv(here::here("data_raw", "seus_strata.csv"), col_types = cols(
   STRATA = col_integer(),
   STRATAHECTARE = col_double()
 ))
@@ -1617,7 +1623,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "seusSPR_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "seusSPR_hq_dat_removed.pdf"))
     rm(temp)
   }
   rm(test, p1, p2, p3, p4)
@@ -1645,7 +1651,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "seusSUM_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "seusSUM_hq_dat_removed.pdf"))
     rm(temp)
   }
   rm(p1, p2)
@@ -1702,7 +1708,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "seusFALL_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "seusFALL_hq_dat_removed.pdf"))
     rm(temp)
   }
   rm(test, test2, p1, p2, p3, p4)
@@ -1712,7 +1718,7 @@ rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, prob
 
 
 # Compile Scotian Shelf ---------------------------------------------------
-scot_summer <- read_csv(unz(here("data_raw", "scot_summer.csv.zip"), "scot_summer.csv")) 
+scot_summer <- read_csv(unz(here::here("data_raw", "scot_summer.csv.zip"), "scot_summer.csv")) 
 
 files <- as.list(dir(pattern = "scot", path = "data_raw", full.names = T))
 
@@ -1789,7 +1795,7 @@ if (HQ_DATA_ONLY == TRUE){
 
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "scot_sumr-hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "scot_sumr-hq_dat_removed.pdf"))
   }
 }  
 
@@ -1845,7 +1851,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-      ggsave(plot = temp, filename = here("plots", "scot_fall-hq_dat_removed.pdf"))
+      ggsave(plot = temp, filename = here::here("plots", "scot_fall-hq_dat_removed.pdf"))
   }
 }  
 
@@ -1902,7 +1908,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here("plots", "scot_spr-hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "scot_spr-hq_dat_removed.pdf"))
     rm(temp)
   }
   rm(p1, p2, p3, p4, test, test2)
@@ -1911,7 +1917,7 @@ if (HQ_DATA_ONLY == TRUE){
 rm(files, scot, annual_strata, temp, scot_summer)
 
 # Compile TAX ====
-tax <- read_csv(here("data_raw", "spptaxonomy.csv"), col_types = cols(
+tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
   taxon = col_character(),
   species = col_character(),
   genus = col_character(),
@@ -1949,9 +1955,9 @@ if(isTRUE(REMOVE_REGION_DATASETS)) {
 
 if(isTRUE(WRITE_MASTER_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here("data_clean", "all-regions-full.RData"))
+    save(dat, file = here::here("data_clean", "all-regions-full.RData"))
   }else{
-    write_csv(dat, here("data_clean", "all-regions-full.csv"))
+    write_csv(dat, here::here("data_clean", "all-regions-full.csv"))
   }
 }
 
@@ -1994,9 +2000,9 @@ rm (maxyrs, presyr, presyrsum, spplist)
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    save(trimmed_dat, file = here("data_clean", "all-regions-trimmed.RData"))
+    save(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed.RData"))
   }else{
-    write_csv(trimmed_dat, here("data_clean", "all-regions-trimmed.csv"))
+    write_csv(trimmed_dat, here::here("data_clean", "all-regions-trimmed.csv"))
   }
 }
 
@@ -2077,16 +2083,16 @@ BY_SPECIES_DATA <- cent_bio %>%
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(BY_SPECIES_DATA, file = here("data_clean", "by_species.RData"))
+    save(BY_SPECIES_DATA, file = here::here("data_clean", "by_species.RData"))
   }else{
-    write_csv(BY_SPECIES_DATA, here("data_clean", "by_species.csv"))
+    write_csv(BY_SPECIES_DATA, here::here("data_clean", "by_species.csv"))
   }
 }
 
 rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr)
 
 # Dat_exploded -  Add 0's ####  
-# these Sys.time() flags are here to see how long this section of code takes to run.
+# these Sys.time() flags are here::here to see how long this section of code takes to run.
 Sys.time()
 # This takes about 5 minutes
 if (DAT_EXPLODED == TRUE){
@@ -2094,9 +2100,9 @@ if (DAT_EXPLODED == TRUE){
   
   if(isTRUE(WRITE_DAT_EXPLODED)){
     if(isTRUE(PREFER_RDATA)){
-      save(dat.exploded, file = here("data_clean", "dat_exploded.Rdata"))
+      save(dat.exploded, file = here::here("data_clean", "dat_exploded.Rdata"))
     }else{
-      write_csv(dat.exploded, here("data_clean", "dat_exploded.csv"))
+      write_csv(dat.exploded, here::here("data_clean", "dat_exploded.csv"))
     }
   }
 
@@ -2188,9 +2194,9 @@ BY_REGION_DATA  <- regcentbio %>%
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(BY_REGION_DATA, file = here("data_clean", "by_region.RData"))
+    save(BY_REGION_DATA, file = here::here("data_clean", "by_region.RData"))
   }else{
-    write_csv(BY_REGION_DATA, here("data_clean", "by_region.csv"))
+    write_csv(BY_REGION_DATA, here::here("data_clean", "by_region.csv"))
   }
 }
 
@@ -2289,9 +2295,9 @@ BY_NATIONAL_DATA <- natcentbio
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(BY_NATIONAL_DATA, file = here("data_clean", "by_national.RData"))
+    save(BY_NATIONAL_DATA, file = here::here("data_clean", "by_national.RData"))
   }else{
-    write_csv(BY_NATIONAL_DATA, here("data_clean", "by_national.csv"))
+    write_csv(BY_NATIONAL_DATA, here::here("data_clean", "by_national.csv"))
   }
 }
 
@@ -2335,7 +2341,7 @@ if(isTRUE(PLOT_CHARTS)) {
                        ,breaks=seq(1970,2020,15)
     ) 
   
-  ggsave(spp_lat_plot, filename =  here("plots", "species-lat.png"))
+  ggsave(spp_lat_plot, filename =  here::here("plots", "species-lat.png"))
     
   
   spp_depth_plot <- ggplot(data = reg_lat_depth, aes(x=year, y=depth, ymin=mindepth, ymax=maxdepth)) + 
@@ -2355,7 +2361,7 @@ if(isTRUE(PLOT_CHARTS)) {
     facet_grid(vars(region, spp)) +
     scale_x_continuous(limit=c(1970,2020),breaks=seq(1970,2020,15))
   
-  ggsave(reg_depth_plot, filename =  here("plots", "species-depth.png"), width = 11, height = 11)
+  ggsave(reg_depth_plot, filename =  here::here("plots", "species-depth.png"), width = 11, height = 11)
   
   
   
@@ -2392,7 +2398,7 @@ if(isTRUE(PLOT_CHARTS)) {
     scale_x_continuous(limit=c(1970,2020)
                        ,breaks=seq(1970,2020,15)
     )
-  ggsave(reg_lat_plot, filename =  here("plots", "regional-lat.png"), width = 8.5, height = 11)
+  ggsave(reg_lat_plot, filename =  here::here("plots", "regional-lat.png"), width = 8.5, height = 11)
   
   reg_depth_plot <- ggplot(data = reg_lat_depth, aes(x=year, y=depth, ymin=mindepth, ymax=maxdepth)) + 
     geom_line(color = "#D95F02") + 
@@ -2412,7 +2418,7 @@ if(isTRUE(PLOT_CHARTS)) {
     scale_x_continuous(limit=c(1970,2020)
                        ,breaks=seq(1970,2020,15)
     )
-  ggsave(reg_depth_plot, filename =  here("plots", "regional-depth.png"), width = 8.5, height = 11)
+  ggsave(reg_depth_plot, filename =  here::here("plots", "regional-depth.png"), width = 8.5, height = 11)
 
   
   # Plot National ####
@@ -2447,7 +2453,7 @@ if(isTRUE(PLOT_CHARTS)) {
     scale_x_continuous(limit=c(1980,2020)
                        ,breaks=seq(1980,2020,15)
     )
-  ggsave(nat_lat_plot, filename =  here("plots", "national-lat.png"), width = 6, height = 3.5)
+  ggsave(nat_lat_plot, filename =  here::here("plots", "national-lat.png"), width = 6, height = 3.5)
 
   nat_depth_plot <- ggplot(data = nat_lat_depth, aes(x=year, y=depth, ymin=mindepth, ymax=maxdepth)) + 
     geom_line(color = "#D95F02") + 
@@ -2466,7 +2472,7 @@ if(isTRUE(PLOT_CHARTS)) {
     scale_x_continuous(limit=c(1980,2020)
                        ,breaks=seq(1980,2020,15)
     )
-  ggsave(nat_depth_plot, filename =  here("plots", "national-depth.png"), width = 6, height = 3.5)
+  ggsave(nat_depth_plot, filename =  here::here("plots", "national-depth.png"), width = 6, height = 3.5)
 
 }
   
