@@ -1219,7 +1219,7 @@ neus <- neus %>%
     haulid = paste(formatC(CRUISE6, width=6, flag=0), formatC(STATION, width=3, flag=0), formatC(STRATUM, width=4, flag=0), sep='-'),  
     # Calculate stratum area where needed (use convex hull approach)
     # convert square nautical miles to square kilometers
-    stratumarea = Areanmi2 * 3.429904) %>% 
+    stratumarea = STRATUM_AREA * 3.429904) %>% 
   rename(year = YEAR,
          spp = SCINAME,
          lat = LAT, 
@@ -1369,9 +1369,9 @@ rm(neus_spp, neus_strata, neus_survdat, neus, survdat, spp,  files)
 # turns everything into a character so import as character anyway
 seus_catch <- read_csv(unz(here::here("data_raw", "seus_catch.csv.zip"), "seus_catch.csv"), col_types = cols(.default = col_character())) %>% 
   # remove symbols
-  mutate_all(funs(str_replace(., "=", ""))) %>% 
-  mutate_all(funs(str_replace(., '"', ''))) %>% 
-  mutate_all(funs(str_replace(., '"', '')))
+  mutate_all(list(~str_replace(., "=", ""))) %>% 
+  mutate_all(list(~str_replace(., '"', ''))) %>% 
+  mutate_all(list(~str_replace(., '"', '')))
 
 # The 9 parsing failures are due to the metadata at the end of the file that does not fit into the data columns
 
