@@ -1,3 +1,5 @@
+## ---- oceanadapt
+
 # If running from R instead of RStudio, please set the working directory to the folder containing this script before running this script.
 # This script is designed to run within the following directory structure:
 # Directory 1 contains:
@@ -45,7 +47,9 @@ WRITE_DAT_EXPLODED <- FALSE
 # 9. Output the BY_SPECIES, BY_REGION, and BY_NATIONAL tables. #DEFAULT:FALSE
 WRITE_BY_TABLES <- FALSE
 
-## Workspace setup ==================================================
+
+# Workspace setup ---------------------------------------------------------
+print("Workspace setup")
 
 # This script works best when the repository is downloaded from github, 
 # especially when that repository is loaded as a project into RStudio.
@@ -62,6 +66,7 @@ library(geosphere) # for calculating trawl distance for SEUS
 library(here) # for relative file paths
 
 # Functions ===========================================================
+print("Functions")
 
 # function to calculate convex hull area in km2
 #developed from http://www.nceas.ucsb.edu/files/scicomp/GISSeminar/UseCases/CalculateConvexHull/CalculateConvexHullR.html
@@ -164,6 +169,7 @@ explode0 <- function(x, by=c("region")){
 }
   
 # Compile AI =====================================================
+print("Compile AI")
 
 ## Special fix
 #there is a comment that contains a comma in the 2014-2018 file that causes the delimiters to read incorrectly.  Fix that here::here:
@@ -308,7 +314,9 @@ if (HQ_DATA_ONLY == TRUE){
 # clean up
 rm(ai_data, ai_strata, files, temp_fixed, temp_csv)
 
-# Compile EBS ====
+# Compile EBS ============================================================
+print("Compile EBS")
+
 files <- as.list(dir(pattern = "ebs", path = "data_raw", full.names = T))
 
 # exclude the strata file
@@ -436,7 +444,9 @@ if (HQ_DATA_ONLY == TRUE){
 rm(files, ebs_data, ebs_strata)
 
 
-# Compile GOA ====
+# Compile GOA =============================================================
+print("Compile GOA")
+
 files <- as.list(dir(pattern = "goa", path = "data_raw", full.names = T))
 
 # exclude the 2 strata files; the 1 and 2 elements
@@ -570,7 +580,9 @@ if (HQ_DATA_ONLY == TRUE){
 rm(files, goa_data, goa_strata)
 
 
-# Compile WCTRI ====
+# Compile WCTRI ===========================================================
+print("Compile WCTRI")
+
 wctri_catch <- read_csv(here::here("data_raw", "wctri_catch.csv"), col_types = cols(
   CRUISEJOIN = col_integer(),
   HAULJOIN = col_integer(),
@@ -735,7 +747,9 @@ if (HQ_DATA_ONLY == TRUE){
 
 rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 
-# Compile WCANN ====
+# Compile WCANN ===========================================================
+print("Compile WCANN")
+
 wcann_catch <- read_csv(unz(here::here("data_raw", "wcann_catch.csv.zip"), "wcann_catch.csv"), col_types = cols(
   catch_id = col_integer(),
   common_name = col_character(),
@@ -869,7 +883,9 @@ if (HQ_DATA_ONLY == TRUE){
 # cleanup
 rm(wcann_catch, wcann_haul, wcann_strats)
 
-# Compile GMEX ====
+# Compile GMEX ===========================================================
+print("Compile GMEX")
+
 gmex_station_raw <- read_lines(here::here("data_raw", "gmex_STAREC.csv"))
 # remove oddly quoted characters
 gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
@@ -1166,7 +1182,9 @@ if (HQ_DATA_ONLY == TRUE){
 }
 rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean, gmex_strats, dups)
 
-# Compile NEUS ====
+# Compile NEUS ===========================================================
+print("Compile NEUS")
+
 load("data_raw/neus_Survdat.RData")
 load("data_raw/neus_SVSPP.RData")
 
@@ -1365,7 +1383,8 @@ if (HQ_DATA_ONLY == TRUE){
 }
 rm(neus_spp, neus_strata, neus_survdat, neus, survdat, spp,  files)
 
-# Compile SEUS ====
+# Compile SEUS ===========================================================
+print("Compile SEUS")
 # turns everything into a character so import as character anyway
 seus_catch <- read_csv(unz(here::here("data_raw", "seus_catch.csv.zip"), "seus_catch.csv"), col_types = cols(.default = col_character())) %>% 
   # remove symbols
@@ -1431,9 +1450,9 @@ seus_catch <- type_convert(seus_catch, col_types = cols(
 seus_haul <- read_csv(here::here("data_raw", "seus_haul.csv"), col_types = cols(.default = col_character())) %>% 
   distinct(EVENTNAME, DEPTHSTART)  %>% 
   # remove symbols
-  mutate_all(funs(str_replace(., "=", ""))) %>% 
-  mutate_all(funs(str_replace(., '"', ''))) %>% 
-  mutate_all(funs(str_replace(., '"', '')))
+  mutate_all(list(~str_replace(., "=", ""))) %>% 
+  mutate_all(list(~str_replace(., '"', ''))) %>% 
+  mutate_all(list(~str_replace(., '"', '')))
 
 # problems should have 0 obs
 problems <- problems(seus_haul) %>% 
@@ -1718,6 +1737,7 @@ rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, prob
 
 
 # Compile Scotian Shelf ---------------------------------------------------
+print("Compile SCOT")
 scot_summer <- read_csv(unz(here::here("data_raw", "scot_summer.csv.zip"), "scot_summer.csv")) 
 
 files <- as.list(dir(pattern = "scot", path = "data_raw", full.names = T))
@@ -1916,7 +1936,8 @@ if (HQ_DATA_ONLY == TRUE){
 
 rm(files, scot, annual_strata, temp, scot_summer)
 
-# Compile TAX ====
+# Compile TAX ===========================================================
+print("Compile TAX")
 tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
   taxon = col_character(),
   species = col_character(),
@@ -1935,7 +1956,8 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
   rename(spp = taxon)
 
 
-# Master Data Set ####
+# Master Data Set ===========================================================
+print("Join into Master Data Set")
 dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot_sumr, scot_fall, scot_spr) %>% 
 # Remove NA values in wtcpue
   filter(!is.na(wtcpue))
@@ -1968,7 +1990,8 @@ if(isTRUE(WRITE_MASTER_DAT)){
 
 ##FEEL FREE TO ADD, MODIFY, OR DELETE ANYTHING BELOW THIS LINE
 
-# Trim species ####
+# Trim species ===========================================================
+print("Trim species")
 
 # Find a standard set of species (present at least 3/4 of the years in a region)
 # this result differs from the original code because it does not include any species that have a pres value of 0.  It does, however, include speices for which the common name is NA.
@@ -2013,7 +2036,8 @@ test <- anti_join(select(trimmed_dat, spp, common), tax, by = "spp") %>%
 # if test contains more than 0 obs, use the add-spp-to-taxonomy.R script to add new taxa to the spptaxonomy.csv and go back to "Compile Tax".
 rm(test)
 
-# BY_SPECIES_DATA ####
+# BY_SPECIES_DATA ===========================================================
+print("By species data")
 # Calculate mean position through time for species 
 ## Calculate mean latitude and depth of each species by year within each survey/region
 ### mean lat/lon/depth for each stratum
@@ -2091,7 +2115,8 @@ if(isTRUE(WRITE_BY_TABLES)){
 
 rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, cent_bio_lon, cent_bio_lon_se, dat_strat, dat_strat_yr)
 
-# Dat_exploded -  Add 0's ####  
+# Dat_exploded -  Add 0's ======================================================
+print("Dat exploded") 
 # these Sys.time() flags are here::here to see how long this section of code takes to run.
 Sys.time()
 # This takes about 5 minutes
@@ -2110,7 +2135,9 @@ if (DAT_EXPLODED == TRUE){
 Sys.time()
 
 
-#By region data ####
+#By region data ===========================================================
+print("by region data")
+
 #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
 ## Calculate mean position through time for regions 
 ## Find a standard set of species (present every year in a region)
@@ -2200,7 +2227,9 @@ if(isTRUE(WRITE_BY_TABLES)){
   }
 }
 
-# By national data ####
+# By national data ===========================================================
+print("by national data")
+
 #Returns national data
 #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
 
