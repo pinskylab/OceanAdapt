@@ -1,0 +1,60 @@
+SubareaDescription,StratumCode,DepthIntervalm,Areakm2
+Fox Islands ,10,1 - 100,8333
+Davidson Bank,11,1 - 100,13681
+Lower Alaska Peninsula ,12,1 - 100,6876
+Shumagin Bank ,13,1 - 100,12399
+Upper Alaska Peninsula ,20,1 - 100,7941
+Semidi Bank,21,1 - 100,7302
+Chirikof Bank ,22,1 - 100,10792
+Albatross Shallows ,30,1 - 100,5766
+Albatross Banks ,31,1 - 100,15403
+Lower Cook Inlet ,32,1 - 100,9887
+Kenai Peninsula ,33,1 - 100,5260
+Northern Kodiak Shallows ,35,1 - 100,2200
+Yakutat Shallows ,40,1 - 100,9947
+Middleton Shallows ,41,1 - 100,6714
+Southeastern Shallows,50,1 - 100,6546
+Sanak Gully,110,101 - 200,4245
+Shumagin Outer Shelf,111,101 - 200,8154
+West Shumagin Gully,112,101 - 200,2278
+East Shumagin Gully,120,101 - 200,11104
+Shelikof Edge,121,101 - 200,7735
+Chirikof Outer Shelf,122,101 - 200,5011
+Albatross Gullies,130,101 - 200,7912
+Portlock Flats,131,101 - 200,7336
+Barren Islands,132,101 - 200,10981
+Kenai Flats,133,101 - 200,12077
+Kodiak Outer Shelf,134,101 - 200,5026
+Middleton Shelf,140,101 - 200,7346
+Yakataga Shelf,141,101 - 200,5277
+Yakutat Flats,142,101 - 200,9032
+Fairweather Shelf,143,101 - 200,7728
+Baranof-Chichagof Shelf,150,101 - 200,4196
+Prince of Wales Shelf,151,101 - 200,6888
+Shumagin Slope,210,201 - 300,2788
+Lower Shelikof Gully,220,201 - 300,10018
+Chirikof Slope,221,201 - 300,1528
+Kenai Gullies,230,201 - 300,6659
+Kodiak Slope,231,201 - 300,1623
+Upper Shelikof Gully,232,201 - 300,3208
+Yakutat Gullies,240,201 - 300,3043
+Yakutat Slope,241,201 - 300,2127
+Baranof-Chichagof Slope,250,201 - 300,1125
+Prince of Wales Slope/Gullies,251,201 - 300,3927
+Shumagin Slope,310,301-500,2530
+Chirikof Slope,320,301-500,1604
+Kodiak Slope,330,301-500,2912
+Yakutat Gullies,340,301-500,1107
+Yakutat Slope,341,301-500,1521
+Southeastern Deep Gullies,350,301-500,2344
+Southeastern Slope,351,301-500,773
+Shumagin Slope,410,501-700,2006
+Chirikof Slope,420,501-700,1953
+Kodiak Slope,430,501-700,1745
+Yakutat Slope,440,501-700,1469
+Southeastern Slope,450,501-700,1033
+Shumagin Slope,510,701-1000,1937
+Chirikof Slope,520,701-1000,3066
+Kodiak Slope,530,701-1000,3494
+Yakutat Slope,540,701-1000,1887
+Southeastern Slope,550,701-1000,1206

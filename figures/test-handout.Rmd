@@ -1,0 +1,209 @@
+---
+title: "OceanAdapt at Rutgers University"
+author: "Dr. Malin Pinsky  malin.pinsky@rutgers.edu"
+email: "malin.pinsky@rutgers.edu"
+params:
+  alpha: 0.25
+  subtitle_size: 14
+  title_colour: dodgerblue3
+  title_size: 21
+output:
+  pdf_document: default
+  github_document: default
+  html_document: default
+  word_document: default
+subtitle: Exploring changes in marine species distributions
+---
+
+______
+
+<!-- None of this handout was used in this format, we got rid of all features that required R code and so moved to google docs, which is more GUI formattable.
+https://docs.google.com/document/d/1Z7UwUygCNV6DkxUD8zHlSD9jXtwjYFRObXRMTFd5_uI/edit?usp=sharing
+-->
+
+# [www.oceanadapt.rutgers.edu](http://oceanadapt.rutgers.edu)
+
+**OceanAdapt is a collaboration between the Pinsky Lab of Rutgers University and the National Marine Fisheries Service (NMFS).**  
+
+
+We provide information about the impacts of changing climate and other factors on the distribution of marine life to the National Climate Assessment, fisheries communities, policymakers, and to others.   
+
+This website hosts an annually updated database of scientific surveys in the United States and provides tools for exploring changes in marine fish and invertebrate distributions. We are continually working to expand the site with new data and visualization tools.
+
+```{r setup, include=FALSE}
+#This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package
+if(!require(pacman))install.packages("pacman")
+
+# change install to true if you want to install any packages listed that you don't currently have.
+pacman::p_load(tidyverse, here, maps, ggthemes, grid, install = FALSE)
+
+
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+  
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  
+  numPlots = length(plots)
+  
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+  
+  if (numPlots==1) {
+    print(plots[[1]])
+    
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+    
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+      
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+
+
+
+```
+
+
+```{r data prep, echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE, include=FALSE}
+oa <- read_csv(here("data_clean", "dat_exploded.csv"), col_types = cols(
+  region = col_character(),
+  haulid = col_character(),
+  year = col_double(),
+  lat = col_double(),
+  lon = col_double(),
+  stratum = col_double(),
+  stratumarea = col_double(),
+  depth = col_double(),
+  spp = col_character(),
+  common = col_character(),
+  wtcpue = col_double()
+)) 
+
+# some rows imported with problems of trailing whitespace in the stratum column
+prob <- problems(oa)
+
+prob$actual <- trimws(prob$actual)
+
+# fix those rows in the oa data set
+oa$stratum[prob$row] <- prob$actual
+rm(prob)
+
+bass <- oa %>% 
+  filter(grepl("black sea bass", common))
+
+east_coast <- subset(map_data("state"), region %in% c("maine", "vermont", "new hampshire", "massachusets", "connecticut", "rhode island", "new york", "new jersey", "delaware", "maryland", "virginia", "north carolina", "south carolina", "georgia", "florida", "pennsylvania"))
+
+```
+
+
+
+```{r all years, eval=FALSE, include=FALSE, echo=FALSE}
+# Skipping this chunk because we want to split maps up into 1960's and 2010's
+
+map_bass <-  bass %>% 
+  group_by(region, year, spp) %>% 
+  summarise(lat = mean(lat), 
+            lon = mean(lon), 
+            wtcpue = mean(wtcpue)) %>% 
+  ungroup() %>% 
+  mutate(year = as.integer(year))
+
+map <- ggplot(data = east_coast)+
+  geom_polygon(aes(x = long, y = lat, group = group), fill = "gray80", colour = "gray85")+
+  coord_fixed(1.3)
+
+map_of_bass <- map + 
+  geom_point(data = map_bass, aes(lon, lat, size = wtcpue
+                                  , color = year)
+             , alpha = 0.1
+             , show.legend = FALSE)+
+  theme_map()+
+  labs(title = "Distribution of black sea bass, Centropristis striata, from 1970-2017") 
+
+
+  map_of_bass + 
+    scale_fill_gradientn(colours = heat.colors(47))
+```
+
+```{r early, eval=FALSE, include=FALSE, echo=FALSE}
+early <-  bass %>% 
+  filter(year <= 1980) %>% 
+  group_by(region, year, spp) %>% 
+  summarise(lat = mean(lat), 
+            lon = mean(lon), 
+            wtcpue = mean(wtcpue)) %>% 
+  ungroup() %>% 
+  mutate(year = as.integer(year))
+
+map <- ggplot(data = east_coast)+
+  geom_polygon(aes(x = long, y = lat, group = group), fill = "gray80", colour = "gray85")+
+  coord_fixed(1.3)
+
+early_map <- map + 
+  geom_point(data = early, aes(lon, lat, size = wtcpue
+                                  , color = year)
+             , alpha = params$alpha
+             , show.legend = FALSE)+
+  theme_map()+
+  labs(title = "Distribution of black sea bass, Centropristis striata", 
+       subtitle= "
+       1970-1980") +
+  theme(plot.title = element_text(size = params$title_size, colour = params$title_colour)) +
+  theme(plot.subtitle = element_text(size = params$subtitle_size))
+```
+
+
+```{r late, eval=FALSE, include=FALSE, echo=FALSE}
+late <-  bass %>% 
+  filter(year >= 2010) %>% 
+  group_by(region, year, spp) %>% 
+  summarise(lat = mean(lat), 
+            lon = mean(lon), 
+            wtcpue = mean(wtcpue)) %>% 
+  ungroup() %>% 
+  mutate(year = as.integer(year))
+
+map <- ggplot(data = east_coast)+
+  geom_polygon(aes(x = long, y = lat, group = group), fill = "gray80", colour = "gray85")+
+  coord_fixed(1.3)
+
+late_map <- map + 
+  geom_point(data = late, aes(lon, lat, size = wtcpue
+                                  , color = year)
+             , alpha = params$alpha
+             , show.legend = FALSE)+
+  theme_map()+
+  # this extra space puts the dates down on the same line as the subtitle from the previous plot
+  labs(subtitle = "
+
+       2010-2017") +
+  theme(plot.subtitle = element_text(size = params$subtitle_size))
+
+```
+```{r 2-up, eval=FALSE, include=FALSE, echo=FALSE}
+multiplot(early_map, late_map, cols = 2)
+```
+<!-- - Size of the circles represent the mean weight caught per unit effort.   -->
+<!-- - Color of the circles represent the year of catch with darker being older.     -->
+<!-- - Location of circled represent the mean latitude and logitude for each year.   -->
+
+### Distribution of Black Sea Bass in the Fall, Northeast US
+![](https://github.com/mpinsky/OceanAdapt/blob/master/metaData/test-handout_files/figure-markdown_github/Screen%20Shot%202019-03-04%20at%203.51.35%20PM.png?raw=true)
+
+![](https://github.com/mpinsky/OceanAdapt/blob/master/metaData/test-handout_files/figure-markdown_github/Screen%20Shot%202019-03-04%20at%203.51.45%20PM.png?raw=true)
+

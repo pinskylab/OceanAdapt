@@ -1,0 +1,333 @@
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml_1.1" packageId="b43c1359-7224-4b98-8801-0c188ac20c9e" system="uuid">
+  <dataset scope="document">
+    <title>West Coast Annual Bottom Trawl Survey</title>
+    <creator>
+      <organizationName>National Oceanic and Atmospheric Administration (NOAA) Northwest Fisheries Science Center (NWFSC)</organizationName>
+      <address>
+        <deliveryPoint>2725 Montlake Boulevard East</deliveryPoint>
+        <city>Seattle</city>
+        <administrativeArea>WA</administrativeArea>
+        <postalCode>98112</postalCode>
+        <country>USA</country>
+      </address>
+      <onlineUrl>http://www.nwfsc.noaa.gov/index.cfm</onlineUrl>
+    </creator>
+    <metadataProvider>
+      <individualName>
+        <givenName>Ryan</givenName>
+        <surName>Batt</surName>
+      </individualName>
+      <electronicMailAddress>battrd@gmail.com</electronicMailAddress>
+    </metadataProvider>
+    <pubDate>2012</pubDate>
+    <intellectualRights>CC0, http://creativecommons.org/publicdomain/zero/1.0</intellectualRights>
+    <contact>
+      <individualName>
+        <givenName>Beth</givenName>
+        <surName>Horness</surName>
+      </individualName>
+      <organizationName>National Oceanic and Atmospheric Administration (NOAA) Northwest Fisheries Science Center (NWFSC)</organizationName>
+      <address>
+        <deliveryPoint>2725 Montlake Boulevard East</deliveryPoint>
+        <city>Seattle</city>
+        <administrativeArea>WA</administrativeArea>
+        <postalCode>98112</postalCode>
+        <country>USA</country>
+      </address>
+      <electronicMailAddress>beth.horness@noaa.gov</electronicMailAddress>
+    </contact>
+    <dataTable id="7ec8450c-bcf7-48da-ae93-906276f473e5" system="uuid" scope="system">
+      <entityName>wcann</entityName>
+      <physical>
+        <objectName>wcann_515e03.csv</objectName>
+        <size>4768</size>
+        <characterEncoding>en_US.UTF-8</characterEncoding>
+        <dataFormat>
+          <textFormat>
+            <numHeaderLines>1</numHeaderLines>
+            <numFooterLines>0</numFooterLines>
+            <recordDelimiter>\r\n</recordDelimiter>
+            <attributeOrientation>column</attributeOrientation>
+            <simpleDelimited>
+              <fieldDelimiter>,</fieldDelimiter>
+            </simpleDelimited>
+          </textFormat>
+        </dataFormat>
+      </physical>
+      <attributeList id="1080dda1-4436-47b6-8686-92f52ee9e8ea">
+        <attribute>
+          <attributeName>Trawl.Id</attributeName>
+          <attributeDefinition>a unique identifier for the haul; vessel ID - cruise ID - haul number</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>haul id</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Species</attributeName>
+          <attributeDefinition>species scientific name; Genus species</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Genus species</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Haul.Weight..kg.</attributeName>
+          <attributeDefinition>the weight (mass) of all items in the net (may be extrapolated)</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>kilogram</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Individual.Average.Weight..kg.</attributeName>
+          <attributeDefinition>average individual weight (weight/count)</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>kilogram</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Survey</attributeName>
+          <attributeDefinition>Indicates the survey time series within which a trawl sample was conducted; either the West Coast Slope Bottom Trawl Survey or the West Coast Slope/Shelf Bottom Trawl Survey</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Survey text</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Survey.Cycle</attributeName>
+          <attributeDefinition>year of haul</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>unit</code>
+                    <definition>number</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>precision</code>
+                    <definition>1</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Vessel</attributeName>
+          <attributeDefinition>vessel ID</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Vessel text</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Cruise.Leg</attributeName>
+          <attributeDefinition>The West Coast Groundfish Bottom Trawl Surveys have been conducted coastwide from the U.S. / Canada border to a southern boundary that has expanded southward from Point Conception to the U.S. - Mexico border over time (see accompanying data annotations document).  The full north to south extent is traversed in two passes each survey season.  Each pass is divided into four (Slope survey) to five (Slope/Shelf combined survey) continuous segments separated by rest periods in ports along the coast.  Cruise leg indicates the sequential segment (1-5) in which a trawl operation was conducted.</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>number</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Trawl.Performance</attributeName>
+          <attributeDefinition>All trawl operations are reviewed and rated as to the quality of their execution and their applicability to formal fishery assessment analysis products.  Trawl Performance indicates these determinations.  See the accompanying data annotations document for a more detailed description.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Trawl.Performance text</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Trawl.Date</attributeName>
+          <attributeDefinition>date of the tow</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>format</code>
+                    <definition>YYYY-MM-DD</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>precision</code>
+                    <definition>1</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Trawl.Start.Time</attributeName>
+          <attributeDefinition>the day and time of the haul</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>MM/DD/YYYY HH:MM</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Best.Latitude..dd.</attributeName>
+          <attributeDefinition>latitude of the haul</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>degree</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Best.Longitude..dd.</attributeName>
+          <attributeDefinition>longitude of the haul, in western hemisphere degrees (for lon &gt; 0, do lon-360)</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>degree</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Best.Position.Type</attributeName>
+          <attributeDefinition>The best trawl position (Best Latitude, Best Longitude) available has been provided in decimal degrees North Latitude and annotated with its type (Best Position Type).  Preference is given to any recorded gear position, usually an estimate of the onbottom midpoint: [(start_lat+end_lat)/2,  (start_lon+end_lon)/2].  If no acceptable onbottom gear position can be determined, a vessel position is provided, usually a similarly determined trawl midpoint estimate for the vessel.  If no acceptable vessel position can be determined, position data recorded for the defined station is provided.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Best.Position.Type text</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Best.Depth..m.</attributeName>
+          <attributeDefinition>the maximum depth of the water at the location of the haul</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>meter</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Best.Depth.Type</attributeName>
+          <attributeDefinition>how depth was determined</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Best.Depth.Type text</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Trawl.Duration..min.</attributeName>
+          <attributeDefinition>duration of the haul (how long the net was being towed)</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>minute</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Area.Swept.by.the.Net..hectares.</attributeName>
+          <attributeDefinition>area sweap by the net (an index of effort)</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>hectare</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>Temperature.At.the.Gear..degs.C.</attributeName>
+          <attributeDefinition>water temperature at the bottom at the location of the haul</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>celsius</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+      </attributeList>
+      <caseSensitive>yes</caseSensitive>
+      <numberOfRecords>6</numberOfRecords>
+    </dataTable>
+  </dataset>
+</eml:eml>

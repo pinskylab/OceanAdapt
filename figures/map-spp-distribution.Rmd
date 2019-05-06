@@ -1,0 +1,135 @@
+---
+title: "Plot distribution of speices"
+params:
+  title: "Distribution of seafood"
+  subtitle: "lobster, cod, and black sea bass, 1972-2017"
+  save_file: "east-coast-seafood.png"
+output: 
+  html_notebook: default
+  github_document: default
+---
+<!-- To turn this into an R script: -->
+<!-- knitr::purl(map-spp-dist2.Rmd) -->
+
+```{r setup, include=FALSE}
+#This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package
+if(!require(pacman))install.packages("pacman")
+
+pacman::p_load('dplyr', 'tidyr', 'gapminder',
+               'ggplot2',  'ggalt',
+               'forcats', 'R.utils', 'png', 
+               'grid', 'ggpubr', 'scales',
+               'bbplot', readr, here, ggthemes,
+               install = FALSE)
+
+# regions_of_interest <- c("West Coast Annual", "West Coast Triennial")
+regions_of_interest <- c("Northeast US Spring", "Northeast US Fall")
+# species_of_interest <- c("Doryteuthis opalescens", "Gadus chalcogrammus", "Sebastes pinniger")
+species_of_interest <- c("HOMARUS AMERICANUS", "Gadus morhua", "GADUS MORHUA", "Homaurs americanus", "CENTROPRISTIS STRIATA")
+# map_regions <- c("Canada", "USA")
+map_regions <- c("USA")
+```
+
+
+Start with data
+```{r fish data}
+oa <- read_csv(here("data_clean", "dat_exploded.csv"), col_types = cols(
+  region = col_character(),
+  haulid = col_character(),
+  year = col_double(),
+  lat = col_double(),
+  lon = col_double(),
+  stratum = col_double(),
+  stratumarea = col_double(),
+  depth = col_double(),
+  spp = col_character(),
+  common = col_character(),
+  wtcpue = col_double()
+))
+
+# some rows imported with problems of trailing whitespace in the stratum column
+prob <- problems(oa)
+
+prob$actual <- trimws(prob$actual)
+
+# fix those rows in the oa data set
+oa$stratum[prob$row] <- prob$actual
+rm(prob)
+
+# filter out just what is needed for the map
+oa <- oa %>%
+  filter(region %in% regions_of_interest, 
+         spp %in% species_of_interest) %>%
+  mutate(lon = ifelse(region == "Aleutian Islands" & !grepl("-", lon), as.numeric(paste0("-", lon)), lon))
+
+# calculate annual means for each variable
+oa_mean <-  oa %>% 
+  mutate(year = as.integer(year), 
+         spp = ifelse(spp == "HOMARUS AMERICANUS", "Homaurs americanus", spp), 
+         spp = ifelse(spp == "GADUS MORHUA", "Gadus morhua", spp)) %>% 
+  group_by(year, spp, common) %>% 
+  summarise(lat = mean(lat), 
+            lon = mean(lon), 
+            wtcpue = mean(wtcpue)) %>% 
+  ungroup() 
+```
+```{r map data}
+coastal_map <- map_data("world") %>% 
+  filter(region %in% map_regions) %>%
+  mutate(long = ifelse(!grepl("-", long) & subregion == "Alaska", paste0("-", long), long), 
+         long = as.numeric(long)) %>%
+  filter(long >= min(oa$lon), long <= (max(oa$lon)+4))
+```
+
+Make the plot
+```{r plot map}
+map <- ggplot(data = coastal_map) +
+ geom_polygon(aes(x = long, y = lat, group = group), fill = "gray80", colour = "gray85") + coord_fixed(1.3) +
+  theme_map()
+
+plot(map)
+```
+
+```{r plot data}
+spp_plot <- map +
+  geom_point(data = oa_mean, aes(lon, lat
+                                 # , size = wtcpue
+                                 # , size = year
+                                 , color = common
+                                 , alpha = year
+                                 )) +
+  scale_color_manual(values = c("olivedrab4", "darkorange3", "dodgerblue3")) + 
+  bbc_style() +
+  theme(legend.position = "none",
+        axis.text.x = element_blank(), 
+        axis.text.y = element_blank()) +
+  labs(title = params$title,
+       subtitle = params$subtitle)+
+  theme(plot.subtitle = element_text(size = 12)) +
+  theme(plot.title = element_text(size = 14)) +
+  theme(legend.position = c(1, 0.25)) +
+  theme(legend.text = element_text(size = 10))
+
+plot(spp_plot)
+
+finalise_plot(
+  plot_name = spp_plot, 
+  source = "Source: Rutgers OceanAdapt", 
+  save_filepath = here("metaData", "media", params$save_file)
+)
+```
+Make a legend that is a barbell plot
+```{r}
+
+#Make plot
+ggplot()+
+  geom_dumbbell(data = oa_mean, aes(x = min(oa_mean$year), xend = max(oa_mean$year), y = common, group = common, alpha = year, color = common)) + 
+   scale_color_manual(values = c("olivedrab4", "darkorange3", "dodgerblue3")) +
+  facet_wrap( ~ common)
+# + 
+#   bbc_style() 
+```
+ 
+ 
+ 
+ 

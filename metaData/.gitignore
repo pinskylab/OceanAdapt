@@ -2,3 +2,6 @@
 .DS_Store
 !*.csv
 .Rhistory
+index.Rmd
+index.html
+README.Rmd
