@@ -2,6 +2,6 @@
 .DS_Store
 !*.csv
 .Rhistory
-test-handout.docx
-test-handout.html
-test-handout.log
+index.Rmd
+index.html
+README.Rmd
