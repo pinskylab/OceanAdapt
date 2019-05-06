@@ -1953,7 +1953,7 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
   common = col_character()
 )) %>% 
   select(taxon, name, common) %>% 
-  rename(spp = taxon)
+  rename(spp = name)
 
 
 # Master Data Set ===========================================================
@@ -1964,7 +1964,8 @@ dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUM
 
 # add a nice spp and common name
 dat <- left_join(dat, tax, by = "spp") %>% 
-  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, common, wtcpue)
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, common, wtcpue) %>% 
+  distinct()
 
 # check for errors in name matching
 if(sum(dat$spp == 'NA') > 0 | sum(is.na(dat$spp)) > 0){
