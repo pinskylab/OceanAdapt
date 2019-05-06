@@ -1,3 +1,6 @@
 gmex_BGSREC.csv
 seus_catch.csv
+.Rapp.history
+.DS_Store
+.Rhistory
 wcann_catch.csv
