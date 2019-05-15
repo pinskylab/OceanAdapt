@@ -42,7 +42,7 @@ WRITE_TRIMMED_DAT <- FALSE
 DAT_EXPLODED <- TRUE
 
 # 8. Output the dat.exploded table #DEFAULT:FALSE
-WRITE_DAT_EXPLODED <- TRUE
+WRITE_DAT_EXPLODED <- FALSE
 
 # 9. Output the BY_SPECIES, BY_REGION, and BY_NATIONAL tables. #DEFAULT:FALSE
 WRITE_BY_TABLES <- FALSE
@@ -142,21 +142,27 @@ explode0 <- function(x, by=c("region")){
   # print(x[1])
   
   # x <- as.data.table(x)
-  # x <- as.data.table(dat)[region=="Eastern Bering Sea"]
+  # x <- as.data.table(trimmed_dat)[region=="Scotian Shelf Summer"]
   # setkey(x, haulid, stratum, year, lat, lon, stratumarea, depth)
+  # group the data by these columns
   setorder(x, haulid, stratum, year, lat, lon, stratumarea, depth)
   
+  # pull out all of the unique spp
   u.spp <- x[,as.character(unique(spp))]
+  # pull out all of the unique common names
   u.cmmn <- x[,common[!duplicated(as.character(spp))]]
   
+  # pull out these location related columns and sort by haul_id and year
   x.loc <- x[,list(haulid, year, stratum, stratumarea, lat, lon, depth)]
   setkey(x.loc, haulid, year)
   
+  # attatch all spp to all locations
   x.skele <- x.loc[,list(spp=u.spp, common=u.cmmn), by=eval(colnames(x.loc))]
   setkey(x.skele, haulid, year, spp)
   x.skele <- unique(x.skele)
   setcolorder(x.skele, c("haulid","year","spp", "common", "stratum", "stratumarea","lat","lon","depth"))
   
+  # pull in multiple observations of the same species 
   x.spp.dat <- x[,list(haulid, year, spp, wtcpue)]
   setkey(x.spp.dat, haulid, year, spp)
   x.spp.dat <- unique(x.spp.dat)
@@ -1739,7 +1745,6 @@ rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, prob
 # Compile Scotian Shelf ---------------------------------------------------
 print("Compile SCOT")
 
-
 files <- as.list(dir(pattern = "scot", path = "data_raw", full.names = T))
 
 scot <- files %>% 
@@ -1764,7 +1769,11 @@ scot <- scot %>%
          lat = latitude_dd, 
          lon = longitude_dd, 
          depth = maximumdepth_fathoms, 
-         spp = scientificname) 
+         spp = scientificname) %>% 
+  # include stratum in the haul_id
+  mutate(haulid = paste(haulid, stratum, depth, sep = "_"))
+
+
 
 # calculate stratum area for each stratum
 scot <- scot %>% 
