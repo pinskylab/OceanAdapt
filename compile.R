@@ -42,7 +42,7 @@ WRITE_TRIMMED_DAT <- FALSE
 DAT_EXPLODED <- TRUE
 
 # 8. Output the dat.exploded table #DEFAULT:FALSE
-WRITE_DAT_EXPLODED <- FALSE
+WRITE_DAT_EXPLODED <- TRUE
 
 # 9. Output the BY_SPECIES, BY_REGION, and BY_NATIONAL tables. #DEFAULT:FALSE
 WRITE_BY_TABLES <- FALSE
@@ -1738,7 +1738,7 @@ rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, prob
 
 # Compile Scotian Shelf ---------------------------------------------------
 print("Compile SCOT")
-scot_summer <- read_csv(unz(here::here("data_raw", "scot_summer.csv.zip"), "scot_summer.csv")) 
+
 
 files <- as.list(dir(pattern = "scot", path = "data_raw", full.names = T))
 
@@ -1751,8 +1751,7 @@ scot <- files %>%
     GEAR = col_character(),
     SCIENTIFICNAME = col_character(),
     TAXONOMICNAMEAUTHOR = col_character()
-  ))) %>% 
-  rbind(scot_summer) 
+  ))) 
 
 names(scot) <- tolower(names(scot))
 
@@ -1934,7 +1933,7 @@ if (HQ_DATA_ONLY == TRUE){
   rm(p1, p2, p3, p4, test, test2)
 }  
 
-rm(files, scot, annual_strata, temp, scot_summer)
+rm(files, scot, annual_strata, temp)
 
 # Compile TAX ===========================================================
 print("Compile TAX")
@@ -2136,7 +2135,7 @@ if (DAT_EXPLODED == TRUE){
 Sys.time()
 
 
-#By region data ===========================================================
+#By region data ================================================
 print("by region data")
 
 #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
