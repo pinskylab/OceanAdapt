@@ -157,5 +157,5 @@ The files that pertain to haul conditions are:
     X20 = col\_character()
 
 -   [SEAMAP South Atlantic](https://www2.dnr.sc.gov/seamap/Account/LogOn?ReturnUrl=%2fseamap%2fReports) - This program provides data for the Southeast US.
--   [Canadian Department of Fisheries and Oceans](http://www.dfo-mpo.gc.ca/index-eng.htm) - Canada DFO provides data for the Scotian Shelf.
+-   [Canadian Department of Fisheries and Oceans](http://www.dfo-mpo.gc.ca/index-eng.htm) - Canada DFO provides data for the Scotian Shelf. The Fall and Spring surveys are rare. Summer surveys occur annually and are reported as part of the OceanAdapt long term data set.
 -   [Pacific Fisheries Management Council]() - PFMC provides data for the West Coast Annual and Triennial surveys.
