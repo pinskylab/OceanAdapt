@@ -670,7 +670,7 @@ wctri <- wctri %>%
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(START_LATITUDE)+0.5, floor(BOTTOM_DEPTH/100)*100 + 50, sep= "-"), 
     # adjust for tow area # weight per hectare (10,000 m2)	
-    wtcpue = WEIGHT*10000/DISTANCE_FISHED*1000*NET_WIDTH
+    wtcpue = (WEIGHT*10000)/(DISTANCE_FISHED*1000*NET_WIDTH)
   )
 
 # Calculate stratum area where needed (use convex hull approach)
