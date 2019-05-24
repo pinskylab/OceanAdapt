@@ -1802,10 +1802,10 @@ scot <- scot %>%
 
 # split out the seasons
 # Scotian Summer ####
-scot_sumr <- scot %>% 
+scot <- scot %>% 
   filter(season == "SUMMER") %>% 
   select(-season) %>% 
-  mutate(region = "Scotian Shelf Summer")
+  mutate(region = "Scotian Shelf")
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
@@ -1828,124 +1828,124 @@ if (HQ_DATA_ONLY == TRUE){
 }  
 
 # Scotian Fall ####
-scot_fall <- scot %>% 
-  filter(season == "FALL") %>% 
-  select(-season) %>% 
-  mutate(region = "Scotian Shelf Fall")
+# scot_fall <- scot %>% 
+#   filter(season == "FALL") %>% 
+#   select(-season) %>% 
+#   mutate(region = "Scotian Shelf Fall")
+# 
+# if (HQ_DATA_ONLY == TRUE){
+#   # plot the strata by year
+#   p1 <- scot_fall %>% 
+#     select(stratum, year) %>% 
+#     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+#     geom_jitter()
+#   
+#   p2 <- scot_fall %>%
+#     select(lat, lon) %>% 
+#     ggplot(aes(x = lon, y = lat)) +
+#     geom_jitter()
+#   
+#   # find strata sampled every year 
+#   annual_strata <- scot_fall %>% 
+#     filter(year != 1986, year != 1978) %>% 
+#     select(stratum, year) %>% 
+#     distinct() %>% 
+#     group_by(stratum) %>% 
+#     summarise(count = n()) %>%
+#     filter(count >= 6)
+#   
+#   # how many rows will be lost if only stratum trawled ever year are kept?
+#   test <- scot_fall %>% 
+#     filter(year != 1986, year != 1978) %>% 
+#     filter(stratum %in% annual_strata$stratum)
+#   nrow(scot_fall) - nrow(test)
+#   # percent that will be lost
+#   print((nrow(scot_fall) - nrow(test))/nrow(scot_fall))
+#   # 19% are removed
+#   
+#   scot_fall <- scot_fall  %>%
+#     filter(year != 1986, year != 1978) %>% 
+#     filter(stratum %in% annual_strata$stratum) 
+#   
+#   p3 <- scot_fall %>% 
+#     select(stratum, year) %>% 
+#     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+#     geom_jitter()
+#   
+#   p4 <- scot_fall %>%
+#     select(lat, lon) %>% 
+#     ggplot(aes(x = lon, y = lat)) +
+#     geom_jitter()
+#   
+#   if (HQ_PLOTS == TRUE){
+#     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+#       ggsave(plot = temp, filename = here::here("plots", "scot_fall-hq_dat_removed.pdf"))
+#   }
+# }  
+# 
+# # Scotian Spring ####
+# scot_spr <- scot %>% 
+#   filter(season == "SPRING") %>% 
+#   select(-season) %>% 
+#   mutate(region = "Scotian Shelf Spring")
+# 
+# 
+# if (HQ_DATA_ONLY == TRUE){
+#   # plot the strata by year
+#   p1 <- scot_spr %>% 
+#     select(stratum, year) %>% 
+#     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+#     geom_jitter()
+#   
+#   p2 <- scot_spr %>%
+#     select(lat, lon) %>% 
+#     ggplot(aes(x = lon, y = lat)) +
+#     geom_jitter()
+#   
+#   test <- scot_spr %>% 
+#     filter(year <= 1984) %>% 
+#     select(stratum, year) %>% 
+#     distinct() %>% 
+#     group_by(stratum) %>% 
+#     summarise(count = n()) %>%
+#     filter(count >= 6)
+#   
+#   # how many rows will be lost if only stratum trawled ever year are kept?
+#   test2 <- scot_spr %>% 
+#     filter(year <= 1984) %>% 
+#     filter(stratum %in% test$stratum)
+#   nrow(scot_spr) - nrow(test2)
+#   # percent that will be lost
+#   print((nrow(scot_spr) - nrow(test2))/nrow(scot_spr))
+#   # 58% are removed
+#   
+#   scot_spr <- scot_spr  %>%
+#     filter(year <= 1984) %>% 
+#     filter(stratum %in% test$stratum) 
+#   
+#   p3 <- scot_spr %>% 
+#     filter(year <= 1984) %>% 
+#     select(stratum, year) %>% 
+#     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+#     geom_jitter()
+#   
+#   p4 <- scot_spr %>%
+#     select(lat, lon) %>% 
+#     ggplot(aes(x = lon, y = lat)) +
+#     geom_jitter()
+#   
+#   if (HQ_PLOTS == TRUE){
+#     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+#     ggsave(plot = temp, filename = here::here("plots", "scot_spr-hq_dat_removed.pdf"))
+#     rm(temp)
+#   }
+#   rm(p1, p2, p3, p4, test, test2)
+# }  
 
-if (HQ_DATA_ONLY == TRUE){
-  # plot the strata by year
-  p1 <- scot_fall %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
-  
-  p2 <- scot_fall %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
-  
-  # find strata sampled every year 
-  annual_strata <- scot_fall %>% 
-    filter(year != 1986, year != 1978) %>% 
-    select(stratum, year) %>% 
-    distinct() %>% 
-    group_by(stratum) %>% 
-    summarise(count = n()) %>%
-    filter(count >= 6)
-  
-  # how many rows will be lost if only stratum trawled ever year are kept?
-  test <- scot_fall %>% 
-    filter(year != 1986, year != 1978) %>% 
-    filter(stratum %in% annual_strata$stratum)
-  nrow(scot_fall) - nrow(test)
-  # percent that will be lost
-  print((nrow(scot_fall) - nrow(test))/nrow(scot_fall))
-  # 19% are removed
-  
-  scot_fall <- scot_fall  %>%
-    filter(year != 1986, year != 1978) %>% 
-    filter(stratum %in% annual_strata$stratum) 
-  
-  p3 <- scot_fall %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
-  
-  p4 <- scot_fall %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
-  
-  if (HQ_PLOTS == TRUE){
-    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-      ggsave(plot = temp, filename = here::here("plots", "scot_fall-hq_dat_removed.pdf"))
-  }
-}  
-
-# Scotian Spring ####
-scot_spr <- scot %>% 
-  filter(season == "SPRING") %>% 
-  select(-season) %>% 
-  mutate(region = "Scotian Shelf Spring")
-
-
-if (HQ_DATA_ONLY == TRUE){
-  # plot the strata by year
-  p1 <- scot_spr %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
-  
-  p2 <- scot_spr %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
-  
-  test <- scot_spr %>% 
-    filter(year <= 1984) %>% 
-    select(stratum, year) %>% 
-    distinct() %>% 
-    group_by(stratum) %>% 
-    summarise(count = n()) %>%
-    filter(count >= 6)
-  
-  # how many rows will be lost if only stratum trawled ever year are kept?
-  test2 <- scot_spr %>% 
-    filter(year <= 1984) %>% 
-    filter(stratum %in% test$stratum)
-  nrow(scot_spr) - nrow(test2)
-  # percent that will be lost
-  print((nrow(scot_spr) - nrow(test2))/nrow(scot_spr))
-  # 58% are removed
-  
-  scot_spr <- scot_spr  %>%
-    filter(year <= 1984) %>% 
-    filter(stratum %in% test$stratum) 
-  
-  p3 <- scot_spr %>% 
-    filter(year <= 1984) %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
-  
-  p4 <- scot_spr %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
-  
-  if (HQ_PLOTS == TRUE){
-    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here::here("plots", "scot_spr-hq_dat_removed.pdf"))
-    rm(temp)
-  }
-  rm(p1, p2, p3, p4, test, test2)
-}  
-
-rm(files, scot, annual_strata, temp)
+rm(files, annual_strata, temp)
 
 # Because scot_fall and scot_spring are rare surveys, only use scot_summer
-scot <- scot_sumr
+
 
 # Compile TAX ===========================================================
 print("Compile TAX")
@@ -2348,62 +2348,69 @@ rm(centbio2, centbio3, maxyrs, natcentbio, natcentbiose, presyr, presyrsum, regc
 if(isTRUE(PLOT_CHARTS)) {
   
   # Plot Species #####
-
-  spp_lat_depth <- BY_SPECIES_DATA %>%
-    mutate(year = as.numeric(year),
-           mindpeth = depth - depth_se,
-           maxdepth = depth + depth_se,
-           minlat = lat - lat_se,
-           maxlat = lat + lat_se, 
-           minlat = ifelse(is.na(minlat), lat, minlat), 
-           maxlat = ifelse(is.na(maxlat), lat, maxlat), 
-           mindepth = ifelse(is.na(mindpeth), depth, mindpeth),
-           maxdepth = ifelse(is.na(maxdepth), depth, maxdepth))
+  centbio <- BY_SPECIES_DATA
   
+  # for latitude
+  print("Starting latitude plots for species")
+  pdf(file = here("plots", "sppcentlatstrat.pdf"), width=10, height=8)
   
-  spp_lat_plot <- spp_lat_depth %>% 
-    group_by(region) %>% 
-    ggplot(aes(x=year, y=lat, ymin=minlat, ymax=maxlat)) + 
-    geom_line(color = "#D95F02") + 
-    geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
-    theme_bw ()+
-    theme(
-      panel.border = element_rect(),
-      plot.background = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      plot.title = element_text(size = "12", hjust = 0.5)
-    ) +
-    xlab("Year") + 
-    ylab("Latitude (N°)") +
-    ggtitle("Latitude by Species") +
-    facet_grid(vars(region, spp)) +
-    scale_x_continuous(limit=c(1970,2020)
-                       ,breaks=seq(1970,2020,15)
-    ) 
-  
-  ggsave(spp_lat_plot, filename =  here::here("plots", "species-lat.png"))
+  regs = sort(unique(centbio$region))
+  for(i in 1:length(regs)){
+    print(i)
+    par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
+    spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
     
+    xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
+    
+    for(j in 1:length(spps)){
+      inds = centbio$spp == spps[j] & centbio$region == regs[i]
+      minlat = centbio$lat[inds] - centbio$lat_se[inds]
+      maxlat = centbio$lat[inds] + centbio$lat_se[inds]
+      minlat[is.na(minlat) | is.infinite(minlat)] = centbio$lat[inds][is.na(minlat) | is.infinite(minlat)] # fill in missing values so that polygon draws correctly
+      maxlat[is.na(maxlat) | is.infinite(maxlat)] = centbio$lat[inds][is.na(maxlat) | is.infinite(maxlat)]
+      ylims = c(min(minlat, na.rm=TRUE), max(maxlat, na.rm=TRUE))
+      
+      plot(0,0, type='l', ylab='Latitude (°)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
+      polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxlat, rev(minlat)), col='#CBD5E8', border=NA)
+      lines(centbio$year[inds], centbio$lat[inds], col='#D95F02', lwd=2)
+      
+      if((j-1) %% 6 == 0) mtext(text='Latitude (°N)', side=2, line=2.3, cex=0.6)
+      if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
+    }
+  }
   
-  spp_depth_plot <- ggplot(data = reg_lat_depth, aes(x=year, y=depth, ymin=mindepth, ymax=maxdepth)) + 
-    geom_line(color = "#D95F02") + 
-    geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
-    theme_bw ()+
-    theme(
-      panel.border = element_rect(),
-      plot.background = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      plot.title = element_text(size = "12", hjust = 0.5)
-    ) +
-    xlab("Year") + 
-    ylab("Depth (m)") +
-    ggtitle("Depth by Species") +
-    facet_grid(vars(region, spp)) +
-    scale_x_continuous(limit=c(1970,2020),breaks=seq(1970,2020,15))
+  dev.off()
   
-  ggsave(reg_depth_plot, filename =  here::here("plots", "species-depth.png"), width = 11, height = 11)
+  # for depth
+  print("Starting depth plots for species")
+  pdf(file = here("plots", "sppcentdepthstrat.pdf"), width=10, height=8)
   
+  regs = sort(unique(centbio$region))
+  for(i in 1:length(regs)){
+    print(i)
+    par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
+    spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
+    
+    xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
+    
+    for(j in 1:length(spps)){
+      inds = centbio$spp == spps[j] & centbio$region == regs[i]
+      mindep = centbio$depth[inds] - centbio$depth_se[inds]
+      maxdep = centbio$depth[inds] + centbio$depth_se[inds]
+      mindep[is.na(mindep) | is.infinite(mindep)] = centbio$depth[inds][is.na(mindep) | is.infinite(mindep)] # fill in missing values so that polygon draws correctly
+      maxdep[is.na(maxdep) | is.infinite(maxdep)] = centbio$depth[inds][is.na(maxdep) | is.infinite(maxdep)]
+      ylims = c(min(mindep, na.rm=TRUE), max(maxdep, na.rm=TRUE))
+      
+      plot(0,0, type='l', ylab='Depth (m)', xlab='Year', ylim=ylims, xlim=xlims, main=spps[j], las=1)
+      polygon(c(centbio$year[inds], rev(centbio$year[inds])), c(maxdep, rev(mindep)), col='#CBD5E8', border=NA)
+      lines(centbio$year[inds], centbio$depth[inds], col='#D95F02', lwd=2)
+      
+      if((j-1) %% 6 == 0) mtext(text='Depth (m)', side=2, line=2.3, cex=0.6)
+      if(j %% 36 < 7) mtext(text=regs[i], side=3, line=1.3, cex=0.6)
+    }
+  }
+  
+  dev.off()
   
   
   # Plot Regional ####
