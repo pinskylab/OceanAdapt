@@ -65,6 +65,7 @@ library(questionr) # for the wgtmean function
 library(geosphere) # for calculating trawl distance for SEUS 
 library(here) # for relative file paths
 
+
 # Functions ===========================================================
 print("Functions")
 
@@ -2348,7 +2349,7 @@ rm(centbio2, centbio3, maxyrs, natcentbio, natcentbiose, presyr, presyrsum, regc
 if(isTRUE(PLOT_CHARTS)) {
   
   # Plot Species #####
-
+library(ggforce)
   spp_lat_depth <- BY_SPECIES_DATA %>%
     mutate(year = as.numeric(year),
            mindpeth = depth - depth_se,
@@ -2377,12 +2378,12 @@ if(isTRUE(PLOT_CHARTS)) {
     xlab("Year") + 
     ylab("Latitude (N°)") +
     ggtitle("Latitude by Species") +
-    facet_grid(vars(region, spp)) +
+    facet_grid_paginate(vars(region, spp)) +
     scale_x_continuous(limit=c(1970,2020)
                        ,breaks=seq(1970,2020,15)
     ) 
   
-  ggsave(spp_lat_plot, filename =  here::here("plots", "species-lat.png"))
+  ggsave(spp_lat_plot, filename =  here::here("plots", "species-lat.pdf"))
     
   
   spp_depth_plot <- ggplot(data = reg_lat_depth, aes(x=year, y=depth, ymin=mindepth, ymax=maxdepth)) + 
@@ -2399,7 +2400,7 @@ if(isTRUE(PLOT_CHARTS)) {
     xlab("Year") + 
     ylab("Depth (m)") +
     ggtitle("Depth by Species") +
-    facet_grid(vars(region, spp)) +
+    facet_grid_paginate(vars(region, spp)) +
     scale_x_continuous(limit=c(1970,2020),breaks=seq(1970,2020,15))
   
   ggsave(reg_depth_plot, filename =  here::here("plots", "species-depth.png"), width = 11, height = 11)
