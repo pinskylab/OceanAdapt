@@ -1944,6 +1944,9 @@ if (HQ_DATA_ONLY == TRUE){
 
 rm(files, scot, annual_strata, temp)
 
+# Because scot_fall and scot_spring are rare surveys, only use scot_summer
+scot <- scot_sumr
+
 # Compile TAX ===========================================================
 print("Compile TAX")
 tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
@@ -1966,7 +1969,7 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
 
 # Master Data Set ===========================================================
 print("Join into Master Data Set")
-dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot_sumr, scot_fall, scot_spr) %>% 
+dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot) %>% 
 # Remove NA values in wtcpue
   filter(!is.na(wtcpue))
 
@@ -1981,7 +1984,7 @@ if(sum(dat$spp == 'NA') > 0 | sum(is.na(dat$spp)) > 0){
 }
 
 if(isTRUE(REMOVE_REGION_DATASETS)) {
-  rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER, scot, scot_fall, scot_spr, scot_sumr, tax)
+  rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER, scot, tax)
 }
 
 if(isTRUE(WRITE_MASTER_DAT)){
