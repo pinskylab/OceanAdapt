@@ -1812,11 +1812,11 @@ if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
 
     # plot the strata by year
-  p1 <- scot_sumr %>% 
+  p1 <- scot %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
-  p2 <- scot_sumr %>%
+  p2 <- scot %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -1824,7 +1824,7 @@ if (HQ_DATA_ONLY == TRUE){
 
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
-    ggsave(plot = temp, filename = here::here("plots", "scot_sumr-hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "scot-hq_dat_removed.pdf"))
   }
 }  
 
