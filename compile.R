@@ -1964,8 +1964,7 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
   name = col_character(),
   common = col_character()
 )) %>% 
-  select(taxon, name, common) %>% 
-  rename(spp = name)
+  select(taxon, name, common)
 
 
 # Master Data Set ===========================================================
@@ -1974,10 +1973,11 @@ dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUM
 # Remove NA values in wtcpue
   filter(!is.na(wtcpue))
 
-# add a nice spp and common name
-dat <- left_join(dat, tax, by = "spp") %>% 
-  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, common, wtcpue) %>% 
-  distinct()
+# add a case sensitive spp and common name
+dat <- left_join(dat, tax, by = c("spp" = "taxon")) %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, name, common, wtcpue) %>% 
+  distinct() %>% 
+  rename(spp = name)
 
 # check for errors in name matching
 if(sum(dat$spp == 'NA') > 0 | sum(is.na(dat$spp)) > 0){
