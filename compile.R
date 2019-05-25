@@ -2043,7 +2043,7 @@ if(isTRUE(WRITE_TRIMMED_DAT)){
 }
 
 # are there any spp in trimmed_dat that are not in the taxonomy file?
-test <- anti_join(select(trimmed_dat, spp, common), tax, by = "spp") %>% 
+test <- anti_join(select(trimmed_dat, spp, common), tax, by = c("spp" = "name")) %>% 
   distinct()
 
 # if test contains more than 0 obs, use the add-spp-to-taxonomy.R script to add new taxa to the spptaxonomy.csv and go back to "Compile Tax".
