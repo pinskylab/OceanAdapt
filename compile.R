@@ -1943,7 +1943,7 @@ if (HQ_DATA_ONLY == TRUE){
 #   rm(p1, p2, p3, p4, test, test2)
 # }  
 
-rm(files, annual_strata, temp)
+rm(files, temp)
 
 # Because scot_fall and scot_spring are rare surveys, only use scot_summer
 
