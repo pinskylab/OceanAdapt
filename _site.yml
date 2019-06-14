@@ -1,0 +1,13 @@
+name: "OceanAdapt"
+navbar:
+  title: "HOME"
+  left:
+    - text: "About"
+      href: about.html
+output_dir: "."
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+#    include:
+#      after_body: _footer.html
