@@ -2,14 +2,12 @@ name: "OceanAdapt"
 navbar:
   title: "HOME"
   left:
-    - text:"Home"
+    - text: "Home"
       href: index.html
     - text: "About"
       href: about.html
+
 output_dir: "."
 output:
   html_document:
     theme: cosmo
-    highlight: textmate
-#    include:
-#      after_body: _footer.html
