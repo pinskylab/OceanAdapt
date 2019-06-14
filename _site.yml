@@ -1,13 +1,19 @@
-name: "OceanAdapt"
+name: "R Markdown Websites Tutorial"
 navbar:
   title: "HOME"
   left:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
-
+    - text: "First Observations"
+      href: first_observations.html
+    - text: "Basic Workflow"
+      href: basic_workflow.html
+    - text: "Getting Sophisticated"
+      href: getting_sophisticated.html
+    - text: "Your Turn"
+      href: your_turn.html
 output_dir: "."
 output:
   html_document:
-    theme: cosmo
+    theme: paper
+    highlight: textmate
+#    include:
+#      after_body: _footer.html
