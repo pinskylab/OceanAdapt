@@ -8,3 +8,5 @@ output:
 
 ----
 Index
+to render the site, type into the console:
+rmarkdown::render_site()
