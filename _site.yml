@@ -2,7 +2,11 @@ name: "OceanAdapt Github Repository"
 navbar:
   title: "HOME"
   left:
+    - text: "Home"
+      href: index.html
     - text: "About"
       href: about.html
+    - text: "How to Update"
+      href: How_to_update.html      
 output_dir: "."
 
