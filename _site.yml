@@ -1,19 +1,10 @@
-name: "Genomics Protocols"
+name: "OceanAdapt Github Repository"
 output_dir: "."
 navbar:
-  title: "Home"
+  title: "OceanAdapt Github Repository"
   left:
-    - text: "Overview"
+    - text: "Home"
       href: index.html
-    - text: "Processing HiSEQ data"
-      href: 01_hiseq_workflow.nb.html
-    - text: "Determining Cervus Parameters"
-      href: determine-cervus-parameters.nb.html
-    - text: "Step 6 - Identity Analysis"
-      href: 06_identity-protocol.nb.html
-output:
-  html_document:
-    theme: yeti
-    highlight: textmate
-#    include:
-#      after_body: _footer.html
+    - text: "About"
+      href: about.html
+
