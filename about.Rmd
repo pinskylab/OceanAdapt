@@ -2,7 +2,6 @@
 title: ""
 output: 
   html_document:
-    theme: cosmo
     toc: true
 ---
 # About Us
