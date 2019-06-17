@@ -463,6 +463,63 @@ div.tocify {
 <li><p><a href="http://www.fishbase.org/">Sealifebase</a></p></li>
 </ul>
 </div>
+<div id="detailed-meta-data" class="section level1">
+<h1>Detailed Meta Data</h1>
+<p>The data we report on OceanAdapt are curated from several data sources. Our curated data can be found here:</p>
+<ul>
+<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/all-regions-full.RData">all-regions-full.RData</a> is a table containing all rows from all regions with the following columns:
+<ul>
+<li>region - character - the region where the survey occurred.</li>
+<li>haulid - character - a unique identifier of the trawl haul.</li>
+<li>year - numeric (YYYY) - the year the trawl occurred.</li>
+<li>lat - numeric - the latitude in decimal degrees where the trawl occurred.</li>
+<li>lon - numeric - the longitude in decimal degrees where the trawl occurred.</li>
+<li>stratum - numeric - the stratum code where the trawl occurred.</li>
+<li>depth - numeric - the depth in meters of the trawl.</li>
+<li>spp - character - the Genus and species of the organism captured in the trawl.</li>
+<li>common - character - the common name of the organism captured in the trawl.</li>
+<li>wtcpue - numeric - the weight in kilograms captured per unit effort.</li>
+</ul></li>
+<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/all-regions-trimmed.RData">all-regions-trimmed.RData</a> is the all-regions_full table reduced to include only species present at least 3/4 of the available years in a survey. The columns are the same as those listed above.</li>
+<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/by_national.RData">by_national.RData</a> is a table of national averages by year for the trawl surveys with the following columns:
+<ul>
+<li>year - numeric (YYYY) - the year the trawl occurred.</li>
+<li>lat - numeric - the mean latitude in decimal degrees where all trawls occurred.</li>
+<li>lon - numeric - the mean longitude in decimal degrees where all trawls occurred.</li>
+<li>depth - numeric - the mean depth in meters of all trawls.</li>
+<li>lat_se - numeric - the standard error of the mean latitude.</li>
+<li>lonse - numeric - the standard error of the mean longitude.</li>
+<li>depth_se - numeric - the standard error of the mean depth.</li>
+<li>numspp - numeric - the total number of species observed that year.</li>
+</ul></li>
+<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/by_region.RData">by_region.RData</a> is a table of regional averages by year for the trawl surveys with the following columns:
+<ul>
+<li>region - character - the region where the survey occurred.</li>
+<li>year - numeric (YYYY) - the year the trawl occurred.</li>
+<li>lat - numeric - the mean latitude in decimal degrees where all trawls occurred.</li>
+<li>lon - numeric - the mean longitude in decimal degrees where all trawls occurred.</li>
+<li>depth - numeric - the mean depth in meters of all trawls.</li>
+<li>lat_se - numeric - the standard error of the mean latitude.</li>
+<li>lonse - numeric - the standard error of the mean longitude.</li>
+<li>depth_se - numeric - the standard error of the mean depth.</li>
+<li>numspp - numeric - the total number of species observed that year in that region.</li>
+</ul></li>
+<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/by_species.RData">by_species.RData</a> is a table of averages by species for the trawl surveys with the following columns:
+<ul>
+<li>region - character - the region where the survey occurred.</li>
+<li>year - numeric (YYYY) - the year the trawl occurred.</li>
+<li>lat - numeric - the mean latitude in decimal degrees where the species was found in a given year.</li>
+<li>lon - numeric - the mean longitude in decimal degrees where the species was found in a given year.</li>
+<li>depth - numeric - the mean depth in meters where the species was found in a given year.</li>
+<li>lat_se - numeric - the standard error of the mean latitude.</li>
+<li>lonse - numeric - the standard error of the mean longitude.</li>
+<li>depth_se - numeric - the standard error of the mean depth.</li>
+<li>spp - character - the Genus and species of the organism captured in the trawl.</li>
+<li>common - character - the common name of the organism captured in the trawl.</li>
+</ul></li>
+<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/by_species.RData">dat_exploded.RData</a> a table where all species found in a region occupy a row in the table in all years and represented with zeros when not observed. The table is made up of the same columns as all-data-full and all-data-trimmed.</li>
+</ul>
+</div>
 
 
 
