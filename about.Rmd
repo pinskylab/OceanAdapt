@@ -57,6 +57,8 @@ In primary publications using data from the database, please cite Pinsky et al. 
 - [National Marine Fisheries Service](http://www.nmfs.noaa.gov/)  
 
 - [US Global Change Research Program](http://www.globalchange.gov/)  
+- [Fisheries and Oceans Canada](https://www.dfo-mpo.gc.ca/index-eng.htm)
+
 
 **Climate, fish, and fisheries**  
 
