@@ -4,7 +4,5 @@ navbar:
   left:
     - text: "About"
       href: about.html
-    - text: "How to Update"
-      href: How_to_update.html      
 output_dir: "."
 
