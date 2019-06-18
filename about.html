@@ -419,12 +419,12 @@ div.tocify {
 <li><a href="http://www.seamap.org/">Southeast Area Monitoring and Assessment Program - South Atlantic</a></li>
 <li><a href="https://www.dfo-mpo.gc.ca/oceans/index-eng.html">Fisheries and Oceans Canada - Scotian Shelf</a></li>
 </ul>
-<p>Note that the script for these calculations is also available (written for <a href="http://www.r-project.org/">R</a>). Development version of the script available on <a href="https://github.com/mpinsky/OceanAdapt">GitHub</a>.</p>
+<p>Note that the script for these calculations is also available (written for <a href="http://www.r-project.org/">R</a>). Development version of the script available on <a href="https://github.com/pinskylab/OceanAdapt">GitHub</a>.</p>
 <hr />
 </div>
 <div id="our-data-policy" class="section level1">
 <h1>Our Data Policy</h1>
-<p>All of the data underlying these analyses are available for <a href="https://github.com/mpinsky/OceanAdapt">download</a>, including spatially georeferenced catches from more than fifty thousand bottom trawl tows in six regions of the U.S. Please notify us through the online form when you download the data, as this helps us justify maintaining the database as a community resource.</p>
+<p>All of the data underlying these analyses are available for <a href="https://github.com/pinskylab/OceanAdapt">download</a>, including spatially georeferenced catches from more than fifty thousand bottom trawl tows in six regions of the U.S. Please notify us through the online form when you download the data, as this helps us justify maintaining the database as a community resource.</p>
 <p><strong>As part of our Fair Use Policy, please:</strong></p>
 <ul>
 <li><p>Notify us if you are preparing a manuscript using information from the OceanAdapt database (also helps justify funding).</p></li>
@@ -467,7 +467,7 @@ div.tocify {
 <h1>Detailed Meta Data</h1>
 <p>The data we report on OceanAdapt are curated from several data sources. Our curated data can be found here:</p>
 <ul>
-<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/all-regions-full.RData">all-regions-full.RData</a> is a table containing all rows from all regions with the following columns:
+<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/all-regions-full.RData">all-regions-full.RData</a> is a table containing all rows from all regions with the following columns:
 <ul>
 <li>region - character - the region where the survey occurred.</li>
 <li>haulid - character - a unique identifier of the trawl haul.</li>
@@ -480,8 +480,8 @@ div.tocify {
 <li>common - character - the common name of the organism captured in the trawl.</li>
 <li>wtcpue - numeric - the weight in kilograms captured per unit effort.</li>
 </ul></li>
-<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/all-regions-trimmed.RData">all-regions-trimmed.RData</a> is the all-regions_full table reduced to include only species present at least 3/4 of the available years in a survey. The columns are the same as those listed above.</li>
-<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/by_national.RData">by_national.RData</a> is a table of national averages by year for the trawl surveys with the following columns:
+<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/all-regions-trimmed.RData">all-regions-trimmed.RData</a> is the all-regions_full table reduced to include only species present at least 3/4 of the available years in a survey. The columns are the same as those listed above.</li>
+<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_national.RData">by_national.RData</a> is a table of national averages by year for the trawl surveys with the following columns:
 <ul>
 <li>year - numeric (YYYY) - the year the trawl occurred.</li>
 <li>lat - numeric - the mean latitude in decimal degrees where all trawls occurred.</li>
@@ -492,7 +492,7 @@ div.tocify {
 <li>depth_se - numeric - the standard error of the mean depth.</li>
 <li>numspp - numeric - the total number of species observed that year.</li>
 </ul></li>
-<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/by_region.RData">by_region.RData</a> is a table of regional averages by year for the trawl surveys with the following columns:
+<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_region.RData">by_region.RData</a> is a table of regional averages by year for the trawl surveys with the following columns:
 <ul>
 <li>region - character - the region where the survey occurred.</li>
 <li>year - numeric (YYYY) - the year the trawl occurred.</li>
@@ -504,7 +504,7 @@ div.tocify {
 <li>depth_se - numeric - the standard error of the mean depth.</li>
 <li>numspp - numeric - the total number of species observed that year in that region.</li>
 </ul></li>
-<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/by_species.RData">by_species.RData</a> is a table of averages by species for the trawl surveys with the following columns:
+<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_species.RData">by_species.RData</a> is a table of averages by species for the trawl surveys with the following columns:
 <ul>
 <li>region - character - the region where the survey occurred.</li>
 <li>year - numeric (YYYY) - the year the trawl occurred.</li>
@@ -517,7 +517,7 @@ div.tocify {
 <li>spp - character - the Genus and species of the organism captured in the trawl.</li>
 <li>common - character - the common name of the organism captured in the trawl.</li>
 </ul></li>
-<li><a href="https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/by_species.RData">dat_exploded.RData</a> a table where all species found in a region occupy a row in the table in all years and represented with zeros when not observed. The table is made up of the same columns as all-data-full and all-data-trimmed.</li>
+<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_species.RData">dat_exploded.RData</a> a table where all species found in a region occupy a row in the table in all years and represented with zeros when not observed. The table is made up of the same columns as all-data-full and all-data-trimmed.</li>
 </ul>
 </div>
 
