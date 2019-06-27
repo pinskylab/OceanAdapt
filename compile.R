@@ -223,7 +223,7 @@ stopifnot(nrow(filter(ai, is.na(Areakm2))) == 0)
 ai <- ai %>% 
   mutate(
     # Create a unique haulid
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
+    haulid = paste(formatC(VESSEL, width=3, flag=0), CRUISE, formatC(HAUL, width=3, flag=0), sep='-'), 
          # change -9999 wtcpue to NA
          wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
   # rename columns
@@ -354,7 +354,7 @@ stopifnot(nrow(filter(ebs, is.na(Areakm2))) == 0)
 ebs <- ebs %>% 
   mutate(
     # Create a unique haulid
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'), 
+    haulid = paste(formatC(VESSEL, width=3, flag=0), CRUISE, formatC(HAUL, width=3, flag=0), sep='-'), 
     # convert -9999 to NA 
     wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>%  
   # rename columns
@@ -487,7 +487,7 @@ stopifnot(nrow(filter(goa, is.na(Areakm2))) == 0)
 goa <- goa %>%
   mutate(
     # Create a unique haulid
-    haulid = paste(formatC(VESSEL, width=3, flag=0), formatC(CRUISE, width=3, flag=0), formatC(HAUL, width=3, flag=0), sep='-'),    
+    haulid = paste(formatC(VESSEL, width=3, flag=0), CRUISE, formatC(HAUL, width=3, flag=0), sep='-'),    
     wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
   rename(year = YEAR, 
          lat = LATITUDE, 
@@ -2249,11 +2249,10 @@ print("by national data")
 ## Calculate mean position through time for the US #
 
 
-#WHEN USING ENGLISH NAMES FROM add_region_column(), UNCOMMENT NEXT LINE:
-regstouse <- c('Eastern Bering Sea', 'Northeast US Spring', 'Northeast US Fall') # Only include regions not constrained by geography in which surveys have consistent methods through time
-#WHEN USING DEFAULT NAMES FROM add_region_column(), UN COMMENT NEXT LINE:
-#regstouse = c('AFSC_EBS', 'NEFSC_NEUSSpring') # Only include regions not constrained by geography in which surveys have consistent methods through time
-natstartyear <- 1982 # a common starting year for the both focal regions
+# Only include regions not constrained by geography in which surveys have consistent methods through time
+regstouse <- c('Eastern Bering Sea', 'Northeast US Spring', 'Northeast US Fall') 
+
+natstartyear <- 1982 # a common starting year for the focal regions
 
 # find the latest year that all regions have in common
 maxyears <- dat %>% 
