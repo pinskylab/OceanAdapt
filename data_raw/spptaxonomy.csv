@@ -1,44 +1,44 @@
 taxon,species,genus,family,order,class,superclass,subphylum,phylum,kingdom,name,common
 ANASIMUS LATUS,latus,Anasimus,Inachoididae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Anasimus latus,stilt spider crab
-ABLENNES HIANS,hians,Ablennes,,,,,,,,Ablennes hians,flat needlefish
+ABLENNES HIANS,hians,Ablennes,NA,NA,NA,NA,NA,NA,NA,Ablennes hians,flat needlefish
 ACANTHEPHYRA PELAGICA,pelagica,Acanthephyra,Acanthephyridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Acanthephyra pelagica,scarlet shrimp
 Acantholithodes hispidus,hispidus,Acantholithodes,Hapalogastridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Acantholithodes hispidus,spiny lithode crab
 Acantholithodeshispidus,hispidus,Acantholithodes,Hapalogastridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Acantholithodes hispidus,spiny lithode crab
-ACANTHOSTRACION QUADRICORNIS,,,,,,,,,,Acanthostracion quadricornis,scrawled cowfish
-ACANTHURUS COERULEUS,,,,,,,,,,Acanthurus coeruleus,blue tang
-ACHIRUS LINEATUS,,,,,,,,,,Achirus lineatus,lined sole
+ACANTHOSTRACION QUADRICORNIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Acanthostracion quadricornis,scrawled cowfish
+ACANTHURUS COERULEUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Acanthurus coeruleus,blue tang
+ACHIRUS LINEATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Achirus lineatus,lined sole
 ACHOA HEPSETUS,hepsetus,Anchoa,Engraulidae,Clupeiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Anchoa hepsetus,striped anchovy
 ACHOA MITCHILLI,mitchilli,Anchoa,Engraulidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Anchoa mitchilli,bay anchovy
-ACIPENSER OXYRINCHUS,,,,,,,,,,Acipenser oxyrinchus,Atlantic sturgeon
+ACIPENSER OXYRINCHUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Acipenser oxyrinchus,Atlantic sturgeon
 ACTINARIA,NA,NA,NA,Actiniaria,Anthozoa,NA,NA,Cnidaria,Animalia,Actiniaria spp.,anemones
 Actinauge verrilli,verrilli,Actinauge,Hormathiidae,Actiniaria,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Actinauge verrilli,reticulate anemone
 Actiniaria,NA,NA,NA,Actiniaria,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Actiniaria spp.,anemones
 ACYLOPSETTA DILECTA,dilecta,Ancylopsetta,Paralichthyidae,Pleuronectiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Acylopsetta dilecta,three-eye flounder
 ACYLOPSETTA QUADROCELLATA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ancylopsetta ommata,ocellated flounder
-AETOBATUS NARINARI,,,,,,,,,,Aetobatus narinari,spotted eagle ray
+AETOBATUS NARINARI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Aetobatus narinari,spotted eagle ray
 Aforia circinata,circinata,Aforia,Cochlespiridae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Aforia circinata,keeled aforia
 Aforiacircinata,circinata,Aforia,Cochlespiridae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Aforia circinata,keeled aforia
 Agonopsis vulsa,vulsa,Agonopsis,Agonidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Agonopsis vulsa,northern spearnose poacher
 AGONUS DECAGONUS,decagonus,Leptagonus,Agonidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Leptagonus decagonus,Atlantic poacher
 Albatrossia pectoralis,pectoralis,Albatrossia,Macrouridae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Albatrossia pectoralis,giant grenadier
 Albatrossiapectoralis,pectoralis,Albatrossia,Macrouridae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Albatrossia pectoralis,giant grenadier
-ALBUNEA PARETII,,,,,,,,,,Albunea paretii,beach mole crab
-ALECTIS CILIARIS,,,,,,,,,,Alectis ciliaris,African pompano
+ALBUNEA PARETII,NA,NA,NA,NA,NA,NA,NA,NA,NA,Albunea paretii,beach mole crab
+ALECTIS CILIARIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Alectis ciliaris,African pompano
 ALEPOCEPHALUS BAIRDII,bairdii,Alepocephalus,Alepocephalidae,Osmeriformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Alepocephalus bairdii,Baird's smoothhead
 Allocentrotus fragilis,fragilis,Allocentrotus,Strongylocentrotidae,Echinoida,Echinoidea,NA,Echinozoa,Echinodermata,Animalia,Allocentrotus fragilis,fragile urchin
 Allosmerus elongatus,elongatus,Allosmerus,Osmeridae,Osmeriformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Allosmerus elongatus,whitebait smelt
-ALOPIAS VULPINUS,,,,,,,,,,Alopias vulpinus,thresher shark
+ALOPIAS VULPINUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Alopias vulpinus,thresher shark
 ALOSA AESTIVALIS,aestivalis,Alosa,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Alosa aestivalis,blueback herring
 Alosa aestivalis,aestivalis,Alosa,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Alosa aestivalis,blueback herring
 ALOSA PSEUDOHARENGUS,pseudoharengus,Alosa,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Alosa pseudoharengus,alewife
 Alosa pseudoharengus,pseudoharengus,Alosa,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Alosa pseudoharengus,alewife
 ALOSA SAPIDISSIMA,sapidissima,Alosa,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Alosa sapidissima,American shad
 Alosa sapidissima,sapidissima,Alosa,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Alosa sapidissima,American shad
-ALPHEUS FORMOSUS,,,,,,,,,,Alpheus formosus,striped snapping shrimp
-ALPHEUS HETEROCHAELIS,,,,,,,,,,Alpheus heterochaelis,bigclaw snapping shrimp
-ALUTERUS HEUDELOTII,,,,,,,,,,Aluterus heudelotii,dotterel filefish
-ALUTERUS MONOCEROS,,,,,,,,,,Aluterus monoceros,unicorn filefish
-ALUTERUS SCHOEPFII,,,,,,,,,,Aluterus schoepfii,orange filefish
+ALPHEUS FORMOSUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Alpheus formosus,striped snapping shrimp
+ALPHEUS HETEROCHAELIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Alpheus heterochaelis,bigclaw snapping shrimp
+ALUTERUS HEUDELOTII,NA,NA,NA,NA,NA,NA,NA,NA,NA,Aluterus heudelotii,dotterel filefish
+ALUTERUS MONOCEROS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Aluterus monoceros,unicorn filefish
+ALUTERUS SCHOEPFII,NA,NA,NA,NA,NA,NA,NA,NA,NA,Aluterus schoepfii,orange filefish
 AMBLYRAJA RADIATA,radiata,Amblyraja,Rajidae,Rajiformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Amblyraja radiata,starry skate
 Amblyraja radiata,radiata,Amblyraja,Rajidae,Rajiformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Amblyraja radiata,starry skate
 AMMODYTES DUBIUS,dubius,Ammodytes,Ammodytidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ammodytes dubius,northern sand lance
@@ -53,16 +53,16 @@ Anarhichas orientalis,orientalis,Anarhichas,Anarhichadidae,Perciformes,Actinopte
 Anarhichasorientalis,orientalis,Anarhichas,Anarhichadidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Anarhichas orientalis,Bering wolffish
 Anarrhichthys ocellatus,ocellatus,Anarrhichthys,Anarhichadidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Anarrhichthys ocellatus,wolf-eel
 ANASIMUS LATUS,latus,Anasimus,Inachoididae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Anasimus latus,stilt spider crab
-ANCHOA,,,,,,,,,,Anchoa spp.,anchovy
+ANCHOA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Anchoa spp.,anchovy
 ANCHOA HEPSETUS,hepsetus,Anchoa,Engraulidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Anchoa hepsetus,striped anchovy
 ANCHOA MITCHILLI,mitchilli,Anchoa,Engraulidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Anchoa mitchilli,bay anchovy
 ANCYLOPSETTA DILECTA,dilecta,Ancylopsetta,Bothidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ancylopsetta dilecta,three-eye flounder
 ANCYLOPSETTA QUADROCELLATA,ommata,Ancylopsetta,Bothidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ancylopsetta ommata,ocellated flounder
 Anisodoris nobilis,nobilis,Anisodoris,Discodorididae,Nudibranchia,Gastropoda,NA,NA,Mollusca,Animalia,Anisodoris nobilis,Pacific sea-lemon
-ANISOTREMUS VIRGINICUS,,,,,,,,,,Anisotremus virginicus,PORKFISH
+ANISOTREMUS VIRGINICUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Anisotremus virginicus,PORKFISH
 Anoplopoma fimbria,fimbria,Anoplopoma,Anoplopomatidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Anoplopoma fimbria,sablefish
 Anoplopomafimbria,fimbria,Anoplopoma,Anoplopomatidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Anoplopoma fimbria,sablefish
-ANTENNARIUS OCELLATUS,,,,,,,,,,Antennarius ocellatus,ocellated frogfish
+ANTENNARIUS OCELLATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Antennarius ocellatus,ocellated frogfish
 ANTENNARIUS RADIOSUS,radiosus,Antennarius,Antennariidae,Lophiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Antennarius radiosus,singlespot frogfish
 Anthoptilum grandiflorum,grandiflorum,Anthoptilum,Anthoptilidae,Pennatulacea,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Anthoptilum grandiflorum,sea pen
 ANTIMORA ROSTRATA,rostrata,Antimora,Moridae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Antimora rostrata,blue hake
@@ -74,10 +74,10 @@ Aplidiumsp.A(Clark2006),NA,Aplidium,Polyclinidae,Aplousobranchia,Ascidiacea,NA,T
 Apristurus brunneus,brunneus,Apristurus,Scyliorhinidae,Carcharhiniformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Apristurus brunneus,brown cat shark
 Aptocyclus ventricosus,ventricosus,Aptocyclus,Cyclopteridae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Aptocyclus ventricosus,smooth lumpsucker
 Aptocyclusventricosus,ventricosus,Aptocyclus,Cyclopteridae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Aptocyclus ventricosus,smooth lumpsucker
-ARCHOSARGUS PROBATOCEPHALUS,,,,,,,,,,Archosargus probatocephalus,sheepshead
+ARCHOSARGUS PROBATOCEPHALUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Archosargus probatocephalus,sheepshead
 Arctomelon stearnsii,stearnsii,Arctomelon,Volutidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Arctomelon stearnsii,Alaska volute
 AREAEUS CRIBRARIUS,cribrarius,Arenaeus,Portunidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Arenaeus cribrarius,speckled swimming crab
-ARENAEUS CRIBRARIUS,,,,,,,,,,Arenaeus cribrarius,speckled swimming crab
+ARENAEUS CRIBRARIUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Arenaeus cribrarius,speckled swimming crab
 Argentina sialis,sialis,Argentina,Argentinidae,Osmeriformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Argentina sialis,Pacific argentine
 ARGENTINA SILUS,silus,Argentina,Argentinidae,Osmeriformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Argentina silus,Atlantic argentine
 Argentina silus,silus,Argentina,Argentinidae,Osmeriformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Argentina silus,Atlantic argentine
@@ -86,8 +86,8 @@ Argis dentata,dentata,Argis,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthr
 Argis lar,lar,Argis,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Argis lar,kuro shrimp
 Argis sp.,NA,Argis,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Argis spp.,argid shrimps
 Argissp.,NA,Argis,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Argis spp.,argid shrimps
-ARIOMMA REGULUS,,,,,,,,,,Ariomma regulus,spotted driftfish
-ARIOPSIS FELIS,,,,,,,,,,Ariopsis felis,hardhead catfish
+ARIOMMA REGULUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ariomma regulus,spotted driftfish
+ARIOPSIS FELIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ariopsis felis,hardhead catfish
 ARIUS FELIS,felis,Ariopsis,Ariidae,Siluriformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ariopsis felis,hardhead catfish
 ARTEDIELLUS  SP,NA,Artediellus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Artediellus spp.,hookear sculpins
 ARTEDIELLUS  SP.,NA,Artediellus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Artediellus spp.,hookear sculpins
@@ -101,8 +101,8 @@ Asteriasamurensis,amurensis,Asterias,Asteriidae,Forcipulatida,Asteroidea,NA,Aste
 ASTEROIDEA,NA,NA,NA,NA,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Asterozoa spp.,sea stars
 Asteroidea,NA,NA,NA,NA,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Asterozoa spp.,sea stars
 Astropecten californicus,verilli,Astropecten,Astropectinidae,Paxillosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Astropecten verilli,sea star
-ASTROSCOPUS GUTTATUS,,,,,,,,,,Astroscopus guttatus,northern stargazer
-ASTROSCOPUS Y-GRAECUM,,,,,,,,,,Astroscopus y-graecum,southern stargazer
+ASTROSCOPUS GUTTATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Astroscopus guttatus,northern stargazer
+ASTROSCOPUS Y-GRAECUM,NA,NA,NA,NA,NA,NA,NA,NA,NA,Astroscopus y-graecum,southern stargazer
 ATEARIUS RADIOSUS,radiosus,Antennarius,Antennariidae,Lophiiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Atearius radiosus,singlespot frogfish
 Atheresthes evermanni,NA,NA,NA,NA,NA,NA,NA,NA,NA,Atheresthes evermanni,Kamchatka flounder
 Atheresthes sp.,NA,Atheresthes,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Atheresthes spp.,arrowtooth and Kamchatka flounders
@@ -112,9 +112,9 @@ Atheresthessp.,NA,Atheresthes,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pi
 Atheresthesstomias,stomias,Atheresthes,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Atheresthes stomias,arrowtooth flounder
 AURELIA,NA,Aurelia,Ulmaridae,Semaeostomeae,Scyphozoa,NA,Medusozoa,Cnidaria,Animalia,Aurelia spp.,moon jellies
 Aurelia spp.,NA,Aurelia,Ulmaridae,Semaeostomeae,Scyphozoa,NA,Medusozoa,Cnidaria,Animalia,Aurelia spp.,moon jellies
-BAGRE MARINUS,,,,,,,,,,Bagre marinus,Gafftopsail catfish
+BAGRE MARINUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Bagre marinus,Gafftopsail catfish
 BAGRE MARIUS,marinus,Bagre,Ariidae,Siluriformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Bagre marinus,Gafftopsail catfish
-BAIRDIELLA CHRYSOURA,,,,,,,,,,Bairdiella chrysoura,silver perch
+BAIRDIELLA CHRYSOURA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Bairdiella chrysoura,silver perch
 Balanus evermanni,evermanni,Chirona,Archaeobalanidae,Sessillia,Maxillopoda,NA,Crustacea,Arthropoda,Animalia,Chirona evermanni,barnacle
 Balanus sp.,NA,Balanus,Balanidae,Sessilia,Maxillopoda,NA,Crustacea,Arthropoda,Animalia,Balanus spp.,barnacle
 BALISTES CAPRISCUS,capriscus,Balistes,Balistidae,Tetraodontiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Balistes capriscus,gray triggerfish
@@ -154,14 +154,14 @@ Boltenia sp.,NA,Boltenia,Pyuridae,Pleurogona,Ascidiacea,NA,Urochordata,Chordata,
 BOREOGADUS SAIDA,saida,Boreogadus,Gadidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Boreogadus saida,Arctic cod
 Boreogadus saida,saida,Boreogadus,Gadidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Boreogadus saida,Arctic cod
 Bothrocara pusillum,pusillum,Bothrocara,Zoarcidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Bothrocara pusillum,Alaska eelpout
-BOTHUS ROBINSI,,,,,,,,,,Bothus robinsi,Twospot flounder
+BOTHUS ROBINSI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Bothus robinsi,Twospot flounder
 Brachiopoda,NA,NA,NA,NA,NA,NA,NA,Brachiopoda,Animalia,Brachiopoda spp.,brachiopods
 BREGMACEROS ATLANTICUS,atlanticus,Bregmaceros,Bregmacerotidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Bregmaceros atlanticus,antenna codlet
 BREGMACEROS ATLATICUS,atlanticus,Bregmaceros,Bregmacerotidae,Gadiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Bregmaceros atlaticus,antenna codlet
 BREVOORTIA PATRONUS,patronus,Brevoortia,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Brevoortia patronus,Gulf menhaden
 BREVOORTIA PATROUS,patronus,Brevoortia,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Brevoortia patronus,Gulf menhaden
-BREVOORTIA SMITHI,,,,,,,,,,Brevoortia smithi,yellowfin menhaden
-BREVOORTIA TYRANNUS,,,,,,,,,,Brevoortia tyrannus,Atlantic menhaden
+BREVOORTIA SMITHI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Brevoortia smithi,yellowfin menhaden
+BREVOORTIA TYRANNUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Brevoortia tyrannus,Atlantic menhaden
 Brisaster latifrons,latifrons,Brisaster,Schizasteridae,Spatangoida,Echinoidea,NA,Echinozoa,Echinodermata,Animalia,Brisaster latifrons,sea urchin
 Brisaster spp.,NA,Brisaster,Schizasteridae,Spatangoida,Echinoidea,NA,Echinozoa,Echinodermata,Animalia,Brisaster spp.,sea urchin
 BROSME BROSME,brosme,Brosme,Lotidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Brosme brosme,cusk
@@ -178,15 +178,15 @@ Buccinum sp.,NA,Buccinum,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Anim
 Buccinum spp.,NA,Buccinum,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Buccinum spp.,true whelks
 Buccinumplectrum,plectrum,Buccinum,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Buccinum plectrum,sinuous whelk
 Buccinumsp.,NA,Buccinum,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Buccinum spp.,true whelks
-CALAMUS LEUCOSTEUS,,,,,,,,,,Calamus leucosteus,whitebone porgy
-CALAPPA FLAMMEA,,,,,,,,,,Calappa flammea,flame box crab
+CALAMUS LEUCOSTEUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Calamus leucosteus,whitebone porgy
+CALAPPA FLAMMEA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Calappa flammea,flame box crab
 CALAPPA SULCATA,sulcata,Calappa,Calappidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Calappa sulcata,yellow box crab
-CALAPPA TORTUGAE,,,,,,,,,,Calappa tortugae,nodose crab
+CALAPPA TORTUGAE,NA,NA,NA,NA,NA,NA,NA,NA,NA,Calappa tortugae,nodose crab
 Calinaticina oldroydii,oldroydii,Calinaticina,Naticidae,Neotaenioglossa,Gastropoda,NA,NA,Mollusca,Animalia,Calinaticina oldroydii,Oldroyd's Fragile Moon Snail
 CALLIECTES SAPIDUS,sapidus,Callinectes,Portunidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Callinectes sapidus,blue crab
 CALLIECTES SIMILIS,similis,Callinectes,Portunidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Callinectes similis,lesser blue crab
-CALLINECTES LARVATUS,,,,,,,,,,Callinectes larvatus,masked swimming crab
-CALLINECTES ORNATUS,,,,,,,,,,Callinectes ornatus,shelligs
+CALLINECTES LARVATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Callinectes larvatus,masked swimming crab
+CALLINECTES ORNATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Callinectes ornatus,shelligs
 CALLINECTES SAPIDUS,sapidus,Callinectes,Portunidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Callinectes sapidus,blue crab
 CALLINECTES SIMILIS,similis,Callinectes,Portunidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Callinectes similis,lesser blue crab
 CANCER BOREALIS,borealis,Cancer,Cancridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Cancer borealis,Jonah crab
@@ -196,29 +196,29 @@ Cancer oregonensis,oregonensis,Glebocarcinus,Cancridae,Decapoda,Malacostraca,NA,
 Cancer productus,productus,Cancer,Cancridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Cancer productus,red rock crab
 Cancermagister,magister,Metacarcinus,Cancridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Metacarcinus magister,dungeness crab
 Canceroregonensis,oregonensis,Glebocarcinus,Cancridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Glebocarcinus oregonensis,pygmy rock crab
-CARANX BARTHOLOMAEI,,,,,,,,,,Caranx bartholomaei,yellow jack
+CARANX BARTHOLOMAEI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Caranx bartholomaei,yellow jack
 CARANX CRYSOS,crysos,Caranx,Carangidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Caranx crysos,blue runner
-CARANX HIPPOS,,,,,,,,,,Caranx hippos,crevalle jack
-CARANX LATUS,,,,,,,,,,Caranx latus,horse-eye jack
-CARANX RUBER,,,,,,,,,,Caranx ruber,bar jack
+CARANX HIPPOS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Caranx hippos,crevalle jack
+CARANX LATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Caranx latus,horse-eye jack
+CARANX RUBER,NA,NA,NA,NA,NA,NA,NA,NA,NA,Caranx ruber,bar jack
 CARAX CRYSOS,crysos,Caranx,Carangidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Caranx crysos,blue runner
-CARCHARHINUS ACRONOTUS,,,,,,,,,,Carcharhinus acronotus,blacknose shark
-CARCHARHINUS BREVIPINNA,,,,,,,,,,Carcharhinus brevipinna,spinner shark
-CARCHARHINUS ISODON,,,,,,,,,,Carcharhinus isodon,finetooth shark
-CARCHARHINUS LEUCAS,,,,,,,,,,Carcharhinus leucas,bull shark
-CARCHARHINUS LIMBATUS,,,,,,,,,,Carcharhinus limbatus,blacktip shark
-CARCHARHINUS OBSCURUS,,,,,,,,,,Carcharhinus obscurus,dusky shark
-CARCHARHINUS PLUMBEUS,,,,,,,,,,Carcharhinus plumbeus,sandbar shark
-CARCHARIAS TAURUS,,,,,,,,,,Carcharhinus taurus,sand tiger
+CARCHARHINUS ACRONOTUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Carcharhinus acronotus,blacknose shark
+CARCHARHINUS BREVIPINNA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Carcharhinus brevipinna,spinner shark
+CARCHARHINUS ISODON,NA,NA,NA,NA,NA,NA,NA,NA,NA,Carcharhinus isodon,finetooth shark
+CARCHARHINUS LEUCAS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Carcharhinus leucas,bull shark
+CARCHARHINUS LIMBATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Carcharhinus limbatus,blacktip shark
+CARCHARHINUS OBSCURUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Carcharhinus obscurus,dusky shark
+CARCHARHINUS PLUMBEUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Carcharhinus plumbeus,sandbar shark
+CARCHARIAS TAURUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Carcharhinus taurus,sand tiger
 Careproctus melanurus,melanurus,Careproctus,Liparidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Careproctus melanurus,blacktail snailfish
 Careproctus rastrinus,rastrinus,Careproctus,Liparidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Careproctus rastrinus,salmon snailfish
 Careproctus sp.,NA,Careproctus,Liparidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Careproctus spp.,snailfishes
 Careproctusmelanurus,melanurus,Careproctus,Liparidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Careproctus melanurus,blacktail snailfish
 Careproctussp.,NA,Careproctus,Liparidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Careproctus spp.,snailfishes
-CARETTA CARETTA,,,,,,,,,,Caretta caretta,loggerhead sea turtle
+CARETTA CARETTA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Caretta caretta,loggerhead sea turtle
 CAULOLATILUS INTERMEDIUS,intermedius,Caulolatilus,Malacanthidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Caulolatilus intermedius,anchor tilefish
 CAULOLATILUS ITERMEDIUS,intermedius,Caulolatilus,Malacanthidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Caulolatilus itermedius,Gulf bareye tilefish
-CENTROPRISTIS PHILADELPHICA,,,,,,,,,,Centropristis philadelphica,rock sea bass
+CENTROPRISTIS PHILADELPHICA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Centropristis philadelphica,rock sea bass
 CENTROPRISTIS PHILADELPHICUS,philadelphica,Centropristis,Serranidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Centropristis philadelphica,rock sea bass
 Centropristis striata,striata,Centropristis,Serranidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Centropristis striata,black sea bass
 CENTROPRISTIS STRIATA,striata,Centropristis,Serranidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Centropristis striata,black sea bass
@@ -230,18 +230,18 @@ Ceramaster sp.,NA,Ceramaster,Goniasteridae,Valvatida,Asteroidea,NA,Asterozoa,Ech
 Ceramaster spp.,NA,Ceramaster,Goniasteridae,Valvatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Ceramaster spp.,cookie star
 CETROPRISTIS PHILADELPHICUS,philadelphica,Centropristis,Serranidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Cetropristis philadelphicus,rock sea bass
 CHAETODIPTERUS FABER,faber,Chaetodipterus,Ephippidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Chaetodipterus faber,Atlantic spadefish
-CHAETODON OCELLATUS,,,,,,,,,,Chaetodon ocellatus,spotfin butterflyfish
+CHAETODON OCELLATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Chaetodon ocellatus,spotfin butterflyfish
 Chauliodontinae,NA,NA,Stomiidae,Stomiiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Chauliodontinae spp.,viperfishes
 Chauliodus macouni,macouni,Chauliodus,Stomiidae,Stomiiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Chauliodus macouni,Pacific viperfish
 CHAULIODUS SLOANI,sloani,Chauliodus,Stomiidae,Stomiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Chauliodus sloani,Sloane's viperfish
 Chauliodusmacouni,macouni,Chauliodus,Stomiidae,Stomiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Chauliodus macouni,Pacific viperfish
 Cheiraster dawsoni,dawsoni,Cheiraster,Benthopectinidae,Notomyotida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Cheiraster dawsoni,sea star
-CHELONIA MYDAS,,,,,,,,,,Chelonia mydas,green sea turtle
+CHELONIA MYDAS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Chelonia mydas,green sea turtle
 CHIASMODON NIGER,niger,Chiasmodon,Chiasmodontidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Chiasmodon niger,black swallower
 Chilara taylori,taylori,Chilara,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Chilara taylori,spotted cusk-eel
-CHILOMYCTERUS ATRINGA,,,,,,,,,,Chilomycterus atringa,spotted burrfish
+CHILOMYCTERUS ATRINGA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Chilomycterus atringa,spotted burrfish
 CHILOMYCTERUS SCHOEPFI,schoepfii,Chilomycterus,Diodontidae,Tetraodontiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Chilomycterus schoepfii,striped burrfish
-CHILOMYCTERUS SCHOEPFII,,,,,,,,,,Chilomycterus schoepfii,striped burrfish
+CHILOMYCTERUS SCHOEPFII,NA,NA,NA,NA,NA,NA,NA,NA,NA,Chilomycterus schoepfii,striped burrfish
 Chionoecetes bairdi,bairdi,Chionoecetes,Oregoniidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Chionoecetes bairdi,tanner crab
 Chionoecetes hybrid,NA,Chionoecetes,Oregoniidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Chionoecetes spp.,snow crabs
 CHIONOECETES OPILIO,opilio,Chionoecetes,Oregoniidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Chionoecetes opilio,snow crab
@@ -263,7 +263,7 @@ CITHARICHTHYS ARCTIFRONS,arctifrons,Citharichthys,Paralichthyidae,Pleuronectifor
 CITHARICHTHYS MACROPS,macrops,Citharichthys,Paralichthyidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Citharichthys macrops,spotted whiff
 Citharichthys sordidus,sordidus,Citharichthys,Paralichthyidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Citharichthys sordidus,Pacific sanddab
 CITHARICHTHYS SPILOPTERUS,spilopterus,Citharichthys,Paralichthyidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Citharichthys spilopterus,bay whiff
-CLIBANARIUS VITTATUS,,,,,,,,,,Clibanarius vittatus,thinstripe hermit
+CLIBANARIUS VITTATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Clibanarius vittatus,thinstripe hermit
 Clinocardium ciliatum,ciliatum,Clinocardium,Cardiidae,Veneroida,Bivalvia,NA,NA,Mollusca,Animalia,Clinocardium ciliatum,hairy cockle
 Clinocardium sp.,NA,Clinocardium,Cardiidae,Veneroida,Bivalvia,NA,NA,Mollusca,Animalia,Clinocardium spp.,Nuttall cockle
 Clinopegma magnum,magnum,Clinopegma,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Clinopegma magnum,helmet whelk
@@ -272,14 +272,14 @@ CLUPEA HARENGUS,harengus,Clupea,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Ver
 Clupea harengus,harengus,Clupea,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Clupea harengus,Atlantic herring
 Clupea pallasi,pallasii,Clupea,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Clupea pallasii,Pacific herring
 Clupeapallasi,pallasii,Clupea,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Clupea pallasii,Pacific herring
-COELOCERUS SPINOSUS,,,,,,,,,,Coelocerus spinosus,channelnose spider crab
+COELOCERUS SPINOSUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Coelocerus spinosus,channelnose spider crab
 Colus halli,hallii,Colus,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Colus halli,snail
 Colus herendeenii,herendeenii,Colus,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Colus herendeenii,thin-ribbed whelk
 Colus sp.,NA,Colus,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Colus spp.,true whelks
 Colus spitzbergensis,brevicauda,Aulacofusus,Buccinidae,Neogastropoda,Gastropoda,Gas,NA,Mollusca,Animalia,Colus brevicauda,thick-ribbed whelk
 Colussp.,NA,Colus,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Colus spp.,true whelks
-CONGER OCEANICUS,,,,,,,,,,Conger oceanicus,conger eel
-CONODON NOBILIS,,,,,,,,,,Conodon nobilis,barred grunt
+CONGER OCEANICUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Conger oceanicus,conger eel
+CONODON NOBILIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Conodon nobilis,barred grunt
 COODO OBILIS,nobilis,Conodon,Haemulidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Coodo obilis,barred grunt
 Corallimorphus spp.,NA,Corallimorphus,Corallimorphidae,Corallimorpharia,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Corallimorphus spp.,false coral
 CORYPHAENOIDES RUPESTRIS,rupestris,Coryphaenoides,Macrouridae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Coryphaenoides rupestris,rock grenadier
@@ -287,12 +287,12 @@ Cottidae,NA,NA,Cottidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,C
 COTTUNCULUS MICROPS,microps,Cottunculus,Psychrolutidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Cottunculus microps,polar sculpin
 Crangon communis,communis,Neocrangon,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Crangon communis,gray shrimp
 Crangon dalli,dalli,Crangon,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Crangon dalli,ridged crangon
-CRANGON SEPTEMSPINOSA,,,,,,,,,,Crangon septemspinosa,sevenspine bay shrimp
+CRANGON SEPTEMSPINOSA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Crangon septemspinosa,sevenspine bay shrimp
 Crangon sp.,NA,Crangon,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Crangon spp.,shrimps
 Crangon spp.,NA,Crangon,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Crangon spp.,shrimps
 Crangonsp.,NA,Crangon,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Crangon spp.,shrimps
 Crepidula grandis,grandis,Crepidula,Calyptraeidae,Neotaenioglossa,Gastropoda,NA,NA,Mollusca,Animalia,Crepidula grandis,great slippersnail
-CRONIUS RUBER,,,,,,,,,,Cronius ruber,blackpoint sculling crab
+CRONIUS RUBER,NA,NA,NA,NA,NA,NA,NA,NA,NA,Cronius ruber,blackpoint sculling crab
 Crossaster borealis,borealis,Crossaster,Solasteridae,Valvatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Crossaster borealis,grooved sun star
 Crossaster papposus,papposus,Crossaster,Solasteridae,Spinulosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Crossaster papposus,common sunstar
 Crossaster sp.,NA,Crossaster,Solasteridae,Spinulosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Crossaster spp.,sunstar
@@ -300,7 +300,7 @@ CRUSTACEA SHRIMP,NA,NA,NA,NA,NA,NA,Crustacea,Arthropoda,Animalia,Crustacea shrim
 Cryptacanthodes giganteus,giganteus,Cryptacanthodes,Cryptacanthodidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Cryptacanthodes giganteus,giant wrymouth
 CRYPTACANTHODES MACULATUS,maculatus,Cryptacanthodes,Cryptacanthodidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Cryptacanthodes maculatus,wrymouth
 Cryptacanthodesgiganteus,giganteus,Cryptacanthodes,Cryptacanthodidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Cryptacanthodes giganteus,giant wrymouth
-CRYPTODROMIOPSIS ANTILLENSIS,,,,,,,,,,Cryptodromiopsis antillensis,hairy sponge crab
+CRYPTODROMIOPSIS ANTILLENSIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Cryptodromiopsis antillensis,hairy sponge crab
 Crystallichthys cyclospilus,cyclospilus,Crystallichthys,Liparidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Crystallichthys cyclospilus,blotched snailfish
 Ctenodiscus crispatus,crispatus,Ctenodiscus,Ctenodiscidae,Paxillosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Ctenodiscus crispatus,mud star
 Ctenodiscuscrispatus,crispatus,Ctenodiscus,Ctenodiscidae,Paxillosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Ctenodiscus crispatus,mud star
@@ -312,65 +312,65 @@ CYCLOPSETTA CHITTENDENI,chittendeni,Cyclopsetta,Paralichthyidae,Pleuronectiforme
 CYCLOPTERUS LUMPUS,lumpus,Cyclopterus,Cyclopteridae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Cyclopterus lumpus,lumpfish
 Cymatogaster aggregata,aggregata,Cymatogaster,Embiotocidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Cymatogaster aggregata,shiner perch
 CYNOSCION,NA,Cynoscion,Sciaenidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Cynoscion spp.,weakfishes
-CYNOSCION NEBULOSUS,,,,,,,,,,Cynoscion nebulosus,spotted seatrout
-CYNOSCION NOTHUS,,,,,,,,,,Cynoscion nothus,silver seatrout
-CYNOSCION REGALIS,,,,,,,,,,Cynoscion regalis,weakfish
+CYNOSCION NEBULOSUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Cynoscion nebulosus,spotted seatrout
+CYNOSCION NOTHUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Cynoscion nothus,silver seatrout
+CYNOSCION REGALIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Cynoscion regalis,weakfish
 CYOSCIO,NA,Cynoscion,Sciaenidae,Perciformes,Actinopterygii,Gnathostomata,Vertebrata,Chordata,Animalia,Cynoscion spp.,drum
 CYOSCIO AREARIUS,arenarius,Cynoscion,Sciaenidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Cyoscio arearius,sand weakfish
 CYOSCIO OTHUS,nothus,Cynoscion,Sciaenidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Cyoscio nothus,silver seatrout
-DACTYLOPTERUS VOLITANS,,,,,,,,,,Dactylopterus volitans,flying gurnard
-DASYATIS AMERICANA,,,,,,,,,,Dasyatis americana,southern stingray
-DASYATIS CENTROURA,,,,,,,,,,Dasyatis centroura,roughtail stingray
-DASYATIS SABINA,,,,,,,,,,Dasyatis sabina,Atlantic stingray
-DASYATIS SAY,,,,,,,,,,Dasyatis say,bluntnose stingray
+DACTYLOPTERUS VOLITANS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Dactylopterus volitans,flying gurnard
+DASYATIS AMERICANA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Dasyatis americana,southern stingray
+DASYATIS CENTROURA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Dasyatis centroura,roughtail stingray
+DASYATIS SABINA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Dasyatis sabina,Atlantic stingray
+DASYATIS SAY,NA,NA,NA,NA,NA,NA,NA,NA,NA,Dasyatis say,bluntnose stingray
 Dasycottus setiger,setiger,Dasycottus,Psychrolutidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Dasycottus setiger,spinyhead sculpin
 Dasycottussetiger,setiger,Dasycottus,Psychrolutidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Dasycottus setiger,spinyhead sculpin
 Decapodiformes,NA,NA,NA,NA,Cephalopoda,NA,NA,Mollusca,Animalia,Decapodiformes spp.,squids
-DECAPTERUS MACARELLUS,,,,,,,,,,Decapterus macarellus,mackerel scad
+DECAPTERUS MACARELLUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Decapterus macarellus,mackerel scad
 DECAPTERUS PUCTATUS,NA,Decapterus,Carangidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Decapterus punctatus,round scad
-DECAPTERUS PUNCTATUS,,,,,,,,,,Decapterus punctatus,round scad
+DECAPTERUS PUNCTATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Decapterus punctatus,round scad
 Dermasterias imbricata,imbricata,Dermasterias,Poraniidae,Spinulosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Dermasterias imbricata,Leather star
-DERMOCHELYS CORIACEA,,,,,,,,,,Dermochelys coriacea,leatherback sea turtle
-DIAPTERUS AURATUS,,,,,,,,,,Diapterus auratus,irish pompano
-DIODON HYSTRIX,,,,,,,,,,Diodon hystrix,porcupinefish
+DERMOCHELYS CORIACEA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Dermochelys coriacea,leatherback sea turtle
+DIAPTERUS AURATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Diapterus auratus,irish pompano
+DIODON HYSTRIX,NA,NA,NA,NA,NA,NA,NA,NA,NA,Diodon hystrix,porcupinefish
 DIPLECTRUM BIVITTATUM,bivittatum,Diplectrum,Serranidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Diplectrum bivittatum,dwarf sand perch
 DIPLECTRUM FORMOSUM,formosum,Diplectrum,Serranidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Diplectrum formosum,sand perch
-DIPLODUS HOLBROOKII,,,,,,,,,,Diplodus holbrookii,spottail pinfish
+DIPLODUS HOLBROOKII,NA,NA,NA,NA,NA,NA,NA,NA,NA,Diplodus holbrookii,spottail pinfish
 Diplopteraster multipes,multipes,Diplopteraster,Pterasteridae,Spinulosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Diplopteraster multipes,cushion star
 Dipsacaster borealis,borealis,Dipsacaster,Astropectinidae,Paxillosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Dipsacaster borealis,northern sand star
 DIPTURUS LAEVIS,laevis,Dipturus,Rajidae,Rajiformes,Chondrichthyes,Chondrichthyes,Vertebrata,Chordata,Animalia,Dipturus laevis,barndoor skate
 Dorididae,NA,NA,Dorididae,Nudibranchia,Gastropoda,NA,NA,Mollusca,Animalia,Dorididae spp.,nudibranch
-DOROSOMA PETENENSE,,,,,,,,,,Dorosoma petenense,threadfin shad
+DOROSOMA PETENENSE,NA,NA,NA,NA,NA,NA,NA,NA,NA,Dorosoma petenense,threadfin shad
 Doryteuthis (Amerigo) pealeii,pealeii,Doryteuthis,Loliginidae,Myopsida,Cephalopoda,NA,NA,Mollusca,Animalia,Doryteuthis pealeii,longfin inshore squid
-ECHENEIS NAUCRATES,,,,,,,,,,Echeneis naucrates,sharksucker
-ECHENEIS NEUCRATOIDES,,,,,,,,,,Echeneis neucratoides,whitefin sharksucker
+ECHENEIS NAUCRATES,NA,NA,NA,NA,NA,NA,NA,NA,NA,Echeneis naucrates,sharksucker
+ECHENEIS NEUCRATOIDES,NA,NA,NA,NA,NA,NA,NA,NA,NA,Echeneis neucratoides,whitefin sharksucker
 Echinacea,NA,NA,NA,NA,NA,NA,NA,NA,NA,Echinacea spp.,purple coneflower
 Echinarachnius parma,parma,Echinarachnius,Echinarachniidae,Clypeasteroida,Echinoidea,NA,Echinozoa,Echinodermata,Animalia,Echinarachnius parma,common sand dollar
-ECHINOIDEA,NA,NA,NA,NA,Echinoidea ,NA,Echinozoa,Echinodermata,Animalia,Echinoidea spp.,heart urchins
+ECHINOIDEA,NA,NA,NA,NA,Echinoidea,NA,Echinozoa,Echinodermata,Animalia,Echinoidea spp.,heart urchins
 EGYOPHRYS SETA,senta,Engyophrys,Bothidae,Pleuronectiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Egyophrys seta,spiny flounder
 Eleginus gracilis,gracilis,Eleginus,Gadidae,Gadiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Eleginus gracilis,saffron cod
-ELOPS SAURUS,,,,,,,,,,Elops saurus,ladyfish
+ELOPS SAURUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Elops saurus,ladyfish
 ENCHELYOPUS CIMBRIUS,cimbrius,Enchelyopus,Lotidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Enchelyopus cimbrius,fourbeard rockling
 Engraulis mordax,mordax,Engraulis,Engraulidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Engraulis mordax,northern anchovy
 ENGYOPHRYS SENTA,senta,Engyophrys,Bothidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Engyophrys senta,spiny flounder
 Enteroctopus dofleini,dofleini,Enteroctopus,Octopodidae,Octopoda,Cephalopoda,NA,NA,Mollusca,Animalia,Enteroctopus dofleini,North Pacific giant octopus
 Eopsetta jordani,jordani,Eopsetta,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Eopsetta jordani,petrale sole
 Eopsettajordani,jordani,Eopsetta,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Eopsetta jordani,petrale sole
-EPINEPHELUS MORIO,,,,,,,,,,Epinephelus morio,red grouper
+EPINEPHELUS MORIO,NA,NA,NA,NA,NA,NA,NA,NA,NA,Epinephelus morio,red grouper
 Eptatretus deani,deani,Eptatretus,Myxinidae,Myxiniformes,Myxini,NA,Vertebrata,Chordata,Animalia,Eptatretus deani,black hagfish
 Eptatretus stouti,stoutii,Eptatretus,Myxinidae,Myxiniformes,Myxini,NA,Vertebrata,Chordata,Animalia,Eptatretus stouti,Pacific hagfish
-EQUETUS LANCEOLATUS,,,,,,,,,,Equetus lanceolatus,jackknife-fish
+EQUETUS LANCEOLATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Equetus lanceolatus,jackknife-fish
 EQUETUS UMBROSUS,umbrosus,Pareques,Sciaenidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Pareques umbrosus,cubbyu
 Erimacrus isenbeckii,isenbeckii,Erimacrus,Cheiragonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Erimacrus isenbeckii,hair crab
 Erimacrusisenbeckii,isenbeckii,Erimacrus,Cheiragonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Erimacrus isenbeckii,hair crab
 ETROPUS CROSSOTUS,crossotus,Etropus,Paralichthyidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Etropus crossotus,fringed flounder
-ETROPUS CYCLOSQUAMUS,,,,,,,,,,Etropus cyclosquamus,shelf flounder
-ETROPUS MICROSTOMUS,,,,,,,,,,Etropus microstomus,smallmouth flounder
+ETROPUS CYCLOSQUAMUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Etropus cyclosquamus,shelf flounder
+ETROPUS MICROSTOMUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Etropus microstomus,smallmouth flounder
 ETRUMEUS TERES,teres,Etrumeus,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Etrumeus teres,round herring
 EUALUS GAIMARDII,gaimardii,Eualus,Hippolytidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Eualus gaimardii,circumpolar eualid
 EUALUS MACILENTUS,macilentus,Eualus,Hippolytidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Eualus macilentus,Greenland shrimp
-EUCERAMUS PRAELONGUS,,,,,,,,,,Euceramus praelongus,olivepit porcelain crab
-EUCINOSTOMUS,,,,,,,,,,Eucinostomus spp.,mojarras
+EUCERAMUS PRAELONGUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Euceramus praelongus,olivepit porcelain crab
+EUCINOSTOMUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Eucinostomus spp.,mojarras
 EUCINOSTOMUS GULA,gula,Eucinostomus,Gerreidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Eucinostomus gula,silver jenny
 EUCIOSTOMUS GULA,gula,Eucinostomus,Gerreidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Eucinostomus gula,silver jenny
 EUMESOGRAMMUS PRAECISUS,praecisus,Eumesogrammus,Stichaeidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Eumesogrammus praecisus,fourline snakeblenny
@@ -379,15 +379,15 @@ EUMICROTREMUS SPINOSUS,spinosus,Eumicrotremus,Cyclopteridae,Scorpaeniformes,Acti
 Eumicrotremusorbis,orbis,Eumicrotremus,Cyclopteridae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Eumicrotremus orbis,Pacific spiny lumpsucker
 Eunoe depressa,depressa,Eunoe,Polynoidae,Phyllodocida,Errantia,NA,Polychaeta,Annelida,Animalia,Eunoe depressa,polychaete worm
 Eunoe nodosa,nodosa,Eunoe,Polynoidae,Phyllodocida,Errantia,NA,Polychaeta,Annelida,Animalia,Eunoe nodosa,polychaete worm
-EURYPANOPEUS DEPRESSUS,,,,,,,,,,Eurypanopeus depressus,flatback mud crab
-EURYPLAX NITIDA,,,,,,,,,,Euryplax nitida,glabrous broadface crab
+EURYPANOPEUS DEPRESSUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Eurypanopeus depressus,flatback mud crab
+EURYPLAX NITIDA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Euryplax nitida,glabrous broadface crab
 Euspira pallida,pallida,Euspira,Naticidae,Neotaenioglossa,Gastropoda,NA,NA,Mollusca,Animalia,Euspira pallida,pale moonsnail
 Evasterias echinosoma,echinosoma,Evasterias,Asteriidae,Forcipulatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Evasterias echinosoma,sea star
 Evasterias troschelii,troschelii,Evasterias,Asteriidae,Forcipulatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Evasterias troschelii,mottled star
-EXHIPPOLYSMATA OPLOPHOROIDES,,,,,,,,,,Exhippolysmata oplophoroides,redleg humpback shrimp
-FARFANTEPENAEUS AZTECUS,,,,,,,,,,Farfantepenaeus aztecus,brown shrimp
-FARFANTEPENAEUS DURORARUM,,,,,,,,,,Farfantepenaeus durorarum,pink shrimp
-FISTULARIA TABACARIA,,,,,,,,,,Fistularia tabacaria,bluespotted cornetfish
+EXHIPPOLYSMATA OPLOPHOROIDES,NA,NA,NA,NA,NA,NA,NA,NA,NA,Exhippolysmata oplophoroides,redleg humpback shrimp
+FARFANTEPENAEUS AZTECUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Farfantepenaeus aztecus,brown shrimp
+FARFANTEPENAEUS DURORARUM,NA,NA,NA,NA,NA,NA,NA,NA,NA,Farfantepenaeus durorarum,pink shrimp
+FISTULARIA TABACARIA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Fistularia tabacaria,bluespotted cornetfish
 Florometra spp.,NA,Florometra,Antedonidae,Comatulida,Crinoidea,NA,Crinozoa,Echinodermata,Animalia,Florometra spp.,common feather star
 Flustra serrulata,serrulata,Flustra,Flustridae,Cheilostomata,Gymnolaemata,NA,NA,Bryozoa,Animalia,Flustra serrulata,bryozoan
 Fusitriton oregonensis,oregonensis,Fusitriton,Ranellidae,Littorinimorpha,Gastropoda,NA,NA,Mollusca,Animalia,Fusitriton oregonensis,Oregon triton
@@ -399,7 +399,7 @@ Gadus morhua,morhua,Gadus,Gadidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Ch
 Gadusmacrocephalus,macrocephalus,Gadus,Gadidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Gadus macrocephalus,Pacific cod
 GAIDROPSARUS  SP,NA,Gaidropsarus,Lotidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Gaidropsarus spp.,three-bearded rocklings
 GAIDROPSARUS  SP.,NA,Gaidropsarus,Lotidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Gaidropsarus spp.,three-bearded rocklings
-GALEOCERDO CUVIER,,,,,,,,,,Galeocerdo cuvier,tiger shark
+GALEOCERDO CUVIER,NA,NA,NA,NA,NA,NA,NA,NA,NA,Galeocerdo cuvier,tiger shark
 Galeorhinus galeus,galeus,Galeorhinus,Triakidae,Carcharhiniformes,Chondrichthyes,Chondrichthyes,Vertebrata,Chordata,Animalia,Galeorhinus galeus,tope shark
 gastropod eggs,NA,NA,NA,NA,Gastropoda,NA,NA,Mollusca,Animalia,Gastropod eggs,Gastropod eggs
 Gastropoda,NA,NA,NA,NA,Gastropoda,NA,NA,Mollusca,Animalia,Gastropoda spp.,gastropods
@@ -408,15 +408,15 @@ Genyonemus lineatus,lineatus,Genyonemus,Sciaenidae,Perciformes,Actinopterygii,Pi
 Gephyreaster swifti,swifti,Gephyreaster,Goniasteridae,Valvatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Gephyreaster swifti,Gunpowder Star
 Gersemia sp.,NA,Gersemia,Nephtheidae,Alcyonacea,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Gersemia spp.,sea strawberry
 Gersemiasp.,NA,Gersemia,Nephtheidae,Alcyonacea,Anthozoa,NA,NA,Cnidaria,Animalia,Gersemia spp.,sea strawberry
-GIBBESIA NEGLECTA,,,,,,,,,,Gibbesia neglecta,lesser mantis shrimp
-GINGLYMOSTOMA CIRRATUM,,,,,,,,,,Ginglymostoma cirratum,nurse shark
+GIBBESIA NEGLECTA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Gibbesia neglecta,lesser mantis shrimp
+GINGLYMOSTOMA CIRRATUM,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ginglymostoma cirratum,nurse shark
 GLYPTOCEPHALUS CYNOGLOSSUS,cynoglossus,Glyptocephalus,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Glyptocephalus cynoglossus,witch flounder
 Glyptocephalus cynoglossus,cynoglossus,Glyptocephalus,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Glyptocephalus cynoglossus,witch flounder
 Glyptocephalus zachirus,zachirus,Glyptocephalus,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Glyptocephalus zachirus,rex sole
 Glyptocephaluszachirus,zachirus,Glyptocephalus,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Glyptocephalus zachirus,rex sole
-GOBIESOX STRUMOSUS,,,,,,,,,,Gobiesox strumosus,skilletfish
-GOBIOSOMA BOSC,,,,,,,,,,Gobiosoma bosc,naked goby
-GOBIOSOMA GINSBURGI,,,,,,,,,,Gobiosoma ginsburgi,seaboard goby
+GOBIESOX STRUMOSUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Gobiesox strumosus,skilletfish
+GOBIOSOMA BOSC,NA,NA,NA,NA,NA,NA,NA,NA,NA,Gobiosoma bosc,naked goby
+GOBIOSOMA GINSBURGI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Gobiosoma ginsburgi,seaboard goby
 Gonatopsis borealis,borealis,Gonatopsis,Gonatidae,Teuthida,Cephalopoda,NA,NA,Mollusca,Animalia,Gonatopsis borealis,Boreopacific gonate squid
 GONATUS  SP.,NA,Gonatus,Gonatidae,Oegopsida,Cephalopoda,NA,NA,Mollusca,Animalia,Gonatus spp.,armhook squids
 Gonatus onyx,onyx,Gonatus,Gonatidae,Teuthida,Cephalopoda,NA,NA,Mollusca,Animalia,Gonatus onyx,clawed armhook squid
@@ -425,21 +425,21 @@ GORGONOCEPHALIDAE,NA,NA,Gorgonocephalidae,Euryalida,Ophiuroidea,NA,Asterozoa,Ech
 Gorgonocephalus eucnemis,eucnemis,Gorgonocephalus,Gorgonocephalidae,Euryalida,Ophiuroidea,NA,Asterozoa,Echinodermata,Animalia,Gorgonocephalus eucnemis,basket star
 Gorgonocephaluseucnemis,eucnemis,Gorgonocephalus,Gorgonocephalidae,Euryalida,Ophiuroidea,NA,Asterozoa,Echinodermata,Animalia,Gorgonocephalus eucnemis,basket star
 GYMACHIRUS TEXAE,texae,Gymnachirus,Achiridae,Pleuronectiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Gymachirus texae,Gulf of Mexico fringed sole
-GYMNACHIRUS MELAS,,,,,,,,,,Gymnachirus melas,naked sole
+GYMNACHIRUS MELAS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Gymnachirus melas,naked sole
 GYMNACHIRUS TEXAE,texae,Gymnachirus,Achiridae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Gymnachirus texae,fringed sole
 GYMNELIS VIRIDIS,viridis,Gymnelus,Zoarcidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Gymnelus viridis,fish doctor
 Gymnocanthus galeatus,galeatus,Gymnocanthus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Gymnocanthus galeatus,armorhead sculpin
 Gymnocanthus pistilliger,pistilliger,Gymnocanthus,Cottidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Gymnocanthus pistilliger,threaded sculpin
 Gymnocanthusgaleatus,galeatus,Gymnocanthus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Gymnocanthus galeatus,armorhead sculpin
-GYMNURA ALTAVELA,,,,,,,,,,Gymnura altavela,spiny butterfly ray
-GYMNURA MICRURA,,,,,,,,,,Gymnura micrura,smooth butterfly ray
+GYMNURA ALTAVELA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Gymnura altavela,spiny butterfly ray
+GYMNURA MICRURA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Gymnura micrura,smooth butterfly ray
 GYMOTHORAX IGROMARGIATUS,nigromarginatus,Gymnothorax,Muraenidae,Anguilliformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Gymothorax igromargiatus,blackedge moray
 HAEMULO AUROLIEATUM,aurolineatum,Haemulon,Haemulidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Haemulo aurolieatum,tomtate
 HAEMULON AUROLINEATUM,aurolineatum,Haemulon,Haemulidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Haemulon aurolineatum,tomtate
-HAEMULON PLUMIERI,,,,,,,,,,Haemulon plumieri,white grunt
-HAEMULON SCIURUS,,,,,,,,,,Haemulon sciurus,bluestriped grunt
-HALICHOERES BIVITTATUS,,,,,,,,,,Halichoeres bivittatus,slippery dick
-HALICHOERES CAUDALIS,,,,,,,,,,Halichoeres caudalis,painted wrasse
+HAEMULON PLUMIERI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Haemulon plumieri,white grunt
+HAEMULON SCIURUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Haemulon sciurus,bluestriped grunt
+HALICHOERES BIVITTATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Halichoeres bivittatus,slippery dick
+HALICHOERES CAUDALIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Halichoeres caudalis,painted wrasse
 Halichondria panicea,panicea,Halichondria,Halichondriidae,Halichondrida,Demospongiae,NA,NA,Porifera,Animalia,Halichondria panicea,breadcrumb sponge
 HALIEUTICHTHYS ACULEATUS,aculeatus,Halieutichthys,Ogcocephalidae,Lophiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Halieutichthys aculeatus,pancake batfish
 Halocynthia aurantium,aurantium,Halocynthia,Pyuridae,Pleurogona,Ascidiacea,NA,Urochordata,Chordata,Animalia,Halocynthia aurantium,sea peach
@@ -449,7 +449,7 @@ HAREGULA JAGUAA,jaguana,Harengula,Clupeidae,Clupeiformes,Actinopterygii,Osteicht
 HARENGULA JAGUANA,jaguana,Harengula,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Harengula jaguana,scaled sardine
 HELICOLENUS DACTYLOPTERUS,dactylopterus,Helicolenus,Sebastidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Helicolenus dactylopterus,blackbelly rosefish
 Helicolenus dactylopterus,dactylopterus,Helicolenus,Sebastidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Helicolenus dactylopterus,blackbelly rosefish
-HEMICARANX AMBLYRHYNCHUS,,,,,,,,,,Hemicaranx amblyrhynchus,bluntnose jack
+HEMICARANX AMBLYRHYNCHUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Hemicaranx amblyrhynchus,bluntnose jack
 HEMICARAX AMBLYRHYCHUS,amblyrhynchus,Hemicaranx,Carangidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Hemicaranx amblyrhynchus,bluntnose jack
 Hemilepidotus hemilepidotus,hemilepidotus,Hemilepidotus,Cottidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Hemilepidotus hemilepidotus,red Irish lord
 Hemilepidotus jordani,jordani,Hemilepidotus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Hemilepidotus jordani,yellow Irish lord
@@ -468,7 +468,7 @@ Henricia leviuscula,leviuscula,Henricia,Echinasteridae,Spinulosida,Asteroidea,NA
 Henricia sp.,NA,Henricia,Echinasteridae,Spinulosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Henricia spp.,sea star
 Henricia spp.,NA,Henricia,Echinasteridae,Spinulosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Henricia spp.,sea star
 HEPATUS EPHELITICUS,epheliticus,Hepatus,Aethridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Hepatus epheliticus,calico box crab
-HETEROPRIACANTHUS CRUENTATUS,,,,,,,,,,Heteropriacanthus cruentatus,glasseye snapper
+HETEROPRIACANTHUS CRUENTATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Heteropriacanthus cruentatus,glasseye snapper
 Heterozonias alternatus,alternatus,Heterozonias,Solasteridae,Spinulosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Heterozonias alternatus,sea star
 Hexactinellida,NA,NA,NA,NA,Hexactinellida,NA,NA,Porifera,Animalia,Hexactinellida spp.,sea sponge
 Hexactinosida,NA,NA,NA,Hexactinosida,Hexactinellida,NA,NA,Porifera,Animalia,Hexactinosida spp.,sponge
@@ -477,7 +477,7 @@ Hexagrammos stelleri,stelleri,Hexagrammos,Hexagrammidae,Scorpaeniformes,Actinopt
 Hexagrammosdecagrammus,decagrammus,Hexagrammos,Hexagrammidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Hexagrammos decagrammus,kelp greenling
 Hexagrammosstelleri,stelleri,Hexagrammos,Hexagrammidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Hexagrammos stelleri,whitespotted greenling
 Hexanchus griseus,griseus,Hexanchus,Hexanchidae,Hexanchiformes,Chondrichthyes,Chondrichthyes,Vertebrata,Chordata,Animalia,Hexanchus griseus,bluntnose sixgill shark
-HEXAPANOPEUS ANGUSTIFRONS,,,,,,,,,,Hexapanopeus angustifrons,smooth mud crab
+HEXAPANOPEUS ANGUSTIFRONS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Hexapanopeus angustifrons,smooth mud crab
 Hiatella arctica,arctica,Hiatella,Hiatellidae,Myoida,Bivalvia,NA,NA,Mollusca,Animalia,Hiatella arctica,Arctic hiatella
 HILDEBRADIA FLAVA,flavus,Rhynchoconger,Congridae,Anguilliformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Rhynchoconger flavus,yellow conger
 HILDEBRANDIA FLAVA,flavus,Rhynchoconger,Congridae,Anguilliformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Rhynchoconger flavus,yellow conger
@@ -496,8 +496,8 @@ HIPPOGLOSSUS HIPPOGLOSSUS,hippoglossus,Hippoglossus,Pleuronectidae,Pleuronectifo
 Hippoglossus hippoglossus,hippoglossus,Hippoglossus,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Hippoglossus hippoglossus,Atlantic halibut
 Hippoglossus stenolepis,stenolepis,Hippoglossus,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Hippoglossus stenolepis,Pacific halibut
 Hippoglossusstenolepis,stenolepis,Hippoglossus,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Hippoglossus stenolepis,Pacific halibut
-HISTRIO HISTRIO,,,,,,,,,,Histrio histrio,sargassumfish
-HOLACANTHUS BERMUDENSIS,,,,,,,,,,Holacanthus bermudensis,blue angelfish
+HISTRIO HISTRIO,NA,NA,NA,NA,NA,NA,NA,NA,NA,Histrio histrio,sargassumfish
+HOLACANTHUS BERMUDENSIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Holacanthus bermudensis,blue angelfish
 HOLOTHUROIDEA,NA,NA,NA,NA,Holothuroidea,NA,Echinozoa,Echinodermata,Animalia,Holothuroidea spp.,sea cucumbers
 Holothuroidea,NA,NA,NA,NA,Holothuroidea,NA,Echinozoa,Echinodermata,Animalia,Holothuroidea spp.,sea cucumbers
 HOMARUS AMERICANUS,americanus,Homarus,Nephropidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Homarus americanus,American lobster
@@ -513,12 +513,12 @@ Hyascoarctatus,coarctatus,Hyas,Oregoniidae,Decapoda,Malacostraca,NA,Crustacea,Ar
 Hyaslyratus,lyratus,Hyas,Oregoniidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Hyas lyratus,Pacific lyre crab
 Hydrolagus colliei,colliei,Hydrolagus,Chimaeridae,Chimaeriformes,Holocephali,Pisces,Vertebrata,Chordata,Animalia,Hydrolagus colliei,spotted ratfish
 Hydrolaguscolliei,colliei,Hydrolagus,Chimaeridae,Chimaeriformes,Holocephali,Pisces,Vertebrata,Chordata,Animalia,Hydrolagus colliei,spotted ratfish
-HYPEROGLYPHE PERCIFORMES,,,,,,,,,,Hyperoglyphe perciformes,barrelfish
-HYPLEUROCHILUS GEMINATUS,,,,,,,,,,Hypleurochilus geminatus,crested blenny
-HYPOCONCHA ARCUATA,,,,,,,,,,Hypoconcha arcuata,granulate shellback crab
-HYPOCONCHA SPINOSISSIMA,,,,,,,,,,Hypoconcha spinosissima,spiny shellback crab
+HYPEROGLYPHE PERCIFORMES,NA,NA,NA,NA,NA,NA,NA,NA,NA,Hyperoglyphe perciformes,barrelfish
+HYPLEUROCHILUS GEMINATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Hypleurochilus geminatus,crested blenny
+HYPOCONCHA ARCUATA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Hypoconcha arcuata,granulate shellback crab
+HYPOCONCHA SPINOSISSIMA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Hypoconcha spinosissima,spiny shellback crab
 Hypsagonus quadricornis,quadricornis,Hypsagonus,Agonidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Hypsagonus quadricornis,fourhorn poacher
-HYPSOBLENNIUS HENTZ,,,,,,,,,,Hypsoblennius hentz,feather blenny
+HYPSOBLENNIUS HENTZ,NA,NA,NA,NA,NA,NA,NA,NA,NA,Hypsoblennius hentz,feather blenny
 Icelinus filamentosus,filamentosus,Icelinus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Icelinus filamentosus,threadfin sculpin
 Icelinus fimbriatus,fimbriatus,Icelinus,Cottidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Icelinus fimbriatus,fringed sculpin
 ICELUS SPATULA,spatula,Icelus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Icelus spatula,spatulate sculpin
@@ -531,9 +531,9 @@ Isopoda,NA,NA,NA,Isopoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Isopoda s
 Isopsetta isolepis,isolepis,Isopsetta,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Isopsetta isolepis,butter sole
 Isopsettaisolepis,isolepis,Isopsetta,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Isopsetta isolepis,butter sole
 KATHETOSTOMA ALBIGUTTA,albigutta,Kathetostoma,Uranoscopidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Kathetostoma albigutta,lancer stargazer
-KYPHOSUS INCISOR,,,,,,,,,,Kyphosus incisor,yellow chub
+KYPHOSUS INCISOR,NA,NA,NA,NA,NA,NA,NA,NA,NA,Kyphosus incisor,yellow chub
 Labidochirus splendescens,splendescens,Labidochirus,Paguridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Labidochirus splendescens,splendid hermit
-LABRISOMUS NUCHIPINNIS,,,,,,,,,,Labrisomus nuchipinnis,hairy blenny
+LABRISOMUS NUCHIPINNIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Labrisomus nuchipinnis,hairy blenny
 LAGOCEPHALUS LAEVIGATUS,laevigatus,Lagocephalus,Tetraodontidae,Tetraodontiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lagocephalus laevigatus,smooth puffer
 LAGODO RHOMBOIDES,rhomboides,Lagodon,Sparidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Lagodo rhomboides,pinfish
 LAGODON RHOMBOIDES,rhomboides,Lagodon,Sparidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lagodon rhomboides,pinfish
@@ -546,7 +546,7 @@ LEBBEUS POLARIS,polaris,Lebbeus,Hippolytidae,Decapoda,Malacostraca,NA,Crustacea,
 LEIOLAMBRUS ITIDUS,nitidus,Leiolambrus,Parthenopidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Leiolambrus itidus,white elbow crab
 LEIOSTOMUS XANTHURUS,xanthurus,Leiostomus,Sciaenidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Leiostomus xanthurus,spot
 LEIOSTOMUS XATHURUS,xanthurus,Leiostomus,Sciaenidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Leiostomus xanthurus,spot
-LEPIDOCHELYS KEMPII,,,,,,,,,,Lepidochelys kempii,Kemp's Ridley sea turtle
+LEPIDOCHELYS KEMPII,NA,NA,NA,NA,NA,NA,NA,NA,NA,Lepidochelys kempii,Kemp's Ridley sea turtle
 Lepidopsetta sp,NA,Lepidopsetta,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lepidopsetta spp.,rock soles
 Lepidopsetta sp.,NA,Lepidopsetta,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lepidopsetta spp.,rock soles
 Lepidopsettasp,NA,Lepidopsetta,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lepidopsetta spp.,rock soles
@@ -571,16 +571,16 @@ Leucoraja ocellata,ocellata,Leucoraja,Rajidae,Rajiformes,Elasmobranchii,Pisces,V
 Leuroglossus schmidti,schmidti,Leuroglossus,Bathylagidae,Osmeriformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Leuroglossus schmidti,northern smoothtongue
 Leuroglossusschmidti,schmidti,Leuroglossus,Bathylagidae,Osmeriformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Leuroglossus schmidti,northern smoothtongue
 LIBIIA EMARGIATA,emarginata,Libinia,Epialtidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Libinia emarginata,portly spider crab
-LIBINIA,,,,,,,,,,Libinia spp.,spider crabs
+LIBINIA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Libinia spp.,spider crabs
 Limanda aspera,aspera,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Limanda aspera,yellowfin sole
 LIMANDA FERRUGINEA,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Limanda ferruginea,yellowtail flounder
 Limanda ferruginea,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Limanda ferruginea,yellowtail flounder
-LIMANDA FERRUGINEA ,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Limanda ferruginea,yellowtail flounder
+LIMANDA FERRUGINEA,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Limanda ferruginea,yellowtail flounder
 Limanda proboscidea,proboscidea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Limanda proboscidea,longhead dab
 Limanda sakhalinensis,sakhalinensis,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Limanda sakhalinensis,Sakhalin sole
 Limandaaspera,aspera,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Limanda aspera,yellowfin sole
 Limandaproboscidea,proboscidea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Limanda proboscidea,longhead dab
-LIMULUS POLYPHEMUS,,,,,,,,,,Limulus polyphemus,horseshoe crab
+LIMULUS POLYPHEMUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Limulus polyphemus,horseshoe crab
 LIPARIDAE,NA,NA,Liparidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Liparidae spp.,snailfishes
 Liparidae,NA,NA,Liparidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Liparidae spp.,snailfishes
 Liparis sp.,NA,NA,NA,NA,NA,NA,NA,NA,NA,Liparis spp.,snailfishes
@@ -589,10 +589,10 @@ Lithodes aequispinus,aequispinus,Lithodes,Lithodidae,Decapoda,Malacostraca,NA,Cr
 LITHODES MAJA,maja,Lithodes,Lithodidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Lithodes maja,Norway king crab
 Lithodesaequispinus,aequispinus,Lithodes,Lithodidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Lithodes aequispinus,golden king crab
 LITHODIDAE,NA,NA,Lithodidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Lithodidae spp.,stone and king crabs
-LITOPENAEUS SETIFERUS,,,,,,,,,,Litopenaeus setiferus,white shrimp
-LITOPENAEUS VANNAMEI,,,,,,,,,,Litopenaeus vannamei,whiteleg shrimp
-LOBOPILUMNUS AGASSIZII,,,,,,,,,,Lobopilumnus agassizii,areolated hairy crab
-LOBOTES SURINAMENSIS,,,,,,,,,,Lobotes surinamensis,tripletail
+LITOPENAEUS SETIFERUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Litopenaeus setiferus,white shrimp
+LITOPENAEUS VANNAMEI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Litopenaeus vannamei,whiteleg shrimp
+LOBOPILUMNUS AGASSIZII,NA,NA,NA,NA,NA,NA,NA,NA,NA,Lobopilumnus agassizii,areolated hairy crab
+LOBOTES SURINAMENSIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Lobotes surinamensis,tripletail
 LOLIGO,NA,Loligo,Loliginidae,Teuthida,Cephalopoda,NA,NA,Mollusca,Animalia,Loligo spp.,Loligo squids
 Loligo opalescens,opalescens,Loligo,Loliginidae,Myopsida,Cephalopoda,NA,NA,Mollusca,Animalia,Loligo opalescens,California market squid
 LOLIGO PEALEII,pealeii,Loligo,Loliginidae,Myopsida,Cephalopoda,NA,NA,Mollusca,Animalia,Loligo pealeii,longfin inshore squid
@@ -613,9 +613,9 @@ Lumpenus maculatus,maculatus,Leptoclinus,Stichaeidae,Perciformes,Actinopterygii,
 Lumpenus sagitta,sagitta,Lumpenus,Stichaeidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Lumpenus sagitta,snake prickleback
 Lumpenusmaculatus,maculatus,Leptoclinus,Stichaeidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Leptoclinus maculatus,daubed shanny
 Lumpenussagitta,sagitta,Lumpenus,Stichaeidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lumpenus sagitta,snake prickleback
-LUTJANUS ANALIS,,,,,,,,,,Lutjanus analis,mutton snapper
+LUTJANUS ANALIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Lutjanus analis,mutton snapper
 LUTJANUS CAMPECHANUS,campechanus,Lutjanus,Lutjanidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lutjanus campechanus,red snapper
-LUTJANUS GRISEUS,,,,,,,,,,Lutjanus griseus,gray snapper
+LUTJANUS GRISEUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Lutjanus griseus,gray snapper
 LUTJANUS SYNAGRIS,synagris,Lutjanus,Lutjanidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lutjanus synagris,lane snapper
 LUTJAUS CAMPECHAUS,campechanus,Lutjanus,Lutjanidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lutjanus campechanus,northern red snapper
 LUTJAUS SYAGRIS,synagris,Lutjanus,Lutjanidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lutjanus synagris,lane snapper
@@ -637,10 +637,10 @@ Lycodespalearis,palearis,Lycodes,Zoarcidae,Perciformes,Actinopterygii,Pisces,Ver
 Lycodesraridens,raridens,Lycodes,Zoarcidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lycodes raridens,sparse-toothed lycod
 Lyopsetta exilis,exilis,Lyopsetta,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lyopsetta exilis,slender sole
 Lyopsettaexilis,exilis,Lyopsetta,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Lyopsetta exilis,slender sole
-LYSIOSQUILLA SCABRICAUDA,,,,,,,,,,Lysiosquilla scabricauda,dark-banded mantis shrimp
-LYSMATA WURDEMANNI,,,,,,,,,,Lysmata wurdemanni,peppermint shrimp
+LYSIOSQUILLA SCABRICAUDA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Lysiosquilla scabricauda,dark-banded mantis shrimp
+LYSMATA WURDEMANNI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Lysmata wurdemanni,peppermint shrimp
 Macoma sp.,NA,Macoma,Tellinidae,Veneroida,Bivalvia,NA,NA,Mollusca,Animalia,Macoma spp.,tellins
-MACROCOELOMA CAMPTOCERUM,,,,,,,,,,Macrocoeloma camptocerum,Florida decorator crab
+MACROCOELOMA CAMPTOCERUM,NA,NA,NA,NA,NA,NA,NA,NA,NA,Macrocoeloma camptocerum,Florida decorator crab
 MACROURUS BERGLAX,berglax,Macrourus,Macrouridae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Macrourus berglax,roughhead grenadier
 MACROZOARCES AMERICANUS,americanus,Zoarces,Zoarcidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Zoarces americanus,ocean pout
 Mactromeris polynyma,polynyma,Mactromeris,Mactridae,Veneroida,Bivalvia,NA,NA,Mollusca,Animalia,Mactromeris polynyma,Arctic surfclam
@@ -654,16 +654,16 @@ Mallotus villosus,villosus,Mallotus,Osmeridae,Osmeriformes,Actinopterygii,Pisces
 Mallotusvillosus,villosus,Mallotus,Osmeridae,Osmeriformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Mallotus villosus,capelin
 Mediaster aequalis,aequalis,Mediaster,Goniasteridae,Valvatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Mediaster aequalis,Vermilion star
 Mediaster spp.,NA,Mediaster,Goniasteridae,Valvatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Mediaster spp.,Vermilion star
-MEGALOPS ATLANTICUS,,,,,,,,,,Megalops atlanticus,tarpon
+MEGALOPS ATLANTICUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Megalops atlanticus,tarpon
 MELANOGRAMMUS AEGLEFINUS,aeglefinus,Melanogrammus,Gadidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Melanogrammus aeglefinus,haddock
 Melanogrammus aeglefinus,aeglefinus,Melanogrammus,Gadidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Melanogrammus aeglefinus,haddock
-MEMBRAS MARTINICA,,,,,,,,,,Membras martinica,rough silverside
-MENIDIA BERYLLINA,,,,,,,,,,Medinia beryllina,inland silverside
-MENIDIA MENIDIA,,,,,,,,,,Menidia menidia,Atlantic silverside
-MENIPPE MERCENARIA,,,,,,,,,,Menippe mercenaria,Florida stone crab
+MEMBRAS MARTINICA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Membras martinica,rough silverside
+MENIDIA BERYLLINA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Medinia beryllina,inland silverside
+MENIDIA MENIDIA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Menidia menidia,Atlantic silverside
+MENIPPE MERCENARIA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Menippe mercenaria,Florida stone crab
 MENTICIRRHUS AMERICANUS,americanus,Menticirrhus,Sciaenidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Menticirrhus americanus,southern kingfish
-MENTICIRRHUS LITTORALIS,,,,,,,,,,Menticirrhus littoralis,gulf kingfish
-MENTICIRRHUS SAXATILIS,,,,,,,,,,Menticirrhus saxatilis,northern kingfish
+MENTICIRRHUS LITTORALIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Menticirrhus littoralis,gulf kingfish
+MENTICIRRHUS SAXATILIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Menticirrhus saxatilis,northern kingfish
 MERLUCCIUS ALBIDUS,albidus,Merluccius,Merlucciidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Merluccius albidus,offshore hake
 Merluccius albidus,albidus,Merluccius,Merlucciidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Merluccius albidus,offshore hake
 MERLUCCIUS BILINEARIS,bilinearis,Merluccius,Merlucciidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Merluccius bilinearis,silver hake
@@ -681,25 +681,25 @@ MICROPOGONIAS UNDULATUS,undulatus,Micropogonias,Sciaenidae,Perciformes,Actinopte
 Microstomus pacificus,pacificus,Microstomus,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Microstomus pacificus,Dover sole
 Microstomuspacificus,pacificus,Microstomus,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Microstomus pacificus,Dover sole
 MOACATHUS HISPIDUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Moacathus hispidus,planehead filefish
-MOBULA HYPOSTOMA,,,,,,,,,,Mobula hypostoma,devil ray
+MOBULA HYPOSTOMA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Mobula hypostoma,devil ray
 Modiolus modiolus,modiolus,Modiolus,Mytilidae,Mytiloida,Bivalvia,NA,NA,Mollusca,Animalia,Modiolus modiolus,northern horsemussel
-MOLA MOLA,,,,,,,,,,Mola mola,ocean sunfish
+MOLA MOLA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Mola mola,ocean sunfish
 Molgula grifithsii,griffithsii,Molgula,Molgulidae,Pleurogona,Ascidiacea,NA,Urochordata,Chordata,Animalia,Molgula grifithsii,sea grapes
 Molpadia intermedia,intermedia,Molpadia,Molpadiidae,Molpadiida,Holothuroidea,NA,Echinozoa,Echinodermata,Animalia,Molpadia intermedia,sea cucumber
 MONACANTHUS HISPIDUS,hispidus,Stephanolepis,Monacanthidae,Tetraodontiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Stephanolepis hispidus,planehead filefish
 Moroteuthis robusta,robusta,Moroteuthis,Onychoteuthidae,Teuthida,Cephalopoda,NA,NA,Mollusca,Animalia,Moroteuthis robusta,robust clubhook squid
-MUGIL CEPHALUS,,,,,,,,,,Mugil cephalus,striped mullet
-MUGIL CUREMA,,,,,,,,,,Mugil curema,white mullet
+MUGIL CEPHALUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Mugil cephalus,striped mullet
+MUGIL CUREMA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Mugil curema,white mullet
 MULLUS AURATUS,auratus,Mullus,Mullidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Mullus auratus,red goatfish
 Munida quadrispina,quadrispina,Munida,Galatheidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Munida quadrispina,squat lobster
 Musculus discors,discors,Musculus,Mytilidae,Mytiloida,Bivalvia,NA,NA,Mollusca,Animalia,Musculus discors,discordant mussel
 MUSTELUS CAIS,canis,Mustelus,Triakidae,Carcharhiniformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Mustelus canis,smooth dogfish
 MUSTELUS CANIS,canis,Mustelus,Triakidae,Carcharhiniformes,Chondrichthyes,Chondrichthyes,Vertebrata,Chordata,Animalia,Mustelus canis,smooth dogfish
 Mycale loveni,loveni,Mycale,Mycalidae,Poecilosclerida,Demospongiae,NA,NA,Porifera,Animalia,Mycale loveni,tree sponge
-MYCTEROPERCA MICROLEPIS,,,,,,,,,,Mycteroperca microlepis,gag
+MYCTEROPERCA MICROLEPIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Mycteroperca microlepis,gag
 MYCTOPHIDAE,NA,NA,Myctophidae,Myctophiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Myctophidae spp.,lanternfishes
 Myctophidae,NA,NA,Myctophidae,Myctophiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Myctophidae spp.,lanternfishes
-MYLIOBATIS FREMINVILLEI,,,,,,,,,,Myliobatis freminvillei,bullnose ray
+MYLIOBATIS FREMINVILLEI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Myliobatis freminvillei,bullnose ray
 Myoxocephalus jaok,jaok,Myoxocephalus,Cottidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Myoxocephalus jaok,plain sculpin
 MYOXOCEPHALUS OCTODECEMSPINOSUS,octodecemspinosus,Myoxocephalus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Myoxocephalus octodecemspinosus,longhorn sculpin
 Myoxocephalus octodecemspinosus,octodecemspinosus,Myoxocephalus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Myoxocephalus octodecemspinosus,longhorn sculpin
@@ -708,11 +708,11 @@ MYOXOCEPHALUS SCORPIUS,scorpius,Myoxocephalus,Cottidae,Scorpaeniformes,Actinopte
 Myoxocephalus sp.,NA,Myoxocephalus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Myoxocephalus spp.,daddy sculpins
 Myoxocephalussp,NA,Myoxocephalus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Myoxocephalus spp.,daddy sculpins
 Myoxocephalussp.,NA,Myoxocephalus,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Myoxocephalus spp.,daddy sculpins
-MYROPHIS PUNCTATUS,,,,,,,,,,Myrophis punctatus,speckled worm eel
+MYROPHIS PUNCTATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Myrophis punctatus,speckled worm eel
 MYXINE GLUTINOSA,glutinosa,Myxine,Myxinidae,Myxiniformes,Myxini,NA,Vertebrata,Chordata,Animalia,Myxine glutinosa,Atlantic hagfish
 Myxinidae,NA,NA,Myxinidae,Myxiniformes,Myxini,NA,Vertebrata,Chordata,Animalia,Myxinidae spp.,hagfishes
 Myxoderma platyacanthum,platyacanthum,Myxoderma,Zoroasteridae,Forcipulatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Myxoderma platyacanthum,sea star
-NARCINE BRASILIENSIS,,,,,,,,,,Narcine brasiliensis,lesser electric ray
+NARCINE BRASILIENSIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Narcine brasiliensis,lesser electric ray
 Natica sp.,NA,Natica,Naticidae,Neotaenioglossa,Gastropoda,NA,NA,Mollusca,Animalia,Natica spp.,Red-Banded Moon Snail
 Nautichthys oculofasciatus,oculofasciatus,Nautichthys,Hemitripteridae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Nautichthys oculofasciatus,sailfin sculpin
 NEMICHTHYS SCOLOPACEUS,scolopaceus,Nemichthys,Nemichthyidae,Anguilliformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Nemichthys scolopaceus,Atlantic snipe eel
@@ -741,12 +741,12 @@ OCTOPODIDAE,NA,NA,Octopodidae,Octopoda,Cephalopoda,NA,NA,Mollusca,Animalia,Octop
 Octopodidae,NA,NA,Octopodidae,Octopoda,Cephalopoda,NA,NA,Mollusca,Animalia,Octopodidae spp.,octopuses
 Octopus (=Enteroctopus) dofleini,dofleini,Enteroctopus,Octopodidae,Octopoda,Cephalopoda,NA,NA,Mollusca,Animalia,Octopus dofleini,giant pacific octopus
 Octopus rubescens,rubescens,Octopus,Octopodidae,Octopoda,Cephalopoda,NA,NA,Mollusca,Animalia,Octopus rubescens,East Pacific red octopus
-OCTOPUS VULGARIS,,,,,,,,,,Octopus vulgaris,common octopus
+OCTOPUS VULGARIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Octopus vulgaris,common octopus
 OGCOCEPHALUS DECLIVIROSTRIS,declivirostris,Ogcocephalus,Ogcocephalidae,Lophiiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Ogcocephalus declivirostris,slantbrow batfish
-OGCOCEPHALUS PARVUS,,,,,,,,,,Ogcocephalus parvus,roughback batfish
-OGCOCEPHALUS ROSTELLUM,,,,,,,,,,Ogcocephalus rostellum,palefin batfish
-OGCOCEPHALUS VESPERTILIO,,,,,,,,,,Ogcocephalus vespertilio,longnose batfish
-OLIGOPLITES SAURUS,,,,,,,,,,Oligoplites saurus,leatherjacket
+OGCOCEPHALUS PARVUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ogcocephalus parvus,roughback batfish
+OGCOCEPHALUS ROSTELLUM,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ogcocephalus rostellum,palefin batfish
+OGCOCEPHALUS VESPERTILIO,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ogcocephalus vespertilio,longnose batfish
+OLIGOPLITES SAURUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Oligoplites saurus,leatherjacket
 Oncorhynchus gorbuscha,gorbuscha,Oncorhynchus,Salmonidae,Salmoniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Oncorhynchus gorbuscha,pink salmon
 Oncorhynchus keta,keta,Oncorhynchus,Salmonidae,Salmoniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Oncorhynchus keta,chum salmon
 Oncorhynchus kisutch,kisutch,Oncorhynchus,Salmonidae,Salmoniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Oncorhynchus kisutch,coho salmon
@@ -756,18 +756,18 @@ Oncorhynchusketa,keta,Oncorhynchus,Salmonidae,Salmoniformes,Actinopterygii,Pisce
 Oncorhynchuskisutch,kisutch,Oncorhynchus,Salmonidae,Salmoniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Oncorhynchus kisutch,coho salmon
 Oncorhynchustshawytscha,tshawytscha,Oncorhynchus,Salmonidae,Salmoniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Oncorhynchus tshawytscha,Chinook salmon
 OPHICHTHUS GOMESII,gomesii,Ophichthus,Ophichthidae,Anguilliformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Ophichthus gomesii,shrimp eel
-OPHICHTHUS OCELLATUS,,,,,,,,,,Ophichthus ocellatus,palespotted eel
+OPHICHTHUS OCELLATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ophichthus ocellatus,palespotted eel
 OPHIDIO,NA,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion spp.,cusk-eels
-OPHIDIO BEAI,beani,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion beani,
+OPHIDIO BEAI,beani,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion beani,NA
 OPHIDIO GRAYI,grayi,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion grayi,blotched cusk-eel
 OPHIDIO HOLBROOKI,holbrookii,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Ophidion holbrookii,bank cusk-eel
 OPHIDIO MARGIATUM,marginatum,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion marginatum,striped cusk-eel
 OPHIDIO SELEOPS,selenops,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion selenops,mooneye cusk-eel
 OPHIDIO WELSHI,welshi,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion welshi,crested cusk-eel
-OPHIDIOIDEI S.O.,NA,NA,NA,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidioidei spp.,
+OPHIDIOIDEI S.O.,NA,NA,NA,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidioidei spp.,NA
 OPHIDION GRAYI,grayi,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion grayi,blotched cusk-eel
 OPHIDION HOLBROOKI,holbrookii,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion holbrookii,bank cusk-eel
-OPHIDION JOSEPHI,,,,,,,,,,Ophidion josephi,crested cusk-eel
+OPHIDION JOSEPHI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ophidion josephi,crested cusk-eel
 OPHIDION MARGINATUM,marginatum,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion marginatum,striped cusk-eel
 Ophidion scrippsae,scrippsae,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion scrippsae,basketweave cusk-eel
 OPHIDION SELENOPS,selenops,Ophidion,Ophidiidae,Ophidiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Ophidion selenops,mooneye cusk-eel
@@ -780,29 +780,29 @@ Ophiura sarsi,sarsi,Ophiura,Ophiuridae,Ophiurida,Ophiuroidea,NA,Asterozoa,Echino
 Ophiuroidea,NA,NA,NA,NA,Ophiuroidea,NA,Asterozoa,Echinodermata,Animalia,Ophiuroidea spp.,brittle stars
 OPISTHOEMA OGLIUM,oglinum,Opisthonema,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Opisthonema oglinum,Atlantic thread herring
 OPISTHONEMA OGLINUM,oglinum,Opisthonema,Clupeidae,Clupeiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Opisthonema oglinum,Atlantic thread herring
-OPSANUS TAU,,,,,,,,,,Opsanus tau,oyster toadfish
+OPSANUS TAU,NA,NA,NA,NA,NA,NA,NA,NA,NA,Opsanus tau,oyster toadfish
 Oregonia gracilis,gracilis,Oregonia,Oregoniidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Oregonia gracilis,graceful decorator crab
 Oregoniagracilis,gracilis,Oregonia,Oregoniidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Oregonia gracilis,graceful decorator crab
 Orthasterias koehleri,koehleri,Orthasterias,Asteriidae,Forcipulatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Orthasterias koehleri,rainbow star
-ORTHOPRISTIS CHRYSOPTERA,,,,,,,,,,Orthopristis chrysoptera,pigfish
+ORTHOPRISTIS CHRYSOPTERA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Orthopristis chrysoptera,pigfish
 ORTHOPRISTIS CHRYSOPTERUS,chrysoptera,Orthopristis,Haemulidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Orthopristis chrysoptera,pigfish
 Osmeridae,NA,NA,Osmeridae,Osmeriformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Osmeridae spp.,smelts
 Osmerus mordax,mordax,Osmerus,Osmeridae,Osmeriformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Osmerus mordax,rainbow smelt
 OVALIPES FLORIDAUS,floridanus,Ovalipes,Portunidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Ovalipes floridaus,Florida lady crab
-OVALIPES OCELLATUS,,,,,,,,,,Ovalipes ocellatus,lady crab
-OVALIPES STEPHENSONI,,,,,,,,,,Ovalipes stephensoni,coursehand lady crab
+OVALIPES OCELLATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ovalipes ocellatus,lady crab
+OVALIPES STEPHENSONI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Ovalipes stephensoni,coursehand lady crab
 Paguridae,NA,NA,Paguridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Paguridae spp.,right-handed hermit crabs
-PAGURISTES HUMMI,,,,,,,,,,Paguristes hummi,blue-spot hermit
+PAGURISTES HUMMI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Paguristes hummi,blue-spot hermit
 Paguristes turgidus,turgidus,Paguristes,Diogenidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Paguristes turgidus,hermit crab
 Pagurus aleuticus,aleuticus,Pagurus,Paguridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pagurus aleuticus,Aleutian hermit
-PAGURUS ANNULIPES,,,,,,,,,,Pagurus annulipes,brown banded hermit
+PAGURUS ANNULIPES,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pagurus annulipes,brown banded hermit
 Pagurus brandti,brandti,Pagurus,Paguridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pagurus brandti,sponge hermit
 Pagurus capillatus,capillatus,Pagurus,Paguridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pagurus capillatus,fuzzy hermit crab
 Pagurus confragosus,confragosus,Pagurus,Paguridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pagurus confragosus,knobbyhand hermit
-PAGURUS IMPRESSUS,,,,,,,,,,Pagurus impressus,palmate hermit crab
-PAGURUS LONGICARPUS,,,,,,,,,,Pagurus longicarpus,longwrist hermit crab
+PAGURUS IMPRESSUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pagurus impressus,palmate hermit crab
+PAGURUS LONGICARPUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pagurus longicarpus,longwrist hermit crab
 Pagurus ochotensis,ochotensis,Pagurus,Paguridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pagurus ochotensis,Alaskan hermit crab
-PAGURUS POLLICARIS,,,,,,,,,,Pagurus pollicaris,gray hermit crab
+PAGURUS POLLICARIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pagurus pollicaris,gray hermit crab
 Pagurus sp.,NA,Pagurus,Paguridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pagurus spp.,hermit crabs
 Pagurus spp.,NA,Pagurus,Paguridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pagurus spp.,hermit crabs
 Pandalopsis dispar,dispar,Pandalopsis,Pandalidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pandalopsis dispar,sidestripe shrimp
@@ -822,17 +822,17 @@ Pandaluseous(=borealis),eous,Pandalus,Pandalidae,Decapoda,Malacostraca,NA,Crusta
 Pandalusgoniurus,goniurus,Pandalus,Pandalidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pandalus goniurus,humpy shrimp
 Pandalushypsinotus,hypsinotus,Pandalus,Pandalidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pandalus hypsinotus,coonstriped shrimp
 Pandalusplatyceros,platyceros,Pandalus,Pandalidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Pandalus platyceros,spot shrimp
-PANOPEUS HERBSTII,,,,,,,,,,Panopeus herbstii,Atlantic mud crab
-PARABLENNIUS MARMOREUS,,,,,,,,,,Parablennius marmoreus,seaweed blenny
+PANOPEUS HERBSTII,NA,NA,NA,NA,NA,NA,NA,NA,NA,Panopeus herbstii,Atlantic mud crab
+PARABLENNIUS MARMOREUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Parablennius marmoreus,seaweed blenny
 Paractinostola faeculenta,faeculenta,Paractinostola,Actinostolidae,Actiniaria,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Paractinostola faeculenta,hobnail vase anemone
 Paragorgia arborea,arborea,Paragorgia,Paragorgiidae,Alcyonacea,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Paragorgia arborea,bubblegum coral
 PARALEPIDIDAE,NA,NA,Paralepididae,Aulopiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Paralepididae spp.,barracudinas
-PARALICHTHYS ALBIGUTTA,,,,,,,,,,Paralichthys albigutta,gulf flounder
+PARALICHTHYS ALBIGUTTA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Paralichthys albigutta,gulf flounder
 PARALICHTHYS DENTATUS,dentatus,Paralichthys,Paralichthyidae,Pleuronectiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Paralichthys dentatus,summer flounder
 Paralichthys dentatus,dentatus,Paralichthys,Paralichthyidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Paralichthys dentatus,summer flounder
 PARALICHTHYS LETHOSTIGMA,lethostigma,Paralichthys,Paralichthyidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Paralichthys lethostigma,southern flounder
 PARALICHTHYS OBLONGUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Paralichthys oblongus,American fourspot flounder
-PARALICHTHYS SQUAMILENTUS,,,,,,,,,,Paralichthys squamilentus,broad flounder
+PARALICHTHYS SQUAMILENTUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Paralichthys squamilentus,broad flounder
 Paralithodes camtschaticus,camtschaticus,Paralithodes,Lithodidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Paralithodes camtschaticus,red king crab
 Paralithodes platypus,platypus,Paralithodes,Lithodidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Paralithodes platypus,blue king crab
 Paralithodescamtschaticus,camtschaticus,Paralithodes,Lithodidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Paralithodes camtschaticus,red king crab
@@ -851,40 +851,40 @@ Patinopectencaurinus,caurinus,Patinopecten,Pectinidae,Pectinoida,Bivalvia,NA,NA,
 PEAEUS AZTECUS,aztecus,Farfantepenaeus,Penaeidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Peaeus aztecus,brown shrimp
 PEAEUS DUORARUM,duorarum,Penaeus,Penaeidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Penaeus duorarum,spotted shrimp
 PEAEUS SETIFERUS,setiferus,Litopenaeus,Penaeidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Peaeus setiferus,white shrimp
-PELIA MUTICA,,,,,,,,,,Pelia mutica,cryptic teardrop crab
+PELIA MUTICA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pelia mutica,cryptic teardrop crab
 PENAEUS AZTECUS,aztecus,Penaeus,Penaeidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Penaeus aztecus,brown shrimp
 PENAEUS DUORARUM,duorarum,Penaeus,Penaeidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Penaeus duorarum,northern pink shrimp
-PENAEUS MONODON,,,,,,,,,,Penaeus monodon,giant tiger prawn
+PENAEUS MONODON,NA,NA,NA,NA,NA,NA,NA,NA,NA,Penaeus monodon,giant tiger prawn
 PENAEUS SETIFERUS,setiferus,Litopenaeus,Penaeidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Litopenaeus setiferus,northern white shrimp
 Pennatulacea,NA,NA,NA,Pennatulacea,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Pennatulacea spp.,sea panzies
 PEPRILUS ALEPIDOTUS,alepidotus,Peprilus,Stromateidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Peprilus alepidotus,harvestfish
 PEPRILUS BURTI,burti,Peprilus,Stromateidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Peprilus burti,Gulf butterfish
-PEPRILUS PARU,,,,,,,,,,Peprilus paru,harvestfish
+PEPRILUS PARU,NA,NA,NA,NA,NA,NA,NA,NA,NA,Peprilus paru,harvestfish
 Peprilus simillimus,simillimus,Peprilus,Stromateidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Peprilus simillimus,Pacific pompano
 PEPRILUS TRIACANTHUS,triacanthus,Peprilus,Stromateidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Peprilus triacanthus,American butterfish
 Peprilus triacanthus,triacanthus,Peprilus,Stromateidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Peprilus triacanthus,butterfish
-PEPRILUS TRIACANTHUS,,,,,,,,,,Peprilus tracanthus,butterfish
+PEPRILUS TRIACANTHUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Peprilus tracanthus,butterfish
 PERISTEDION MINIATUM,miniatum,Peristedion,Triglidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Peristedion miniatum,armored searobin
 PERSEPHOA CRIITA,crinita,Persephona,Leucosiidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Persephoa criita,pink purse crab
 PERSEPHOA MEDITERRAEA,mediterranea,Persephona,Leucosiidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Persephona mediterranea,mottled purse crab
-PERSEPHONA MEDITERRANEA,,,,,,,,,,Persephona mediterranea,mottled purse crab
-PETROCHIRUS DIOGENES,,,,,,,,,,Pentrochirus diogenes,giant hermit
-PETROLISTHES ARMATUS,,,,,,,,,,Petrolisthes armatus,green porcelain crab
-PETROLISTHES GALATHINUS,,,,,,,,,,Petrolisthes galanthinus,banded porcelain crab
-PILUMNUS FLORIDANUS,,,,,,,,,,Pilumnus floridanus,plumed hairy crab
-PILUMNUS SAYI,,,,,,,,,,Pilumnus sayi,spineback hairy crab
-PINNAXODES FLORIDENSIS,,,,,,,,,,Pinnaxodes floridensis,polkadotted pea crab
-PINNIXA CHAETOPTERANA,,,,,,,,,,Pinnixa chaetopterana,tube pea crab
-PINNIXA LUNZI,,,,,,,,,,Pinnixa lunzi,Lunz pea crab
+PERSEPHONA MEDITERRANEA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Persephona mediterranea,mottled purse crab
+PETROCHIRUS DIOGENES,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pentrochirus diogenes,giant hermit
+PETROLISTHES ARMATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Petrolisthes armatus,green porcelain crab
+PETROLISTHES GALATHINUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Petrolisthes galanthinus,banded porcelain crab
+PILUMNUS FLORIDANUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pilumnus floridanus,plumed hairy crab
+PILUMNUS SAYI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pilumnus sayi,spineback hairy crab
+PINNAXODES FLORIDENSIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pinnaxodes floridensis,polkadotted pea crab
+PINNIXA CHAETOPTERANA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pinnixa chaetopterana,tube pea crab
+PINNIXA LUNZI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pinnixa lunzi,Lunz pea crab
 Pisaster brevispinus,brevispinus,Pisaster,Asteriidae,Forcipulatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Pisaster brevispinus,giant pink sea star
 Placetron wosnessenskii,wosnessenskii,Placetron,Hapalogastridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Placetron wosnessenskii,scaled crab
 Placetronwosnessenskii,wosnessenskii,Placetron,Hapalogastridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Placetron wosnessenskii,scaled crab
 PLACOPECTEN MAGELLANICUS,magellanicus,Placopecten,Pectinidae,Ostreoida,Bivalvia,NA,NA,Mollusca,Animalia,Placopecten magellanicus,sea scallop
 Placopecten magellanicus,magellanicus,Placopecten,Pectinidae,Pectinoida,Bivalvia,NA,NA,Mollusca,Animalia,Placopecten magellanicus,sea scallop
-PLANES MINUTUS,,,,,,,,,,Planes minutus,gulfweed crab
+PLANES MINUTUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Planes minutus,gulfweed crab
 Platichthys stellatus,stellatus,Platichthys,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Platichthys stellatus,starry flounder
 Platichthysstellatus,stellatus,Platichthys,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Platichthys stellatus,starry flounder
-PLATYLAMBRUS GRANULATA,,,,,,,,,,Platylambrus granulata,rough elbow crab
+PLATYLAMBRUS GRANULATA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Platylambrus granulata,rough elbow crab
 Platymera gaudichaudii,gaudichaudii,Platymera,Calappidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Platymera gaudichaudii,armed box crab
 Pleurobranchaea californica,californica,Pleurobranchaea,Pleurobranchidae,Notaspidea,Gastropoda,NA,NA,Mollusca,Animalia,Pleurobranchaea californica,nudibranch
 Pleurogrammus monopterygius,monopterygius,Pleurogrammus,Hexagrammidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Pleurogrammus monopterygius,Atka mackerel
@@ -895,23 +895,23 @@ Pleuronichthys decurrens,decurrens,Pleuronichthys,Pleuronectidae,Pleuronectiform
 Pleuronichthys verticalis,verticalis,Pleuronichthys,Pleuronectidae,Pleuronectiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Pleuronichthys verticalis,hornyhead turbot
 Plicifusus kroyeri,kroeyeri,Plicifusus,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Plicifusus kroeyeri,true whelk
 Plicifususkroyeri,kroeyeri,Plicifusus,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Plicifusus kroeyeri,true whelk
-PODOCHELA RIISEI,,,,,,,,,,Podochela riisei,longfinger neck crab
-PODOCHELA SIDNEYI,,,,,,,,,,Podochela sidneyi,shortfinger neck crab
+PODOCHELA RIISEI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Podochela riisei,longfinger neck crab
+PODOCHELA SIDNEYI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Podochela sidneyi,shortfinger neck crab
 Pododesmus macrochisma,macrochisma,Pododesmus,Anomiidae,Ostreoida,Bivalvia,NA,NA,Mollusca,Animalia,Pododesmus macrochisma,green falsejingle
 Podothecus accipenserinus,accipenserinus,Podothecus,Agonidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Podothecus accipenserinus,sturgeon poacher
 Podothecusaccipenserinus,accipenserinus,Podothecus,Agonidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Podothecus accipenserinus,sturgeon poacher
-POGONIAS CROMIS,,,,,,,,,,Pogonias cromis,black drum
+POGONIAS CROMIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pogonias cromis,black drum
 POLLACHIUS VIRENS,virens,Pollachius,Gadidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Pollachius virens,pollock
 Pollachius virens,virens,Pollachius,Gadidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Pollachius virens,pollock
 Polychaeta,NA,NA,NA,NA,NA,NA,Polychaeta,Annelida,Animalia,Polychaeta spp.,polychaetes
 POLYDACTYLUS OCTOEMUS,octonemus,Polydactylus,Polynemidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Polydactylus octoemus,Atlantic threadfin
 Polynoidae,NA,NA,Polynoidae,Phyllodocida,Errantia,NA,Polychaeta,Annelida,Animalia,Polynoidae spp.,scaleworms
-POLYONYX GIBBESI,,,,,,,,,,Polyonyx gibbesi,eastern tube crab
+POLYONYX GIBBESI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Polyonyx gibbesi,eastern tube crab
 Polyplacophora,NA,NA,NA,NA,Polyplacophora,NA,NA,Mollusca,Animalia,Polyplacophora spp.,chitons
 POMATOMUS SALTATRIX,saltatrix,Pomatomus,Pomatomidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Pomatomus saltatrix,bluefish
 Poraniopsis inflata,inflata,Poraniopsis,Echinasteridae,Spinulosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Poraniopsis inflata,spiny sea star
-PORCELLANA SAYANA,,,,,,,,,,Porcellana sayana,spotted porcelain crab
-PORCELLANA SIGSBEIANA,,,,,,,,,,Porcellana sigsbeiana,striped porcelain crab
+PORCELLANA SAYANA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Porcellana sayana,spotted porcelain crab
+PORCELLANA SIGSBEIANA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Porcellana sigsbeiana,striped porcelain crab
 Porichthys notatus,notatus,Porichthys,Batrachoididae,Batrachoidiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Porichthys notatus,plainfin midshipman
 PORICHTHYS PLECTRODO,plectrodon,Porichthys,Batrachoididae,Batrachoidiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Porichthys plectrodo,Atlantic midshipman
 PORICHTHYS PLECTRODON,plectrodon,Porichthys,Batrachoididae,Batrachoidiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Porichthys plectrodon,Atlantic midshipman
@@ -919,7 +919,7 @@ PORIFERA,NA,NA,NA,NA,NA,NA,NA,Porifera,Animalia,Porifera spp.,sponges
 Porifera,NA,NA,NA,NA,NA,NA,NA,Porifera,Animalia,Porifera spp.,sponges
 Poroclinus rothrocki,rothrocki,Poroclinus,Stichaeidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Poroclinus rothrocki,whitebarred prickleback
 PORTUNUS GIBBESII,gibbesii,Portunus,Portunidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Portunus gibbesii,iridescent swimming crab
-PORTUNUS SAYI,,,,,,,,,,Portunus sayi,sargassum swimming crab
+PORTUNUS SAYI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Portunus sayi,sargassum swimming crab
 PORTUNUS SPINICARPUS,spinicarpus,Achelous,Portunidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Achelous spinicarpus,longspine swimming crab
 PORTUNUS SPINIMANUS,spinimanus,Achelous,Portunidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Achelous spinimanus,blotched swimming crab
 PORTUUS GIBBESII,gibbesii,Portunus,Portunidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Portuus gibbesii,iridescent swimming crab
@@ -937,7 +937,7 @@ PRIONOTUS OPHRYAS,ophryas,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Pis
 PRIONOTUS PARALATUS,paralatus,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Prionotus paralatus,Mexican searobin
 PRIONOTUS ROSEUS,roseus,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Prionotus roseus,bluespotted searobin
 PRIONOTUS RUBIO,rubio,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Prionotus rubio,blackfin searobin
-PRIONOTUS SCITULUS,,,,,,,,,,Prionotus scitulus,leopard searobin
+PRIONOTUS SCITULUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Prionotus scitulus,leopard searobin
 PRIONOTUS STEARNSI,stearnsi,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Prionotus stearnsi,shortwing searobin
 PRIONOTUS TRIBULUS,tribulus,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Prionotus tribulus,bighead searobin
 PRIOOTUS LOGISPIOSUS,longispinosus,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Priootus logispiosus,bigeye searobin
@@ -948,11 +948,11 @@ PRIOOTUS RUBIO,rubio,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Osteicht
 PRIOOTUS SCITULUS,scitulus,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Priootus scitulus,leopard searobin
 PRIOOTUS STEARSI,stearnsi,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Priootus stearsi,shortwing searobin
 PRIOOTUS TRIBULUS,tribulus,Prionotus,Triglidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Priootus tribulus,bighead searobin
-PRISTIGENYS ALTA,,,,,,,,,,Pristigenys alta,short bigeye
+PRISTIGENYS ALTA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pristigenys alta,short bigeye
 PRISTIPOMOIDES AQUILOARIS,aquilonaris,Pristipomoides,Lutjanidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Pristipomoides aquiloaris,wrenchman
 PRISTIPOMOIDES AQUILONARIS,aquilonaris,Pristipomoides,Lutjanidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Pristipomoides aquilonaris,wenchman
 Protomyctophum thompsoni,thompsoni,Protomyctophum,Myctophidae,Myctophiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Protomyctophum thompsoni,bigeye lanternfish
-PSENES PELLUCIDUS,,,,,,,,,,Psenes pellucidus,bluefin driftfish
+PSENES PELLUCIDUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Psenes pellucidus,bluefin driftfish
 Psettichthys melanostictus,melanostictus,Psettichthys,Pleuronectidae,Pleuronectiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Psettichthys melanostictus,Pacific sand sole
 Psettichthysmelanostictus,melanostictus,Psettichthys,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Psettichthys melanostictus,sand sole
 Pseudarchaster alascensis,NA,NA,NA,NA,NA,NA,NA,NA,NA,Pseudarchaster alascensis,Alaskan scarlet star
@@ -960,7 +960,7 @@ Pseudarchaster parelii,parelii,Pseudarchaster,Goniasteridae,Valvatida,Asteroidea
 Pseudarchaster spp.,NA,Pseudarchaster,Goniasteridae,Valvatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Pseudarchaster spp.,Alaskan scarlet star
 PSEUDOPLEURONECTES AMERICANUS,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Pseudopleuronectes americanus,blackback
 Pseudopleuronectes americanus,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Pseudopleuronectes americanus,blackback
-PSEUDOPLEURONECTES AMERICANUS ,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Pseudopleuronectes americanus ,winter flounder
+PSEUDOPLEURONECTES AMERICANUS,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Pseudopleuronectes americanus,winter flounder
 Pseudostichopus mollis,mollis,Pseudostichopus,Synallactidae,Aspidochirotida,Holothuroidea,NA,Echinozoa,Echinodermata,Animalia,Pseudostichopus mollis,sea cucumber
 Psolus sp.,NA,Psolus,Psolidae,Dendrochirotida,Holothuroidea,NA,Echinozoa,Echinodermata,Animalia,Psolus spp.,sea cucumber
 Pteraster jordani,jordani,Pteraster,Pterasteridae,Spinulosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Pteraster jordani,Jordan's cushion star
@@ -977,7 +977,7 @@ Pyrulofusus deformis,deformis,Pyrulofusus,Buccinidae,Neogastropoda,Gastropoda,NA
 Pyrulofusus harpa,harpa,Pyrulofusus,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Pyrulofusus harpa,left-hand whelk
 Pyrulofusus melonis,melonis,Pyrulofusus,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Pyrulofusus melonis,melon shaped whelk
 Pyrulofususdeformis,deformis,Pyrulofusus,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Pyrulofusus deformis,warped whelk
-RACHYCENTRON CANADUM,,,,,,,,,,Rachycentron canadum,cobia
+RACHYCENTRON CANADUM,NA,NA,NA,NA,NA,NA,NA,NA,NA,Rachycentron canadum,cobia
 Radulinus asprellus,asprellus,Radulinus,Cottidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Radulinus asprellus,slim sculpin
 RAIOIDES LOUISIAESIS,louisianensis,Raninoides,Raninidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Raioides louisiaesis,Gulf frog crab
 RAJA (BATHYRAJA) SPINICAUDA,spinicauda,Bathyraja,Rajidae,Rajiformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Bathyraja spinicauda,spinytail skate
@@ -1003,53 +1003,53 @@ REILLA MULLERI,muelleri,Renilla,Renillidae,Pennatulacea,Anthozoa,NA,Anthozoa,Cni
 REINHARDTIUS HIPPOGLOSSOIDES,hippoglossoides,Reinhardtius,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Reinhardtius hippoglossoides,Greenland halibut
 Reinhardtius hippoglossoides,hippoglossoides,Reinhardtius,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Reinhardtius hippoglossoides,Greenland halibut
 Reinhardtiushippoglossoides,hippoglossoides,Reinhardtius,Pleuronectidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Reinhardtius hippoglossoides,Greenland halibut
-REMORA,,,,,,,,,,Remora spp.,remora
-REMORA REMORA,,,,,,,,,,Remora remora,common remora
+REMORA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Remora spp.,remora
+REMORA REMORA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Remora remora,common remora
 Rhamphocottus richardsoni,richardsonii,Rhamphocottus,Rhamphocottidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Rhamphocottus richardsoni,grunt sculpin
 Rhamphocottusrichardsoni,richardsonii,Rhamphocottus,Rhamphocottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Rhamphocottus richardsonii,grunt sculpin
-RHINOBATOS LENTIGINOSUS,,,,,,,,,,Rhinobatos lentiginosus,Atlantic guitarfish
+RHINOBATOS LENTIGINOSUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Rhinobatos lentiginosus,Atlantic guitarfish
 Rhinolithodes wosnessenskii,wosnessenskii,Rhinolithodes,Lithodidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Rhinolithodes wosnessenskii,rhinoceros crab
-RHINOPTERA BONASUS,,,,,,,,,,Rhinoptera bonasus,cownose ray
+RHINOPTERA BONASUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Rhinoptera bonasus,cownose ray
 RHIOPTERA BOASUS,bonasus,Rhinoptera,Rhinopteridae,Myliobatiformes,Chondrichthyes,Chondrichthyes,Vertebrata,Chordata,Animalia,Rhioptera bonasus,cownose ray
-RHITHROPANOPEUS HARRISII,,,,,,,,,,Rhithropanopeus harrisii,Harris mud crab
+RHITHROPANOPEUS HARRISII,NA,NA,NA,NA,NA,NA,NA,NA,NA,Rhithropanopeus harrisii,Harris mud crab
 RHIZOPRIONODON TERRAENOVAE,terraenovae,Rhizoprionodon,Carcharhinidae,Carcharhiniformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Rhizoprionodon terraenovae,Atlantic sharpnose shark
 RHIZOPRIOODO TERRAEOVAE,terraenovae,Rhizoprionodon,Carcharhinidae,Carcharhiniformes,Chondrichthyes,Chondrichthyes,Vertebrata,Chordata,Animalia,Rhizoprionodon terraenovae,Atlantic sharpnose shark
 RHOMBOPLITES AURORUBES,aurorubens,Rhomboplites,Lutjanidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Rhomboplites aurorubes,vermilion snapper
-RIMAPENAEUS CONSTRICTUS,,,,,,,,,,Rimapenaeus constrictus,roughneck shrimp
-ROCHINIA CRASSA,,,,,,,,,,Rochinia crassa,inflated spiny crab
+RIMAPENAEUS CONSTRICTUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Rimapenaeus constrictus,roughneck shrimp
+ROCHINIA CRASSA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Rochinia crassa,inflated spiny crab
 Ronquilus jordani,jordani,Ronquilus,Bathymasteridae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Ronquilus jordani,northern ronquil
 Rossellinae,NA,NA,Rossellidae,Lyssacinosida,Hexactinellida,NA,NA,Porifera,Animalia,Rossellinae spp.,sea spunge
 Rossia pacifica,pacifica,Rossia,Sepiolidae,Sepiolida,Cephalopoda,NA,NA,Mollusca,Animalia,Rossia pacifica,eastern pacific bobtail
 Rossiapacifica,pacifica,Rossia,Sepiolidae,Sepiolida,Cephalopoda,NA,NA,Mollusca,Animalia,Rossia pacifica,eastern pacific bobtail
 ROSSIINAE,NA,NA,Sepiolidae,Sepiolida,Cephalopoda,NA,NA,Mollusca,Animalia,Rossiinae spp.,bobtail squids
-RYPTICUS MACULATUS,,,,,,,,,,Rypticus maculatus,whitespotted soapfish
+RYPTICUS MACULATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Rypticus maculatus,whitespotted soapfish
 SABINEA HYSTRIX,hystrix,Sabinea,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Sabinea hystrix,shrimp
 SABINEA SARSI,sarsi,Sabinea,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Sabinea sarsi,Sars shrimp
 SABINEA SEPTEMCARINATA,septemcarinata,Sabinea,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Sabinea septemcarinata,sevenline shrimp
-SARDA SARDA,,,,,,,,,,Sarda sarda,Atlantic bonito
+SARDA SARDA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sarda sarda,Atlantic bonito
 SARDIELLA AURITA,aurita,Sardinella,Clupeidae,Clupeiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Sardinella aurita,spanish sardine
-SARDINELLA AURITA,,,,,,,,,,Sardinella aurita,spanish sardine
+SARDINELLA AURITA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sardinella aurita,spanish sardine
 Sardinops sagax,sagax,Sardinops,Clupeidae,Clupeiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Sardinops sagax,South American pilchard
 SAURIDA BRASILIENSIS,brasiliensis,Saurida,Synodontidae,Aulopiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Saurida brasiliensis,largescale lizardfish
 SAURIDA BRASILIESIS,brasiliensis,Saurida,Synodontidae,Aulopiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Saurida brasiliensis,largescale lizardfish
-SCIAENOPS OCELLATUS,,,,,,,,,,Sciaenops ocellatus,red drum
+SCIAENOPS OCELLATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sciaenops ocellatus,red drum
 Scleractinia,NA,NA,NA,Scleractinia,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Scleractinia spp.,stony corals
 SCLEROCRANGON BOREAS,boreas,Sclerocrangon,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Sclerocrangon boreas,sculptured shrimp
 Sclerocrangon boreas,boreas,Sclerocrangon,Crangonidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Sclerocrangon boreas,sculptured shrimp
-SCOMBER JAPONICUS,,,,,,,,,,Scomber japonicus,chub mackerel
+SCOMBER JAPONICUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Scomber japonicus,chub mackerel
 SCOMBER SCOMBRUS,scombrus,Scomber,Scombridae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Scomber scombrus,Atlantic mackerel
 Scomber scombrus,scombrus,Scomber,Scombridae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Scomber scombrus,Atlantic mackerel
 SCOMBEROMORUS CAVALLA,cavalla,Scomberomorus,Scombridae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Scomberomorus cavalla,king mackerel
 SCOMBEROMORUS MACULATUS,maculatus,Scomberomorus,Scombridae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Scomberomorus maculatus,Spanish mackerel
-SCOMBEROMORUS REGALIS,,,,,,,,,,Scomberomorus regalis,painted mackerel
+SCOMBEROMORUS REGALIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Scomberomorus regalis,painted mackerel
 SCOPHTHALMUS AQUOSUS,aquosus,Scophthalmus,Scophthalmidae,Pleuronectiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Scophthalmus aquosus,windowpane
 Scophthalmus aquosus,aquosus,Scophthalmus,Scophthalmidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Scophthalmus aquosus,windowpane
 SCORPAEA CALCARATA,calcarata,Scorpaena,Scorpaenidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Scorpaena calcarata,smoothhead scorpionfish
-SCORPAENA BRASILIENSIS,,,,,,,,,,Scorpaena brasiliensis,barbfish
+SCORPAENA BRASILIENSIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Scorpaena brasiliensis,barbfish
 SCORPAENA CALCARATA,calcarata,Scorpaena,Scorpaenidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Scorpaena calcarata,smoothhead scorpionfish
 SCYLIORHINUS RETIFER,retifer,Scyliorhinus,Scyliorhinidae,Carcharhiniformes,Chondrichthyes,Chondrichthyes,Vertebrata,Chordata,Animalia,Scyliorhinus retifer,chain catshark
-SCYLLARUS AMERICANUS,,,,,,,,,,Scyllarus americanus,American slipper lobster
-SCYLLARUS CHACEI,,,,,,,,,,Scyllarus chacei,Chace slipper lobster
+SCYLLARUS AMERICANUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Scyllarus americanus,American slipper lobster
+SCYLLARUS CHACEI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Scyllarus chacei,Chace slipper lobster
 SCYPHOZOA,NA,NA,NA,NA,Scyphozoa,NA,Medusozoa,Cnidaria,Animalia,Scyphozoa spp.,jellyfishes
 Scyphozoa,NA,NA,NA,NA,Scyphozoa,NA,Medusozoa,Cnidaria,Animalia,Scyphozoa spp.,jellyfishes
 Sebastes alutus,alutus,Sebastes,Sebastidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Sebastes alutus,Pacific ocean perch
@@ -1119,14 +1119,14 @@ SELAR CRUMEOPHTHALMUS,crumenophthalmus,Selar,Carangidae,Perciformes,Actinopteryg
 SELEE SETAPIIS,setapinnis,Selene,Carangidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Selee setapiis,Atlantic moonfish
 SELEE VOMER,vomer,Selene,Carangidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Selee vomer,lookdown
 SELENE SETAPINNIS,setapinnis,Selene,Carangidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Selene setapinnis,Atlantic moonfish
-SELENE VOMER,,,,,,,,,,Selene vomer,lookdown
+SELENE VOMER,NA,NA,NA,NA,NA,NA,NA,NA,NA,Selene vomer,lookdown
 Sergestes similis,similis,Sergestes,Sergestidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Sergestes similis,midwater shrimp
 SERIOLA DUMERILI,dumerili,Seriola,Carangidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Seriola dumerili,greater amberjack
-SERIOLA RIVOLIANA,,,,,,,,,,Seriola rivoliana,almaco jack
-SERIOLA ZONATA,,,,,,,,,,Seriola zonata,banded rudderfish
+SERIOLA RIVOLIANA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Seriola rivoliana,almaco jack
+SERIOLA ZONATA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Seriola zonata,banded rudderfish
 SERRAICULUS PUMILIO,pumilio,Serraniculus,Serranidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Serraiculus pumilio,pygmy sea bass
 SERRANUS ATROBRANCHUS,atrobranchus,Serranus,Serranidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Serranus atrobranchus,blackear bass
-SERRANUS SUBLIGARIUS,,,,,,,,,,Serranus subligarius,belted sandfish
+SERRANUS SUBLIGARIUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Serranus subligarius,belted sandfish
 SERRAUS,NA,Serranus,Serranidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Serranus sp.,bass sp.
 SERRAUS ATROBRACHUS,atrobranchus,Serranus,Serranidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Serranus atrobrachus,blackear bass
 SERRAUS AULARIS,annularis,Serranus,Serranidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Serranus annularis,orangeback bass
@@ -1144,7 +1144,7 @@ SICYOIA BURKEROADI,burkenroadi,Sicyonia,Sicyoniidae,Decapoda,Malacostraca,NA,Cru
 SICYOIA DORSALIS,dorsalis,Sicyonia,Sicyoniidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Sicyoia dorsalis,lesser rock shrimp
 SICYONIA BREVIROSTRIS,brevirostris,Sicyonia,Sicyoniidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Sicyonia brevirostris,brown rock shrimp
 SICYONIA DORSALIS,dorsalis,Sicyonia,Sicyoniidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Sicyonia dorsalis,lesser rock shrimp
-SICYONIA LAEVIGATA,,,,,,,,,,Sicyonia laevigata,
+SICYONIA LAEVIGATA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sicyonia laevigata,NA
 Siliqua alta,alta,Siliqua,Pharidae,Veneroida,Bivalvia,NA,NA,Mollusca,Animalia,Siliqua alta,Alaska razor
 Sipuncula,NA,NA,NA,NA,NA,NA,NA,Sipuncula,Animalia,Sipuncula spp.,peanut worms
 Solaster borealis,borealis,Crossaster,Solasteridae,Spinulosida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Crossaster borealis,grooved sun star
@@ -1156,17 +1156,17 @@ SOLENOCERA,NA,Solenocera,Solenoceridae,Decapoda,Malacostraca,NA,Crustacea,Arthro
 SOLEOCERA VIOSCAI,vioscai,Solenocera,Solenoceridae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Soleocera vioscai,humpback shrimp
 Somniosus pacificus,pacificus,Somniosus,Dalatiidae,Squaliformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Somniosus pacificus,Pacific sleeper shark
 Somniosuspacificus,pacificus,Somniosus,Dalatiidae,Squaliformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Somniosus pacificus,Pacific sleeper shark
-SPEOCARCINUS CAROLINENSIS,,,,,,,,,,Speocarcinus carolinensis,carolinian squareback crab
-SPHOEROIDES MACULATUS,,,,,,,,,,Sphoeroides maculatus,northern puffer
-SPHOEROIDES NEPHELUS,,,,,,,,,,Sphoeroides nephelus,southern puffer
+SPEOCARCINUS CAROLINENSIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Speocarcinus carolinensis,carolinian squareback crab
+SPHOEROIDES MACULATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sphoeroides maculatus,northern puffer
+SPHOEROIDES NEPHELUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sphoeroides nephelus,southern puffer
 SPHOEROIDES PARVUS,parvus,Sphoeroides,Tetraodontidae,Tetraodontiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Sphoeroides parvus,least puffer
-SPHOEROIDES SPENGLERI,,,,,,,,,,Sphoeroides spengleri,bandtail puffer
+SPHOEROIDES SPENGLERI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sphoeroides spengleri,bandtail puffer
 SPHYRAEA GUACHACHO,guachancho,Sphyraena,Sphyraenidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Sphyraena guachancho,guaguanche baracuda
-SPHYRAENA BARRACUDA,,,,,,,,,,Sphyraena barracuda,great barracuda
-SPHYRAENA BOREALIS,,,,,,,,,,Sphyraena borealis,northern sennet
+SPHYRAENA BARRACUDA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sphyraena barracuda,great barracuda
+SPHYRAENA BOREALIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sphyraena borealis,northern sennet
 SPHYRAENA GUACHANCHO,guachancho,Sphyraena,Sphyraenidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Sphyraena guachancho,guaguanche
-SPHYRNA LEWINI,,,,,,,,,,Sphyrna lewini,scalloped hammerhead
-SPHYRNA TIBURO,,,,,,,,,,Sphyrna tiburo,bonnethead
+SPHYRNA LEWINI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sphyrna lewini,scalloped hammerhead
+SPHYRNA TIBURO,NA,NA,NA,NA,NA,NA,NA,NA,NA,Sphyrna tiburo,bonnethead
 Spirinchus starksi,starksi,Spirinchus,Osmeridae,Osmeriformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Spirinchus starksi,night smelt
 Spirinchus thaleichthys,thaleichthys,Spirinchus,Osmeridae,Osmeriformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Spirinchus thaleichthys,longfin smelt
 SPIRONTOCARIS LILLJEBORGI,lilljeborgi,Spirontocaris,Hippolytidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Spirontocaris lilljeborgi,friendly blade shrimp
@@ -1174,30 +1174,30 @@ SPIRONTOCARIS SPINUS,spinus,Spirontocaris,Hippolytidae,Decapoda,Malacostraca,NA,
 SQUALUS ACANTHIAS,acanthias,Squalus,Squalidae,Squaliformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Squalus acanthias,spiny dogfish
 Squalus acanthias,acanthias,Squalus,Squalidae,Squaliformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Squalus acanthias,spiny dogfish
 Squalusacanthias,acanthias,Squalus,Squalidae,Squaliformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Squalus acanthias,spiny dogfish
-SQUATINA DUMERIL,,,,,,,,,,Squatina dumeril,sand devil
+SQUATINA DUMERIL,NA,NA,NA,NA,NA,NA,NA,NA,NA,Squatina dumeril,sand devil
 SQUILLA CHYDAEA,chydaea,Squilla,Squillidae,Stomatopoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Squilla chydaea,offshore mantis shrimp
 SQUILLA EMPUSA,empusa,Squilla,Squillidae,Stomatopoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Squilla empusa,mantis shrimp
 Stegophiura ponderosa,ponderosa,Stegophiura,Ophiuridae,Ophiurida,Ophiuroidea,NA,Asterozoa,Echinodermata,Animalia,Stegophiura ponderosa,sea star
 STELLIFER LACEOLATUS,lanceolatus,Stellifer,Sciaenidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Stellifer laceolatus,American stardrum
 STELLIFER LANCEOLATUS,lanceolatus,Stellifer,Sciaenidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Stellifer lanceolatus,star drum
 Stenobrachius leucopsarus,leucopsarus,Stenobrachius,Myctophidae,Myctophiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Stenobrachius leucopsarus,northern lampfish
-STENOTOMUS,,,,,,,,,,Stenotomus spp.,Stenotomus porgies
+STENOTOMUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Stenotomus spp.,Stenotomus porgies
 STENOTOMUS CAPRINUS,caprinus,Stenotomus,Sparidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Stenotomus caprinus,longspine porgy
 STENOTOMUS CHRYSOPS,chrysops,Stenotomus,Sparidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Stenotomus chrysops,scup
 Stenotomus chrysops,chrysops,Stenotomus,Sparidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Stenotomus chrysops,scup
 STEORHYCHUS SETICORIS,seticornis,Stenorhynchus,Inachidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Steorhychus seticoris,yellowline arrow crab
 STEOTOMUS CAPRIUS,caprinus,Stenotomus,Sparidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Stenotomus caprius,longspine porgy
-STEPHANOLEPIS HISPIDA,,,,,,,,,,Stephanolepis hispida,planehead filefish
+STEPHANOLEPIS HISPIDA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Stephanolepis hispida,planehead filefish
 STEREOMASTIS SCULPTA,sculpta,Stereomastis,Polychelidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Stereomastis sculpta,flatback lobster
 STOMIAS BOA FEROX,ferox,Stomias,Stomiidae,Stomiiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Stomias boa ferox,boa dragonfish
-STOMOLOPHUS MELEAGRIS,,,,,,,,,,Stomolophus meleagris,cannonball jellyfish
+STOMOLOPHUS MELEAGRIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Stomolophus meleagris,cannonball jellyfish
 Stomphia spp.,NA,Stomphia,Actinostolidae,Actiniaria,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Stomphia spp.,cowardly anemone
 Strongylocentrotus droebachiensis,droebachiensis,Strongylocentrotus,Strongylocentrotidae,Camarodonta,Echinoidea,NA,Echinozoa,Echinodermata,Animalia,Strongylocentrotus droebachiensis,green sea urchin
 Strongylocentrotus franciscanus,franciscanus,Strongylocentrotus,Strongylocentrotidae,Echinoida,Echinoidea,NA,Echinozoa,Echinodermata,Animalia,Strongylocentrotus franciscanus,red sea star
 Strongylocentrotus spp.,NA,Strongylocentrotus,Strongylocentrotidae,Echinoida,Echinoidea,NA,Echinozoa,Echinodermata,Animalia,Strongylocentrotus spp.,sea urchins
 Strongylocentrotusdroebachiensis,droebachiensis,Strongylocentrotus,Strongylocentrotidae,Camarodonta,Echinoidea,NA,Echinozoa,Echinodermata,Animalia,Strongylocentrotus droebachiensis,green sea urchin
-STRONGYLURA,,,,,,,,,,Strongylura spp.,needlefishes
-STRONGYLURA MARINA,,,,,,,,,,Strongylura marina,Atlantic needlefish
+STRONGYLURA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Strongylura spp.,needlefishes
+STRONGYLURA MARINA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Strongylura marina,Atlantic needlefish
 Styela rustica,rustica,Styela,Styelidae,Pleurogona,Ascidiacea,NA,Urochordata,Chordata,Animalia,Styela rustica,sea potato
 Stylasterias forreri,forreri,Stylasterias,Asteriidae,Forcipulatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Stylasterias forreri,velcro star
 Stylatula sp.,NA,Stylatula,Virgulariidae,Pennatulacea,Anthozoa,NA,Anthozoa,Cnidaria,Animalia,Stylatula spp.,slender sea pen
@@ -1207,21 +1207,21 @@ SYACIUM PAPILLOSUM,papillosum,Syacium,Paralichthyidae,Pleuronectiformes,Actinopt
 SYMPHURUS CIVITATUM,NA,NA,NA,NA,NA,NA,NA,NA,NA,Symphurus civitatum,offshore tonguefish
 SYMPHURUS DIOMEDIAUS,diomedeanus,Symphurus,Cynoglossidae,Pleuronectiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Symphurus diomediaus,spottedfin tonguefish
 SYMPHURUS PLAGIUSA,plagiusa,Symphurus,Cynoglossidae,Pleuronectiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Symphurus plagiusa,blackcheek tonguefish
-SYMPHURUS UROSPILUS,,,,,,,,,,Symphurus urospilus,spottail tonguefish
-SYNALPHEUS FRITZMUELLERI,,,,,,,,,,Synalpheus fritzmuelleri,speckled snapping shrimp
-SYNALPHEUS MINUS,,,,,,,,,,Synalpheus minus,minor snapping shrimp
-SYNALPHEUS TOWNSENDI,,,,,,,,,,Synalpheus townsendi,Townsend snapping shrimp
+SYMPHURUS UROSPILUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Symphurus urospilus,spottail tonguefish
+SYNALPHEUS FRITZMUELLERI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Synalpheus fritzmuelleri,speckled snapping shrimp
+SYNALPHEUS MINUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Synalpheus minus,minor snapping shrimp
+SYNALPHEUS TOWNSENDI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Synalpheus townsendi,Townsend snapping shrimp
 SYNAPHOBRANCHUS KAUPI,kaupii,Synaphobranchus,Synaphobranchidae,Anguilliformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Synaphobranchus kaupii,northern cutthroat eel
-SYNGNATHUS FLORIDAE,,,,,,,,,,Syngnathus floridae,dusky pipefish
-SYNGNATHUS FUSCUS,,,,,,,,,,Syngnathus fuscus,northern pipefish
-SYNGNATHUS LOUISIANAE,,,,,,,,,,Syngnathus louisianae,chain pipefish
-SYNGNATHUS SPRINGERI,,,,,,,,,,Syngnathus springeri,bull pipefish
+SYNGNATHUS FLORIDAE,NA,NA,NA,NA,NA,NA,NA,NA,NA,Syngnathus floridae,dusky pipefish
+SYNGNATHUS FUSCUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Syngnathus fuscus,northern pipefish
+SYNGNATHUS LOUISIANAE,NA,NA,NA,NA,NA,NA,NA,NA,NA,Syngnathus louisianae,chain pipefish
+SYNGNATHUS SPRINGERI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Syngnathus springeri,bull pipefish
 SYNODUS FOETENS,foetens,Synodus,Synodontidae,Aulopiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Synodus foetens,inshore lizardfish
 SYNODUS POEYI,poeyi,Synodus,Synodontidae,Aulopiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Synodus poeyi,offshore lizardfish
 SYODUS FOETES,foetens,Synodus,Synodontidae,Aulopiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Syodus foetes,inshore lizardfish
 SYODUS POEYI,poeyi,Synodus,Synodontidae,Aulopiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Syodus poeyi,offshore lizardfish
 Tactostoma macropus,macropus,Tactostoma,Stomiidae,Stomiiformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Tactostoma macropus,longfin dragonfish
-TAUTOGA ONITIS,,,,,,,,,,Tautoga onitis,tautog
+TAUTOGA ONITIS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Tautoga onitis,tautog
 TAUTOGOLABRUS ADSPERSUS,adspersus,Tautogolabrus,Labridae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Tautogolabrus adspersus,cunner
 Tautogolabrus adspersus,adspersus,Tautogolabrus,Labridae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Tautogolabrus adspersus,cunner
 Tellina lutea,lutea,Tellina,Tellinidae,Veneroida,Bivalvia,NA,NA,Mollusca,Animalia,Tellina lutea,Alaska great tellin
@@ -1239,10 +1239,10 @@ Thrissacanthias penicillatus,penicillatus,Thrissacanthias,Astropectinidae,Paxill
 Thyriscus anoplus,anoplus,Thyriscus,Cottidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Thyriscus anoplus,sponge sculpin
 Tochuina tetraquetra,tetraquetra,Tochuina,Tritoniidae,Nudibranchia,Gastropoda,NA,NA,Mollusca,Animalia,Tochuina tetraquetra,giant orange tochui
 Torpedo californica,californica,Torpedo,Torpedinidae,Torpediniformes,Elasmobranchii,Pisces,Vertebrata,Chordata,Animalia,Torpedo californica,Pacific electric ray
-TORPEDO NOBILIANA,,,,,,,,,,Torpedo nobiliana,Atlantic torpedo
-TRACHINOCEPHALUS MYOPS,,,,,,,,,,Trachinocephalus myops,snakefish
-TRACHINOTUS CAROLINUS,,,,,,,,,,Trachinotus carolinus,Florida pompano
-TRACHINOTUS FALCATUS,,,,,,,,,,Trachinotus falcatus,permit
+TORPEDO NOBILIANA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Torpedo nobiliana,Atlantic torpedo
+TRACHINOCEPHALUS MYOPS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Trachinocephalus myops,snakefish
+TRACHINOTUS CAROLINUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Trachinotus carolinus,Florida pompano
+TRACHINOTUS FALCATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Trachinotus falcatus,permit
 TRACHURUS LATHAMI,lathami,Trachurus,Carangidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Trachurus lathami,rough scad
 Trachurus symmetricus,symmetricus,Trachurus,Carangidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Trachurus symmetricus,jack mackerel
 TRACHYPEEUS COSTRICTUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Trachypeeus costrictus,roughneck shrimp
@@ -1264,20 +1264,20 @@ Triglopsforficata,forficatus,Triglops,Cottidae,Scorpaeniformes,Actinopterygii,Pi
 Triglopsmacellus,macellus,Triglops,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Triglops macellus,roughspine sculpin
 Triglopspingeli,pingelii,Triglops,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Triglops pingelii,ribbed sculpin
 Triglopsscepticus,scepticus,Triglops,Cottidae,Scorpaeniformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Triglops scepticus,spectacled sculpin
-TRINECTES MACULATUS,,,,,,,,,,Trinectes maculatus,hogchoker
+TRINECTES MACULATUS,NA,NA,NA,NA,NA,NA,NA,NA,NA,Trinectes maculatus,hogchoker
 Tritonia diomedea,diomedea,Tritonia,Tritoniidae,Nudibranchia,Gastropoda,NA,NA,Mollusca,Animalia,Tritonia diomedea,rosy tritonia
 Tritonia sp.,NA,Tritonia,Tritoniidae,Nudibranchia,Gastropoda,NA,NA,Mollusca,Animalia,Tritonia spp.,nudibranch
 Tunicata,NA,NA,NA,NA,NA,NA,NA,NA,NA,Tunicata spp.,tunicates
-UMBRINA COROIDES,,,,,,,,,,Umbrina coroides,sand drum
+UMBRINA COROIDES,NA,NA,NA,NA,NA,NA,NA,NA,NA,Umbrina coroides,sand drum
 UPEEUS PARVUS,parvus,Upeneus,Mullidae,Perciformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Upeeus parvus,dwarf goatfish
 UPENEUS PARVUS,parvus,Upeneus,Mullidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Upeneus parvus,dwarf goatfish
-URASPIS SECUNDA,,,,,,,,,,Uraspis secunda,cottonmouth jack
+URASPIS SECUNDA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Uraspis secunda,cottonmouth jack
 UROPHYCIS CHESTERI,chesteri,Phycis,Phycidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Phycis chesteri,longfin hake
 UROPHYCIS CHUSS,chuss,Urophycis,Phycidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Urophycis chuss,red hake
 Urophycis chuss,chuss,Urophycis,Phycidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Urophycis chuss,red hake
 UROPHYCIS CIRRATUS,cirrata,Urophycis,Phycidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Urophycis cirrata,Gulf hake
-UROPHYCIS EARLLII,,,,,,,,,,Urophycis earllii,Carolina hake
-UROPHYCIS FLORIDANA,,,,,,,,,,Urophycis floridana,southern hake
+UROPHYCIS EARLLII,NA,NA,NA,NA,NA,NA,NA,NA,NA,Urophycis earllii,Carolina hake
+UROPHYCIS FLORIDANA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Urophycis floridana,southern hake
 UROPHYCIS FLORIDANUS,floridana,Urophycis,Phycidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Urophycis floridana,southern hake
 UROPHYCIS FLORIDAUS,floridana,Urophycis,Phycidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Urophycis floridana,southern hake
 UROPHYCIS REGIA,regia,Urophycis,Phycidae,Gadiformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Urophycis regia,spotted hake
@@ -1291,7 +1291,7 @@ Volutopsius sp.,NA,Volutopsius,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusc
 Volutopsiussp.,NA,Volutopsius,Buccinidae,Neogastropoda,Gastropoda,NA,NA,Mollusca,Animalia,Volutopsius spp.,true whelks
 Xeneretmus latifrons,latifrons,Xeneretmus,Agonidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Xeneretmus latifrons,blacktip poacher
 XIPHOPEAEUS KROYERI,kroyeri,Xiphopenaeus,Penaeidae,Decapoda,Malacostraca,NA,Crustacea,Arthropoda,Animalia,Xiphopenaeus kroyeri,Atlantic seabob
-XIPHOPENAEUS KROYERI,,,,,,,,,,Xiphopenaeus kroyeri,Alantic seabob
+XIPHOPENAEUS KROYERI,NA,NA,NA,NA,NA,NA,NA,NA,NA,Xiphopenaeus kroyeri,Alantic seabob
 Zalembius rosaceus,rosaceus,Zalembius,Embiotocidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Zalembius rosaceus,pink seaperch
 Zaniolepis latipinnis,latipinnis,Zaniolepis,Hexagrammidae,Scorpaeniformes,Actinopterygii,Osteichthyes,Vertebrata,Chordata,Animalia,Zaniolepis latipinnis,longspine combfish
 Zaprora silenus,silenus,Zaprora,Zaproridae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Zaprora silenus,prowfish
@@ -1299,8 +1299,8 @@ Zaprorasilenus,silenus,Zaprora,Zaproridae,Perciformes,Actinopterygii,Pisces,Vert
 Zoarces americanus,americanus,Zoarces,Zoarcidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Zoarces americanus,ocean pout
 ZOARCIDAE,NA,NA,Zoarcidae,Perciformes,Actinopterygii,Pisces,Vertebrata,Chordata,Animalia,Zoarcidae spp.,eelpouts
 Zoroaster evermanni,evermanni,Sagenaster,Zoroasteridae,Forcipulatida,Asteroidea,NA,Asterozoa,Echinodermata,Animalia,Sagenaster evermanni,sea star
-LIMANDA FERRUGINEA ,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Limanda ferruginea,Yellowtail flounder
-PSEUDOPLEURONECTES AMERICANUS ,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Pseudopleuronectes americanus,Winter flounder
+LIMANDA FERRUGINEA,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Limanda ferruginea,Yellowtail flounder
+PSEUDOPLEURONECTES AMERICANUS,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Pseudopleuronectes americanus,Winter flounder
 PETROMYZON MARINUS,marinus,Petromyzon,Petromyzontidae,Petromyzontiformes,Cephalaspidomorphi,NA,NA,NA,NA,Petromyzon marinus,Sea lamprey
 TRIGLOPS MURRAYI,murrayi,Triglops,Cottidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,Triglops murrayi,Moustache sculpin
 SCOMBERESOX SAURUS,saurus,Scomberesox,Scomberesocidae,Beloniformes,Actinopterygii,NA,NA,NA,NA,Scomberesox saurus,Atlantic saury
@@ -1527,8 +1527,8 @@ Lycodes beringi,beringi,Lycodes,Zoarcidae,Perciformes,Actinopterygii,NA,NA,NA,NA
 Diaphus theta,theta,Diaphus,Myctophidae,Myctophiformes,Actinopterygii,NA,NA,NA,NA,Diaphus theta,California headlightfish
 Aspidophoroides monopterygius,monopterygius,Aspidophoroides,Agonidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,Aspidophoroides monopterygius,Alligatorfish
 Squalus suckleyi,suckleyi,Squalus,Squalidae,Squaliformes,Elasmobranchii,NA,NA,NA,NA,Squalus suckleyi,Pacific spiny dogfish
-LIMANDA FERRUGINEA ,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Limanda ferruginea,Yellowtail flounder
-PSEUDOPLEURONECTES AMERICANUS ,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Pseudopleuronectes americanus,Winter flounder
+LIMANDA FERRUGINEA,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Limanda ferruginea,Yellowtail flounder
+PSEUDOPLEURONECTES AMERICANUS,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Pseudopleuronectes americanus,Winter flounder
 Chesnonia verrucosa,verrucosa,Chesnonia,Agonidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,Chesnonia verrucosa,Warty poacher
 Eptatretus stoutii,stoutii,Eptatretus,Myxinidae,Myxiniformes,Myxini,NA,NA,NA,NA,Eptatretus stoutii,Pacific hagfish
 Nezumia bairdii,bairdii,Nezumia,Macrouridae,Gadiformes,Actinopterygii,NA,NA,NA,NA,Nezumia bairdii,Marlin-spike grenadier
@@ -1539,8 +1539,8 @@ Phycis chesteri,chesteri,Phycis,Phycidae,Gadiformes,Actinopterygii,NA,NA,NA,NA,P
 Ammodytes dubius,dubius,Ammodytes,Ammodytidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Ammodytes dubius,Northern sand lance
 Cryptacanthodes maculatus,maculatus,Cryptacanthodes,Cryptacanthodidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Cryptacanthodes maculatus,Wrymouth
 Lycodes vahlii,vahlii,Lycodes,Zoarcidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Lycodes vahlii,Vahl's eelpout
-LIMANDA FERRUGINEA ,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Limanda ferruginea,Yellowtail flounder
-PSEUDOPLEURONECTES AMERICANUS ,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Pseudopleuronectes americanus,Winter flounder
+LIMANDA FERRUGINEA,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Limanda ferruginea,Yellowtail flounder
+PSEUDOPLEURONECTES AMERICANUS,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Pseudopleuronectes americanus,Winter flounder
 Leptoclinus maculatus,maculatus,Leptoclinus,Stichaeidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Leptoclinus maculatus,Daubed shanny
 Enophrys taurina,taurina,Enophrys,Cottidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,Enophrys taurina,Bull sculpin
 Thetys vagina,vagina,Thetys,Salpidae,Salpida,Thaliacea,NA,NA,NA,NA,Thetys vagina,virgin salpa
@@ -1693,10 +1693,10 @@ Icosteus aenigmaticus,aenigmaticus,Icosteus,Icosteidae,Perciformes,Actinopterygi
 Lycodapus mandibularis,mandibularis,Lycodapus,Zoarcidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Lycodapus mandibularis,Pallid eelpout
 Liparis pulchellus,pulchellus,Liparis,Liparidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,Liparis pulchellus,Showy snailfish
 Zaniolepis frenata,frenata,Zaniolepis,Hexagrammidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,Zaniolepis frenata,Shortspine combfish
-LIMANDA FERRUGINEA ,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Limanda ferruginea,Yellowtail flounder
-PSEUDOPLEURONECTES AMERICANUS ,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Pseudopleuronectes americanus,Winter flounder
+LIMANDA FERRUGINEA,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Limanda ferruginea,Yellowtail flounder
+PSEUDOPLEURONECTES AMERICANUS,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,Pseudopleuronectes americanus,Winter flounder
 OSMERUS MORDAX,mordax,Osmerus,Osmeridae,Osmeriformes,Actinopterygii,NA,NA,NA,NA,Osmerus mordax,Rainbow smelt
-NEZUMIA BAIRDII ,bairdii,Nezumia,Macrouridae,Gadiformes,Actinopterygii,NA,NA,NA,NA,Nezumia bairdii,Marlin-spike grenadier
+NEZUMIA BAIRDII,bairdii,Nezumia,Macrouridae,Gadiformes,Actinopterygii,NA,NA,NA,NA,Nezumia bairdii,Marlin-spike grenadier
 LOPHOLATILUS CHAMAELEONTICEPS,chamaeleonticeps,Lopholatilus,Malacanthidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Lopholatilus chamaeleonticeps,Great northern tilefish
 ARIOSOMA BALEARICUM,balearicum,Ariosoma,Congridae,Anguilliformes,Actinopterygii,NA,NA,NA,NA,Ariosoma balearicum,Bandtooth conger
 BENTHODESMUS SIMONYI,simonyi,Benthodesmus,Trichiuridae,Perciformes,Actinopterygii,NA,NA,NA,NA,Benthodesmus simonyi,Simony's frostfish
@@ -1704,7 +1704,7 @@ PHOLIS GUNNELLUS,gunnellus,Pholis,Pholidae,Perciformes,Actinopterygii,NA,NA,NA,N
 MORONE AMERICANA,americana,Morone,Moronidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Morone americana,White perch
 OPHICHTHUS CRUENTIFER,cruentifer,Ophichthus,Ophichthidae,Anguilliformes,Actinopterygii,NA,NA,NA,NA,Ophichthus cruentifer,Margined snake eel
 CHLOROPHTHALMUS AGASSIZI,agassizi,Chlorophthalmus,Chlorophthalmidae,Aulopiformes,Actinopterygii,NA,NA,NA,NA,Chlorophthalmus agassizi,Shortnose greeneye
-POLYIPNUS CLARUS ,clarus,Polyipnus,Sternoptychidae,Stomiiformes,Actinopterygii,NA,NA,NA,NA,Polyipnus clarus,Slope hatchetfish
+POLYIPNUS CLARUS,clarus,Polyipnus,Sternoptychidae,Stomiiformes,Actinopterygii,NA,NA,NA,NA,Polyipnus clarus,Slope hatchetfish
 POLYMIXIA LOWEI,lowei,Polymixia,Polymixiidae,Polymixiiformes,Actinopterygii,NA,NA,NA,NA,Polymixia lowei,Beardfish
 ALOSA MEDIOCRIS,mediocris,Alosa,Clupeidae,Clupeiformes,Actinopterygii,NA,NA,NA,NA,Alosa mediocris,Hickory shad
 PHYSICULUS FULVUS,fulvus,Physiculus,Moridae,Gadiformes,Actinopterygii,NA,NA,NA,NA,Physiculus fulvus,Hakeling
@@ -1713,7 +1713,7 @@ GASTEROSTEUS ACULEATUS,aculeatus,Gasterosteus,Gasterosteidae,Gasterosteiformes,A
 ULVARIA SUBBIFURCATA,subbifurcata,Ulvaria,Stichaeidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Ulvaria subbifurcata,Radiated shanny
 LIPARIS ATLANTICUS,atlanticus,Liparis,Liparidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,Liparis atlanticus,Atlantic seasnail
 MYOXOCEPHALUS AENAEUS,aenaeus,Myoxocephalus,Cottidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,Myoxocephalus aenaeus,Grubby
-MAUROLICUS WEITZMANI ,weitzmani,Maurolicus,Sternoptychidae,Stomiiformes,Actinopterygii,NA,NA,NA,NA,Maurolicus weitzmani,Atlantic pearlside
+MAUROLICUS WEITZMANI,weitzmani,Maurolicus,Sternoptychidae,Stomiiformes,Actinopterygii,NA,NA,NA,NA,Maurolicus weitzmani,Atlantic pearlside
 CERATOSCOPELUS MADERENSIS,maderensis,Ceratoscopelus,Myctophidae,Myctophiformes,Actinopterygii,NA,NA,NA,NA,Ceratoscopelus maderensis,Madeira lantern fish
 MALACOCEPHALUS OCCIDENTALIS,occidentalis,Malacocephalus,Macrouridae,Gadiformes,Actinopterygii,NA,NA,NA,NA,Malacocephalus occidentalis,Western softhead grenadier
 ARGYROPELECUS ACULEATUS,aculeatus,Argyropelecus,Sternoptychidae,Stomiiformes,Actinopterygii,NA,NA,NA,NA,Argyropelecus aculeatus,Lovely hatchetfish
@@ -1743,7 +1743,7 @@ SYNAGROPS BELLUS,bellus,Synagrops,Acropomatidae,Perciformes,Actinopterygii,NA,NA
 ANTHIAS NICHOLSI,nicholsi,Anthias,Serranidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Anthias nicholsi,Yellowfin bass
 PROMETHICHTHYS PROMETHEUS,prometheus,Promethichthys,Gempylidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Promethichthys prometheus,Roudi escolar
 MORONE SAXATILIS,saxatilis,Morone,Moronidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Morone saxatilis,Striped bass
-SIMENCHELYS PARASITICA ,parasitica,Simenchelys,Synaphobranchidae,Anguilliformes,Actinopterygii,NA,NA,NA,NA,Simenchelys parasitica,Snubnosed eel
+SIMENCHELYS PARASITICA,parasitica,Simenchelys,Synaphobranchidae,Anguilliformes,Actinopterygii,NA,NA,NA,NA,Simenchelys parasitica,Snubnosed eel
 XENOLEPIDICHTHYS DALGLEISHI,dalgleishi,Xenolepidichthys,Grammicolepididae,Zeiformes,Actinopterygii,NA,NA,NA,NA,Xenolepidichthys dalgleishi,Spotted tinselfish
 ANGUILLA ROSTRATA,rostrata,Anguilla,Anguillidae,Anguilliformes,Actinopterygii,NA,NA,NA,NA,Anguilla rostrata,American eel
 LAEMONEMA BARBATULUM,barbatulum,Laemonema,Moridae,Gadiformes,Actinopterygii,NA,NA,NA,NA,Laemonema barbatulum,Shortbeard codling
@@ -1752,7 +1752,7 @@ CAULOLATILUS MICROPS,microps,Caulolatilus,Malacanthidae,Perciformes,Actinopteryg
 SCORPAENA DISPAR,dispar,Scorpaena,Scorpaenidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,Scorpaena dispar,Hunchback scorpionfish
 HOPLOSTETHUS OCCIDENTALIS,occidentalis,Hoplostethus,Trachichthyidae,Beryciformes,Actinopterygii,NA,NA,NA,NA,Hoplostethus occidentalis,Western roughy
 LOPHIUS GASTROPHYSUS,gastrophysus,Lophius,Lophiidae,Lophiiformes,Actinopterygii,NA,NA,NA,NA,Lophius gastrophysus,Blackfin goosefish
-ARCTOZENUS RISSO ,risso,Arctozenus,Paralepididae,Aulopiformes,Actinopterygii,NA,NA,NA,NA,Arctozenus risso,Spotted barracudina
+ARCTOZENUS RISSO,risso,Arctozenus,Paralepididae,Aulopiformes,Actinopterygii,NA,NA,NA,NA,Arctozenus risso,Spotted barracudina
 AMMODYTES AMERICANUS,americanus,Ammodytes,Ammodytidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Ammodytes americanus,American sand lance
 BEMBROPS GOBIOIDES,gobioides,Bembrops,Percophidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Bembrops gobioides,Goby flathead
 SYNAGROPS SPINOSUS,spinosus,Synagrops,Acropomatidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Synagrops spinosus,Keelcheek bass
@@ -1764,9 +1764,9 @@ ALOPIAS SUPERCILIOSUS,superciliosus,Alopias,Alopiidae,Lamniformes,Elasmobranchii
 CETORHINUS MAXIMUS,maximus,Cetorhinus,Cetorhinidae,Lamniformes,Elasmobranchii,NA,NA,NA,NA,Cetorhinus maximus,Basking shark
 SPHYRNA ZYGAENA,zygaena,Sphyrna,Sphyrnidae,Carcharhiniformes,Elasmobranchii,NA,NA,NA,NA,Sphyrna zygaena,Smooth hammerhead
 COOKEOLUS JAPONICUS,japonicus,Cookeolus,Priacanthidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Cookeolus japonicus,Longfinned bullseye
-AETOBATUS NARINARI  ,narinari,Aetobatus,Myliobatidae,Myliobatiformes,Elasmobranchii,NA,NA,NA,NA,Aetobatus narinari,Spotted eagle ray
+AETOBATUS NARINARI,narinari,Aetobatus,Myliobatidae,Myliobatiformes,Elasmobranchii,NA,NA,NA,NA,Aetobatus narinari,Spotted eagle ray
 HYPORHAMPHUS UNIFASCIATUS,unifasciatus,Hyporhamphus,Hemiramphidae,Beloniformes,Actinopterygii,NA,NA,NA,NA,Hyporhamphus unifasciatus,Common halfbeak
-XENOCEPHALUS EGREGIUS ,egregius,Xenocephalus,Uranoscopidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Xenocephalus egregius,Freckled stargazer
+XENOCEPHALUS EGREGIUS,egregius,Xenocephalus,Uranoscopidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Xenocephalus egregius,Freckled stargazer
 ENGRAULIS EURYSTOLE,eurystole,Engraulis,Engraulidae,Clupeiformes,Actinopterygii,NA,NA,NA,NA,Engraulis eurystole,Silver anchovy
 CAULOLATILUS CYANOPS,cyanops,Caulolatilus,Malacanthidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Caulolatilus cyanops,Blackline tilefish
 NAUCRATES DUCTOR,ductor,Naucrates,Carangidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Naucrates ductor,Pilotfish
@@ -1777,11 +1777,11 @@ ISURUS OXYRINCHUS,oxyrinchus,Isurus,Lamnidae,Lamniformes,Elasmobranchii,NA,NA,NA
 ANCHOA LYOLEPIS,lyolepis,Anchoa,Engraulidae,Clupeiformes,Actinopterygii,NA,NA,NA,NA,Anchoa lyolepis,Shortfinger anchovy
 OPHICHTHUS PUNCTICEPS,puncticeps,Ophichthus,Ophichthidae,Anguilliformes,Actinopterygii,NA,NA,NA,NA,Ophichthus puncticeps,Palespotted eel
 EUCINOSTOMUS ARGENTEUS,argenteus,Eucinostomus,Gerreidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Eucinostomus argenteus,Silver mojarra
-HOWELLA SHERBORNI ,sherborni,Howella,Howellidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Howella sherborni,Sherborn's pelagic bass
+HOWELLA SHERBORNI,sherborni,Howella,Howellidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Howella sherborni,Sherborn's pelagic bass
 ARIOMMA MELANUM,melanum,Ariomma,Ariommatidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Ariomma melanum,Brown driftfish
 CORYPHAENA HIPPURUS,hippurus,Coryphaena,Coryphaenidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Coryphaena hippurus,Common dolphinfish
 XIPHIAS GLADIUS,gladius,Xiphias,Xiphiidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Xiphias gladius,Swordfish
-UROPHYCIS EARLLII ,earllii,Urophycis,Phycidae,Gadiformes,Actinopterygii,NA,NA,NA,NA,Urophycis earllii,Carolina hake
+UROPHYCIS EARLLII,earllii,Urophycis,Phycidae,Gadiformes,Actinopterygii,NA,NA,NA,NA,Urophycis earllii,Carolina hake
 BALISTES VETULA,vetula,Balistes,Balistidae,Tetraodontiformes,Actinopterygii,NA,NA,NA,NA,Balistes vetula,Queen triggerfish
 SERIOLA FASCIATA,fasciata,Seriola,Carangidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Seriola fasciata,Lesser amberjack
 SYNODUS SYNODUS,synodus,Synodus,Synodontidae,Aulopiformes,Actinopterygii,NA,NA,NA,NA,Synodus synodus,Diamond lizardfish
@@ -1797,8 +1797,8 @@ MYLIOBATIS GOODEI,goodei,Myliobatis,Myliobatidae,Myliobatiformes,Elasmobranchii,
 PONTINUS RATHBUNI,rathbuni,Pontinus,Scorpaenidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,Pontinus rathbuni,Highfin scorpionfish
 CARCHARHINUS FALCIFORMIS,falciformis,Carcharhinus,Carcharhinidae,Carcharhiniformes,Elasmobranchii,NA,NA,NA,NA,Carcharhinus falciformis,Silky shark
 ALUTERUS SCRIPTUS,scriptus,Aluterus,Monacanthidae,Tetraodontiformes,Actinopterygii,NA,NA,NA,NA,Aluterus scriptus,Scribbled leatherjacket filefish
-DIPLODUS HOLBROOKII ,holbrookii,Diplodus,Sparidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Diplodus holbrookii,Spottail seabream
-CORYPHAENA EQUISELIS ,equiselis,Coryphaena,Coryphaenidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Coryphaena equiselis,Pompano dolphinfish
+DIPLODUS HOLBROOKII,holbrookii,Diplodus,Sparidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Diplodus holbrookii,Spottail seabream
+CORYPHAENA EQUISELIS,equiselis,Coryphaena,Coryphaenidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Coryphaena equiselis,Pompano dolphinfish
 EUTHYNNUS ALLETTERATUS,alletteratus,Euthynnus,Scombridae,Perciformes,Actinopterygii,NA,NA,NA,NA,Euthynnus alletteratus,Little tunny
 GEMPYLUS SERPENS,serpens,Gempylus,Gempylidae,Perciformes,Actinopterygii,NA,NA,NA,NA,Gempylus serpens,Snake mackerel
 LAMNA NASUS,nasus,Lamna,Lamnidae,Lamniformes,Elasmobranchii,NA,NA,NA,NA,Lamna nasus,Porbeagle
@@ -3444,18 +3444,18 @@ Neoturris breviconis,breviconis,Neoturris,NA,NA,NA,NA,NA,NA,NA,Neoturris brevico
 Boreotrophon stuarti,stuarti,Boreotrophon,NA,NA,NA,NA,NA,NA,NA,Boreotrophon stuarti,NA
 Benthalbella sp.,sp.,Benthalbella,NA,NA,NA,NA,NA,NA,NA,Benthalbella sp.,NA
 Gobiidae,NA,Gobiidae,NA,NA,NA,NA,NA,NA,NA,Gobiidae,NA
-CAELORINCHUS CAELORHINCUS CARMINATUS ,caelorhincus,Caelorinchus,NA,NA,NA,NA,NA,NA,NA,Caelorinchus caelorhincus,NA
-ETROPUS ,,Etropus,NA,NA,NA,NA,NA,NA,NA,Etropus ,NA
+CAELORINCHUS CAELORHINCUS CARMINATUS,caelorhincus,Caelorinchus,NA,NA,NA,NA,NA,NA,NA,Caelorinchus caelorhincus,NA
+ETROPUS,NA,Etropus,NA,NA,NA,NA,NA,NA,NA,Etropus,NA
 ACIPENSER OXYRHYNCHUS,oxyrhynchus,Acipenser,NA,NA,NA,NA,NA,NA,NA,Acipenser oxyrhynchus,NA
 RAJIFORMES,NA,Rajiformes,NA,NA,NA,NA,NA,NA,NA,Rajiformes,NA
-SYMPHURUS ,,Symphurus,NA,NA,NA,NA,NA,NA,NA,Symphurus ,NA
+SYMPHURUS,NA,Symphurus,NA,NA,NA,NA,NA,NA,NA,Symphurus,NA
 TRIGLIDAE,NA,Triglidae,NA,NA,NA,NA,NA,NA,NA,Triglidae,NA
 MACRORHAMPHOSUS SCOLOPAX,scolopax,Macrorhamphosus,NA,NA,NA,NA,NA,NA,NA,Macrorhamphosus scolopax,NA
 BOTHIDAE,NA,Bothidae,NA,NA,NA,NA,NA,NA,NA,Bothidae,NA
-RAJA ,,Raja,NA,NA,NA,NA,NA,NA,NA,Raja ,NA
+RAJA,NA,Raja,NA,NA,NA,NA,NA,NA,NA,Raja,NA
 APOGONIDAE,NA,Apogonidae,NA,NA,NA,NA,NA,NA,NA,Apogonidae,NA
 STOMIIDAE,NA,Stomiidae,NA,NA,NA,NA,NA,NA,NA,Stomiidae,NA
-ARTEDIELLUS ,,Artediellus,NA,NA,NA,NA,NA,NA,NA,Artediellus ,NA
+ARTEDIELLUS,NA,Artediellus,NA,NA,NA,NA,NA,NA,NA,Artediellus,NA
 GADIDAE,NA,Gadidae,NA,NA,NA,NA,NA,NA,NA,Gadidae,NA
 ANGUILLIFORMES,NA,Anguilliformes,NA,NA,NA,NA,NA,NA,NA,Anguilliformes,NA
 CARANGIDAE,NA,Carangidae,NA,NA,NA,NA,NA,NA,NA,Carangidae,NA
@@ -3463,17 +3463,17 @@ GONOSTOMA ELONGATUM,elongatum,Gonostoma,NA,NA,NA,NA,NA,NA,NA,Gonostoma elongatum
 OPHIDIIDAE,NA,Ophidiidae,NA,NA,NA,NA,NA,NA,NA,Ophidiidae,NA
 CANCRIDAE,NA,Cancridae,NA,NA,NA,NA,NA,NA,NA,Cancridae,NA
 COTTIDAE,NA,Cottidae,NA,NA,NA,NA,NA,NA,NA,Cottidae,NA
-CITHARICHTHYS ,,Citharichthys,NA,NA,NA,NA,NA,NA,NA,Citharichthys ,NA
+CITHARICHTHYS,NA,Citharichthys,NA,NA,NA,NA,NA,NA,NA,Citharichthys,NA
 CONGRIDAE,NA,Congridae,NA,NA,NA,NA,NA,NA,NA,Congridae,NA
 SCORPAENIDAE,NA,Scorpaenidae,NA,NA,NA,NA,NA,NA,NA,Scorpaenidae,NA
-CHLOROPHTHALMUS ,,Chlorophthalmus,NA,NA,NA,NA,NA,NA,NA,Chlorophthalmus ,NA
-DIAPHUS ,,Diaphus,NA,NA,NA,NA,NA,NA,NA,Diaphus ,NA
+CHLOROPHTHALMUS,NA,Chlorophthalmus,NA,NA,NA,NA,NA,NA,NA,Chlorophthalmus,NA
+DIAPHUS,NA,Diaphus,NA,NA,NA,NA,NA,NA,NA,Diaphus,NA
 OPHICHTHIDAE,NA,Ophichthidae,NA,NA,NA,NA,NA,NA,NA,Ophichthidae,NA
 CALAPPIDAE,NA,Calappidae,NA,NA,NA,NA,NA,NA,NA,Calappidae,NA
 CHLOROPHTHALMIDAE,NA,Chlorophthalmidae,NA,NA,NA,NA,NA,NA,NA,Chlorophthalmidae,NA
 GALATHEIDAE,NA,Galatheidae,NA,NA,NA,NA,NA,NA,NA,Galatheidae,NA
 PORTUNIDAE,NA,Portunidae,NA,NA,NA,NA,NA,NA,NA,Portunidae,NA
-UROPHYCIS ,,Urophycis,NA,NA,NA,NA,NA,NA,NA,Urophycis ,NA
+UROPHYCIS,NA,Urophycis,NA,NA,NA,NA,NA,NA,NA,Urophycis,NA
 MAJIDAE,NA,Majidae,NA,NA,NA,NA,NA,NA,NA,Majidae,NA
 GONOSTOMATIDAE,NA,Gonostomatidae,NA,NA,NA,NA,NA,NA,NA,Gonostomatidae,NA
 STOMIAS BOA,boa,Stomias,NA,NA,NA,NA,NA,NA,NA,Stomias boa,NA
@@ -3485,13 +3485,13 @@ SERRANIDAE,NA,Serranidae,NA,NA,NA,NA,NA,NA,NA,Serranidae,NA
 STERNOPTYCHIDAE,NA,Sternoptychidae,NA,NA,NA,NA,NA,NA,NA,Sternoptychidae,NA
 SCOMBRIDAE,NA,Scombridae,NA,NA,NA,NA,NA,NA,NA,Scombridae,NA
 OGCOCEPHALIDAE,NA,Ogcocephalidae,NA,NA,NA,NA,NA,NA,NA,Ogcocephalidae,NA
-MERLUCCIUS ,,Merluccius,NA,NA,NA,NA,NA,NA,NA,Merluccius ,NA
+MERLUCCIUS,NA,Merluccius,NA,NA,NA,NA,NA,NA,NA,Merluccius,NA
 ATHERINIDAE,NA,Atherinidae,NA,NA,NA,NA,NA,NA,NA,Atherinidae,NA
 CLUPEIDAE,NA,Clupeidae,NA,NA,NA,NA,NA,NA,NA,Clupeidae,NA
 STROMATEIDAE,NA,Stromateidae,NA,NA,NA,NA,NA,NA,NA,Stromateidae,NA
 TETRAODONTIDAE,NA,Tetraodontidae,NA,NA,NA,NA,NA,NA,NA,Tetraodontidae,NA
-PENAEUS ,,Penaeus,NA,NA,NA,NA,NA,NA,NA,Penaeus ,NA
-PARALEPIDIDAE ,,Paralepididae,NA,NA,NA,NA,NA,NA,NA,Paralepididae ,NA
+PENAEUS,NA,Penaeus,NA,NA,NA,NA,NA,NA,NA,Penaeus,NA
+PARALEPIDIDAE,NA,Paralepididae,NA,NA,NA,NA,NA,NA,NA,Paralepididae,NA
 SYNGNATHIDAE,NA,Syngnathidae,NA,NA,NA,NA,NA,NA,NA,Syngnathidae,NA
 MORIDAE,NA,Moridae,NA,NA,NA,NA,NA,NA,NA,Moridae,NA
 SELACHIMORPHA,NA,Selachimorpha,NA,NA,NA,NA,NA,NA,NA,Selachimorpha,NA
@@ -3503,7 +3503,7 @@ LOLIGO PLEI,plei,Loligo,NA,NA,NA,NA,NA,NA,NA,Loligo plei,NA
 DIAPHUS DUMERILI,dumerili,Diaphus,NA,NA,NA,NA,NA,NA,NA,Diaphus dumerili,NA
 TRICHIURIDAE,NA,Trichiuridae,NA,NA,NA,NA,NA,NA,NA,Trichiuridae,NA
 PLEURONECTIDAE,NA,Pleuronectidae,NA,NA,NA,NA,NA,NA,NA,Pleuronectidae,NA
-POLYMETME THAEOCORYLA ,thaeocoryla,Polymetme,NA,NA,NA,NA,NA,NA,NA,Polymetme thaeocoryla,NA
+POLYMETME THAEOCORYLA,thaeocoryla,Polymetme,NA,NA,NA,NA,NA,NA,NA,Polymetme thaeocoryla,NA
 SEPIOLIDAE,NA,Sepiolidae,NA,NA,NA,NA,NA,NA,NA,Sepiolidae,NA
 SPIRONTOCARIS LILJEBORGII,liljeborgii,Spirontocaris,NA,NA,NA,NA,NA,NA,NA,Spirontocaris liljeborgii,NA
 BALISTIDAE,NA,Balistidae,NA,NA,NA,NA,NA,NA,NA,Balistidae,NA
@@ -3515,16 +3515,16 @@ TRASH SPECIES IN CATCH,species,Trash,NA,NA,NA,NA,NA,NA,NA,Trash species,NA
 CAPROIDAE,NA,Caproidae,NA,NA,NA,NA,NA,NA,NA,Caproidae,NA
 LOPHIIFORMES,NA,Lophiiformes,NA,NA,NA,NA,NA,NA,NA,Lophiiformes,NA
 STELLEROIDEA,NA,Stelleroidea,NA,NA,NA,NA,NA,NA,NA,Stelleroidea,NA
-OVALIPES ,,Ovalipes,NA,NA,NA,NA,NA,NA,NA,Ovalipes ,NA
-FISTULARIA ,,Fistularia,NA,NA,NA,NA,NA,NA,NA,Fistularia ,NA
+OVALIPES,NA,Ovalipes,NA,NA,NA,NA,NA,NA,NA,Ovalipes,NA
+FISTULARIA,NA,Fistularia,NA,NA,NA,NA,NA,NA,NA,Fistularia,NA
 GERYON FENNERI,fenneri,Geryon,NA,NA,NA,NA,NA,NA,NA,Geryon fenneri,NA
 LEPIDOCHELYS KEMPI,kempi,Lepidochelys,NA,NA,NA,NA,NA,NA,NA,Lepidochelys kempi,NA
 CARCHARHINIDAE,NA,Carcharhinidae,NA,NA,NA,NA,NA,NA,NA,Carcharhinidae,NA
 PLEURONECTIFORMES,NA,Pleuronectiformes,NA,NA,NA,NA,NA,NA,NA,Pleuronectiformes,NA
 LABRIDAE,NA,Labridae,NA,NA,NA,NA,NA,NA,NA,Labridae,NA
 ASTERIAS VULGARIS,vulgaris,Asterias,NA,NA,NA,NA,NA,NA,NA,Asterias vulgaris,NA
-PARALICHTHYS ,,Paralichthys,NA,NA,NA,NA,NA,NA,NA,Paralichthys ,NA
-ECHIOPHIS ,,Echiophis,NA,NA,NA,NA,NA,NA,NA,Echiophis ,NA
+PARALICHTHYS,NA,Paralichthys,NA,NA,NA,NA,NA,NA,NA,Paralichthys,NA
+ECHIOPHIS,NA,Echiophis,NA,NA,NA,NA,NA,NA,NA,Echiophis,NA
 GERREIDAE,NA,Gerreidae,NA,NA,NA,NA,NA,NA,NA,Gerreidae,NA
 HAEMULIDAE,NA,Haemulidae,NA,NA,NA,NA,NA,NA,NA,Haemulidae,NA
 EQUETUS ACUMINATUS,acuminatus,Equetus,NA,NA,NA,NA,NA,NA,NA,Equetus acuminatus,NA
@@ -3533,17 +3533,17 @@ BLENNIIDAE,NA,Blenniidae,NA,NA,NA,NA,NA,NA,NA,Blenniidae,NA
 PAGUROIDEA,NA,Paguroidea,NA,NA,NA,NA,NA,NA,NA,Paguroidea,NA
 CLYPEASTEROIDA,NA,Clypeasteroida,NA,NA,NA,NA,NA,NA,NA,Clypeasteroida,NA
 NATICIDAE,NA,Naticidae,NA,NA,NA,NA,NA,NA,NA,Naticidae,NA
-SPHYRAENA ,,Sphyraena,NA,NA,NA,NA,NA,NA,NA,Sphyraena ,NA
+SPHYRAENA,NA,Sphyraena,NA,NA,NA,NA,NA,NA,NA,Sphyraena,NA
 CHAETODONTIDAE,NA,Chaetodontidae,NA,NA,NA,NA,NA,NA,NA,Chaetodontidae,NA
 EPINEPHELUS NIVEATUS,niveatus,Epinephelus,NA,NA,NA,NA,NA,NA,NA,Epinephelus niveatus,NA
 CYPSELURUS CYANOPTERUS,cyanopterus,Cypselurus,NA,NA,NA,NA,NA,NA,NA,Cypselurus cyanopterus,NA
 PAGRUS SEDECIM,sedecim,Pagrus,NA,NA,NA,NA,NA,NA,NA,Pagrus sedecim,NA
 PRIACANTHUS CRUENTATUS,cruentatus,Priacanthus,NA,NA,NA,NA,NA,NA,NA,Priacanthus cruentatus,NA
-VINCIGUERRIA ,,Vinciguerria,NA,NA,NA,NA,NA,NA,NA,Vinciguerria ,NA
+VINCIGUERRIA,NA,Vinciguerria,NA,NA,NA,NA,NA,NA,NA,Vinciguerria,NA
 CYPSELURUS MELANURUS,melanurus,Cypselurus,NA,NA,NA,NA,NA,NA,NA,Cypselurus melanurus,NA
 CHILOMYCTERUS ATINGA,atinga,Chilomycterus,NA,NA,NA,NA,NA,NA,NA,Chilomycterus atinga,NA
 LACTOPHRYS POLYGONIA,polygonia,Lactophrys,NA,NA,NA,NA,NA,NA,NA,Lactophrys polygonia,NA
-ALEPOCEPHALIDAE ,,Alepocephalidae,NA,NA,NA,NA,NA,NA,NA,Alepocephalidae ,NA
+ALEPOCEPHALIDAE,NA,Alepocephalidae,NA,NA,NA,NA,NA,NA,NA,Alepocephalidae,NA
 Scyliorhinidae,NA,Scyliorhinidae,NA,NA,NA,NA,NA,NA,NA,Scyliorhinidae,NA
 Mursia gaudichaudii,gaudichaudii,Mursia,NA,NA,NA,NA,NA,NA,NA,Mursia gaudichaudii,NA
 Bothidae,NA,Bothidae,NA,NA,NA,NA,NA,NA,NA,Bothidae,NA
@@ -4191,7 +4191,7 @@ DFO:CTENOPHORA P.(8100),p.(8100),Dfo:ctenophora,NA,NA,NA,NA,NA,NA,NA,Dfo:ctenoph
 DFO:HENRICA SP.(6120),sp.(6120),Dfo:henrica,NA,NA,NA,NA,NA,NA,NA,Dfo:henrica sp.(6120),NA
 DFO:PITAR MORRHUANA(4314),morrhuana(4314),Dfo:pitar,NA,NA,NA,NA,NA,NA,NA,Dfo:pitar morrhuana(4314),NA
 DFO:SIPHONOPHORA O.(8700),o.(8700),Dfo:siphonophora,NA,NA,NA,NA,NA,NA,NA,Dfo:siphonophora o.(8700),NA
-DFO:TEALIA  FELINA(8315),,Dfo:tealia,NA,NA,NA,NA,NA,NA,NA,Dfo:tealia ,NA
+DFO:TEALIA  FELINA(8315),NA,Dfo:tealia,NA,NA,NA,NA,NA,NA,NA,Dfo:tealia,NA
 DFO:UNIDENTIFIED(9991),NA,Dfo:unidentified(9991),NA,NA,NA,NA,NA,NA,NA,Dfo:unidentified(9991),NA
 DFO:UNIDENTIFIED(9992),NA,Dfo:unidentified(9992),NA,NA,NA,NA,NA,NA,NA,Dfo:unidentified(9992),NA
 DFO:VAZELLA POURTALESI(8601),pourtalesi(8601),Dfo:vazella,NA,NA,NA,NA,NA,NA,NA,Dfo:vazella pourtalesi(8601),NA
@@ -4312,3 +4312,37 @@ Tanaidae,NA,Tanaidae,NA,NA,NA,NA,NA,NA,NA,Tanaidae,NA
 Thysanoessa raschii,raschii,Thysanoessa,NA,NA,NA,NA,NA,NA,NA,Thysanoessa raschii,NA
 Gasterosteidae,NA,Gasterosteidae,NA,NA,NA,NA,NA,NA,NA,Gasterosteidae,NA
 Syngnathus,NA,Syngnathus,NA,NA,NA,NA,NA,NA,NA,Syngnathus,NA
+PSEUDOPLEURONECTES AMERICANUS ,americanus,Pseudopleuronectes,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,Chordata,Animalia,Pseudopleuronectes americanus,Winter flounder
+LIMANDA FERRUGINEA ,ferruginea,Limanda,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,Chordata,Animalia,Limanda ferruginea,Yellowtail flounder
+NEZUMIA BAIRDII ,bairdii,Nezumia,Macrouridae,Gadiformes,Actinopterygii,NA,NA,Chordata,Animalia,Nezumia bairdii,Marlin-spike grenadier
+AETOBATUS NARINARI  ,narinari,Aetobatus,Myliobatidae,Myliobatiformes,Elasmobranchii,NA,NA,Chordata,Animalia,Aetobatus narinari,Spotted eagle ray
+MAUROLICUS WEITZMANI ,weitzmani,Maurolicus,Sternoptychidae,Stomiiformes,Actinopterygii,NA,NA,Chordata,Animalia,Maurolicus weitzmani,Atlantic pearlside
+POLYIPNUS CLARUS ,clarus,Polyipnus,Sternoptychidae,Stomiiformes,Actinopterygii,NA,NA,Chordata,Animalia,Polyipnus clarus,Slope hatchetfish
+XENOCEPHALUS EGREGIUS ,egregius,Xenocephalus,Uranoscopidae,Perciformes,Actinopterygii,NA,NA,Chordata,Animalia,Xenocephalus egregius,Freckled stargazer
+SIMENCHELYS PARASITICA ,parasitica,Simenchelys,Synaphobranchidae,Anguilliformes,Actinopterygii,NA,NA,Chordata,Animalia,Simenchelys parasitica,Snubnosed eel
+ARCTOZENUS RISSO ,risso,Arctozenus,Paralepididae,Aulopiformes,Actinopterygii,NA,NA,Chordata,Animalia,Arctozenus risso,Spotted barracudina
+HOWELLA SHERBORNI ,sherborni,Howella,Howellidae,Perciformes,Actinopterygii,NA,NA,Chordata,Animalia,Howella sherborni,Sherborn's pelagic bass
+POLYMETME THAEOCORYLA ,thaeocoryla,Polymetme,Phosichthyidae,Stomiiformes,Actinopterygii,NA,NA,Chordata,Animalia,Polymetme thaeocoryla,NA
+UROPHYCIS EARLLII ,earllii,Urophycis,Phycidae,Gadiformes,Actinopterygii,NA,NA,Chordata,Animalia,Urophycis earllii,Carolina hake
+DIPLODUS HOLBROOKII ,holbrookii,Diplodus,Sparidae,Perciformes,Actinopterygii,NA,NA,Chordata,Animalia,Diplodus holbrookii,Spottail seabream
+CORYPHAENA EQUISELIS ,equiselis,Coryphaena,Coryphaenidae,Perciformes,Actinopterygii,NA,NA,Chordata,Animalia,Coryphaena equiselis,Pompano dolphinfish
+PINNOTHERES,NA,Pinnotheres,Pinnotheridae,Decapoda,Malacostraca,NA,NA,NA,NA,NA,NA
+DENDOSTREA,NA,Dendostrea,Ostreidae,Ostreoida,Bivalvia,NA,NA,NA,NA,NA,NA
+ETROPUS ,NA,Etropus,Paralichthyidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+SYMPHURUS ,NA,Symphurus,Cynoglossidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+ARTEDIELLUS ,NA,Artediellus,Cottidae,Scorpaeniformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+PARALICHTHYS ,NA,Paralichthys,Paralichthyidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+FISTULARIA ,NA,Fistularia,Fistulariidae,Syngnathiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+CHLOROPHTHALMUS ,NA,Chlorophthalmus,Chlorophthalmidae,Aulopiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+ECHIOPHIS ,NA,Echiophis,Ophichthidae,Anguilliformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+RAJA ,NA,Raja,Rajidae,Rajiformes,Elasmobranchii,NA,NA,NA,NA,NA,NA
+CITHARICHTHYS ,NA,Citharichthys,Paralichthyidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+MERLUCCIUS ,NA,Merluccius,Merlucciidae,Gadiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+DIAPHUS ,NA,Diaphus,Myctophidae,Myctophiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+UROPHYCIS ,NA,Urophycis,Phycidae,Gadiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+SPHYRAENA ,NA,Sphyraena,Sphyraenidae,Perciformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+PENAEUS ,NA,Penaeus,Penaeidae,Decapoda,Malacostraca,NA,NA,NA,NA,NA,NA
+VINCIGUERRIA ,NA,Vinciguerria,Phosichthyidae,Stomiiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+OVALIPES ,NA,Ovalipes,Portunidae,Decapoda,Malacostraca,NA,NA,NA,NA,NA,NA
+Halargyreus johnsonii,NA,Halargyreus,Moridae,Gadiformes,Actinopterygii,NA,NA,NA,NA,NA,NA
+Clidoderma asperrimum,NA,Clidoderma,Pleuronectidae,Pleuronectiformes,Actinopterygii,NA,NA,NA,NA,NA,NA

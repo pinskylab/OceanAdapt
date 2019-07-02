@@ -1,0 +1,188 @@
+---
+title: "Check species names"
+output: html_notebook
+---
+
+Load libraries and data
+```{r setup, include = FALSE}
+library(here) # to find yourself
+library(tidyverse)
+library(rfishbase) # to get missing taxon data
+library(janitor) # to clean names
+
+# this is an R data of all of the individual regions
+
+
+# this is the data after it has been joined with the spptaxonomy file but before trimming.
+master_data <- readRDS(here("data_clean", "all-regions-full.RData"))
+```
+
+Malin asked if there were other Echinoidea names that don’t have “crushed urchin"
+
+```{r}
+echinoidea <- all_data %>% 
+  filter(grepl("Echinoid", spp)) %>% 
+  select(spp, common) %>% 
+  distinct()
+
+other <- all_data %>% 
+  filter(grepl("spp", spp)) %>% 
+  select(spp, common) %>% 
+  distinct()
+
+```
+
+Aurore asked about how the taxonomic file does not cover all 'spp' names from the surveys and ended up with species names without their corresponding 'taxon' in the file 'spptaxonomy.csv' (>800), and include several fish species (such as winter flounder and several sebastes species) from several surveys (EBS, GOA, NEUS, WCTRI, WCANN, GMEX).
+
+# examine column names in all-regions-full.RData
+```{r}
+names(all_data)
+```
+# Combine the imported and cleaned regions and check the values before they are trimmed to the spptaxonomy file
+```{r}
+load( here("data_clean", "individual-regions.rda"))
+all_regions <- rbind(ai, ebs, gmex, goa, neusF, neusS, scot, seusFALL, seusSPRING, seusSUMMER, wcann, wctri)
+
+names(all_regions)
+
+```
+
+# examine only the spp column, only unique values, and assign a test id number
+```{r}
+
+all_regions_spp <- all_regions_spp %>% 
+  select(spp) %>% 
+  distinct() %>% 
+  mutate(spp_id = 1:nrow(.))
+  
+```
+# Anti-join this spp list to the taxon column from the spptaxonomy file to see which spp are not represented there
+```{r}
+not_in_tax <- anti_join(all_regions_spp, tax, by = c("spp"="taxon")) %>% 
+  # format the column into genus and spp so that I can check it against fishbase
+  separate(spp, into= c("genus", "spp", "extra", "extra1"), sep = " ") %>%
+  mutate(genus = str_to_title(genus), 
+         spp = str_c(spp, extra, sep = " "),
+         spp = str_to_lower(spp), 
+         spp = str_trim(spp)) %>% 
+  select(-contains("extra")) 
+
+
+```
+Check that all whitespace was removed from names
+```{r, eval = FALSE}
+test <- not_in_tax %>% 
+  separate(spp, into = c("spp", "white"), sep = " ") %>% 
+  filter(!is.na(white)) 
+# should return one row for the spp with 2 names
+```
+
+# Check against fishbase
+```{r}
+not_in_tax <- not_in_tax %>% 
+  mutate(name = str_c(genus, spp, sep = " "))
+
+fb_check <- fishbase %>% 
+  # join the genus and spp columns into one
+  mutate(name = str_c(Genus, Species, sep = " ")) %>% 
+  filter(name %in% not_in_tax$name) %>% 
+  clean_names() %>% 
+  select(-contains("code"), -species_ref_no) %>% 
+  rename(common = f_bname) 
+  
+
+sb_check <- sealifebase %>% 
+  mutate(name = str_c(Genus, Species, sep = " ")) %>% 
+  filter(name %in% not_in_tax$name)
+# none in sealife base
+```
+
+# Add the results of species to the spptaxonomy.csv
+```{r}
+col_spec <- cols(.default = col_character())
+tax_raw <- read_csv(here("data_raw", "spptaxonomy.csv"), col_types = col_spec)
+
+# add columns to fb_check to match tax_raw
+names(tax_raw)
+
+# have to add the taxon back into fb_check based on the species id I created earlier
+matching <- left_join(not_in_tax, select(fb_check, -genus, -species), by = c("name")) %>% 
+  filter(!is.na(family)) %>% 
+  rename(species = spp) %>% 
+  left_join(all_regions_spp, by = "spp_id") %>% 
+  rename(taxon = spp) %>% 
+  select(-spp_id, -sub_family) %>% 
+  mutate(superclass = NA, 
+         subphylum = NA, 
+         phylum = "Chordata", 
+         kingdom = "Animalia")
+
+names(matching)
+
+tax_added <- rbind(tax_raw, matching)
+
+```
+# There are still genera only rows that can be matched
+```{r}
+gen_not_in_tax <- anti_join(not_in_tax, select(matching, -genus),by = "name") %>% 
+  filter(is.na(spp))
+
+gen_fb_check <- fishbase %>% 
+  # join the genus and spp columns into one
+  filter(Genus %in% gen_not_in_tax$genus) %>% 
+  clean_names() %>% 
+  select(-contains("code"), -species_ref_no, -species, -f_bname) %>% 
+  distinct()
+  
+# make sure the same genus name is not matching more than one family
+test <- gen_fb_check %>% 
+  group_by(genus) %>% 
+  filter(n() > 1)
+
+
+gen_sb_check <- sealifebase %>% 
+  filter(Genus %in% gen_not_in_tax$genus) %>% 
+  clean_names() %>% 
+  select(-contains("code"), -species_ref_no, -species, -f_bname) %>% 
+  distinct()
+
+# make sure the same genus name is not matching more than one family
+test <- gen_sb_check %>% 
+  group_by(genus) %>% 
+  filter(n() > 1)
+
+gen_check <- rbind(gen_fb_check, gen_sb_check)
+```
+
+# Add the results of genera to the spptaxonomy.csv
+```{r}
+# add columns to fb_check to match tax_raw
+names(tax_added)
+
+# have to add the taxon back into fb_check based on the species id I created earlier
+matching <- left_join(not_in_tax, gen_check, by = "genus") %>% 
+  filter(!is.na(family), is.na(spp)) %>% 
+  rename(species = spp) %>% 
+  left_join(all_regions_spp, by = "spp_id") %>% 
+  rename(taxon = spp) %>% 
+  select(-spp_id, -sub_family) %>% 
+  mutate(superclass = NA, 
+         subphylum = NA, 
+         phylum = NA, 
+         kingdom = NA, 
+         common = NA)
+
+names(tax_added)
+names(matching)
+
+tax_added <- rbind(tax_added, matching)
+
+# anything left?
+not_in_tax <- anti_join(all_regions_spp, tax_added, by = c("spp"="taxon"))
+
+```
+# Write to csv
+```{r}
+write_csv(tax_added, here("data_raw", "spptaxonomy.csv"))
+```
+
