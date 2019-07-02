@@ -1990,7 +1990,7 @@ if(isTRUE(REMOVE_REGION_DATASETS)) {
 
 if(isTRUE(WRITE_MASTER_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    save(dat, file = here::here("data_clean", "all-regions-full.RData"))
+    saveRDS(dat, file = here::here("data_clean", "all-regions-full.RData"))
   }else{
     write_csv(dat, here::here("data_clean", "all-regions-full.csv"))
   }
@@ -2036,7 +2036,7 @@ rm (maxyrs, presyr, presyrsum, spplist)
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    save(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed.RData"))
+    saveRDS(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed.RData"))
   }else{
     write_csv(trimmed_dat, here::here("data_clean", "all-regions-trimmed.csv"))
   }
@@ -2120,7 +2120,7 @@ BY_SPECIES_DATA <- cent_bio %>%
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(BY_SPECIES_DATA, file = here::here("data_clean", "by_species.RData"))
+    saveRDS(BY_SPECIES_DATA, file = here::here("data_clean", "by_species.RData"))
   }else{
     write_csv(BY_SPECIES_DATA, here::here("data_clean", "by_species.csv"))
   }
@@ -2138,7 +2138,7 @@ if (DAT_EXPLODED == TRUE){
   
   if(isTRUE(WRITE_DAT_EXPLODED)){
     if(isTRUE(PREFER_RDATA)){
-      save(dat.exploded, file = here::here("data_clean", "dat_exploded.Rdata"))
+      saveRDS(dat.exploded, file = here::here("data_clean", "dat_exploded.Rdata"))
     }else{
       write_csv(dat.exploded, here::here("data_clean", "dat_exploded.csv"))
     }
@@ -2234,7 +2234,7 @@ BY_REGION_DATA  <- regcentbio %>%
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(BY_REGION_DATA, file = here::here("data_clean", "by_region.RData"))
+    saveRDS(BY_REGION_DATA, file = here::here("data_clean", "by_region.RData"))
   }else{
     write_csv(BY_REGION_DATA, here::here("data_clean", "by_region.csv"))
   }
@@ -2336,7 +2336,7 @@ BY_NATIONAL_DATA <- natcentbio
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    save(BY_NATIONAL_DATA, file = here::here("data_clean", "by_national.RData"))
+    saveRDS(BY_NATIONAL_DATA, file = here::here("data_clean", "by_national.RData"))
   }else{
     write_csv(BY_NATIONAL_DATA, here::here("data_clean", "by_national.csv"))
   }
