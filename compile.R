@@ -1967,6 +1967,10 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
   select(taxon, name, common)
 
 
+if(isTRUE(WRITE_MASTER_DAT)){
+save(ai, ebs, gmex, goa, neusF, neusS, scot, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rda"))
+}
+
 # Master Data Set ===========================================================
 print("Join into Master Data Set")
 dat <- rbind(ai, ebs, goa, neusS, neusF, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot) %>% 
