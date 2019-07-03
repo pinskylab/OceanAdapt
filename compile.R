@@ -200,7 +200,12 @@ ai_data <- files %>%
   rbind(temp_csv) %>% 
   # remove any data rows that have headers as data rows
   filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
-  mutate(stratum = as.integer(STRATUM))
+  mutate(stratum = as.integer(STRATUM)) %>% 
+  # remove unused columns
+  select(-STATION, -DATETIME, -NUMCPUE, -SID, -BOT_TEMP, -SURF_TEMP, -STRATUM) %>% 
+  # remove any extra white space from around spp and common names
+  mutate(COMMON = str_trim(COMMON), 
+         SCIENTIFIC = str_trim(SCIENTIFIC))
 
 # The warning of 13 parsing failures is pointing to a row in the middle of the data set that contains headers instead of the numbers expected, this row is removed by the filter above.
 
@@ -215,6 +220,8 @@ ai_strata <- read_csv(here::here("data_raw", "ai_strata.csv"), col_types = cols(
     
 
 ai <- left_join(ai_data, ai_strata, by = "stratum")
+  
+  
 
 # are there any strata in the data that are not in the strata file?
 stopifnot(nrow(filter(ai, is.na(Areakm2))) == 0)
@@ -335,7 +342,12 @@ ebs_data <- files %>%
   map_dfr(read_csv) %>%
   # remove any data rows that have headers as data rows
   filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
-  mutate(stratum = as.integer(STRATUM))
+  mutate(stratum = as.integer(STRATUM))  %>% 
+  # remove unused columns
+  select(-STATION, -DATETIME, -NUMCPUE, -SID, -BOT_TEMP, -SURF_TEMP, -STRATUM) %>% 
+  # remove any extra white space from around spp and common names
+  mutate(COMMON = str_trim(COMMON), 
+         SCIENTIFIC = str_trim(SCIENTIFIC))
 
 # import the strata data
 ebs_strata <- read_csv(here::here("data_raw", "ebs_strata.csv"), col_types = cols(
@@ -465,7 +477,9 @@ goa_data <- files %>%
   map_dfr(read_csv) %>%
   # remove any data rows that have headers as data rows
   filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
-  mutate(stratum = as.integer(STRATUM))
+  mutate(stratum = as.integer(STRATUM)) %>% 
+  # remove unused columns
+  select(-STATION, -DATETIME, -NUMCPUE, -SID, -BOT_TEMP, -SURF_TEMP, -STRATUM)
 
 # import the strata data
 files <- as.list(dir(pattern = "goa_strata", path = "data_raw", full.names = T))
@@ -605,7 +619,7 @@ wctri_catch <- read_csv(here::here("data_raw", "wctri_catch.csv"), col_types = c
   VOUCHER = col_character(),
   AUDITJOIN = col_integer()
 )) %>% 
-  select('CRUISEJOIN', 'HAULJOIN', 'VESSEL', 'CRUISE', 'HAUL', 'SPECIES_CODE', 'WEIGHT')
+  select(CRUISEJOIN, HAULJOIN, VESSEL, CRUISE, HAUL, SPECIES_CODE, WEIGHT)
 
 wctri_haul <- read_csv(here::here("data_raw", "wctri_haul.csv"), col_types = 
                          cols(
@@ -640,7 +654,7 @@ wctri_haul <- read_csv(here::here("data_raw", "wctri_haul.csv"), col_types =
                            SUBSAMPLE = col_integer(),
                            AUDITJOIN = col_integer()
                          )) %>% 
-  select('CRUISEJOIN', 'HAULJOIN', 'VESSEL', 'CRUISE', 'HAUL', 'HAUL_TYPE', 'PERFORMANCE', 'START_TIME', 'DURATION', 'DISTANCE_FISHED', 'NET_WIDTH', 'STRATUM', 'START_LATITUDE', 'END_LATITUDE', 'START_LONGITUDE', 'END_LONGITUDE', 'STATIONID', 'BOTTOM_DEPTH')
+  select(CRUISEJOIN, HAULJOIN, VESSEL, CRUISE, HAUL, HAUL_TYPE, PERFORMANCE, START_TIME, DURATION, DISTANCE_FISHED, NET_WIDTH, STRATUM, START_LATITUDE, END_LATITUDE, START_LONGITUDE, END_LONGITUDE, STATIONID, BOTTOM_DEPTH)
 
 wctri_species <- read_csv(here::here("data_raw", "wctri_species.csv"), col_types = cols(
   SPECIES_CODE = col_integer(),
@@ -652,7 +666,7 @@ wctri_species <- read_csv(here::here("data_raw", "wctri_species.csv"), col_types
   WC = col_character(),
   AUDITJOIN = col_integer()
 )) %>% 
-  select('SPECIES_CODE', 'SPECIES_NAME', 'COMMON_NAME')
+  select(SPECIES_CODE, SPECIES_NAME, COMMON_NAME)
 
 # Add haul info to catch data
 wctri <- left_join(wctri_catch, wctri_haul, by = c("CRUISEJOIN", "HAULJOIN", "VESSEL", "CRUISE", "HAUL"))
@@ -818,9 +832,6 @@ wcann_haul <- read_csv(here::here("data_raw", "wcann_haul.csv"), col_types = col
   select("trawl_id","year","longitude_hi_prec_dd","latitude_hi_prec_dd","depth_hi_prec_m","area_swept_ha_der")
 # It is ok to get warning message that missing column names filled in: 'X1' [1].
 
-# this merge needs to be successful for complete_r_script to have a chance at working  
-merge(wcann_catch, wcann_haul, by=c("trawl_id","year"), all.x=TRUE, all.y=FALSE, allow.cartesian=TRUE) 
-
 wcann <- left_join(wcann_haul, wcann_catch, by = c("trawl_id", "year"))
 wcann <- wcann %>% 
   mutate(
@@ -845,7 +856,8 @@ wcann <- wcann %>%
          depth = depth_m, 
          spp = scientific_name) %>% 
   # remove non-fish
-  filter(!grepl("Egg", partition)) %>% 
+  filter(!grepl("Egg", partition), 
+         !grepl("crushed", spp)) %>% 
   # adjust spp names
   mutate(
     spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
@@ -1994,7 +2006,7 @@ if(isTRUE(REMOVE_REGION_DATASETS)) {
 
 if(isTRUE(WRITE_MASTER_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    saveRDS(dat, file = here::here("data_clean", "all-regions-full.RData"))
+    saveRDS(dat, file = here::here("data_clean", "all-regions-full.rds"))
   }else{
     write_csv(dat, here::here("data_clean", "all-regions-full.csv"))
   }
@@ -2040,7 +2052,7 @@ rm (maxyrs, presyr, presyrsum, spplist)
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    saveRDS(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed.RData"))
+    saveRDS(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed.rds"))
   }else{
     write_csv(trimmed_dat, here::here("data_clean", "all-regions-trimmed.csv"))
   }
@@ -2124,7 +2136,7 @@ BY_SPECIES_DATA <- cent_bio %>%
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    saveRDS(BY_SPECIES_DATA, file = here::here("data_clean", "by_species.RData"))
+    saveRDS(BY_SPECIES_DATA, file = here::here("data_clean", "by_species.rds"))
   }else{
     write_csv(BY_SPECIES_DATA, here::here("data_clean", "by_species.csv"))
   }
@@ -2142,7 +2154,7 @@ if (DAT_EXPLODED == TRUE){
   
   if(isTRUE(WRITE_DAT_EXPLODED)){
     if(isTRUE(PREFER_RDATA)){
-      saveRDS(dat.exploded, file = here::here("data_clean", "dat_exploded.Rdata"))
+      saveRDS(dat.exploded, file = here::here("data_clean", "dat_exploded.rds"))
     }else{
       write_csv(dat.exploded, here::here("data_clean", "dat_exploded.csv"))
     }
@@ -2238,7 +2250,7 @@ BY_REGION_DATA  <- regcentbio %>%
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    saveRDS(BY_REGION_DATA, file = here::here("data_clean", "by_region.RData"))
+    saveRDS(BY_REGION_DATA, file = here::here("data_clean", "by_region.rds"))
   }else{
     write_csv(BY_REGION_DATA, here::here("data_clean", "by_region.csv"))
   }
@@ -2340,7 +2352,7 @@ BY_NATIONAL_DATA <- natcentbio
 
 if(isTRUE(WRITE_BY_TABLES)){
   if(isTRUE(PREFER_RDATA)){
-    saveRDS(BY_NATIONAL_DATA, file = here::here("data_clean", "by_national.RData"))
+    saveRDS(BY_NATIONAL_DATA, file = here::here("data_clean", "by_national.rds"))
   }else{
     write_csv(BY_NATIONAL_DATA, here::here("data_clean", "by_national.csv"))
   }
