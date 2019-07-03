@@ -15,22 +15,11 @@ library(janitor) # to clean names
 
 # this is the data after it has been joined with the spptaxonomy file but before trimming.
 master_data <- readRDS(here("data_clean", "all-regions-full.RData"))
+
+# this is the spptaxonomy file
+tax <- read_csv(here("data_raw", "spptaxonomy.csv"))
 ```
 
-Malin asked if there were other Echinoidea names that don’t have “crushed urchin"
-
-```{r}
-echinoidea <- all_data %>% 
-  filter(grepl("Echinoid", spp)) %>% 
-  select(spp, common) %>% 
-  distinct()
-
-other <- all_data %>% 
-  filter(grepl("spp", spp)) %>% 
-  select(spp, common) %>% 
-  distinct()
-
-```
 
 Aurore asked about how the taxonomic file does not cover all 'spp' names from the surveys and ended up with species names without their corresponding 'taxon' in the file 'spptaxonomy.csv' (>800), and include several fish species (such as winter flounder and several sebastes species) from several surveys (EBS, GOA, NEUS, WCTRI, WCANN, GMEX).
 
@@ -184,5 +173,40 @@ not_in_tax <- anti_join(all_regions_spp, tax_added, by = c("spp"="taxon"))
 # Write to csv
 ```{r}
 write_csv(tax_added, here("data_raw", "spptaxonomy.csv"))
+```
+
+
+
+Malin asked if there were other Echinoidea names that don’t have “crushed urchin"
+
+```{r eval=FALSE}
+echinoidea <- all_data %>% 
+  filter(grepl("Echinoid", spp)) %>% 
+  select(spp, common) %>% 
+  distinct()
+
+other <- all_data %>% 
+  filter(grepl("spp", spp)) %>% 
+  select(spp, common) %>% 
+  distinct()
+
+```
+
+Daniel asked if there is a fish called the Alantic seabob in GOM - yep, there is a type-o, fixing it here
+```{r eval=FALSE}
+master_data %>% 
+  filter(grepl("Alantic", common))
+
+new <- tax %>% 
+  mutate(common = ifelse(grepl("Alantic", common), "Atlantic seabob", common))
+
+tax %>% 
+  filter(grepl("Alantic", common))
+
+new %>% 
+  filter(grepl("Alantic", common))
+
+
+write_csv(new, here("data_raw", "spptaxonomy.csv"))
 ```
 
