@@ -1,6 +1,6 @@
 ---
 title: "OceanAdapt Metadata"
-output: html_notebook
+output: html_document
 ---
 
 ## By region:  
