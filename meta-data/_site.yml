@@ -1,0 +1,7 @@
+name: "OceanAdapt Metadata"
+navbar:
+  title: "Home"
+  left:
+    - text: "Test"
+      href: "01_extract_ali.nb.html"
+output_dir: "."
