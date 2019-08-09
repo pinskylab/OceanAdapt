@@ -1,0 +1,63 @@
+Taxonomy metadata
+
+spptaxonomy_2014-04-12 manual.csv
+	Older version of file. Created by Malin Pinsky during preparation for Pinsky et al. 2013 Science.
+	
+spptaxonomy_2014-07-29.csv
+	Older version of file. Created by Malin Pinsky.
+
+spptaxonomy_2014-07-30.csv
+	Converts species names from all regions to a prettier and common format (Genus species), and contains information on the taxonomy of the species. Older versions of this file are also available.
+	Not sure if this has all taxa in all regions, or just taxa with long time-series that are used in the CINAR OceanAdapt website project.
+
+	taxon: character string for the species, as found in one of the surveys
+	species: species name
+	genus: genus
+	family
+	order
+	class
+	superclass
+	subphylum
+	phylum
+	kingdom
+	name: scientific name of the species, in Genus species
+	common: common name, usually derived from ITIS, but sometimes from Wikipedia or the internet if ITIS came up blank. Alternatively, made up by Malin Pinsky if nothing was available.
+	
+spptaxonomy_2014-10-02_plusManualRDB.csv
+	Developed from spptaxonomy_2014-07-30.csv. Ryan Batt ran taxize() to fill in species names and holes, then manually added common names where necessary.
+	
+	His notes:
+		Attached are 1041 unique taxonomic identifiers matched to their full taxonomic classification and common names, in English.
+
+		There are still mistakes. When creating this table, I only merged in my package=taxize corrected names (name meaning any column, e.g. "species" or "name" or "subphylum", etc) in cases where you had an NA for that element. So I didn't change anything that you had, I only filled in gaps. However, in some cases I've noticed that 1) your species names were wrong (e.g., missing "n"s); 2) your species names were outdated. 
+
+		Also, there is a chance that common names may vary within a corrected taxonomic identifier. Obviously, each row in the attached table is a unique taxonomic identifier from the raw data set; however, once corrected, many of these identifiers are redundant. This redundancy created the opportunity for different common names (or any other column, for that matter, but especially "common" and "name") to vary for a given species/ genus etc.
+
+		There are items in the table that should probably be discarded. These include, but may not be limited to 1) "Invertebrata"; 2) "Raja binoculata egg case"; 3) "Raja sp. egg case"; 4) "Rajiformes egg case".
+
+		There may be inconsistencies in how the columns "superclass" or "subphylum" were filled in *within* a group of animals that should belong to the same superclass or subphylum. E.g., sometimes I have "Actinopterygii" falling under superclass Osteichthes, and sometimes under Pisces. I do not fully understand this problem, but I was just copying what was available online, or using what was filled in by taxize:::classification(), or using what you had originally. Also, e.g., if you look at the WoRMS site for Cyoscion, you'll see that it has both Pisces and Gnathostomata listed as a Superclass. However, Pisces is outdated, apparently (see this). So this is really confusing, and I don't think any sort of code or scientific description should really rely on these names to be consistent .... it's just too prone to error, misinterpretation, etc.
+
+		So most of the blanks are filled in where possible, and I think I've done a pretty good job, but I do not think this table is perfect or even super polished. Also, I eventually want to have correct taxonomy, common names, and images (!) for all of the taxa in the databases, not just the taxa with long time series in North America. Given that we'll likely acquire new data and taxa, I thought it pertinent to do as much of this with a repeatable method: code. Right now I'm thinking that I will remerge this data set back into its predecessor (before I manually added/ corrected entries), have another go at taxizing it, and see if that helps in places (it may not). What we can't get there, we may want to think about importing some manual assistance (undergrads, e.g.). 
+
+		If you make any changes to this file, please adjust the file name accordingly, and share :)
+		
+spptaxonomy_2014-10-09_plusManual.csv
+	started from spptaxonomy_2014-10-02_plusManualRDB.csv
+	removed "a" and "an" from common name with cleaning_2014_10_08.R
+	manually searched for foreign common names and fixed to English
+	added "spp." to name column if it was not a binomial species name
+	note: this is not all the species in the North American trawl database. It should be a combination of those in the 2013 Science paper and those presented on OceanAdapt
+	
+spptaxonomy_2015-02-09_plusManual.csv
+	updated common name for Squalus anthias to "spiny dogfish" instead of "piked dogfish." The former is accepted in the USA.
+	
+spptaxonomy_2015-05-05_plusManual copy.csv
+	updated Serraus to Serranus (was missing an n), and added a few more Serranus spp lines
+	added Ophidion lines (cusk-eels)
+
+spptaxonomy_2015-05-14_plusManual.csv
+	added "metridium farcimen (=metridium giganteum)" to become metridium farcimen
+	added "pandalus montagui(trans.w/o hr)" to become Pandalus montagui
+	
+spptaxonomy.csv on 2019-02-06
+  changed Aasimus to Anasimus

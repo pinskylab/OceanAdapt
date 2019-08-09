@@ -12,3 +12,11 @@ output: html_notebook
 - [NOAA Protocols for Groundfish Bottom Trawl Surveys of the Nation’s Fishery Resources March 16, 2003](https://www.afsc.noaa.gov/RACE/gearsupport/tmspo65.pdf)  
 - [Species Codebook 2011](ai_species_codebook_2011.pdf)  
 - [Species Identification Confidence in the Gulf of Alaska and Aleutian Islands Surveys (1980-2011)](https://www.afsc.noaa.gov/Publications/ProcRpt/PR2014-01.pdf)
+
+
+## Special Notes:
+- Wayne Palsson, Mar 29, 2012 clarified that the station column is not unique to haul:  
+*Yes indeed there are many examples of valid hauls with the same stationid in the early years. I have tried to recreate in my head the survey design from the Tech Memo, Scientific Operation Plan, and Fishing Report for 1983. The exact protocols are unclear, but it looks like they used a stratified random approach with the strata defined by area and depth, but these were rather primitively developed and not directly comparable to those strata set later. In addition, it appears that there was an attempt to conduct adaptive sampling when high abundances of key species occurred or when they were in "high abundance" areas. The bottom line is that the stationid identifier is not unique to a haul.*
+
+
+## How we change the data:
