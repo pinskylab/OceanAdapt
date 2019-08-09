@@ -1,0 +1,12 @@
+---
+title: "Gulf of Alaska"
+output: html_notebook
+---
+
+## Source:
+[NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)
+
+## Related papers:  
+
+- [Data Report: 2009 Gulf of Alaska Bottom Trawl Survey](https://www.afsc.noaa.gov/Publications/AFSC-TM/NOAA-TM-AFSC-208.pdf)  
+

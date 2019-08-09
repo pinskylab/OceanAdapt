@@ -1,0 +1,13 @@
+---
+title: "Eastern Bering Sea"
+output: html_notebook
+---
+
+## Source:
+[NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)
+
+## Related papers:  
+
+- [Results of the 2010 Eastern and Northern Bering Sea Continental Shelf Bottom Trawl Survey of Groundfish and Invertebrate Fauna](https://www.afsc.noaa.gov/publications/afsc-tm/noaa-tm-afsc-227.pdf)  
+
+- [Kotwicki, Stan, and Robert R. Lauth. 2013. “Detecting Temporal Trends and Environmentally-Driven Changes in the Spatial Distribution of Bottom Fishes and Crabs on the Eastern Bering Sea Shelf.” Deep Sea Research Part II: Topical Studies in Oceanography, Understanding Ecosystem Processes in the Eastern Bering Sea II, 94 (October): 231–43.](https://doi.org/10.1016/j.dsr2.2013.03.017)

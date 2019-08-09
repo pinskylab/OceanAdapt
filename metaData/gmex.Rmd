@@ -1,0 +1,12 @@
+---
+title: "Gulf of Mexico"
+output: html_notebook
+---
+
+## Source:
+[Gulf States Marine Fisheries Commission SEAMAP Groundfish Surveys](http://seamap.gsmfc.org)
+
+## Related Papers:  
+[Comparisons of Relative Fishing Powers of Selected SEAMAP Survey Vessels](http://sedarweb.org/docs/wpapers/SEDAR7_DW53.pdf)
+
+
