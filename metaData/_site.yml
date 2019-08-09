@@ -2,6 +2,25 @@ name: "OceanAdapt Metadata"
 navbar:
   title: "Home"
   left:
-    - text: ""
-      href: "01_extract_ali.nb.html"
+    - text: "Aleutian Islands"
+      href: ai.nb.html
+    - text: "Eastern Bering Sea"
+      href: ebs.nb.html
+    - text: "Gulf of Alaska"
+      href: goa.nb.html
+    - text: "West Coast U.S."
+      href: wcann.nb.html
+    - text: "Gulf of Mexico"
+      href: gmex.nb.html
+    - text: "Southeast U.S."
+      href: seus.nb.html
+    - text: "Northeast U.S."
+      href: neus.nb.html
+    - text: "Scotian Shelf"
+      href: scot.nb.html
 output_dir: "."
+output:
+  html_document:
+    theme: journal
+#    include:
+#      after_body: _footer.html
