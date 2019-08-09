@@ -1,0 +1,14 @@
+---
+title: "Aleutian Islands"
+output: html_notebook
+---
+
+## Source:
+[NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)
+
+## Related papers:  
+- [NOAA Technical Memorandum NMFS-AFSC-215 Data Report: 2010 Aleutian Islands bottom trawl survey](https://www.afsc.noaa.gov/Publications/AFSC-TM/NOAA-TM-AFSC-215.pdf)  
+
+- [NOAA Protocols for Groundfish Bottom Trawl Surveys of the Nation’s Fishery Resources March 16, 2003](https://www.afsc.noaa.gov/RACE/gearsupport/tmspo65.pdf)  
+- [Species Codebook 2011](ai_species_codebook_2011.pdf)  
+- [Species Identification Confidence in the Gulf of Alaska and Aleutian Islands Surveys (1980-2011)](https://www.afsc.noaa.gov/Publications/ProcRpt/PR2014-01.pdf)
