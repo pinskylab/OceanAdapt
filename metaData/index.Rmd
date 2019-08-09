@@ -1,10 +1,10 @@
 ---
 title: "OceanAdapt Metadata"
-output: html_document
+output: html_notebook
 ---
 
 ## By region:  
-### [Aleutian Islands]()  
+### [Aleutian Islands](ai.nb.html)  
 ### [Eastern Bering Sea]()  
 ### [Gulf of Alaska]()  
 ### [West Coast U.S.]()
@@ -13,12 +13,9 @@ output: html_document
 ### [Northeast U.S.]() 
 ### [Scotian Shelf]()
 
- [NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)
 
-
-
-# Detailed Meta Data
-The data we report on OceanAdapt are curated from several data sources. Our curated data can be found here:
+# Detailed Metadata
+The data we report on OceanAdapt are curated from several data sources. Our curated data takes the form of several tables described here:
 
 -   [all-regions-full.RData](https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/all-regions-full.RData) is a table containing all rows from all regions with the following columns:
     -   region - character - the region where the survey occurred.
