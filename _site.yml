@@ -1,8 +1,0 @@
-name: "OceanAdapt Github Repository"
-navbar:
-  title: "HOME"
-  left:
-    - text: "About"
-      href: about.html
-output_dir: "."
-

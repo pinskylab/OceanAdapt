@@ -1,7 +1,0 @@
----
-title: "OceanAdapt GitHub Repository"
-author:  "[Michelle Stuart](https://github.com/mstuart1) at [Rutgers](http://pinsky.marine.rutgers.edu), 2019-06-17"
-output: html_document
----
-
-This is a space where demo webpages can be viewed.
