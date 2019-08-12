@@ -1847,7 +1847,28 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="01_extract_ali.nb.html">test</a>
+  <a href="ai.nb.html">Aleutian Islands</a>
+</li>
+<li>
+  <a href="ebs.nb.html">Eastern Bering Sea</a>
+</li>
+<li>
+  <a href="goa.nb.html">Gulf of Alaska</a>
+</li>
+<li>
+  <a href="wcann.nb.html">West Coast U.S.</a>
+</li>
+<li>
+  <a href="gmex.nb.html">Gulf of Mexico</a>
+</li>
+<li>
+  <a href="seus.nb.html">Southeast U.S.</a>
+</li>
+<li>
+  <a href="neus.nb.html">Northeast U.S.</a>
+</li>
+<li>
+  <a href="scot.nb.html">Scotian Shelf</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -1892,12 +1913,29 @@ $(document).ready(function () {
 </li>
 <li><a href="https://www.nefsc.noaa.gov/publications/crd/crd1406/">Northeast Fisheries Science Center Bottom Trawl Survey Protocols for the NOAA Ship Henry B. Bigelow</a><br />
 </li>
-<li><a href="https://doi.org/10.1093/icesjms/fsx246">Li, Zengguang, Zhenjiang Ye, Rong Wan, Kisei R. Tanaka, Robert Boenish, and Yong Chen. 2018. “Density-Independent and Density-Dependent Factors Affecting Spatio-Temporal Dynamics of Atlantic Cod (Gadus Morhua) Distribution in the Gulf of Maine.” ICES Journal of Marine Science 75 (4): 1329–40.</a></li>
+<li><a href="https://doi.org/10.1093/icesjms/fsx246">Li, Zengguang, Zhenjiang Ye, Rong Wan, Kisei R. Tanaka, Robert Boenish, and Yong Chen. 2018. “Density-Independent and Density-Dependent Factors Affecting Spatio-Temporal Dynamics of Atlantic Cod (Gadus Morhua) Distribution in the Gulf of Maine.” ICES Journal of Marine Science 75 (4): 1329–40.</a><br />
+</li>
+<li><a href="https://www.st.nmfs.noaa.gov/tm/nec_image/nec052image.pdf">An Evaluation of the Bottom Trawl Survey Program of the Northeast Fisheries Center</a></li>
+</ul>
+</div>
+<div id="how-we-change-the-data" class="section level2">
+<h2>How we change the data:</h2>
+<ul>
+<li>We group the data by YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, and SVSPP and summarise the BIOMASS to calculate wtcpue.<br />
+</li>
+<li>We create a haulid by combining a 6 digit leading zero cruise number with a 3 digit leading zero station number and a 4 digit leading zero stratum number, separated by “-”, for example: (cruise-station-stratum) 456354-067-0001.<br />
+</li>
+<li>We convert square nautical miles to square kilometers.<br />
+</li>
+<li>We remove any SCINAME spp values that contain the word “egg” or “unidentified”, or where the only value in the SCINAME field is white space.<br />
+</li>
+<li>We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.</li>
+<li>We separate the trawls into Fall and Spring seasons.</li>
 </ul>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTm9ydGhlYXN0IFUuUy4iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW05PQUEgTm9ydGhlYXN0IEZpc2hlcmllcyBTY2llbmNlIENlbnRlciBTcHJpbmcgYW5kIEZhbGwgQm90dG9tIFRyYXdsIFN1cnZleXNdKGh0dHA6Ly93d3cubmVmc2Mubm9hYS5nb3YvZmVtYWQvZWNvc3VydmV5L21haW5wYWdlLykKCiMjIFJlbGF0ZWQgcGFwZXJzOiAgCi0gW0EgaGlzdG9yaWNhbCBwZXJzcGVjdGl2ZSBvbiB0aGUgYWJ1bmRhbmNlIGFuZCBiaW9tYXNzIG9mIG5vcnRoZWFzdCBkZW1lcnNhbCBjb21wbGV4IHN0b2NrcyBmcm9tIE5NRlMgYW5kIE1hc3NhY2h1c2V0dHMgaW5zaG9yZSBib3R0b20gdHJhd2wgc3VydmV5cywgMTk2My0yMDAyXShodHRwczovL3JlcG9zaXRvcnkubGlicmFyeS5ub2FhLmdvdi92aWV3L25vYWEvNTI1OSkgIAotIFtORUZTQyB0cmF3bCBzdHJhdGFdKG5ldXNfTkVGU0NfdHJhd2xfc3RyYXRhLnBkZikgIAotIFsgR3VpZGUgdG8gc29tZSB0cmF3bC1jYXVnaHQgbWFyaW5lIGZpc2hlcyBmcm9tIE1haW5lIHRvIENhcGUgSGF0dGVyYXMsIE5vcnRoIENhcm9saW5hXShodHRwczovL3Nwby5ubWZzLm5vYWEuZ292L2NvbnRlbnQvY2lyY3VsYXItNDMxLWd1aWRlLXNvbWUtdHJhd2wtY2F1Z2h0LW1hcmluZS1maXNoZXMtbWFpbmUtY2FwZS1oYXR0ZXJhcy1ub3J0aC1jYXJvbGluYSkgIAotIFtOb3J0aGVhc3QgRmlzaGVyaWVzIFNjaWVuY2UgQ2VudGVyIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgUHJvdG9jb2xzIGZvciB0aGUgTk9BQSBTaGlwIEhlbnJ5IEIuIEJpZ2Vsb3ddKGh0dHBzOi8vd3d3Lm5lZnNjLm5vYWEuZ292L3B1YmxpY2F0aW9ucy9jcmQvY3JkMTQwNi8pICAKLSBbTGksIFplbmdndWFuZywgWmhlbmppYW5nIFllLCBSb25nIFdhbiwgS2lzZWkgUi4gVGFuYWthLCBSb2JlcnQgQm9lbmlzaCwgYW5kIFlvbmcgQ2hlbi4gMjAxOC4g4oCcRGVuc2l0eS1JbmRlcGVuZGVudCBhbmQgRGVuc2l0eS1EZXBlbmRlbnQgRmFjdG9ycyBBZmZlY3RpbmcgU3BhdGlvLVRlbXBvcmFsIER5bmFtaWNzIG9mIEF0bGFudGljIENvZCAoR2FkdXMgTW9yaHVhKSBEaXN0cmlidXRpb24gaW4gdGhlIEd1bGYgb2YgTWFpbmUu4oCdIElDRVMgSm91cm5hbCBvZiBNYXJpbmUgU2NpZW5jZSA3NSAoNCk6IDEzMjnigJM0MC5dKGh0dHBzOi8vZG9pLm9yZy8xMC4xMDkzL2ljZXNqbXMvZnN4MjQ2KSAKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTm9ydGhlYXN0IFUuUy4iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW05PQUEgTm9ydGhlYXN0IEZpc2hlcmllcyBTY2llbmNlIENlbnRlciBTcHJpbmcgYW5kIEZhbGwgQm90dG9tIFRyYXdsIFN1cnZleXNdKGh0dHA6Ly93d3cubmVmc2Mubm9hYS5nb3YvZmVtYWQvZWNvc3VydmV5L21haW5wYWdlLykKCiMjIFJlbGF0ZWQgcGFwZXJzOiAgCi0gW0EgaGlzdG9yaWNhbCBwZXJzcGVjdGl2ZSBvbiB0aGUgYWJ1bmRhbmNlIGFuZCBiaW9tYXNzIG9mIG5vcnRoZWFzdCBkZW1lcnNhbCBjb21wbGV4IHN0b2NrcyBmcm9tIE5NRlMgYW5kIE1hc3NhY2h1c2V0dHMgaW5zaG9yZSBib3R0b20gdHJhd2wgc3VydmV5cywgMTk2My0yMDAyXShodHRwczovL3JlcG9zaXRvcnkubGlicmFyeS5ub2FhLmdvdi92aWV3L25vYWEvNTI1OSkgIAotIFtORUZTQyB0cmF3bCBzdHJhdGFdKG5ldXNfTkVGU0NfdHJhd2xfc3RyYXRhLnBkZikgIAotIFsgR3VpZGUgdG8gc29tZSB0cmF3bC1jYXVnaHQgbWFyaW5lIGZpc2hlcyBmcm9tIE1haW5lIHRvIENhcGUgSGF0dGVyYXMsIE5vcnRoIENhcm9saW5hXShodHRwczovL3Nwby5ubWZzLm5vYWEuZ292L2NvbnRlbnQvY2lyY3VsYXItNDMxLWd1aWRlLXNvbWUtdHJhd2wtY2F1Z2h0LW1hcmluZS1maXNoZXMtbWFpbmUtY2FwZS1oYXR0ZXJhcy1ub3J0aC1jYXJvbGluYSkgIAotIFtOb3J0aGVhc3QgRmlzaGVyaWVzIFNjaWVuY2UgQ2VudGVyIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgUHJvdG9jb2xzIGZvciB0aGUgTk9BQSBTaGlwIEhlbnJ5IEIuIEJpZ2Vsb3ddKGh0dHBzOi8vd3d3Lm5lZnNjLm5vYWEuZ292L3B1YmxpY2F0aW9ucy9jcmQvY3JkMTQwNi8pICAKLSBbTGksIFplbmdndWFuZywgWmhlbmppYW5nIFllLCBSb25nIFdhbiwgS2lzZWkgUi4gVGFuYWthLCBSb2JlcnQgQm9lbmlzaCwgYW5kIFlvbmcgQ2hlbi4gMjAxOC4g4oCcRGVuc2l0eS1JbmRlcGVuZGVudCBhbmQgRGVuc2l0eS1EZXBlbmRlbnQgRmFjdG9ycyBBZmZlY3RpbmcgU3BhdGlvLVRlbXBvcmFsIER5bmFtaWNzIG9mIEF0bGFudGljIENvZCAoR2FkdXMgTW9yaHVhKSBEaXN0cmlidXRpb24gaW4gdGhlIEd1bGYgb2YgTWFpbmUu4oCdIElDRVMgSm91cm5hbCBvZiBNYXJpbmUgU2NpZW5jZSA3NSAoNCk6IDEzMjnigJM0MC5dKGh0dHBzOi8vZG9pLm9yZy8xMC4xMDkzL2ljZXNqbXMvZnN4MjQ2KSAgCi0gW0FuIEV2YWx1YXRpb24gb2YgdGhlIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgUHJvZ3JhbSBvZiB0aGUgTm9ydGhlYXN0IEZpc2hlcmllcyBDZW50ZXJdKGh0dHBzOi8vd3d3LnN0Lm5tZnMubm9hYS5nb3YvdG0vbmVjX2ltYWdlL25lYzA1MmltYWdlLnBkZikKCiMjIEhvdyB3ZSBjaGFuZ2UgdGhlIGRhdGE6ICAKLSBXZSBncm91cCB0aGUgZGF0YSBieSBZRUFSLCBTRUFTT04sIExBVCwgTE9OLCBERVBUSCwgQ1JVSVNFNiwgU1RBVElPTiwgU1RSQVRVTSwgYW5kIFNWU1BQIGFuZCBzdW1tYXJpc2UgdGhlIEJJT01BU1MgdG8gY2FsY3VsYXRlIHd0Y3B1ZS4gIAotIFdlIGNyZWF0ZSBhIGhhdWxpZCBieSBjb21iaW5pbmcgYSA2IGRpZ2l0IGxlYWRpbmcgemVybyBjcnVpc2UgbnVtYmVyIHdpdGggYSAzIGRpZ2l0IGxlYWRpbmcgemVybyBzdGF0aW9uIG51bWJlciBhbmQgYSA0IGRpZ2l0IGxlYWRpbmcgemVybyBzdHJhdHVtIG51bWJlciwgc2VwYXJhdGVkIGJ5ICItIiwgZm9yIGV4YW1wbGU6IChjcnVpc2Utc3RhdGlvbi1zdHJhdHVtKSA0NTYzNTQtMDY3LTAwMDEuICAKLSBXZSBjb252ZXJ0IHNxdWFyZSBuYXV0aWNhbCBtaWxlcyB0byBzcXVhcmUga2lsb21ldGVycy4gIAotIFdlIHJlbW92ZSBhbnkgU0NJTkFNRSBzcHAgdmFsdWVzIHRoYXQgY29udGFpbiB0aGUgd29yZCAiZWdnIiBvciAidW5pZGVudGlmaWVkIiwgb3Igd2hlcmUgdGhlIG9ubHkgdmFsdWUgaW4gdGhlIFNDSU5BTUUgZmllbGQgaXMgd2hpdGUgc3BhY2UuICAKLSBXZSBncm91cCB0aGUgZGF0YSBieSBoYXVsaWQsIHN0cmF0dW0sIHN0cmF0dW1hcmVhLCB5ZWFyLCBsYXQsIGxvbiwgZGVwdGgsICBhbmQgc3BwIGFuZCB0aGVuIHN1bSB1cCBhbGwgb2YgdGhlIHd0Y3B1ZSB2YWx1ZXMgZm9yIGVhY2ggZ3JvdXAgYW5kIHJlYXNzaWduIHRoYXQgYXMgdGhlIHd0Y3B1ZS4KLSBXZSBzZXBhcmF0ZSB0aGUgdHJhd2xzIGludG8gRmFsbCBhbmQgU3ByaW5nIHNlYXNvbnMuCgoKCgo=</div>
 
 
 

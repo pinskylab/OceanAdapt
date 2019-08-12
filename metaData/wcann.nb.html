@@ -1847,7 +1847,28 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="01_extract_ali.nb.html"></a>
+  <a href="ai.nb.html">Aleutian Islands</a>
+</li>
+<li>
+  <a href="ebs.nb.html">Eastern Bering Sea</a>
+</li>
+<li>
+  <a href="goa.nb.html">Gulf of Alaska</a>
+</li>
+<li>
+  <a href="wcann.nb.html">West Coast U.S.</a>
+</li>
+<li>
+  <a href="gmex.nb.html">Gulf of Mexico</a>
+</li>
+<li>
+  <a href="seus.nb.html">Southeast U.S.</a>
+</li>
+<li>
+  <a href="neus.nb.html">Northeast U.S.</a>
+</li>
+<li>
+  <a href="scot.nb.html">Scotian Shelf</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -1880,10 +1901,59 @@ $(document).ready(function () {
 <div id="source" class="section level2">
 <h2>Source:</h2>
 <p><a href="http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm">NOAA Northwest Fisheries Science Center U.S. West Coast Groundfish Bottom Trawl Survey</a></p>
+</div>
+<div id="related-papers" class="section level2">
+<h2>Related papers:</h2>
+<ul>
+<li><a href="https://www.st.nmfs.noaa.gov/spo/FishBull/963/munro.pdf">Munro, P. T. 1998. A decision rule based on the mean square error for correcting relative fishing power differences in trawl survey data. Fish. Bull. 96:538-546.</a><br />
+</li>
+<li><a href="ftp://ftp.library.noaa.gov/noaa_documents.lib/NMFS/AFSC/AFSC_PR/PR1992-01.pdf">Estimation of the Fishing Power Correction Factor</a><br />
+</li>
+<li><a href="https://doi.org/10.1016/j.fishres.2004.08.007">Helser, Thomas, André Punt, and Richard Methot. 2004. “A Generalized Linear Mixed Model Analysis of a Multi-Vessel Fishery Resource Survey.” Fisheries Research 70 (December): 251–64</a><br />
+</li>
+<li><a href="https://doi.org/10.1016/j.fishres.2004.08.006">Cooper, Andrew B., Andrew A. Rosenberg, Gunnar Stefánsson, and Marc Mangel. 2004. “Examining the Importance of Consistency in Multi-Vessel Trawl Survey Design Based on the U.S. West Coast Groundfish Bottom Trawl Survey.” Fisheries Research, Models in Fisheries Research: GLMs, GAMS and GLMMs, 70 (2): 239–50.</a></li>
+</ul>
+</div>
+<div id="how-we-change-the-data" class="section level2">
+<h2>How we change the data:</h2>
+<div id="to-wctri" class="section level4">
+<h4>To WCTRI:</h4>
+<ul>
+<li>We keep only hauls of type 3 and performance 0.<br />
+</li>
+<li>We calculate a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by “-”, for example: (vessel-cruise-haul) 354-067-001.</li>
+<li>We create a “strata” value by using lat, lon and depth to create a value in 100m bins.<br />
+</li>
+<li>We create a wtcpue value with the units weight per hectare (10,000 m2) by multiplying the WEIGHT by 10,000 and dividing by the product of the DISTANCE_FISHED * 1000 * NET_WIDTH.<br />
+</li>
+<li>We calculate the area of the stratum by creating a closed hull of lat lon points, creating a polygon with a map projection, converting to kilometers, and calculating the area of the polygon, all using the function calcarea as defined in the compile.R script.<br />
+</li>
+<li>We remove any SPECIES_NAME spp values that contain the word “egg” or where the only value in the SPECIES_NAME field is white space.<br />
+</li>
+<li>Any values SPECIES_NAME values that contain the word “Lepidopsetta” are changed to “Lepidopsetta sp.” because more than one genus/spp combo was used to describe the same organism over time. This also holds true for Bathyraja sp.<br />
+</li>
+<li>We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.</li>
+</ul>
+</div>
+<div id="to-wcann" class="section level4">
+<h4>To WCANN:</h4>
+<ul>
+<li>We create a “strata” value by using lat, lon and depth to create a value in 100m bins.<br />
+</li>
+<li>We calculate a wtcpue value with the units kg per hectare (10,000 m2) by dividing total_catch_wt_kg by area_swept_ha_der.</li>
+<li>We calculate the area of the stratum by creating a closed hull of lat lon points, creating a polygon with a map projection, converting to kilometers, and calculating the area of the polygon, all using the function calcarea as defined in the compile.R script.<br />
+</li>
+<li>We remove any SPECIES_NAME spp values that contain the word “egg” or where the only value in the SPECIES_NAME field is white space.<br />
+</li>
+<li>Any values SPECIES_NAME values that contain the word “Lepidopsetta” are changed to “Lepidopsetta sp.” because more than one genus/spp combo was used to describe the same organism over time. This also holds true for Bathyraja sp.<br />
+</li>
+<li>We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.</li>
+</ul>
 <!-- rnb-text-end -->
 </div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiV2VzdCBDb2FzdCBVLlMuIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBTb3VyY2U6CltOT0FBIE5vcnRod2VzdCBGaXNoZXJpZXMgU2NpZW5jZSBDZW50ZXIgVS5TLiBXZXN0IENvYXN0IEdyb3VuZGZpc2ggQm90dG9tIFRyYXdsIFN1cnZleV0oaHR0cDovL3d3dy5ud2ZzYy5ub2FhLmdvdi9yZXNlYXJjaC9kaXZpc2lvbnMvZnJhbS9ncm91bmRmaXNoL2JvdHRvbV90cmF3bC5jZm0pCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiV2VzdCBDb2FzdCBVLlMuIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBTb3VyY2U6CltOT0FBIE5vcnRod2VzdCBGaXNoZXJpZXMgU2NpZW5jZSBDZW50ZXIgVS5TLiBXZXN0IENvYXN0IEdyb3VuZGZpc2ggQm90dG9tIFRyYXdsIFN1cnZleV0oaHR0cDovL3d3dy5ud2ZzYy5ub2FhLmdvdi9yZXNlYXJjaC9kaXZpc2lvbnMvZnJhbS9ncm91bmRmaXNoL2JvdHRvbV90cmF3bC5jZm0pCgojIyBSZWxhdGVkIHBhcGVyczogIAotIFtNdW5ybywgUC4gVC4gMTk5OC4gQSBkZWNpc2lvbiBydWxlIGJhc2VkIG9uIHRoZSBtZWFuIHNxdWFyZSBlcnJvciBmb3IgY29ycmVjdGluZyByZWxhdGl2ZSBmaXNoaW5nIHBvd2VyIGRpZmZlcmVuY2VzIGluIHRyYXdsIHN1cnZleSBkYXRhLiBGaXNoLiBCdWxsLiA5Njo1MzgtNTQ2Ll0oaHR0cHM6Ly93d3cuc3Qubm1mcy5ub2FhLmdvdi9zcG8vRmlzaEJ1bGwvOTYzL211bnJvLnBkZikgIAotIFtFc3RpbWF0aW9uIG9mIHRoZSBGaXNoaW5nIFBvd2VyIENvcnJlY3Rpb24gRmFjdG9yXShmdHA6Ly9mdHAubGlicmFyeS5ub2FhLmdvdi9ub2FhX2RvY3VtZW50cy5saWIvTk1GUy9BRlNDL0FGU0NfUFIvUFIxOTkyLTAxLnBkZikgIAotIFtIZWxzZXIsIFRob21hcywgQW5kcsOpIFB1bnQsIGFuZCBSaWNoYXJkIE1ldGhvdC4gMjAwNC4g4oCcQSBHZW5lcmFsaXplZCBMaW5lYXIgTWl4ZWQgTW9kZWwgQW5hbHlzaXMgb2YgYSBNdWx0aS1WZXNzZWwgRmlzaGVyeSBSZXNvdXJjZSBTdXJ2ZXku4oCdIEZpc2hlcmllcyBSZXNlYXJjaCA3MCAoRGVjZW1iZXIpOiAyNTHigJM2NF0oaHR0cHM6Ly9kb2kub3JnLzEwLjEwMTYvai5maXNocmVzLjIwMDQuMDguMDA3KSAgCi0gW0Nvb3BlciwgQW5kcmV3IEIuLCBBbmRyZXcgQS4gUm9zZW5iZXJnLCBHdW5uYXIgU3RlZsOhbnNzb24sIGFuZCBNYXJjIE1hbmdlbC4gMjAwNC4g4oCcRXhhbWluaW5nIHRoZSBJbXBvcnRhbmNlIG9mIENvbnNpc3RlbmN5IGluIE11bHRpLVZlc3NlbCBUcmF3bCBTdXJ2ZXkgRGVzaWduIEJhc2VkIG9uIHRoZSBVLlMuIFdlc3QgQ29hc3QgR3JvdW5kZmlzaCBCb3R0b20gVHJhd2wgU3VydmV5LuKAnSBGaXNoZXJpZXMgUmVzZWFyY2gsIE1vZGVscyBpbiBGaXNoZXJpZXMgUmVzZWFyY2g6IEdMTXMsIEdBTVMgYW5kIEdMTU1zLCA3MCAoMik6IDIzOeKAkzUwLl0oaHR0cHM6Ly9kb2kub3JnLzEwLjEwMTYvai5maXNocmVzLjIwMDQuMDguMDA2KSAgCgojIyBIb3cgd2UgY2hhbmdlIHRoZSBkYXRhOiAgCiMjIyMgVG8gV0NUUkk6Ci0gV2Uga2VlcCBvbmx5IGhhdWxzIG9mIHR5cGUgMyBhbmQgcGVyZm9ybWFuY2UgMC4gIAotIFdlIGNhbGN1bGF0ZSBhIGhhdWxpZCBieSBjb21iaW5pbmcgYSAzIGRpZ2l0IGxlYWRpbmcgemVybyB2ZXNzZWwgbnVtYmVyIHdpdGggYSAzIGRpZ2l0IGxlYWRpbmcgemVybyBjcnVpc2UgbnVtYmVyIGFuZCBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIGhhdWwgbnVtYmVyLCBzZXBhcmF0ZWQgYnkgIi0iLCBmb3IgZXhhbXBsZTogKHZlc3NlbC1jcnVpc2UtaGF1bCkgMzU0LTA2Ny0wMDEuCi0gV2UgY3JlYXRlIGEgInN0cmF0YSIgdmFsdWUgYnkgdXNpbmcgbGF0LCBsb24gYW5kIGRlcHRoIHRvIGNyZWF0ZSBhIHZhbHVlIGluIDEwMG0gYmlucy4gIAotIFdlIGNyZWF0ZSBhIHd0Y3B1ZSB2YWx1ZSB3aXRoIHRoZSB1bml0cyB3ZWlnaHQgcGVyIGhlY3RhcmUgKDEwLDAwMCBtMikgYnkgbXVsdGlwbHlpbmcgdGhlIFdFSUdIVCBieSAxMCwwMDAgYW5kIGRpdmlkaW5nIGJ5IHRoZSBwcm9kdWN0IG9mIHRoZSBESVNUQU5DRV9GSVNIRUQgKiAxMDAwICogTkVUX1dJRFRILiAgCi0gV2UgY2FsY3VsYXRlIHRoZSBhcmVhIG9mIHRoZSBzdHJhdHVtIGJ5IGNyZWF0aW5nIGEgY2xvc2VkIGh1bGwgb2YgbGF0IGxvbiBwb2ludHMsIGNyZWF0aW5nIGEgcG9seWdvbiB3aXRoIGEgbWFwIHByb2plY3Rpb24sIGNvbnZlcnRpbmcgdG8ga2lsb21ldGVycywgYW5kIGNhbGN1bGF0aW5nIHRoZSBhcmVhIG9mIHRoZSBwb2x5Z29uLCBhbGwgdXNpbmcgdGhlIGZ1bmN0aW9uIGNhbGNhcmVhIGFzIGRlZmluZWQgaW4gdGhlIGNvbXBpbGUuUiBzY3JpcHQuICAKLSBXZSByZW1vdmUgYW55IFNQRUNJRVNfTkFNRSBzcHAgdmFsdWVzIHRoYXQgY29udGFpbiB0aGUgd29yZCAiZWdnIiBvciB3aGVyZSB0aGUgb25seSB2YWx1ZSBpbiB0aGUgU1BFQ0lFU19OQU1FIGZpZWxkIGlzIHdoaXRlIHNwYWNlLiAgCi0gQW55IHZhbHVlcyBTUEVDSUVTX05BTUUgdmFsdWVzIHRoYXQgY29udGFpbiB0aGUgd29yZCAiTGVwaWRvcHNldHRhIiBhcmUgY2hhbmdlZCB0byAiTGVwaWRvcHNldHRhIHNwLiIgYmVjYXVzZSBtb3JlIHRoYW4gb25lIGdlbnVzL3NwcCBjb21ibyB3YXMgdXNlZCB0byBkZXNjcmliZSB0aGUgc2FtZSBvcmdhbmlzbSBvdmVyIHRpbWUuICBUaGlzIGFsc28gaG9sZHMgdHJ1ZSBmb3IgQmF0aHlyYWphIHNwLiAgCi0gV2UgZ3JvdXAgdGhlIGRhdGEgYnkgaGF1bGlkLCBzdHJhdHVtLCBzdHJhdHVtYXJlYSwgeWVhciwgbGF0LCBsb24sIGRlcHRoLCAgYW5kIHNwcCBhbmQgdGhlbiBzdW0gdXAgYWxsIG9mIHRoZSB3dGNwdWUgdmFsdWVzIGZvciBlYWNoIGdyb3VwIGFuZCByZWFzc2lnbiB0aGF0IGFzIHRoZSB3dGNwdWUuICAgIAoKIyMjIyBUbyBXQ0FOTjoKLSBXZSBjcmVhdGUgYSAic3RyYXRhIiB2YWx1ZSBieSB1c2luZyBsYXQsIGxvbiBhbmQgZGVwdGggdG8gY3JlYXRlIGEgdmFsdWUgaW4gMTAwbSBiaW5zLiAgCi0gV2UgY2FsY3VsYXRlIGEgd3RjcHVlIHZhbHVlIHdpdGggdGhlIHVuaXRzIGtnIHBlciBoZWN0YXJlICgxMCwwMDAgbTIpIGJ5IGRpdmlkaW5nIHRvdGFsX2NhdGNoX3d0X2tnIGJ5IGFyZWFfc3dlcHRfaGFfZGVyLgotIFdlIGNhbGN1bGF0ZSB0aGUgYXJlYSBvZiB0aGUgc3RyYXR1bSBieSBjcmVhdGluZyBhIGNsb3NlZCBodWxsIG9mIGxhdCBsb24gcG9pbnRzLCBjcmVhdGluZyBhIHBvbHlnb24gd2l0aCBhIG1hcCBwcm9qZWN0aW9uLCBjb252ZXJ0aW5nIHRvIGtpbG9tZXRlcnMsIGFuZCBjYWxjdWxhdGluZyB0aGUgYXJlYSBvZiB0aGUgcG9seWdvbiwgYWxsIHVzaW5nIHRoZSBmdW5jdGlvbiBjYWxjYXJlYSBhcyBkZWZpbmVkIGluIHRoZSBjb21waWxlLlIgc2NyaXB0LiAgIAotIFdlIHJlbW92ZSBhbnkgU1BFQ0lFU19OQU1FIHNwcCB2YWx1ZXMgdGhhdCBjb250YWluIHRoZSB3b3JkICJlZ2ciIG9yIHdoZXJlIHRoZSBvbmx5IHZhbHVlIGluIHRoZSBTUEVDSUVTX05BTUUgZmllbGQgaXMgd2hpdGUgc3BhY2UuICAKLSBBbnkgdmFsdWVzIFNQRUNJRVNfTkFNRSB2YWx1ZXMgdGhhdCBjb250YWluIHRoZSB3b3JkICJMZXBpZG9wc2V0dGEiIGFyZSBjaGFuZ2VkIHRvICJMZXBpZG9wc2V0dGEgc3AuIiBiZWNhdXNlIG1vcmUgdGhhbiBvbmUgZ2VudXMvc3BwIGNvbWJvIHdhcyB1c2VkIHRvIGRlc2NyaWJlIHRoZSBzYW1lIG9yZ2FuaXNtIG92ZXIgdGltZS4gIFRoaXMgYWxzbyBob2xkcyB0cnVlIGZvciBCYXRoeXJhamEgc3AuICAKLSBXZSBncm91cCB0aGUgZGF0YSBieSBoYXVsaWQsIHN0cmF0dW0sIHN0cmF0dW1hcmVhLCB5ZWFyLCBsYXQsIGxvbiwgZGVwdGgsICBhbmQgc3BwIGFuZCB0aGVuIHN1bSB1cCBhbGwgb2YgdGhlIHd0Y3B1ZSB2YWx1ZXMgZm9yIGVhY2ggZ3JvdXAgYW5kIHJlYXNzaWduIHRoYXQgYXMgdGhlIHd0Y3B1ZS4gICAKCg==</div>
 
 
 

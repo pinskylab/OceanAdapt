@@ -1847,7 +1847,28 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="01_extract_ali.nb.html"></a>
+  <a href="ai.nb.html">Aleutian Islands</a>
+</li>
+<li>
+  <a href="ebs.nb.html">Eastern Bering Sea</a>
+</li>
+<li>
+  <a href="goa.nb.html">Gulf of Alaska</a>
+</li>
+<li>
+  <a href="wcann.nb.html">West Coast U.S.</a>
+</li>
+<li>
+  <a href="gmex.nb.html">Gulf of Mexico</a>
+</li>
+<li>
+  <a href="seus.nb.html">Southeast U.S.</a>
+</li>
+<li>
+  <a href="neus.nb.html">Northeast U.S.</a>
+</li>
+<li>
+  <a href="scot.nb.html">Scotian Shelf</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -1883,11 +1904,82 @@ $(document).ready(function () {
 </div>
 <div id="related-papers" class="section level2">
 <h2>Related Papers:</h2>
-<p><a href="http://sedarweb.org/docs/wpapers/SEDAR7_DW53.pdf">Comparisons of Relative Fishing Powers of Selected SEAMAP Survey Vessels</a></p>
+<ul>
+<li><a href="http://sedarweb.org/docs/wpapers/SEDAR7_DW1.pdf">Derivation of Red Snapper Time Series from SEAMAP and Groundfish Trawl Surveys</a><br />
+</li>
+<li><a href="http://sedarweb.org/docs/wpapers/SEDAR7_DW53.pdf">Comparisons of Relative Fishing Powers of Selected SEAMAP Survey Vessels</a><br />
+</li>
+<li><a href="https://spo.nmfs.noaa.gov/sites/default/files/pdf-content/MFR/mfr724/mfr7242.pdf">Fishery-independent Bottom Trawl Surveys for Deep-water Fishes and Invertebrates of the U.S. Gulf of Mexico, 2002-08</a><br />
+</li>
+<li><a href="http://seamap.gsmfc.org/documents/filedef.doc">SEAMAP Oracle DMS definitions</a><br />
+## How we change the data:</li>
+<li>gmex_STAREC.csv has characters that prevent it from being parsed easily. We attempt to make parsing more manageable by replacing the quotes in quoted character strings using the R regex below then reading the file in as a csv.</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoic3RyX3JlcGxhY2VfYWxsKGdtZXhfc3RhdGlvbl9yYXcsIFwiXFxcXFxcXFxcXFxcXFxcIlwiLCBcIlxcXFxcXFwiXFxcXFxcXCJcIikifQ== -->
+<pre class="r"><code>str_replace_all(gmex_station_raw, &quot;\\\\\\\&quot;&quot;, &quot;\\\&quot;\\\&quot;&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ul>
+<li>We only keep gear type “ST”.<br />
+</li>
+<li>We trim out young of year records (only useful for count data) and those with UNKNOWN species.<br />
+</li>
+<li>We make two combined records where ‘ANTHIAS TENUIS AND WOODSI’, ‘MOLLUSCA AND UNID.OTHER #01’ share the same species code.<br />
+</li>
+<li>We trim to high quality SEAMAP summer trawls, based off the subset used by Jeff Rester’s GS_TRAWL_05232011.sas.<br />
+</li>
+<li>We create a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by “-”, for example: (vessel-cruise-haul) 354-067-001.<br />
+</li>
+<li>We convert fathoms to meters.</li>
+<li>We create a “strata” value by using lat, lon and depth to create a value in 100m bins.<br />
+</li>
+<li>We trim out or fix speed and duration records by trimming out tows of 0, &gt;60, or unknown minutes.<br />
+</li>
+<li>We fix VESSEL_SP typo according to Jeff Rester: 30 = 3.<br />
+</li>
+<li>We trim out vessel speeds 0, unknown, or &gt;5 (need vessel speed to calculate area trawled).<br />
+</li>
+<li>We remove a tow when paired tows exist, same lat/lon/year but different haulid.<br />
+</li>
+<li>We adjust wtcpue (biomass per standard tow) for area towed, in units of kg per 10,000 m2. Calculate area trawled in m2: knots * 1.8 km/hr/knot * 1000 m/km * minutes * 1 hr/60 min * width of gear in feet * 0.3 m/ft.</li>
+<li>We remove unidentified spp, white space only values, and adjust the following names:</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuICAgICFzcHAgJWluJSBjKCdVTklEIENSVVNUQScsICdVTklEIE9USEVSJywgJ1VOSUQuRklTSCcsICdDUlVTVEFDRUEoSU5GUkFPUkRFUikgQlJBQ0hZVVJBJywgJ01PTExVU0NBIEFORCBVTklELk9USEVSICMwMScsICdBTEdBRScsICdNSVNDRUxMQU5FT1VTIElOVkVSVEVCUicsICdPVEhFUiBJTlZFUlRFQlJBVEVTJylcbiAgKSAlPiUgXG4gICMgYWRqdXN0IHNwcCBuYW1lc1xuICBtdXRhdGUoXG4gICAgc3BwID0gaWZlbHNlKEdFTlVTX0JHUyA9PSAnUEVMQUdJQScgJiBTUEVDX0JHUyA9PSAnTk9DVFVMJywgJ1BFTEFHSUEgTk9DVElMVUNBJywgc3BwKSwgXG4gICAgQklPX0JHUyA9IGlmZWxzZShzcHAgPT0gXCJQRUxBR0lBIE5PQ1RJTFVDQVwiLCA2MTgwMzAyMDEsIEJJT19CR1MpLCBcbiAgICBzcHAgPSBpZmVsc2UoR0VOVVNfQkdTID09ICdNVVJJQ0FOJyAmIFNQRUNfQkdTID09ICdGVUxWRU4nLCAnTVVSSUNBTlRIVVMgRlVMVkVTQ0VOUycsIHNwcCksIFxuICAgIEJJT19CR1MgPSBpZmVsc2Uoc3BwID09IFwiTVVSSUNBTlRIVVMgRlVMVkVTQ0VOU1wiLCAzMDgwMTE1MDEsIEJJT19CR1MpLCBcbiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoXCJBUExZU0lBXCIsIHNwcCksIFwiQVBMWVNJQVwiLCBzcHApLCBcbiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoXCJBVVJFTElBXCIsIHNwcCksIFwiQVVSRUxJQVwiLCBzcHApLCBcbiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoXCJCT1RIVVNcIiwgc3BwKSwgXCJCT1RIVVNcIiwgc3BwKSwgXG4gICAgc3BwID0gaWZlbHNlKGdyZXBsKFwiQ0xZUEVBU1RFUlwiLCBzcHApLCBcIkNMWVBFQVNURVJcIiwgc3BwKSwgXG4gICAgc3BwID0gaWZlbHNlKGdyZXBsKFwiQ09OVVNcIiwgc3BwKSwgXCJDT05VU1wiLCBzcHApLCBcbiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoXCJDWU5PU0NJT05cIiwgc3BwKSwgXCJDWU5PU0NJT05cIiwgc3BwKSwgXG4gICAgc3BwID0gaWZlbHNlKGdyZXBsKFwiRUNISU5BU1RFUlwiLCBzcHApLCBcIkVDSElOQVNURVJcIiwgc3BwKSxcbiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoXCJPUElTVE9HTkFUSFVTXCIsIHNwcCksIFwiT1BJU1RPR05BVEhVU1wiLCBzcHApLCBcbiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoXCJPUFNBTlVTXCIsIHNwcCksIFwiT1BTQU5VU1wiLCBzcHApLCBcbiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoXCJST1NTSUFcIiwgc3BwKSwgXCJST1NTSUFcIiwgc3BwKSwgXG4gICAgc3BwID0gaWZlbHNlKGdyZXBsKFwiU09MRU5PQ0VSQVwiLCBzcHApLCBcIlNPTEVOT0NFUkFcIiwgc3BwKSwgXG4gICAgc3BwID0gaWZlbHNlKGdyZXBsKFwiVFJBQ0hZUEVORVVTXCIsIHNwcCksIFwiVFJBQ0hZUEVORVVTXCIsIHNwcClcbmBgYCJ9 -->
+<pre class="r"><code>    !spp %in% c(&#39;UNID CRUSTA&#39;, &#39;UNID OTHER&#39;, &#39;UNID.FISH&#39;, &#39;CRUSTACEA(INFRAORDER) BRACHYURA&#39;, &#39;MOLLUSCA AND UNID.OTHER #01&#39;, &#39;ALGAE&#39;, &#39;MISCELLANEOUS INVERTEBR&#39;, &#39;OTHER INVERTEBRATES&#39;)
+  ) %&gt;% 
+  # adjust spp names
+  mutate(
+    spp = ifelse(GENUS_BGS == &#39;PELAGIA&#39; &amp; SPEC_BGS == &#39;NOCTUL&#39;, &#39;PELAGIA NOCTILUCA&#39;, spp), 
+    BIO_BGS = ifelse(spp == &quot;PELAGIA NOCTILUCA&quot;, 618030201, BIO_BGS), 
+    spp = ifelse(GENUS_BGS == &#39;MURICAN&#39; &amp; SPEC_BGS == &#39;FULVEN&#39;, &#39;MURICANTHUS FULVESCENS&#39;, spp), 
+    BIO_BGS = ifelse(spp == &quot;MURICANTHUS FULVESCENS&quot;, 308011501, BIO_BGS), 
+    spp = ifelse(grepl(&quot;APLYSIA&quot;, spp), &quot;APLYSIA&quot;, spp), 
+    spp = ifelse(grepl(&quot;AURELIA&quot;, spp), &quot;AURELIA&quot;, spp), 
+    spp = ifelse(grepl(&quot;BOTHUS&quot;, spp), &quot;BOTHUS&quot;, spp), 
+    spp = ifelse(grepl(&quot;CLYPEASTER&quot;, spp), &quot;CLYPEASTER&quot;, spp), 
+    spp = ifelse(grepl(&quot;CONUS&quot;, spp), &quot;CONUS&quot;, spp), 
+    spp = ifelse(grepl(&quot;CYNOSCION&quot;, spp), &quot;CYNOSCION&quot;, spp), 
+    spp = ifelse(grepl(&quot;ECHINASTER&quot;, spp), &quot;ECHINASTER&quot;, spp),
+    spp = ifelse(grepl(&quot;OPISTOGNATHUS&quot;, spp), &quot;OPISTOGNATHUS&quot;, spp), 
+    spp = ifelse(grepl(&quot;OPSANUS&quot;, spp), &quot;OPSANUS&quot;, spp), 
+    spp = ifelse(grepl(&quot;ROSSIA&quot;, spp), &quot;ROSSIA&quot;, spp), 
+    spp = ifelse(grepl(&quot;SOLENOCERA&quot;, spp), &quot;SOLENOCERA&quot;, spp), 
+    spp = ifelse(grepl(&quot;TRACHYPENEUS&quot;, spp), &quot;TRACHYPENEUS&quot;, spp)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ul>
+<li>We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.</li>
+</ul>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiR3VsZiBvZiBNZXhpY28iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW0d1bGYgU3RhdGVzIE1hcmluZSBGaXNoZXJpZXMgQ29tbWlzc2lvbiBTRUFNQVAgR3JvdW5kZmlzaCBTdXJ2ZXlzXShodHRwOi8vc2VhbWFwLmdzbWZjLm9yZykKCiMjIFJlbGF0ZWQgUGFwZXJzOiAgCltDb21wYXJpc29ucyBvZiBSZWxhdGl2ZSBGaXNoaW5nIFBvd2VycyBvZiBTZWxlY3RlZCBTRUFNQVAgU3VydmV5IFZlc3NlbHNdKGh0dHA6Ly9zZWRhcndlYi5vcmcvZG9jcy93cGFwZXJzL1NFREFSN19EVzUzLnBkZikKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiR3VsZiBvZiBNZXhpY28iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW0d1bGYgU3RhdGVzIE1hcmluZSBGaXNoZXJpZXMgQ29tbWlzc2lvbiBTRUFNQVAgR3JvdW5kZmlzaCBTdXJ2ZXlzXShodHRwOi8vc2VhbWFwLmdzbWZjLm9yZykKCiMjIFJlbGF0ZWQgUGFwZXJzOiAgCi0gW0Rlcml2YXRpb24gb2YgUmVkIFNuYXBwZXIgVGltZSBTZXJpZXMgZnJvbSBTRUFNQVAgYW5kIEdyb3VuZGZpc2ggVHJhd2wgU3VydmV5c10oaHR0cDovL3NlZGFyd2ViLm9yZy9kb2NzL3dwYXBlcnMvU0VEQVI3X0RXMS5wZGYpICAKLSBbQ29tcGFyaXNvbnMgb2YgUmVsYXRpdmUgRmlzaGluZyBQb3dlcnMgb2YgU2VsZWN0ZWQgU0VBTUFQIFN1cnZleSBWZXNzZWxzXShodHRwOi8vc2VkYXJ3ZWIub3JnL2RvY3Mvd3BhcGVycy9TRURBUjdfRFc1My5wZGYpICAKLSBbRmlzaGVyeS1pbmRlcGVuZGVudCBCb3R0b20gVHJhd2wgU3VydmV5cyBmb3IgRGVlcC13YXRlciBGaXNoZXMgYW5kIEludmVydGVicmF0ZXMgb2YgdGhlIFUuUy4gR3VsZiBvZiBNZXhpY28sIDIwMDItMDhdKGh0dHBzOi8vc3BvLm5tZnMubm9hYS5nb3Yvc2l0ZXMvZGVmYXVsdC9maWxlcy9wZGYtY29udGVudC9NRlIvbWZyNzI0L21mcjcyNDIucGRmKSAgCi0gW1NFQU1BUCBPcmFjbGUgRE1TIGRlZmluaXRpb25zXShodHRwOi8vc2VhbWFwLmdzbWZjLm9yZy9kb2N1bWVudHMvZmlsZWRlZi5kb2MpICAgIAojIyBIb3cgd2UgY2hhbmdlIHRoZSBkYXRhOgotIGdtZXhfU1RBUkVDLmNzdiBoYXMgY2hhcmFjdGVycyB0aGF0IHByZXZlbnQgaXQgZnJvbSBiZWluZyBwYXJzZWQgZWFzaWx5LiAgV2UgYXR0ZW1wdCB0byBtYWtlIHBhcnNpbmcgbW9yZSBtYW5hZ2VhYmxlIGJ5IHJlcGxhY2luZyB0aGUgcXVvdGVzIGluIHF1b3RlZCBjaGFyYWN0ZXIgc3RyaW5ncyB1c2luZyB0aGUgUiByZWdleCBiZWxvdyB0aGVuIHJlYWRpbmcgdGhlIGZpbGUgaW4gYXMgYSBjc3YuCmBgYHtyIGV2YWw9RkFMU0V9CnN0cl9yZXBsYWNlX2FsbChnbWV4X3N0YXRpb25fcmF3LCAiXFxcXFxcXCIiLCAiXFxcIlxcXCIiKQpgYGAKLSBXZSBvbmx5IGtlZXAgZ2VhciB0eXBlICJTVCIuICAKLSBXZSB0cmltIG91dCB5b3VuZyBvZiB5ZWFyIHJlY29yZHMgKG9ubHkgdXNlZnVsIGZvciBjb3VudCBkYXRhKSBhbmQgdGhvc2Ugd2l0aCBVTktOT1dOIHNwZWNpZXMuICAKLSBXZSBtYWtlIHR3byBjb21iaW5lZCByZWNvcmRzIHdoZXJlICdBTlRISUFTIFRFTlVJUyBBTkQgV09PRFNJJywgJ01PTExVU0NBIEFORCBVTklELk9USEVSICMwMScgc2hhcmUgdGhlIHNhbWUgc3BlY2llcyBjb2RlLiAgCi0gV2UgdHJpbSB0byBoaWdoIHF1YWxpdHkgU0VBTUFQIHN1bW1lciB0cmF3bHMsIGJhc2VkIG9mZiB0aGUgc3Vic2V0IHVzZWQgYnkgSmVmZiBSZXN0ZXIncyBHU19UUkFXTF8wNTIzMjAxMS5zYXMuICAKLSBXZSBjcmVhdGUgYSBoYXVsaWQgYnkgY29tYmluaW5nIGEgMyBkaWdpdCBsZWFkaW5nIHplcm8gdmVzc2VsIG51bWJlciB3aXRoIGEgMyBkaWdpdCBsZWFkaW5nIHplcm8gY3J1aXNlIG51bWJlciBhbmQgYSAzIGRpZ2l0IGxlYWRpbmcgemVybyBoYXVsIG51bWJlciwgc2VwYXJhdGVkIGJ5ICItIiwgZm9yIGV4YW1wbGU6ICh2ZXNzZWwtY3J1aXNlLWhhdWwpIDM1NC0wNjctMDAxLiAgCi0gV2UgY29udmVydCBmYXRob21zIHRvIG1ldGVycy4gCi0gV2UgY3JlYXRlIGEgInN0cmF0YSIgdmFsdWUgYnkgdXNpbmcgbGF0LCBsb24gYW5kIGRlcHRoIHRvIGNyZWF0ZSBhIHZhbHVlIGluIDEwMG0gYmlucy4gICAKLSBXZSB0cmltIG91dCBvciBmaXggc3BlZWQgYW5kIGR1cmF0aW9uIHJlY29yZHMgYnkgdHJpbW1pbmcgb3V0IHRvd3Mgb2YgMCwgPjYwLCBvciB1bmtub3duIG1pbnV0ZXMuICAKLSBXZSBmaXggVkVTU0VMX1NQIHR5cG8gYWNjb3JkaW5nIHRvIEplZmYgUmVzdGVyOiAzMCA9IDMuICAKLSBXZSB0cmltIG91dCB2ZXNzZWwgc3BlZWRzIDAsIHVua25vd24sIG9yID41IChuZWVkIHZlc3NlbCBzcGVlZCB0byBjYWxjdWxhdGUgYXJlYSB0cmF3bGVkKS4gIAotIFdlIHJlbW92ZSBhIHRvdyB3aGVuIHBhaXJlZCB0b3dzIGV4aXN0LCBzYW1lIGxhdC9sb24veWVhciBidXQgZGlmZmVyZW50IGhhdWxpZC4gIAotIFdlIGFkanVzdCB3dGNwdWUgKGJpb21hc3MgcGVyIHN0YW5kYXJkIHRvdykgZm9yIGFyZWEgdG93ZWQsIGluIHVuaXRzIG9mIGtnIHBlciAxMCwwMDAgbTIuIENhbGN1bGF0ZSBhcmVhIHRyYXdsZWQgaW4gbTI6IGtub3RzICogMS44IGttL2hyL2tub3QgKiAxMDAwIG0va20gKiBtaW51dGVzICogMSBoci82MCBtaW4gKiB3aWR0aCBvZiBnZWFyIGluIGZlZXQgKiAwLjMgbS9mdC4KLSBXZSByZW1vdmUgdW5pZGVudGlmaWVkIHNwcCwgd2hpdGUgc3BhY2Ugb25seSB2YWx1ZXMsIGFuZCBhZGp1c3QgdGhlIGZvbGxvd2luZyBuYW1lczoKYGBge3J9CiAgICAhc3BwICVpbiUgYygnVU5JRCBDUlVTVEEnLCAnVU5JRCBPVEhFUicsICdVTklELkZJU0gnLCAnQ1JVU1RBQ0VBKElORlJBT1JERVIpIEJSQUNIWVVSQScsICdNT0xMVVNDQSBBTkQgVU5JRC5PVEhFUiAjMDEnLCAnQUxHQUUnLCAnTUlTQ0VMTEFORU9VUyBJTlZFUlRFQlInLCAnT1RIRVIgSU5WRVJURUJSQVRFUycpCiAgKSAlPiUgCiAgIyBhZGp1c3Qgc3BwIG5hbWVzCiAgbXV0YXRlKAogICAgc3BwID0gaWZlbHNlKEdFTlVTX0JHUyA9PSAnUEVMQUdJQScgJiBTUEVDX0JHUyA9PSAnTk9DVFVMJywgJ1BFTEFHSUEgTk9DVElMVUNBJywgc3BwKSwgCiAgICBCSU9fQkdTID0gaWZlbHNlKHNwcCA9PSAiUEVMQUdJQSBOT0NUSUxVQ0EiLCA2MTgwMzAyMDEsIEJJT19CR1MpLCAKICAgIHNwcCA9IGlmZWxzZShHRU5VU19CR1MgPT0gJ01VUklDQU4nICYgU1BFQ19CR1MgPT0gJ0ZVTFZFTicsICdNVVJJQ0FOVEhVUyBGVUxWRVNDRU5TJywgc3BwKSwgCiAgICBCSU9fQkdTID0gaWZlbHNlKHNwcCA9PSAiTVVSSUNBTlRIVVMgRlVMVkVTQ0VOUyIsIDMwODAxMTUwMSwgQklPX0JHUyksIAogICAgc3BwID0gaWZlbHNlKGdyZXBsKCJBUExZU0lBIiwgc3BwKSwgIkFQTFlTSUEiLCBzcHApLCAKICAgIHNwcCA9IGlmZWxzZShncmVwbCgiQVVSRUxJQSIsIHNwcCksICJBVVJFTElBIiwgc3BwKSwgCiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoIkJPVEhVUyIsIHNwcCksICJCT1RIVVMiLCBzcHApLCAKICAgIHNwcCA9IGlmZWxzZShncmVwbCgiQ0xZUEVBU1RFUiIsIHNwcCksICJDTFlQRUFTVEVSIiwgc3BwKSwgCiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoIkNPTlVTIiwgc3BwKSwgIkNPTlVTIiwgc3BwKSwgCiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoIkNZTk9TQ0lPTiIsIHNwcCksICJDWU5PU0NJT04iLCBzcHApLCAKICAgIHNwcCA9IGlmZWxzZShncmVwbCgiRUNISU5BU1RFUiIsIHNwcCksICJFQ0hJTkFTVEVSIiwgc3BwKSwKICAgIHNwcCA9IGlmZWxzZShncmVwbCgiT1BJU1RPR05BVEhVUyIsIHNwcCksICJPUElTVE9HTkFUSFVTIiwgc3BwKSwgCiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoIk9QU0FOVVMiLCBzcHApLCAiT1BTQU5VUyIsIHNwcCksIAogICAgc3BwID0gaWZlbHNlKGdyZXBsKCJST1NTSUEiLCBzcHApLCAiUk9TU0lBIiwgc3BwKSwgCiAgICBzcHAgPSBpZmVsc2UoZ3JlcGwoIlNPTEVOT0NFUkEiLCBzcHApLCAiU09MRU5PQ0VSQSIsIHNwcCksIAogICAgc3BwID0gaWZlbHNlKGdyZXBsKCJUUkFDSFlQRU5FVVMiLCBzcHApLCAiVFJBQ0hZUEVORVVTIiwgc3BwKQpgYGAKLSBXZSBncm91cCB0aGUgZGF0YSBieSBoYXVsaWQsIHN0cmF0dW0sIHN0cmF0dW1hcmVhLCB5ZWFyLCBsYXQsIGxvbiwgZGVwdGgsICBhbmQgc3BwIGFuZCB0aGVuIHN1bSB1cCBhbGwgb2YgdGhlIHd0Y3B1ZSB2YWx1ZXMgZm9yIGVhY2ggZ3JvdXAgYW5kIHJlYXNzaWduIHRoYXQgYXMgdGhlIHd0Y3B1ZS4gCgoKCgo=</div>
 
 
 

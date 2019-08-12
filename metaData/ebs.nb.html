@@ -1847,7 +1847,28 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="01_extract_ali.nb.html"></a>
+  <a href="ai.nb.html">Aleutian Islands</a>
+</li>
+<li>
+  <a href="ebs.nb.html">Eastern Bering Sea</a>
+</li>
+<li>
+  <a href="goa.nb.html">Gulf of Alaska</a>
+</li>
+<li>
+  <a href="wcann.nb.html">West Coast U.S.</a>
+</li>
+<li>
+  <a href="gmex.nb.html">Gulf of Mexico</a>
+</li>
+<li>
+  <a href="seus.nb.html">Southeast U.S.</a>
+</li>
+<li>
+  <a href="neus.nb.html">Northeast U.S.</a>
+</li>
+<li>
+  <a href="scot.nb.html">Scotian Shelf</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -1886,11 +1907,27 @@ $(document).ready(function () {
 <ul>
 <li><p><a href="https://www.afsc.noaa.gov/publications/afsc-tm/noaa-tm-afsc-227.pdf">Results of the 2010 Eastern and Northern Bering Sea Continental Shelf Bottom Trawl Survey of Groundfish and Invertebrate Fauna</a></p></li>
 <li><p><a href="https://doi.org/10.1016/j.dsr2.2013.03.017">Kotwicki, Stan, and Robert R. Lauth. 2013. “Detecting Temporal Trends and Environmentally-Driven Changes in the Spatial Distribution of Bottom Fishes and Crabs on the Eastern Bering Sea Shelf.” Deep Sea Research Part II: Topical Studies in Oceanography, Understanding Ecosystem Processes in the Eastern Bering Sea II, 94 (October): 231–43.</a></p></li>
+<li><p><a href="https://www.afsc.noaa.gov/Publications/ProcRpt/PR2009-04.pdf">STEVENSON, D. E., and G. R. HOFF 2009. Species identification confidence in the eastern Bering Sea shelf survey (1982-2008). AFSC Processed Rep. 2009-04, 46 p. Alaska Fish. Sci. Cent., NOAA, Natl. Mar. Fish. Serv., 7600 Sand Point Way NE, Seattle WA 98115.</a></p></li>
+</ul>
+</div>
+<div id="how-we-change-the-data" class="section level2">
+<h2>How we change the data:</h2>
+<ul>
+<li>Some of the files contain extra headers in the data rows, so we remove any data rows that contain the word “LATITUDE” in the LATITUDE column.<br />
+</li>
+<li>We create a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by “-”, for example: (vessel-cruise-haul) 354-067-001.<br />
+</li>
+<li>If wtcpue is recorded as “-9999”, we change the value to NA.<br />
+</li>
+<li>We remove any SCIENTIFIC spp values that contain the word “egg” or where the only value in the SCIENTIFIC field is white space.<br />
+</li>
+<li>Any values SCIENTIFIC values that contain the word “Atheresthes” are changed to “Atheresthes sp.” because more than one genus/spp combo was used to describe the same organism over time. This also holds true for Lepidopsetta sp., Myoxocephalus sp., Hippoglossoides sp. &amp; Bathyraja sp.</li>
+<li>We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.</li>
 </ul>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRWFzdGVybiBCZXJpbmcgU2VhIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBTb3VyY2U6CltOT0FBIEFsYXNrYSBGaXNoZXJpZXMgU2NpZW5jZSBDZW50ZXIgR3JvdW5kZmlzaCBBc3Nlc3NtZW50IFByb2dyYW0gc3VydmV5c10oaHR0cDovL3d3dy5ud2ZzYy5ub2FhLmdvdi9yZXNlYXJjaC9kaXZpc2lvbnMvZnJhbS9ncm91bmRmaXNoL2JvdHRvbV90cmF3bC5jZm0pCgojIyBSZWxhdGVkIHBhcGVyczogIAoKLSBbUmVzdWx0cyBvZiB0aGUgMjAxMCBFYXN0ZXJuIGFuZCBOb3J0aGVybiBCZXJpbmcgU2VhIENvbnRpbmVudGFsIFNoZWxmIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgb2YgR3JvdW5kZmlzaCBhbmQgSW52ZXJ0ZWJyYXRlIEZhdW5hXShodHRwczovL3d3dy5hZnNjLm5vYWEuZ292L3B1YmxpY2F0aW9ucy9hZnNjLXRtL25vYWEtdG0tYWZzYy0yMjcucGRmKSAgCgotIFtLb3R3aWNraSwgU3RhbiwgYW5kIFJvYmVydCBSLiBMYXV0aC4gMjAxMy4g4oCcRGV0ZWN0aW5nIFRlbXBvcmFsIFRyZW5kcyBhbmQgRW52aXJvbm1lbnRhbGx5LURyaXZlbiBDaGFuZ2VzIGluIHRoZSBTcGF0aWFsIERpc3RyaWJ1dGlvbiBvZiBCb3R0b20gRmlzaGVzIGFuZCBDcmFicyBvbiB0aGUgRWFzdGVybiBCZXJpbmcgU2VhIFNoZWxmLuKAnSBEZWVwIFNlYSBSZXNlYXJjaCBQYXJ0IElJOiBUb3BpY2FsIFN0dWRpZXMgaW4gT2NlYW5vZ3JhcGh5LCBVbmRlcnN0YW5kaW5nIEVjb3N5c3RlbSBQcm9jZXNzZXMgaW4gdGhlIEVhc3Rlcm4gQmVyaW5nIFNlYSBJSSwgOTQgKE9jdG9iZXIpOiAyMzHigJM0My5dKGh0dHBzOi8vZG9pLm9yZy8xMC4xMDE2L2ouZHNyMi4yMDEzLjAzLjAxNykK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRWFzdGVybiBCZXJpbmcgU2VhIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBTb3VyY2U6CltOT0FBIEFsYXNrYSBGaXNoZXJpZXMgU2NpZW5jZSBDZW50ZXIgR3JvdW5kZmlzaCBBc3Nlc3NtZW50IFByb2dyYW0gc3VydmV5c10oaHR0cDovL3d3dy5ud2ZzYy5ub2FhLmdvdi9yZXNlYXJjaC9kaXZpc2lvbnMvZnJhbS9ncm91bmRmaXNoL2JvdHRvbV90cmF3bC5jZm0pCgojIyBSZWxhdGVkIHBhcGVyczogIAoKLSBbUmVzdWx0cyBvZiB0aGUgMjAxMCBFYXN0ZXJuIGFuZCBOb3J0aGVybiBCZXJpbmcgU2VhIENvbnRpbmVudGFsIFNoZWxmIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgb2YgR3JvdW5kZmlzaCBhbmQgSW52ZXJ0ZWJyYXRlIEZhdW5hXShodHRwczovL3d3dy5hZnNjLm5vYWEuZ292L3B1YmxpY2F0aW9ucy9hZnNjLXRtL25vYWEtdG0tYWZzYy0yMjcucGRmKSAgCgotIFtLb3R3aWNraSwgU3RhbiwgYW5kIFJvYmVydCBSLiBMYXV0aC4gMjAxMy4g4oCcRGV0ZWN0aW5nIFRlbXBvcmFsIFRyZW5kcyBhbmQgRW52aXJvbm1lbnRhbGx5LURyaXZlbiBDaGFuZ2VzIGluIHRoZSBTcGF0aWFsIERpc3RyaWJ1dGlvbiBvZiBCb3R0b20gRmlzaGVzIGFuZCBDcmFicyBvbiB0aGUgRWFzdGVybiBCZXJpbmcgU2VhIFNoZWxmLuKAnSBEZWVwIFNlYSBSZXNlYXJjaCBQYXJ0IElJOiBUb3BpY2FsIFN0dWRpZXMgaW4gT2NlYW5vZ3JhcGh5LCBVbmRlcnN0YW5kaW5nIEVjb3N5c3RlbSBQcm9jZXNzZXMgaW4gdGhlIEVhc3Rlcm4gQmVyaW5nIFNlYSBJSSwgOTQgKE9jdG9iZXIpOiAyMzHigJM0My5dKGh0dHBzOi8vZG9pLm9yZy8xMC4xMDE2L2ouZHNyMi4yMDEzLjAzLjAxNykgIAoKLSBbU1RFVkVOU09OLCBELiBFLiwgYW5kIEcuIFIuIEhPRkYgMjAwOS4gU3BlY2llcyBpZGVudGlmaWNhdGlvbiBjb25maWRlbmNlIGluIHRoZSBlYXN0ZXJuIEJlcmluZyBTZWEgc2hlbGYgc3VydmV5ICgxOTgyLTIwMDgpLiBBRlNDIFByb2Nlc3NlZCBSZXAuIDIwMDktMDQsIDQ2IHAuIEFsYXNrYSBGaXNoLiBTY2kuIENlbnQuLCBOT0FBLCBOYXRsLiBNYXIuIEZpc2guIFNlcnYuLCA3NjAwIFNhbmQgUG9pbnQgV2F5IE5FLCBTZWF0dGxlIFdBIDk4MTE1Ll0oaHR0cHM6Ly93d3cuYWZzYy5ub2FhLmdvdi9QdWJsaWNhdGlvbnMvUHJvY1JwdC9QUjIwMDktMDQucGRmKQoKIyMgSG93IHdlIGNoYW5nZSB0aGUgZGF0YTogIAotIFNvbWUgb2YgdGhlIGZpbGVzIGNvbnRhaW4gZXh0cmEgaGVhZGVycyBpbiB0aGUgZGF0YSByb3dzLCBzbyB3ZSByZW1vdmUgYW55IGRhdGEgcm93cyB0aGF0IGNvbnRhaW4gdGhlIHdvcmQgIkxBVElUVURFIiBpbiB0aGUgTEFUSVRVREUgY29sdW1uLiAgCi0gV2UgY3JlYXRlIGEgaGF1bGlkIGJ5IGNvbWJpbmluZyBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIHZlc3NlbCBudW1iZXIgd2l0aCBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIGNydWlzZSBudW1iZXIgYW5kIGEgMyBkaWdpdCBsZWFkaW5nIHplcm8gaGF1bCBudW1iZXIsIHNlcGFyYXRlZCBieSAiLSIsIGZvciBleGFtcGxlOiAodmVzc2VsLWNydWlzZS1oYXVsKSAzNTQtMDY3LTAwMS4gIAotIElmIHd0Y3B1ZSBpcyByZWNvcmRlZCBhcyAiLTk5OTkiLCB3ZSBjaGFuZ2UgdGhlIHZhbHVlIHRvIE5BLiAgCi0gV2UgcmVtb3ZlIGFueSBTQ0lFTlRJRklDIHNwcCB2YWx1ZXMgdGhhdCBjb250YWluIHRoZSB3b3JkICJlZ2ciIG9yIHdoZXJlIHRoZSBvbmx5IHZhbHVlIGluIHRoZSBTQ0lFTlRJRklDIGZpZWxkIGlzIHdoaXRlIHNwYWNlLiAgCi0gQW55IHZhbHVlcyBTQ0lFTlRJRklDIHZhbHVlcyB0aGF0IGNvbnRhaW4gdGhlIHdvcmQgIkF0aGVyZXN0aGVzIiBhcmUgY2hhbmdlZCB0byAiQXRoZXJlc3RoZXMgc3AuIiBiZWNhdXNlIG1vcmUgdGhhbiBvbmUgZ2VudXMvc3BwIGNvbWJvIHdhcyB1c2VkIHRvIGRlc2NyaWJlIHRoZSBzYW1lIG9yZ2FuaXNtIG92ZXIgdGltZS4gIFRoaXMgYWxzbyBob2xkcyB0cnVlIGZvciBMZXBpZG9wc2V0dGEgc3AuLCBNeW94b2NlcGhhbHVzIHNwLiwgSGlwcG9nbG9zc29pZGVzIHNwLiAmIEJhdGh5cmFqYSBzcC4KLSBXZSBncm91cCB0aGUgZGF0YSBieSBoYXVsaWQsIHN0cmF0dW0sIHN0cmF0dW1hcmVhLCB5ZWFyLCBsYXQsIGxvbiwgZGVwdGgsICBhbmQgc3BwIGFuZCB0aGVuIHN1bSB1cCBhbGwgb2YgdGhlIHd0Y3B1ZSB2YWx1ZXMgZm9yIGVhY2ggZ3JvdXAgYW5kIHJlYXNzaWduIHRoYXQgYXMgdGhlIHd0Y3B1ZS4K</div>
 
 
 

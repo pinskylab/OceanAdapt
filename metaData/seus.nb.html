@@ -1847,7 +1847,28 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="01_extract_ali.nb.html"></a>
+  <a href="ai.nb.html">Aleutian Islands</a>
+</li>
+<li>
+  <a href="ebs.nb.html">Eastern Bering Sea</a>
+</li>
+<li>
+  <a href="goa.nb.html">Gulf of Alaska</a>
+</li>
+<li>
+  <a href="wcann.nb.html">West Coast U.S.</a>
+</li>
+<li>
+  <a href="gmex.nb.html">Gulf of Mexico</a>
+</li>
+<li>
+  <a href="seus.nb.html">Southeast U.S.</a>
+</li>
+<li>
+  <a href="neus.nb.html">Northeast U.S.</a>
+</li>
+<li>
+  <a href="scot.nb.html">Scotian Shelf</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -1880,10 +1901,45 @@ $(document).ready(function () {
 <div id="source" class="section level2">
 <h2>Source:</h2>
 <p><a href="http://www.seamap.org/">Southeast Area Monitoring and Assessment Program - South Atlantic</a></p>
+</div>
+<div id="related-papers" class="section level2">
+<h2>Related papers:</h2>
+<ul>
+<li><a href="seus_seamap_data_descriptions.pdf">Descriptions of surveys and data for SEAMAP</a><br />
+## How we change the data:<br />
+</li>
+<li>We remove equal signs and quotes.<br />
+</li>
+<li>The STRATA column is a subset of the first 2 characters of the STATIONCODE.<br />
+</li>
+<li>We remove any rows where DEPTHZONE is “OUTER”.<br />
+</li>
+<li>We change the SEASON column to be “winter” if the month is 1-3, “spring” if the month is 4-6, “summer” if the month is 7 or 8, and “fall” if the month is 9-12.<br />
+</li>
+<li>We find rows where weight was not provided for a species, calculate the mean weight for those species, and replace the missing values with mean weight.<br />
+</li>
+<li>We fix some data entry issues with lat lon, specifically, coordinates of less than -360 (like -700), do not exist. This is a missing decimal. We fix this by dividing the value by 10.<br />
+</li>
+<li>We calculate trawl distance in order to calculate effort.<br />
+</li>
+<li>There are two COLLECTIONNUMBERS per EVENTNAME, with no exceptions; EFFORT is always the same for each COLLECTIONNUMBER. We sum the two tows.<br />
+</li>
+<li>We calculate biomass by grouping the data by haulid, stratum, stratumarea, year, lat, lon, depth, SEASON, EFFORT, and spp and summing up the SPECIESTOTALWEIGHT.<br />
+</li>
+<li>We calculate wtpcue by dividing the biomass by 2 x EFFORT.<br />
+</li>
+<li>We remove any SPECIESSCIENTIFICNAME spp with the value ‘MISCELLANEOUS INVERTEBRATES’, ‘XANTHIDAE’, ‘MICROPANOPE NUTTINGI’, ‘ALGAE’, ‘DYSPANOPEUS SAYI’, or ‘PSEUDOMEDAEUS AGASSIZII’.<br />
+</li>
+<li>Any values SPECIESSCIENTIFICNAME spp values that contain the word “ANCHOA” are changed to only “ANCHOA” because more than one genus/spp combo was used to describe the same organism over time. This also holds true for LIBINIA.<br />
+</li>
+<li>We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.<br />
+</li>
+<li>We split the data out into spring, summer, and fall seasons.</li>
+</ul>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU291dGhlYXN0IFUuUy4iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW1NvdXRoZWFzdCBBcmVhIE1vbml0b3JpbmcgYW5kIEFzc2Vzc21lbnQgUHJvZ3JhbSAtIFNvdXRoIEF0bGFudGljXShodHRwOi8vd3d3LnNlYW1hcC5vcmcvKQoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU291dGhlYXN0IFUuUy4iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW1NvdXRoZWFzdCBBcmVhIE1vbml0b3JpbmcgYW5kIEFzc2Vzc21lbnQgUHJvZ3JhbSAtIFNvdXRoIEF0bGFudGljXShodHRwOi8vd3d3LnNlYW1hcC5vcmcvKQoKIyMgUmVsYXRlZCBwYXBlcnM6ICAKLSBbRGVzY3JpcHRpb25zIG9mIHN1cnZleXMgYW5kIGRhdGEgZm9yIFNFQU1BUF0oc2V1c19zZWFtYXBfZGF0YV9kZXNjcmlwdGlvbnMucGRmKSAgCiMjIEhvdyB3ZSBjaGFuZ2UgdGhlIGRhdGE6ICAKLSBXZSByZW1vdmUgZXF1YWwgc2lnbnMgYW5kIHF1b3Rlcy4gIAotIFRoZSBTVFJBVEEgY29sdW1uIGlzIGEgc3Vic2V0IG9mIHRoZSBmaXJzdCAyIGNoYXJhY3RlcnMgb2YgdGhlIFNUQVRJT05DT0RFLiAgCi0gV2UgcmVtb3ZlIGFueSByb3dzIHdoZXJlIERFUFRIWk9ORSBpcyAiT1VURVIiLiAgCi0gV2UgY2hhbmdlIHRoZSBTRUFTT04gY29sdW1uIHRvIGJlICJ3aW50ZXIiIGlmIHRoZSBtb250aCBpcyAxLTMsICJzcHJpbmciIGlmIHRoZSBtb250aCBpcyA0LTYsICJzdW1tZXIiIGlmIHRoZSBtb250aCBpcyA3IG9yIDgsIGFuZCAiZmFsbCIgaWYgdGhlIG1vbnRoIGlzIDktMTIuICAKLSBXZSBmaW5kIHJvd3Mgd2hlcmUgd2VpZ2h0IHdhcyBub3QgcHJvdmlkZWQgZm9yIGEgc3BlY2llcywgY2FsY3VsYXRlIHRoZSBtZWFuIHdlaWdodCBmb3IgdGhvc2Ugc3BlY2llcywgYW5kIHJlcGxhY2UgdGhlIG1pc3NpbmcgdmFsdWVzIHdpdGggbWVhbiB3ZWlnaHQuICAKLSBXZSBmaXggc29tZSBkYXRhIGVudHJ5IGlzc3VlcyB3aXRoIGxhdCBsb24sIHNwZWNpZmljYWxseSwgY29vcmRpbmF0ZXMgb2YgbGVzcyB0aGFuIC0zNjAgKGxpa2UgLTcwMCksIGRvIG5vdCBleGlzdC4gIFRoaXMgaXMgYSBtaXNzaW5nIGRlY2ltYWwuICBXZSBmaXggdGhpcyBieSBkaXZpZGluZyB0aGUgdmFsdWUgYnkgMTAuICAKLSBXZSBjYWxjdWxhdGUgdHJhd2wgZGlzdGFuY2UgaW4gb3JkZXIgdG8gY2FsY3VsYXRlIGVmZm9ydC4gIAotIFRoZXJlIGFyZSB0d28gQ09MTEVDVElPTk5VTUJFUlMgcGVyIEVWRU5UTkFNRSwgd2l0aCBubyBleGNlcHRpb25zOyBFRkZPUlQgaXMgYWx3YXlzIHRoZSBzYW1lIGZvciBlYWNoIENPTExFQ1RJT05OVU1CRVIuICBXZSBzdW0gdGhlIHR3byB0b3dzLiAgCi0gV2UgY2FsY3VsYXRlIGJpb21hc3MgYnkgZ3JvdXBpbmcgdGhlIGRhdGEgYnkgaGF1bGlkLCBzdHJhdHVtLCBzdHJhdHVtYXJlYSwgeWVhciwgbGF0LCBsb24sIGRlcHRoLCBTRUFTT04sIEVGRk9SVCwgYW5kIHNwcCBhbmQgc3VtbWluZyB1cCB0aGUgU1BFQ0lFU1RPVEFMV0VJR0hULiAgCi0gV2UgY2FsY3VsYXRlIHd0cGN1ZSBieSBkaXZpZGluZyB0aGUgYmlvbWFzcyBieSAyIHggRUZGT1JULiAgCi0gV2UgcmVtb3ZlIGFueSBTUEVDSUVTU0NJRU5USUZJQ05BTUUgc3BwIHdpdGggdGhlIHZhbHVlICdNSVNDRUxMQU5FT1VTIElOVkVSVEVCUkFURVMnLCAnWEFOVEhJREFFJywgJ01JQ1JPUEFOT1BFIE5VVFRJTkdJJywgJ0FMR0FFJywgJ0RZU1BBTk9QRVVTIFNBWUknLCAgb3IgJ1BTRVVET01FREFFVVMgQUdBU1NJWklJJy4gIAotIEFueSB2YWx1ZXMgU1BFQ0lFU1NDSUVOVElGSUNOQU1FIHNwcCB2YWx1ZXMgdGhhdCBjb250YWluIHRoZSB3b3JkICJBTkNIT0EiIGFyZSBjaGFuZ2VkIHRvIG9ubHkgIkFOQ0hPQSIgYmVjYXVzZSBtb3JlIHRoYW4gb25lIGdlbnVzL3NwcCBjb21ibyB3YXMgdXNlZCB0byBkZXNjcmliZSB0aGUgc2FtZSBvcmdhbmlzbSBvdmVyIHRpbWUuICBUaGlzIGFsc28gaG9sZHMgdHJ1ZSBmb3IgTElCSU5JQS4gIAotIFdlIGdyb3VwIHRoZSBkYXRhIGJ5IGhhdWxpZCwgc3RyYXR1bSwgc3RyYXR1bWFyZWEsIHllYXIsIGxhdCwgbG9uLCBkZXB0aCwgIGFuZCBzcHAgYW5kIHRoZW4gc3VtIHVwIGFsbCBvZiB0aGUgd3RjcHVlIHZhbHVlcyBmb3IgZWFjaCBncm91cCBhbmQgcmVhc3NpZ24gdGhhdCBhcyB0aGUgd3RjcHVlLiAgCi0gV2Ugc3BsaXQgdGhlIGRhdGEgb3V0IGludG8gc3ByaW5nLCBzdW1tZXIsIGFuZCBmYWxsIHNlYXNvbnMuCg==</div>
 
 
 

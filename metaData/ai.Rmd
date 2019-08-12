@@ -13,10 +13,12 @@ output: html_notebook
 - [Species Codebook 2011](ai_species_codebook_2011.pdf)  
 - [Species Identification Confidence in the Gulf of Alaska and Aleutian Islands Surveys (1980-2011)](https://www.afsc.noaa.gov/Publications/ProcRpt/PR2014-01.pdf)
 
-
-## Special Notes:
-- Wayne Palsson, Mar 29, 2012 clarified that the station column is not unique to haul:  
-*Yes indeed there are many examples of valid hauls with the same stationid in the early years. I have tried to recreate in my head the survey design from the Tech Memo, Scientific Operation Plan, and Fishing Report for 1983. The exact protocols are unclear, but it looks like they used a stratified random approach with the strata defined by area and depth, but these were rather primitively developed and not directly comparable to those strata set later. In addition, it appears that there was an attempt to conduct adaptive sampling when high abundances of key species occurred or when they were in "high abundance" areas. The bottom line is that the stationid identifier is not unique to a haul.*
-
-
-## How we change the data:
+## How we change the data:  
+- The 2014-2018.csv file has a comment that contains a comma, which affects the parsing of the csv file.  We fix this by replacing all occurrences of "Stone et al., 2011" with "Stone et al. 2011".  This causes the columns to parse correctly.  
+- Some of the files contain extra headers in the data rows, so we remove any data rows that contain the word "LATITUDE" in the LATITUDE column.  
+- We create a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by "-", for example: (vessel-cruise-haul) 354-067-001.  
+- If wtcpue is recorded as "-9999", we change the value to NA.  
+- We remove any SCIENTIFIC spp values that contain the word "egg" or where the only value in the SCIENTIFIC field is white space.  
+- Any values SCIENTIFIC values that contain the word "Atheresthes" are changed to "Atheresthes sp." because more than one genus/spp combo was used to describe the same organism over time.  This also holds true for Lepidopsetta sp., Myoxocephalus sp. excluding scorpius, & Bathyraja sp. excluding panthera.  
+- We correct the longitude for the Aleutians by subtracting 360 from any longitude value over 0.
+- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.

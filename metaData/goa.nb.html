@@ -1847,7 +1847,28 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="01_extract_ali.nb.html"></a>
+  <a href="ai.nb.html">Aleutian Islands</a>
+</li>
+<li>
+  <a href="ebs.nb.html">Eastern Bering Sea</a>
+</li>
+<li>
+  <a href="goa.nb.html">Gulf of Alaska</a>
+</li>
+<li>
+  <a href="wcann.nb.html">West Coast U.S.</a>
+</li>
+<li>
+  <a href="gmex.nb.html">Gulf of Mexico</a>
+</li>
+<li>
+  <a href="seus.nb.html">Southeast U.S.</a>
+</li>
+<li>
+  <a href="neus.nb.html">Northeast U.S.</a>
+</li>
+<li>
+  <a href="scot.nb.html">Scotian Shelf</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -1886,10 +1907,25 @@ $(document).ready(function () {
 <ul>
 <li><a href="https://www.afsc.noaa.gov/Publications/AFSC-TM/NOAA-TM-AFSC-208.pdf">Data Report: 2009 Gulf of Alaska Bottom Trawl Survey</a></li>
 </ul>
+</div>
+<div id="how-we-change-the-data" class="section level2">
+<h2>How we change the data:</h2>
+<ul>
+<li>Some of the files contain extra headers in the data rows, so we remove any data rows that contain the word “LATITUDE” in the LATITUDE column.<br />
+</li>
+<li>We create a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by “-”, for example: (vessel-cruise-haul) 354-067-001.<br />
+</li>
+<li>If wtcpue is recorded as “-9999”, we change the value to NA.<br />
+</li>
+<li>We remove any SCIENTIFIC spp values that contain the word “egg” or where the only value in the SCIENTIFIC field is white space.<br />
+</li>
+<li>Any values SCIENTIFIC values that contain the word “Lepidopsetta” are changed to “Lepidopsetta sp.” because more than one genus/spp combo was used to describe the same organism over time. This also holds true for Myoxocephalus sp. excluding scorpius and Bathyraja sp. excluding panthera.</li>
+<li>We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.</li>
+</ul>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiR3VsZiBvZiBBbGFza2EiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW05PQUEgQWxhc2thIEZpc2hlcmllcyBTY2llbmNlIENlbnRlciBHcm91bmRmaXNoIEFzc2Vzc21lbnQgUHJvZ3JhbSBzdXJ2ZXlzXShodHRwOi8vd3d3Lm53ZnNjLm5vYWEuZ292L3Jlc2VhcmNoL2RpdmlzaW9ucy9mcmFtL2dyb3VuZGZpc2gvYm90dG9tX3RyYXdsLmNmbSkKCiMjIFJlbGF0ZWQgcGFwZXJzOiAgCgotIFtEYXRhIFJlcG9ydDogMjAwOSBHdWxmIG9mIEFsYXNrYSBCb3R0b20gVHJhd2wgU3VydmV5XShodHRwczovL3d3dy5hZnNjLm5vYWEuZ292L1B1YmxpY2F0aW9ucy9BRlNDLVRNL05PQUEtVE0tQUZTQy0yMDgucGRmKSAgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiR3VsZiBvZiBBbGFza2EiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW05PQUEgQWxhc2thIEZpc2hlcmllcyBTY2llbmNlIENlbnRlciBHcm91bmRmaXNoIEFzc2Vzc21lbnQgUHJvZ3JhbSBzdXJ2ZXlzXShodHRwOi8vd3d3Lm53ZnNjLm5vYWEuZ292L3Jlc2VhcmNoL2RpdmlzaW9ucy9mcmFtL2dyb3VuZGZpc2gvYm90dG9tX3RyYXdsLmNmbSkKCiMjIFJlbGF0ZWQgcGFwZXJzOiAgCgotIFtEYXRhIFJlcG9ydDogMjAwOSBHdWxmIG9mIEFsYXNrYSBCb3R0b20gVHJhd2wgU3VydmV5XShodHRwczovL3d3dy5hZnNjLm5vYWEuZ292L1B1YmxpY2F0aW9ucy9BRlNDLVRNL05PQUEtVE0tQUZTQy0yMDgucGRmKSAgCgojIyBIb3cgd2UgY2hhbmdlIHRoZSBkYXRhOiAgCi0gU29tZSBvZiB0aGUgZmlsZXMgY29udGFpbiBleHRyYSBoZWFkZXJzIGluIHRoZSBkYXRhIHJvd3MsIHNvIHdlIHJlbW92ZSBhbnkgZGF0YSByb3dzIHRoYXQgY29udGFpbiB0aGUgd29yZCAiTEFUSVRVREUiIGluIHRoZSBMQVRJVFVERSBjb2x1bW4uICAKLSBXZSBjcmVhdGUgYSBoYXVsaWQgYnkgY29tYmluaW5nIGEgMyBkaWdpdCBsZWFkaW5nIHplcm8gdmVzc2VsIG51bWJlciB3aXRoIGEgMyBkaWdpdCBsZWFkaW5nIHplcm8gY3J1aXNlIG51bWJlciBhbmQgYSAzIGRpZ2l0IGxlYWRpbmcgemVybyBoYXVsIG51bWJlciwgc2VwYXJhdGVkIGJ5ICItIiwgZm9yIGV4YW1wbGU6ICh2ZXNzZWwtY3J1aXNlLWhhdWwpIDM1NC0wNjctMDAxLiAgCi0gSWYgd3RjcHVlIGlzIHJlY29yZGVkIGFzICItOTk5OSIsIHdlIGNoYW5nZSB0aGUgdmFsdWUgdG8gTkEuICAKLSBXZSByZW1vdmUgYW55IFNDSUVOVElGSUMgc3BwIHZhbHVlcyB0aGF0IGNvbnRhaW4gdGhlIHdvcmQgImVnZyIgb3Igd2hlcmUgdGhlIG9ubHkgdmFsdWUgaW4gdGhlIFNDSUVOVElGSUMgZmllbGQgaXMgd2hpdGUgc3BhY2UuICAKLSBBbnkgdmFsdWVzIFNDSUVOVElGSUMgdmFsdWVzIHRoYXQgY29udGFpbiB0aGUgd29yZCAiTGVwaWRvcHNldHRhIiBhcmUgY2hhbmdlZCB0byAiTGVwaWRvcHNldHRhIHNwLiIgYmVjYXVzZSBtb3JlIHRoYW4gb25lIGdlbnVzL3NwcCBjb21ibyB3YXMgdXNlZCB0byBkZXNjcmliZSB0aGUgc2FtZSBvcmdhbmlzbSBvdmVyIHRpbWUuICBUaGlzIGFsc28gaG9sZHMgdHJ1ZSBmb3IgTXlveG9jZXBoYWx1cyBzcC4gZXhjbHVkaW5nIHNjb3JwaXVzIGFuZCBCYXRoeXJhamEgc3AuIGV4Y2x1ZGluZyBwYW50aGVyYS4KLSBXZSBncm91cCB0aGUgZGF0YSBieSBoYXVsaWQsIHN0cmF0dW0sIHN0cmF0dW1hcmVhLCB5ZWFyLCBsYXQsIGxvbiwgZGVwdGgsICBhbmQgc3BwIGFuZCB0aGVuIHN1bSB1cCBhbGwgb2YgdGhlIHd0Y3B1ZSB2YWx1ZXMgZm9yIGVhY2ggZ3JvdXAgYW5kIHJlYXNzaWduIHRoYXQgYXMgdGhlIHd0Y3B1ZS4K</div>
 
 
 

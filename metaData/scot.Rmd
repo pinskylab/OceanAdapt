@@ -4,5 +4,11 @@ output: html_notebook
 ---
 
 ## Source:
-[Fisheries and Oceans Canada - Scotian Shelf](https://www.dfo-mpo.gc.ca/oceans/index-eng.html)
+[Fisheries and Oceans Canada - Scotian Shelf](https://www.dfo-mpo.gc.ca/oceans/index-eng.html)  
+
+## How we change the data:  
+- We create a haulid by combining the mission, stratum, and depth, separated by "_".  
+- We calculate the area of the stratum by creating a closed hull of lat lon points, creating a polygon with a map projection, converting to kilometers, and calculating the area of the polygon, all using the function calcarea as defined in the compile.R script.  
+- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
+- We only keep rows with the season value "SUMMER".
 

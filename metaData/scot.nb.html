@@ -1847,7 +1847,28 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="01_extract_ali.nb.html">test</a>
+  <a href="ai.nb.html">Aleutian Islands</a>
+</li>
+<li>
+  <a href="ebs.nb.html">Eastern Bering Sea</a>
+</li>
+<li>
+  <a href="goa.nb.html">Gulf of Alaska</a>
+</li>
+<li>
+  <a href="wcann.nb.html">West Coast U.S.</a>
+</li>
+<li>
+  <a href="gmex.nb.html">Gulf of Mexico</a>
+</li>
+<li>
+  <a href="seus.nb.html">Southeast U.S.</a>
+</li>
+<li>
+  <a href="neus.nb.html">Northeast U.S.</a>
+</li>
+<li>
+  <a href="scot.nb.html">Scotian Shelf</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -1880,10 +1901,21 @@ $(document).ready(function () {
 <div id="source" class="section level2">
 <h2>Source:</h2>
 <p><a href="https://www.dfo-mpo.gc.ca/oceans/index-eng.html">Fisheries and Oceans Canada - Scotian Shelf</a></p>
+</div>
+<div id="how-we-change-the-data" class="section level2">
+<h2>How we change the data:</h2>
+<ul>
+<li>We create a haulid by combining the mission, stratum, and depth, separated by &quot;_&quot;.<br />
+</li>
+<li>We calculate the area of the stratum by creating a closed hull of lat lon points, creating a polygon with a map projection, converting to kilometers, and calculating the area of the polygon, all using the function calcarea as defined in the compile.R script.<br />
+</li>
+<li>We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.</li>
+<li>We only keep rows with the season value “SUMMER”.</li>
+</ul>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU2NvdGlhbiBTaGVsZiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgU291cmNlOgpbRmlzaGVyaWVzIGFuZCBPY2VhbnMgQ2FuYWRhIC0gU2NvdGlhbiBTaGVsZl0oaHR0cHM6Ly93d3cuZGZvLW1wby5nYy5jYS9vY2VhbnMvaW5kZXgtZW5nLmh0bWwpCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU2NvdGlhbiBTaGVsZiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgU291cmNlOgpbRmlzaGVyaWVzIGFuZCBPY2VhbnMgQ2FuYWRhIC0gU2NvdGlhbiBTaGVsZl0oaHR0cHM6Ly93d3cuZGZvLW1wby5nYy5jYS9vY2VhbnMvaW5kZXgtZW5nLmh0bWwpICAKCiMjIEhvdyB3ZSBjaGFuZ2UgdGhlIGRhdGE6ICAKLSBXZSBjcmVhdGUgYSBoYXVsaWQgYnkgY29tYmluaW5nIHRoZSBtaXNzaW9uLCBzdHJhdHVtLCBhbmQgZGVwdGgsIHNlcGFyYXRlZCBieSAiXyIuICAKLSBXZSBjYWxjdWxhdGUgdGhlIGFyZWEgb2YgdGhlIHN0cmF0dW0gYnkgY3JlYXRpbmcgYSBjbG9zZWQgaHVsbCBvZiBsYXQgbG9uIHBvaW50cywgY3JlYXRpbmcgYSBwb2x5Z29uIHdpdGggYSBtYXAgcHJvamVjdGlvbiwgY29udmVydGluZyB0byBraWxvbWV0ZXJzLCBhbmQgY2FsY3VsYXRpbmcgdGhlIGFyZWEgb2YgdGhlIHBvbHlnb24sIGFsbCB1c2luZyB0aGUgZnVuY3Rpb24gY2FsY2FyZWEgYXMgZGVmaW5lZCBpbiB0aGUgY29tcGlsZS5SIHNjcmlwdC4gIAotIFdlIGdyb3VwIHRoZSBkYXRhIGJ5IGhhdWxpZCwgc3RyYXR1bSwgc3RyYXR1bWFyZWEsIHllYXIsIGxhdCwgbG9uLCBkZXB0aCwgIGFuZCBzcHAgYW5kIHRoZW4gc3VtIHVwIGFsbCBvZiB0aGUgd3RjcHVlIHZhbHVlcyBmb3IgZWFjaCBncm91cCBhbmQgcmVhc3NpZ24gdGhhdCBhcyB0aGUgd3RjcHVlLgotIFdlIG9ubHkga2VlcCByb3dzIHdpdGggdGhlIHNlYXNvbiB2YWx1ZSAiU1VNTUVSIi4KCg==</div>
 
 
 
