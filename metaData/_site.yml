@@ -1,6 +1,4 @@
 name: "OceanAdapt Metadata"
-navbar:
-  title: "Home"
 output_dir: "."
 output:
   html_document:
