@@ -3,5 +3,3 @@ output_dir: "."
 output:
   html_document:
     theme: journal
-#    include:
-#      after_body: _footer.html

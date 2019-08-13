@@ -13,7 +13,7 @@ output: html_notebook
 - [Species Codebook 2011](ai_species_codebook_2011.pdf)  
 - [Species Identification Confidence in the Gulf of Alaska and Aleutian Islands Surveys (1980-2011)](https://www.afsc.noaa.gov/Publications/ProcRpt/PR2014-01.pdf)
 
-## How we change the data:  
+## How we process the data:  
 - The 2014-2018.csv file has a comment that contains a comma, which affects the parsing of the csv file.  We fix this by replacing all occurrences of "Stone et al., 2011" with "Stone et al. 2011".  This causes the columns to parse correctly.  
 - Some of the files contain extra headers in the data rows, so we remove any data rows that contain the word "LATITUDE" in the LATITUDE column.  
 - We create a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by "-", for example: (vessel-cruise-haul) 354-067-001.  

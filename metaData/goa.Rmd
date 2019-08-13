@@ -10,7 +10,7 @@ output: html_notebook
 
 - [Data Report: 2009 Gulf of Alaska Bottom Trawl Survey](https://www.afsc.noaa.gov/Publications/AFSC-TM/NOAA-TM-AFSC-208.pdf)  
 
-## How we change the data:  
+## How we process the data:  
 - Some of the files contain extra headers in the data rows, so we remove any data rows that contain the word "LATITUDE" in the LATITUDE column.  
 - We create a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by "-", for example: (vessel-cruise-haul) 354-067-001.  
 - If wtcpue is recorded as "-9999", we change the value to NA.  

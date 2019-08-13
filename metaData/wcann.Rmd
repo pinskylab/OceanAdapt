@@ -12,7 +12,7 @@ output: html_notebook
 - [Helser, Thomas, André Punt, and Richard Methot. 2004. “A Generalized Linear Mixed Model Analysis of a Multi-Vessel Fishery Resource Survey.” Fisheries Research 70 (December): 251–64](https://doi.org/10.1016/j.fishres.2004.08.007)  
 - [Cooper, Andrew B., Andrew A. Rosenberg, Gunnar Stefánsson, and Marc Mangel. 2004. “Examining the Importance of Consistency in Multi-Vessel Trawl Survey Design Based on the U.S. West Coast Groundfish Bottom Trawl Survey.” Fisheries Research, Models in Fisheries Research: GLMs, GAMS and GLMMs, 70 (2): 239–50.](https://doi.org/10.1016/j.fishres.2004.08.006)  
 
-## How we change the data:  
+## How we process the data:  
 #### To WCTRI:
 - We keep only hauls of type 3 and performance 0.  
 - We calculate a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by "-", for example: (vessel-cruise-haul) 354-067-001.

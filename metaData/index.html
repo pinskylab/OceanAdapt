@@ -21,7 +21,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -191,7 +191,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">OceanAdapt Metadata</h1>
 <h4 class="author">Michelle Stuart</h4>
-<h4 class="date">updated 2019-08-12</h4>
+<h4 class="date">updated 2019-08-13</h4>
 
 </div>
 
@@ -223,11 +223,12 @@ $(document).ready(function () {
 <h3><a href="scot.nb.html">Scotian Shelf</a></h3>
 </div>
 </div>
-<div id="detailed-metadata" class="section level1">
-<h1>Detailed Metadata</h1>
-<p>The data we report on OceanAdapt are curated from several data sources. Our curated data takes the form of several tables described here:</p>
+<div id="curated-tables" class="section level1">
+<h1>Curated Tables</h1>
+<p>A optional quality trimming step that we perform by default as part of regional compilation is to trim each region to only strata that were sampled in all years and only years that sampled all strata.</p>
+<p>The data we report on OceanAdapt, found in the data_clean folder, are gathered from several data sources found above. Our curated data takes the form of several tables described here:</p>
 <ul>
-<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/all-regions-full.RData">all-regions-full.RData</a> is a table containing all rows from all regions with the following columns:
+<li><p><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/all-regions-full.RData">all-regions-full.RData</a> is a table containing all curated rows from all regions with the following columns:</p>
 <ul>
 <li>region - character - the region where the survey occurred.</li>
 <li>haulid - character - a unique identifier of the trawl haul.</li>
@@ -240,31 +241,31 @@ $(document).ready(function () {
 <li>common - character - the common name of the organism captured in the trawl.</li>
 <li>wtcpue - numeric - the weight in kilograms captured per unit effort.</li>
 </ul></li>
-<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/all-regions-trimmed.RData">all-regions-trimmed.RData</a> is the all-regions_full table reduced to include only species present at least 3/4 of the available years in a survey. The columns are the same as those listed above.</li>
-<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_national.RData">by_national.RData</a> is a table of national averages by year for the trawl surveys with the following columns:
+<li><p><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/all-regions-trimmed.RData">all-regions-trimmed.RData</a> is the all-regions_full table reduced to include only species present at least 3/4 of the available years in a survey. The columns are the same as those listed above.</p></li>
+<li><p><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_national.RData">by_national.RData</a> is a table of national averages by year for the trawl surveys with the following columns:</p>
 <ul>
 <li>year - numeric (YYYY) - the year the trawl occurred.</li>
-<li>lat - numeric - the mean latitude in decimal degrees where all trawls occurred.</li>
-<li>lon - numeric - the mean longitude in decimal degrees where all trawls occurred.</li>
-<li>depth - numeric - the mean depth in meters of all trawls.</li>
-<li>lat_se - numeric - the standard error of the mean latitude.</li>
-<li>lonse - numeric - the standard error of the mean longitude.</li>
-<li>depth_se - numeric - the standard error of the mean depth.</li>
+<li>lat - numeric - the mean latitude offset in decimal degrees where all trawls occurred.</li>
+<li>lon - numeric - the mean longitude offset in decimal degrees where all trawls occurred.</li>
+<li>depth - numeric - the mean depth offset in meters of all trawls.</li>
+<li>lat_se - numeric - the standard error of the mean latitude offset.</li>
+<li>lonse - numeric - the standard error of the mean longitude offset.</li>
+<li>depth_se - numeric - the standard error of the mean depth offset.</li>
 <li>numspp - numeric - the total number of species observed that year.</li>
 </ul></li>
-<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_region.RData">by_region.RData</a> is a table of regional averages by year for the trawl surveys with the following columns:
+<li><p><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_region.RData">by_region.RData</a> is a table of regional averages by year for the trawl surveys with the following columns:</p>
 <ul>
 <li>region - character - the region where the survey occurred.</li>
 <li>year - numeric (YYYY) - the year the trawl occurred.</li>
-<li>lat - numeric - the mean latitude in decimal degrees where all trawls occurred.</li>
-<li>lon - numeric - the mean longitude in decimal degrees where all trawls occurred.</li>
-<li>depth - numeric - the mean depth in meters of all trawls.</li>
-<li>lat_se - numeric - the standard error of the mean latitude.</li>
-<li>lonse - numeric - the standard error of the mean longitude.</li>
-<li>depth_se - numeric - the standard error of the mean depth.</li>
+<li>lat - numeric - the mean latitude offset in decimal degrees where all trawls occurred.</li>
+<li>lon - numeric - the mean longitude offset in decimal degrees where all trawls occurred.</li>
+<li>depth - numeric - the mean depth offset in meters of all trawls.</li>
+<li>lat_se - numeric - the standard error of the mean latitude offset.</li>
+<li>lonse - numeric - the standard error of the mean longitude offset.</li>
+<li>depth_se - numeric - the standard error of the mean depth offset.</li>
 <li>numspp - numeric - the total number of species observed that year in that region.</li>
 </ul></li>
-<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_species.RData">by_species.RData</a> is a table of averages by species for the trawl surveys with the following columns:
+<li><p><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_species.RData">by_species.RData</a> is a table of averages by species for the trawl surveys with the following columns:</p>
 <ul>
 <li>region - character - the region where the survey occurred.</li>
 <li>year - numeric (YYYY) - the year the trawl occurred.</li>
@@ -277,7 +278,7 @@ $(document).ready(function () {
 <li>spp - character - the Genus and species of the organism captured in the trawl.</li>
 <li>common - character - the common name of the organism captured in the trawl.</li>
 </ul></li>
-<li><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_species.RData">dat_exploded.RData</a> a table where all species found in a region occupy a row in the table in all years and represented with zeros when not observed. The table is made up of the same columns as all-data-full and all-data-trimmed.</li>
+<li><p><a href="https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_species.RData">dat_exploded.RData</a> a table where all species found in a region occupy a row in the table in all years and represented with zeros when not observed. The table is made up of the same columns as all-data-full and all-data-trimmed.</p></li>
 </ul>
 </div>
 

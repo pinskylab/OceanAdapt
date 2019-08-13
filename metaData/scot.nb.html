@@ -1654,93 +1654,6 @@ summary {
 }
 </style>
 
-<style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script>
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark it active
-  menuAnchor.parent().addClass('active');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
-});
-</script>
 
 <!-- tabsets -->
 
@@ -1834,50 +1747,6 @@ $(document).ready(function () {
 
 
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Home</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="ai.nb.html">Aleutian Islands</a>
-</li>
-<li>
-  <a href="ebs.nb.html">Eastern Bering Sea</a>
-</li>
-<li>
-  <a href="goa.nb.html">Gulf of Alaska</a>
-</li>
-<li>
-  <a href="wcann.nb.html">West Coast U.S.</a>
-</li>
-<li>
-  <a href="gmex.nb.html">Gulf of Mexico</a>
-</li>
-<li>
-  <a href="seus.nb.html">Southeast U.S.</a>
-</li>
-<li>
-  <a href="neus.nb.html">Northeast U.S.</a>
-</li>
-<li>
-  <a href="scot.nb.html">Scotian Shelf</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
 <div class="fluid-row" id="header">
 
 <div class="btn-group pull-right">
@@ -1902,8 +1771,8 @@ $(document).ready(function () {
 <h2>Source:</h2>
 <p><a href="https://www.dfo-mpo.gc.ca/oceans/index-eng.html">Fisheries and Oceans Canada - Scotian Shelf</a></p>
 </div>
-<div id="how-we-change-the-data" class="section level2">
-<h2>How we change the data:</h2>
+<div id="how-we-process-the-data" class="section level2">
+<h2>How we process the data:</h2>
 <ul>
 <li>We create a haulid by combining the mission, stratum, and depth, separated by &quot;_&quot;.<br />
 </li>
@@ -1915,7 +1784,7 @@ $(document).ready(function () {
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU2NvdGlhbiBTaGVsZiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgU291cmNlOgpbRmlzaGVyaWVzIGFuZCBPY2VhbnMgQ2FuYWRhIC0gU2NvdGlhbiBTaGVsZl0oaHR0cHM6Ly93d3cuZGZvLW1wby5nYy5jYS9vY2VhbnMvaW5kZXgtZW5nLmh0bWwpICAKCiMjIEhvdyB3ZSBjaGFuZ2UgdGhlIGRhdGE6ICAKLSBXZSBjcmVhdGUgYSBoYXVsaWQgYnkgY29tYmluaW5nIHRoZSBtaXNzaW9uLCBzdHJhdHVtLCBhbmQgZGVwdGgsIHNlcGFyYXRlZCBieSAiXyIuICAKLSBXZSBjYWxjdWxhdGUgdGhlIGFyZWEgb2YgdGhlIHN0cmF0dW0gYnkgY3JlYXRpbmcgYSBjbG9zZWQgaHVsbCBvZiBsYXQgbG9uIHBvaW50cywgY3JlYXRpbmcgYSBwb2x5Z29uIHdpdGggYSBtYXAgcHJvamVjdGlvbiwgY29udmVydGluZyB0byBraWxvbWV0ZXJzLCBhbmQgY2FsY3VsYXRpbmcgdGhlIGFyZWEgb2YgdGhlIHBvbHlnb24sIGFsbCB1c2luZyB0aGUgZnVuY3Rpb24gY2FsY2FyZWEgYXMgZGVmaW5lZCBpbiB0aGUgY29tcGlsZS5SIHNjcmlwdC4gIAotIFdlIGdyb3VwIHRoZSBkYXRhIGJ5IGhhdWxpZCwgc3RyYXR1bSwgc3RyYXR1bWFyZWEsIHllYXIsIGxhdCwgbG9uLCBkZXB0aCwgIGFuZCBzcHAgYW5kIHRoZW4gc3VtIHVwIGFsbCBvZiB0aGUgd3RjcHVlIHZhbHVlcyBmb3IgZWFjaCBncm91cCBhbmQgcmVhc3NpZ24gdGhhdCBhcyB0aGUgd3RjcHVlLgotIFdlIG9ubHkga2VlcCByb3dzIHdpdGggdGhlIHNlYXNvbiB2YWx1ZSAiU1VNTUVSIi4KCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU2NvdGlhbiBTaGVsZiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgU291cmNlOgpbRmlzaGVyaWVzIGFuZCBPY2VhbnMgQ2FuYWRhIC0gU2NvdGlhbiBTaGVsZl0oaHR0cHM6Ly93d3cuZGZvLW1wby5nYy5jYS9vY2VhbnMvaW5kZXgtZW5nLmh0bWwpICAKCiMjIEhvdyB3ZSBwcm9jZXNzIHRoZSBkYXRhOiAgCi0gV2UgY3JlYXRlIGEgaGF1bGlkIGJ5IGNvbWJpbmluZyB0aGUgbWlzc2lvbiwgc3RyYXR1bSwgYW5kIGRlcHRoLCBzZXBhcmF0ZWQgYnkgIl8iLiAgCi0gV2UgY2FsY3VsYXRlIHRoZSBhcmVhIG9mIHRoZSBzdHJhdHVtIGJ5IGNyZWF0aW5nIGEgY2xvc2VkIGh1bGwgb2YgbGF0IGxvbiBwb2ludHMsIGNyZWF0aW5nIGEgcG9seWdvbiB3aXRoIGEgbWFwIHByb2plY3Rpb24sIGNvbnZlcnRpbmcgdG8ga2lsb21ldGVycywgYW5kIGNhbGN1bGF0aW5nIHRoZSBhcmVhIG9mIHRoZSBwb2x5Z29uLCBhbGwgdXNpbmcgdGhlIGZ1bmN0aW9uIGNhbGNhcmVhIGFzIGRlZmluZWQgaW4gdGhlIGNvbXBpbGUuUiBzY3JpcHQuICAKLSBXZSBncm91cCB0aGUgZGF0YSBieSBoYXVsaWQsIHN0cmF0dW0sIHN0cmF0dW1hcmVhLCB5ZWFyLCBsYXQsIGxvbiwgZGVwdGgsICBhbmQgc3BwIGFuZCB0aGVuIHN1bSB1cCBhbGwgb2YgdGhlIHd0Y3B1ZSB2YWx1ZXMgZm9yIGVhY2ggZ3JvdXAgYW5kIHJlYXNzaWduIHRoYXQgYXMgdGhlIHd0Y3B1ZS4KLSBXZSBvbmx5IGtlZXAgcm93cyB3aXRoIHRoZSBzZWFzb24gdmFsdWUgIlNVTU1FUiIuCgo=</div>
 
 
 

@@ -11,7 +11,7 @@ output: html_notebook
 - [Comparisons of Relative Fishing Powers of Selected SEAMAP Survey Vessels](http://sedarweb.org/docs/wpapers/SEDAR7_DW53.pdf)  
 - [Fishery-independent Bottom Trawl Surveys for Deep-water Fishes and Invertebrates of the U.S. Gulf of Mexico, 2002-08](https://spo.nmfs.noaa.gov/sites/default/files/pdf-content/MFR/mfr724/mfr7242.pdf)  
 - [SEAMAP Oracle DMS definitions](http://seamap.gsmfc.org/documents/filedef.doc)    
-## How we change the data:
+## How we process the data:
 - gmex_STAREC.csv has characters that prevent it from being parsed easily.  We attempt to make parsing more manageable by replacing the quotes in quoted character strings using the R regex below then reading the file in as a csv.
 ```{r eval=FALSE}
 str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")

@@ -8,7 +8,7 @@ output: html_notebook
 
 ## Related papers:  
 - [Descriptions of surveys and data for SEAMAP](seus_seamap_data_descriptions.pdf)  
-## How we change the data:  
+## How we process the data:  
 - We remove equal signs and quotes.  
 - The STRATA column is a subset of the first 2 characters of the STATIONCODE.  
 - We remove any rows where DEPTHZONE is "OUTER".  

@@ -1654,93 +1654,6 @@ summary {
 }
 </style>
 
-<style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script>
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark it active
-  menuAnchor.parent().addClass('active');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
-});
-</script>
 
 <!-- tabsets -->
 
@@ -1834,50 +1747,6 @@ $(document).ready(function () {
 
 
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Home</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="ai.nb.html">Aleutian Islands</a>
-</li>
-<li>
-  <a href="ebs.nb.html">Eastern Bering Sea</a>
-</li>
-<li>
-  <a href="goa.nb.html">Gulf of Alaska</a>
-</li>
-<li>
-  <a href="wcann.nb.html">West Coast U.S.</a>
-</li>
-<li>
-  <a href="gmex.nb.html">Gulf of Mexico</a>
-</li>
-<li>
-  <a href="seus.nb.html">Southeast U.S.</a>
-</li>
-<li>
-  <a href="neus.nb.html">Northeast U.S.</a>
-</li>
-<li>
-  <a href="scot.nb.html">Scotian Shelf</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
 <div class="fluid-row" id="header">
 
 <div class="btn-group pull-right">
@@ -1918,8 +1787,8 @@ $(document).ready(function () {
 <li><a href="https://www.st.nmfs.noaa.gov/tm/nec_image/nec052image.pdf">An Evaluation of the Bottom Trawl Survey Program of the Northeast Fisheries Center</a></li>
 </ul>
 </div>
-<div id="how-we-change-the-data" class="section level2">
-<h2>How we change the data:</h2>
+<div id="how-we-process-the-data" class="section level2">
+<h2>How we process the data:</h2>
 <ul>
 <li>We group the data by YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, and SVSPP and summarise the BIOMASS to calculate wtcpue.<br />
 </li>
@@ -1935,7 +1804,7 @@ $(document).ready(function () {
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTm9ydGhlYXN0IFUuUy4iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW05PQUEgTm9ydGhlYXN0IEZpc2hlcmllcyBTY2llbmNlIENlbnRlciBTcHJpbmcgYW5kIEZhbGwgQm90dG9tIFRyYXdsIFN1cnZleXNdKGh0dHA6Ly93d3cubmVmc2Mubm9hYS5nb3YvZmVtYWQvZWNvc3VydmV5L21haW5wYWdlLykKCiMjIFJlbGF0ZWQgcGFwZXJzOiAgCi0gW0EgaGlzdG9yaWNhbCBwZXJzcGVjdGl2ZSBvbiB0aGUgYWJ1bmRhbmNlIGFuZCBiaW9tYXNzIG9mIG5vcnRoZWFzdCBkZW1lcnNhbCBjb21wbGV4IHN0b2NrcyBmcm9tIE5NRlMgYW5kIE1hc3NhY2h1c2V0dHMgaW5zaG9yZSBib3R0b20gdHJhd2wgc3VydmV5cywgMTk2My0yMDAyXShodHRwczovL3JlcG9zaXRvcnkubGlicmFyeS5ub2FhLmdvdi92aWV3L25vYWEvNTI1OSkgIAotIFtORUZTQyB0cmF3bCBzdHJhdGFdKG5ldXNfTkVGU0NfdHJhd2xfc3RyYXRhLnBkZikgIAotIFsgR3VpZGUgdG8gc29tZSB0cmF3bC1jYXVnaHQgbWFyaW5lIGZpc2hlcyBmcm9tIE1haW5lIHRvIENhcGUgSGF0dGVyYXMsIE5vcnRoIENhcm9saW5hXShodHRwczovL3Nwby5ubWZzLm5vYWEuZ292L2NvbnRlbnQvY2lyY3VsYXItNDMxLWd1aWRlLXNvbWUtdHJhd2wtY2F1Z2h0LW1hcmluZS1maXNoZXMtbWFpbmUtY2FwZS1oYXR0ZXJhcy1ub3J0aC1jYXJvbGluYSkgIAotIFtOb3J0aGVhc3QgRmlzaGVyaWVzIFNjaWVuY2UgQ2VudGVyIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgUHJvdG9jb2xzIGZvciB0aGUgTk9BQSBTaGlwIEhlbnJ5IEIuIEJpZ2Vsb3ddKGh0dHBzOi8vd3d3Lm5lZnNjLm5vYWEuZ292L3B1YmxpY2F0aW9ucy9jcmQvY3JkMTQwNi8pICAKLSBbTGksIFplbmdndWFuZywgWmhlbmppYW5nIFllLCBSb25nIFdhbiwgS2lzZWkgUi4gVGFuYWthLCBSb2JlcnQgQm9lbmlzaCwgYW5kIFlvbmcgQ2hlbi4gMjAxOC4g4oCcRGVuc2l0eS1JbmRlcGVuZGVudCBhbmQgRGVuc2l0eS1EZXBlbmRlbnQgRmFjdG9ycyBBZmZlY3RpbmcgU3BhdGlvLVRlbXBvcmFsIER5bmFtaWNzIG9mIEF0bGFudGljIENvZCAoR2FkdXMgTW9yaHVhKSBEaXN0cmlidXRpb24gaW4gdGhlIEd1bGYgb2YgTWFpbmUu4oCdIElDRVMgSm91cm5hbCBvZiBNYXJpbmUgU2NpZW5jZSA3NSAoNCk6IDEzMjnigJM0MC5dKGh0dHBzOi8vZG9pLm9yZy8xMC4xMDkzL2ljZXNqbXMvZnN4MjQ2KSAgCi0gW0FuIEV2YWx1YXRpb24gb2YgdGhlIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgUHJvZ3JhbSBvZiB0aGUgTm9ydGhlYXN0IEZpc2hlcmllcyBDZW50ZXJdKGh0dHBzOi8vd3d3LnN0Lm5tZnMubm9hYS5nb3YvdG0vbmVjX2ltYWdlL25lYzA1MmltYWdlLnBkZikKCiMjIEhvdyB3ZSBjaGFuZ2UgdGhlIGRhdGE6ICAKLSBXZSBncm91cCB0aGUgZGF0YSBieSBZRUFSLCBTRUFTT04sIExBVCwgTE9OLCBERVBUSCwgQ1JVSVNFNiwgU1RBVElPTiwgU1RSQVRVTSwgYW5kIFNWU1BQIGFuZCBzdW1tYXJpc2UgdGhlIEJJT01BU1MgdG8gY2FsY3VsYXRlIHd0Y3B1ZS4gIAotIFdlIGNyZWF0ZSBhIGhhdWxpZCBieSBjb21iaW5pbmcgYSA2IGRpZ2l0IGxlYWRpbmcgemVybyBjcnVpc2UgbnVtYmVyIHdpdGggYSAzIGRpZ2l0IGxlYWRpbmcgemVybyBzdGF0aW9uIG51bWJlciBhbmQgYSA0IGRpZ2l0IGxlYWRpbmcgemVybyBzdHJhdHVtIG51bWJlciwgc2VwYXJhdGVkIGJ5ICItIiwgZm9yIGV4YW1wbGU6IChjcnVpc2Utc3RhdGlvbi1zdHJhdHVtKSA0NTYzNTQtMDY3LTAwMDEuICAKLSBXZSBjb252ZXJ0IHNxdWFyZSBuYXV0aWNhbCBtaWxlcyB0byBzcXVhcmUga2lsb21ldGVycy4gIAotIFdlIHJlbW92ZSBhbnkgU0NJTkFNRSBzcHAgdmFsdWVzIHRoYXQgY29udGFpbiB0aGUgd29yZCAiZWdnIiBvciAidW5pZGVudGlmaWVkIiwgb3Igd2hlcmUgdGhlIG9ubHkgdmFsdWUgaW4gdGhlIFNDSU5BTUUgZmllbGQgaXMgd2hpdGUgc3BhY2UuICAKLSBXZSBncm91cCB0aGUgZGF0YSBieSBoYXVsaWQsIHN0cmF0dW0sIHN0cmF0dW1hcmVhLCB5ZWFyLCBsYXQsIGxvbiwgZGVwdGgsICBhbmQgc3BwIGFuZCB0aGVuIHN1bSB1cCBhbGwgb2YgdGhlIHd0Y3B1ZSB2YWx1ZXMgZm9yIGVhY2ggZ3JvdXAgYW5kIHJlYXNzaWduIHRoYXQgYXMgdGhlIHd0Y3B1ZS4KLSBXZSBzZXBhcmF0ZSB0aGUgdHJhd2xzIGludG8gRmFsbCBhbmQgU3ByaW5nIHNlYXNvbnMuCgoKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTm9ydGhlYXN0IFUuUy4iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW05PQUEgTm9ydGhlYXN0IEZpc2hlcmllcyBTY2llbmNlIENlbnRlciBTcHJpbmcgYW5kIEZhbGwgQm90dG9tIFRyYXdsIFN1cnZleXNdKGh0dHA6Ly93d3cubmVmc2Mubm9hYS5nb3YvZmVtYWQvZWNvc3VydmV5L21haW5wYWdlLykKCiMjIFJlbGF0ZWQgcGFwZXJzOiAgCi0gW0EgaGlzdG9yaWNhbCBwZXJzcGVjdGl2ZSBvbiB0aGUgYWJ1bmRhbmNlIGFuZCBiaW9tYXNzIG9mIG5vcnRoZWFzdCBkZW1lcnNhbCBjb21wbGV4IHN0b2NrcyBmcm9tIE5NRlMgYW5kIE1hc3NhY2h1c2V0dHMgaW5zaG9yZSBib3R0b20gdHJhd2wgc3VydmV5cywgMTk2My0yMDAyXShodHRwczovL3JlcG9zaXRvcnkubGlicmFyeS5ub2FhLmdvdi92aWV3L25vYWEvNTI1OSkgIAotIFtORUZTQyB0cmF3bCBzdHJhdGFdKG5ldXNfTkVGU0NfdHJhd2xfc3RyYXRhLnBkZikgIAotIFsgR3VpZGUgdG8gc29tZSB0cmF3bC1jYXVnaHQgbWFyaW5lIGZpc2hlcyBmcm9tIE1haW5lIHRvIENhcGUgSGF0dGVyYXMsIE5vcnRoIENhcm9saW5hXShodHRwczovL3Nwby5ubWZzLm5vYWEuZ292L2NvbnRlbnQvY2lyY3VsYXItNDMxLWd1aWRlLXNvbWUtdHJhd2wtY2F1Z2h0LW1hcmluZS1maXNoZXMtbWFpbmUtY2FwZS1oYXR0ZXJhcy1ub3J0aC1jYXJvbGluYSkgIAotIFtOb3J0aGVhc3QgRmlzaGVyaWVzIFNjaWVuY2UgQ2VudGVyIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgUHJvdG9jb2xzIGZvciB0aGUgTk9BQSBTaGlwIEhlbnJ5IEIuIEJpZ2Vsb3ddKGh0dHBzOi8vd3d3Lm5lZnNjLm5vYWEuZ292L3B1YmxpY2F0aW9ucy9jcmQvY3JkMTQwNi8pICAKLSBbTGksIFplbmdndWFuZywgWmhlbmppYW5nIFllLCBSb25nIFdhbiwgS2lzZWkgUi4gVGFuYWthLCBSb2JlcnQgQm9lbmlzaCwgYW5kIFlvbmcgQ2hlbi4gMjAxOC4g4oCcRGVuc2l0eS1JbmRlcGVuZGVudCBhbmQgRGVuc2l0eS1EZXBlbmRlbnQgRmFjdG9ycyBBZmZlY3RpbmcgU3BhdGlvLVRlbXBvcmFsIER5bmFtaWNzIG9mIEF0bGFudGljIENvZCAoR2FkdXMgTW9yaHVhKSBEaXN0cmlidXRpb24gaW4gdGhlIEd1bGYgb2YgTWFpbmUu4oCdIElDRVMgSm91cm5hbCBvZiBNYXJpbmUgU2NpZW5jZSA3NSAoNCk6IDEzMjnigJM0MC5dKGh0dHBzOi8vZG9pLm9yZy8xMC4xMDkzL2ljZXNqbXMvZnN4MjQ2KSAgCi0gW0FuIEV2YWx1YXRpb24gb2YgdGhlIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgUHJvZ3JhbSBvZiB0aGUgTm9ydGhlYXN0IEZpc2hlcmllcyBDZW50ZXJdKGh0dHBzOi8vd3d3LnN0Lm5tZnMubm9hYS5nb3YvdG0vbmVjX2ltYWdlL25lYzA1MmltYWdlLnBkZikKCiMjIEhvdyB3ZSBwcm9jZXNzIHRoZSBkYXRhOiAgCi0gV2UgZ3JvdXAgdGhlIGRhdGEgYnkgWUVBUiwgU0VBU09OLCBMQVQsIExPTiwgREVQVEgsIENSVUlTRTYsIFNUQVRJT04sIFNUUkFUVU0sIGFuZCBTVlNQUCBhbmQgc3VtbWFyaXNlIHRoZSBCSU9NQVNTIHRvIGNhbGN1bGF0ZSB3dGNwdWUuICAKLSBXZSBjcmVhdGUgYSBoYXVsaWQgYnkgY29tYmluaW5nIGEgNiBkaWdpdCBsZWFkaW5nIHplcm8gY3J1aXNlIG51bWJlciB3aXRoIGEgMyBkaWdpdCBsZWFkaW5nIHplcm8gc3RhdGlvbiBudW1iZXIgYW5kIGEgNCBkaWdpdCBsZWFkaW5nIHplcm8gc3RyYXR1bSBudW1iZXIsIHNlcGFyYXRlZCBieSAiLSIsIGZvciBleGFtcGxlOiAoY3J1aXNlLXN0YXRpb24tc3RyYXR1bSkgNDU2MzU0LTA2Ny0wMDAxLiAgCi0gV2UgY29udmVydCBzcXVhcmUgbmF1dGljYWwgbWlsZXMgdG8gc3F1YXJlIGtpbG9tZXRlcnMuICAKLSBXZSByZW1vdmUgYW55IFNDSU5BTUUgc3BwIHZhbHVlcyB0aGF0IGNvbnRhaW4gdGhlIHdvcmQgImVnZyIgb3IgInVuaWRlbnRpZmllZCIsIG9yIHdoZXJlIHRoZSBvbmx5IHZhbHVlIGluIHRoZSBTQ0lOQU1FIGZpZWxkIGlzIHdoaXRlIHNwYWNlLiAgCi0gV2UgZ3JvdXAgdGhlIGRhdGEgYnkgaGF1bGlkLCBzdHJhdHVtLCBzdHJhdHVtYXJlYSwgeWVhciwgbGF0LCBsb24sIGRlcHRoLCAgYW5kIHNwcCBhbmQgdGhlbiBzdW0gdXAgYWxsIG9mIHRoZSB3dGNwdWUgdmFsdWVzIGZvciBlYWNoIGdyb3VwIGFuZCByZWFzc2lnbiB0aGF0IGFzIHRoZSB3dGNwdWUuCi0gV2Ugc2VwYXJhdGUgdGhlIHRyYXdscyBpbnRvIEZhbGwgYW5kIFNwcmluZyBzZWFzb25zLgoKCgoK</div>
 
 
 

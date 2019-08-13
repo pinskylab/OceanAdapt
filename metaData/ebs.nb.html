@@ -1654,93 +1654,6 @@ summary {
 }
 </style>
 
-<style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script>
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark it active
-  menuAnchor.parent().addClass('active');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
-});
-</script>
 
 <!-- tabsets -->
 
@@ -1834,50 +1747,6 @@ $(document).ready(function () {
 
 
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Home</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="ai.nb.html">Aleutian Islands</a>
-</li>
-<li>
-  <a href="ebs.nb.html">Eastern Bering Sea</a>
-</li>
-<li>
-  <a href="goa.nb.html">Gulf of Alaska</a>
-</li>
-<li>
-  <a href="wcann.nb.html">West Coast U.S.</a>
-</li>
-<li>
-  <a href="gmex.nb.html">Gulf of Mexico</a>
-</li>
-<li>
-  <a href="seus.nb.html">Southeast U.S.</a>
-</li>
-<li>
-  <a href="neus.nb.html">Northeast U.S.</a>
-</li>
-<li>
-  <a href="scot.nb.html">Scotian Shelf</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
 <div class="fluid-row" id="header">
 
 <div class="btn-group pull-right">
@@ -1910,8 +1779,8 @@ $(document).ready(function () {
 <li><p><a href="https://www.afsc.noaa.gov/Publications/ProcRpt/PR2009-04.pdf">STEVENSON, D. E., and G. R. HOFF 2009. Species identification confidence in the eastern Bering Sea shelf survey (1982-2008). AFSC Processed Rep. 2009-04, 46 p. Alaska Fish. Sci. Cent., NOAA, Natl. Mar. Fish. Serv., 7600 Sand Point Way NE, Seattle WA 98115.</a></p></li>
 </ul>
 </div>
-<div id="how-we-change-the-data" class="section level2">
-<h2>How we change the data:</h2>
+<div id="how-we-process-the-data" class="section level2">
+<h2>How we process the data:</h2>
 <ul>
 <li>Some of the files contain extra headers in the data rows, so we remove any data rows that contain the word “LATITUDE” in the LATITUDE column.<br />
 </li>
@@ -1927,7 +1796,7 @@ $(document).ready(function () {
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRWFzdGVybiBCZXJpbmcgU2VhIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBTb3VyY2U6CltOT0FBIEFsYXNrYSBGaXNoZXJpZXMgU2NpZW5jZSBDZW50ZXIgR3JvdW5kZmlzaCBBc3Nlc3NtZW50IFByb2dyYW0gc3VydmV5c10oaHR0cDovL3d3dy5ud2ZzYy5ub2FhLmdvdi9yZXNlYXJjaC9kaXZpc2lvbnMvZnJhbS9ncm91bmRmaXNoL2JvdHRvbV90cmF3bC5jZm0pCgojIyBSZWxhdGVkIHBhcGVyczogIAoKLSBbUmVzdWx0cyBvZiB0aGUgMjAxMCBFYXN0ZXJuIGFuZCBOb3J0aGVybiBCZXJpbmcgU2VhIENvbnRpbmVudGFsIFNoZWxmIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgb2YgR3JvdW5kZmlzaCBhbmQgSW52ZXJ0ZWJyYXRlIEZhdW5hXShodHRwczovL3d3dy5hZnNjLm5vYWEuZ292L3B1YmxpY2F0aW9ucy9hZnNjLXRtL25vYWEtdG0tYWZzYy0yMjcucGRmKSAgCgotIFtLb3R3aWNraSwgU3RhbiwgYW5kIFJvYmVydCBSLiBMYXV0aC4gMjAxMy4g4oCcRGV0ZWN0aW5nIFRlbXBvcmFsIFRyZW5kcyBhbmQgRW52aXJvbm1lbnRhbGx5LURyaXZlbiBDaGFuZ2VzIGluIHRoZSBTcGF0aWFsIERpc3RyaWJ1dGlvbiBvZiBCb3R0b20gRmlzaGVzIGFuZCBDcmFicyBvbiB0aGUgRWFzdGVybiBCZXJpbmcgU2VhIFNoZWxmLuKAnSBEZWVwIFNlYSBSZXNlYXJjaCBQYXJ0IElJOiBUb3BpY2FsIFN0dWRpZXMgaW4gT2NlYW5vZ3JhcGh5LCBVbmRlcnN0YW5kaW5nIEVjb3N5c3RlbSBQcm9jZXNzZXMgaW4gdGhlIEVhc3Rlcm4gQmVyaW5nIFNlYSBJSSwgOTQgKE9jdG9iZXIpOiAyMzHigJM0My5dKGh0dHBzOi8vZG9pLm9yZy8xMC4xMDE2L2ouZHNyMi4yMDEzLjAzLjAxNykgIAoKLSBbU1RFVkVOU09OLCBELiBFLiwgYW5kIEcuIFIuIEhPRkYgMjAwOS4gU3BlY2llcyBpZGVudGlmaWNhdGlvbiBjb25maWRlbmNlIGluIHRoZSBlYXN0ZXJuIEJlcmluZyBTZWEgc2hlbGYgc3VydmV5ICgxOTgyLTIwMDgpLiBBRlNDIFByb2Nlc3NlZCBSZXAuIDIwMDktMDQsIDQ2IHAuIEFsYXNrYSBGaXNoLiBTY2kuIENlbnQuLCBOT0FBLCBOYXRsLiBNYXIuIEZpc2guIFNlcnYuLCA3NjAwIFNhbmQgUG9pbnQgV2F5IE5FLCBTZWF0dGxlIFdBIDk4MTE1Ll0oaHR0cHM6Ly93d3cuYWZzYy5ub2FhLmdvdi9QdWJsaWNhdGlvbnMvUHJvY1JwdC9QUjIwMDktMDQucGRmKQoKIyMgSG93IHdlIGNoYW5nZSB0aGUgZGF0YTogIAotIFNvbWUgb2YgdGhlIGZpbGVzIGNvbnRhaW4gZXh0cmEgaGVhZGVycyBpbiB0aGUgZGF0YSByb3dzLCBzbyB3ZSByZW1vdmUgYW55IGRhdGEgcm93cyB0aGF0IGNvbnRhaW4gdGhlIHdvcmQgIkxBVElUVURFIiBpbiB0aGUgTEFUSVRVREUgY29sdW1uLiAgCi0gV2UgY3JlYXRlIGEgaGF1bGlkIGJ5IGNvbWJpbmluZyBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIHZlc3NlbCBudW1iZXIgd2l0aCBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIGNydWlzZSBudW1iZXIgYW5kIGEgMyBkaWdpdCBsZWFkaW5nIHplcm8gaGF1bCBudW1iZXIsIHNlcGFyYXRlZCBieSAiLSIsIGZvciBleGFtcGxlOiAodmVzc2VsLWNydWlzZS1oYXVsKSAzNTQtMDY3LTAwMS4gIAotIElmIHd0Y3B1ZSBpcyByZWNvcmRlZCBhcyAiLTk5OTkiLCB3ZSBjaGFuZ2UgdGhlIHZhbHVlIHRvIE5BLiAgCi0gV2UgcmVtb3ZlIGFueSBTQ0lFTlRJRklDIHNwcCB2YWx1ZXMgdGhhdCBjb250YWluIHRoZSB3b3JkICJlZ2ciIG9yIHdoZXJlIHRoZSBvbmx5IHZhbHVlIGluIHRoZSBTQ0lFTlRJRklDIGZpZWxkIGlzIHdoaXRlIHNwYWNlLiAgCi0gQW55IHZhbHVlcyBTQ0lFTlRJRklDIHZhbHVlcyB0aGF0IGNvbnRhaW4gdGhlIHdvcmQgIkF0aGVyZXN0aGVzIiBhcmUgY2hhbmdlZCB0byAiQXRoZXJlc3RoZXMgc3AuIiBiZWNhdXNlIG1vcmUgdGhhbiBvbmUgZ2VudXMvc3BwIGNvbWJvIHdhcyB1c2VkIHRvIGRlc2NyaWJlIHRoZSBzYW1lIG9yZ2FuaXNtIG92ZXIgdGltZS4gIFRoaXMgYWxzbyBob2xkcyB0cnVlIGZvciBMZXBpZG9wc2V0dGEgc3AuLCBNeW94b2NlcGhhbHVzIHNwLiwgSGlwcG9nbG9zc29pZGVzIHNwLiAmIEJhdGh5cmFqYSBzcC4KLSBXZSBncm91cCB0aGUgZGF0YSBieSBoYXVsaWQsIHN0cmF0dW0sIHN0cmF0dW1hcmVhLCB5ZWFyLCBsYXQsIGxvbiwgZGVwdGgsICBhbmQgc3BwIGFuZCB0aGVuIHN1bSB1cCBhbGwgb2YgdGhlIHd0Y3B1ZSB2YWx1ZXMgZm9yIGVhY2ggZ3JvdXAgYW5kIHJlYXNzaWduIHRoYXQgYXMgdGhlIHd0Y3B1ZS4K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRWFzdGVybiBCZXJpbmcgU2VhIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBTb3VyY2U6CltOT0FBIEFsYXNrYSBGaXNoZXJpZXMgU2NpZW5jZSBDZW50ZXIgR3JvdW5kZmlzaCBBc3Nlc3NtZW50IFByb2dyYW0gc3VydmV5c10oaHR0cDovL3d3dy5ud2ZzYy5ub2FhLmdvdi9yZXNlYXJjaC9kaXZpc2lvbnMvZnJhbS9ncm91bmRmaXNoL2JvdHRvbV90cmF3bC5jZm0pCgojIyBSZWxhdGVkIHBhcGVyczogIAoKLSBbUmVzdWx0cyBvZiB0aGUgMjAxMCBFYXN0ZXJuIGFuZCBOb3J0aGVybiBCZXJpbmcgU2VhIENvbnRpbmVudGFsIFNoZWxmIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgb2YgR3JvdW5kZmlzaCBhbmQgSW52ZXJ0ZWJyYXRlIEZhdW5hXShodHRwczovL3d3dy5hZnNjLm5vYWEuZ292L3B1YmxpY2F0aW9ucy9hZnNjLXRtL25vYWEtdG0tYWZzYy0yMjcucGRmKSAgCgotIFtLb3R3aWNraSwgU3RhbiwgYW5kIFJvYmVydCBSLiBMYXV0aC4gMjAxMy4g4oCcRGV0ZWN0aW5nIFRlbXBvcmFsIFRyZW5kcyBhbmQgRW52aXJvbm1lbnRhbGx5LURyaXZlbiBDaGFuZ2VzIGluIHRoZSBTcGF0aWFsIERpc3RyaWJ1dGlvbiBvZiBCb3R0b20gRmlzaGVzIGFuZCBDcmFicyBvbiB0aGUgRWFzdGVybiBCZXJpbmcgU2VhIFNoZWxmLuKAnSBEZWVwIFNlYSBSZXNlYXJjaCBQYXJ0IElJOiBUb3BpY2FsIFN0dWRpZXMgaW4gT2NlYW5vZ3JhcGh5LCBVbmRlcnN0YW5kaW5nIEVjb3N5c3RlbSBQcm9jZXNzZXMgaW4gdGhlIEVhc3Rlcm4gQmVyaW5nIFNlYSBJSSwgOTQgKE9jdG9iZXIpOiAyMzHigJM0My5dKGh0dHBzOi8vZG9pLm9yZy8xMC4xMDE2L2ouZHNyMi4yMDEzLjAzLjAxNykgIAoKLSBbU1RFVkVOU09OLCBELiBFLiwgYW5kIEcuIFIuIEhPRkYgMjAwOS4gU3BlY2llcyBpZGVudGlmaWNhdGlvbiBjb25maWRlbmNlIGluIHRoZSBlYXN0ZXJuIEJlcmluZyBTZWEgc2hlbGYgc3VydmV5ICgxOTgyLTIwMDgpLiBBRlNDIFByb2Nlc3NlZCBSZXAuIDIwMDktMDQsIDQ2IHAuIEFsYXNrYSBGaXNoLiBTY2kuIENlbnQuLCBOT0FBLCBOYXRsLiBNYXIuIEZpc2guIFNlcnYuLCA3NjAwIFNhbmQgUG9pbnQgV2F5IE5FLCBTZWF0dGxlIFdBIDk4MTE1Ll0oaHR0cHM6Ly93d3cuYWZzYy5ub2FhLmdvdi9QdWJsaWNhdGlvbnMvUHJvY1JwdC9QUjIwMDktMDQucGRmKQoKIyMgSG93IHdlIHByb2Nlc3MgdGhlIGRhdGE6ICAKLSBTb21lIG9mIHRoZSBmaWxlcyBjb250YWluIGV4dHJhIGhlYWRlcnMgaW4gdGhlIGRhdGEgcm93cywgc28gd2UgcmVtb3ZlIGFueSBkYXRhIHJvd3MgdGhhdCBjb250YWluIHRoZSB3b3JkICJMQVRJVFVERSIgaW4gdGhlIExBVElUVURFIGNvbHVtbi4gIAotIFdlIGNyZWF0ZSBhIGhhdWxpZCBieSBjb21iaW5pbmcgYSAzIGRpZ2l0IGxlYWRpbmcgemVybyB2ZXNzZWwgbnVtYmVyIHdpdGggYSAzIGRpZ2l0IGxlYWRpbmcgemVybyBjcnVpc2UgbnVtYmVyIGFuZCBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIGhhdWwgbnVtYmVyLCBzZXBhcmF0ZWQgYnkgIi0iLCBmb3IgZXhhbXBsZTogKHZlc3NlbC1jcnVpc2UtaGF1bCkgMzU0LTA2Ny0wMDEuICAKLSBJZiB3dGNwdWUgaXMgcmVjb3JkZWQgYXMgIi05OTk5Iiwgd2UgY2hhbmdlIHRoZSB2YWx1ZSB0byBOQS4gIAotIFdlIHJlbW92ZSBhbnkgU0NJRU5USUZJQyBzcHAgdmFsdWVzIHRoYXQgY29udGFpbiB0aGUgd29yZCAiZWdnIiBvciB3aGVyZSB0aGUgb25seSB2YWx1ZSBpbiB0aGUgU0NJRU5USUZJQyBmaWVsZCBpcyB3aGl0ZSBzcGFjZS4gIAotIEFueSB2YWx1ZXMgU0NJRU5USUZJQyB2YWx1ZXMgdGhhdCBjb250YWluIHRoZSB3b3JkICJBdGhlcmVzdGhlcyIgYXJlIGNoYW5nZWQgdG8gIkF0aGVyZXN0aGVzIHNwLiIgYmVjYXVzZSBtb3JlIHRoYW4gb25lIGdlbnVzL3NwcCBjb21ibyB3YXMgdXNlZCB0byBkZXNjcmliZSB0aGUgc2FtZSBvcmdhbmlzbSBvdmVyIHRpbWUuICBUaGlzIGFsc28gaG9sZHMgdHJ1ZSBmb3IgTGVwaWRvcHNldHRhIHNwLiwgTXlveG9jZXBoYWx1cyBzcC4sIEhpcHBvZ2xvc3NvaWRlcyBzcC4gJiBCYXRoeXJhamEgc3AuCi0gV2UgZ3JvdXAgdGhlIGRhdGEgYnkgaGF1bGlkLCBzdHJhdHVtLCBzdHJhdHVtYXJlYSwgeWVhciwgbGF0LCBsb24sIGRlcHRoLCAgYW5kIHNwcCBhbmQgdGhlbiBzdW0gdXAgYWxsIG9mIHRoZSB3dGNwdWUgdmFsdWVzIGZvciBlYWNoIGdyb3VwIGFuZCByZWFzc2lnbiB0aGF0IGFzIHRoZSB3dGNwdWUuCg==</div>
 
 
 
