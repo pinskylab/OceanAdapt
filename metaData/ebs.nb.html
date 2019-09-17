@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -1483,7 +1484,7 @@ window.initializeCodeFolding = function(show) {
 
     // create a collapsable div to wrap the code in
     var div = $('<div class="collapse r-code-collapse"></div>');
-    if (show)
+    if (show || $(this)[0].classList.contains('fold-show'))
       div.addClass('in');
     var id = 'rcode-643E0F36' + currentIndex++;
     div.attr('id', id);
@@ -1613,7 +1614,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -1711,28 +1711,10 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeSourceEmbed("ebs.Rmd");
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
 
@@ -1776,7 +1758,9 @@ $(document).ready(function () {
 <ul>
 <li><p><a href="https://www.afsc.noaa.gov/publications/afsc-tm/noaa-tm-afsc-227.pdf">Results of the 2010 Eastern and Northern Bering Sea Continental Shelf Bottom Trawl Survey of Groundfish and Invertebrate Fauna</a></p></li>
 <li><p><a href="https://doi.org/10.1016/j.dsr2.2013.03.017">Kotwicki, Stan, and Robert R. Lauth. 2013. “Detecting Temporal Trends and Environmentally-Driven Changes in the Spatial Distribution of Bottom Fishes and Crabs on the Eastern Bering Sea Shelf.” Deep Sea Research Part II: Topical Studies in Oceanography, Understanding Ecosystem Processes in the Eastern Bering Sea II, 94 (October): 231–43.</a></p></li>
-<li><p><a href="https://www.afsc.noaa.gov/Publications/ProcRpt/PR2009-04.pdf">STEVENSON, D. E., and G. R. HOFF 2009. Species identification confidence in the eastern Bering Sea shelf survey (1982-2008). AFSC Processed Rep. 2009-04, 46 p. Alaska Fish. Sci. Cent., NOAA, Natl. Mar. Fish. Serv., 7600 Sand Point Way NE, Seattle WA 98115.</a></p></li>
+<li><p><a href="https://www.afsc.noaa.gov/Publications/ProcRpt/PR2009-04.pdf">STEVENSON, D. E., and G. R. HOFF 2009. Species identification confidence in the eastern Bering Sea shelf survey (1982-2008). AFSC Processed Rep. 2009-04, 46 p. Alaska Fish. Sci. Cent., NOAA, Natl. Mar. Fish. Serv., 7600 Sand Point Way NE, Seattle WA 98115.</a><br />
+</p></li>
+<li><p><a href="https://www.fisheries.noaa.gov/resource/document/groundfish-bottom-trawl-survey-protocols">Groundfish Bottom Trawl Survey Protocols</a></p></li>
 </ul>
 </div>
 <div id="how-we-process-the-data" class="section level2">
@@ -1796,7 +1780,7 @@ $(document).ready(function () {
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRWFzdGVybiBCZXJpbmcgU2VhIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBTb3VyY2U6CltOT0FBIEFsYXNrYSBGaXNoZXJpZXMgU2NpZW5jZSBDZW50ZXIgR3JvdW5kZmlzaCBBc3Nlc3NtZW50IFByb2dyYW0gc3VydmV5c10oaHR0cDovL3d3dy5ud2ZzYy5ub2FhLmdvdi9yZXNlYXJjaC9kaXZpc2lvbnMvZnJhbS9ncm91bmRmaXNoL2JvdHRvbV90cmF3bC5jZm0pCgojIyBSZWxhdGVkIHBhcGVyczogIAoKLSBbUmVzdWx0cyBvZiB0aGUgMjAxMCBFYXN0ZXJuIGFuZCBOb3J0aGVybiBCZXJpbmcgU2VhIENvbnRpbmVudGFsIFNoZWxmIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgb2YgR3JvdW5kZmlzaCBhbmQgSW52ZXJ0ZWJyYXRlIEZhdW5hXShodHRwczovL3d3dy5hZnNjLm5vYWEuZ292L3B1YmxpY2F0aW9ucy9hZnNjLXRtL25vYWEtdG0tYWZzYy0yMjcucGRmKSAgCgotIFtLb3R3aWNraSwgU3RhbiwgYW5kIFJvYmVydCBSLiBMYXV0aC4gMjAxMy4g4oCcRGV0ZWN0aW5nIFRlbXBvcmFsIFRyZW5kcyBhbmQgRW52aXJvbm1lbnRhbGx5LURyaXZlbiBDaGFuZ2VzIGluIHRoZSBTcGF0aWFsIERpc3RyaWJ1dGlvbiBvZiBCb3R0b20gRmlzaGVzIGFuZCBDcmFicyBvbiB0aGUgRWFzdGVybiBCZXJpbmcgU2VhIFNoZWxmLuKAnSBEZWVwIFNlYSBSZXNlYXJjaCBQYXJ0IElJOiBUb3BpY2FsIFN0dWRpZXMgaW4gT2NlYW5vZ3JhcGh5LCBVbmRlcnN0YW5kaW5nIEVjb3N5c3RlbSBQcm9jZXNzZXMgaW4gdGhlIEVhc3Rlcm4gQmVyaW5nIFNlYSBJSSwgOTQgKE9jdG9iZXIpOiAyMzHigJM0My5dKGh0dHBzOi8vZG9pLm9yZy8xMC4xMDE2L2ouZHNyMi4yMDEzLjAzLjAxNykgIAoKLSBbU1RFVkVOU09OLCBELiBFLiwgYW5kIEcuIFIuIEhPRkYgMjAwOS4gU3BlY2llcyBpZGVudGlmaWNhdGlvbiBjb25maWRlbmNlIGluIHRoZSBlYXN0ZXJuIEJlcmluZyBTZWEgc2hlbGYgc3VydmV5ICgxOTgyLTIwMDgpLiBBRlNDIFByb2Nlc3NlZCBSZXAuIDIwMDktMDQsIDQ2IHAuIEFsYXNrYSBGaXNoLiBTY2kuIENlbnQuLCBOT0FBLCBOYXRsLiBNYXIuIEZpc2guIFNlcnYuLCA3NjAwIFNhbmQgUG9pbnQgV2F5IE5FLCBTZWF0dGxlIFdBIDk4MTE1Ll0oaHR0cHM6Ly93d3cuYWZzYy5ub2FhLmdvdi9QdWJsaWNhdGlvbnMvUHJvY1JwdC9QUjIwMDktMDQucGRmKQoKIyMgSG93IHdlIHByb2Nlc3MgdGhlIGRhdGE6ICAKLSBTb21lIG9mIHRoZSBmaWxlcyBjb250YWluIGV4dHJhIGhlYWRlcnMgaW4gdGhlIGRhdGEgcm93cywgc28gd2UgcmVtb3ZlIGFueSBkYXRhIHJvd3MgdGhhdCBjb250YWluIHRoZSB3b3JkICJMQVRJVFVERSIgaW4gdGhlIExBVElUVURFIGNvbHVtbi4gIAotIFdlIGNyZWF0ZSBhIGhhdWxpZCBieSBjb21iaW5pbmcgYSAzIGRpZ2l0IGxlYWRpbmcgemVybyB2ZXNzZWwgbnVtYmVyIHdpdGggYSAzIGRpZ2l0IGxlYWRpbmcgemVybyBjcnVpc2UgbnVtYmVyIGFuZCBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIGhhdWwgbnVtYmVyLCBzZXBhcmF0ZWQgYnkgIi0iLCBmb3IgZXhhbXBsZTogKHZlc3NlbC1jcnVpc2UtaGF1bCkgMzU0LTA2Ny0wMDEuICAKLSBJZiB3dGNwdWUgaXMgcmVjb3JkZWQgYXMgIi05OTk5Iiwgd2UgY2hhbmdlIHRoZSB2YWx1ZSB0byBOQS4gIAotIFdlIHJlbW92ZSBhbnkgU0NJRU5USUZJQyBzcHAgdmFsdWVzIHRoYXQgY29udGFpbiB0aGUgd29yZCAiZWdnIiBvciB3aGVyZSB0aGUgb25seSB2YWx1ZSBpbiB0aGUgU0NJRU5USUZJQyBmaWVsZCBpcyB3aGl0ZSBzcGFjZS4gIAotIEFueSB2YWx1ZXMgU0NJRU5USUZJQyB2YWx1ZXMgdGhhdCBjb250YWluIHRoZSB3b3JkICJBdGhlcmVzdGhlcyIgYXJlIGNoYW5nZWQgdG8gIkF0aGVyZXN0aGVzIHNwLiIgYmVjYXVzZSBtb3JlIHRoYW4gb25lIGdlbnVzL3NwcCBjb21ibyB3YXMgdXNlZCB0byBkZXNjcmliZSB0aGUgc2FtZSBvcmdhbmlzbSBvdmVyIHRpbWUuICBUaGlzIGFsc28gaG9sZHMgdHJ1ZSBmb3IgTGVwaWRvcHNldHRhIHNwLiwgTXlveG9jZXBoYWx1cyBzcC4sIEhpcHBvZ2xvc3NvaWRlcyBzcC4gJiBCYXRoeXJhamEgc3AuCi0gV2UgZ3JvdXAgdGhlIGRhdGEgYnkgaGF1bGlkLCBzdHJhdHVtLCBzdHJhdHVtYXJlYSwgeWVhciwgbGF0LCBsb24sIGRlcHRoLCAgYW5kIHNwcCBhbmQgdGhlbiBzdW0gdXAgYWxsIG9mIHRoZSB3dGNwdWUgdmFsdWVzIGZvciBlYWNoIGdyb3VwIGFuZCByZWFzc2lnbiB0aGF0IGFzIHRoZSB3dGNwdWUuCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRWFzdGVybiBCZXJpbmcgU2VhIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBTb3VyY2U6CltOT0FBIEFsYXNrYSBGaXNoZXJpZXMgU2NpZW5jZSBDZW50ZXIgR3JvdW5kZmlzaCBBc3Nlc3NtZW50IFByb2dyYW0gc3VydmV5c10oaHR0cDovL3d3dy5ud2ZzYy5ub2FhLmdvdi9yZXNlYXJjaC9kaXZpc2lvbnMvZnJhbS9ncm91bmRmaXNoL2JvdHRvbV90cmF3bC5jZm0pCgojIyBSZWxhdGVkIHBhcGVyczogIAoKLSBbUmVzdWx0cyBvZiB0aGUgMjAxMCBFYXN0ZXJuIGFuZCBOb3J0aGVybiBCZXJpbmcgU2VhIENvbnRpbmVudGFsIFNoZWxmIEJvdHRvbSBUcmF3bCBTdXJ2ZXkgb2YgR3JvdW5kZmlzaCBhbmQgSW52ZXJ0ZWJyYXRlIEZhdW5hXShodHRwczovL3d3dy5hZnNjLm5vYWEuZ292L3B1YmxpY2F0aW9ucy9hZnNjLXRtL25vYWEtdG0tYWZzYy0yMjcucGRmKSAgCgotIFtLb3R3aWNraSwgU3RhbiwgYW5kIFJvYmVydCBSLiBMYXV0aC4gMjAxMy4g4oCcRGV0ZWN0aW5nIFRlbXBvcmFsIFRyZW5kcyBhbmQgRW52aXJvbm1lbnRhbGx5LURyaXZlbiBDaGFuZ2VzIGluIHRoZSBTcGF0aWFsIERpc3RyaWJ1dGlvbiBvZiBCb3R0b20gRmlzaGVzIGFuZCBDcmFicyBvbiB0aGUgRWFzdGVybiBCZXJpbmcgU2VhIFNoZWxmLuKAnSBEZWVwIFNlYSBSZXNlYXJjaCBQYXJ0IElJOiBUb3BpY2FsIFN0dWRpZXMgaW4gT2NlYW5vZ3JhcGh5LCBVbmRlcnN0YW5kaW5nIEVjb3N5c3RlbSBQcm9jZXNzZXMgaW4gdGhlIEVhc3Rlcm4gQmVyaW5nIFNlYSBJSSwgOTQgKE9jdG9iZXIpOiAyMzHigJM0My5dKGh0dHBzOi8vZG9pLm9yZy8xMC4xMDE2L2ouZHNyMi4yMDEzLjAzLjAxNykgIAoKLSBbU1RFVkVOU09OLCBELiBFLiwgYW5kIEcuIFIuIEhPRkYgMjAwOS4gU3BlY2llcyBpZGVudGlmaWNhdGlvbiBjb25maWRlbmNlIGluIHRoZSBlYXN0ZXJuIEJlcmluZyBTZWEgc2hlbGYgc3VydmV5ICgxOTgyLTIwMDgpLiBBRlNDIFByb2Nlc3NlZCBSZXAuIDIwMDktMDQsIDQ2IHAuIEFsYXNrYSBGaXNoLiBTY2kuIENlbnQuLCBOT0FBLCBOYXRsLiBNYXIuIEZpc2guIFNlcnYuLCA3NjAwIFNhbmQgUG9pbnQgV2F5IE5FLCBTZWF0dGxlIFdBIDk4MTE1Ll0oaHR0cHM6Ly93d3cuYWZzYy5ub2FhLmdvdi9QdWJsaWNhdGlvbnMvUHJvY1JwdC9QUjIwMDktMDQucGRmKSAgCi0gW0dyb3VuZGZpc2ggQm90dG9tIFRyYXdsIFN1cnZleSBQcm90b2NvbHNdKGh0dHBzOi8vd3d3LmZpc2hlcmllcy5ub2FhLmdvdi9yZXNvdXJjZS9kb2N1bWVudC9ncm91bmRmaXNoLWJvdHRvbS10cmF3bC1zdXJ2ZXktcHJvdG9jb2xzKQoKIyMgSG93IHdlIHByb2Nlc3MgdGhlIGRhdGE6ICAKLSBTb21lIG9mIHRoZSBmaWxlcyBjb250YWluIGV4dHJhIGhlYWRlcnMgaW4gdGhlIGRhdGEgcm93cywgc28gd2UgcmVtb3ZlIGFueSBkYXRhIHJvd3MgdGhhdCBjb250YWluIHRoZSB3b3JkICJMQVRJVFVERSIgaW4gdGhlIExBVElUVURFIGNvbHVtbi4gIAotIFdlIGNyZWF0ZSBhIGhhdWxpZCBieSBjb21iaW5pbmcgYSAzIGRpZ2l0IGxlYWRpbmcgemVybyB2ZXNzZWwgbnVtYmVyIHdpdGggYSAzIGRpZ2l0IGxlYWRpbmcgemVybyBjcnVpc2UgbnVtYmVyIGFuZCBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIGhhdWwgbnVtYmVyLCBzZXBhcmF0ZWQgYnkgIi0iLCBmb3IgZXhhbXBsZTogKHZlc3NlbC1jcnVpc2UtaGF1bCkgMzU0LTA2Ny0wMDEuICAKLSBJZiB3dGNwdWUgaXMgcmVjb3JkZWQgYXMgIi05OTk5Iiwgd2UgY2hhbmdlIHRoZSB2YWx1ZSB0byBOQS4gIAotIFdlIHJlbW92ZSBhbnkgU0NJRU5USUZJQyBzcHAgdmFsdWVzIHRoYXQgY29udGFpbiB0aGUgd29yZCAiZWdnIiBvciB3aGVyZSB0aGUgb25seSB2YWx1ZSBpbiB0aGUgU0NJRU5USUZJQyBmaWVsZCBpcyB3aGl0ZSBzcGFjZS4gIAotIEFueSB2YWx1ZXMgU0NJRU5USUZJQyB2YWx1ZXMgdGhhdCBjb250YWluIHRoZSB3b3JkICJBdGhlcmVzdGhlcyIgYXJlIGNoYW5nZWQgdG8gIkF0aGVyZXN0aGVzIHNwLiIgYmVjYXVzZSBtb3JlIHRoYW4gb25lIGdlbnVzL3NwcCBjb21ibyB3YXMgdXNlZCB0byBkZXNjcmliZSB0aGUgc2FtZSBvcmdhbmlzbSBvdmVyIHRpbWUuICBUaGlzIGFsc28gaG9sZHMgdHJ1ZSBmb3IgTGVwaWRvcHNldHRhIHNwLiwgTXlveG9jZXBoYWx1cyBzcC4sIEhpcHBvZ2xvc3NvaWRlcyBzcC4gJiBCYXRoeXJhamEgc3AuCi0gV2UgZ3JvdXAgdGhlIGRhdGEgYnkgaGF1bGlkLCBzdHJhdHVtLCBzdHJhdHVtYXJlYSwgeWVhciwgbGF0LCBsb24sIGRlcHRoLCAgYW5kIHNwcCBhbmQgdGhlbiBzdW0gdXAgYWxsIG9mIHRoZSB3dGNwdWUgdmFsdWVzIGZvciBlYWNoIGdyb3VwIGFuZCByZWFzc2lnbiB0aGF0IGFzIHRoZSB3dGNwdWUuCg==</div>
 
 
 
@@ -1825,6 +1809,29 @@ $(document).ready(function () {
 });
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("ebs.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

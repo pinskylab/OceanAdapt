@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -1483,7 +1484,7 @@ window.initializeCodeFolding = function(show) {
 
     // create a collapsable div to wrap the code in
     var div = $('<div class="collapse r-code-collapse"></div>');
-    if (show)
+    if (show || $(this)[0].classList.contains('fold-show'))
       div.addClass('in');
     var id = 'rcode-643E0F36' + currentIndex++;
     div.attr('id', id);
@@ -1613,7 +1614,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -1711,28 +1711,10 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeSourceEmbed("goa.Rmd");
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
 
@@ -1774,7 +1756,9 @@ $(document).ready(function () {
 <div id="related-papers" class="section level2">
 <h2>Related papers:</h2>
 <ul>
-<li><a href="https://www.afsc.noaa.gov/Publications/AFSC-TM/NOAA-TM-AFSC-208.pdf">Data Report: 2009 Gulf of Alaska Bottom Trawl Survey</a></li>
+<li><a href="https://www.afsc.noaa.gov/Publications/AFSC-TM/NOAA-TM-AFSC-208.pdf">Data Report: 2009 Gulf of Alaska Bottom Trawl Survey</a><br />
+</li>
+<li><a href="https://www.fisheries.noaa.gov/resource/document/groundfish-bottom-trawl-survey-protocols">Groundfish Bottom Trawl Survey Protocols</a></li>
 </ul>
 </div>
 <div id="how-we-process-the-data" class="section level2">
@@ -1794,7 +1778,7 @@ $(document).ready(function () {
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiR3VsZiBvZiBBbGFza2EiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW05PQUEgQWxhc2thIEZpc2hlcmllcyBTY2llbmNlIENlbnRlciBHcm91bmRmaXNoIEFzc2Vzc21lbnQgUHJvZ3JhbSBzdXJ2ZXlzXShodHRwOi8vd3d3Lm53ZnNjLm5vYWEuZ292L3Jlc2VhcmNoL2RpdmlzaW9ucy9mcmFtL2dyb3VuZGZpc2gvYm90dG9tX3RyYXdsLmNmbSkKCiMjIFJlbGF0ZWQgcGFwZXJzOiAgCgotIFtEYXRhIFJlcG9ydDogMjAwOSBHdWxmIG9mIEFsYXNrYSBCb3R0b20gVHJhd2wgU3VydmV5XShodHRwczovL3d3dy5hZnNjLm5vYWEuZ292L1B1YmxpY2F0aW9ucy9BRlNDLVRNL05PQUEtVE0tQUZTQy0yMDgucGRmKSAgCgojIyBIb3cgd2UgcHJvY2VzcyB0aGUgZGF0YTogIAotIFNvbWUgb2YgdGhlIGZpbGVzIGNvbnRhaW4gZXh0cmEgaGVhZGVycyBpbiB0aGUgZGF0YSByb3dzLCBzbyB3ZSByZW1vdmUgYW55IGRhdGEgcm93cyB0aGF0IGNvbnRhaW4gdGhlIHdvcmQgIkxBVElUVURFIiBpbiB0aGUgTEFUSVRVREUgY29sdW1uLiAgCi0gV2UgY3JlYXRlIGEgaGF1bGlkIGJ5IGNvbWJpbmluZyBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIHZlc3NlbCBudW1iZXIgd2l0aCBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIGNydWlzZSBudW1iZXIgYW5kIGEgMyBkaWdpdCBsZWFkaW5nIHplcm8gaGF1bCBudW1iZXIsIHNlcGFyYXRlZCBieSAiLSIsIGZvciBleGFtcGxlOiAodmVzc2VsLWNydWlzZS1oYXVsKSAzNTQtMDY3LTAwMS4gIAotIElmIHd0Y3B1ZSBpcyByZWNvcmRlZCBhcyAiLTk5OTkiLCB3ZSBjaGFuZ2UgdGhlIHZhbHVlIHRvIE5BLiAgCi0gV2UgcmVtb3ZlIGFueSBTQ0lFTlRJRklDIHNwcCB2YWx1ZXMgdGhhdCBjb250YWluIHRoZSB3b3JkICJlZ2ciIG9yIHdoZXJlIHRoZSBvbmx5IHZhbHVlIGluIHRoZSBTQ0lFTlRJRklDIGZpZWxkIGlzIHdoaXRlIHNwYWNlLiAgCi0gQW55IHZhbHVlcyBTQ0lFTlRJRklDIHZhbHVlcyB0aGF0IGNvbnRhaW4gdGhlIHdvcmQgIkxlcGlkb3BzZXR0YSIgYXJlIGNoYW5nZWQgdG8gIkxlcGlkb3BzZXR0YSBzcC4iIGJlY2F1c2UgbW9yZSB0aGFuIG9uZSBnZW51cy9zcHAgY29tYm8gd2FzIHVzZWQgdG8gZGVzY3JpYmUgdGhlIHNhbWUgb3JnYW5pc20gb3ZlciB0aW1lLiAgVGhpcyBhbHNvIGhvbGRzIHRydWUgZm9yIE15b3hvY2VwaGFsdXMgc3AuIGV4Y2x1ZGluZyBzY29ycGl1cyBhbmQgQmF0aHlyYWphIHNwLiBleGNsdWRpbmcgcGFudGhlcmEuCi0gV2UgZ3JvdXAgdGhlIGRhdGEgYnkgaGF1bGlkLCBzdHJhdHVtLCBzdHJhdHVtYXJlYSwgeWVhciwgbGF0LCBsb24sIGRlcHRoLCAgYW5kIHNwcCBhbmQgdGhlbiBzdW0gdXAgYWxsIG9mIHRoZSB3dGNwdWUgdmFsdWVzIGZvciBlYWNoIGdyb3VwIGFuZCByZWFzc2lnbiB0aGF0IGFzIHRoZSB3dGNwdWUuCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiR3VsZiBvZiBBbGFza2EiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIFNvdXJjZToKW05PQUEgQWxhc2thIEZpc2hlcmllcyBTY2llbmNlIENlbnRlciBHcm91bmRmaXNoIEFzc2Vzc21lbnQgUHJvZ3JhbSBzdXJ2ZXlzXShodHRwOi8vd3d3Lm53ZnNjLm5vYWEuZ292L3Jlc2VhcmNoL2RpdmlzaW9ucy9mcmFtL2dyb3VuZGZpc2gvYm90dG9tX3RyYXdsLmNmbSkKCiMjIFJlbGF0ZWQgcGFwZXJzOiAgCgotIFtEYXRhIFJlcG9ydDogMjAwOSBHdWxmIG9mIEFsYXNrYSBCb3R0b20gVHJhd2wgU3VydmV5XShodHRwczovL3d3dy5hZnNjLm5vYWEuZ292L1B1YmxpY2F0aW9ucy9BRlNDLVRNL05PQUEtVE0tQUZTQy0yMDgucGRmKSAgCi0gW0dyb3VuZGZpc2ggQm90dG9tIFRyYXdsIFN1cnZleSBQcm90b2NvbHNdKGh0dHBzOi8vd3d3LmZpc2hlcmllcy5ub2FhLmdvdi9yZXNvdXJjZS9kb2N1bWVudC9ncm91bmRmaXNoLWJvdHRvbS10cmF3bC1zdXJ2ZXktcHJvdG9jb2xzKQoKIyMgSG93IHdlIHByb2Nlc3MgdGhlIGRhdGE6ICAKLSBTb21lIG9mIHRoZSBmaWxlcyBjb250YWluIGV4dHJhIGhlYWRlcnMgaW4gdGhlIGRhdGEgcm93cywgc28gd2UgcmVtb3ZlIGFueSBkYXRhIHJvd3MgdGhhdCBjb250YWluIHRoZSB3b3JkICJMQVRJVFVERSIgaW4gdGhlIExBVElUVURFIGNvbHVtbi4gIAotIFdlIGNyZWF0ZSBhIGhhdWxpZCBieSBjb21iaW5pbmcgYSAzIGRpZ2l0IGxlYWRpbmcgemVybyB2ZXNzZWwgbnVtYmVyIHdpdGggYSAzIGRpZ2l0IGxlYWRpbmcgemVybyBjcnVpc2UgbnVtYmVyIGFuZCBhIDMgZGlnaXQgbGVhZGluZyB6ZXJvIGhhdWwgbnVtYmVyLCBzZXBhcmF0ZWQgYnkgIi0iLCBmb3IgZXhhbXBsZTogKHZlc3NlbC1jcnVpc2UtaGF1bCkgMzU0LTA2Ny0wMDEuICAKLSBJZiB3dGNwdWUgaXMgcmVjb3JkZWQgYXMgIi05OTk5Iiwgd2UgY2hhbmdlIHRoZSB2YWx1ZSB0byBOQS4gIAotIFdlIHJlbW92ZSBhbnkgU0NJRU5USUZJQyBzcHAgdmFsdWVzIHRoYXQgY29udGFpbiB0aGUgd29yZCAiZWdnIiBvciB3aGVyZSB0aGUgb25seSB2YWx1ZSBpbiB0aGUgU0NJRU5USUZJQyBmaWVsZCBpcyB3aGl0ZSBzcGFjZS4gIAotIEFueSB2YWx1ZXMgU0NJRU5USUZJQyB2YWx1ZXMgdGhhdCBjb250YWluIHRoZSB3b3JkICJMZXBpZG9wc2V0dGEiIGFyZSBjaGFuZ2VkIHRvICJMZXBpZG9wc2V0dGEgc3AuIiBiZWNhdXNlIG1vcmUgdGhhbiBvbmUgZ2VudXMvc3BwIGNvbWJvIHdhcyB1c2VkIHRvIGRlc2NyaWJlIHRoZSBzYW1lIG9yZ2FuaXNtIG92ZXIgdGltZS4gIFRoaXMgYWxzbyBob2xkcyB0cnVlIGZvciBNeW94b2NlcGhhbHVzIHNwLiBleGNsdWRpbmcgc2NvcnBpdXMgYW5kIEJhdGh5cmFqYSBzcC4gZXhjbHVkaW5nIHBhbnRoZXJhLgotIFdlIGdyb3VwIHRoZSBkYXRhIGJ5IGhhdWxpZCwgc3RyYXR1bSwgc3RyYXR1bWFyZWEsIHllYXIsIGxhdCwgbG9uLCBkZXB0aCwgIGFuZCBzcHAgYW5kIHRoZW4gc3VtIHVwIGFsbCBvZiB0aGUgd3RjcHVlIHZhbHVlcyBmb3IgZWFjaCBncm91cCBhbmQgcmVhc3NpZ24gdGhhdCBhcyB0aGUgd3RjcHVlLgo=</div>
 
 
 
@@ -1823,6 +1807,29 @@ $(document).ready(function () {
 });
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("goa.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

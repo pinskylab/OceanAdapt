@@ -12,7 +12,8 @@ output: html_notebook
 
 - [Kotwicki, Stan, and Robert R. Lauth. 2013. “Detecting Temporal Trends and Environmentally-Driven Changes in the Spatial Distribution of Bottom Fishes and Crabs on the Eastern Bering Sea Shelf.” Deep Sea Research Part II: Topical Studies in Oceanography, Understanding Ecosystem Processes in the Eastern Bering Sea II, 94 (October): 231–43.](https://doi.org/10.1016/j.dsr2.2013.03.017)  
 
-- [STEVENSON, D. E., and G. R. HOFF 2009. Species identification confidence in the eastern Bering Sea shelf survey (1982-2008). AFSC Processed Rep. 2009-04, 46 p. Alaska Fish. Sci. Cent., NOAA, Natl. Mar. Fish. Serv., 7600 Sand Point Way NE, Seattle WA 98115.](https://www.afsc.noaa.gov/Publications/ProcRpt/PR2009-04.pdf)
+- [STEVENSON, D. E., and G. R. HOFF 2009. Species identification confidence in the eastern Bering Sea shelf survey (1982-2008). AFSC Processed Rep. 2009-04, 46 p. Alaska Fish. Sci. Cent., NOAA, Natl. Mar. Fish. Serv., 7600 Sand Point Way NE, Seattle WA 98115.](https://www.afsc.noaa.gov/Publications/ProcRpt/PR2009-04.pdf)  
+- [Groundfish Bottom Trawl Survey Protocols](https://www.fisheries.noaa.gov/resource/document/groundfish-bottom-trawl-survey-protocols)
 
 ## How we process the data:  
 - Some of the files contain extra headers in the data rows, so we remove any data rows that contain the word "LATITUDE" in the LATITUDE column.  

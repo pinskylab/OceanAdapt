@@ -11,7 +11,8 @@ output: html_notebook
 
 - [NOAA Protocols for Groundfish Bottom Trawl Surveys of the Nation’s Fishery Resources March 16, 2003](https://www.afsc.noaa.gov/RACE/gearsupport/tmspo65.pdf)  
 - [Species Codebook 2011](ai_species_codebook_2011.pdf)  
-- [Species Identification Confidence in the Gulf of Alaska and Aleutian Islands Surveys (1980-2011)](https://www.afsc.noaa.gov/Publications/ProcRpt/PR2014-01.pdf)
+- [Species Identification Confidence in the Gulf of Alaska and Aleutian Islands Surveys (1980-2011)](https://www.afsc.noaa.gov/Publications/ProcRpt/PR2014-01.pdf)  
+- [Groundfish Bottom Trawl Survey Protocols](https://www.fisheries.noaa.gov/resource/document/groundfish-bottom-trawl-survey-protocols)
 
 ## How we process the data:  
 - The 2014-2018.csv file has a comment that contains a comma, which affects the parsing of the csv file.  We fix this by replacing all occurrences of "Stone et al., 2011" with "Stone et al. 2011".  This causes the columns to parse correctly.  
