@@ -11,6 +11,7 @@ output: html_notebook
 - [Estimation of the Fishing Power Correction Factor](ftp://ftp.library.noaa.gov/noaa_documents.lib/NMFS/AFSC/AFSC_PR/PR1992-01.pdf)  
 - [Helser, Thomas, André Punt, and Richard Methot. 2004. “A Generalized Linear Mixed Model Analysis of a Multi-Vessel Fishery Resource Survey.” Fisheries Research 70 (December): 251–64](https://doi.org/10.1016/j.fishres.2004.08.007)  
 - [Cooper, Andrew B., Andrew A. Rosenberg, Gunnar Stefánsson, and Marc Mangel. 2004. “Examining the Importance of Consistency in Multi-Vessel Trawl Survey Design Based on the U.S. West Coast Groundfish Bottom Trawl Survey.” Fisheries Research, Models in Fisheries Research: GLMs, GAMS and GLMMs, 70 (2): 239–50.](https://doi.org/10.1016/j.fishres.2004.08.006)  
+- [The Northwest Fisheries Science Center’s West Coast Groundfish Bottom Trawl Survey: History, Design, and Description](https://repository.library.noaa.gov/view/noaa/14179/noaa_14179_DS2.pdf)
 
 ## How we process the data:  
 #### To WCTRI:
