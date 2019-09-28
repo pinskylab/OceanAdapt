@@ -19,7 +19,7 @@ output: html_notebook
 - [NEFSC trawl strata](neus_NEFSC_trawl_strata.pdf)  
 
 ## How we process the data:  
-- We group the data by YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, and SVSPP and summarise the BIOMASS to calculate wtcpue.  
+- We group the data by YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, and SVSPP and sum the BIOMASS (which is reported by sex) to calculate wtcpue.  
 - We create a haulid by combining a 6 digit leading zero cruise number with a 3 digit leading zero station number and a 4 digit leading zero stratum number, separated by "-", for example: (cruise-station-stratum) 456354-067-0001.  
 - We convert square nautical miles to square kilometers.  
 - We remove any SCINAME spp values that contain the word "egg" or "unidentified", or where the only value in the SCINAME field is white space.  
