@@ -12,6 +12,7 @@ output: html_notebook
 - [A brief historical review of the Woods Hole Laboratory trawl survey time series, Azarovitz, 1981](http://dmoserv3.whoi.edu/data_docs/NEFSC_Bottom_Trawl/Azarovitz1981.pdf)  
 - [An Evaluation of the Bottom Trawl Survey Program of the Northeast Fisheries Center, NEFSC, 1988](https://www.st.nmfs.noaa.gov/tm/nec_image/nec052image.pdf)  
 - [A historical perspective on the abundance and biomass of northeast demersal complex stocks from NMFS and Massachusetts inshore bottom trawl surveys, 1963-2002, Sosebe and Cardin, 2006](https://repository.library.noaa.gov/view/noaa/5259)   
+- [Estimation of Albatross IV to Henry B. Bigelow Calibration Factors, Miller et al., 2010](https://www.nefsc.noaa.gov/publications/crd/crd1005/crd1005.pdf)
 - [Northeast Fisheries Science Center Bottom Trawl Survey Protocols for the NOAA Ship Henry B. Bigelow, Politis et al., 2014](https://www.nefsc.noaa.gov/publications/crd/crd1406/)  
 - [Groundfish Bottom Trawl Survey Protocols, NOAA Fisheries, 2018](https://www.fisheries.noaa.gov/resource/document/groundfish-bottom-trawl-survey-protocols)  
 - [Density-Independent and Density-Dependent Factors Affecting Spatio-Temporal Dynamics of Atlantic Cod (Gadus Morhua) Distribution in the Gulf of Maine, Zengguang et al., 2018](https://doi.org/10.1093/icesjms/fsx246)
