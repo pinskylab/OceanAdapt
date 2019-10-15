@@ -1,0 +1,27 @@
+---
+title: "Southeast U.S."
+output: html_notebook
+---
+
+## Source:
+[Southeast Area Monitoring and Assessment Program - South Atlantic](http://www.seamap.org/)
+
+## Related papers:  
+- [Descriptions of surveys and data for SEAMAP](seus_seamap_data_descriptions.pdf)  
+- [SEAMAP-SA Coastal Trawl Survey](http://www.seamap.org/documents/Coastal%20Survey.pdf)  
+
+## How we process the data:  
+- We remove equal signs and quotes.  
+- The STRATA column is a subset of the first 2 characters of the STATIONCODE.  
+- We remove any rows where DEPTHZONE is "OUTER".  
+- We change the SEASON column to be "winter" if the month is 1-3, "spring" if the month is 4-6, "summer" if the month is 7 or 8, and "fall" if the month is 9-12.  
+- We find rows where weight was not provided for a species, calculate the mean weight for those species, and replace the missing values with mean weight.  
+- We fix some data entry issues with lat lon, specifically, coordinates of less than -360 (like -700), do not exist.  This is a missing decimal.  We fix this by dividing the value by 10.  
+- We calculate trawl distance in order to calculate effort.  
+- There are two COLLECTIONNUMBERS per EVENTNAME, with no exceptions; EFFORT is always the same for each COLLECTIONNUMBER.  We sum the two tows.  
+- We calculate biomass by grouping the data by haulid, stratum, stratumarea, year, lat, lon, depth, SEASON, EFFORT, and spp and summing up the SPECIESTOTALWEIGHT.  
+- We calculate wtpcue by dividing the biomass by 2 x EFFORT.  
+- We remove any SPECIESSCIENTIFICNAME spp with the value 'MISCELLANEOUS INVERTEBRATES', 'XANTHIDAE', 'MICROPANOPE NUTTINGI', 'ALGAE', 'DYSPANOPEUS SAYI',  or 'PSEUDOMEDAEUS AGASSIZII'.  
+- Any values SPECIESSCIENTIFICNAME spp values that contain the word "ANCHOA" are changed to only "ANCHOA" because more than one genus/spp combo was used to describe the same organism over time.  This also holds true for LIBINIA.  
+- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.  
+- We split the data out into spring, summer, and fall seasons.

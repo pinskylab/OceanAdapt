@@ -1,0 +1,25 @@
+---
+title: "Aleutian Islands"
+output: html_notebook
+---
+
+## Source:
+[NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)
+
+## Related papers:  
+- [NOAA Technical Memorandum NMFS-AFSC-215 Data Report: 2010 Aleutian Islands bottom trawl survey](https://www.afsc.noaa.gov/Publications/AFSC-TM/NOAA-TM-AFSC-215.pdf)  
+
+- [NOAA Protocols for Groundfish Bottom Trawl Surveys of the Nation’s Fishery Resources March 16, 2003](https://www.afsc.noaa.gov/RACE/gearsupport/tmspo65.pdf)  
+- [Species Codebook 2011](ai_species_codebook_2011.pdf)  
+- [Species Identification Confidence in the Gulf of Alaska and Aleutian Islands Surveys (1980-2011)](https://www.afsc.noaa.gov/Publications/ProcRpt/PR2014-01.pdf)  
+- [Groundfish Bottom Trawl Survey Protocols](https://www.fisheries.noaa.gov/resource/document/groundfish-bottom-trawl-survey-protocols)
+
+## How we process the data:  
+- The 2014-2018.csv file has a comment that contains a comma, which affects the parsing of the csv file.  We fix this by replacing all occurrences of "Stone et al., 2011" with "Stone et al. 2011".  This causes the columns to parse correctly.  
+- Some of the files contain extra headers in the data rows, so we remove any data rows that contain the word "LATITUDE" in the LATITUDE column.  
+- We create a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by "-", for example: (vessel-cruise-haul) 354-067-001.  
+- If wtcpue is recorded as "-9999", we change the value to NA.  
+- We remove any SCIENTIFIC spp values that contain the word "egg" or where the only value in the SCIENTIFIC field is white space.  
+- Any values SCIENTIFIC values that contain the word "Atheresthes" are changed to "Atheresthes sp." because more than one genus/spp combo was used to describe the same organism over time.  This also holds true for Lepidopsetta sp., Myoxocephalus sp. excluding scorpius, & Bathyraja sp. excluding panthera.  
+- We correct the longitude for the Aleutians by subtracting 360 from any longitude value over 0.
+- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.

@@ -1,0 +1,74 @@
+---
+title: "OceanAdapt Metadata"
+author: "Michelle Stuart"
+date: "updated `r Sys.Date()`"
+output: 
+  html_document: 
+    highlight: textmate
+    theme: journal
+---
+
+## By region:  
+### [Aleutian Islands](ai.nb.html)  
+### [Eastern Bering Sea](ebs.nb.html)  
+### [Gulf of Alaska](goa.nb.html)  
+### [West Coast U.S.](wcann.nb.html)
+### [Gulf of Mexico](gmex.nb.html)
+### [Southeast U.S.](seus.nb.html)
+### [Northeast U.S.](neus.nb.html) 
+### [Scotian Shelf](scot.nb.html)
+
+
+# Curated Tables
+A optional quality trimming step that we perform by default as part of regional compilation is to trim each region to only strata that were sampled in all years and only years that sampled all strata.
+
+The data we report on OceanAdapt, found in the data_clean folder,  are gathered from several data sources found above. Our curated data takes the form of several tables described here:
+
+-   [all-regions-full.RData](https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/all-regions-full.RData) is a table containing all curated rows from all regions with the following columns:
+    -   region - character - the region where the survey occurred.
+    -   haulid - character - a unique identifier of the trawl haul.
+    -   year - numeric (YYYY) - the year the trawl occurred.
+    -   lat - numeric - the latitude in decimal degrees where the trawl occurred.
+    -   lon - numeric - the longitude in decimal degrees where the trawl occurred.
+    -   stratum - numeric - the stratum code where the trawl occurred.
+    -   depth - numeric - the depth in meters of the trawl.
+    -   spp - character - the Genus and species of the organism captured in the trawl.
+    -   common - character - the common name of the organism captured in the trawl.
+    -   wtcpue - numeric - the weight in kilograms captured per unit effort.
+
+-   [all-regions-trimmed.RData](https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/all-regions-trimmed.RData) is the all-regions\_full table reduced to include only species present at least 3/4 of the available years in a survey. The columns are the same as those listed above.
+
+-   [by\_national.RData](https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_national.RData) is a table of national averages by year for the trawl surveys with the following columns:
+    -   year - numeric (YYYY) - the year the trawl occurred.
+    -   lat - numeric - the mean latitude offset in decimal degrees where all trawls occurred.
+    -   lon - numeric - the mean longitude offset in decimal degrees where all trawls occurred.
+    -   depth - numeric - the mean depth offset in meters of all trawls.
+    -   lat\_se - numeric - the standard error of the mean latitude offset.
+    -   lonse - numeric - the standard error of the mean longitude offset.
+    -   depth\_se - numeric - the standard error of the mean depth offset.
+    -   numspp - numeric - the total number of species observed that year.
+
+-   [by\_region.RData](https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_region.RData) is a table of regional averages by year for the trawl surveys with the following columns:
+    -   region - character - the region where the survey occurred.
+    -   year - numeric (YYYY) - the year the trawl occurred.
+    -   lat - numeric - the mean latitude offset in decimal degrees where all trawls occurred.
+    -   lon - numeric - the mean longitude offset in decimal degrees where all trawls occurred.
+    -   depth - numeric - the mean depth offset in meters of all trawls.
+    -   lat\_se - numeric - the standard error of the mean latitude offset.
+    -   lonse - numeric - the standard error of the mean longitude offset.
+    -   depth\_se - numeric - the standard error of the mean depth offset.
+    -   numspp - numeric - the total number of species observed that year in that region.
+
+-   [by\_species.RData](https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_species.RData) is a table of averages by species for the trawl surveys with the following columns:
+    -   region - character - the region where the survey occurred.
+    -   year - numeric (YYYY) - the year the trawl occurred.
+    -   lat - numeric - the mean latitude in decimal degrees where the species was found in a given year.
+    -   lon - numeric - the mean longitude in decimal degrees where the species was found in a given year.
+    -   depth - numeric - the mean depth in meters where the species was found in a given year.
+    -   lat\_se - numeric - the standard error of the mean latitude.
+    -   lonse - numeric - the standard error of the mean longitude.
+    -   depth\_se - numeric - the standard error of the mean depth.
+    -   spp - character - the Genus and species of the organism captured in the trawl.
+    -   common - character - the common name of the organism captured in the trawl.
+
+-   [dat_exploded.RData](https://github.com/pinskylab/OceanAdapt/tree/update_2019/data_clean/by_species.RData) a table where all species found in a region occupy a row in the table in all years and represented with zeros when not observed. The table is made up of the same columns as all-data-full and all-data-trimmed.

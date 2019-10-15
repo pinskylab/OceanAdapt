@@ -1,0 +1,88 @@
+---
+title: ""
+output: 
+  html_document:
+    theme: cosmo
+---
+# About Us
+
+OceanAdapt is a collaboration between the Pinsky Lab of Rutgers University, the National Marine Fisheries Service (NMFS), and Fisheries and Oceans Canada (DFO) to provide information about the impacts of changing climate and other factors on the distribution of marine life to the National Climate Assessment, fisheries communities, policymakers, and to others. This website hosts an annually updated database of scientific surveys in the United States and Canada, providing tools for exploring changes in marine fish and invertebrate distributions. We are continually working to expand the site with new data and visualization tools.
+
+___
+
+# Our Method
+
+The distributions of fish and invertebrate populations are routinely monitored by DFO, NMFS, and other agencies during bottom trawl surveys on the continental shelves of North America. These surveys provide core information for use in fisheries management and extend back two to five decades. For the indicators displayed on this website, a mean location (the centroid) is calculated for each species in each year of each survey, after the surveys have been standardized to a consistent spatial footprint through time. The centroid is the mean latitude and mean depth of catch in the survey, weighted by biomass.
+
+For the regional and national indices, the first year is standardized to a value of zero and changes are then averaged across species in a region. Only regions with consistent survey methods and without coastlines that would prevent poleward shifts in distribution are included in the national average (currently Eastern Bering Sea and Northeast U.S.). Only species caught every year are analyzed to prevent changes in species composition from affecting the indicator. The indicator begins in the first year that data are available from the focal regions.
+
+The historical analyses and data are described in Pinsky, M. L., B. Worm, M. J. Fogarty, J. L. Sarmiento, and S. A. Levin. 2013. Marine taxa track local climate velocities. Science 341: 1239-1242 doi: [10.1126/science.1239352](http://doi.org/10.1126/science.1239352) (free reprint available from [pinsky.marine.rutgers.edu/publications](http://pinsky.marine.rutgers.edu/publications/)).
+
+The projections of future species distributions were developed from statistical relationships between ocean temperature, bottom habitat features, and species abundance. Ocean temperature projections for the future were from global climate models developed for the [Intergovernmental Panel on Climate Change](https://www.ipcc.ch/). Full methods are described in Morley, J. W., R. L. Selden, R. J. Latour, T. L. Frölicher, R. J. Seagraves, and M. L. Pinsky. 2018. Projecting shifts in thermal habitat for 686 species on the North American continental shelf. PLOS ONE 13(5): e0196127 doi: [10.1371/journal.pone.0196127](http://doi.org/10.1371/journal.pone.0196127) (open access).
+
+Data contributors to this website include:
+
+- [NOAA Northeast Fisheries Science Center Spring and Fall Bottom Trawl Surveys](http://www.nefsc.noaa.gov/femad/ecosurvey/mainpage/)  
+- [NOAA Northwest Fisheries Science Center U.S. West Coast Groundfish Bottom Trawl Survey](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)  
+- [NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)  
+- [Gulf States Marine Fisheries Commission SEAMAP Groundfish Surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)  
+- [Southeast Area Monitoring and Assessment Program - South Atlantic](http://www.seamap.org/)
+- [Fisheries and Oceans Canada - Scotian Shelf](https://www.dfo-mpo.gc.ca/oceans/index-eng.html)
+
+Note that the script for these calculations is also available (written for [R](http://www.r-project.org/)). Development version of the script available on [GitHub](https://github.com/mpinsky/OceanAdapt).
+
+---
+
+# Our Data Policy
+
+All of the data underlying these analyses are available for [download](https://github.com/mpinsky/OceanAdapt), including spatially georeferenced catches from more than fifty thousand bottom trawl tows in six regions of the U.S. Please notify us through the online form when you download the data, as this helps us justify maintaining the database as a community resource.
+
+**As part of our Fair Use Policy, please:**  
+
+
+- Notify us if you are preparing a manuscript using information from the OceanAdapt database (also helps justify funding).  
+
+- Coordinate your research efforts with others using the database by joining existing papers where efforts overlap (contact us if you want to check on potential overlap).  
+
+- If the database is particularly crucial to your research, please consider offering database developers and their colleagues an opportunity to become involved as co-authors.  
+
+In primary publications using data from the database, please cite Pinsky et al. 2013. Marine taxa track local climate velocities. Science 341: 1239-1242 doi: 10.1126/science.1239352, as well as the original data sources.
+
+---
+
+# Related Resources
+
+**Government agencies**  
+
+- [National Marine Fisheries Service](http://www.nmfs.noaa.gov/)  
+
+- [US Global Change Research Program](http://www.globalchange.gov/)  
+
+**Climate, fish, and fisheries**  
+
+- [National Climate Assessment](http://www.globalchange.gov/)  
+
+- [Northeast Fisheries Science Center: Climate Change](http://www.nefsc.noaa.gov/ecosys/climate_change/index.html)  
+
+- [NOAA Climate, Fisheries, and Protected Resources](http://www.fisheries.noaa.gov/stories/2014/03/climate_portal.html)  
+
+- [Nereus Program](http://www.nereusprogram.org/)  
+
+- [ICES Report on Ocean Climate](http://ocean.ices.dk/iroc/)  
+
+**Marine climate data**  
+
+- [Ocean Climate Change Web Portal](http://www.esrl.noaa.gov/psd/ipcc/ocn/)  
+
+- [ICES Report on Ocean Climate](http://ocean.ices.dk/iroc/)  
+
+**Fish and fisheries data**  
+
+- [RAM Legacy Database](http://ramlegacy.org/)  
+
+- [Sea Around Us Project](http://www.seaaroundus.org/)  
+
+- [Fishbase](http://www.fishbase.org/)  
+
+- [Sealifebase](http://www.fishbase.org/)  
+

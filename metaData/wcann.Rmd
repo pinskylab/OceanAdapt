@@ -1,0 +1,34 @@
+---
+title: "West Coast U.S."
+output: html_notebook
+---
+
+## Source:
+[NOAA Northwest Fisheries Science Center U.S. West Coast Groundfish Bottom Trawl Survey](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)
+
+## Related papers:  
+- [Munro, P. T. 1998. A decision rule based on the mean square error for correcting relative fishing power differences in trawl survey data. Fish. Bull. 96:538-546.](https://www.st.nmfs.noaa.gov/spo/FishBull/963/munro.pdf)  
+- [Estimation of the Fishing Power Correction Factor](ftp://ftp.library.noaa.gov/noaa_documents.lib/NMFS/AFSC/AFSC_PR/PR1992-01.pdf)  
+- [Helser, Thomas, André Punt, and Richard Methot. 2004. “A Generalized Linear Mixed Model Analysis of a Multi-Vessel Fishery Resource Survey.” Fisheries Research 70 (December): 251–64](https://doi.org/10.1016/j.fishres.2004.08.007)  
+- [Cooper, Andrew B., Andrew A. Rosenberg, Gunnar Stefánsson, and Marc Mangel. 2004. “Examining the Importance of Consistency in Multi-Vessel Trawl Survey Design Based on the U.S. West Coast Groundfish Bottom Trawl Survey.” Fisheries Research, Models in Fisheries Research: GLMs, GAMS and GLMMs, 70 (2): 239–50.](https://doi.org/10.1016/j.fishres.2004.08.006)  
+- [The Northwest Fisheries Science Center’s West Coast Groundfish Bottom Trawl Survey: History, Design, and Description](https://repository.library.noaa.gov/view/noaa/14179/noaa_14179_DS2.pdf)
+
+## How we process the data:  
+#### To WCTRI:
+- We keep only hauls of type 3 and performance 0.  
+- We calculate a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by "-", for example: (vessel-cruise-haul) 354-067-001.
+- We create a "strata" value by using lat, lon and depth to create a value in 100m bins.  
+- We create a wtcpue value with the units weight per hectare (10,000 m2) by multiplying the WEIGHT by 10,000 and dividing by the product of the DISTANCE_FISHED * 1000 * NET_WIDTH.  
+- We calculate the area of the stratum by creating a closed hull of lat lon points, creating a polygon with a map projection, converting to kilometers, and calculating the area of the polygon, all using the function calcarea as defined in the compile.R script.  
+- We remove any SPECIES_NAME spp values that contain the word "egg" or where the only value in the SPECIES_NAME field is white space.  
+- Any values SPECIES_NAME values that contain the word "Lepidopsetta" are changed to "Lepidopsetta sp." because more than one genus/spp combo was used to describe the same organism over time.  This also holds true for Bathyraja sp.  
+- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.    
+
+#### To WCANN:
+- We create a "strata" value by using lat, lon and depth to create a value in 100m bins.  
+- We calculate a wtcpue value with the units kg per hectare (10,000 m2) by dividing total_catch_wt_kg by area_swept_ha_der.
+- We calculate the area of the stratum by creating a closed hull of lat lon points, creating a polygon with a map projection, converting to kilometers, and calculating the area of the polygon, all using the function calcarea as defined in the compile.R script.   
+- We remove any SPECIES_NAME spp values that contain the word "egg" or where the only value in the SPECIES_NAME field is white space.  
+- Any values SPECIES_NAME values that contain the word "Lepidopsetta" are changed to "Lepidopsetta sp." because more than one genus/spp combo was used to describe the same organism over time.  This also holds true for Bathyraja sp.  
+- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.   
+

@@ -1,0 +1,60 @@
+---
+title: "Gulf of Mexico"
+output: html_notebook
+---
+
+## Source:
+[Gulf States Marine Fisheries Commission SEAMAP Groundfish Surveys](http://seamap.gsmfc.org)
+
+## Related Papers: 
+- [Gulf of Mexico Operations Manual](https://seamap.gsmfc.org/documents/SEAMAP%20Operations%20Manual%20March%202016.pdf)  
+- [Derivation of Red Snapper Time Series from SEAMAP and Groundfish Trawl Surveys](http://sedarweb.org/docs/wpapers/SEDAR7_DW1.pdf)  
+- [Comparisons of Relative Fishing Powers of Selected SEAMAP Survey Vessels](http://sedarweb.org/docs/wpapers/SEDAR7_DW53.pdf)  
+- [Fishery-independent Bottom Trawl Surveys for Deep-water Fishes and Invertebrates of the U.S. Gulf of Mexico, 2002-08](https://spo.nmfs.noaa.gov/sites/default/files/pdf-content/MFR/mfr724/mfr7242.pdf)  
+- [SEAMAP Oracle DMS definitions](http://seamap.gsmfc.org/documents/filedef.doc)  
+
+## How we process the data:
+- gmex_STAREC.csv has characters that prevent it from being parsed easily.  We attempt to make parsing more manageable by replacing the quotes in quoted character strings using the R regex below then reading the file in as a csv.
+```{r eval=FALSE}
+str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
+```
+- We only keep gear type "ST".  
+- We trim out young of year records (only useful for count data) and those with UNKNOWN species.  
+- We make two combined records where 'ANTHIAS TENUIS AND WOODSI', 'MOLLUSCA AND UNID.OTHER #01' share the same species code.  
+- We trim to high quality SEAMAP summer trawls, based off the subset used by Jeff Rester's GS_TRAWL_05232011.sas.  
+- We create a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by "-", for example: (vessel-cruise-haul) 354-067-001.  
+- We convert fathoms to meters. 
+- We create a "strata" value by using lat, lon and depth to create a value in 100m bins.   
+- We trim out or fix speed and duration records by trimming out tows of 0, >60, or unknown minutes.  
+- We fix VESSEL_SP typo according to Jeff Rester: 30 = 3.  
+- We trim out vessel speeds 0, unknown, or >5 (need vessel speed to calculate area trawled).  
+- We remove a tow when paired tows exist, same lat/lon/year but different haulid.  
+- We adjust wtcpue (biomass per standard tow) for area towed, in units of kg per 10,000 m2. Calculate area trawled in m2: knots * 1.8 km/hr/knot * 1000 m/km * minutes * 1 hr/60 min * width of gear in feet * 0.3 m/ft.
+- We remove unidentified spp, white space only values, and adjust the following names:
+```{r}
+    !spp %in% c('UNID CRUSTA', 'UNID OTHER', 'UNID.FISH', 'CRUSTACEA(INFRAORDER) BRACHYURA', 'MOLLUSCA AND UNID.OTHER #01', 'ALGAE', 'MISCELLANEOUS INVERTEBR', 'OTHER INVERTEBRATES')
+  ) %>% 
+  # adjust spp names
+  mutate(
+    spp = ifelse(GENUS_BGS == 'PELAGIA' & SPEC_BGS == 'NOCTUL', 'PELAGIA NOCTILUCA', spp), 
+    BIO_BGS = ifelse(spp == "PELAGIA NOCTILUCA", 618030201, BIO_BGS), 
+    spp = ifelse(GENUS_BGS == 'MURICAN' & SPEC_BGS == 'FULVEN', 'MURICANTHUS FULVESCENS', spp), 
+    BIO_BGS = ifelse(spp == "MURICANTHUS FULVESCENS", 308011501, BIO_BGS), 
+    spp = ifelse(grepl("APLYSIA", spp), "APLYSIA", spp), 
+    spp = ifelse(grepl("AURELIA", spp), "AURELIA", spp), 
+    spp = ifelse(grepl("BOTHUS", spp), "BOTHUS", spp), 
+    spp = ifelse(grepl("CLYPEASTER", spp), "CLYPEASTER", spp), 
+    spp = ifelse(grepl("CONUS", spp), "CONUS", spp), 
+    spp = ifelse(grepl("CYNOSCION", spp), "CYNOSCION", spp), 
+    spp = ifelse(grepl("ECHINASTER", spp), "ECHINASTER", spp),
+    spp = ifelse(grepl("OPISTOGNATHUS", spp), "OPISTOGNATHUS", spp), 
+    spp = ifelse(grepl("OPSANUS", spp), "OPSANUS", spp), 
+    spp = ifelse(grepl("ROSSIA", spp), "ROSSIA", spp), 
+    spp = ifelse(grepl("SOLENOCERA", spp), "SOLENOCERA", spp), 
+    spp = ifelse(grepl("TRACHYPENEUS", spp), "TRACHYPENEUS", spp)
+```
+- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue. 
+
+
+
+

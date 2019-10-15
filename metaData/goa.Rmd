@@ -1,0 +1,20 @@
+---
+title: "Gulf of Alaska"
+output: html_notebook
+---
+
+## Source:
+[NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)
+
+## Related papers:  
+
+- [Data Report: 2009 Gulf of Alaska Bottom Trawl Survey](https://www.afsc.noaa.gov/Publications/AFSC-TM/NOAA-TM-AFSC-208.pdf)  
+- [Groundfish Bottom Trawl Survey Protocols](https://www.fisheries.noaa.gov/resource/document/groundfish-bottom-trawl-survey-protocols)
+
+## How we process the data:  
+- Some of the files contain extra headers in the data rows, so we remove any data rows that contain the word "LATITUDE" in the LATITUDE column.  
+- We create a haulid by combining a 3 digit leading zero vessel number with a 3 digit leading zero cruise number and a 3 digit leading zero haul number, separated by "-", for example: (vessel-cruise-haul) 354-067-001.  
+- If wtcpue is recorded as "-9999", we change the value to NA.  
+- We remove any SCIENTIFIC spp values that contain the word "egg" or where the only value in the SCIENTIFIC field is white space.  
+- Any values SCIENTIFIC values that contain the word "Lepidopsetta" are changed to "Lepidopsetta sp." because more than one genus/spp combo was used to describe the same organism over time.  This also holds true for Myoxocephalus sp. excluding scorpius and Bathyraja sp. excluding panthera.
+- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
