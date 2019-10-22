@@ -6,6 +6,9 @@ output: html_notebook
 ## Source:
 [Fisheries and Oceans Canada - Scotian Shelf](https://www.dfo-mpo.gc.ca/oceans/index-eng.html)  
 
+## Citing data from Canada:  
+[Please refer to the Open Government Licence - Canada](http://open.canada.ca/en/open-government-licence-canada)
+
 ## How we process the data:  
 - We create a haulid by combining the mission, stratum, and depth, separated by "_".  
 - We calculate the area of the stratum by creating a closed hull of lat lon points, creating a polygon with a map projection, converting to kilometers, and calculating the area of the polygon, all using the function calcarea as defined in the compile.R script.  
