@@ -62,30 +62,30 @@ gen.units <- list(
 			"TV" = "video trap",
 			"VC" = "video camera"
 	),
-	"meshsize" = c(unit = "inch", precision=0.01),
-	"duration" = c(unit = "minute", precision=1),
-	"towspeed" = c(unit="knots", precision=0.1),
-	"areaswept" = c(unit = "hectare", precision =0.000001),
+	"meshsize" = "inch",
+	"duration" = "minute",
+	"towspeed" = "knots",
+	"areaswept" = "hectare",
 	
 	"stratum" = "1 degree lon lat", 
-	"stratumarea"=c(unit = "squareKilometers",precision = 1),
-	"stratumarea2"=c(unit = "nauticalMile", precision = 1), # WRONG: needs to be nautical miles squared, needs custom unit 
-	"lat"=c(unit = "degree", precision = 0.001), 
-	"lon"=c(unit = "degree", precision = 0.001),
-	"lat.deg" = c(unit = "degree", precision=1),
-	"lon.deg" = c(unit="degree",precision=1),
-	"lat.min" = c(unit = "minute", precision = 0.1),
-	"lon.min" = c(unit = "minute" , precision = 0.1),
+	"stratumarea"= "square kilometers",
+	"stratumarea2"= "square nautical miles",
+	"lat"= "degree",
+	"lon"= "degree",
+	"lat.deg" = "degree",
+	"lon.deg" = "degree",
+	"lat.min" = "minute",
+	"lon.min" = "minute",
 	
-	"depth"=c(unit = "meter", precision = 1),
-	"depth2" = c(unit="fathom", precision=0.1),
-	"stemp"=c(unit = "celsius",precision = 0.1), 
-	"btemp"=c(unit = "celsius",precision = 0.1), 
+	"depth"= "meter",
+	"depth2" = "fathom",
+	"stemp"= "celsius",
+	"btemp"= "celsius",
 	
-	"wtcpue" =c(unit = "kilogramsPerHectare",precision = 0.0001),# WRONG, needs to be per hectare
-	"cntcpue"=c(unit = "numberPerKilometerSquared", precision = 0.01),
-	"cnt" = c(unit="number"),
-	"weight"=c(unit="kilogram")
+	"wtcpue" = "kilgrams per tow",
+	"cntcpue"= "number per tow",
+	"cnt" = "number",
+	"weight"= "kilogram"
 )
 
 
