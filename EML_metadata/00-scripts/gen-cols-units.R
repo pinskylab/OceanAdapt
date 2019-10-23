@@ -82,7 +82,7 @@ gen.units <- list(
 	"stemp"= "celsius",
 	"btemp"= "celsius",
 	
-	"wtcpue" = "kilgrams per tow",
+	"wtcpue" = "kilograms per tow",
 	"cntcpue"= "number per tow",
 	"cnt" = "number",
 	"weight"= "kilogram"
