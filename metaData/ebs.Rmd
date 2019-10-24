@@ -2,6 +2,24 @@
 title: "Eastern Bering Sea"
 output: html_notebook
 ---
+---
+```{r setup, include = FALSE, message=FALSE}
+# load libraries
+library(EML)
+library(emld)
+library(tidyverse) # for data table wrangling
+library(knitr) # for web presentation of tables
+library(kableExtra) # for web presentation of tables
+
+# load data
+source("https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/EML_metadata/00-scripts/gen-cols-units.R")
+
+sample_data <- read_csv("https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/data_raw/ebs1982_1984.csv", n_max = 6)
+
+strata <- read_csv("https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/data_raw/ebs_strata.csv", n_max = 6)
+
+column_defs <- readRDS(here::here("metadata","column-definitions.rds"))
+```
 
 ## Source:
 [NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)
@@ -21,4 +39,134 @@ output: html_notebook
 - If wtcpue is recorded as "-9999", we change the value to NA.  
 - We remove any SCIENTIFIC spp values that contain the word "egg" or where the only value in the SCIENTIFIC field is white space.  
 - Any values SCIENTIFIC values that contain the word "Atheresthes" are changed to "Atheresthes sp." because more than one genus/spp combo was used to describe the same organism over time.  This also holds true for Lepidopsetta sp., Myoxocephalus sp., Hippoglossoides sp. & Bathyraja sp.
-- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
+- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.  
+
+## What the raw data includes:  
+The current files of raw data for the Eastern Bering Sea are `r list.files(here::here("data_raw"), pattern = "ebs")`.
+
+### ebs_strata.csv is constant through the years with the column definitions  
+```{r include = FALSE}
+st_attributes <- tibble(
+  attributeName = dput(names(strata))) %>% 
+  left_join(column_defs)
+```
+```{r echo=FALSE, message=TRUE, warning=TRUE}
+knitr::kable(st_attributes) %>% 
+  kableExtra::kable_styling(latex_options = "scale_down")
+```
+
+### The remaining files are trawl data files, data added annually, with the column definitions
+```{r include = FALSE}
+# create a table with each column from the dataset represented as a row.  There will be an error message about undefined units but they are defined later when the dataset is created.
+attributes <- tibble(
+  attributeName = dput(names(sample_data))) %>% 
+  left_join(column_defs) %>% 
+  mutate(formatString = NA,
+         formatString = ifelse(attributeName == "YEAR", unit, formatString), 
+         formatString = ifelse(attributeName == "DATETIME", unit, formatString))
+
+attributeList <- set_attributes(attributes, col_classes = c("numeric", "numeric", "character", "numeric", "Date", "Date", "numeric", "numeric", "character", "character", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"))
+```
+```{r echo=FALSE}
+knitr::kable(select(attributes, -formatString)) %>% 
+  kableExtra::kable_styling(latex_options = "scale_down")
+```
+
+```{r include = FALSE}
+# define custom units
+id <- c("kilograms per tow", "number per tow", "square kilometers")
+dimension <- c("weight", "count", "area")
+unitTypes <- data.frame(
+  id = id, dimension = dimension, stringsAsFactors = FALSE
+)
+units <- data.frame(
+  id = id, unitType = unitTypes, stringsAsFactors = FALSE
+)
+
+unitList <- set_unitList(units, unitTypes)
+
+# define the rest of the data
+# <title>
+	# character vector title
+	dataTitle <- "Eastern Bering Sea bottom trawl survey"
+
+# <creator>
+	# organization name
+	afsc.name <- "National Oceanic and Atmospheric Administration (NOAA) Alaska Fisheries Science Center (AFSC) Resource Assessment and Conservation Engineering Division (RACE)"
+	# create organization address
+	afsc_address <- list( 
+		deliveryPoint = "7600 Sand Point Way, N.E. bldg. 4",
+		city = "Seattle",
+		administrativeArea = "WA",
+		postalCode = "98115",
+		country = "USA"
+	)
+	
+	publisher <- list(
+	organizationName = afsc.name,
+	address = afsc_address,
+	onlineUrl = "http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm")
+
+	R_person <- person(given = "Wayne", family = "Palsson", email = "Wayne.Palsson@noaa.gov", role = "cre")
+	wayne <- as_emld(R_person)
+
+	metadataProvider <- as_emld(person(given="Michelle", family = "Stuart",email = "michelle.stuart@rutgers.edu"))
+	
+others <- as.person("Bob Lauth [ctb] <Bob.Lauth@noaa.gov>")
+associatedParty <- as_emld(others)
+associatedParty[[1]]$organizationName <- afsc.name
+	
+# <pubDate>
+pubDate <- "2012"
+
+# <intellectualRights>
+	# IR <- "this is just a long piece of text"
+
+# <abstract>
+abstract <- set_TextType(text = "The Resource Assessment and Conservation Engineering Division (RACE) of the Alaska Fisheries Science Center (AFSC) conducts bottom trawl surveys to monitor the condition of the demersal fish and crab stocks of Alaska. These data include catch per unit effort for each identified species at a standard set of stations. This is a subset of the main racebase datase. Excluded are non standard stations, earlier years using different gear, and other types of data collected other than species id, species weight, water temperature and depth.")
+
+# This isn't working right now
+# # <methods>
+# 	methods <- 	list(dataSource="http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm",
+# 				description="http://www.afsc.noaa.gov/RACE/groundfish/survey_data/metadata_template.php?fname=RACEweb.xml"
+# 			) 
+# 	set_methods(methods)
+
+	
+
+# ======================
+# = Create EML Objects =
+# ======================
+
+ebs.data <- set_physical("https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/data_raw/ai1983_2000.csv")
+# Create "dataTable": the physical data set with associated column definitions and units
+ebs.dataTable <- list(
+		physical=ebs.data,
+		entityName="EBS",
+		entityDescription = "Bottom Trawl Data in the Eastern Bering Sea",
+		attributeList = attributeList
+)
+
+
+eml <- list(
+           packageId = uuid::UUIDgenerate(),  
+           system = "uuid",
+           dataset = list(
+               title = dataTitle,
+               creator = wayne,
+               pubDate = pubDate,
+               # abstract = abstract,
+               contact = wayne,
+               additionalMetadata = list(metadata = list(unitList = unitList)),
+               dataTable = ebs.dataTable
+               ))
+
+
+# validate
+eml_validate(eml)
+
+# Write EML data file
+write_eml(eml, file=here::here("metadata","ebs.xml"))
+```
+
+The Ecological Metadata Language file can be accessed [here](https://github.com/pinskylab/OceanAdapt/blob/master/metaData/ebs.xml)

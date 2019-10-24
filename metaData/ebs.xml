@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="c550b233-0b6b-40a0-a667-90817f3539ed" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0/ eml.xsd">
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="6224579f-a8c6-4b42-bd41-b43ef91c5c31" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0/ eml.xsd">
   <dataset>
     <additionalMetadata>
       <metadata>
@@ -40,8 +40,8 @@
       <electronicMailAddress>Wayne.Palsson@noaa.gov</electronicMailAddress>
     </creator>
     <dataTable>
-      <entityName>AI</entityName>
-      <entityDescription>Bottom Trawl Data in the Aleutian Islands</entityDescription>
+      <entityName>EBS</entityName>
+      <entityDescription>Bottom Trawl Data in the Eastern Bering Sea</entityDescription>
       <physical>
         <objectName>https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/data_raw/ai1983_2000.csv</objectName>
         <dataFormat>
@@ -267,6 +267,6 @@
       </attributeList>
     </dataTable>
     <pubDate>2012</pubDate>
-    <title>Aleutian Islands bottom trawl survey</title>
+    <title>Eastern Bering Sea bottom trawl survey</title>
   </dataset>
 </eml:eml>
