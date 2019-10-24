@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="1668b15a-6c11-48f5-b508-674f33f96885" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0/ eml.xsd">
+  <dataset>
+    <additionalMetadata>
+      <metadata>
+        <unitList>
+          <unitType id="kilograms per tow" name="kilograms per tow">
+            <dimension name="weight"/>
+          </unitType>
+          <unitType id="number per tow" name="number per tow">
+            <dimension name="count"/>
+          </unitType>
+          <unitType id="square kilometers" name="square kilometers">
+            <dimension name="area"/>
+          </unitType>
+          <unit id="kilograms per tow" name="kilograms per tow">
+            <dimension name="weight"/>
+          </unit>
+          <unit id="number per tow" name="number per tow">
+            <dimension name="count"/>
+          </unit>
+          <unit id="square kilometers" name="square kilometers">
+            <dimension name="area"/>
+          </unit>
+        </unitList>
+      </metadata>
+    </additionalMetadata>
+    <contact>
+      <individualName>
+        <givenName>Wayne</givenName>
+        <surName>Palsson</surName>
+      </individualName>
+      <electronicMailAddress>Wayne.Palsson@noaa.gov</electronicMailAddress>
+    </contact>
+    <creator>
+      <individualName>
+        <givenName>Wayne</givenName>
+        <surName>Palsson</surName>
+      </individualName>
+      <electronicMailAddress>Wayne.Palsson@noaa.gov</electronicMailAddress>
+    </creator>
+    <dataTable>
+      <entityName>goa</entityName>
+      <entityDescription>Bottom Trawl Data in the Gulf of Alaska</entityDescription>
+      <physical>
+        <objectName>https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/data_raw/ai1983_2000.csv</objectName>
+        <dataFormat>
+          <textFormat>
+            <recordDelimiter>&#13;
+</recordDelimiter>
+            <attributeOrientation>column</attributeOrientation>
+            <simpleDelimited>
+              <fieldDelimiter>,</fieldDelimiter>
+            </simpleDelimited>
+          </textFormat>
+        </dataFormat>
+      </physical>
+      <attributeList>
+        <attribute>
+          <attributeName>LATITUDE</attributeName>
+          <attributeDefinition>latitude of the haul</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>degree</standardUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>LONGITUDE</attributeName>
+          <attributeDefinition>longitude of the haul, in western hemisphere degrees (for lon &gt; 0, do lon-360)</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>degree</standardUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>STATION</attributeName>
+          <attributeDefinition>the station ID for the haul</attributeDefinition>
+          <storageType>string</storageType>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain/>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>STRATUM</attributeName>
+          <attributeDefinition>the statistical stratum of the haul</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>YEAR</attributeName>
+          <attributeDefinition>year of haul</attributeDefinition>
+          <storageType>date</storageType>
+          <measurementScale>
+            <dateTime>
+              <formatString>YYYY</formatString>
+              <dateTimeDomain/>
+            </dateTime>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>DATETIME</attributeName>
+          <attributeDefinition>the day and time of the haul</attributeDefinition>
+          <storageType>date</storageType>
+          <measurementScale>
+            <dateTime>
+              <formatString>MM/DD/YYYY HH:MM</formatString>
+              <dateTimeDomain/>
+            </dateTime>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>WTCPUE</attributeName>
+          <attributeDefinition>weight (mass) of the catch</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>kilograms per tow</customUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>NUMCPUE</attributeName>
+          <attributeDefinition>number of individuals caught per hectare in the haul</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>number per tow</customUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>COMMON</attributeName>
+          <attributeDefinition>the common name of the organism sampled</attributeDefinition>
+          <storageType>string</storageType>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain/>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>SCIENTIFIC</attributeName>
+          <attributeDefinition>species scientific name; Genus species</attributeDefinition>
+          <storageType>string</storageType>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain/>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>SID</attributeName>
+          <attributeDefinition>species identification number</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>BOT_DEPTH</attributeName>
+          <attributeDefinition>the maximum depth of the water at the location of the haul</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>meter</standardUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>BOT_TEMP</attributeName>
+          <attributeDefinition>water temperature at the bottom at the location of the haul</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>celsius</standardUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>SURF_TEMP</attributeName>
+          <attributeDefinition>water temperature at the surface at the location of the haul</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>celsius</standardUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>VESSEL</attributeName>
+          <attributeDefinition>vessel ID</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>CRUISE</attributeName>
+          <attributeDefinition>cruise ID</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>HAUL</attributeName>
+          <attributeDefinition>the integer haul number within a cruise</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain/>
+            </ratio>
+          </measurementScale>
+        </attribute>
+      </attributeList>
+    </dataTable>
+    <pubDate>2012</pubDate>
+    <title>Gulf of Alaska bottom trawl survey</title>
+  </dataset>
+</eml:eml>
