@@ -12,8 +12,6 @@ library(knitr) # for web presentation of tables
 library(kableExtra) # for web presentation of tables
 
 # load data
-source("https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/EML_metadata/00-scripts/gen-cols-units.R")
-
 sample_data <- read_csv("https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/data_raw/ebs1982_1984.csv", n_max = 6)
 
 strata <- read_csv("https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/data_raw/ebs_strata.csv", n_max = 6)
