@@ -6,7 +6,7 @@
 # General units – data from a given region have columns which are in one of the following units
 # All units must be custom defined or found here: https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/./eml-unitTypeDefinitions.html#StandardUnitDictionary
 gen.units <- list(
-	"year"=c(unit = "number",precision = 1), 
+	"year"=c(unit = "number"), 
 	"datetime" = c(format = "MM/DD/YYYY HH:MM"),
 	"timezone"= c(
 		"1" = "Eastern Standard Time",
