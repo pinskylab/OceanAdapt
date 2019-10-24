@@ -169,4 +169,4 @@ eml_validate(eml)
 write_eml(eml, file=here::here("metadata","ai.xml"))
 ```
 
-The Ecological Metadata Language file can be accessed [here]()
+The Ecological Metadata Language file can be accessed [here](https://github.com/pinskylab/OceanAdapt/blob/master/metaData/ai.xml)
