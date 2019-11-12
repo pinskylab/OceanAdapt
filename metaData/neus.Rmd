@@ -69,16 +69,36 @@ attributes <- tibble(
   left_join(column_defs) %>% 
   mutate(formatString = NA,
          formatString = ifelse(attributeName == "YEAR", unit, formatString), 
-         formatString = ifelse(attributeName == "DATETIME", unit, formatString))
+         formatString = ifelse(attributeName == "DATETIME", unit, formatString)) %>% 
+  rename(col_classes = col_class)
+
 
 dput(attributes$col_class)
 
-attributeList <- set_attributes(attributes, col_classes = c("character", "character", "character", "character", "character", "character", "character", "character", "character", "numeric", "numeric", "character", "numeric", "numeric", "numeric", "numeric", "numeric", "character", "character", "numeric", "numeric"))
+# attributeList <- set_attributes(attributes)
 ```
 ```{r echo=FALSE}
 knitr::kable(select(attributes, -formatString)) %>% 
   kableExtra::kable_styling(latex_options = "scale_down")
 ```
+## neus_svspp.csv connects species codes to species names.
+```{r include = FALSE}
+spp_attributes <- tibble(
+  attributeName = dput(names(spp))) %>% 
+  left_join(column_defs) %>% 
+  mutate(formatString = NA,
+         formatString = ifelse(attributeName == "YEAR", unit, formatString), 
+         formatString = ifelse(attributeName == "DATETIME", unit, formatString))
+
+dput(spp_attributes$col_class)
+
+# attributeList <- set_attributes(spp_attributes, col_classes = c("character", "character", "character", "character", "character"))
+```
+```{r echo=FALSE}
+knitr::kable(select(spp_attributes, -formatString)) %>% 
+  kableExtra::kable_styling(latex_options = "scale_down")
+```
+
 
 ```{r include = FALSE}
 # define custom units
@@ -177,7 +197,7 @@ eml_validate(eml)
 write_eml(eml, file=here::here("metadata","neus.xml"))
 ```
 
-The Ecological Metadata Language file can be accessed [here](https://github.com/pinskylab/OceanAdapt/blob/master/metaData/neus.xml)
+<!-- The Ecological Metadata Language file can be accessed [here](https://github.com/pinskylab/OceanAdapt/blob/master/metaData/neus.xml) -->
 
 
 
