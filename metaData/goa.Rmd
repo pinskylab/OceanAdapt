@@ -19,6 +19,7 @@ column_defs <- readRDS(here::here("metadata","column-definitions.rds"))
 ```
 ## Source:
 [NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)
+[Download](https://www.afsc.noaa.gov/RACE/groundfish/survey_data/)
 
 ## Related papers:  
 
