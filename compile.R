@@ -709,7 +709,8 @@ wctri <- wctri %>%
   ) %>% 
   # adjust spp names
   mutate(spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
-         spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp)) %>%
+         spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp), 
+         spp = ifelse(grepl("Squalus", spp), 'Squalus sp.', spp)) %>%
   group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
   summarise(wtcpue = sumna(wtcpue)) %>% 
   # add region column
