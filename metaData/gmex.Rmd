@@ -2,7 +2,16 @@
 title: "Gulf of Mexico"
 output: html_notebook
 ---
+```{r setup, include = FALSE, message=FALSE}
+# load libraries
+library(EML)
+library(emld)
+library(tidyverse) # for data table wrangling
+library(knitr) # for web presentation of tables
+library(kableExtra) # for web presentation of tables
 
+column_defs <- readRDS(here::here("metadata","column-definitions.rds"))
+```
 ## Source:
 [Gulf States Marine Fisheries Commission SEAMAP Groundfish Surveys](http://seamap.gsmfc.org)
 
@@ -31,7 +40,7 @@ str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
 - We remove a tow when paired tows exist, same lat/lon/year but different haulid.  
 - We adjust wtcpue (biomass per standard tow) for area towed, in units of kg per 10,000 m2. Calculate area trawled in m2: knots * 1.8 km/hr/knot * 1000 m/km * minutes * 1 hr/60 min * width of gear in feet * 0.3 m/ft.
 - We remove unidentified spp, white space only values, and adjust the following names:
-```{r}
+```{r eval=FALSE}
     !spp %in% c('UNID CRUSTA', 'UNID OTHER', 'UNID.FISH', 'CRUSTACEA(INFRAORDER) BRACHYURA', 'MOLLUSCA AND UNID.OTHER #01', 'ALGAE', 'MISCELLANEOUS INVERTEBR', 'OTHER INVERTEBRATES')
   ) %>% 
   # adjust spp names
@@ -54,6 +63,172 @@ str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
     spp = ifelse(grepl("TRACHYPENEUS", spp), "TRACHYPENEUS", spp)
 ```
 - We group the data by haulid, stratum, stratumarea, year, lat, lon, depth,  and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue. 
+
+## What the raw data includes:  
+The current files of raw data for the Gulf of Mexico are `r list.files(here::here("data_raw"), pattern = "gmex")`.
+
+### gmex_BGSREC.csv column definitions 
+```{r include = FALSE}
+sample_data <- read_csv(here::here("data_raw", "gmex_BGSREC.csv"), n_max = 6)
+  
+attributes <- tibble(
+  attributeName = dput(names(sample_data))) %>% 
+  left_join(column_defs) %>% 
+  mutate(col_class = ifelse(is.na(col_class), "character", col_class), 
+         attributeDefinition = ifelse(is.na(attributeDefinition), "unknown", attributeDefinition))
+
+clas <- dput(attributes$col_class)
+
+attributes <- attributes %>% 
+  select(-col_class)
+
+attributeList <- set_attributes(attributes, col_classes = clas)
+```
+
+```{r echo=FALSE, message=TRUE, warning=TRUE}
+knitr::kable(attributes) %>% 
+  kableExtra::kable_styling(latex_options = "scale_down")
+```
+
+### gmex_CRUISES.csv column definitions 
+```{r include = FALSE}
+sample_data <- read_csv("https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/data_raw/gmex_CRUISES.csv", n_max = 6)
+  
+attributes <- tibble(
+  attributeName = dput(names(sample_data))) %>% 
+  left_join(column_defs) %>% 
+  mutate(col_class = ifelse(is.na(col_class), "character", col_class), 
+         attributeDefinition = ifelse(is.na(attributeDefinition), "unknown", attributeDefinition))
+
+clas <- dput(attributes$col_class)
+
+attributes <- attributes %>% 
+  select(-col_class)
+
+attributeList <- set_attributes(attributes, col_classes = clas)
+```
+
+```{r echo=FALSE, message=TRUE, warning=TRUE}
+knitr::kable(attributes) %>% 
+  kableExtra::kable_styling(latex_options = "scale_down")
+```
+
+
+### The remaining files are trawl data files, data added annually, with the column definitions
+```{r include = FALSE}
+# create a table with each column from the dataset represented as a row.  There will be an error message about undefined units but they are defined later when the dataset is created.
+attributes <- tibble(
+  attributeName = dput(names(sample_data))) %>% 
+  left_join(column_defs) %>% 
+  mutate(formatString = NA,
+         formatString = ifelse(attributeName == "YEAR", unit, formatString), 
+         formatString = ifelse(attributeName == "DATETIME", unit, formatString))
+
+attributeList <- set_attributes(attributes, col_classes = c("numeric", "numeric", "character", "numeric", "Date", "Date", "numeric", "numeric", "character", "character", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"))
+```
+```{r echo=FALSE}
+knitr::kable(select(attributes, -formatString)) %>% 
+  kableExtra::kable_styling(latex_options = "scale_down")
+```
+
+```{r include = FALSE}
+# define custom units
+id <- c("kilograms per tow", "number per tow", "square kilometers")
+dimension <- c("weight", "count", "area")
+unitTypes <- data.frame(
+  id = id, dimension = dimension, stringsAsFactors = FALSE
+)
+units <- data.frame(
+  id = id, unitType = unitTypes, stringsAsFactors = FALSE
+)
+
+unitList <- set_unitList(units, unitTypes)
+
+# define the rest of the data
+# <title>
+	# character vector title
+	dataTitle <- "Gulf of Mexico bottom trawl survey"
+
+# <creator>
+	# organization name
+	afsc.name <- "National Oceanic and Atmospheric Administration (NOAA) Alaska Fisheries Science Center (AFSC) Resource Assessment and Conservation Engineering Division (RACE)"
+	# create organization address
+	afsc_address <- list( 
+		deliveryPoint = "7600 Sand Point Way, N.E. bldg. 4",
+		city = "Seattle",
+		administrativeArea = "WA",
+		postalCode = "98115",
+		country = "USA"
+	)
+	
+	publisher <- list(
+	organizationName = afsc.name,
+	address = afsc_address,
+	onlineUrl = "http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm")
+
+	R_person <- person(given = "Wayne", family = "Palsson", email = "Wayne.Palsson@noaa.gov", role = "cre")
+	wayne <- as_emld(R_person)
+
+	metadataProvider <- as_emld(person(given="Michelle", family = "Stuart",email = "michelle.stuart@rutgers.edu"))
+	
+others <- as.person("Bob Lauth [ctb] <Bob.Lauth@noaa.gov>")
+associatedParty <- as_emld(others)
+associatedParty[[1]]$organizationName <- afsc.name
+	
+# <pubDate>
+pubDate <- "2012"
+
+# <intellectualRights>
+	# IR <- "this is just a long piece of text"
+
+# <abstract>
+abstract <- set_TextType(text = "The Resource Assessment and Conservation Engineering Division (RACE) of the Alaska Fisheries Science Center (AFSC) conducts bottom trawl surveys to monitor the condition of the demersal fish and crab stocks of Alaska. These data include catch per unit effort for each identified species at a standard set of stations. This is a subset of the main racebase datase. Excluded are non standard stations, earlier years using different gear, and other types of data collected other than species id, species weight, water temperature and depth.")
+
+# This isn't working right now
+# # <methods>
+# 	methods <- 	list(dataSource="http://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm",
+# 				description="http://www.afsc.noaa.gov/RACE/groundfish/survey_data/metadata_template.php?fname=RACEweb.xml"
+# 			) 
+# 	set_methods(methods)
+
+	
+
+# ======================
+# = Create EML Objects =
+# ======================
+
+goa.data <- set_physical("https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/data_raw/ai1983_2000.csv")
+# Create "dataTable": the physical data set with associated column definitions and units
+goa.dataTable <- list(
+		physical=goa.data,
+		entityName="goa",
+		entityDescription = "Bottom Trawl Data in the Gulf of Alaska",
+		attributeList = attributeList
+)
+
+
+eml <- list(
+           packageId = uuid::UUIDgenerate(),  
+           system = "uuid",
+           dataset = list(
+               title = dataTitle,
+               creator = wayne,
+               pubDate = pubDate,
+               # abstract = abstract,
+               contact = wayne,
+               additionalMetadata = list(metadata = list(unitList = unitList)),
+               dataTable = goa.dataTable
+               ))
+
+
+# validate
+eml_validate(eml)
+
+# Write EML data file
+write_eml(eml, file=here::here("metadata","goa.xml"))
+```
+
+The Ecological Metadata Language file can be accessed [here](https://github.com/pinskylab/OceanAdapt/blob/master/metaData/goa.xml)
 
 
 

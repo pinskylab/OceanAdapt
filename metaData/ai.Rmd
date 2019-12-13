@@ -17,7 +17,7 @@ strata <- read_csv("https://raw.githubusercontent.com/pinskylab/OceanAdapt/maste
 ```
 
 ## Source:
-[NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](http://www.nwfsc.noaa.gov/research/divisions/fram/groundfish/bottom_trawl.cfm)
+[NOAA Alaska Fisheries Science Center Groundfish Assessment Program surveys](https://www.afsc.noaa.gov/RACE/groundfish/survey_data/default.htm)
 
 ## Related papers:  
 - [NOAA Technical Memorandum NMFS-AFSC-215 Data Report: 2010 Aleutian Islands bottom trawl survey](https://www.afsc.noaa.gov/Publications/AFSC-TM/NOAA-TM-AFSC-215.pdf)  
@@ -43,9 +43,8 @@ The current files of raw data for the Aleutian Islands are `r list.files(here::h
 ### ai_strata.csv is constant through the years with the column definitions  
 ```{r include = FALSE}
 st_attributes <- tibble(
-  attributeName = dput(names(strata)),
-  attributeDefinition = c(gen.cols[["NPFMCArea"]], gen.cols[["Subarea Description"]], gen.cols[["StratumCode"]], gen.cols[["DepthIntervalm"]], gen.cols[["stratumarea"]]), 
-  unit = c("character", "character", "dimensionless", "meter", gen.units[["stratumarea"]]))
+  attributeName = dput(names(strata))) %>% 
+  left_join(column_defs)
 ```
 ```{r echo=FALSE, message=TRUE, warning=TRUE}
 knitr::kable(st_attributes) %>% 
@@ -55,17 +54,29 @@ knitr::kable(st_attributes) %>%
 ### The remaining files are trawl data files, data added annually, with the column definitions
 ```{r include = FALSE}
 # create a table with each column from the dataset represented as a row.  There will be an error message about undefined units but they are defined later when the dataset is created.
-attributes <- tibble(
-  attributeName = dput(names(sample_data)),
-  # attach definitions from gen.cols
-  attributeDefinition = c(gen.cols[["lat"]], gen.cols[["lon"]], gen.cols[["station"]], gen.cols[["stratum"]], gen.cols[["year"]], gen.cols[["datetime"]],gen.cols[["wtcpue"]], gen.cols[["cntcpue"]], gen.cols[["common"]], gen.cols[["spp"]], gen.cols[["SID"]], gen.cols[["depth"]], gen.cols[["btemp"]], gen.cols[["stemp"]], gen.cols[["vessel"]], gen.cols[["cruise"]],  gen.cols[["haul"]]), 
-  unit = c(gen.units[["lat"]], gen.units[["lon"]], "dimensionless", gen.units[["year"]], gen.units[["datetime"]],gen.units[["wtcpue"]],gen.units[["cntcpue"]],	gen.units[["common"]],gen.units[["spp"]],"dimensionless",gen.units[["depth"]],gen.units[["btemp"]],gen.units[["stemp"]],"dimensionless","dimensionless","dimensionless"),
-  formatString = NA) %>% 
-mutate(formatString = ifelse(attributeName == "YEAR", "YYYY", formatString), 
-         formatString = ifelse(attributeName == "DATETIME", unit, formatString), 
-         unit = ifelse(attributeName == "YEAR", "YYYY", unit))
+# dput(names(sample_data))
 
-attributeList <- set_attributes(attributes, col_classes = c("numeric", "numeric", "character", "numeric", "Date", "Date", "numeric", "numeric", "character", "character", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"))
+attributes <- tribble(~attributeName, ~attributeDefinition, ~col_classes, ~unit, ~formatString,
+                      
+                      "LATITUDE", "The latitude (decimal degrees) at the start of the haul", "numeric", "degree", NA,
+                      
+                      "LONGITUDE", "The longitude (decimal degrees) at the start of the haul", "numeric", "degree", NA,
+                      
+                      "STATION", "Unique sequential order in which stations have been completed. Hangups and short tows each receive a non-repeated consecutive number.","character", "dimensionless", NA,
+                      
+                      "STRATUM", NA, "character", "dimensionless", NA,
+                      "YEAR", "a 4 digit string containing the year of the survey", "character", "dimensionless", "YYYY",
+                      "DATETIME", "This is the date and time at the beginning of the haul; This is the date and time at the beginning of the haul; For groundfish trawl data, this is the on-bottom time which is determined after we have looked at the bottom-contact sensor and net-mensuration plots. ", "character" , "dimensionless", NA,
+                      "WTCPUE",  "Catch weight per area the net swept in KG/HA.", "numeric", "kilogramsPerHectare", NA,
+                      "NUMCPUE", "Catch number per area the net swept in number/HA.", "numeric", "dimensionless", NA,
+               "COMMON", "The common name of the marine organism associated with the SCIENTIFIC_NAME","character", "dimensionless", NA,
+               "SCIENTIFIC", "The scientific name of the organism associated with the COMMON_NAME.", "character", "dimensionless", NA,
+               "SID", "Domain: RACE Species Codebook; http://www.afsc.noaa.gov/RACE/groundfish/species_codebook.pdf", "numeric", "dimensionless", NA,
+               "BOT_DEPTH", "Weighted average depth (m) and is calculated by adding GEAR_DEPTH to NET_HEIGHT. Prior to (year), before NET_HEIGHT was regularly measured, this value was obtained using either echosounder or bathythermograph.", "numeric", "meter", NA, 
+               "BOT_TEMP", "Weighted average temperature (in tenths of a degree Celsius) measured at the maximum depth of the headrope of the trawl. Null values indicate temperature not recoreded.", "numeric", "celsius", NA,
+               "SURF_TEMP", "Weighted average temperature (in tenths of a degree Celsius) measured at the sea surface of the trawl. Null values indicate temperature not recoreded.", "numeric", "celsius", NA,
+               "CRUISE", "This is a six-digit number identifying the Cruise number. It is of the form: YYYY99 (where YYYY = year of the cruise; 99 = 2-digit number and is sequential; 01 denotes the first cruise that vessel made in this year, 02 is the second, etc.)", "character", "dimensionless", NA,
+               "HAUL", "This number uniquely identifies a haul within a cruise. It is a sequential number, in chronological order of occurrence.", "numeric", "dimensionless", NA)
 ```
 ```{r echo=FALSE}
 knitr::kable(select(attributes, -formatString)) %>% 

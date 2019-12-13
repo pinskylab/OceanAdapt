@@ -1,8 +1,8 @@
 
 library(EML)
 
-# setwd("/Users/Battrd/Documents/School&Work/pinskyPost/OceanAdapt/metaData")
-source("../../OceanAdapt/R/metadata/gen.cols&units.R")
+
+source("https://raw.githubusercontent.com/pinskylab/OceanAdapt/master/EML_metadata/00-scripts/gen-cols-units.R")
 
 
 # ===============================
