@@ -7,6 +7,10 @@ OceanAdapt
 
 # News
 
+## 2020/01/15 - Our national average graphic has been included in the 4th National Climate Assessment
+
+  - Find us [here](https://nca2018.globalchange.gov/chapter/1/) in figure 1.2(h).
+
 ## 2019/03/01 -  data has been added to OceanAdapt\!
 
   - Check out the latest update to the OceanAdapt website. New data in
