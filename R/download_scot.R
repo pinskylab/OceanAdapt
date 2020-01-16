@@ -63,4 +63,3 @@ pullDFOGIS_Prod <-function(service='ADAPT_Canada_Atlantic_Summer_2018', save_csv
   return(this.df)
 }
 
-pullDFOGIS_Prod()
