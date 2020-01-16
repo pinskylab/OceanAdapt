@@ -81,9 +81,12 @@ file.rename(here::here("data_raw","22560_UNION_FSCS_SVCAT.csv"), here::here("dat
 file.rename(here::here("data_raw","22561_UNION_FSCS_SVSTA.csv"), here::here("data_raw","neus_spring_svsta.csv"), overwrite = T)
 file.rename(here::here("data_raw","22561_UNION_FSCS_SVCAT.csv"), here::here("data_raw","neus_spring_svcat.csv"), overwrite = T)
 
+other <- dir(pattern = "FSCS", path = "data_raw", full.names = T)
+file.remove(other)
+
 ```
 
-- This year we are attempting to download the data from the publicly available website instead of emailing a NOAA staff member.  The data is in separate files for Spring and Fall.  Instead of one file that contains all of the data, we must download multiple files and combine them.  The files we need are UNION_FSCS_SVBIO, UNION_FSCS_SVSTA, and UNION_FSCS_SVCAT.  All of these documents are included in the ftp "distribution 1". Connecting to this ftp address with Fetch revealed a zip file.  I downloaded that zip file and it opened into a directory called 22561_FSCSTables that contained csv files.
+- This year we are attempting to download the data from the publicly available website instead of emailing a NOAA staff member.  The data is in separate files for Spring and Fall.  Instead of one file that contains all of the data, we must download multiple files and combine them.  The files we need are UNION_FSCS_SVSTA and UNION_FSCS_SVCAT.  These documents are included in the ftp "distribution 1". Connecting to this ftp address with Fetch revealed a zip file.  I downloaded that zip file and it opened into a directory called 22561_FSCSTables that contained csv files.
 
 ## For [SEUS]("https://www2.dnr.sc.gov/seamap/Account/LogOn?ReturnUrl=%2fseamap%2fReports"), visit the website to download event information and abundance and biomass.
 ```{r seus}
