@@ -1205,24 +1205,201 @@ rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gm
 # Compile NEUS ===========================================================
 print("Compile NEUS")
 
-load("data_raw/neus_Survdat.RData")
-load("data_raw/neus_SVSPP.RData")
+## Special fix
+#there is a comment that contains a comma in the svcat.csv file that causes the delimiters to read incorrectly.
+temp <- read_lines(here::here("data_raw", "neus_spring_svcat.csv"))
+temp_fixed <- stringr::str_replace_all(temp, "SQUID, CUTTLEFISH, AND OCTOPOD UNCL", "SQUID CUTTLEFISH AND OCTOPOD UNCL")
+temp_fixed2 <- stringr::str_replace_all(temp_fixed, "SHRIMP \\(PINK,BROWN,WHITE\\)", "SHRIMP PINK BROWN WHITE")
+temp_fixed3 <- stringr::str_replace_all(temp_fixed2, "SHRIMP \\(PINKBROWNWHITE\\) UNCL", "SHRIMP PINK BROWN WHITE UNCL")
+neus_spr_catch <- read_csv(temp_fixed3, col_types = cols(
+  CRUISE6 = col_double(),
+  STRATUM = col_character(),
+  TOW = col_character(),
+  STATION = col_character(),
+  ID = col_double(),
+  LOGGED_SPECIES_NAME = col_character(),
+  SVSPP = col_double(),
+  CATCHSEX = col_double(),
+  EXPCATCHNUM = col_double(),
+  EXPCATCHWT = col_double()
+))
+rm(temp, temp_fixed, temp_fixed2, temp_fixed3)
 
-neus_survdat <- survdat %>% 
-  # select specific columns
-  select(CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX, SVVESSEL, YEAR, SEASON, LAT, LON, DEPTH, SURFTEMP, SURFSALIN, BOTTEMP, BOTSALIN, ABUNDANCE, BIOMASS) %>% 
-  # remove duplicates
+
+
+temp <- read_lines(here::here("data_raw", "neus_fall_svcat.csv"))
+temp_fixed <- stringr::str_replace_all(temp, "SQUID, CUTTLEFISH, AND OCTOPOD UNCL", "SQUID CUTTLEFISH AND OCTOPOD UNCL")
+temp_fixed2 <- stringr::str_replace_all(temp_fixed, "SHRIMP \\(PINK,BROWN,WHITE\\)", "SHRIMP PINK BROWN WHITE")
+temp_fixed3 <- stringr::str_replace_all(temp_fixed2, "SHRIMP \\(PINKBROWNWHITE\\) UNCL", "SHRIMP PINK BROWN WHITE UNCL")
+temp_fixed4 <- stringr::str_replace_all(temp_fixed3, "SEA STAR, BRITTLE STAR, AND BASKETSTAR UNCL", "SEA STAR BRITTLE STAR AND BASKETSTAR UNCL")
+temp_fixed5 <- stringr::str_replace_all(temp_fixed4, "MOON SNAIL, SHARK EYE, AND BABY-EAR UNCL", "MOON SNAIL SHARK EYE AND BABY EAR UNCL")
+neus_fall_catch <- read_csv(temp_fixed5, col_types = cols(
+  CRUISE6 = col_double(),
+  STRATUM = col_character(),
+  TOW = col_character(),
+  STATION = col_character(),
+  ID = col_double(),
+  LOGGED_SPECIES_NAME = col_character(),
+  SVSPP = col_double(),
+  CATCHSEX = col_double(),
+  EXPCATCHNUM = col_double(),
+  EXPCATCHWT = col_double()
+))
+rm(temp, temp_fixed, temp_fixed2, temp_fixed3, temp_fixed4, temp_fixed5)
+# End special fix
+
+neus_spr_station <- read_csv(here::here("data_raw", "neus_spring_svsta.csv"), col_types = cols(
+  CRUISE6 = col_double(),
+  STRATUM = col_double(),
+  TOW = col_character(),
+  STATION = col_character(),
+  ID = col_double(),
+  AREA = col_double(),
+  SVVESSEL = col_character(),
+  CRUNUM = col_character(),
+  SVGEAR = col_double(),
+  BEGIN_EST_TOWDATE = col_character(),
+  END_EST_TOWDATE = col_character(),
+  BEGIN_GMT_TOWDATE = col_character(),
+  END_GMT_TOWDATE = col_character(),
+  EST_YEAR = col_double(),
+  EST_MONTH = col_character(),
+  EST_DAY = col_character(),
+  EST_JULIAN_DAY = col_double(),
+  EST_TIME = col_time(format = ""),
+  GMT_YEAR = col_double(),
+  GMT_MONTH = col_character(),
+  GMT_DAY = col_character(),
+  GMT_JULIAN_DAY = col_double(),
+  GMT_TIME = col_time(format = ""),
+  TOWDUR = col_double(),
+  SETDEPTH = col_double(),
+  ENDDEPTH = col_double(),
+  MINDEPTH = col_double(),
+  MAXDEPTH = col_double(),
+  AVGDEPTH = col_double(),
+  BEGLAT = col_double(),
+  BEGLON = col_double(),
+  ENDLAT = col_double(),
+  ENDLON = col_double(),
+  DECDEG_BEGLAT = col_double(),
+  DECDEG_BEGLON = col_double(),
+  DECDEG_ENDLAT = col_double(),
+  DECDEG_ENDLON = col_double(),
+  CABLE = col_double(),
+  PITCH = col_double(),
+  HEADING = col_double(),
+  COURSE = col_double(),
+  RPM = col_double(),
+  DOPDISTB = col_double(),
+  DOPDISTW = col_double(),
+  DESSPEED = col_double(),
+  AIRTEMP = col_double(),
+  CLOUD = col_double(),
+  BAROPRESS = col_double(),
+  WINDDIR = col_double(),
+  WINDSP = col_double(),
+  WEATHER = col_double(),
+  WAVEHGT = col_double(),
+  SWELLDIR = col_double(),
+  SWELLHGT = col_double(),
+  BKTTEMP = col_double(),
+  XBT = col_double(),
+  SURFTEMP = col_double(),
+  SURFSALIN = col_double(),
+  BOTTEMP = col_double(),
+  BOTSALIN = col_double()
+))
+
+neus_fall_station <- read_csv(here::here("data_raw", "neus_fall_svsta.csv"), col_types = cols(
+  CRUISE6 = col_double(),
+  STRATUM = col_double(),
+  TOW = col_character(),
+  STATION = col_character(),
+  ID = col_double(),
+  AREA = col_double(),
+  SVVESSEL = col_character(),
+  CRUNUM = col_character(),
+  SVGEAR = col_double(),
+  BEGIN_EST_TOWDATE = col_character(),
+  END_EST_TOWDATE = col_character(),
+  BEGIN_GMT_TOWDATE = col_character(),
+  END_GMT_TOWDATE = col_character(),
+  EST_YEAR = col_double(),
+  EST_MONTH = col_character(),
+  EST_DAY = col_character(),
+  EST_JULIAN_DAY = col_double(),
+  EST_TIME = col_time(format = ""),
+  GMT_YEAR = col_double(),
+  GMT_MONTH = col_character(),
+  GMT_DAY = col_character(),
+  GMT_JULIAN_DAY = col_double(),
+  GMT_TIME = col_time(format = ""),
+  TOWDUR = col_double(),
+  SETDEPTH = col_double(),
+  ENDDEPTH = col_double(),
+  MINDEPTH = col_double(),
+  MAXDEPTH = col_double(),
+  AVGDEPTH = col_double(),
+  BEGLAT = col_double(),
+  BEGLON = col_double(),
+  ENDLAT = col_double(),
+  ENDLON = col_double(),
+  DECDEG_BEGLAT = col_double(),
+  DECDEG_BEGLON = col_double(),
+  DECDEG_ENDLAT = col_double(),
+  DECDEG_ENDLON = col_double(),
+  CABLE = col_double(),
+  PITCH = col_double(),
+  HEADING = col_double(),
+  COURSE = col_double(),
+  RPM = col_double(),
+  DOPDISTB = col_double(),
+  DOPDISTW = col_double(),
+  DESSPEED = col_double(),
+  AIRTEMP = col_double(),
+  CLOUD = col_double(),
+  BAROPRESS = col_double(),
+  WINDDIR = col_double(),
+  WINDSP = col_double(),
+  WEATHER = col_double(),
+  WAVEHGT = col_double(),
+  SWELLDIR = col_double(),
+  SWELLHGT = col_double(),
+  BKTTEMP = col_double(),
+  XBT = col_double(),
+  SURFTEMP = col_double(),
+  SURFSALIN = col_double(),
+  BOTTEMP = col_double(),
+  BOTSALIN = col_double()
+))
+
+neus_spr_survdat <- right_join(neus_spr_station, neus_spr_catch, by = c("CRUISE6", "STRATUM", "TOW", "STATION", "ID")) %>% 
+  select(CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX, SVVESSEL, EST_YEAR, DECDEG_BEGLAT, DECDEG_BEGLON,  AVGDEPTH, SURFTEMP, SURFSALIN, BOTTEMP, BOTSALIN, EXPCATCHWT) %>% 
   distinct() %>% 
-  mutate(SVVESSEL = as.character(SVVESSEL), 
-         SEASON = as.character(SEASON))
-
-# sum different sexes of same spp together
-neus_survdat <- neus_survdat %>% 
-  group_by(YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP) %>% 
+  rename(YEAR = EST_YEAR, 
+         LAT = DECDEG_BEGLAT,
+         LON = DECDEG_BEGLON, 
+         DEPTH = AVGDEPTH, 
+         BIOMASS = EXPCATCHWT) %>% 
+  # sum different sexes of same spp together
+  group_by(YEAR, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP) %>% 
   summarise(wtcpue = sum(BIOMASS)) 
 
+neus_fall_survdat <- right_join(neus_fall_station, neus_fall_catch, by = c("CRUISE6", "STRATUM", "TOW", "STATION", "ID")) %>% 
+  select(CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX, SVVESSEL, EST_YEAR, DECDEG_BEGLAT, DECDEG_BEGLON,  AVGDEPTH, SURFTEMP, SURFSALIN, BOTTEMP, BOTSALIN, EXPCATCHWT) %>% 
+  distinct() %>% 
+  rename(YEAR = EST_YEAR, 
+         LAT = DECDEG_BEGLAT,
+         LON = DECDEG_BEGLON, 
+         DEPTH = AVGDEPTH, 
+         BIOMASS = EXPCATCHWT) %>% 
+  # sum different sexes of same spp together
+  group_by(YEAR, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP) %>% 
+  summarise(wtcpue = sum(BIOMASS))
 
-# repeat for spp file 
+
+# process spp file
 neus_spp <- spp %>%
   # remove some columns from spp data
   select(-ITISSPP, -COMNAME, -AUTHOR) %>% 
@@ -1232,7 +1409,7 @@ files <- as.list(dir(pattern = "neus_strata", path = "data_raw", full.names = T)
 
 neus_strata <- read_csv(here::here("data_raw", "neus_strata.csv"), col_types = cols(
   STRGRP_DESC = col_character(),
-  STRATUM = col_double(),
+  STRATUM = col_character(),
   STRATUM_NAME = col_character(),
   STRATUM_AREA = col_double(),
   MIDLAT = col_double(),
@@ -1245,13 +1422,17 @@ neus_strata <- read_csv(here::here("data_raw", "neus_strata.csv"), col_types = c
   select(STRATUM, STRATUM_AREA) %>% 
   distinct()
 
-neus <- left_join(neus_survdat, neus_spp, by = "SVSPP") %>%
+neus_spr <- left_join(neus_spr_survdat, neus_spp, by = "SVSPP") %>%
+  left_join(neus_strata, by = "STRATUM")
+
+neus_fall <- left_join(neus_spr_survdat, neus_spp, by = "SVSPP") %>%
   left_join(neus_strata, by = "STRATUM")
 
 # are there any strata in the data that are not in the strata file?
-# stopifnot(nrow(filter(neus, is.na(STRATUM_AREA))) == 0)
+# stopifnot(nrow(filter(neus_spr, is.na(STRATUM_AREA))) == 0)
+# stopifnot(nrow(filter(neus_fall, is.na(STRATUM_AREA))) == 0)
 
-neus <- neus %>%
+neus_spr <- neus_spr %>%
   mutate(
     # Create a unique haulid
     haulid = paste(formatC(CRUISE6, width=6, flag=0), formatC(STATION, width=3, flag=0), formatC(STRATUM, width=4, flag=0), sep='-'),  
