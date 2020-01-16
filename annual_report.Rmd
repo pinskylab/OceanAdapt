@@ -1,0 +1,107 @@
+---
+title: "Annual Update Report `r Sys.Date()`"
+output: html_notebook
+---
+```{r survey, include=FALSE}
+# load libraries
+library(tidyverse)
+library(RCurl)
+library(reticulate)
+library(here)
+```
+
+## Check [Alaskan website](https://www.fisheries.noaa.gov/alaska/commercial-fishing/alaska-groundfish-bottom-trawl-survey-data) for any new data and add it to the list, files to watch are ai2014-2018, ebs2017-2018, and goa2015-2017.  Did the names changes?  Are there more recent files? - no new data as of `r Sys.Date()`.
+```{r ak_survey_list}
+ak_files <- tibble(survey = c("ai1983_2000.zip", 
+                              "ai2002_2012.zip", 
+                              "ai2014_2018.zip", 
+                              
+                              "ebs1982_1984.zip", 
+                              "ebs1985_1989.zip", 
+                              "ebs1990_1994.zip", 
+                              "ebs1995_1999.zip", 
+                              "ebs2000_2004.zip", 
+                              "ebs2005_2008.zip", 
+                              "ebs2009_2012.zip", 
+                              "ebs2013_2016.zip", 
+                              "ebs2017_2018.zip", 
+                              
+                              "goa1984_1987.zip", 
+                              "goa1990_1999.zip", 
+                              "goa2001_2005.zip", 
+                              "goa2007_2013.zip", 
+                              "goa2015_2017.zip"))
+```
+
+## Run Alaska download and check for errors. 
+```{r download_ak}
+source(textConnection(read_lines("R/download_ak.R")))
+```
+
+## Do any files appear in the git data_raw repo as changed or added?  
+- No new files
+
+## Visit the [Gulf of Mexico]("https://seamap.gsmfc.org/") website and download the files, then copy them into the data_raw folder.
+```{r gmex}
+  file.copy(from = "~/Downloads/public_seamap_csvs/BGSREC.csv", to = "data_raw/gmex_BGSREC.csv", overwrite = T)
+   file.copy(from = "~/Downloads/public_seamap_csvs/CRUISES.csv", to = "data_raw/gmex_CRUISES.csv", overwrite = T)
+   file.copy(from = "~/Downloads/public_seamap_csvs/NEWBIOCODESBIG.csv", to = "data_raw/gmex_NEWBIOCODESBIG.csv", overwrite = T)
+   file.copy(from = "~/Downloads/public_seamap_csvs/STAREC.csv", to = "data_raw/gmex_STAREC.csv", overwrite = T)
+   file.copy(from = "~/Downloads/public_seamap_csvs/INVREC.csv", to = "data_raw/gmex_INVREC.csv", overwrite = T)
+
+```
+
+- Website is unresponsive
+
+## Do any files appear in the git data_raw repo as changed or added?  
+
+
+## For NEUS, email NOAA to get the latest Survdat.Rdata file or download the spring and fall bottom trawl survey files using fetch from [Fall](https://inport.nmfs.noaa.gov/inport/item/22560) and [Spring](https://inport.nmfs.noaa.gov/inport/item/22561)  
+
+```{bash}
+curl -L -R -O ftp://ftp.nefsc.noaa.gov/pub/dropoff/PARR/PEMAD/ESB/SVDBS/SVDBS_SupportTables.zip
+curl -L -R -O ftp://ftp.nefsc.noaa.gov/pub/dropoff/PARR/PEMAD/ESB/22560/22560_FSCSTables.zip
+curl -L -R -O ftp://ftp.nefsc.noaa.gov/pub/dropoff/PARR/PEMAD/ESB/22561/22561_FSCSTables.zip
+```
+
+
+```{r neus}
+unzip("SVDBS_SupportTables.zip", exdir = here::here("data_raw"))
+svdbs <- dir(pattern = "SVDBS", path = "data_raw", full.names = T)
+svdbs <- svdbs[-c(grep("STRATA", svdbs))]
+file.remove(svdbs)
+file.rename(here::here("data_raw", "SVDBS_SVMSTRATA.csv"), here::here("data_raw", "neus_strata.csv"))
+
+unzip("22560_FSCSTables.zip", exdir = here::here("data_raw"))
+unzip("22561_FSCSTables.zip", exdir = here::here("data_raw"))
+
+file.rename(here::here("data_raw","22560_UNION_FSCS_SVSTA.csv"), here::here("data_raw","neus_fall_svsta.csv"), overwrite = T)
+file.rename(here::here("data_raw","22560_UNION_FSCS_SVCAT.csv"), here::here("data_raw","neus_fall_svcat.csv"), overwrite = T)
+
+file.rename(here::here("data_raw","22561_UNION_FSCS_SVSTA.csv"), here::here("data_raw","neus_spring_svsta.csv"), overwrite = T)
+file.rename(here::here("data_raw","22561_UNION_FSCS_SVCAT.csv"), here::here("data_raw","neus_spring_svcat.csv"), overwrite = T)
+
+```
+
+- This year we are attempting to download the data from the publicly available website instead of emailing a NOAA staff member.  The data is in separate files for Spring and Fall.  Instead of one file that contains all of the data, we must download multiple files and combine them.  The files we need are UNION_FSCS_SVBIO, UNION_FSCS_SVSTA, and UNION_FSCS_SVCAT.  All of these documents are included in the ftp "distribution 1". Connecting to this ftp address with Fetch revealed a zip file.  I downloaded that zip file and it opened into a directory called 22561_FSCSTables that contained csv files.
+
+## For [SEUS]("https://www2.dnr.sc.gov/seamap/Account/LogOn?ReturnUrl=%2fseamap%2fReports"), visit the website to download event information and abundance and biomass.
+```{r seus}
+   file.copy(from = "~/Downloads/pinsky", to = "data_raw/seus_catch.csv", overwrite = T)
+   file.copy(from = "~/Downloads/pinsky", to = "data_raw/seus_haul.csv", overwrite = T)
+```
+- All files downloaded successfully.  
+
+
+## For Scotian Shelf,  the DFO has to supply the name of the file with updated data.  Run the following block to get that file.
+```{r scotian}
+source(textConnection(read_lines("R/download_data.R", skip = 26)))
+pullDFOGIS_Prod()
+```
+- File downloaded successfully.
+
+## Run the compile.R script for the Alaska data
+```{r}
+source(textConnection(read_lines(here::here("compile.R"), n_max = 601)))
+```
+
