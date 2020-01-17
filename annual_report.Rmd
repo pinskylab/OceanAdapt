@@ -56,8 +56,7 @@ source(textConnection(read_lines("R/download_ak.R")))
 ## Do any files appear in the git data_raw repo as changed or added?  
 
 
-## For NEUS, email NOAA to get the latest Survdat.Rdata file or download the spring and fall bottom trawl survey files using fetch from [Fall](https://inport.nmfs.noaa.gov/inport/item/22560) and [Spring](https://inport.nmfs.noaa.gov/inport/item/22561)  
-
+## For NEUS, email NOAA to get the latest Survdat.Rdata file or download the spring and fall bottom trawl survey files from [Fall](https://inport.nmfs.noaa.gov/inport/item/22560) and [Spring](https://inport.nmfs.noaa.gov/inport/item/22561).  Currently ftp through R is not working so 1st chunk is bash to download and unzip the files into Downloads and the 2nd chunk is to rename and move the files to data_raw using R.
 ```{bash}
 curl -L -R -O ftp://ftp.nefsc.noaa.gov/pub/dropoff/PARR/PEMAD/ESB/SVDBS/SVDBS_SupportTables.zip
 curl -L -R -O ftp://ftp.nefsc.noaa.gov/pub/dropoff/PARR/PEMAD/ESB/22560/22560_FSCSTables.zip
