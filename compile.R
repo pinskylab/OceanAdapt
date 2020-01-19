@@ -1204,6 +1204,8 @@ neus_spr <- neus_spr %>%
     # per neus data steward strata 07940 and 07980 should not be used because they are undefined and should not have been included in the public dataset
     stratum != "07940",
     stratum != "07980",
+    # stratum 01990 is Offshore, undefined stratum
+    stratum != "01990",
     # remove unidentified spp and non-species
     spp != "" | !is.na(spp), 
     !grepl("EGG", spp), 
@@ -1337,6 +1339,8 @@ neus_fall <- neus_fall %>%
     # per neus data steward strata 07940 and 07980 should not be used because they are undefined and should not have been included in the public dataset
     stratum != "07940",
     stratum != "07980",
+    # stratum 01990 is Offshore, undefined stratum
+    stratum != "01990",
     # remove unidentified spp and non-species
     spp != "" | !is.na(spp), 
     !grepl("EGG", spp), 
