@@ -908,119 +908,50 @@ print("Compile GMEX")
 
 gmex_station_raw <- read_lines(here::here("data_raw", "gmex_STAREC.csv"))
 # remove oddly quoted characters
-gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"")
-gmex_station <- read_csv(gmex_station_clean, col_types = cols(.default = col_character())) %>% 
-  select('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')
+gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"") %>% 
+  str_replace(., "HAULVALUE\",", "HAULVALUE\"")
+gmex_station <- read_csv(gmex_station_clean) %>% 
+  select(STATIONID, CRUISEID, CRUISE_NO, P_STA_NO, TIME_ZN, TIME_MIL, S_LATD, S_LATM, S_LOND, S_LONM, E_LATD, E_LATM, E_LOND, E_LONM, DEPTH_SSTA, MO_DAY_YR, VESSEL_SPD, COMSTAT, HAULVALUE) 
+# %>% 
+#   filter(HAULVALUE == "G")
+print("imported gmex_station")
 
-problems <- problems(gmex_station) %>% 
-  filter(!is.na(col))
-stopifnot(nrow(problems) == 0)
-
-gmex_station <- type_convert(gmex_station, col_types = cols(
-  STATIONID = col_integer(),
-  CRUISEID = col_integer(),
-  CRUISE_NO = col_integer(),
-  P_STA_NO = col_character(),
-  TIME_ZN = col_integer(),
-  TIME_MIL = col_character(),
-  S_LATD = col_integer(),
-  S_LATM = col_double(),
-  S_LOND = col_integer(),
-  S_LONM = col_double(),
-  E_LATD = col_integer(),
-  E_LATM = col_double(),
-  E_LOND = col_integer(),
-  E_LONM = col_double(),
-  DEPTH_SSTA = col_double(),
-  MO_DAY_YR = col_date(format = ""),
-  VESSEL_SPD = col_double(),
-  COMSTAT = col_character()
-))
-
-
-gmex_tow <-read_csv(here::here("data_raw", "gmex_INVREC.csv"), col_types = cols(
-  INVRECID = col_integer(),
-  STATIONID = col_integer(),
-  CRUISEID = col_integer(),
-  VESSEL = col_integer(),
-  CRUISE_NO = col_integer(),
-  P_STA_NO = col_character(),
-  GEAR_SIZE = col_integer(),
-  GEAR_TYPE = col_character(),
-  MESH_SIZE = col_double(),
-  OP = col_character(),
-  MIN_FISH = col_integer(),
-  WBCOLOR = col_character(),
-  BOT_TYPE = col_character(),
-  BOT_REG = col_character(),
-  TOT_LIVE = col_double(),
-  FIN_CATCH = col_double(),
-  CRUS_CATCH = col_double(),
-  OTHR_CATCH = col_double(),
-  T_SAMPLEWT = col_double(),
-  T_SELECTWT = col_double(),
-  FIN_SMP_WT = col_double(),
-  FIN_SEL_WT = col_double(),
-  CRU_SMP_WT = col_double(),
-  CRU_SEL_WT = col_double(),
-  OTH_SMP_WT = col_double(),
-  OTH_SEL_WT = col_double(),
-  COMBIO = col_character(),
-  X28 = col_character()
-))
-
-gmex_tow <- gmex_tow %>%
+# remove extra comma from first row that causes problems in the parsing
+gmex_tow_raw <- read_lines(here::here("data_raw", "gmex_INVREC.csv")) %>% 
+  str_replace(., "COMBIO\",", "COMBIO\"")
+gmex_tow <-read_csv(gmex_tow_raw) %>%
   select('STATIONID', 'CRUISE_NO', 'P_STA_NO', 'INVRECID', 'GEAR_SIZE', 'GEAR_TYPE', 'MESH_SIZE', 'MIN_FISH', 'OP') %>%
   filter(GEAR_TYPE=='ST')
+print("imported gmex_tow, 2 parsing failures for COMBIO delimiter are ok")
 
-problems <- problems(gmex_tow) %>% 
-  filter(!is.na(col)) 
-stopifnot(nrow(problems) == 2)
-# 2 problems are that there are weird delimiters in the note column COMBIO, ignoring for now.
+# remove extra comma from first row that causes problems in the parsing
+gmex_spp_raw <- read_lines(here::here("data_raw","gmex_NEWBIOCODESBIG.csv")) %>% 
+  str_replace(., "tsn_accepted\",", "tsn_accepted\"")
+gmex_spp <-read_csv(gmex_spp_raw)
+print("imported gmex_spp")
 
-gmex_spp <-read_csv(here::here("data_raw","gmex_NEWBIOCODESBIG.csv"), col_types = cols(
-  Key1 = col_integer(),
-  TAXONOMIC = col_character(),
-  CODE = col_integer(),
-  TAXONSIZECODE = col_character(),
-  isactive = col_integer(),
-  common_name = col_character(),
-  tsn = col_integer(),
-  tsn_accepted = col_integer(),
-  X9 = col_character()
-)) %>% 
-  select(-X9, -tsn_accepted)
-
-# problems should be 0 obs
-problems <- problems(gmex_spp) %>% 
-  filter(!is.na(col))
-stopifnot(nrow(problems) == 0)
-gmex_cruise <-read_csv(here::here("data_raw", "gmex_CRUISES.csv"), col_types = cols(.default = col_character())) %>% 
+# remove extra comma from first row that causes problems in the parsing
+gmex_cruise_raw <- read_lines(here::here("data_raw", "gmex_CRUISES.csv")) %>% 
+  str_replace(., "NGEST_PROGRAM_VER\",", "NGEST_PROGRAM_VER\"")
+gmex_cruise <-read_csv(gmex_cruise_raw) %>% 
   select(CRUISEID, VESSEL, TITLE)
+print("imported gmex_cruise")
 
-# problems should be 0 obs
-problems <- problems(gmex_cruise) %>% 
-  filter(!is.na(col))
-stopifnot(nrow(problems) == 0)
-gmex_cruise <- type_convert(gmex_cruise, col_types = cols(CRUISEID = col_integer(), VESSEL = col_integer(), TITLE = col_character()))
-
-gmex_bio <-read_csv(unz(here::here("data_raw", "gmex_BGSREC.csv.zip"), "gmex_BGSREC.csv"), col_types = cols(.default = col_character())) %>% 
-  select('CRUISEID', 'STATIONID', 'VESSEL', 'CRUISE_NO', 'P_STA_NO', 'GENUS_BGS', 'SPEC_BGS', 'BGSCODE', 'BIO_BGS', 'SELECT_BGS') %>%
+# remove extra comma from first row that causes problems in the parsing
+gmex_bio_raw <- read_lines(unz(here::here("data_raw", "gmex_BGSREC.csv.zip"), "gmex_BGSREC.csv")) %>% 
+  str_replace(., "INVRECID\",", "INVRECID\"")
+gmex_bio <-read_csv(gmex_bio_raw, col_types = cols(.default = col_character())) %>% 
+  select(CRUISEID, STATIONID, VESSEL, CRUISE_NO, P_STA_NO, GENUS_BGS, SPEC_BGS, BGSCODE, BIO_BGS, SELECT_BGS) %>%
   # trim out young of year records (only useful for count data) and those with UNKNOWN species
   filter(BGSCODE != "T" | is.na(BGSCODE),
          GENUS_BGS != "UNKNOWN" | is.na(GENUS_BGS))  %>%
   # remove the few rows that are still duplicates
   distinct()
 
-# problems should be 0 obs
-problems <- problems(gmex_bio) %>% 
-  filter(!is.na(col))
-stopifnot(nrow(problems) == 0)
-
 gmex_bio <- type_convert(gmex_bio, cols(
   CRUISEID = col_integer(),
   STATIONID = col_integer(),
-  VESSEL = col_integer(),
+  VESSEL = col_character(),
   CRUISE_NO = col_integer(),
   P_STA_NO = col_character(),
   GENUS_BGS = col_character(),
@@ -1038,7 +969,8 @@ newspp <- tibble(
   TAXONSIZECODE = NA, 
   isactive = -1, 
   common_name = c('threadnose and swallowtail bass', 'molluscs or unknown'), 
-  tsn = NA) 
+  tsn = NA, 
+  tsn_accepted = NA) 
 
 # remove the duplicates that were just combined  
 gmex_spp <- gmex_spp %>% 
