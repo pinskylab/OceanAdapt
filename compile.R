@@ -1341,6 +1341,7 @@ neus_fall <- neus_fall %>%
     stratum != "07980",
     # stratum 01990 is Offshore, undefined stratum
     stratum != "01990",
+
     # remove unidentified spp and non-species
     spp != "" | !is.na(spp), 
     !grepl("EGG", spp), 
@@ -1986,13 +1987,13 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
 
 
 if(isTRUE(WRITE_MASTER_DAT)){
-  save(ai, ebs, gmex, goa, neus_fall, neus_spr, scot, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rda"))
+save(ai, ebs, gmex, goa, neus_fall, neus_spr, scot, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rda"))
+
 }
 
 # Master Data Set ===========================================================
 print("Join into Master Data Set")
 dat <- rbind(ai, ebs, goa, neus_spr, neus_fall, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot) %>% 
-  # Remove NA values in wtcpue
   filter(!is.na(wtcpue))
 
 # add a case sensitive spp and common name
