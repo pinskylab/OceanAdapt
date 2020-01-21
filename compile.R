@@ -174,7 +174,7 @@ explode0 <- function(x, by=c("region")){
   
   out
 }
-  
+
 # Compile AI =====================================================
 print("Compile AI")
 
@@ -210,18 +210,18 @@ ai_data <- files %>%
 # The warning of 13 parsing failures is pointing to a row in the middle of the data set that contains headers instead of the numbers expected, this row is removed by the filter above.
 
 ai_strata <- read_csv(here::here("data_raw", "ai_strata.csv"), col_types = cols(NPFMCArea = col_character(),
-      SubareaDescription = col_character(),
-      StratumCode = col_integer(),
-      DepthIntervalm = col_character(),
-      Areakm2 = col_integer()
-    ))  %>% 
-      select(StratumCode, Areakm2) %>% 
+                                                                                SubareaDescription = col_character(),
+                                                                                StratumCode = col_integer(),
+                                                                                DepthIntervalm = col_character(),
+                                                                                Areakm2 = col_integer()
+))  %>% 
+  select(StratumCode, Areakm2) %>% 
   mutate(stratum = StratumCode)
-    
+
 
 ai <- left_join(ai_data, ai_strata, by = "stratum")
-  
-  
+
+
 
 # are there any strata in the data that are not in the strata file?
 stopifnot(nrow(filter(ai, is.na(Areakm2))) == 0)
@@ -231,8 +231,8 @@ ai <- ai %>%
   mutate(
     # Create a unique haulid
     haulid = paste(formatC(VESSEL, width=3, flag=0), CRUISE, formatC(HAUL, width=3, flag=0), sep='-'), 
-         # change -9999 wtcpue to NA
-         wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
+    # change -9999 wtcpue to NA
+    wtcpue = ifelse(WTCPUE == "-9999", NA, WTCPUE)) %>% 
   # rename columns
   rename(year = YEAR, 
          lat = LATITUDE, 
@@ -279,7 +279,7 @@ if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
   # plot the strata by year
- p1 <- ai %>% 
+  p1 <- ai %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
@@ -319,7 +319,7 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   if (HQ_PLOTS == TRUE){
-  temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
     ggsave(plot = temp, filename = here::here("plots", "ai_hq_dat_removed.pdf"))
     rm(temp)
   }
@@ -415,12 +415,12 @@ ebs <- ebs %>%
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
- p1 <- ebs %>% 
+  p1 <- ebs %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
- p2 <- ebs %>%
+  p2 <- ebs %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -580,7 +580,7 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum) %>%
     filter(year != 2001)
   
- p3 <-  goa %>% 
+  p3 <-  goa %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
@@ -593,7 +593,7 @@ if (HQ_DATA_ONLY == TRUE){
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
     ggsave(plot = temp, filename = here::here("plots", "goa_hq_dat_removed.pdf"))
-
+    
     rm(temp)
   }
   rm(test, test2, p1, p2, p3, p4)
@@ -757,7 +757,7 @@ if (HQ_DATA_ONLY == TRUE){
   p4 <- wctri %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
-             geom_jitter()
+    geom_jitter()
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
@@ -894,8 +894,8 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
-      ggsave(plot = temp, filename = here::here("plots", "wcann_hq_dat_removed.pdf"))
-      rm(temp)
+    ggsave(plot = temp, filename = here::here("plots", "wcann_hq_dat_removed.pdf"))
+    rm(temp)
   }
   rm(p1, p2)
 }
@@ -911,9 +911,8 @@ gmex_station_raw <- read_lines(here::here("data_raw", "gmex_STAREC.csv"))
 gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\\\"", "\\\"\\\"") %>% 
   str_replace(., "HAULVALUE\",", "HAULVALUE\"")
 gmex_station <- read_csv(gmex_station_clean) %>% 
-  select(STATIONID, CRUISEID, CRUISE_NO, P_STA_NO, TIME_ZN, TIME_MIL, S_LATD, S_LATM, S_LOND, S_LONM, E_LATD, E_LATM, E_LOND, E_LONM, DEPTH_SSTA, MO_DAY_YR, VESSEL_SPD, COMSTAT, HAULVALUE) 
-# %>% 
-#   filter(HAULVALUE == "G")
+  select(STATIONID, CRUISEID, CRUISE_NO, P_STA_NO, TIME_ZN, TIME_MIL, S_LATD, S_LATM, S_LOND, S_LONM, E_LATD, E_LATM, E_LOND, E_LONM, DEPTH_SSTA, MO_DAY_YR, VESSEL_SPD, COMSTAT, HAULVALUE) %>%
+  filter(HAULVALUE == "G")
 print("imported gmex_station")
 
 # remove extra comma from first row that causes problems in the parsing
@@ -1205,6 +1204,8 @@ neus_spr <- neus_spr %>%
     # per neus data steward strata 07940 and 07980 should not be used because they are undefined and should not have been included in the public dataset
     stratum != "07940",
     stratum != "07980",
+    # stratum 01990 is Offshore, undefined stratum
+    stratum != "01990",
     # remove unidentified spp and non-species
     spp != "" | !is.na(spp), 
     !grepl("EGG", spp), 
@@ -1338,6 +1339,9 @@ neus_fall <- neus_fall %>%
     # per neus data steward strata 07940 and 07980 should not be used because they are undefined and should not have been included in the public dataset
     stratum != "07940",
     stratum != "07980",
+    # stratum 01990 is Offshore, undefined stratum
+    stratum != "01990",
+
     # remove unidentified spp and non-species
     spp != "" | !is.na(spp), 
     !grepl("EGG", spp), 
@@ -1697,7 +1701,7 @@ if (HQ_DATA_ONLY == TRUE){
   }
   rm(p1, p2)
 }
-  # no missing data
+# no missing data
 
 # SEUS fall ====
 seusFALL <- seus %>% 
@@ -1825,8 +1829,8 @@ scot <- scot %>%
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
-
-    # plot the strata by year
+  
+  # plot the strata by year
   p1 <- scot %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
@@ -1836,7 +1840,7 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-
+  
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
     ggsave(plot = temp, filename = here::here("plots", "scot-hq_dat_removed.pdf"))
@@ -1984,12 +1988,12 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
 
 if(isTRUE(WRITE_MASTER_DAT)){
 save(ai, ebs, gmex, goa, neus_fall, neus_spr, scot, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rda"))
+
 }
 
 # Master Data Set ===========================================================
 print("Join into Master Data Set")
 dat <- rbind(ai, ebs, goa, neus_spr, neus_fall, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot) %>% 
-# Remove NA values in wtcpue
   filter(!is.na(wtcpue))
 
 # add a case sensitive spp and common name
@@ -2162,7 +2166,7 @@ if (DAT_EXPLODED == TRUE){
       write_csv(dat.exploded, here::here("data_clean", "dat_exploded.csv"))
     }
   }
-
+  
 }
 Sys.time()
 
@@ -2367,7 +2371,7 @@ rm(centbio2, centbio3, maxyrs, natcentbio, natcentbiose, presyr, presyrsum, regc
 if(isTRUE(PLOT_CHARTS)) {
   
   # Plot Species #####
-
+  
   centbio <- BY_SPECIES_DATA
   
   # for latitude
@@ -2379,7 +2383,7 @@ if(isTRUE(PLOT_CHARTS)) {
     print(i)
     par(mfrow = c(6,6), mai=c(0.3, 0.3, 0.2, 0.05), cex.main=0.7, cex.axis=0.8, omi=c(0,0.2,0.1,0), mgp=c(2.8, 0.7, 0), font.main=3)
     spps = sort(unique(centbio$spp[centbio$region == regs[i]]))  
-
+    
     
     xlims = range(as.numeric(centbio$year[centbio$region == regs[i]]))
     
@@ -2401,7 +2405,7 @@ if(isTRUE(PLOT_CHARTS)) {
   }
   
   dev.off()
-
+  
   
   # for depth
   print("Starting depth plots for species")
@@ -2436,7 +2440,7 @@ if(isTRUE(PLOT_CHARTS)) {
   
   
   # Plot Regional ####
-
+  
   reg_lat_depth <- BY_REGION_DATA %>%
     ungroup() %>%
     mutate(year = as.numeric(year),
@@ -2489,7 +2493,7 @@ if(isTRUE(PLOT_CHARTS)) {
                        ,breaks=seq(1970,2020,15)
     )
   ggsave(reg_depth_plot, filename =  here::here("plots", "regional-depth.png"), width = 8.5, height = 11)
-
+  
   
   # Plot National ####
   
@@ -2524,7 +2528,7 @@ if(isTRUE(PLOT_CHARTS)) {
                        ,breaks=seq(1980,2020,15)
     )
   ggsave(nat_lat_plot, filename =  here::here("plots", "national-lat.png"), width = 6, height = 3.5)
-
+  
   nat_depth_plot <- ggplot(data = nat_lat_depth, aes(x=year, y=depth, ymin=mindepth, ymax=maxdepth)) + 
     geom_line(color = "#D95F02") + 
     geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
@@ -2543,6 +2547,6 @@ if(isTRUE(PLOT_CHARTS)) {
                        ,breaks=seq(1980,2020,15)
     )
   ggsave(nat_depth_plot, filename =  here::here("plots", "national-depth.png"), width = 6, height = 3.5)
-
-}
   
+}
+
