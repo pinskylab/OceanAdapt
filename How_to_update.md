@@ -7,7 +7,7 @@ Make sure there is a data_raw directory within the OceanAdapt directory.
 
 ---
 ## Acquire new data.  ###
-Run the download_data.R script found in the R directory within the OceanAdapt directory.  Some notes:
+Run the download_x.R scripts found in the R directory within the OceanAdapt directory.  Some notes:
 1. For regions in Alaska, there is a function that repeats the download steps for all of the files and regions, however it is important to visit the website and make sure any new files are included in the list of files in the script.
 
 2. WCTRI is no longer active and so the wctri files in the data_raw directory remain the current files to use each year.  Do not delete them.
