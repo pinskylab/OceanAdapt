@@ -194,56 +194,51 @@ explode0 <- function(x, by=c("region")){
 # Compile AI =====================================================
 print("Compile AI")
 
-## Special fix
-#there is a comment that contains a comma in the 2014-2018 file that causes the delimiters to read incorrectly.  Fix that here::here:
-temp <- read_lines(here::here("data_raw", "ai2014_2018.csv"))
-# replace the string that causes the problem
-temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
-# read the result in as a csv
-temp_csv <- read_csv(temp_fixed)
-## End special fix
 
 files <- as.list(dir(pattern = "ai", path = "data_raw", full.names = T))
 
-# exclude the strata file and the raw 2014-2016 data file which has been fixed in temp_csv
-files <- files[-c(grep("strata", files),grep("2014", files))]
+# exclude the strata file and the fixed file
+files <- files[-c(grep("strata", files))]
 
-# combine all of the data files into one table
-ai_data <- files %>% 
-  # read in all of the csv's in the files list
-  map_dfr(read_csv) %>%
-  # add in the data fixed above
-  rbind(temp_csv) %>% 
-  # remove any data rows that have headers as data rows
-  filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
-  mutate(stratum = as.integer(STRATUM)) %>% 
-  # remove unused columns
-  select(-STATION, -DATETIME, -NUMCPUE, -SID, -BOT_TEMP, -SURF_TEMP, -STRATUM) %>% 
-  # remove any extra white space from around spp and common names
-  mutate(COMMON = str_trim(COMMON), 
-         SCIENTIFIC = str_trim(SCIENTIFIC))
+# because there are some character issues with the incoming data, I am reading in each file as lines to one character object
 
-# The warning of 13 parsing failures is pointing to a row in the middle of the data set that contains headers instead of the numbers expected, this row is removed by the filter above.
+ai_data <- tibble()
+for (file in files){
+  ai_char <- read_lines(file)
+  if(length(grep("LATITUDE", ai_char)) > 1){
+    ai_char_fix1 <- ai_char[-grep("LATITUDE",ai_char)[-c(1)]]
+  }else{
+    ai_char_fix1 <- ai_char
+  }
+  ai_char_fix2 <- str_replace_all(ai_char_fix1, "Stone et al., 2011", "Stone et al. 2011")
+  ai_csv <- read_csv(ai_char_fix2) %>% 
+    select(-STATION, -DATETIME, -NUMCPUE, -SID, -BOT_TEMP, -SURF_TEMP) %>% 
+    mutate(COMMON = str_trim(COMMON), 
+           SCIENTIFIC = str_trim(SCIENTIFIC))
+  ai_data <- rbind(ai_data, ai_csv) 
+}
 
-ai_strata <- read_csv(here::here("data_raw", "ai_strata.csv"), col_types = cols(NPFMCArea = col_character(),
-                                                                                SubareaDescription = col_character(),
-                                                                                StratumCode = col_integer(),
-                                                                                DepthIntervalm = col_character(),
-                                                                                Areakm2 = col_integer()
-))  %>% 
+ai_strata <- read_csv(here::here("data_raw", "ai_strata.csv"), 
+                      col_types = cols(NPFMCArea = col_character(),
+                                       SubareaDescription = col_character(),
+                                       StratumCode = col_integer(),
+                                       DepthIntervalm = col_character(),
+                                       Areakm2 = col_integer()
+                      ))  %>% 
   select(StratumCode, Areakm2) %>% 
-  mutate(stratum = StratumCode)
+  rename(STRATUM = StratumCode)
 
-
-ai <- left_join(ai_data, ai_strata, by = "stratum")
-
-
+ai <- left_join(ai_data, ai_strata, by = "STRATUM")
 
 # are there any strata in the data that are not in the strata file?
 stopifnot(nrow(filter(ai, is.na(Areakm2))) == 0)
 
 # the following chunk of code reformats and fixes this region's data
 ai <- ai %>% 
+  # remove rows that are eggs
+  filter(SCIENTIFIC != "" &
+           # remove all spp that contain the word "egg"
+           !grepl("egg", SCIENTIFIC)) %>% 
   mutate(
     # Create a unique haulid
     haulid = paste(formatC(VESSEL, width=3, flag=0), CRUISE, formatC(HAUL, width=3, flag=0), sep='-'), 
@@ -255,11 +250,8 @@ ai <- ai %>%
          lon = LONGITUDE, 
          depth = BOT_DEPTH, 
          spp = SCIENTIFIC, 
-         stratum_area = Areakm2) %>% 
-  # remove rows that are eggs
-  filter(spp != "" &
-           # remove all spp that contain the word "egg"
-           !grepl("egg", spp)) %>% 
+         stratum_area = Areakm2, 
+         stratum = STRATUM) %>% 
   # adjust spp names
   mutate(
     # catch A. stomias and A. evermanii (as of 2018 both spp appear as "valid" so not sure why they are being changed)
@@ -273,15 +265,6 @@ ai <- ai %>%
     spp = ifelse(grepl("Bathyraja", spp) & !grepl("panthera", spp), 'Bathyraja sp.', spp)
   ) %>% 
   select(haulid, year, lat, lon, stratum, stratum_area, depth, spp, wtcpue) %>% 
-  type_convert(col_types = cols(
-    lat = col_double(),
-    lon = col_double(),
-    year = col_integer(),
-    wtcpue = col_double(),
-    spp = col_character(),
-    depth = col_integer(),
-    haulid = col_character()
-  )) %>% 
   group_by(haulid, stratum, stratum_area, year, lat, lon, depth, spp) %>% 
   summarise(wtcpue = sumna(wtcpue)) %>% 
   # Calculate a corrected longitude for Aleutians (all in western hemisphere coordinates)
@@ -295,16 +278,9 @@ if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
   # plot the strata by year
-  p1 <- ai %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
+  p1 <- yr_strat_plot(ai)
   
-  p2 <- ai %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
-  
+  p2 <- lat_lon_plot(ai)
   
   test <- ai %>% 
     select(stratum, year) %>% 
@@ -324,15 +300,9 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum)
   
   # plot the results after editing
-  p3 <- ai %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
+  p3 <- yr_strat_plot(ai)
   
-  p4 <- ai%>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
+  p4 <- lat_lon_plot(ai)
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
@@ -342,28 +312,31 @@ if (HQ_DATA_ONLY == TRUE){
   rm(test, test2, p1, p2, p3, p4)
 }
 # clean up
-rm(ai_data, ai_strata, files, temp_fixed, temp_csv)
+rm(ai_data, ai_strata, ai_csv, files)
 
 # Compile EBS ============================================================
 print("Compile EBS")
 
 files <- as.list(dir(pattern = "ebs", path = "data_raw", full.names = T))
 
-# exclude the strata file
-files <- files[-grep("strata", files)]
+# exclude the strata file and the fixed file
+files <- files[-c(grep("strata", files))]
 
-# combine all of the data files into one table
-ebs_data <- files %>% 
-  # read in all of the csv's in the files list
-  map_dfr(read_csv) %>%
-  # remove any data rows that have headers as data rows
-  filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
-  mutate(stratum = as.integer(STRATUM))  %>% 
-  # remove unused columns
-  select(-STATION, -DATETIME, -NUMCPUE, -SID, -BOT_TEMP, -SURF_TEMP, -STRATUM) %>% 
-  # remove any extra white space from around spp and common names
-  mutate(COMMON = str_trim(COMMON), 
-         SCIENTIFIC = str_trim(SCIENTIFIC))
+ebs_data <- tibble()
+for (file in files){
+  ebs_char <- read_lines(file)
+  if(length(grep("LATITUDE", ebs_char)) > 1){
+    ebs_char_fix1 <- ebs_char[-grep("LATITUDE",ebs_char)[-c(1)]]
+  }else{
+    ebs_char_fix1 <- ebs_char
+  }
+  ebs_csv <- read_csv(ebs_char_fix1) %>% 
+    select(-STATION, -DATETIME, -NUMCPUE, -SID, -BOT_TEMP, -SURF_TEMP) %>% 
+    mutate(COMMON = str_trim(COMMON), 
+           SCIENTIFIC = str_trim(SCIENTIFIC))
+  ebs_data <- rbind(ebs_data, ebs_csv) 
+}
+
 
 # import the strata data
 ebs_strata <- read_csv(here::here("data_raw", "ebs_strata.csv"), col_types = cols(
@@ -372,14 +345,17 @@ ebs_strata <- read_csv(here::here("data_raw", "ebs_strata.csv"), col_types = col
   Areakm2 = col_integer()
 )) %>% 
   select(StratumCode, Areakm2) %>% 
-  rename(stratum = StratumCode)
+  rename(STRATUM = StratumCode)
 
-ebs <- left_join(ebs_data, ebs_strata, by = "stratum")
+ebs <- left_join(ebs_data, ebs_strata, by = "STRATUM")
 
 # are there any strata in the data that are not in the strata file?
 stopifnot(nrow(filter(ebs, is.na(Areakm2))) == 0)
 
 ebs <- ebs %>% 
+  # remove eggs
+  filter(SCIENTIFIC != '' &
+           !grepl("egg", SCIENTIFIC)) %>% 
   mutate(
     # Create a unique haulid
     haulid = paste(formatC(VESSEL, width=3, flag=0), CRUISE, formatC(HAUL, width=3, flag=0), sep='-'), 
@@ -390,56 +366,28 @@ ebs <- ebs %>%
          lat = LATITUDE, 
          lon = LONGITUDE, 
          depth = BOT_DEPTH, 
-         spp = SCIENTIFIC, 
+         spp = SCIENTIFIC,
+         stratum = STRATUM,
          stratum_area = Areakm2) %>% 
-  # remove eggs
-  filter(spp != '' &
-           !grepl("egg", spp)) %>% 
   # adjust spp names
   mutate(spp = ifelse(grepl("Atheresthes", spp), "Atheresthes sp.", spp), 
          spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
          spp = ifelse(grepl("Myoxocephalus", spp), "Myoxocephalus sp.", spp),
          spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp), 
          spp = ifelse(grepl("Hippoglossoides", spp), "Hippoglossoides sp.", spp)) %>% 
-  # change from all character to fitting column types
-  type_convert(col_types = cols(
-    lat = col_double(),
-    lon = col_double(),
-    STATION = col_character(),
-    year = col_integer(),
-    DATETIME = col_character(),
-    wtcpue = col_double(),
-    NUMCPUE = col_double(),
-    COMMON = col_character(),
-    spp = col_character(),
-    SID = col_integer(),
-    depth = col_integer(),
-    BOT_TEMP = col_double(),
-    SURF_TEMP = col_double(),
-    VESSEL = col_integer(),
-    CRUISE = col_integer(),
-    HAUL = col_integer(),
-    haulid = col_character()
-  ))  %>%  
   group_by(haulid, stratum, stratum_area, year, lat, lon, depth, spp) %>% 
   summarise(wtcpue = sumna(wtcpue)) %>% 
   # add region column
   mutate(region = "Eastern Bering Sea") %>% 
-  select(region, haulid, year, lat, lon, stratum, stratum_area, depth, spp, wtcpue) %>% 
-  ungroup()
+  ungroup() %>% 
+  select(region, haulid, year, lat, lon, stratum, stratum_area, depth, spp, wtcpue) 
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
-  p1 <- ebs %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
+  p1 <- yr_strat_plot(ebs)
   
-  p2 <- ebs %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
+  p2 <- lat_lon_plot(ebs)
   
   test <- ebs %>% 
     select(stratum, year) %>% 
@@ -458,15 +406,9 @@ if (HQ_DATA_ONLY == TRUE){
   ebs <- ebs %>% 
     filter(stratum %in% test$stratum)
   
-  p3 <- ebs %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year))) +
-    geom_jitter()
+  p3 <- yr_strat_plot(ebs)
   
-  p4 <- ebs %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
+  p4 <- lat_lon_plot(ebs)
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
@@ -476,7 +418,7 @@ if (HQ_DATA_ONLY == TRUE){
   rm(test, test2, p1, p2, p3, p4)
 }
 # clean up
-rm(files, ebs_data, ebs_strata)
+rm(files, ebs_data, ebs_strata, ebs_char_fixed, ebs_csv)
 
 
 # Compile GOA =============================================================
@@ -487,27 +429,34 @@ files <- as.list(dir(pattern = "goa", path = "data_raw", full.names = T))
 # exclude the 2 strata files; the 1 and 2 elements
 files <- files[-grep("strata", files)]
 
-# combine all of the data files into one table
-goa_data <- files %>% 
-  # read in all of the csv's in the files list
-  map_dfr(read_csv) %>%
-  # remove any data rows that have headers as data rows
-  filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
-  mutate(stratum = as.integer(STRATUM)) %>% 
-  # remove unused columns
-  select(-STATION, -DATETIME, -NUMCPUE, -SID, -BOT_TEMP, -SURF_TEMP, -STRATUM)
-
+goa_data <- tibble()
+for (file in files){
+  goa_char <- read_lines(file)
+  if(length(grep("LATITUDE", goa_char)) > 1){
+    goa_char_fix1 <- goa_char[-grep("LATITUDE",goa_char)[-c(1)]]
+  }else{
+    goa_char_fix1 <- goa_char
+  }
+  goa_csv <- read_csv(goa_char_fix1) %>% 
+    select(-STATION, -DATETIME, -NUMCPUE, -SID, -BOT_TEMP, -SURF_TEMP) %>% 
+    mutate(COMMON = str_trim(COMMON), 
+           SCIENTIFIC = str_trim(SCIENTIFIC))
+  goa_data <- rbind(goa_data, goa_csv) 
+}
 # import the strata data
-files <- as.list(dir(pattern = "goa_strata", path = "data_raw", full.names = T))
 
-goa_strata <- files %>% 
-  # read in all of the csv's in the files list
-  map_dfr(read_csv) %>% 
+
+goa_strata <- read_csv(here::here("data_raw", "goa_strata.csv"), col_types = cols(
+  SubareaDescription = col_character(),
+  StratumCode = col_double(),
+  DepthIntervalm = col_character(),
+  Areakm2 = col_double()
+)) %>% 
   select(StratumCode, Areakm2) %>% 
   distinct() %>% 
-  rename(stratum = StratumCode)
+  rename(STRATUM = StratumCode)
 
-goa <- left_join(goa_data, goa_strata, by = "stratum")
+goa <- left_join(goa_data, goa_strata, by = "STRATUM")
 
 # are there any strata in the data that are not in the strata file?
 stopifnot(nrow(filter(goa, is.na(Areakm2))) == 0)
@@ -515,6 +464,10 @@ stopifnot(nrow(filter(goa, is.na(Areakm2))) == 0)
 
 
 goa <- goa %>%
+  # remove non-fish
+  filter(
+    SCIENTIFIC != '' & 
+      !grepl("egg", SCIENTIFIC)) %>% 
   mutate(
     # Create a unique haulid
     haulid = paste(formatC(VESSEL, width=3, flag=0), CRUISE, formatC(HAUL, width=3, flag=0), sep='-'),    
@@ -524,11 +477,8 @@ goa <- goa %>%
          lon = LONGITUDE, 
          depth = BOT_DEPTH, 
          spp = SCIENTIFIC, 
+         stratum = STRATUM,
          stratum_area = Areakm2) %>% 
-  # remove non-fish
-  filter(
-    spp != '' & 
-      !grepl("egg", spp)) %>% 
   # adjust spp names
   mutate(
     spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
@@ -557,21 +507,16 @@ goa <- goa %>%
   group_by(haulid, stratum, stratum_area, year, lat, lon, depth, spp) %>% 
   summarise(wtcpue = sumna(wtcpue)) %>% 
   mutate(region = "Gulf of Alaska") %>% 
-  select(region, haulid, year, lat, lon, stratum, stratum_area, depth, spp, wtcpue) %>% 
-  ungroup()
+  ungroup() %>% 
+  select(region, haulid, year, lat, lon, stratum, stratum_area, depth, spp, wtcpue)
+
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
-  p1 <- goa %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
+  p1 <- yr_strat_plot(goa)
   
-  p2 <- goa %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
+  p2 <- lat_lon_plot(goa)
   
   # for GOA in 2018, 2001 missed 27 strata and will be removed, stratum 50 is
   # missing from 3 years but will be kept, 410, 420, 430, 440, 450 are missing 
@@ -596,15 +541,9 @@ if (HQ_DATA_ONLY == TRUE){
     filter(stratum %in% test$stratum) %>%
     filter(year != 2001)
   
-  p3 <-  goa %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
+  p3 <- yr_strat_plot(goa)
   
-  p4 <- goa %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
+  p4 <- lat_lon_plot(goa)
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
@@ -614,7 +553,7 @@ if (HQ_DATA_ONLY == TRUE){
   }
   rm(test, test2, p1, p2, p3, p4)
 }
-rm(files, goa_data, goa_strata)
+rm(files, goa_data, goa_strata, goa_csv)
 
 
 # Compile WCTRI ===========================================================
