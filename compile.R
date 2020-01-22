@@ -69,6 +69,20 @@ library(here) # for relative file paths
 # Functions ===========================================================
 print("Functions")
 
+# function to apply conversion factors to bigelow hauls in neus
+bigelow_conversion <- function(seasn){
+  spp <- big_bio %>% 
+    filter(season == seasn) %>% 
+    select(svspp)
+  out <- neus_survdat %>% 
+    filter(SVVESSEL %in% c('HB', 'PC'), 
+           SVSPP %in% spp$svspp) %>% 
+    left_join(big_bio, by = c("season", "SVSPP" = "svspp")) %>% 
+    mutate(converted = biomass / rhoW)
+  return(out)
+  
+}
+
 # function to plot a grid of stratum and years sampled during a bottom trawl
 yr_strat_plot <- function(dataset){
   dataset %>% 
@@ -1179,7 +1193,40 @@ neus_survdat <- left_join(neus_catch, neus_station, by = c("CRUISE6", "STRATUM",
            lat = DECDEG_BEGLAT,
            lon = DECDEG_BEGLON, 
            depth = AVGDEPTH, 
-           biomass = EXPCATCHWT) %>% 
+           biomass = EXPCATCHWT) 
+
+  # add bigelow conversion factors
+big_bio <- tibble(svspp = c(12, 22, 24, 27, 28, 31, 33, 34, 73, 76, 106, 107, 
+                                109, 121, 135, 136, 141, 143, 145, 149, 155, 164, 
+                                171, 181, 193, 197, 502, 512, 15, 23, 26, 32, 72,
+                                74, 77, 78, 102, 103, 104, 105, 108, 131, 163, 301,
+                                313, 401, 503, 15, 23, 26, 32, 72, 74, 77, 78, 102, 
+                                103, 104, 105, 108, 131, 163, 301, 313, 401, 503),
+                      season = c(rep('both', 28), rep('spring', 19), rep('fall', 19)),
+                      rhoW = c(1.082, 3.661, 6.189, 4.45, 3.626, 1.403, 1.1, 2.12,
+                               1.58, 2.088, 2.086, 3.257, 12.199, 0.868, 0.665, 1.125,
+                               2.827, 1.347, 1.994, 1.535, 1.191, 1.354, 3.259, 0.22,
+                               3.912, 8.062, 1.409, 2.075, 1.166, 3.718, 2.786, 5.394,
+                               4.591, 0.878, 3.712, 3.483, 2.092, 3.066, 3.05, 2.244,
+                               3.069, 2.356, 2.986, 1.272, 3.864, 1.85, 2.861, 1.21, 
+                               2.174, 8.814, 1.95, 4.349, 1.489, 3, 2.405, 1.692,
+                               2.141, 2.151, 2.402, 1.901, 1.808, 2.771, 1.375, 2.479,
+                               3.151, 1.186))
+
+
+
+
+
+both <- bigelow_conversion("both")
+spring <- bigelow_conversion("spring")
+fall <- bigelow_conversion("fall")  
+
+neus_converted <- rbind(both, spring, fall) %>% 
+  group_by(ID,year, lat, lon, depth, CRUISE6, STATION, STRATUM, SVSPP, season) %>% 
+  summarise(wtcpue = sum(coverted))
+
+
+
     # sum biomass of different sexes of same spp together
     group_by(ID,year, lat, lon, depth, CRUISE6, STATION, STRATUM, SVSPP, season) %>% 
     summarise(wtcpue = sum(biomass)) %>% 
