@@ -69,6 +69,22 @@ library(here) # for relative file paths
 # Functions ===========================================================
 print("Functions")
 
+# function to plot a grid of stratum and years sampled during a bottom trawl
+yr_strat_plot <- function(dataset){
+  dataset %>% 
+    select(stratum, year) %>% 
+    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+}
+
+lat_lon_plot <- function(dataset){
+  dataset %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+}
+
+
 # function to calculate convex hull area in km2
 #developed from http://www.nceas.ucsb.edu/files/scicomp/GISSeminar/UseCases/CalculateConvexHull/CalculateConvexHullR.html
 calcarea <- function(lon,lat){
@@ -1133,72 +1149,110 @@ if (HQ_DATA_ONLY == TRUE){
 }
 rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean, gmex_strats, dups)
 
-# Compile NEUS SPRING ===========================================================
-# process spp file
+# Compile NEUS ===========================================================
 
 load(here::here("data_raw", "neus_SVSPP.RData"))
 neus_spp <- spp %>% 
   # remove some columns from spp data
   select(-ITISSPP, -COMNAME, -AUTHOR) %>% 
   mutate(SCINAME = as.character(SCINAME))
+print("NEUS species codes imported")
 
-files <- as.list(dir(pattern = "neus_strata", path = "data_raw", full.names = T))
-
-neus_strata <- read_csv(here::here("data_raw", "neus_strata.csv")) %>% 
+neus_strata <- read_csv(here::here("data_raw", "neus_strata.csv"), col_types = cols(
+  strgrp_desc = col_character(),
+  stratum = col_character(),
+  stratum_name = col_character(),
+  stratum_area = col_double(),
+  midlat = col_double(),
+  midlon = col_double(),
+  minlat = col_double(),
+  maxlat = col_double(),
+  minlon = col_double(),
+  maxlon = col_double(),
+  blocks = col_double(),
+  notows = col_double(),
+  doe = col_logical(),
+  doc = col_logical(),
+  uoe = col_logical(),
+  uoc = col_logical()
+)) %>% 
   select(stratum, stratum_area) %>% 
   distinct()
+print("NEUS strata definitions imported")
 
-print("Compile NEUS SPRING")
+catch_raw <- as.list(dir(pattern = "svcat.csv", path = "data_raw", full.names = T))
 
-## Special fix
-#there is a comment that contains a comma in the svcat.csv file that causes the delimiters to read incorrectly.
-temp <- read_lines(here::here("data_raw", "neus_spring_svcat.csv"))
-temp_fixed <- stringr::str_replace_all(temp, "SQUID, CUTTLEFISH, AND OCTOPOD UNCL", "SQUID CUTTLEFISH AND OCTOPOD UNCL")
-temp_fixed2 <- stringr::str_replace_all(temp_fixed, "SHRIMP \\(PINK,BROWN,WHITE\\)", "SHRIMP PINK BROWN WHITE")
-temp_fixed3 <- stringr::str_replace_all(temp_fixed2, "SHRIMP \\(PINKBROWNWHITE\\) UNCL", "SHRIMP PINK BROWN WHITE UNCL")
-neus_spr_catch <- read_csv(temp_fixed3, col_types = cols(
-  CRUISE6 = col_character(),
-  STRATUM = col_character(),
-  TOW = col_character(),
-  STATION = col_character(),
-  ID = col_character(),
-  LOGGED_SPECIES_NAME = col_character(),
-  SVSPP = col_double(),
-  CATCHSEX = col_double(),
-  EXPCATCHNUM = col_double(),
-  EXPCATCHWT = col_double()
-))
-rm(temp, temp_fixed, temp_fixed2, temp_fixed3)
+# remove special characters from the comments that cause parsing errors in the catch files
+for (i in catch_raw){
+  temp <- read_lines(here::here(i))
+  temp_fixed <- stringr::str_replace_all(temp, "SQUID, CUTTLEFISH, AND OCTOPOD UNCL", "SQUID CUTTLEFISH AND OCTOPOD UNCL")
+  temp_fixed2 <- stringr::str_replace_all(temp_fixed, "SHRIMP \\(PINK,BROWN,WHITE\\)", "SHRIMP PINK BROWN WHITE")
+  temp_fixed3 <- stringr::str_replace_all(temp_fixed2, "SHRIMP \\(PINKBROWNWHITE\\) UNCL", "SHRIMP PINK BROWN WHITE UNCL")
+  temp_fixed4 <- stringr::str_replace_all(temp_fixed3, "SEA STAR, BRITTLE STAR, AND BASKETSTAR UNCL", "SEA STAR BRITTLE STAR AND BASKETSTAR UNCL")
+  temp_fixed5 <- stringr::str_replace_all(temp_fixed4, "MOON SNAIL, SHARK EYE, AND BABY-EAR UNCL", "MOON SNAIL SHARK EYE AND BABY EAR UNCL")
+  temp6 <- read_csv(temp_fixed5, col_types = cols(
+    CRUISE6 = col_character(),
+    STRATUM = col_character(),
+    TOW = col_character(),
+    STATION = col_character(),
+    ID = col_character(),
+    LOGGED_SPECIES_NAME = col_character(),
+    SVSPP = col_double(),
+    CATCHSEX = col_double(),
+    EXPCATCHNUM = col_double(),
+    EXPCATCHWT = col_double()
+  ))
+  if (grepl("fall", i)){
+    neus_fall_catch <- temp6 %>% 
+      mutate(season = "fall")
+  } else if(grepl("spring", i)){
+      neus_spring_catch <- temp6 %>% 
+        mutate(season = "spring")
+    }
+  rm(temp, temp_fixed, temp_fixed2, temp_fixed3, temp_fixed4, temp_fixed5, temp6)
+}
+neus_catch <- rbind(neus_fall_catch, neus_spring_catch)
+print("imported NEUS catch data")
+rm(catch_raw, neus_fall_catch, neus_spring_catch)
 
-neus_spr_station <- read_csv(here::here("data_raw", "neus_spring_svsta.csv"), col_types = cols(.default = col_character()))
+station_raw <- as.list(dir(pattern = "svsta.csv", path = "data_raw", full.names = T))
 
-neus_spr_survdat <- left_join(neus_spr_catch, neus_spr_station, by = c("CRUISE6", "STRATUM", "TOW", "STATION", "ID")) %>% 
-  select(ID, CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX, SVVESSEL, EST_YEAR, DECDEG_BEGLAT, DECDEG_BEGLON,  AVGDEPTH, SURFTEMP, SURFSALIN, BOTTEMP, BOTSALIN, EXPCATCHWT) %>% 
-  distinct() %>% 
-  rename(YEAR = EST_YEAR, 
-         LAT = DECDEG_BEGLAT,
-         LON = DECDEG_BEGLON, 
-         DEPTH = AVGDEPTH, 
-         BIOMASS = EXPCATCHWT) %>% 
-  # sum different sexes of same spp together
-  group_by(ID,YEAR, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP) %>% 
-  summarise(wtcpue = sum(BIOMASS)) 
+for (i in station_raw){
+  temp <- read_csv(here::here(i), col_types = cols(.default = col_character()))
+  if (grepl("fall", i)){
+    neus_fall_station <- temp %>% 
+      mutate(season = "fall")
+  } else if(grepl("spring", i)){
+    neus_spring_station <- temp %>% 
+      mutate(season = "spring")
+  }
+  rm(temp)
+}
 
-neus_spr <- left_join(neus_spr_survdat, neus_spp, by = "SVSPP") %>%
+neus_station <- rbind(neus_fall_station, neus_spring_station)
+print("imported NEUS station")
+rm(station_raw, neus_fall_station, neus_spring_station)
+
+
+neus_survdat <- left_join(neus_catch, neus_station, by = c("CRUISE6", "STRATUM", "TOW", "STATION", "ID", "season")) %>% 
+    select(season, ID, CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX, SVVESSEL, EST_YEAR, DECDEG_BEGLAT, DECDEG_BEGLON,  AVGDEPTH, SURFTEMP, SURFSALIN, BOTTEMP, BOTSALIN, EXPCATCHWT) %>% 
+    rename(year = EST_YEAR, 
+           lat = DECDEG_BEGLAT,
+           lon = DECDEG_BEGLON, 
+           depth = AVGDEPTH, 
+           biomass = EXPCATCHWT) %>% 
+    # sum biomass of different sexes of same spp together
+    group_by(ID,year, lat, lon, depth, CRUISE6, STATION, STRATUM, SVSPP, season) %>% 
+    summarise(wtcpue = sum(biomass)) %>% 
+  left_join(neus_spp, by = "SVSPP") %>%
   left_join(neus_strata, by = c("STRATUM" = "stratum"))
 
-neus_spr <- neus_spr %>%
+neus <- neus_survdat %>%
   mutate(
-    # Create a unique haulid
-    haulid = str_c(str_sub(ID, 1,6),"-", str_sub(ID, -4), "-", str_sub(ID, 7,11)), 
-    # Calculate stratum area where needed (use convex hull approach)
     # convert square nautical miles to square kilometers
     stratum_area = stratum_area * 3.429904) %>% 
-  rename(year = YEAR,
+  rename(haulid = ID,
          spp = SCINAME,
-         lat = LAT, 
-         lon = LON, 
-         depth = DEPTH,
          stratum = STRATUM) %>%
   filter(
     # per neus data steward strata 07940 and 07980 should not be used because they are undefined and should not have been included in the public dataset
@@ -1210,201 +1264,123 @@ neus_spr <- neus_spr %>%
     spp != "" | !is.na(spp), 
     !grepl("EGG", spp), 
     !grepl("UNIDENTIFIED", spp)) %>%
-  group_by(haulid, stratum, stratum_area, year, lat, lon, depth, spp) %>% 
+  group_by(haulid, stratum, stratum_area, year, lat, lon, depth, spp, season) %>% 
   summarise(wtcpue = sumna(wtcpue)) %>% 
-  # add temporary region column (this will be replaced with seasonal name)
-  mutate(region = "Northeast US") %>% 
-  select(region, haulid, year, lat, lon, stratum, stratum_area, depth, spp, wtcpue) %>% 
   ungroup() %>% 
-  mutate(region = "Northeast US Spring")
+  select(haulid, year, lat, lon, stratum, stratum_area, depth, spp, wtcpue, season)
+
+neus_spr <- neus %>% 
+  filter(season == "spring") %>% 
+  mutate(region = "Northeast U.S. Spring") %>% 
+  select(-season)
+
+neus_fall <- neus %>% 
+  filter(season == "fall") %>% 
+  mutate(region = "Northeast U.S. Fall") %>% 
+  select(-season)
+ 
+rm(neus, neus_catch, neus_spp, neus_station, neus_strata, neus_survdat, spp) 
 
 # are there any strata in the data that are not in the strata file?
 # stopifnot(nrow(filter(neus_spr, is.na(stratum_area))) == 0)
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
+  p1 <- yr_strat_plot(neus_spr)
+  p2 <- lat_lon_plot(neus_spr)
   
-  p1 <-neus_spr %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
-  
-  p2 <- neus_spr %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
-  
-  # for neus Spring, right away it is apparent that 1972 and earlier be eliminated
+  # for neus Spring, right away it is apparent that 1972 and earlier should be eliminated because of missing data
   neus_spr <- neus_spr %>% 
     filter(year > 1972)
   
-  # it's hard to read the strata labels so I'm finding them here::here
-  test <- neus_spr %>% 
+  # I ran the code through the summarize line and played with the plot and last filter line until I found a good balance.  In other regions we are able to remove all strata or years with missing data without losing much of the dataset but for NEUS we have to keep some incomplete years or strata or we would loose too much data.
+  # less than 35, a column of missing strata appears on the right hand side of the plot, distinguishing this as the lowest to go.
+  test1 <- neus_spr %>% 
     select(stratum, year) %>% 
     distinct() %>% 
     group_by(stratum) %>% 
     summarise(count = n()) %>%
-    filter(count < 40)
-  
-  neus_spr <- neus_spr %>%
-    filter(!stratum %in% test$stratum)
+    filter(count >= 34)
   
   # check by year
-  test <- neus_spr %>% 
+  test2 <- neus_spr %>% 
     select(stratum, year) %>% 
     distinct() %>% 
     group_by(year) %>% 
     summarise(count = n()) %>%
-    filter(count > 67)
+    filter(count >=78)
   
+  test <- neus_spr %>%
+    filter(year %in% test2$year, 
+           stratum %in% test1$stratum)
+  
+  yr_strat_plot(test)
+  
+  
+  print(str_c("losing ", (nrow(neus_spr) - nrow(test))/nrow(neus_spr), " of data"))
+# 10%
   neus_spr <- neus_spr %>%
-    filter(year %in% test$year)
+    filter(stratum %in% test1$stratum, 
+           year %in% test2$year)
   
-  p3 <- neus_spr %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
-  
-  p4 <- neus_spr %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
+
+  p3 <- yr_strat_plot(neus_spr)
+  p4 <- lat_lon_plot(neus_spr)
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
     ggsave(plot = temp, filename = here::here("plots", "neus_spr_hq_dat_removed.pdf"))
     rm(temp)
   }
-  rm(test, p1, p2, p3, p4)
+  rm(test, test1, test2, p1, p2, p3, p4)
 }
-
-# Compile NEUS FALL ===========================================================
-print("Compile NEUS FALL")
-temp <- read_lines(here::here("data_raw", "neus_fall_svcat.csv"))
-temp_fixed <- stringr::str_replace_all(temp, "SQUID, CUTTLEFISH, AND OCTOPOD UNCL", "SQUID CUTTLEFISH AND OCTOPOD UNCL")
-temp_fixed2 <- stringr::str_replace_all(temp_fixed, "SHRIMP \\(PINK,BROWN,WHITE\\)", "SHRIMP PINK BROWN WHITE")
-temp_fixed3 <- stringr::str_replace_all(temp_fixed2, "SHRIMP \\(PINKBROWNWHITE\\) UNCL", "SHRIMP PINK BROWN WHITE UNCL")
-temp_fixed4 <- stringr::str_replace_all(temp_fixed3, "SEA STAR, BRITTLE STAR, AND BASKETSTAR UNCL", "SEA STAR BRITTLE STAR AND BASKETSTAR UNCL")
-temp_fixed5 <- stringr::str_replace_all(temp_fixed4, "MOON SNAIL, SHARK EYE, AND BABY-EAR UNCL", "MOON SNAIL SHARK EYE AND BABY EAR UNCL")
-neus_fall_catch <- read_csv(temp_fixed5, col_types = cols(
-  CRUISE6 = col_character(),
-  STRATUM = col_character(),
-  TOW = col_character(),
-  STATION = col_character(),
-  ID = col_double(),
-  LOGGED_SPECIES_NAME = col_character(),
-  SVSPP = col_double(),
-  CATCHSEX = col_double(),
-  EXPCATCHNUM = col_double(),
-  EXPCATCHWT = col_double()
-))
-rm(temp, temp_fixed, temp_fixed2, temp_fixed3, temp_fixed4, temp_fixed5)
-# End special fix
-
-
-neus_fall_station <- read_csv(here::here("data_raw", "neus_fall_svsta.csv"), col_types = cols(.default = col_character()))
-
-neus_fall_survdat <- right_join(neus_fall_station, neus_fall_catch, by = c("CRUISE6", "STRATUM", "TOW", "STATION", "ID")) %>% 
-  select(CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX, SVVESSEL, EST_YEAR, DECDEG_BEGLAT, DECDEG_BEGLON,  AVGDEPTH, SURFTEMP, SURFSALIN, BOTTEMP, BOTSALIN, EXPCATCHWT) %>% 
-  distinct() %>% 
-  rename(YEAR = EST_YEAR, 
-         LAT = DECDEG_BEGLAT,
-         LON = DECDEG_BEGLON, 
-         DEPTH = AVGDEPTH, 
-         BIOMASS = EXPCATCHWT) %>% 
-  # sum different sexes of same spp together
-  group_by(YEAR, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, SVSPP) %>% 
-  summarise(wtcpue = sum(BIOMASS))
-
-neus_fall <- left_join(neus_spr_survdat, neus_spp, by = "SVSPP") %>%
-  left_join(neus_strata, by = "STRATUM")
-
-# are there any strata in the data that are not in the strata file?
-# stopifnot(nrow(filter(neus_fall, is.na(STRATUM_AREA))) == 0)
-
-neus_fall <- neus_fall %>%
-  mutate(
-    # Create a unique haulid
-    haulid = str_c(str_sub(ID, 1,6),"-", str_sub(ID, -4), "-", str_sub(ID, 7,11)), 
-    # Calculate stratum area where needed (use convex hull approach)
-    # convert square nautical miles to square kilometers
-    stratum_area = stratum_area * 3.429904) %>% 
-  rename(year = YEAR,
-         spp = SCINAME,
-         lat = LAT, 
-         lon = LON, 
-         depth = DEPTH,
-         stratum = STRATUM) %>%
-  filter(
-    # per neus data steward strata 07940 and 07980 should not be used because they are undefined and should not have been included in the public dataset
-    stratum != "07940",
-    stratum != "07980",
-    # stratum 01990 is Offshore, undefined stratum
-    stratum != "01990",
-    # remove unidentified spp and non-species
-    spp != "" | !is.na(spp), 
-    !grepl("EGG", spp), 
-    !grepl("UNIDENTIFIED", spp)) %>%
-  group_by(haulid, stratum, stratum_area, year, lat, lon, depth, spp) %>% 
-  summarise(wtcpue = sumna(wtcpue)) %>% 
-  # add temporary region column (this will be replaced with seasonal name)
-  mutate(region = "Northeast US") %>% 
-  select(region, haulid, year, lat, lon, stratum, stratum_area, depth, spp, wtcpue) %>% 
-  ungroup()  %>% 
-  mutate(region = "Northeast US Fall")
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
+  p1 <- yr_strat_plot(neus_fall)
+  p2 <- lat_lon_plot(neus_fall)
   
-  
-  p1 <- neus_fall %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year))) +
-    geom_jitter()
-  
-  p2 <- neus_fall %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
-  
-  test <- neus_fall %>% 
-    filter(year != 2017, year >= 1972) %>% 
+  # I ran the code through the summarize line and played with the plot and last filter line until I found a good balance.  In other regions we are able to remove all strata or years with missing data without losing much of the dataset but for NEUS we have to keep some incomplete years or strata or we would loose too much data.
+  # less than 35, a column of missing strata appears on the right hand side of the plot, distinguishing this as the lowest to go.
+  test1 <- neus_fall %>% 
     select(stratum, year) %>% 
     distinct() %>% 
     group_by(stratum) %>% 
     summarise(count = n()) %>%
-    filter(count >= 45)
+    filter(count >= 30)
   
-  # how many rows will be lost if only stratum trawled ever year are kept?
+  # check by year
   test2 <- neus_fall %>% 
-    filter(year != 2017, year >= 1972) %>% 
-    filter(stratum %in% test$stratum)
-  nrow(neus_fall) - nrow(test2)
-  # percent that will be lost
-  (nrow(neus_fall) - nrow(test2))/nrow(neus_fall)
-  # 60% is too much, by removing bad years we get rid of 9%, which is not so bad.
-  # When bad strata are removed after bad years we only lose 37%
+    select(stratum, year) %>% 
+    distinct() %>% 
+    group_by(year) %>% 
+    summarise(count = n()) %>%
+    filter(count >=62)
+  
+  test <- neus_fall %>%
+    filter(year %in% test2$year, 
+           stratum %in% test1$stratum)
+  
+  yr_strat_plot(test)
+  
+  
+  print(str_c("losing ", (nrow(neus_fall) - nrow(test))/nrow(neus_fall), " of data"))
+  # 17%
   
   neus_fall <- neus_fall %>%
-    filter(year != 2017, year >= 1972) %>% 
-    filter(stratum %in% test$stratum) 
+    filter(stratum %in% test1$stratum, 
+           year %in% test2$year)
   
-  p3 <- neus_fall %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
   
-  p4 <- neus_fall %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
+  p3 <- yr_strat_plot(neus_fall)
+  p4 <- lat_lon_plot(neus_fall)
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
     ggsave(plot = temp, filename = here::here("plots", "neus_fall_hq_dat_removed.pdf"))
     rm(temp)
   }
-  rm(test, test2, p1, p2, p3, p4)
+  rm(test, p1, p2, p3, p4)
 }
 rm(neus_spp, neus_strata, neus_survdat, neus, survdat, spp,  files)
 
