@@ -1335,6 +1335,7 @@ if (HQ_DATA_ONLY == TRUE){
   rm(test, test1, test2, p1, p2, p3, p4)
 }
 
+
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   p1 <- yr_strat_plot(neus_fall)
@@ -1962,13 +1963,13 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
 
 
 if(isTRUE(WRITE_MASTER_DAT)){
-  save(ai, ebs, gmex, goa, neus_fall, neus_spr, scot, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rda"))
+save(ai, ebs, gmex, goa, neus_fall, neus_spr, scot, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rda"))
+
 }
 
 # Master Data Set ===========================================================
 print("Join into Master Data Set")
 dat <- rbind(ai, ebs, goa, neus_spr, neus_fall, wctri, wcann, gmex, seusSPRING, seusSUMMER, seusFALL, scot) %>% 
-  # Remove NA values in wtcpue
   filter(!is.na(wtcpue))
 
 # add a case sensitive spp and common name
