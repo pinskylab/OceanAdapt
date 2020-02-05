@@ -1,8 +1,3 @@
-# function for Scotian Shelf data
-# library(remotes)
-# install_github('Maritimes/FGP')
-# library(FGP)
-
 #' @title pullDFOGIS_Prod
 #' @description This function extracts an r data.frame from the DFO ESRI REST 
 #' service.
@@ -29,8 +24,8 @@ pullDFOGIS_Prod <-function(service='ADAPT_Canada_Atlantic_Summer_2018', save_csv
   json_cnt_url <- paste0(base_url,'query?where=1=1&f=pjson&returnCountOnly=true')
   json_cnt <- fromJSON(json_cnt_url)
   if ('error' %in% names(json_cnt)) stop(paste0('\nSomething appears to be wrong with the selected service. Please try again later.
-                                                \nYou can try visiting the following url in your browser to see if there\'s any additional information:
-                                                \n',base_url))
+\nYou can try visiting the following url in your browser to see if there\'s any additional information:
+\n',base_url))
   rec_N = json_cnt$count
   print(paste0('Starting extraction of ',rec_N-rec_Start,' records'))
   
@@ -62,4 +57,8 @@ pullDFOGIS_Prod <-function(service='ADAPT_Canada_Atlantic_Summer_2018', save_csv
   }
   return(this.df)
 }
-
+#' Test calls using production 2016 services hosted on DFO eGIS infrastructure
+#' fallNew=pullDFOGIS_Prod(service='ADAPT_Canada_Atlantic_Fall_2018')
+#' summerNew=pullDFOGIS_Prod(service='ADAPT_Canada_Atlantic_Summer_2018')
+springNew=pullDFOGIS_Prod(service='ADAPT_Canada_Atlantic_Spring_2018')
+   

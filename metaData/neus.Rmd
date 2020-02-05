@@ -27,7 +27,7 @@ column_defs <- readRDS(here::here("metadata","column-definitions.rds"))
 [NOAA Northeast Fisheries Science Center Spring and Fall Bottom Trawl Surveys](http://www.nefsc.noaa.gov/femad/ecosurvey/mainpage/)
 
 ## Related information:  
-- Source data for the Northeast U.S. are only available upon written request.  Details for requesting data can be found [here](https://inport.nmfs.noaa.gov/inport/item/22560).  
+- Source data can be found here: [Fall](https://inport.nmfs.noaa.gov/inport/item/22560) [Spring](https://inport.nmfs.noaa.gov/inport/item/22561).  
 - [ Guide to some trawl-caught marine fishes from Maine to Cape Hatteras, North Carolina, Flescher, 1980](https://spo.nmfs.noaa.gov/content/circular-431-guide-some-trawl-caught-marine-fishes-maine-cape-hatteras-north-carolina)  
 - [A brief historical review of the Woods Hole Laboratory trawl survey time series, Azarovitz, 1981](http://dmoserv3.whoi.edu/data_docs/NEFSC_Bottom_Trawl/Azarovitz1981.pdf)  
 - [An Evaluation of the Bottom Trawl Survey Program of the Northeast Fisheries Center, NEFSC, 1988](https://www.st.nmfs.noaa.gov/tm/nec_image/nec052image.pdf)  
@@ -40,6 +40,8 @@ column_defs <- readRDS(here::here("metadata","column-definitions.rds"))
 - [NEFSC trawl strata](neus_NEFSC_trawl_strata.pdf)  
 
 ## How we process the data:  
+- Before 2020, we emailed a staff member at NOAA with a data request and recieved a RData file.  This file was a combination of the SVBIO, SVCAT, and SVSTA files and some column names were changed.  Now we download the files from the publicly available data set.  We combine those files and change the column names to match the column names we used to receive so that subsequent code will work.  The changes include changing EST_YEAR to YEAR, changing DECDEG_BEGLAT to LAT, DECDEG_BEGLON to LON, AVGDEPTH to DEPTH, EXPCATCHWT to BIOMASS.  
+- There are some commas and special characters in the svcat.csv files that cause them to parse incorrectly.  We import those files with read_lines, remove the commas and special characters from the comments, and proceed to read them into R as .csvs.  
 - We group the data by YEAR, SEASON, LAT, LON, DEPTH, CRUISE6, STATION, STRATUM, and SVSPP and sum the BIOMASS (which is reported by sex) to calculate wtcpue.  
 - We create a haulid by combining a 6 digit leading zero cruise number with a 3 digit leading zero station number and a 4 digit leading zero stratum number, separated by "-", for example: (cruise-station-stratum) 456354-067-0001.  
 - We convert square nautical miles to square kilometers.  
@@ -50,7 +52,8 @@ column_defs <- readRDS(here::here("metadata","column-definitions.rds"))
 ## What the raw data includes:  
 The current files of raw data for the Northeast U.S. are `r list.files(here::here("data_raw"), pattern = "neus")`.  neus_svspp.csv contains the same data as neus_SVSPP.RData.
 
-### neus_strata.csv is constant through the years with the column definitions  
+### neus_strata.csv is constant through the years.
+- In 2020 this file was updated to add a leading zero to the STRATUM column to match the STRATUM column in the publicly available data.  
 ```{r include = FALSE}
 st_attributes <- tibble(
   attributeName = dput(names(strata))) %>% 
@@ -61,11 +64,11 @@ knitr::kable(st_attributes) %>%
   kableExtra::kable_styling(latex_options = "scale_down")
 ```
 
-### neus_Survdat.RData is updated annually and has the following column definitions:
+### neus_spring_svcat.csv and neus_fall_svcat.csv are updated annually.
 ```{r include = FALSE}
 # create a table with each column from the dataset represented as a row.  There will be an error message about undefined units but they are defined later when the dataset is created.
 attributes <- tibble(
-  attributeName = dput(names(survdat))) %>% 
+  attributeName = dput(names(neus_spr_catch))) %>% 
   left_join(column_defs) %>% 
   mutate(formatString = NA,
          formatString = ifelse(attributeName == "YEAR", unit, formatString), 
@@ -73,7 +76,9 @@ attributes <- tibble(
   rename(col_classes = col_class)
 
 
-dput(attributes$col_class)
+
+
+dput(attributes$col_classes)
 
 # attributeList <- set_attributes(attributes)
 ```
@@ -81,6 +86,29 @@ dput(attributes$col_class)
 knitr::kable(select(attributes, -formatString)) %>% 
   kableExtra::kable_styling(latex_options = "scale_down")
 ```
+### neus_spring_svsta.csv and neus_fall_svsta.csv are updated annually.
+```{r include = FALSE}
+# create a table with each column from the dataset represented as a row.  There will be an error message about undefined units but they are defined later when the dataset is created.
+attributes <- tibble(
+  attributeName = dput(names(neus_spr_station))) %>% 
+  left_join(column_defs) %>% 
+  mutate(formatString = NA,
+         formatString = ifelse(attributeName == "YEAR", unit, formatString), 
+         formatString = ifelse(attributeName == "DATETIME", unit, formatString)) %>% 
+  rename(col_classes = col_class)
+
+dput(attributes$col_classes)
+
+# attributeList <- set_attributes(attributes)
+```
+```{r echo=FALSE}
+knitr::kable(select(attributes, -formatString)) %>% 
+  kableExtra::kable_styling(latex_options = "scale_down")
+```
+
+
+
+
 ## neus_svspp.csv connects species codes to species names.
 ```{r include = FALSE}
 spp_attributes <- tibble(
