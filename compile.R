@@ -1195,7 +1195,7 @@ neus_survdat <- left_join(neus_catch, neus_station, by = c("CRUISE6", "STRATUM",
            depth = AVGDEPTH, 
            biomass = EXPCATCHWT) 
 
-  # add bigelow conversion factors
+# add bigelow conversion factors
 big_bio <- tibble(svspp = c(12, 22, 24, 27, 28, 31, 33, 34, 73, 76, 106, 107, 
                                 109, 121, 135, 136, 141, 143, 145, 149, 155, 164, 
                                 171, 181, 193, 197, 502, 512, 15, 23, 26, 32, 72,
@@ -1223,17 +1223,11 @@ fall <- bigelow_conversion("fall")
 
 neus_converted <- rbind(both, spring, fall) %>% 
   group_by(ID,year, lat, lon, depth, CRUISE6, STATION, STRATUM, SVSPP, season) %>% 
-  summarise(wtcpue = sum(coverted))
-
-
-
-    # sum biomass of different sexes of same spp together
-    group_by(ID,year, lat, lon, depth, CRUISE6, STATION, STRATUM, SVSPP, season) %>% 
-    summarise(wtcpue = sum(biomass)) %>% 
+  summarise(wtcpue = sum(converted)) %>% 
   left_join(neus_spp, by = "SVSPP") %>%
   left_join(neus_strata, by = c("STRATUM" = "stratum"))
 
-neus <- neus_survdat %>%
+neus <- neus_converted %>%
   mutate(
     # convert square nautical miles to square kilometers
     stratum_area = stratum_area * 3.429904) %>% 
@@ -1265,7 +1259,7 @@ neus_fall <- neus %>%
   mutate(region = "Northeast U.S. Fall") %>% 
   select(-season)
  
-rm(neus, neus_catch, neus_spp, neus_station, neus_strata, neus_survdat, spp) 
+rm(neus, neus_catch, neus_spp, neus_station, neus_strata, neus_survdat, spp, big_bio, both, fall, neus_converted, spring) 
 
 # are there any strata in the data that are not in the strata file?
 # stopifnot(nrow(filter(neus_spr, is.na(stratum_area))) == 0)
@@ -1286,7 +1280,7 @@ if (HQ_DATA_ONLY == TRUE){
     distinct() %>% 
     group_by(stratum) %>% 
     summarise(count = n()) %>%
-    filter(count >= 34)
+    filter(count >= 7)
   
   # check by year
   test2 <- neus_spr %>% 
