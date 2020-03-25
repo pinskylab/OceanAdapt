@@ -12,5 +12,5 @@
 #EVENT = haul
 
 
-file.copy(from = "~/Downloads/pinsky.Coastal Survey.ABUNDANCE.2020-03-25T10.29.11.csv"", to = "data_raw/seus_catch.csv", overwrite = T)
+file.copy(from = "~/Downloads/pinsky.Coastal Survey.ABUNDANCE.2020-03-25T10.29.11.csv", to = "data_raw/seus_catch.csv", overwrite = T)
 file.copy(from = "~/Downloads/pinsky.Coastal Survey.EVENT.2020-03-25T10.29.11.csv", to = "data_raw/seus_haul.csv", overwrite = T)
