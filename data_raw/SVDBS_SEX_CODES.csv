@@ -1,0 +1,9 @@
+sex,sex_description
+0,"Unsexed, unknown, or sex not observed; Since the summer 1995 Gulf of Maine Trawl Survey forgot to look for American Lobster"
+1,"Male"
+2,"Female; Female Stage I for Northern Shrimp; Since the summer 1995 Gulf of Maine Trawl Survey Female (no eggs, no notch) American Lobster"
+3,"Female Stage II for Northern Shrimp; Since the summer 1995 Gulf of Maine Trawl Survey Female, with eggs, no notch American Lobster"
+4,"Transitional for Northern Shrimp; Since the summer 1995 Gulf of Maine Trawl Survey Female, with notch, no eggs American Lobster"
+5,"Ovigerous for Northern Shrimp; Since the summer 1995 Gulf of Maine Trawl Survey Female, with notch and eggs American Lobster"
+6,"Non-spawning Female for Northern Shrimp"
+7,"Female for Northern Shrimp not staged (stage I or II not determined)"

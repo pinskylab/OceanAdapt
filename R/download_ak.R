@@ -5,7 +5,7 @@
 library(tibble)
 download_ak <- function(){
   # define the destination folder
-  for (i in seq(ak_files$survey)){
+  for (i in seq(file_list)){
     # define the destination file path
     file <- paste("data_raw", ak_files$survey[i], sep = "/")
     # define the source url
@@ -40,4 +40,4 @@ ak_files <- tibble(survey = c("ai1983_2000.zip",
                               "goa2015_2017.zip"))
 
 file_list <- ak_files$survey
-download_ak(file_list)
+download_ak()

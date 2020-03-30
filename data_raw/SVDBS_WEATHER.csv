@@ -1,0 +1,12 @@
+weather,weather_def,doe,doc,uoe,uoc
+"00","Clear (No clouds at any level)",,,,
+"01","Partly Cloudy (Scattered or Broken)",,,,
+"02","Continuous Layer(s) of Clouds(s)",,,,
+"03","Sandstorm, Duststorm, or Blowing Snow",,,,
+"04","Fog, Thick Dust, or Haze",,,,
+"05","Drizzle",,,,
+"06","Rain",,,,
+"07","Snow, or Snow and Rain Mixed",,,,
+"08","Shower(s)",,,,
+"09","Thunderstorm(s)",,,,
+"99","Obscure or Cannot be Determined Due to Darkness",,,,
