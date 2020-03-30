@@ -1,5 +1,17 @@
 ## ---- oceanadapt
 
+# OceanAdapt requires the following verisons of packages. These versions are based on the last successful date that the script ran.  This will install these versions on your machine, proceed with caution.  The dates on the following lines can be updated if the script successfully runs with different versions on a subsequent date.
+# library(devtools)
+# install_version("tidyverse", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+# install_version("lubridate", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+# install_version("PBSmapping", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+# install_version("data.table", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+# install_version("gridExtra", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+# install_version("questionr", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+# install_version("geosphere", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+# install_version("here", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+# 
+
 # If running from R instead of RStudio, please set the working directory to the folder containing this script before running this script.
 # This script is designed to run within the following directory structure:
 # Directory 1 contains:
@@ -55,8 +67,13 @@ print("Workspace setup")
 # especially when that repository is loaded as a project into RStudio.
 
 # The working directory is assumed to be the OceanAdapt directory of this repository.
-
-library(tidyverse) # use ggplot2, tibble, readr, dplyr, stringr
+# library(tidyverse)# use ggplot2, tibble, readr, dplyr, stringr, purrr
+library(purrr)
+library(stringr) 
+library(ggplot2)
+library(tibble)
+library(readr)
+library(dplyr)
 library(lubridate) # for date manipulation
 library(PBSmapping) # for calculating stratum areas 
 library(data.table) # for dat.exploded
@@ -1230,23 +1247,12 @@ neus_spp <- spp %>%
 
 files <- as.list(dir(pattern = "neus_strata", path = "data_raw", full.names = T))
 
-neus_strata <- read_csv(here::here("data_raw", "neus_strata.csv"), col_types = cols(
-  STRGRP_DESC = col_character(),
-  STRATUM = col_double(),
-  STRATUM_NAME = col_character(),
-  STRATUM_AREA = col_double(),
-  MIDLAT = col_double(),
-  MIDLON = col_double(),
-  MINLAT = col_double(),
-  MAXLAT = col_double(),
-  MINLON = col_double(),
-  MAXLON = col_double()
-)) %>% 
-  select(STRATUM, STRATUM_AREA) %>% 
+neus_strata <- read_csv("~/OceanAdapt/data_raw/neus_strata.csv") %>% 
+  select(stratum, stratum_area) %>% 
   distinct()
 
 neus <- left_join(neus_survdat, neus_spp, by = "SVSPP") %>%
-  left_join(neus_strata, by = "STRATUM")
+  left_join(neus_strata, by = c("STRATUM" = "stratum")
 
 # are there any strata in the data that are not in the strata file?
 # stopifnot(nrow(filter(neus, is.na(STRATUM_AREA))) == 0)
