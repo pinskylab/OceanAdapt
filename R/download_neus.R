@@ -1,9 +1,11 @@
 #' ---
 #' title: "Download NEUS"
 #' ---
-#' # For NEUS, email Sean Lucey at NOAA to get the latest Survdat.Rdata file and you are ready to run compile
+#' # For NEUS, email Sean Lucey (sean.lucey@noaa.gov) at NOAA and ask for the latest Survdat.Rdata file, and you are ready to run compile
 #' 
-#' or if the conversion factor code has been figured out, download 
+#' Ignore the following, unless given specific instructions:
+#' 
+#' If the conversion factor code has been figured out, download 
 #' the spring and fall bottom trawl survey files from 
 #' [Fall](https://inport.nmfs.noaa.gov/inport/item/22560) 
 #' and [Spring](https://inport.nmfs.noaa.gov/inport/item/22561).  Currently 

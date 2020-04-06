@@ -1,15 +1,15 @@
 ## ---- oceanadapt
 
 # OceanAdapt requires the following verisons of packages. These versions are based on the last successful date that the script ran.  This will install these versions on your machine, proceed with caution.  The dates on the following lines can be updated if the script successfully runs with different versions on a subsequent date.
-# library(devtools)
-# install_version("tidyverse", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
-# install_version("lubridate", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
-# install_version("PBSmapping", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
-# install_version("data.table", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
-# install_version("gridExtra", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
-# install_version("questionr", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
-# install_version("geosphere", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
-# install_version("here", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+ library(devtools)
+ install_version("tidyverse", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+ install_version("lubridate", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+ install_version("PBSmapping", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+ install_version("data.table", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+ install_version("gridExtra", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+ install_version("questionr", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+ install_version("geosphere", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+ install_version("here", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
 # 
 
 # If running from R instead of RStudio, please set the working directory to the folder containing this script before running this script.
@@ -68,20 +68,7 @@ print("Workspace setup")
 
 # The working directory is assumed to be the OceanAdapt directory of this repository.
 # library(tidyverse)# use ggplot2, tibble, readr, dplyr, stringr, purrr
-library(purrr)
-library(stringr) 
-library(ggplot2)
-library(tibble)
-library(readr)
-library(dplyr)
-library(lubridate) # for date manipulation
-library(PBSmapping) # for calculating stratum areas 
-library(data.table) # for dat.exploded
-library(gridExtra) #grid.arrange plots of HQ data
-library(questionr) # for the wgtmean function
-library(geosphere) # for calculating trawl distance for SEUS 
-library(here) # for relative file paths
-
+inst
 
 # Functions ===========================================================
 print("Functions")
@@ -296,15 +283,7 @@ if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
   # plot the strata by year
-  p1 <- ai %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
-  
-  p2 <- ai %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
+ 
   
   
   test <- ai %>% 
@@ -341,13 +320,11 @@ if (HQ_DATA_ONLY == TRUE){
     rm(temp)
   }
   rm(test, test2, p1, p2, p3, p4)
-}
-# clean up
+}# clean up
 rm(ai_data, ai_strata, files, temp_fixed, temp_csv)
 
 # Compile EBS ============================================================
 print("Compile EBS")
-
 files <- as.list(dir(pattern = "ebs", path = "data_raw", full.names = T))
 
 # exclude the strata file
@@ -1247,15 +1224,16 @@ neus_spp <- spp %>%
 
 files <- as.list(dir(pattern = "neus_strata", path = "data_raw", full.names = T))
 
-neus_strata <- read_csv("~/OceanAdapt/data_raw/neus_strata.csv") %>% 
+neus_strata <- read_csv("data_raw/neus_strata.csv") %>% 
   select(stratum, stratum_area) %>% 
+  mutate(stratum = as.integer(stratum)) %>%
   distinct()
 
 neus <- left_join(neus_survdat, neus_spp, by = "SVSPP") %>%
-  left_join(neus_strata, by = c("STRATUM" = "stratum")
+  left_join(neus_strata, by = c("STRATUM" = "stratum"))
 
 # are there any strata in the data that are not in the strata file?
-# stopifnot(nrow(filter(neus, is.na(STRATUM_AREA))) == 0)
+stopifnot(nrow(filter(neus, is.na(stratum_area))) == 0)
 
 neus <- neus %>%
   mutate(
@@ -1263,7 +1241,7 @@ neus <- neus %>%
     haulid = paste(formatC(CRUISE6, width=6, flag=0), formatC(STATION, width=3, flag=0), formatC(STRATUM, width=4, flag=0), sep='-'),  
     # Calculate stratum area where needed (use convex hull approach)
     # convert square nautical miles to square kilometers
-    stratumarea = STRATUM_AREA * 3.429904) %>% 
+    stratumarea = stratum_area * 3.429904) %>% 
   rename(year = YEAR,
          spp = SCINAME,
          lat = LAT, 
@@ -1822,147 +1800,149 @@ scot <- scot %>%
 
 # split out the seasons
 # Scotian Summer ####
-scot <- scot %>% 
-  filter(season == "SUMMER") %>% 
-  select(-season) %>% 
+scot <- scot %>%
+  filter(season == "SUMMER") %>%
+  select(-season) %>%
   mutate(region = "Scotian Shelf")
+
+#test = setcolorder(scot, c('region', 'haulid', 'year', 'lat', 'lon', 'stratum', 'stratumarea', 'depth', 'spp', 'wtcpue'))
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
-  
+
   # plot the strata by year
-  p1 <- scot %>% 
-    select(stratum, year) %>% 
+  p1 <- scot %>%
+    select(stratum, year) %>%
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   p2 <- scot %>%
-    select(lat, lon) %>% 
+    select(lat, lon) %>%
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
-  
-  
+
+
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
     ggsave(plot = temp, filename = here::here("plots", "scot-hq_dat_removed.pdf"))
   }
-}  
+}
 
-# Scotian Fall ####
-# scot_fall <- scot %>% 
-#   filter(season == "FALL") %>% 
-#   select(-season) %>% 
-#   mutate(region = "Scotian Shelf Fall")
+# # Scotian Fall ####
+#  scot_fall <- scot %>%
+#    filter(season == "FALL") %>%
+#    select(-season) %>%
+#    mutate(region = "Scotian Shelf Fall")
 # 
-# if (HQ_DATA_ONLY == TRUE){
-#   # plot the strata by year
-#   p1 <- scot_fall %>% 
-#     select(stratum, year) %>% 
-#     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-#     geom_jitter()
-#   
-#   p2 <- scot_fall %>%
-#     select(lat, lon) %>% 
-#     ggplot(aes(x = lon, y = lat)) +
-#     geom_jitter()
-#   
-#   # find strata sampled every year 
-#   annual_strata <- scot_fall %>% 
-#     filter(year != 1986, year != 1978) %>% 
-#     select(stratum, year) %>% 
-#     distinct() %>% 
-#     group_by(stratum) %>% 
-#     summarise(count = n()) %>%
-#     filter(count >= 6)
-#   
-#   # how many rows will be lost if only stratum trawled ever year are kept?
-#   test <- scot_fall %>% 
-#     filter(year != 1986, year != 1978) %>% 
-#     filter(stratum %in% annual_strata$stratum)
-#   nrow(scot_fall) - nrow(test)
-#   # percent that will be lost
-#   print((nrow(scot_fall) - nrow(test))/nrow(scot_fall))
-#   # 19% are removed
-#   
-#   scot_fall <- scot_fall  %>%
-#     filter(year != 1986, year != 1978) %>% 
-#     filter(stratum %in% annual_strata$stratum) 
-#   
-#   p3 <- scot_fall %>% 
-#     select(stratum, year) %>% 
-#     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-#     geom_jitter()
-#   
-#   p4 <- scot_fall %>%
-#     select(lat, lon) %>% 
-#     ggplot(aes(x = lon, y = lat)) +
-#     geom_jitter()
-#   
-#   if (HQ_PLOTS == TRUE){
-#     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-#       ggsave(plot = temp, filename = here::here("plots", "scot_fall-hq_dat_removed.pdf"))
-#   }
-# }  
+#  if (HQ_DATA_ONLY == TRUE){
+#    # plot the strata by year
+#    p1 <- scot_fall %>%
+#      select(stratum, year) %>%
+#      ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+#      geom_jitter()
 # 
-# # Scotian Spring ####
-# scot_spr <- scot %>% 
-#   filter(season == "SPRING") %>% 
-#   select(-season) %>% 
-#   mutate(region = "Scotian Shelf Spring")
+#    p2 <- scot_fall %>%
+#      select(lat, lon) %>%
+#      ggplot(aes(x = lon, y = lat)) +
+#      geom_jitter()
+# 
+#    # find strata sampled every year
+#    annual_strata <- scot_fall %>%
+#      filter(year != 1986, year != 1978) %>%
+#      select(stratum, year) %>%
+#      distinct() %>%
+#      group_by(stratum) %>%
+#      summarise(count = n()) %>%
+#      filter(count >= 6)
+# 
+#    # how many rows will be lost if only stratum trawled ever year are kept?
+#    test <- scot_fall %>%
+#      filter(year != 1986, year != 1978) %>%
+#      filter(stratum %in% annual_strata$stratum)
+#    nrow(scot_fall) - nrow(test)
+#    # percent that will be lost
+#    print((nrow(scot_fall) - nrow(test))/nrow(scot_fall))
+#    # 19% are removed
+# 
+#    scot_fall <- scot_fall  %>%
+#      filter(year != 1986, year != 1978) %>%
+#      filter(stratum %in% annual_strata$stratum)
+# 
+#    p3 <- scot_fall %>%
+#      select(stratum, year) %>%
+#      ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+#      geom_jitter()
+# 
+#    p4 <- scot_fall %>%
+#      select(lat, lon) %>%
+#      ggplot(aes(x = lon, y = lat)) +
+#      geom_jitter()
+# 
+#    if (HQ_PLOTS == TRUE){
+#      temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+#        ggsave(plot = temp, filename = here::here("plots", "scot_fall-hq_dat_removed.pdf"))
+#    }
+#  }
+# 
+# #  # Scotian Spring ####
+#  scot_spr <- scot %>%
+#    filter(season == "SPRING") %>%
+#    select(-season) %>%
+#    mutate(region = "Scotian Shelf Spring")
 # 
 # 
-# if (HQ_DATA_ONLY == TRUE){
-#   # plot the strata by year
-#   p1 <- scot_spr %>% 
-#     select(stratum, year) %>% 
-#     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-#     geom_jitter()
-#   
-#   p2 <- scot_spr %>%
-#     select(lat, lon) %>% 
-#     ggplot(aes(x = lon, y = lat)) +
-#     geom_jitter()
-#   
-#   test <- scot_spr %>% 
-#     filter(year <= 1984) %>% 
-#     select(stratum, year) %>% 
-#     distinct() %>% 
-#     group_by(stratum) %>% 
-#     summarise(count = n()) %>%
-#     filter(count >= 6)
-#   
-#   # how many rows will be lost if only stratum trawled ever year are kept?
-#   test2 <- scot_spr %>% 
-#     filter(year <= 1984) %>% 
+#  if (HQ_DATA_ONLY == TRUE){
+#    # plot the strata by year
+#    p1 <- scot_spr %>%
+#      select(stratum, year) %>%
+#      ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+#      geom_jitter()
+# 
+#    p2 <- scot_spr %>%
+#      select(lat, lon) %>%
+#      ggplot(aes(x = lon, y = lat)) +
+#      geom_jitter()
+# 
+#    test <- scot_spr %>%
+#      filter(year <= 1984) %>%
+#      select(stratum, year) %>%
+#      distinct() %>%
+#      group_by(stratum) %>%
+#      summarise(count = n()) %>%
+#      filter(count >= 6)
+# 
+#    # how many rows will be lost if only stratum trawled ever year are kept?
+#    test2 <- scot_spr %>%
+#      filter(year <= 1984) %>%
 #     filter(stratum %in% test$stratum)
 #   nrow(scot_spr) - nrow(test2)
 #   # percent that will be lost
 #   print((nrow(scot_spr) - nrow(test2))/nrow(scot_spr))
 #   # 58% are removed
-#   
+# 
 #   scot_spr <- scot_spr  %>%
-#     filter(year <= 1984) %>% 
-#     filter(stratum %in% test$stratum) 
-#   
-#   p3 <- scot_spr %>% 
-#     filter(year <= 1984) %>% 
-#     select(stratum, year) %>% 
+#     filter(year <= 1984) %>%
+#     filter(stratum %in% test$stratum)
+# 
+#   p3 <- scot_spr %>%
+#     filter(year <= 1984) %>%
+#     select(stratum, year) %>%
 #     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
 #     geom_jitter()
-#   
+# 
 #   p4 <- scot_spr %>%
-#     select(lat, lon) %>% 
+#     select(lat, lon) %>%
 #     ggplot(aes(x = lon, y = lat)) +
 #     geom_jitter()
-#   
+# 
 #   if (HQ_PLOTS == TRUE){
 #     temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
 #     ggsave(plot = temp, filename = here::here("plots", "scot_spr-hq_dat_removed.pdf"))
 #     rm(temp)
 #   }
 #   rm(p1, p2, p3, p4, test, test2)
-# }  
-
-rm(files, temp)
+# }
+# 
+# rm(files, temp)
 
 # Because scot_fall and scot_spring are rare surveys, only use scot_summer
 

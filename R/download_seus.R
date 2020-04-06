@@ -5,12 +5,11 @@
 # 4. Select "Event Information" from the drop down menu.
 # 5. For all of the remaining boxes, click on the <- arrow on the upper right side of each box to move all options over to the left.  Sometimes these pop back over to the right so wait a while to make sure everything sticks.
 # 6. Click create report.
-# 7. Update the line below to point to the downloaded file (change ~/Downloads/pinsky to wherever your file downloaded and whatever it was named, pay attention that the EVENT file stays on the event line and the ABUNDANCE file stays on the abundance line.
+# 7. Update the line below to point to the downloaded file (change ~/Downloads/pinsky[...] to wherever your file downloaded and whatever it was named, pay attention that the EVENT file stays on the event line and the ABUNDANCE file stays on the abundance line.
 # 8. repeat steps 4-7 for the dropdown menu item "Abundance and Biomass".
 
 #ABUNDANCE = catch
 #EVENT = haul
-
 
 file.copy(from = "~/Downloads/df511.Coastal Survey.ABUNDANCEBIOMASS.2020-03-23T13.18.39.csv", to = "data_raw/seus_catch.csv", overwrite = T)
 file.copy(from = "~/Downloads/df511.Coastal Survey.EVENT.2020-03-23T13.14.46.csv", to = "data_raw/seus_haul.csv", overwrite = T)

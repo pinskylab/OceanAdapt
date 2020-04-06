@@ -1,3 +1,10 @@
+ #' In March 2020, Mike McMahon referred us to his Git profile, from which this script was downaloaded.
+ #' Though he suggested using his package "FGP" (https://github.com/Maritimes/FGP/), we opted to write 
+ #' the function "get_DFO_REST" directly (https://github.com/Maritimes/FGP/blob/master/R/get_DFO_REST.R).
+ #' The package is only functional in some versions of R, whereas this function is nearly universal, 
+ #' and the only piece of the package we need. Run the following:
+ #' 
+ #' 
  #' @title get_DFO_REST
  #' @description This function facilitates the extraction of data from the DFO 
  #' ESRI REST services into R objects and other formats.  
@@ -75,6 +82,9 @@
    return(this.df)
  }
 
+# now that get_DFO_REST() is written, use it to download and name the files. 
+# Change the host and service URLs if it has been updated/changed since the previous year. 
+ 
 summerNew=get_DFO_REST(host = "https://gisp.dfo-mpo.gc.ca", service='FGP/ADAPT_Canada_Atlantic_Summer_2018_EN') 
 fallNew=get_DFO_REST(host = "https://gisp.dfo-mpo.gc.ca", service='FGP/ADAPT_Canada_Atlantic_Fall_2018_EN') 
 springNew=get_DFO_REST(host = "https://gisp.dfo-mpo.gc.ca", service='FGP/ADAPT_Canada_Atlantic_Spring_2018_EN') 
