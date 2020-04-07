@@ -10,7 +10,16 @@
  install_version("questionr", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
  install_version("geosphere", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
  install_version("here", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
-# 
+
+# Load required packages 
+ library(tidyverse)
+ library(lubridate)
+ library(PBSmapping) 
+ library(data.table) 
+ library(gridExtra) 
+ library(questionr) 
+ library(geosphere)
+ library(here)
 
 # If running from R instead of RStudio, please set the working directory to the folder containing this script before running this script.
 # This script is designed to run within the following directory structure:
@@ -31,7 +40,7 @@ HQ_DATA_ONLY <- TRUE
 
 # 2. View plots of removed strata for HQ_DATA. #OPTIONAL, DEFAULT:FALSE
 # It takes a while to generate these plots.
-HQ_PLOTS <- FALSE
+HQ_PLOTS <- TRUE
 
 # 3. Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`. #DEFAULT: FALSE 
 REMOVE_REGION_DATASETS <- FALSE
@@ -44,20 +53,20 @@ PLOT_CHARTS <- FALSE
 PREFER_RDATA <- TRUE
 
 # 5. Output the clean full master data frame. #DEFAULT:FALSE
-WRITE_MASTER_DAT <- FALSE
+WRITE_MASTER_DAT <- TRUE
 # This used to be called OPTIONAL_OUTPUT_DAT_MASTER_TABLE, do I need to change the name back?
 
 # 6. Output the clean trimmed data frame. #DEFAULT:FALSE
-WRITE_TRIMMED_DAT <- FALSE
+WRITE_TRIMMED_DAT <- TRUE
 
 # 7. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
 DAT_EXPLODED <- TRUE
 
 # 8. Output the dat.exploded table #DEFAULT:FALSE
-WRITE_DAT_EXPLODED <- FALSE
+WRITE_DAT_EXPLODED <- TRUE
 
 # 9. Output the BY_SPECIES, BY_REGION, and BY_NATIONAL tables. #DEFAULT:FALSE
-WRITE_BY_TABLES <- FALSE
+WRITE_BY_TABLES <- TRUE
 
 
 # Workspace setup ---------------------------------------------------------
@@ -765,8 +774,9 @@ rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 
 # Compile WCANN ===========================================================
 print("Compile WCANN")
-
-wcann_catch <- read_csv(unz(here::here("data_raw", "wcann_catch.csv.zip"), "wcann_catch.csv"), col_types = cols(
+# commented line previously unzipped the zipped csv file, but current line reads directly from the csv
+#wcann_catch <- read_csv(unz(here::here("data_raw", "wcann_catch.csv.zip"), "wcann_catch.csv"), col_types = cols(
+wcann_catch <- read_csv(here::here("data_raw", "wcann_catch.csv"), col_types = cols(
   catch_id = col_integer(),
   common_name = col_character(),
   cpue_kg_per_ha_der = col_double(),
@@ -2443,7 +2453,7 @@ if(isTRUE(PLOT_CHARTS)) {
       plot.background = element_blank(),
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
-      plot.title = element_text(size = "12", hjust = 0.5, )
+      plot.title = element_text(size = "12", hjust = 0.5)
     ) +
     xlab("Year") + 
     ylab("Offset in latitude (°)") +

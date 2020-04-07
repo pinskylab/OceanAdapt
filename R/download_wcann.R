@@ -1,6 +1,6 @@
 # WCANN download ----
 # info about West Coast api: https://www.nwfsc.noaa.gov/data/api/v1/source
-
+library(readr)
 library("jsonlite")
 
 wcann_save_loc <- "data_raw"
