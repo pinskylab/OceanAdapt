@@ -1,4 +1,4 @@
- #' In March 2020, Mike McMahon referred us to his Git profile, from which this script was downaloaded.
+ #' In March 2020, Mike McMahon referred us to his Git profile, from which this script was downloaded.
  #' Though he suggested using his package "FGP" (https://github.com/Maritimes/FGP/), we opted to write 
  #' the function "get_DFO_REST" directly (https://github.com/Maritimes/FGP/blob/master/R/get_DFO_REST.R).
  #' The package is only functional in some versions of R, whereas this function is nearly universal, 
