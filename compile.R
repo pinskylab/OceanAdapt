@@ -46,7 +46,7 @@ HQ_PLOTS <- TRUE
 REMOVE_REGION_DATASETS <- FALSE
 
 # 4. Create graphs based on the data similar to those shown on the website and outputs them to pdf. #DEFAULT:FALSE
-PLOT_CHARTS <- FALSE
+PLOT_CHARTS <- TRUE
 # This used to be called OPTIONAL_PLOT_CHARTS, do I need to change it back?
 
 # 5. If you would like to write out the clean data, would you prefer it in Rdata or CSV form?  Note the CSV's are much larger than the Rdata files. #DEFAULT:TRUE, FALSE generates CSV's instead of Rdata.
@@ -1155,6 +1155,52 @@ gmex <- gmex %>%
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
   ungroup()
 
+# The following is used for testing whether to use all strata sampled nearly every year
+# p1 <- gmex %>% 
+#   select(stratum, year) %>% 
+#   ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+#   geom_jitter()
+# 
+# p2 <- gmex %>%
+#   select(lat, lon) %>% 
+#   ggplot(aes(x = lon, y = lat)) +
+#   geom_jitter()
+# 
+# test <- gmex %>% 
+#   select(stratum, year) %>% 
+#   distinct() %>% 
+#   group_by(stratum) %>% 
+#   summarise(count = n()) %>% 
+#   filter(count >= 13)
+# 
+# # how many rows will be lost if only stratum trawled ever year are kept?
+# test2 <- gmex %>% 
+#   filter(stratum %in% test$stratum)
+# nrow(gmex) - nrow(test2)
+# # percent that will be lost
+# print((nrow(gmex) - nrow(test2))/nrow(gmex))
+# # 0% of rows are removed
+# gmex <- gmex %>% 
+#   filter(stratum %in% test$stratum)
+# 
+# # plot the results after editing
+# p3 <- gmex %>% 
+#   select(stratum, year) %>% 
+#   ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+#   geom_jitter()
+# 
+# p4 <- gmex%>%
+#   select(lat, lon) %>% 
+#   ggplot(aes(x = lon, y = lat)) +
+#   geom_jitter()
+# 
+# if (HQ_PLOTS == TRUE){
+#   temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+#   ggsave(plot = temp, filename = here::here("plots", "gmex_hq_dat_removed2.pdf"))
+#   rm(temp)
+# }
+# rm(test, test2, p1, p2, p3, p4)
+
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
   
@@ -1817,6 +1863,36 @@ scot <- scot %>%
 
 #test = setcolorder(scot, c('region', 'haulid', 'year', 'lat', 'lon', 'stratum', 'stratumarea', 'depth', 'spp', 'wtcpue'))
 
+# how many rows will be lost if only stratum trawled ever year are kept?
+test2 <- scot %>% 
+  filter(stratum %in% test$stratum)
+nrow(scot) - nrow(test2)
+# percent that will be lost
+print((nrow(scot) - nrow(test2))/nrow(scot))
+# 0% of rows are removed
+scot <- scot %>% 
+  filter(stratum %in% test$stratum)
+
+# plot the results after editing
+p3 <- scot %>% 
+  select(stratum, year) %>% 
+  ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+  geom_jitter()
+
+p4 <- scot%>%
+  select(lat, lon) %>% 
+  ggplot(aes(x = lon, y = lat)) +
+  geom_jitter()
+
+if (HQ_PLOTS == TRUE){
+  temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "ai_hq_dat_removed.pdf"))
+  rm(temp)
+}
+rm(test, test2, p1, p2, p3, p4)
+
+
+
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
 
@@ -1829,13 +1905,61 @@ if (HQ_DATA_ONLY == TRUE){
     select(lat, lon) %>%
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
+  
+ # find strata sampled every year
+ annual_strata <- scot %>%
+   filter(year != 1986, year != 1978, year != 2018) %>%
+   select(stratum, year) %>%
+   distinct() %>%
+   group_by(stratum) %>%
+   summarise(count = n()) %>%
+   filter(count >= 6)
+ 
+ # # find strata sampled every year
+ # annual_strata_old <- scot %>%
+ #   filter(year != 1986, year != 1978) %>%
+ #   select(stratum, year) %>%
+ #   distinct() %>%
+ #   group_by(stratum) %>%
+ #   summarise(count = n()) %>%
+ #   filter(count >= 6)
 
+sum(annual_strata_old$count - annual_strata$count)
+ # how many rows will be lost if only stratum trawled ever year are kept?
+ test <- scot %>%
+   filter(year != 1986, year != 1978, year!= 2018) %>%
+   filter(stratum %in% annual_strata$stratum)
+ nrow(scot) - nrow(test)
+ # percent that will be lost
+ print((nrow(scot) - nrow(test))/nrow(scot))
+ # 2% are removed
 
-  if (HQ_PLOTS == TRUE){
-    temp <- grid.arrange(p1, p2, nrow = 2)
-    ggsave(plot = temp, filename = here::here("plots", "scot-hq_dat_removed.pdf"))
-  }
+ scot <- scot  %>%
+   filter(year != 1986, year != 1978, year != 2018) %>%
+   filter(stratum %in% annual_strata$stratum)
+
+ p3 <- scot %>%
+   select(stratum, year) %>%
+   ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+   geom_jitter()
+
+ p4 <- scot %>%
+   select(lat, lon) %>%
+   ggplot(aes(x = lon, y = lat)) +
+   geom_jitter()
+
+ if (HQ_PLOTS == TRUE){
+   temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+     ggsave(plot = temp, filename = here::here("plots", "scot_hq_dat_removed2.pdf"))
+ }
 }
+
+
+#   if (HQ_PLOTS == TRUE){
+#     temp <- grid.arrange(p1, p2, nrow = 2)
+#     ggsave(plot = temp, filename = here::here("plots", "scot-hq_dat_removed.pdf"))
+#   }
+# }
 
 # # Scotian Fall ####
 #  scot_fall <- scot %>%
