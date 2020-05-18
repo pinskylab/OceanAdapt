@@ -1914,14 +1914,14 @@ if (HQ_DATA_ONLY == TRUE){
    summarise(count = n()) %>%
    filter(count >= 6)
  
- # # find strata sampled every year
- # annual_strata_old <- scot %>%
- #   filter(year != 1986, year != 1978) %>%
- #   select(stratum, year) %>%
- #   distinct() %>%
- #   group_by(stratum) %>%
- #   summarise(count = n()) %>%
- #   filter(count >= 6)
+  # find strata sampled every year
+  annual_strata_old <- scot %>%
+    filter(year != 1986, year != 1978) %>%
+    select(stratum, year) %>%
+    distinct() %>%
+    group_by(stratum) %>%
+    summarise(count = n()) %>%
+    filter(count >= 6)
 
 sum(annual_strata_old$count - annual_strata$count)
  # how many rows will be lost if only stratum trawled ever year are kept?
