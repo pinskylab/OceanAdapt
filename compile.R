@@ -40,13 +40,13 @@ HQ_DATA_ONLY <- TRUE
 
 # 2. View plots of removed strata for HQ_DATA. #OPTIONAL, DEFAULT:FALSE
 # It takes a while to generate these plots.
-HQ_PLOTS <- TRUE
+HQ_PLOTS <- FALSE
 
 # 3. Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`. #DEFAULT: FALSE 
 REMOVE_REGION_DATASETS <- FALSE
 
 # 4. Create graphs based on the data similar to those shown on the website and outputs them to pdf. #DEFAULT:FALSE
-PLOT_CHARTS <- TRUE
+PLOT_CHARTS <- FALSE
 # This used to be called OPTIONAL_PLOT_CHARTS, do I need to change it back?
 
 # 5. If you would like to write out the clean data, would you prefer it in Rdata or CSV form?  Note the CSV's are much larger than the Rdata files. #DEFAULT:TRUE, FALSE generates CSV's instead of Rdata.
@@ -1296,6 +1296,8 @@ neus_strata <- read_csv("data_raw/neus_strata.csv") %>%
 neus <- left_join(neus_survdat, neus_spp, by = "SVSPP") %>%
   left_join(neus_strata, by = c("STRATUM" = "stratum"))
 
+neus <- filter(neus, !is.na(stratum_area))
+
 # are there any strata in the data that are not in the strata file?
 stopifnot(nrow(filter(neus, is.na(stratum_area))) == 0)
 
@@ -1912,14 +1914,14 @@ if (HQ_DATA_ONLY == TRUE){
    summarise(count = n()) %>%
    filter(count >= 6)
  
- # # find strata sampled every year
- # annual_strata_old <- scot %>%
- #   filter(year != 1986, year != 1978) %>%
- #   select(stratum, year) %>%
- #   distinct() %>%
- #   group_by(stratum) %>%
- #   summarise(count = n()) %>%
- #   filter(count >= 6)
+  # find strata sampled every year
+  annual_strata_old <- scot %>%
+    filter(year != 1986, year != 1978) %>%
+    select(stratum, year) %>%
+    distinct() %>%
+    group_by(stratum) %>%
+    summarise(count = n()) %>%
+    filter(count >= 6)
 
 sum(annual_strata_old$count - annual_strata$count)
  # how many rows will be lost if only stratum trawled ever year are kept?
