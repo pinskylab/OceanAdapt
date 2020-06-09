@@ -9,7 +9,7 @@ OceanAdapt
 
 ## 2020/05/18 -  data has been added to OceanAdapt\!
 
-  - Check out the latest update to the OceanAdapt website. 2019 data added for nearly every region\! 2019 data were not available for the Gulf of Alaska, Southeast US and Scotian Shelf at the time of update, but will be included in the next website update. A new release of this repository will be available shortly.
+  - Check out the latest update to the OceanAdapt website. 2019 data added for nearly every region\! 2019 data were not available for the Gulf of Alaska, Southeast US and Scotian Shelf at the time of update, but will be included in the next website update. A new release of this repository is available, DOI below:
   
 [![DOI](https://zenodo.org/badge/29789533.svg)](https://zenodo.org/badge/latestdoi/29789533)
 
