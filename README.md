@@ -13,6 +13,7 @@ OceanAdapt
 
    [Download the lastest release (full data and
     code)](https://github.com/pinskylab/OceanAdapt/releases/tag/update2020)
+  
   [![DOI](https://zenodo.org/badge/29789533.svg)](https://zenodo.org/badge/latestdoi/29789533)
 
 ## 2020/01/15 - Our national average graphic has been included in the 4th National Climate Assessment
@@ -25,6 +26,7 @@ OceanAdapt
     every region\!  
     [Download the lastest release (full data and
     code)](https://github.com/mpinsky/OceanAdapt/releases/tag/update2019)
+    
     [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3890214.svg)](https://doi.org/10.5281/zenodo.3890214)
 
 ## 2019/03/01 - Scotian Shelf Region has been added to OceanAdapt\!
