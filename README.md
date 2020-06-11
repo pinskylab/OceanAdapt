@@ -24,10 +24,9 @@ OceanAdapt
 
   - Check out the latest update to the OceanAdapt website. New data in
     every region\!  
-    [Download the lastest release (full data and
-    code)](https://github.com/mpinsky/OceanAdapt/releases/tag/update2019)
+ [Download the lastest release (full data and code)](https://github.com/mpinsky/OceanAdapt/releases/tag/update2019)
     
-    [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3890214.svg)](https://doi.org/10.5281/zenodo.3890214)
+ [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3890214.svg)](https://doi.org/10.5281/zenodo.3890214)
 
 ## 2019/03/01 - Scotian Shelf Region has been added to OceanAdapt\!
 
