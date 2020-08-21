@@ -2148,13 +2148,13 @@ QCS <- left_join(QCS_catch, QCS_effort, by = c("Trip.identifier", "Set.number","
   
   QCS <- left_join(QCS, QCS_strats, by = "stratum")
   
-  wctri <- wctri %>% 
+  QCS <- QCS %>% 
     rename(
-      svvessel = VESSEL,
-      lat = START_LATITUDE, 
-      lon = START_LONGITUDE,
-      depth = BOTTOM_DEPTH, 
-      spp = SPECIES_NAME
+      lat = Start.latitude, 
+      lon = Start.longitude,
+      depth = Bottom.depth..m., 
+      spp = Scientific.name,
+      year = Survey.Year
     ) %>% 
     filter(
       spp != "" & 
@@ -2167,7 +2167,7 @@ QCS <- left_join(QCS_catch, QCS_effort, by = c("Trip.identifier", "Set.number","
     group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
     summarise(wtcpue = sumna(wtcpue)) %>% 
     # add region column
-    mutate(region = "West Coast Triennial") %>% 
+    mutate(region = "Queen Charlotte Sound") %>% 
     select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
     ungroup()
   
@@ -2175,50 +2175,266 @@ QCS <- left_join(QCS_catch, QCS_effort, by = c("Trip.identifier", "Set.number","
   
 
 #West Coast Vancouver Island
+  
+  
+WCV_catch <- read_csv(here::here("data_raw", "WCV_catch.csv"), col_types = cols(
+  Survey.Year = col_integer(),
+  Trip.identifier = col_integer(),
+  Set.number = col_integer(),
+  ITIS.TSN = col_integer(),
+  Species.code = col_character(),
+  Scientific.name = col_character(),
+  English.common.name = col_character(),
+  French.common.name = col_character(),
+  LSID = col_character(),
+  Catch.weight..kg. = col_double(),
+  Catch.count..pieces. = col_integer()
+)) %>% 
+  select(Trip.identifier, Set.number,Survey.Year, ITIS.TSN, Species.code, Scientific.name, English.common.name, Catch.weight..kg.)
 
-files <- as.list(dir(pattern = "WCV", path = "data_raw", full.names = T))
+WCV_effort <- read_csv(here::here("data_raw", "WCV_effort.csv"), col_types = 
+                         cols(
+                           Survey.Year = col_integer(),
+                           Trip.identifier = col_integer(),
+                           Vessel.name = col_character(),
+                           Trip.start.date = col_character(),
+                           Trip.end.date = col_character(),
+                           GMA = col_character(),
+                           PFMA = col_character(),
+                           Set.number = col_integer(),
+                           Set.date = col_character(),
+                           Start.latitude = col_double(),
+                           Start.longitude = col_double(),
+                           End.latitude = col_double(),
+                           End.longitude = col_double(),
+                           Bottom.depth..m. = col_double(),
+                           Tow.duration..min. = col_integer(),
+                           Distance.towed..m. = col_double(),
+                           Vessel.speed..m.min. = col_double(),
+                           Trawl.door.spread..m. = col_double(),
+                           Trawl.mouth.opening.height..m. = col_double()
+                         )) %>% 
+  select(Trip.identifier, Set.number,Survey.Year,Trip.start.date,Trip.end.date, GMA, PFMA,Set.date, Start.latitude,Start.longitude, End.latitude, End.longitude, Bottom.depth..m., Tow.duration..min.,Distance.towed..m., Trawl.door.spread..m., Trawl.mouth.opening.height..m. )
 
-WCV <- files %>% 
-  map_dfr(~ read_csv(.x, col_types = cols(
-    .default = col_double(),
-    MISSION = col_character(),
-    SEASON = col_character(),
-    SURVEYDATE = col_character(),
-    GEAR = col_character(),
-    SCIENTIFICNAME = col_character(),
-    TAXONOMICNAMEAUTHOR = col_character()
-  ))) 
+
+WCV <- left_join(WCV_catch, WCV_effort, by = c("Trip.identifier", "Set.number","Survey.Year"))
+
+
+
+WCV <- WCV %>% 
+  # Create a unique haulid
+  mutate(
+    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0)), 
+    # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
+    stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m.)*100, sep= "-"), 
+    # adjust for tow area # weight per hectare (10,000 m2)	
+    wtcpue = (Catch.weight..kg.)/(Distance.towed..m.*Trawl.door.spread..m.)
+  )
+
+# Calculate stratum area where needed (use convex hull approach)
+WCV_strats <- WCV  %>% 
+  group_by(stratum) %>% 
+  summarise(stratumarea = calcarea(Start.latitude, Start.longitude))
+
+WCV <- left_join(WCV, WCV_strats, by = "stratum")
+
+WCV <- WCV %>% 
+  rename(
+    lat = Start.latitude, 
+    lon = Start.longitude,
+    depth = Bottom.depth..m., 
+    spp = Scientific.name,
+    year = Survey.Year
+  ) %>% 
+  filter(
+    spp != "" & 
+      !grepl("egg", spp)
+  ) %>% 
+  # adjust spp names
+  mutate(spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
+         spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp), 
+         spp = ifelse(grepl("Squalus", spp), 'Squalus suckleyi', spp)) %>%
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  # add region column
+  mutate(region = "West Coast Vancouver Island") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
+  ungroup()
+
 
 #Hecate Strait
 
-files <- as.list(dir(pattern = "HS", path = "data_raw", full.names = T))
 
-HS <- files %>% 
-  map_dfr(~ read_csv(.x, col_types = cols(
-    .default = col_double(),
-    MISSION = col_character(),
-    SEASON = col_character(),
-    SURVEYDATE = col_character(),
-    GEAR = col_character(),
-    SCIENTIFICNAME = col_character(),
-    TAXONOMICNAMEAUTHOR = col_character()
-  ))) 
+HS_catch <- read_csv(here::here("data_raw", "HS_catch.csv"), col_types = cols(
+  Survey.Year = col_integer(),
+  Trip.identifier = col_integer(),
+  Set.number = col_integer(),
+  ITIS.TSN = col_integer(),
+  Species.code = col_character(),
+  Scientific.name = col_character(),
+  English.common.name = col_character(),
+  French.common.name = col_character(),
+  LSID = col_character(),
+  Catch.weight..kg. = col_double(),
+  Catch.count..pieces. = col_integer()
+)) %>% 
+  select(Trip.identifier, Set.number,Survey.Year, ITIS.TSN, Species.code, Scientific.name, English.common.name, Catch.weight..kg.)
+
+HS_effort <- read_csv(here::here("data_raw", "HS_effort.csv"), col_types = 
+                         cols(
+                           Survey.Year = col_integer(),
+                           Trip.identifier = col_integer(),
+                           Vessel.name = col_character(),
+                           Trip.start.date = col_character(),
+                           Trip.end.date = col_character(),
+                           GMA = col_character(),
+                           PFMA = col_character(),
+                           Set.number = col_integer(),
+                           Set.date = col_character(),
+                           Start.latitude = col_double(),
+                           Start.longitude = col_double(),
+                           End.latitude = col_double(),
+                           End.longitude = col_double(),
+                           Bottom.depth..m. = col_double(),
+                           Tow.duration..min. = col_integer(),
+                           Distance.towed..m. = col_double(),
+                           Vessel.speed..m.min. = col_double(),
+                           Trawl.door.spread..m. = col_double(),
+                           Trawl.mouth.opening.height..m. = col_double()
+                         )) %>% 
+  select(Trip.identifier, Set.number,Survey.Year,Trip.start.date,Trip.end.date, GMA, PFMA,Set.date, Start.latitude,Start.longitude, End.latitude, End.longitude, Bottom.depth..m., Tow.duration..min.,Distance.towed..m., Trawl.door.spread..m., Trawl.mouth.opening.height..m. )
+
+
+HS <- left_join(HS_catch, HS_effort, by = c("Trip.identifier", "Set.number","Survey.Year"))
+
+
+
+HS <- HS %>% 
+  # Create a unique haulid
+  mutate(
+    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0)), 
+    # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
+    stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m.)*100, sep= "-"), 
+    # adjust for tow area # weight per hectare (10,000 m2)	
+    wtcpue = (Catch.weight..kg.)/(Distance.towed..m.*Trawl.door.spread..m.)
+  )
+
+# Calculate stratum area where needed (use convex hull approach)
+HS_strats <- HS  %>% 
+  group_by(stratum) %>% 
+  summarise(stratumarea = calcarea(Start.latitude, Start.longitude))
+
+HS <- left_join(HS, HS_strats, by = "stratum")
+
+HS <- HS %>% 
+  rename(
+    lat = Start.latitude, 
+    lon = Start.longitude,
+    depth = Bottom.depth..m., 
+    spp = Scientific.name,
+    year = Survey.Year
+  ) %>% 
+  filter(
+    spp != "" & 
+      !grepl("egg", spp)
+  ) %>% 
+  # adjust spp names
+  mutate(spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
+         spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp), 
+         spp = ifelse(grepl("Squalus", spp), 'Squalus suckleyi', spp)) %>%
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  # add region column
+  mutate(region = "Hecate Strait") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
+  ungroup()
 
 #Strait of Georgia
 
-files <- as.list(dir(pattern = "SOG", path = "data_raw", full.names = T))
 
-SOG <- files %>% 
-  map_dfr(~ read_csv(.x, col_types = cols(
-    .default = col_double(),
-    MISSION = col_character(),
-    SEASON = col_character(),
-    SURVEYDATE = col_character(),
-    GEAR = col_character(),
-    SCIENTIFICNAME = col_character(),
-    TAXONOMICNAMEAUTHOR = col_character()
-  ))) 
+SOG_catch <- read_csv(here::here("data_raw", "SOG_catch.csv"), col_types = cols(
+  Survey.Year = col_integer(),
+  Trip.identifier = col_integer(),
+  Set.number = col_integer(),
+  ITIS.TSN = col_integer(),
+  Species.code = col_character(),
+  Scientific.name = col_character(),
+  English.common.name = col_character(),
+  French.common.name = col_character(),
+  LSID = col_character(),
+  Catch.weight..kg. = col_double(),
+  Catch.count..pieces. = col_integer()
+)) %>% 
+  select(Trip.identifier, Set.number,Survey.Year, ITIS.TSN, Species.code, Scientific.name, English.common.name, Catch.weight..kg.)
 
+SOG_effort <- read_csv(here::here("data_raw", "SOG_effort.csv"), col_types = 
+                         cols(
+                           Survey.Year = col_integer(),
+                           Trip.identifier = col_integer(),
+                           Vessel.name = col_character(),
+                           Trip.start.date = col_character(),
+                           Trip.end.date = col_character(),
+                           GMA = col_character(),
+                           PFMA = col_character(),
+                           Set.number = col_integer(),
+                           Set.date = col_character(),
+                           Start.latitude = col_double(),
+                           Start.longitude = col_double(),
+                           End.latitude = col_double(),
+                           End.longitude = col_double(),
+                           Bottom.depth..m. = col_double(),
+                           Tow.duration..min. = col_integer(),
+                           Distance.towed..m. = col_double(),
+                           Vessel.speed..m.min. = col_double(),
+                           Trawl.door.spread..m. = col_double(),
+                           Trawl.mouth.opening.height..m. = col_double()
+                         )) %>% 
+  select(Trip.identifier, Set.number,Survey.Year,Trip.start.date,Trip.end.date, GMA, PFMA,Set.date, Start.latitude,Start.longitude, End.latitude, End.longitude, Bottom.depth..m., Tow.duration..min.,Distance.towed..m., Trawl.door.spread..m., Trawl.mouth.opening.height..m. )
+
+
+SOG <- left_join(SOG_catch, SOG_effort, by = c("Trip.identifier", "Set.number","Survey.Year"))
+
+
+
+SOG <- SOG %>% 
+  # Create a unique haulid
+  mutate(
+    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0)), 
+    # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
+    stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m.)*100, sep= "-"), 
+    # adjust for tow area # weight per hectare (10,000 m2)	
+    wtcpue = (Catch.weight..kg.)/(Distance.towed..m.*Trawl.door.spread..m.)
+  )
+
+# Calculate stratum area where needed (use convex hull approach)
+SOG_strats <- SOG  %>% 
+  group_by(stratum) %>% 
+  summarise(stratumarea = calcarea(Start.latitude, Start.longitude))
+
+SOG <- left_join(SOG, SOG_strats, by = "stratum")
+
+SOG <- SOG %>% 
+  rename(
+    lat = Start.latitude, 
+    lon = Start.longitude,
+    depth = Bottom.depth..m., 
+    spp = Scientific.name,
+    year = Survey.Year
+  ) %>% 
+  filter(
+    spp != "" & 
+      !grepl("egg", spp)
+  ) %>% 
+  # adjust spp names
+  mutate(spp = ifelse(grepl("Lepidopsetta", spp), "Lepidopsetta sp.", spp),
+         spp = ifelse(grepl("Bathyraja", spp), 'Bathyraja sp.', spp), 
+         spp = ifelse(grepl("Squalus", spp), 'Squalus suckleyi', spp)) %>%
+  group_by(haulid, stratum, stratumarea, year, lat, lon, depth, spp) %>% 
+  summarise(wtcpue = sumna(wtcpue)) %>% 
+  # add region column
+  mutate(region = "Strait of Georgia") %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
+  ungroup()
 
 # Compile TAX ===========================================================
 print("Compile TAX")
