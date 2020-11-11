@@ -2136,7 +2136,7 @@ QCS <- left_join(QCS_catch, QCS_effort, by = c("Trip.identifier", "Set.number","
     mutate(
       haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0)), 
       # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
-      stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m.)*100, sep= "-"), 
+      stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
       # adjust for tow area # weight per hectare (10,000 m2)	
       wtcpue = (Catch.weight..kg.)/(Distance.towed..m.*Trawl.door.spread..m.)
     )
@@ -2435,6 +2435,30 @@ SOG <- SOG %>%
   mutate(region = "Strait of Georgia") %>% 
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
   ungroup()
+
+
+# Compile Canadian Pacific ---------------------------------------------------
+print("Compile CGULF")
+
+cgulf <- read_csv(here::here("data_raw", "cgulf.csv"))
+
+cgulf <- cgulf %>% 
+  # Create a unique haulid
+  mutate(
+    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0)), 
+    # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
+    stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m.)*100, sep= "-"), 
+    # adjust for tow area # weight per hectare (10,000 m2)	
+    wtcpue = (Catch.weight..kg.)/(Distance.towed..m.*Trawl.door.spread..m.)
+  )
+
+# Calculate stratum area where needed (use convex hull approach)
+HS_strats <- HS  %>% 
+  group_by(stratum) %>% 
+  summarise(stratumarea = calcarea(Start.latitude, Start.longitude))
+
+HS <- left_join(HS, HS_strats, by = "stratum")
+
 
 # Compile TAX ===========================================================
 print("Compile TAX")
