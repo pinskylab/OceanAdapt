@@ -2974,15 +2974,7 @@ CPAC$region <- 'Canadian Pacific'
 CPAC <- CPAC %>%
   select(region, everything())
 
-CPAC$spp <- firstup(CPAC$spp)
 
-CPAC$year <- oddtoeven(CPAC$year)
-
-
- 
-if(unique(test) <= 2004){
-  print('2003-2004')
-  } 
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
@@ -2996,6 +2988,19 @@ if (HQ_DATA_ONLY == TRUE){
     select(lat, lon) %>%
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
+  
+# regroup year bins
+  CPAC$spp <- firstup(CPAC$spp)
+  CPAC$year <- oddtoeven(CPAC$year)
+  CPAC$year[CPAC$year=='2020'] <- '2019'
+  CPAC$year[CPAC$year=='2018'] <- '2017-2018'
+  CPAC$year[CPAC$year=='2016'] <- '2015-2016'
+  CPAC$year[CPAC$year=='2014'] <- '2013-2014'
+  CPAC$year[CPAC$year=='2012'] <- '2011-2012'
+  CPAC$year[CPAC$year=='2010'] <- '2009-2010'
+  CPAC$year[CPAC$year=='2008'] <- '2007-2008'
+  CPAC$year[CPAC$year=='2006'] <- '2005-2006'
+  CPAC$year[CPAC$year=='2004'] <- '2003-2004'
 
   # find strata sampled every year
   annual_strata <- CPAC %>%
@@ -3004,7 +3009,7 @@ if (HQ_DATA_ONLY == TRUE){
     distinct() %>%
     group_by(stratum) %>%
     summarise(count = n()) %>%
-    filter(count >= 2)
+    filter(count >= 3)
 
   # find strata sampled every year
   annual_strata_old <- CPAC %>%
@@ -3040,23 +3045,9 @@ if (HQ_DATA_ONLY == TRUE){
 
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2,p3,p4, nrow = 2)
-    #ggsave(plot = temp, filename = here::here("plots", "scot_hq_dat_removed.png"))
+    ggsave(plot = temp, filename = here::here("plots", "cpac_hq_dat_removed.png"))
   }
 }
-
-
-  p1 <- CPAC %>%
-    select(stratum, year) %>%
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
-  p2 <- CPAC %>%
-    select(lat, lon) %>%
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
-
-grid.arrange(p1, p2)
-
-
 
 
 
@@ -3189,7 +3180,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2,p3,p4, nrow = 2)
-    #ggsave(plot = temp, filename = here::here("plots", "scot_hq_dat_removed.png"))
+    ggsave(plot = temp, filename = here::here("plots", "GSLsouth_hq_dat_removed.png"))
   }
 }
 
@@ -3337,9 +3328,9 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2,p3,p4, nrow = 2)
-    #ggsave(plot = temp, filename = here::here("plots", "scot_hq_dat_removed.png"))
+    ggsave(plot = temp, filename = here::here("plots", "GSLnorth_hq_dat_removed.png"))
   }
- }
+ o}
 
 
 
