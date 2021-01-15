@@ -35,7 +35,7 @@ https://open.canada.ca/data/en/dataset/86a9d0b0-fcce-48ed-a124-68061d7b7553
 save_loc <- "data_raw"
 save_date <- Sys.Date()
 file_name <- "GSLnorth_hammond.csv"
-data <- read.csv("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/lady_hammond/PGF_LadyHammond.csv")
+data <- read_delim("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/lady_hammond/PGF_LadyHammond.csv", ";")
 write_csv(data, here::here(save_loc, file_name))
 rm(data, save_date, file_name, save_loc)
 
@@ -46,7 +46,7 @@ https://open.canada.ca/data/en/dataset/4bbd03ce-ae48-4aaa-97ac-5594c2a3a6c2
 save_loc <- "data_raw"
 save_date <- Sys.Date()
 file_name <- "GSLnorth_gadus.csv"
-data <- read.csv("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/gadus_atlantica/PGF_Gadus.csv")
+data <- read_delim("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/gadus_atlantica/PGF_Gadus.csv", ";")
 write_csv(data, here::here(save_loc, file_name))
 rm(data, save_date, file_name, save_loc)
 
@@ -69,7 +69,7 @@ https://open.canada.ca/data/en/dataset/4eaac443-24a8-4b37-9178-d7cce4eb7c7b
 save_loc <- "data_raw"
 save_date <- Sys.Date()
 file_name <- "GSLnorth_needler.csv"
-data <- read.csv("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/needler/PGF_Needler.csv")
+data <- read_delim("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/needler/PGF_Needler.csv", ";")
 write_csv(data, here::here(save_loc, file_name))
 rm(data, save_date, file_name, save_loc)
 
@@ -80,7 +80,7 @@ https://open.canada.ca/data/en/dataset/40381c35-4849-4f17-a8f3-707aa6a53a9d
 save_loc <- "data_raw"
 save_date <- Sys.Date()
 file_name <- "GSLnorth_teleost.csv"
-data <- read.csv("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/teleost/PGF_Teleost.csv")
+data <- read_delim("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/teleost/PGF_Teleost.csv",";")
 write_csv(data, here::here(save_loc, file_name))
 rm(data, save_date, file_name, save_loc)
 
