@@ -1,3 +1,85 @@
+ #' In February 2021, Mike McMahon and Brian Bowers directed us to their newly uploaded Maritimes data on the open.canada.ca site.
+ #' 
+
+#Maritimes Fall
+temp <- tempfile()
+save_loc <- "data_raw"
+save_date <- Sys.Date()
+file_name <- "MAR_FALL_MISSION.csv"
+download.file("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/Maritimes_Research_Vessel_Survey/FALL_csv.zip",temp)
+data <- read.csv(unz(temp, "FALL_2020GSMISSIONS.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "MAR_FALL_CATCH.csv"
+data <- read.csv(unz(temp, "FALL_2020_GSCAT.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "MAR_FALL_INF.csv"
+data <- read.csv(unz(temp, "FALL_2020_GSINF.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "MAR_FALL_SPP.csv"
+data <- read.csv(unz(temp, "FALL_2020_GSSPECIES.csv"))
+write_csv(data, here::here(save_loc, file_name))
+unlink(temp) 
+
+
+
+#Maritimes Spring
+temp <- tempfile()
+save_loc <- "data_raw"
+save_date <- Sys.Date()
+file_name <- "MAR_SPRING_MISSION.csv"
+download.file("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/Maritimes_Research_Vessel_Survey/SPRING_csv.zip",temp)
+data <- read.csv(unz(temp, "SPRING_2020GSMISSIONS.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "MAR_SPRING__CATCH.csv"
+data <- read.csv(unz(temp, "SPRING_2020_GSCAT.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "MAR_SPRING__INF.csv"
+data <- read.csv(unz(temp, "SPRING_2020_GSINF.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "MAR_SPRING__SPP.csv"
+data <- read.csv(unz(temp, "SPRING_2020_GSSPECIES.csv"))
+write_csv(data, here::here(save_loc, file_name))
+unlink(temp) 
+
+#Maritimes Summer
+temp <- tempfile()
+save_loc <- "data_raw"
+save_date <- Sys.Date()
+file_name <- "MAR_SUMMER_MISSION.csv"
+download.file("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/Maritimes_Research_Vessel_Survey/SUMMER_csv.zip",temp)
+data <- read.csv(unz(temp, "SUMMER_2020GSMISSIONS.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "MAR_SUMMER_CATCH.csv"
+data <- read.csv(unz(temp, "SUMMER_2020_GSCAT.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "MAR_SUMMER_INF.csv"
+data <- read.csv(unz(temp, "SUMMER_2020_GSINF.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "MAR_SUMMER_SPP.csv"
+data <- read.csv(unz(temp, "SUMMER_2020_GSSPECIES.csv"))
+write_csv(data, here::here(save_loc, file_name))
+unlink(temp) 
+
+#4VSW
+temp <- tempfile()
+save_loc <- "data_raw"
+save_date <- Sys.Date()
+file_name <- "4VSW_MISSION.csv"
+download.file("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/Maritimes_Research_Vessel_Survey/4VSW_csv.zip",temp)
+data <- read.csv(unz(temp, "4VSW_2020GSMISSIONS.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "4VSW_CATCH.csv"
+data <- read.csv(unz(temp, "4VSW_2020_GSCAT.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "4VSW_INF.csv"
+data <- read.csv(unz(temp, "4VSW_2020_GSINF.csv"))
+write_csv(data, here::here(save_loc, file_name))
+file_name <- "4VSW_SPP.csv"
+data <- read.csv(unz(temp, "4VSW_2020_GSSPECIES.csv"))
+write_csv(data, here::here(save_loc, file_name))
+unlink(temp) 
+#' 
+ #' 
  #' In June 2020, Mike McMahon said that new data is always available at: ftp://ftp.dfo-mpo.gc.ca/MarPED/RVSurvey_20200420.zip
  #' In March 2020, Mike McMahon referred us to his Git profile, from which this script was downloaded.
  #' Though he suggested using his package "FGP" (https://github.com/Maritimes/FGP/), we opted to write 
@@ -89,3 +171,21 @@
 summerNew=get_DFO_REST(host = "https://gisp.dfo-mpo.gc.ca", service='FGP/ADAPT_Canada_Atlantic_Summer_2019_EN') 
 fallNew=get_DFO_REST(host = "https://gisp.dfo-mpo.gc.ca", service='FGP/ADAPT_Canada_Atlantic_Fall_2019_EN') 
 springNew=get_DFO_REST(host = "https://gisp.dfo-mpo.gc.ca", service='FGP/ADAPT_Canada_Atlantic_Spring_2019_EN') 
+
+#Test=get_DFO_REST(host = "https://gisp.dfo-mpo.gc.ca", service='FGP/ADAPT_Canada_Atlantic_Summer_2019_EN') 
+
+
+#additional scotian shelf data
+
+
+# temp <- tempfile()
+# save_loc <- "data_raw"
+# save_date <- Sys.Date()
+# file_name <- "SCOT_CATCH.csv"
+# download.file("ftp://ftp.dfo-mpo.gc.ca/MarPED/RVSurvey_20201130.zip",temp)
+# data <- load(unz(temp, "RV_Survey_20201130/RV.GSCAT.RData"))
+# write_csv(GSCAT, here::here(save_loc, file_name))
+# data <- load(unz(temp, "RV_Survey_20201130/RV.GSCAT.RData"))
+# write_csv(GSCAT, here::here(save_loc, file_name))
+# data <- load(unz(temp, "RV_Survey_20201130/RV.GSCAT.RData"))
+# write_csv(GSCAT, here::here(save_loc, file_name))

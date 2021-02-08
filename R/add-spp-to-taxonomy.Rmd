@@ -7,17 +7,83 @@ Load libraries and data
 ```{r setup, include = FALSE}
 library(here) # to find yourself
 library(tidyverse)
+library(dplyr)
+library(plyr)
+library(tidyr)
+library(stringr)
 library(rfishbase) # to get missing taxon data
 library(janitor) # to clean names
+library(ggplot2)
+library(matrixStats)
+library(gridExtra)
 
 # this is an R data of all of the individual regions
-
+all_data <- load(here("data_clean", "individual-regions.rda"))
 
 # this is the data after it has been joined with the spptaxonomy file but before trimming.
-master_data <- readRDS(here("data_clean", "all-regions-full.RData"))
+master_data <- readRDS(here("data_clean", "all-regions-full.rds"))
 
 # this is the spptaxonomy file
 tax <- read_csv(here("data_raw", "spptaxonomy.csv"))
+```
+```{r}
+flag_spp <- function(region){
+    df <- region %>% 
+      select(spp, year) %>% 
+      group_by(spp) %>% 
+      distinct()
+    years <- unique(df$year)
+    df2 <- data.frame(matrix(ncol = length(years)+1, nrow = length(df$spp)))
+    x <- c('spp', unique(df$year))
+    colnames(df2) <- x
+    df2$spp <- df$spp
+    
+    n<-2
+  for (year in years){
+    df2[,n] <- c(apply(df, 1, function(r) any(r %in% c(year))))
+    n <- n+1
+    }
+    df2 <- df2 %>% group_by(spp) %>% summarize_all(any)
+    df3 <- data.frame(matrix(ncol = 3, nrow = length(df2$spp)))
+    colnames(df3) <- c('spp', 'rlmax', 'PresToAbs')
+    for (n in 1:length(df2$spp)){
+      r <- rle(df2[n,])
+      sp <- c(df2[n,1])
+      rlmax <- max(r$lengths)
+      df3[n,1] <- sp
+      df3[n,2] <- rlmax
+      df3[n,3] <- length(r$values)
+    }
+    x <- round(0.95*length(years))
+    df3 <- df3[df3$rlmax < x,]
+    df3 <- df3[df3$PresToAbs < 4,]
+    df3
+  
+}
+```
+```{r}
+region <- goa
+test <- flag_spp(region)
+
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "goa_tax_check_test.png"))
+  
+
 ```
 
 
@@ -39,7 +105,7 @@ names(all_regions)
 # examine only the spp column, only unique values, and assign a test id number
 ```{r}
 
-all_regions_spp <- all_regions_spp %>% 
+all_regions_spp <- all_regions %>% 
   select(spp) %>% 
   distinct() %>% 
   mutate(spp_id = 1:nrow(.))
@@ -170,12 +236,31 @@ tax_added <- rbind(tax_added, matching)
 not_in_tax <- anti_join(all_regions_spp, tax_added, by = c("spp"="taxon"))
 
 ```
+```{r}
+ p1 <- wcann %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_jitter()
+
+  test <- wcann %>% 
+    select(spp, year) %>% 
+    group_by(spp) #%>% 
+    #summarise(count = n())
+  
+  unique(test$year)
+
+```
+
 # Write to csv
 ```{r}
 write_csv(tax_added, here("data_raw", "spptaxonomy.csv"))
 ```
 
-
+# Write to csv
+```{r}
+library(compare)
+comparison <- compare(tax_raw,tax_added,allowAll=TRUE)
+```
 
 Malin asked if there were other Echinoidea names that don’t have “crushed urchin"
 
