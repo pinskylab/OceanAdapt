@@ -1,4 +1,8 @@
-# Visit the [Gulf of Mexico]("https://seamap.gsmfc.org/") website and download the files, then copy them into the data_raw folder.
+# Visit the [Gulf of Mexico]("https://seamap.gsmfc.org/") website
+# Click "Download" the SEAMAP Trawl/Plankton, Bottom Longline
+# Fill in the form ("Scientific Research", "Educational Institution", "Trawl/Plankton Data (CSV)"
+# Unzip the CSV in your downloads folder
+# then copy them into the data_raw folder with the script below
 
 file.copy(from = "~/Downloads/public_seamap_csvs/BGSREC.csv", to = "data_raw/gmex_BGSREC.csv", overwrite = T)
 file.copy(from = "~/Downloads/public_seamap_csvs/CRUISES.csv", to = "data_raw/gmex_CRUISES.csv", overwrite = T)

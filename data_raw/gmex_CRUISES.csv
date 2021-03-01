@@ -640,11 +640,9 @@
 640,"2006","TX",32,"62","2006-06-05","2006-06-26","Summer SEAMAP Groundfish Survey",0,,
 641,"2006","TX",67,"62","2006-06-05","2006-06-26","Summer SEAMAP Groundfish Survey",0,,
 642,"2006","MS",17,"61","2006-06-06","2006-07-05","Summer SEAMAP Groundfish Survey",0,,
-643,"2006","US",04,"271","2006-06-14","2006-07-16","Summer SEAMAP Groundfish Survey",0,,
 644,"2006","US",63,"64","2006-08-31","2006-09-27","Fall SEAMAP Plankton Survey",0,,
 645,"2006","AL",23,"62","2006-09-05","2006-09-05","Fall SEAMAP Plankton Survey",0,,
 647,"2006","US",63,"65","2006-10-13","2006-11-19","Fall SEAMAP Groundfish Survey",0,,
-648,"2006","US",04,"273","2006-10-15","2006-11-20","Fall SEAMAP Groundfish Survey",0,,
 649,"2006","AL",23,"63","2006-10-25","2006-11-09","Fall SEAMAP Groundfish Survey",0,,
 650,"2006","TX",40,"63","2006-11-01","2006-11-17","Fall SEAMAP Groundfish Survey",0,,
 651,"2006","TX",65,"63","2006-11-01","2006-11-17","Fall SEAMAP Groundfish Survey",0,,
@@ -655,12 +653,10 @@
 656,"2007","US",63,"73","2007-04-17","2007-05-29","Spring SEAMAP Plankton Survey",0,,
 657,"2007","AL",23,"71","2007-06-04","2007-06-27","Summer SEAMAP Groundfish Survey",0,,
 658,"2007","MS",17,"71","2007-06-05","2007-06-09","Spring SEAMAP Plankton Survey",0,,
-659,"2007","US",04,"276","2007-06-07","2007-08-03","Summer SEAMAP Groundfish Survey",0,,
 661,"2007","LA",35,"71","2007-06-26","2007-06-29","Summer SEAMAP Groundfish Survey",0,,
 662,"2007","US",63,"75","2007-08-29","2007-09-28","Fall SEAMAP Plankton Survey",0,,
 663,"2007","MS",17,"73","2007-09-28","2007-09-29","SEAMAP Fall Plankton Survey",0,,
 664,"2007","LA",35,"72","2007-10-08","2007-10-11","Fall SEAMAP Groundfish Survey",0,,
-666,"2007","US",04,"278","2007-10-15","2007-11-11","Fall SEAMAP Groundfish Survey",0,,
 667,"2007","LA",35,"73","2007-12-04","2007-12-07","Winter SEAMAP Trawl Survey",0,,
 668,"2008","LA",35,"81","2008-04-01","2008-04-04","Spring SEAMAP Trawl Survey",0,,
 669,"2008","LA",35,"82","2008-06-23","2008-06-26","Summer SEAMAP Groundfish Survey",0,,
@@ -798,7 +794,7 @@
 871,"2012","FL",17,"1203","2012-06-07","2012-07-04","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
 872,"2012","MS",17,"1202","2012-05-29","2012-05-31","Summer SEAMAP Groundfish Survey",0,"sdes54-September 2011","SDES IMPORT v3.2 "
 873,"2011","AL",77,"1104","2011-11-01","2011-11-12","Fall SEAMAP Groundfish Survey",0,"sdes53-Feburary 2010","SDES IMPORT v3.2 "
-874,"2011","US",04,"0297","2011-10-10","2011-11-06","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
+874,"2011","US",04,"0297","2011-10-10","2011-11-06","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
 875,"2011","US",04,"0294","2011-04-08","2011-04-25","SEAMAP Reef Fish Survey",0,,
 876,"2011","US",72,"1101","2011-05-09","2011-07-11","SEAMAP Reef Fish Survey",0,,
 877,"2013","AL",77,"1301","2013-07-03","2013-07-12","Summer SEAMAP Groundfish Survey",0,"sdes54-September 2011","SDES IMPORT v3.2 "
@@ -812,11 +808,11 @@
 898,"2010","AL",77,"1003","2010-09-02","2010-09-02","Fall SEAMAP Plankton Survey",4,,
 899,"2011","AL",77,"1103","2011-09-20","2011-09-20","Fall SEAMAP Plankton Survey",0,,
 900,"2012","AL",77,"1202","2012-09-04","2012-09-04","Fall SEAMAP Plankton Survey",0,,
-901,"2012","US",04,"0299","2012-06-07","2012-07-15","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
+901,"2012","US",04,"0299","2012-06-07","2012-07-15","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
 903,"2013","AL",77,"1303","2013-11-22","2013-11-22","Fall SEAMAP Groundfish Survey",0,,
 906,"2013","FL",17,"1305","2013-10-09","2013-10-19","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
-913,"2012","US",04,"0301","2012-10-11","2012-11-17","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
-914,"2013","US",04,"0304","2013-06-09","2013-07-18","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
+913,"2012","US",04,"0301","2012-10-11","2012-11-17","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
+914,"2013","US",04,"0304","2013-06-09","2013-07-18","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
 919,"2013","LA",88,"1303","2013-09-13","2013-09-14","Fall SEAMAP Plankton Survey",,"LA-DMS V1.0(Cruise_1303)","GSMFC-LA import 1.2"
 921,"2011","FL",17,"1103","2011-06-08","2011-07-31","Summer SEAMAP Groundfish Survey",1,"sdes53-Feburary 2010","SDES IMPORT v3.2 "
 922,"2013","MS",17,"1306","2013-11-11","2013-11-12","Fall SEAMAP Groundfish Survey",0,"sdes54-September 2011","SDES IMPORT v3.2 "
@@ -833,19 +829,19 @@
 934,"2013","LA",88,"1304","2013-10-28","2013-11-18","Fall SEAMAP Groundfish Survey",,"LA-DMS V1.0(Cruise_1304)","GSMFC-LA import 1.1"
 935,"2011","MS",17,"1102","2011-06-03","2011-06-05","Summer SEAMAP Groundfish Survey",0,"sdes53-Feburary 2010","SDES IMPORT v3.2 "
 936,"2014","LA",88,"1401","2014-05-01","2014-05-09","Spring SEAMAP Plankton Survey",,"LA-DMS V1.0(Cruise_1401)","GSMFC-LA import 1.1"
-937,"2011","US",04,"0295","2011-06-07","2011-07-17","Summer SEAMAP Groundfish Survey",1,"sdes53-Feburary 2010","SDES IMPORT v3.2 "
+937,"2011","US",04,"0295","2011-06-07","2011-07-17","Summer SEAMAP Groundfish Survey",1,"sdes53-Feburary 2010","SDES IMPORT v3.21 "
 938,"2011","AL",77,"1101","2011-02-15","2011-02-15","Winter SEAMAP Groundfish Survey",0,"sdes47-08/2008","SDES IMPORT v3.2 "
 939,"2010","AL",77,"1004","2010-10-17","2010-10-18","Fall SEAMAP Groundfish Survey",0,"sdes47-08/2008","SDES IMPORT v3.2 "
 940,"2010","FL",17,"1007","2010-10-14","2010-10-22","Fall SEAMAP Groundfish Survey",1,"sdes53-Feburary 2010","SDES IMPORT v3.2 "
-941,"2010","US",04,"0292","2010-10-09","2010-11-18","Fall SEAMAP Groundfish Survey",1,"sdes53-Feburary 2010","SDES IMPORT v3.2 "
-942,"2010","US",04,"0290","2010-06-26","2010-08-02","Summer SEAMAP Groundfish Survey",1,"sdes53-Feburary 2010","SDES IMPORT v3.2 "
+941,"2010","US",04,"0292","2010-10-09","2010-11-18","Fall SEAMAP Groundfish Survey",1,"sdes53-Feburary 2010","SDES IMPORT v3.21 "
+942,"2010","US",04,"0290","2010-06-26","2010-08-02","Summer SEAMAP Groundfish Survey",1,"sdes53-Feburary 2010","SDES IMPORT v3.21 "
 943,"2010","AL",77,"1002","2010-06-02","2010-06-08","Summer SEAMAP Groundfish Survey",0,"sdes47-08/2008","SDES IMPORT v3.2 "
 944,"2010","AL",77,"1001","2010-02-20","2010-02-20","Winter SEAMAP Groundfish Survey",0,"sdes47-08/2008","SDES IMPORT v3.2 "
-945,"2009","US",04,"0289","2009-10-10","2009-11-20","Fall SEAMAP Groundfish Survey",1,"sdes53 - February 2010","SDES IMPORT v3.2 "
+945,"2009","US",04,"0289","2009-10-10","2009-11-20","Fall SEAMAP Groundfish Survey",1,"sdes51-July 2009","SDES IMPORT v3.21 "
 946,"2009","MS",17,"0906","2009-10-02","2009-10-05","Fall SEAMAP Groundfish Survey",0,"sdes50-January 2009","SDES IMPORT v3.2 "
-947,"2009","US",04,"0287","2009-06-08","2009-07-17","Summer SEAMAP Groundfish Survey",1,"sdes53 - February 2010","SDES IMPORT v3.2 "
-948,"2008","US",04,"0284","2008-10-10","2008-11-18","Fall SEAMAP Groundfish Survey",1,"sdes50 - January 2009","SDES IMPORT v3.2 "
-949,"2008","US",04,"0282","2008-06-11","2008-07-16","Summer SEAMAP Groundfish Survey",1,"sdes50 - January 2009","SDES IMPORT v3.2 "
+947,"2009","US",04,"0287","2009-06-08","2009-07-17","Summer SEAMAP Groundfish Survey",1,"sdes50-January 2009","SDES IMPORT v3.21 "
+948,"2008","US",04,"0284","2008-10-10","2008-11-18","Fall SEAMAP Groundfish Survey",1,"sdes50 - January 2009","SDES IMPORT v3.21 "
+949,"2008","US",04,"0282","2008-06-11","2008-07-16","Summer SEAMAP Groundfish Survey",1,"sdes28-08/2007","SDES IMPORT v3.21 "
 950,"2008","MS",17,"0802","2008-05-31","2008-06-03","Summer SEAMAP Groundfish Survey",0,"sdes28-08/2007","SDES IMPORT v3.2 "
 951,"2007","MS",17,"0704","2007-10-10","2007-10-13","Fall SEAMAP Groundfish Survey",0,"sdes44 -01/2008","SDES IMPORT v3.2 "
 952,"2007","MS",17,"0702","2007-06-12","2007-07-08","Summer SEAMAP Groundfish Survey",0,"sdes44 -01/2008","SDES IMPORT v3.2 "
@@ -869,7 +865,7 @@
 971,"2012","US",76,"1201","2012-04-06","2012-05-07","SEAMAP Reef Fish",0,"sdes53 - February 2010","SDES IMPORT v2.0 "
 972,"2013","US",76,"1302","2013-04-07","2013-06-04","SEAMAP Reef Fish",0,"sdes53 - February 2010","SDES IMPORT v2.0 "
 973,"2013","AL",77,"132","2013-09-06","2013-09-06","Fall SEAMAP Plankton Survey",4,,
-974,"2013","US",04,"0306","2013-10-28","2013-12-06","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
+974,"2013","US",04,"0306","2013-10-28","2013-12-06","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
 975,"2014","MS",17,"1401","2014-05-02","2014-05-06","Spring SEAMAP Plankton Survey",0,"sdes54-September 2011","SDES IMPORT v3.2 "
 976,"2014","MS",17,"1403","2014-07-11","2014-07-13","Summer SEAMAP Groundfish Survey",0,"sdes54-September 2011","SDES IMPORT v3.2 "
 977,"2014","MS",17,"1404","2014-09-03","2014-09-04","Fall SEAMAP Plankton Survey",0,"sdes54-September 2011","SDES IMPORT v3.2 "
@@ -896,9 +892,9 @@
 1015,"2013","TX",69,"1302","2013-06-05","2013-06-20","Summer SEAMAP Groundfish Survey",,"TX ACCESS FMT","TX/INGEST V1.2"
 1016,"2013","TX",87,"1302","2013-06-03","2013-06-17","Summer SEAMAP Groundfish Survey",,"TX ACCESS FMT","TX/INGEST V1.2"
 1017,"2015","AL",77,"1501","2015-06-29","2015-06-29","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
-1018,"2014","US",04,"0308","2014-06-10","2014-07-17","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
+1018,"2014","US",04,"0308","2014-06-10","2014-07-17","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
 1019,"2015","LA",95,"1501","2015-05-20","2015-05-22","Spring SEAMAP Plankton Survey",,"LA-DMS V1.0(Cruise_1501)","GSMFC-LA import 1.1"
-1020,"2014","US",04,"0310","2014-10-09","2014-11-18","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
+1020,"2014","US",04,"0310","2014-10-09","2014-11-18","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
 1021,"2014","AL",77,"1402","2014-09-08","2014-09-08","Fall SEAMAP Plankton Survey",4,"AL Plankton tables v2.0",
 1022,"2015","MS",17,"1502","2015-05-30","2015-06-02","Summer SEAMAP Groundfish Survey",0,"sdes54-September 2011","SDES IMPORT v3.2 "
 1023,"2015","AL",77,"1503","2015-11-04","2015-11-04","Fall SEAMAP Groundfish Survey",0,"sdes54-September 2011","SDES IMPORT v3.2 "
@@ -910,8 +906,8 @@
 1029,"2015","MS",17,"1501","2015-05-02","2015-05-04","Spring SEAMAP Plankton Survey",0,"sdes54-September 2011","SDES IMPORT v3.2 "
 1030,"2012","TX",40,"122","2012-06-15","2012-07-03","Summer SEAMAP Groundfish Survey",,"TX ACCESS FMT","TX/INGEST V1.3"
 1031,"2006","US",55,"0601","2006-02-17","2006-03-28","Reef Fish Survey",0,,"SDES IMPORT v2.1 "
-1032,"2015","US",04,"0313","2015-06-09","2015-07-16","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
-1033,"2015","US",04,"0315","2015-10-10","2015-11-20","Fall SEAMAP groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
+1032,"2015","US",04,"0313","2015-06-09","2015-07-16","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
+1033,"2015","US",04,"0315","2015-10-10","2015-11-20","Fall SEAMAP groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
 1034,"2015","FL",17,"1505","2015-10-08","2015-10-30","Fall SEAMAP groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
 1035,"2011","US",63,"1101","2011-03-31","2011-05-27","Spring SEAMAP Plankton Survey",0,"sdes53-Feburary 2010","SDES IMPORT v3.2 "
 1036,"2016","FL",17,"1602","2016-06-09","2016-07-01","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
@@ -937,8 +933,8 @@
 1056,"2016","LA",97,"1602","2016-09-15","2016-09-20","Fall SEAMAP Plankton Survey",,"LA-DMS V1.0(Cruise_1602)","GSMFC-LA import 1.1"
 1057,"2016","LA",95,"1601","2016-06-07","2016-06-10","Summer SEAMAP Groundfish Survey",,"LA-DMS V1.0(Cruise_1601)","GSMFC-LA import 1.2"
 1058,"2016","LA",35,"1603","2016-10-25","2016-10-26","Fall SEAMAP Groundfish Survey",,"LA-DMS V1.0(Cruise_1603)","GSMFC-LA import 1.2"
-1059,"2016","US",04,"0318","2016-06-09","2016-07-19","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
-1060,"2016","US",04,"0320","2016-10-09","2016-11-19","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.2 "
+1059,"2016","US",04,"0318","2016-06-09","2016-07-19","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
+1060,"2016","US",04,"0320","2016-10-09","2016-11-19","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
 1061,"2017","MS",17,"1701","2017-05-30","2017-06-01","Summer SEAMAP Groundfish Survey",0,"sdes54-September 2011","SDES IMPORT v3.2 "
 1062,"2015","AL",77,"1502","2015-09-10","2015-09-10","Fall SEAMAP Plankton Survey",4,,"AL Plankton Import 1.0"
 1063,"2016","AL",77,"1602","2016-09-08","2016-09-08","Fall SEAMAP Plankton Survey",4,,"AL Plankton Import 1.0"
@@ -973,3 +969,14 @@
 1095,"2019","LA",35,"1902","2019-10-09","2019-10-10","Fall SEAMAP Groundfish Survey",0,"sdes54-September 2011","SDES IMPORT v3.21 "
 1096,"2019","LA",35,"1901","2019-06-30","2019-07-03","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
 1097,"2019","FL",17,"1904","2019-10-16","2019-10-29","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
+1098,"2019","US",04,"0332","2019-06-09","2019-07-18","Summer SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
+1099,"2019","US",04,"0334","2019-10-11","2019-11-21","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
+1100,"2019","MS",17,"1903","2019-10-03","2019-10-06","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
+1101,"2020","FL",17,"2002","2020-10-14","2020-10-23","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "
+1102,"2006","US",04,"0273","2006-10-15","2006-11-20","Fall SEAMAP Groundfish Survey",1,"sdes43-12/2007","SDES IMPORT v3.21 "
+1103,"2007","US",04,"0276","2007-06-07","2007-08-03","Summer SEAMAP Groundfish Survey",1,"sdes24-09/28/2006","SDES IMPORT v3.21 "
+1104,"2007","US",04,"0278","2007-10-15","2007-11-11","Fall SEAMAP Groundfish Survey",1,"sdes28-08/2007","SDES IMPORT v3.21 "
+1105,"2006","US",63,"0605","2006-10-13","2006-11-19","Fall SEAMAP Groundfish Survey",1,"sdes50 - January 2009","SDES IMPORT v3.21 "
+1106,"2006","US",04,"0271","2006-06-14","2006-07-16","Summer SEAMAP Groundfish Survey",1,,"SDES IMPORT v3.21 "
+1107,"2020","LA",35,"2001","2020-12-06","2020-12-11","Fall SEAMAP Groundfish Survey",0,"sdes54-September 2011","SDES IMPORT v3.21 "
+1108,"2020","MS",17,"2001","2020-10-01","2020-10-05","Fall SEAMAP Groundfish Survey",1,"sdes54-September 2011","SDES IMPORT v3.21 "

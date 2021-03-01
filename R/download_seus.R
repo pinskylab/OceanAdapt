@@ -11,5 +11,5 @@
 #ABUNDANCE = catch
 #EVENT = haul
 
-file.copy(from = "~/Downloads/df511.Coastal Survey.ABUNDANCEBIOMASS.2020-06-17T14.27.30.csv", to = "data_raw/seus_catch.csv", overwrite = T) #file which includes 2019 data
-file.copy(from = "~/Downloads/df511.Coastal Survey.EVENT.2020-06-17T14.12.17.csv", to = "data_raw/seus_haul.csv", overwrite = T) #file which includes 2019 data
+file.copy(from = "~/Downloads/df511.Coastal Survey.ABUNDANCEBIOMASS.2021-03-01T10.52.42.csv", to = "data_raw/seus_catch.csv", overwrite = T) #file which includes 2019 data
+file.copy(from = "~/Downloads/df511.Coastal Survey.EVENT.2021-03-01T10.48.47.csv", to = "data_raw/seus_haul.csv", overwrite = T) #file which includes 2019 data
