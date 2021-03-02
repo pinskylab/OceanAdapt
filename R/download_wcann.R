@@ -8,6 +8,17 @@ save_date <- Sys.Date()
 catch_file_name <- paste("wcann", "catch.csv", sep="_")
 haul_file_name <- paste("wcann", "haul.csv", sep="_")
 
+url_catch <- "https://www.webapps.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003" #updated URL in March 2021
+data_catch <- jsonlite::fromJSON(url_catch)
+
+url_haul <- "https://www.webapps.nwfsc.noaa.gov/data/api/v1/source/trawl.operation_haul_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003" #updated URL in March 2021
+data_haul <- jsonlite::fromJSON(url_haul)
+
+write_csv(data_catch, here::here(wcann_save_loc, catch_file_name))
+write_csv(data_haul, here::here(wcann_save_loc, haul_file_name))
+
+#Old script below
+#-------------------------------------------------------------------------------------
 old_names <- c("Anoplopoma fimbria", "Antimora microlepis", "Apristurus brunneus",
                "Bathyagonus nigripinnis", "Bathyraja kincaidii (formerly B. interrupta)",
                "Careproctus melanurus", "Chauliodus macouni", "Glyptocephalus zachirus",
@@ -152,14 +163,11 @@ old_names <- c("Anoplopoma fimbria", "Antimora microlepis", "Apristurus brunneus
 # wcann_catch <- as.data.table(download_catch_rates(survey="WCGBTS", add_zeros=FALSE, species_set=500))
 # wcann_catch[,TowID:=as.character(TowID)]
 # new_names <- wcann_catch[,unique(Sci)]
-url_catch <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003"
-data_catch <- jsonlite::fromJSON( url_catch )
+url_catch <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003" #old URL
+data_catch <- jsonlite::fromJSON(url_catch)
 
-url_haul <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.operation_haul_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003"
-data_haul <- jsonlite::fromJSON( url_haul )
-
+url_haul <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.operation_haul_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,date_dim$year>=2003" #old URL
+data_haul <- jsonlite::fromJSON(url_haul)
 
 write_csv(data_catch, here::here(wcann_save_loc, catch_file_name))
 write_csv(data_haul, here::here(wcann_save_loc, haul_file_name))
-
-
