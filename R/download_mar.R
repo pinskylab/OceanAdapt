@@ -78,7 +78,8 @@ file_name <- "4VSW_SPP.csv"
 data <- read.csv(unz(temp, "4VSW_2020_GSSPECIES.csv"))
 write_csv(data, here::here(save_loc, file_name))
 unlink(temp) 
-#' 
+#' Old script below
+------------------------------------------------------------  
  #' 
  #' In June 2020, Mike McMahon said that new data is always available at: ftp://ftp.dfo-mpo.gc.ca/MarPED/RVSurvey_20200420.zip
  #' In March 2020, Mike McMahon referred us to his Git profile, from which this script was downloaded.

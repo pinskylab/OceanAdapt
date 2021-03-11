@@ -16,9 +16,13 @@
 
 unzip("~/Downloads/SVDBS_SupportTables.zip", exdir = here::here("data_raw"))
 svdbs <- dir(pattern = "SVDBS", path = "data_raw", full.names = T)
-svdbs <- svdbs[-c(grep("STRATA", svdbs))]
+svdbs <- svdbs[-c(grep("STRATA","SPECIES", svdbs))]
 file.remove(svdbs)
 file.rename(here::here("data_raw", "SVDBS_SVMSTRATA.csv"), here::here("data_raw", "neus_strata.csv"))
+file.rename(here::here("data_raw", "SVDBS_SVSPECIES_LIST.csv"), here::here("data_raw", "neus_spp.csv"))
+
+other <- dir(pattern = "SVDBS", path = "data_raw", full.names = T)
+unlink(other, recursive = TRUE)
 
 unzip("~/Downloads/22560_FSCSTables.zip", exdir = here::here("data_raw"))
 unzip("~/Downloads/22561_FSCSTables.zip", exdir = here::here("data_raw"))
