@@ -3195,6 +3195,11 @@ if(isTRUE(WRITE_MASTER_DAT)){
   save(ai, ebs, gmex, goa, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rda"))
 }
 
+if(isTRUE(WRITE_MASTER_DAT)){
+  save(ai, ebs, gmex, goa, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = gzfile(here("data_clean", "individual-regions.gz")))
+}
+
+
 # Master Data Set ===========================================================
 print("Join into Master Data Set")
 dat <- rbind(ai, ebs, gmex, goa, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, wcann, wctri) %>% 
