@@ -339,16 +339,16 @@ if (HQ_DATA_ONLY == TRUE){
   # percent that will be lost
   print((nrow(ai) - nrow(test2))/nrow(ai))
   # 0% of rows are removed
-  ai <- ai %>% 
+  ai_fltr <- ai %>% 
     filter(stratum %in% test$stratum)
   
   # plot the results after editing
-  p3 <- ai %>% 
+  p3 <- ai_fltr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p4 <- ai%>%
+  p4 <- ai_fltr %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -472,15 +472,15 @@ if (HQ_DATA_ONLY == TRUE){
   # percent that will be lost
   print((nrow(ebs) - nrow(test2))/nrow(ebs))
   # 4.7% of rows are removed
-  ebs <- ebs %>% 
+  ebs_fltr <- ebs %>% 
     filter(stratum %in% test$stratum)
   
-  p3 <- ebs %>% 
+  p3 <- ebs_fltr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year))) +
     geom_jitter()
   
-  p4 <- ebs %>%
+  p4 <- ebs_fltr %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -609,16 +609,16 @@ if (HQ_DATA_ONLY == TRUE){
   # percent that will be lost
   print ((nrow(goa) - nrow(test2))/nrow(goa))
   # 4% of rows are removed
-  goa <- goa %>% 
+  goa_fltr <- goa %>% 
     filter(stratum %in% test$stratum) %>%
     filter(year != 2001)
   
-  p3 <-  goa %>% 
+  p3 <-  goa_fltr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p4 <- goa %>%
+  p4 <- goa_fltr %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -779,15 +779,15 @@ if (HQ_DATA_ONLY == TRUE){
   # percent that will be lost
   print((nrow(wctri) - nrow(test2))/nrow(wctri))
   # 23% of rows are removed
-  wctri <- wctri %>% 
+  wctri_fltr <- wctri %>% 
     filter(stratum %in% test$stratum)
   
-  p3 <- wctri %>% 
+  p3 <- wctri_fltr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p4 <- wctri %>%
+  p4 <- wctri_fltr %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -912,16 +912,16 @@ if (HQ_DATA_ONLY == TRUE){
   # percent that will be lost - 61% !
   (nrow(wcann) - nrow(filter(wcann, stratum %in% wctri$stratum)))/nrow(wcann)
   
-  wcann <- wcann %>% 
-    filter(stratum %in% wctri$stratum)
+  wcann_fltr <- wcann %>% 
+    filter(stratum %in% wcann$stratum)
   
   # see what these data look like - pretty solid
-  p1 <- wcann %>% 
+  p1 <- wcann_fltr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p2 <- wcann %>%
+  p2 <- wcann_fltr %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -1301,16 +1301,16 @@ if (HQ_DATA_ONLY == TRUE){
   
   
   
-  test <- gmex %>%
+  gmex_fltr <- gmex %>%
     filter(stratum %in% test$stratum) %>% 
     filter(year >= 2008) 
   
-  p3 <- test %>% 
+  p3 <- gmex_fltr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p4 <- test %>%
+  p4 <- gmex_fltr%>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -1472,7 +1472,7 @@ if (HQ_DATA_ONLY == TRUE){
     geom_jitter()
   
   # for neus Spring, right away it is apparent that 1972 and earlier be eliminated
-  neus_spring <- neus_spring %>% 
+  neus_spring_fltr <- neus_spring %>% 
     filter(year > 1972)
   
   # it's hard to read the strata labels so I'm finding them here::here
@@ -1483,7 +1483,7 @@ if (HQ_DATA_ONLY == TRUE){
     summarise(count = n()) %>%
     filter(count < 40)
   
-  neus_spring <- neus_spring %>%
+  neus_spring_fltr <- neus_spring %>%
     filter(!stratum %in% test$stratum)
   
   # check by year
@@ -1494,15 +1494,15 @@ if (HQ_DATA_ONLY == TRUE){
     summarise(count = n()) %>%
     filter(count > 67)
   
-  neus_spring <- neus_spring %>%
+  neus_spring_fltr <- neus_spring %>%
     filter(year %in% test$year)
   
-  p3 <- neus_spring %>% 
+  p3 <- neus_spring_fltr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p4 <- neus_spring %>%
+  p4 <- neus_spring_fltr %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -1550,16 +1550,16 @@ if (HQ_DATA_ONLY == TRUE){
   # 60% is too much, by removing bad years we get rid of 9%, which is not so bad.
   # When bad strata are removed after bad years we only lose 37%
   
-  neus_fall <- neus_fall %>%
+  neus_fall_fltr <- neus_fall %>%
     filter(year != 2017, year > 1973) %>% 
     filter(stratum %in% test$stratum) 
   
-  p3 <- neus_fall %>% 
+  p3 <- neus_fall_fltr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p4 <- neus_fall %>%
+  p4 <- neus_fall_fltr %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -1817,15 +1817,15 @@ if (HQ_DATA_ONLY == TRUE){
   print((nrow(seusSPRING) - nrow(test2))/nrow(seusSPRING))
   # 6% are removed
   
-  seusSPRING <- seusSPRING %>%
+  seusSPRING_fltr <- seusSPRING %>%
     filter(stratum %in% test$stratum) 
   
-  p3 <- seusSPRING %>% 
+  p3 <- seusSPRING_fltr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p4 <- seusSPRING %>%
+  p4 <- seusSPRING_fltr %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -1847,13 +1847,14 @@ seusSUMMER <- seus %>%
 
 if (HQ_DATA_ONLY == TRUE){
   # look at the graph and make sure decisions to keep or eliminate data make sense
-  
-  p1 <- seusSUMMER %>% 
+  #no need to filter, but rename dataset for consistency
+  seusSUMMER_fltr <- seusSUMMER
+  p1 <- seusSUMMER_fltr %>% 
     select(stratum, year) %>% 
     ggplot(aes(x = as.factor(stratum), y = as.factor(year))) +
     geom_jitter()
   
-  p2 <- seusSUMMER %>%
+  p2 <- seusSUMMER_fltr %>%
     select(lat, lon) %>% 
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -1875,7 +1876,7 @@ seusFALL <- seus %>%
 
 
 # how many rows will be lost if only stratum trawled ever year are kept?
-
+if (HQ_DATA_ONLY == TRUE){
 test <- seusFALL %>%
   filter(year != 1986, year != 1978, year != 2018,  year != 2019) %>%
   select(stratum, year) %>%
@@ -1899,17 +1900,17 @@ p2 <- seusFALL %>%
   ggplot(aes(x = lon, y = lat)) +
   geom_jitter()
 
-seusFALL <- seusFALL  %>%
+seusFALL_fltr <- seusFALL  %>%
   filter(year != 1986, year != 1978, year != 2018,  year != 2019) %>%
   filter(stratum %in% test$stratum)
 
 # plot the results after editing
-p3 <- seusFALL %>% 
+p3 <- seusFALL_fltr %>% 
   select(stratum, year) %>% 
   ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
   geom_jitter()
 
-p4 <- seusFALL%>%
+p4 <- seusFALL_fltr %>%
   select(lat, lon) %>% 
   ggplot(aes(x = lon, y = lat)) +
   geom_jitter()
@@ -1919,27 +1920,13 @@ if (HQ_PLOTS == TRUE){
   ggsave(plot = temp, filename = here::here("plots", "seusFALL_hq_dat_removed.png"))
   rm(temp)
 }
+}
 #clean up
 rm(test, test2, p1, p2, p3, p4)
 
 rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, problems, change, seus)
 
 # Compile Maritimes ---------------------------------------------------
-
-# HSV_files <- as.list(dir(pattern = "4VSW", path = "data_raw", full.names = T))
-# 
-# HSV <- HSV_files %>% 
-#   map_dfr(~ read_csv(.x, col_types = cols(
-#     .default = col_double(),
-#     SPEC = col_character(),
-#     MISSION = col_character(),
-#     VESEL = col_character(),
-#     SEASON = col_character()
-#   )))
-# 
-# HSV <- HSV %>%
-#   rename(mission = MISSION) 
-
 
 spp_files <- as.list(dir(pattern = "_SPP", path = "data_raw", full.names = T))
 mar_spp <- spp_files %>% 
@@ -2156,16 +2143,16 @@ if (HQ_DATA_ONLY == TRUE){
   print((nrow(mar) - nrow(test))/nrow(mar))
   # 7.6% are removed
   
-  mar <- mar  %>%
+  mar_fltr <- mar  %>%
     filter(year != 2018) %>%
     filter(stratum %in% annual_strata$stratum)
   
-  p3 <- mar %>%
+  p3 <- mar_fltr %>%
     select(stratum, year) %>%
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p4 <- mar %>%
+  p4 <- mar_fltr %>%
     select(lat, lon) %>%
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -2235,8 +2222,9 @@ QCS <- left_join(QCS_catch, QCS_effort, by = c("Trip.identifier", "Set.number","
       # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
       stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
       # adjust for tow area # weight per hectare (10,000 m2)	
-      wtcpue = (Catch.weight..kg.)/(Distance.towed..m.*Trawl.door.spread..m.)
+      wtcpue = (Catch.weight..kg.)#/(Distance.towed..m.*Trawl.door.spread..m.)
     )
+  
   
   # Calculate stratum area where needed (use convex hull approach)
   QCS_strats <- QCS  %>% 
@@ -2346,7 +2334,7 @@ WCV <- WCV %>%
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
     # adjust for tow area # weight per hectare (10,000 m2)	
-    wtcpue = (Catch.weight..kg.)/(Distance.towed..m.*Trawl.door.spread..m.)
+    wtcpue = (Catch.weight..kg.)#/(Distance.towed..m.*Trawl.door.spread..m.)
   )
 
 # Calculate stratum area where needed (use convex hull approach)
@@ -2458,7 +2446,7 @@ WCHG <- WCHG %>%
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
     # adjust for tow area # weight per hectare (10,000 m2)	
-    wtcpue = (Catch.weight..kg.)/(Distance.towed..m.*Trawl.door.spread..m.)
+    wtcpue = (Catch.weight..kg.)#/(Distance.towed..m.*Trawl.door.spread..m.)
   )
 
 # Calculate stratum area where needed (use convex hull approach)
@@ -2566,7 +2554,7 @@ HS <- HS %>%
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
     # adjust for tow area # weight per hectare (10,000 m2)	
-    wtcpue = (Catch.weight..kg.)/(Distance.towed..m.*Trawl.door.spread..m.)
+    wtcpue = (Catch.weight..kg.)#/(Distance.towed..m.*Trawl.door.spread..m.)
   )
 
 # Calculate stratum area where needed (use convex hull approach)
@@ -2674,7 +2662,7 @@ SOG <- SOG %>%
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
     # adjust for tow area # weight per hectare (10,000 m2)	
-    wtcpue = (Catch.weight..kg.)/(Distance.towed..m.*Trawl.door.spread..m.)
+    wtcpue = (Catch.weight..kg.)#/(Distance.towed..m.*Trawl.door.spread..m.)
   )
 
 # Calculate stratum area where needed (use convex hull approach)
@@ -2736,6 +2724,8 @@ CPAC <- rbind(QCS, WCV, WCHG, HS, SOG)
 test <- CPAC %>% 
   filter(stratumarea > 0)
 
+#CPAC$year <- as.integer(CPAC$year)
+
 
 # how many rows will be lost if only stratum trawled ever year are kept?
 test2 <- CPAC %>%
@@ -2768,21 +2758,24 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
+  CPAC_fltr <- CPAC
+  
 # regroup year bins
 # update this when adding a new year!  
-  CPAC$year <- oddtoeven(CPAC$year)
-  CPAC$year[CPAC$year=='2020'] <- '2019'
-  CPAC$year[CPAC$year=='2018'] <- '2017-2018'
-  CPAC$year[CPAC$year=='2016'] <- '2015-2016'
-  CPAC$year[CPAC$year=='2014'] <- '2013-2014'
-  CPAC$year[CPAC$year=='2012'] <- '2011-2012'
-  CPAC$year[CPAC$year=='2010'] <- '2009-2010'
-  CPAC$year[CPAC$year=='2008'] <- '2007-2008'
-  CPAC$year[CPAC$year=='2006'] <- '2005-2006'
-  CPAC$year[CPAC$year=='2004'] <- '2003-2004'
+  #CPAC_fltr$year <- eventoodd(CPAC_fltr$year)
+  CPAC_fltr$year <- oddtoeven(CPAC_fltr$year)-1
+  # CPAC_fltr$year[CPAC_fltr$year=='2020'] <- '2019'
+  # CPAC_fltr$year[CPAC_fltr$year=='2018'] <- '2017-2018'
+  # CPAC_fltr$year[CPAC_fltr$year=='2016'] <- '2015-2016'
+  # CPAC_fltr$year[CPAC_fltr$year=='2014'] <- '2013-2014'
+  # CPAC_fltryear[CPAC_fltr$year=='2012'] <- '2011-2012'
+  # CPAC_fltr$year[CPAC_fltr$year=='2010'] <- '2009-2010'
+  # CPAC_fltr$year[CPAC_fltr$year=='2008'] <- '2007-2008'
+  # CPAC_fltr$year[CPAC_fltr$year=='2006'] <- '2005-2006'
+  # CPAC_fltr$year[CPAC_fltr$year=='2004'] <- '2003-2004'
 
   # find strata sampled every year
-  annual_strata <- CPAC %>%
+  annual_strata <- CPAC_fltr %>%
     select(stratum, year) %>%
     distinct() %>%
     group_by(stratum) %>%
@@ -2798,9 +2791,8 @@ if (HQ_DATA_ONLY == TRUE){
     summarise(count = n())
   
 
-  sum(annual_strata_old$count - annual_strata$count)
   # how many rows will be lost if only stratum trawled ever year are kept?
-  test <- CPAC %>%
+  test <- CPAC_fltr %>%
     #filter(year != 1986, year != 1978, year!= 2018) %>%
     filter(stratum %in% annual_strata$stratum)
   nrow(CPAC) - nrow(test)
@@ -2809,24 +2801,24 @@ if (HQ_DATA_ONLY == TRUE){
   # 3.03% are removed
   
   #how much additional data will be lost if we remove years 2003-2004?
-  test <- CPAC%>%
-    filter(year != '2003-2004',year != '2019' ) %>%
+  test <- CPAC_fltr%>%
+    filter(year != 2003,year != 2019 ) %>%
     filter(stratum %in% annual_strata$stratum)
   nrow(CPAC) - nrow(test)
   # percent that will be lost
   print((nrow(CPAC) - nrow(test))/nrow(CPAC))
-  # 18.26% are removed
+  # 18.3% are removed
   
-  CPAC <- CPAC  %>%
-    filter(year != '2003-2004',year != '2019' ) %>%
+  CPAC_fltr <- CPAC_fltr  %>%
+    filter(year != 2003,year != 2019 )  %>%
     filter(stratum %in% test$stratum)
 
-  p3 <- CPAC %>%
+  p3 <- CPAC_fltr %>%
     select(stratum, year) %>%
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
 
-  p4 <- CPAC %>%
+  p4 <- CPAC_fltr %>%
     select(lat, lon) %>%
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -2977,16 +2969,16 @@ if (HQ_DATA_ONLY == TRUE){
   #   filter(year >= 1985)
   
 #Filter spatially and first year with very low coverage 
-  GSLsouth <- GSLsouth %>%
+  GSLsouth_fltr <- GSLsouth %>%
     filter(year != 1970) %>%
     filter(stratum %in% test$stratum)
   
-  p3 <- GSLsouth %>%
+  p3 <- GSLsouth_fltr %>%
     select(stratum, year) %>%
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p4 <- GSLsouth %>%
+  p4 <- GSLsouth_fltr %>%
     select(lat, lon) %>%
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -3137,16 +3129,16 @@ if (HQ_DATA_ONLY == TRUE){
   # # 5.6% are removed
   # #
   
-  GSLnor <- GSLnor  %>%
+  GSLnor_fltr <- GSLnor  %>%
     filter(year != 1979, year != 1980,year != 1981) %>%
     filter(stratum %in% annual_strata$stratum)
   
-  p3 <- GSLnor %>%
+  p3 <- GSLnor_fltr %>%
     select(stratum, year) %>%
     ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
     geom_jitter()
   
-  p4 <- GSLnor %>%
+  p4 <- GSLnor_fltr %>%
     select(lon, lat) %>%
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
@@ -3192,17 +3184,21 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
 
 
 if(isTRUE(WRITE_MASTER_DAT)){
-  save(ai, ebs, gmex, goa, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rda"))
+  save(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rds"))
 }
 
 if(isTRUE(WRITE_MASTER_DAT)){
-  save(ai, ebs, gmex, goa, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = gzfile(here("data_clean", "individual-regions.gz")))
+  save(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = gzfile(here("data_clean", "individual-regions.rds.gz")))
 }
+if(isTRUE(WRITE_MASTER_DAT)){
+   save(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, tax, wcann_fltr, wctri_fltr, file = gzfile(here("data_clean", "individual-regions-fltr.rds.gz")))
+}
+
 
 
 # Master Data Set ===========================================================
 print("Join into Master Data Set")
-dat <- rbind(ai, ebs, gmex, goa, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, wcann, wctri) %>% 
+dat <- rbind(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, wcann, wctri) %>% 
   # Remove NA values in wtcpue
   filter(!is.na(wtcpue))
 
@@ -3218,7 +3214,7 @@ if(sum(dat$spp == 'NA') > 0 | sum(is.na(dat$spp)) > 0){
 }
 
 if(isTRUE(REMOVE_REGION_DATASETS)) {
-  rm(ai,ebs,gmex,goa,neus,wcann,wctri, neusF, neusS, seus, seusFALL, seusSPRING, seusSUMMER, scot, tax)
+  rm(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, wcann, wctri, tax)
 }
 
 if(isTRUE(WRITE_MASTER_DAT)){
@@ -3236,8 +3232,43 @@ if(isTRUE(WRITE_MASTER_DAT)){
 
 ##FEEL FREE TO ADD, MODIFY, OR DELETE ANYTHING BELOW THIS LINE
 
+dat_fltr <- rbind(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, wcann_fltr, wctri_fltr) %>% 
+  # Remove NA values in wtcpue
+  filter(!is.na(wtcpue))
+
+# add a case sensitive spp and common name
+dat_fltr <- left_join(dat_fltr, tax, by = c("spp" = "taxon")) %>% 
+  select(region, haulid, year, lat, lon, stratum, stratumarea, depth, name, common, wtcpue) %>% 
+  distinct() %>% 
+  rename(spp = name)
+
+# check for errors in name matching
+if(sum(dat_fltr$spp == 'NA') > 0 | sum(is.na(dat_fltr$spp)) > 0){
+  warning('>>create_master_table(): Did not match on some taxon [Variable: `tax`] names.')
+}
+
+if(isTRUE(REMOVE_REGION_DATASETS)) {
+  rm(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, wcann_fltr, wctri_fltr, tax)
+}
+
+if(isTRUE(WRITE_MASTER_DAT)){
+  if(isTRUE(PREFER_RDATA)){
+    saveRDS(dat, file = here::here("data_clean", "all-regions-full-fltr.rds"))
+  }else{
+    write_csv(dat, here::here("data_clean", "all-regions-full-fltr.csv"))
+  }
+}
+
+# At this point, we have a compiled `dat` master table on which we can begin our analysis.
+
+# If you have not cleared the regional datasets {By setting REMOVE_REGION_DATASETS=FALSE at the top}, 
+#you are free to do analysis on those sets individually as well.
+
+##FEEL FREE TO ADD, MODIFY, OR DELETE ANYTHING BELOW THIS LINE
 # Trim species ===========================================================
 print("Trim species")
+
+#FULL DATA
 
 # Find a standard set of species (present at least 3/4 of the years in a region)
 # this result differs from the original code because it does not include any species that have a pres value of 0.  It does, however, include species for which the common name is NA.
@@ -3282,12 +3313,58 @@ test <- anti_join(select(trimmed_dat, spp, common), tax, by = c("spp" = "name"))
 # if test contains more than 0 obs, use the add-spp-to-taxonomy.R script to add new taxa to the spptaxonomy.csv and go back to "Compile Tax".
 rm(test)
 
+## FILTERED DATA
+
+# Find a standard set of species (present at least 3/4 of the years in a region)
+# this result differs from the original code because it does not include any species that have a pres value of 0.  It does, however, include species for which the common name is NA.
+presyr <- present_every_year(dat_fltr, region, spp, common, year) 
+
+# years in which spp was present
+presyrsum <- num_year_present(presyr, region, spp, common)
+
+# max num years of survey in each region
+maxyrs <- max_year_surv(presyrsum, region)
+
+# merge in max years
+presyrsum <- left_join(presyrsum, maxyrs, by = "region")
+
+# retain all spp present at least 3/4 of the available years in a survey
+spplist <- presyrsum %>% 
+  filter(presyr >= (maxyrs * 3/4)) %>% 
+  select(region, spp, common)
+
+# Trim dat to these species (for a given region, spp pair in spplist, in dat, keep only rows that match that region, spp pairing)
+trimmed_dat_fltr <- dat_fltr %>% 
+  filter(paste(region, spp) %in% paste(spplist$region, spplist$spp)) %>% 
+  # some spp have whitespace - this should potentially be moved up to NEUS section
+  mutate(
+    spp = ifelse(grepl("LIMANDA FERRUGINEA", spp), "LIMANDA FERRUGINEA", spp),
+    spp = ifelse(grepl("PSEUDOPLEURONECTES AMERICANUS", spp), "PSEUDOPLEURONECTES AMERICANUS", spp))
+
+rm (maxyrs, presyr, presyrsum, spplist)
+
+if(isTRUE(WRITE_TRIMMED_DAT)){
+  if(isTRUE(PREFER_RDATA)){
+    saveRDS(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed-fltr.rds"))
+  }else{
+    write_csv(trimmed_dat, here::here("data_clean", "all-regions-trimmed-fltr.csv"))
+  }
+}
+
+# are there any spp in trimmed_dat that are not in the taxonomy file?
+test <- anti_join(select(trimmed_dat_fltr, spp, common), tax, by = c("spp" = "name")) %>% 
+  distinct()
+
+# if test contains more than 0 obs, use the add-spp-to-taxonomy.R script to add new taxa to the spptaxonomy.csv and go back to "Compile Tax".
+rm(test)
+
+
 # BY_SPECIES_DATA ===========================================================
 print("By species data")
 # Calculate mean position through time for species 
 ## Calculate mean latitude and depth of each species by year within each survey/region
 ### mean lat/lon/depth for each stratum
-dat_strat <- trimmed_dat %>% 
+dat_strat <- trimmed_dat_fltr %>% 
   select(stratum, region, lat, lon, depth, stratumarea, haulid) %>% 
   distinct(region, stratum, haulid, .keep_all = T) %>% 
   group_by(stratum, region) %>% 
@@ -3298,7 +3375,7 @@ dat_strat <- trimmed_dat %>%
 
 ### mean wtcpue in each stratum/yr/spp (new code includes more lines because it
 ### includes rows that do not have a common name)
-dat_strat_yr <- trimmed_dat %>% 
+dat_strat_yr <- trimmed_dat_fltr %>% 
   group_by(region, spp, common, stratum, year) %>% 
   summarise(wtcpue = meanna(wtcpue))
 
@@ -3387,7 +3464,7 @@ print("by region data")
 #Requires function species_data's dataset [by default: BY_SPECIES_DATA] or this function will not run properly.
 ## Calculate mean position through time for regions 
 ## Find a standard set of species (present every year in a region)
-presyr <- present_every_year(dat, region, spp, year)
+presyr <- present_every_year(dat_fltr, region, spp, year)
 
 # num years in which spp was present
 presyrsum <- num_year_present(presyr, region, spp)
@@ -3488,7 +3565,7 @@ regstouse <- c('Eastern Bering Sea', 'Northeast US Spring', 'Northeast US Fall')
 natstartyear <- 1982 # a common starting year for the focal regions
 
 # find the latest year that all regions have in common
-maxyears <- dat %>% 
+maxyears <- dat_fltr %>% 
   filter(region %in% regstouse) %>% 
   group_by(region) %>% 
   summarise(maxyear = max(year))
@@ -3498,7 +3575,7 @@ natendyear <- min(maxyears$maxyear)
 ## Find a standard set of species (present every year in the focal regions) for the national analysis
 # For national average, start in prescribed year, only use focal regions
 # find which species are present in which years
-presyr <- present_every_year(dat, region, spp, year) %>% 
+presyr <- present_every_year(dat_fltr, region, spp, year) %>% 
   filter(year >= natstartyear & year <= natendyear & 
            region %in% regstouse)  
 
