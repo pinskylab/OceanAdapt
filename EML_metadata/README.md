@@ -62,4 +62,4 @@ contains data that are downloaded from the websites of various government agenci
 - [Gulf States Marine Fisheries online SEAMAP access](https://seamap.gsmfc.org/documents/SEAMAP_Data_Structures.pdf) - This program provides data for the Gulf of Mexico.
 - [Northeast Fisheries Science Center](https://www.nefsc.noaa.gov/rcb/projects/ntap/) - This NOAA center provides data for the Northeast US.
 - [SEAMAP South Atlantic](https://www2.dnr.sc.gov/seamap/Account/LogOn?ReturnUrl=%2fseamap%2fReports) - This program provides data for the Southeast US.
-- [Canadian Department of Fisheries and Oceans](http://www.dfo-mpo.gc.ca/index-eng.htm) - Canada DFO provides data for the Scotian Shelf.
+- [Canadian Department of Fisheries and Oceans](http://www.dfo-mpo.gc.ca/index-eng.htm) - Canada DFO provides data for the Scotian Shelf, Gulf of St. Lawrence, and Canadian Pacific.

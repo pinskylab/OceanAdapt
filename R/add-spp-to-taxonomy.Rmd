@@ -91,7 +91,31 @@ write_csv(testdf, file = here::here("flagspp", "ai_flagspp.csv"))
   temp <- grid.arrange(p1, p2, nrow = 2)
   ggsave(plot = temp, filename = here::here("plots", "ai_tax_check_test.png"))
   
-test
+#Canadian Pacific
+region <- CPAC
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "cpac_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "cpac_tax_check_test.png"))
+  
 
 #Eastern Bering Sea
 region <- ebs
@@ -119,9 +143,12 @@ write_csv(testdf, file = here::here("flagspp", "ebs_flagspp.csv"))
   ggsave(plot = temp, filename = here::here("plots", "ebs_tax_check_test.png"))
 
 #Gulf of Mexico 
-  region <- gmex
+region <- gmex
 test <- flag_spp(region)
 
+testdf <- data.frame(test$spp)
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "gmex_flagspp.csv"))
 
   p1 <- region %>%
     select(spp, year) %>%
@@ -165,8 +192,59 @@ write_csv(testdf, file = here::here("flagspp", "goa_flagspp.csv"))
   temp <- grid.arrange(p1, p2, nrow = 2)
   ggsave(plot = temp, filename = here::here("plots", "goa_tax_check_test.png"))
 
+#Gulf of St. Lawrence - North
+region <- GSLnor
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "GSLnor_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "GSLnor_tax_check_test.png"))
+
+#Gulf of St. Lawrence - South
+region <- GSLsouth
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "GSLsouth_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "GSLsouth_tax_check_test.png"))  
+
+  
 #NEUS Fall
-region <- neusF
+region <- neus_fall
 test <- flag_spp(region)
 
 testdf <- data.frame(test$spp)
@@ -191,7 +269,7 @@ write_csv(testdf, file = here::here("flagspp", "neusF_flagspp.csv"))
   ggsave(plot = temp, filename = here::here("plots", "neusF_tax_check_test.png"))
 
 #NEUS Summer  
-region <- neusS
+region <- neus_spring
 test <- flag_spp(region)
 
 testdf <- data.frame(test$spp)
@@ -216,12 +294,12 @@ write_csv(testdf, file = here::here("flagspp", "neusS_flagspp.csv"))
   ggsave(plot = temp, filename = here::here("plots", "neusS_tax_check_test.png"))
   
 #Scotian Shelf (soon to be replaced by Maritimes)
-region <- scot
+region <- mar
 test <- flag_spp(region)
 
 testdf <- data.frame(test$spp)
 #write csv of flagged spp in region
-write_csv(testdf, file = here::here("flagspp", "scot_flagspp.csv"))
+write_csv(testdf, file = here::here("flagspp", "mar_flagspp.csv"))
 
   p1 <- region %>%
     select(spp, year) %>%
@@ -238,7 +316,7 @@ write_csv(testdf, file = here::here("flagspp", "scot_flagspp.csv"))
   length(test$spp)/length(region$spp)
   #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
   temp <- grid.arrange(p1, p2, nrow = 2)
-  ggsave(plot = temp, filename = here::here("plots", "scot_tax_check_test.png"))
+  ggsave(plot = temp, filename = here::here("plots", "mar_tax_check_test.png"))
 
 #SEUS Fall
 region <- seusFALL
@@ -377,7 +455,7 @@ names(all_data)
 # Combine the imported and cleaned regions and check the values before they are trimmed to the spptaxonomy file
 ```{r}
 load( here("data_clean", "individual-regions.rda"))
-all_regions <- rbind(ai, ebs, gmex, goa, neusF, neusS, scot, seusFALL, seusSPRING, seusSUMMER, wcann, wctri)
+all_regions <- rbind(ai, CPAC, ebs, gmex, goa,GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, wcann, wctri)
 
 names(all_regions)
 
