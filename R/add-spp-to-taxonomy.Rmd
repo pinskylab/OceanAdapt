@@ -19,7 +19,7 @@ library(gridExtra)
 library(here) # to find yourself
 
 # this is an R data of all of the individual regions
-all_data <- load(here("data_clean", "individual-regions.rda"))
+all_data <- load(here("data_clean", "individual-regions.rds"))
 
 # this is the data after it has been joined with the spptaxonomy file but before trimming.
 master_data <- readRDS(here("data_clean", "all-regions-full.rds"))
@@ -112,7 +112,7 @@ write_csv(testdf, file = here::here("flagspp", "cpac_flagspp.csv"))
     geom_point()
   
   length(test$spp)/length(region$spp)
-  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  #CPAC 3.6%
   temp <- grid.arrange(p1, p2, nrow = 2)
   ggsave(plot = temp, filename = here::here("plots", "cpac_tax_check_test.png"))
   
@@ -138,7 +138,7 @@ write_csv(testdf, file = here::here("flagspp", "ebs_flagspp.csv"))
     geom_point()
   
   length(test$spp)/length(region$spp)
-  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  #ebs, 1.74%
   temp <- grid.arrange(p1, p2, nrow = 2)
   ggsave(plot = temp, filename = here::here("plots", "ebs_tax_check_test.png"))
 
@@ -163,7 +163,7 @@ write_csv(testdf, file = here::here("flagspp", "gmex_flagspp.csv"))
     geom_point()
   
   length(test$spp)/length(region$spp)
-  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  #gmex, 1.74%
   temp <- grid.arrange(p1, p2, nrow = 2)
   ggsave(plot = temp, filename = here::here("plots", "gmex_tax_check_test.png"))
 
@@ -188,7 +188,7 @@ write_csv(testdf, file = here::here("flagspp", "goa_flagspp.csv"))
     geom_point()
   
   length(test$spp)/length(region$spp)
-  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  #goa, 1.62%
   temp <- grid.arrange(p1, p2, nrow = 2)
   ggsave(plot = temp, filename = here::here("plots", "goa_tax_check_test.png"))
 
@@ -454,7 +454,7 @@ names(all_data)
 ```
 # Combine the imported and cleaned regions and check the values before they are trimmed to the spptaxonomy file
 ```{r}
-load( here("data_clean", "individual-regions.rda"))
+load( here("data_clean", "individual-regions.rds"))
 all_regions <- rbind(ai, CPAC, ebs, gmex, goa,GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, wcann, wctri)
 
 names(all_regions)
@@ -502,7 +502,7 @@ fb_check <- fishbase %>%
   filter(name %in% not_in_tax$name) %>% 
   clean_names() %>% 
   select(-contains("code"), -species_ref_no) %>% 
-  rename(common = f_bname) 
+  dplyr::rename(common = f_bname) 
   
 
 sb_check <- sealifebase %>% 
@@ -522,9 +522,9 @@ names(tax_raw)
 # have to add the taxon back into fb_check based on the species id I created earlier
 matching <- left_join(not_in_tax, select(fb_check, -genus, -species), by = c("name")) %>% 
   filter(!is.na(family)) %>% 
-  rename(species = spp) %>% 
+  dplyr::rename(species = spp) %>% 
   left_join(all_regions_spp, by = "spp_id") %>% 
-  rename(taxon = spp) %>% 
+  dplyr::rename(taxon = spp) %>% 
   select(-spp_id, -sub_family) %>% 
   mutate(superclass = NA, 
          subphylum = NA, 
@@ -576,9 +576,9 @@ names(tax_added)
 # have to add the taxon back into fb_check based on the species id I created earlier
 matching <- left_join(not_in_tax, gen_check, by = "genus") %>% 
   filter(!is.na(family), is.na(spp)) %>% 
-  rename(species = spp) %>% 
+  dplyr::rename(species = spp) %>% 
   left_join(all_regions_spp, by = "spp_id") %>% 
-  rename(taxon = spp) %>% 
+  dplyr::rename(taxon = spp) %>% 
   select(-spp_id, -sub_family) %>% 
   mutate(superclass = NA, 
          subphylum = NA, 
@@ -593,20 +593,6 @@ tax_added <- rbind(tax_added, matching)
 
 # anything left?
 not_in_tax <- anti_join(all_regions_spp, tax_added, by = c("spp"="taxon"))
-
-```
-```{r}
- p1 <- wcann %>%
-    select(spp, year) %>%
-    ggplot(aes(x = year, y = spp)) +
-    geom_jitter()
-
-  test <- wcann %>% 
-    select(spp, year) %>% 
-    group_by(spp) #%>% 
-    #summarise(count = n())
-  
-  unique(test$year)
 
 ```
 
