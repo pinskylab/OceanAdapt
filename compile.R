@@ -41,7 +41,7 @@ HQ_DATA_ONLY <- TRUE
 
 # 2. View plots of removed strata for HQ_DATA. #OPTIONAL, DEFAULT:FALSE
 # It takes a while to generate these plots.
-HQ_PLOTS <- TRUE
+HQ_PLOTS <- FALSE
 
 # 3. Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`. #DEFAULT: FALSE 
 REMOVE_REGION_DATASETS <- FALSE
@@ -939,40 +939,40 @@ rm(wcann_catch, wcann_haul, wcann_strats)
 
 # Compile GMEX ===========================================================
 print("Compile GMEX")
-#new version trial
-gmex_station <- read_delim(here::here("data_raw", "gmex_STAREC.csv"), delim = ",", skip_empty_rows = F) %>% 
-  select('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')
+# #new version trial
+# gmex_station <- read_delim(here::here("data_raw", "gmex_STAREC.csv"), delim = ",", skip_empty_rows = F) %>% 
+#   select('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')
+# 
+# 
+# #gmex_station <- read.table(here::here("data_raw", "gmex_STAREC.csv"), header = T, sep = ",", quote="") %>% 
+#  # select('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')
+# 
+# 
+# gmex_tow <- read_delim(here::here("data_raw", "gmex_INVREC.csv"), delim = ",") %>%
+#   select('STATIONID', 'CRUISE_NO', 'P_STA_NO', 'INVRECID', 'GEAR_SIZE', 'GEAR_TYPE', 'MESH_SIZE', 'MIN_FISH', 'OP') %>%
+#   filter(GEAR_TYPE=='ST')
+#  
+# gmex_spp <-read_delim(here::here("data_raw","gmex_NEWBIOCODESBIG.csv"), ",") %>% 
+#                    select(-X9, -tsn_accepted)
+# 
+# gmex_cruise <-read_delim(here::here("data_raw", "gmex_CRUISES.csv"), ",", col_types = cols(.default = col_character())) %>% 
+#   select(CRUISEID, VESSEL, TITLE)
+# 
+# gmex_bio <-read_delim(unz(here::here("data_raw", "gmex_BGSREC.csv.zip"), "gmex_BGSREC.csv"), ",",col_types = cols(.default = col_character())) %>% 
+#   select('CRUISEID', 'STATIONID', 'VESSEL', 'CRUISE_NO', 'P_STA_NO', 'GENUS_BGS', 'SPEC_BGS', 'BGSCODE', 'BIO_BGS', 'SELECT_BGS') %>%
+#   # trim out young of year records (only useful for count data) and those with UNKNOWN species
+#   filter(BGSCODE != "T" | is.na(BGSCODE),
+#          GENUS_BGS != "UNKNOWN" | is.na(GENUS_BGS))  %>%
+#   # remove the few rows that are still duplicates
+#   distinct() 
+# 
+#   
+# 
+# problems <- problems(gmex_station) %>% 
+#   filter(!is.na(col))
+# stopifnot(nrow(problems) == 0)
 
-
-gmex_station <- read.table(here::here("data_raw", "gmex_STAREC.csv"), header = T, sep = ",", quote="") %>% 
-  select('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', 'VESSEL_SPD', 'COMSTAT')
-
-
-gmex_tow <- read_delim(here::here("data_raw", "gmex_INVREC.csv"), delim = ",") %>%
-  select('STATIONID', 'CRUISE_NO', 'P_STA_NO', 'INVRECID', 'GEAR_SIZE', 'GEAR_TYPE', 'MESH_SIZE', 'MIN_FISH', 'OP') %>%
-  filter(GEAR_TYPE=='ST')
- 
-gmex_spp <-read_delim(here::here("data_raw","gmex_NEWBIOCODESBIG.csv"), ",") %>% 
-                   select(-X9, -tsn_accepted)
-
-gmex_cruise <-read_delim(here::here("data_raw", "gmex_CRUISES.csv"), ",", col_types = cols(.default = col_character())) %>% 
-  select(CRUISEID, VESSEL, TITLE)
-
-gmex_bio <-read_delim(unz(here::here("data_raw", "gmex_BGSREC.csv.zip"), "gmex_BGSREC.csv"), ",",col_types = cols(.default = col_character())) %>% 
-  select('CRUISEID', 'STATIONID', 'VESSEL', 'CRUISE_NO', 'P_STA_NO', 'GENUS_BGS', 'SPEC_BGS', 'BGSCODE', 'BIO_BGS', 'SELECT_BGS') %>%
-  # trim out young of year records (only useful for count data) and those with UNKNOWN species
-  filter(BGSCODE != "T" | is.na(BGSCODE),
-         GENUS_BGS != "UNKNOWN" | is.na(GENUS_BGS))  %>%
-  # remove the few rows that are still duplicates
-  distinct() 
-
-  
-
-problems <- problems(gmex_station) %>% 
-  filter(!is.na(col))
-stopifnot(nrow(problems) == 0)
-
-#old code
+#old code [preffered, still works]
 gmex_station_raw <- read_lines(here::here("data_raw", "gmex_STAREC.csv"))
 #gmex_station_clean <- str_replace_all(gmex_station_raw, "\\"","")
 gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\"", "")
@@ -2761,9 +2761,13 @@ if (HQ_DATA_ONLY == TRUE){
   CPAC_fltr <- CPAC
   
 # regroup year bins
-# update this when adding a new year!  
-  #CPAC_fltr$year <- eventoodd(CPAC_fltr$year)
+# update this when adding a new year!
+  # The following line will place data into two year bins
+  # bin names (e.g., 2015) refer to the stated year and the one following (e.g., 2015 = 2015-2016)
+  # This maintains year as a numeric variable and facilitates all other analyses
   CPAC_fltr$year <- oddtoeven(CPAC_fltr$year)-1
+  
+# Old code to create character bin names
   # CPAC_fltr$year[CPAC_fltr$year=='2020'] <- '2019'
   # CPAC_fltr$year[CPAC_fltr$year=='2018'] <- '2017-2018'
   # CPAC_fltr$year[CPAC_fltr$year=='2016'] <- '2015-2016'
@@ -3225,12 +3229,14 @@ if(isTRUE(WRITE_MASTER_DAT)){
   }
 }
 
-# At this point, we have a compiled `dat` master table on which we can begin our analysis.
+if(isTRUE(WRITE_MASTER_DAT)){
+  if(isTRUE(PREFER_RDATA)){
+    saveRDS(dat, file = gzfile(here::here("data_clean", "all-regions-full.rds.gz")))
+  }else{
+    write_csv(dat, gzfile(here::here("data_clean", "all-regions-full.csv.gz")))
+  }
+}
 
-# If you have not cleared the regional datasets {By setting REMOVE_REGION_DATASETS=FALSE at the top}, 
-#you are free to do analysis on those sets individually as well.
-
-##FEEL FREE TO ADD, MODIFY, OR DELETE ANYTHING BELOW THIS LINE
 
 dat_fltr <- rbind(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, wcann_fltr, wctri_fltr) %>% 
   # Remove NA values in wtcpue
@@ -3253,9 +3259,17 @@ if(isTRUE(REMOVE_REGION_DATASETS)) {
 
 if(isTRUE(WRITE_MASTER_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    saveRDS(dat, file = here::here("data_clean", "all-regions-full-fltr.rds"))
+    saveRDS(dat_fltr, file = here::here("data_clean", "all-regions-full-fltr.rds"))
   }else{
-    write_csv(dat, here::here("data_clean", "all-regions-full-fltr.csv"))
+    write_csv(dat_fltr, here::here("data_clean", "all-regions-full-fltr.csv"))
+  }
+}
+
+if(isTRUE(WRITE_MASTER_DAT)){
+  if(isTRUE(PREFER_RDATA)){
+    saveRDS(dat_fltr, file = gzfile(here::here("data_clean", "all-regions-full-fltr.rds.gz")))
+  }else{
+    write_csv(dat_fltr, gzfile(here::here("data_clean", "all-regions-full-fltr.csv.gz")))
   }
 }
 
