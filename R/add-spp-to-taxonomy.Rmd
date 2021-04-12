@@ -524,16 +524,6 @@ names(all_regions)
 
 ```
 
-```{r}
-#Reformat string - first letter uppercase
-firstup <- function(x) {
-  x <- tolower(x)
-  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
-  x
-}
-```
-
-
 # examine only the spp column, only unique values, and assign a test id number
 ```{r}
 
@@ -551,34 +541,12 @@ not_in_tax <- anti_join(all_regions_spp, tax, by = c("spp"="taxon")) %>%
   separate(spp, into= c("genus", "spp", "extra", "extra1"), sep = " ") %>%
   mutate(genus = str_to_title(genus)) %>% 
   select(-contains("extra")) 
-         
-# test1 <- anti_join(all_regions_spp, tax, by = c("spp"="taxon")) %>% 
-#   # format the column into genus and spp so that I can check it against fishbase
-#   separate(spp, into= c("genus", "spp", "extra", "extra1"), sep = " ")%>%
-#   mutate(genus = str_to_title(genus),        ,
-#   spp = str_c(spp, extra, sep = " "))
-# 
-
-# not_in_tax <- anti_join(all_regions_spp, tax, by = c("spp"="taxon")) %>%
-#   # format the column into genus and spp so that I can check it against fishbase
-#   separate(spp, into= c("genus", "spp", "extra", "extra1"), sep = " ") %>%
-#   mutate(genus = str_to_title(genus),
-#          spp = str_c(spp, extra, sep = " "),
-#          spp = str_to_lower(spp),
-#          spp = str_trim(spp)) %>%
-#   select(-contains("extra"))
-
 ```
 Check that all whitespace was removed from names
 ```{r, eval = FALSE}
 test <- not_in_tax %>% 
   separate(spp, into = c("spp", "white"), sep = " ") %>% 
-  filter(!is.na(white)) #%>%
- # filter(!white == "") %>%
- # filter(!spp == "") %>%
- # filter(!spp == "sp.")
-  
-  
+  filter(!is.na(white)) 
 
 # should return one row for the spp with 2 names
 ```
@@ -588,10 +556,6 @@ test <- not_in_tax %>%
 not_in_tax <- not_in_tax %>% 
   mutate(name = str_c(genus, spp, sep = " "))
 
-# not_in_tax$name <- paste(not_in_tax$genus, not_in_tax$spp)
-# not_in_tax$name <- gsub(' NA', '', not_in_tax$name)
-
-
 fb_check <- fishbase %>% 
   # join the genus and spp columns into one
   mutate(name = str_c(Genus, Species, sep = " ")) %>% 
@@ -599,12 +563,15 @@ fb_check <- fishbase %>%
   clean_names() %>% 
   select(-contains("code"), -species_ref_no) %>% 
   dplyr::rename(common = f_bname) 
-#150 in fb check  
+#155 in fb check  
 
 sb_check <- sealifebase %>% 
   mutate(name = str_c(Genus, Species, sep = " ")) %>% 
-  filter(name %in% not_in_tax$name)
-# 50 in sb_check
+  filter(name %in% not_in_tax$name) %>% 
+  clean_names() %>% 
+  select(-contains("code"), -species_ref_no) %>% 
+  dplyr::rename(common = f_bname) 
+# 54 in sb_check
 ```
 
 # Add the results of species to the spptaxonomy.csv
@@ -614,7 +581,6 @@ tax_raw <- read_csv(here("data_raw", "spptaxonomy.csv"), col_types = col_spec)
 
 # add columns to fb_check to match tax_raw
 names(tax_raw)
-
 
 # have to add the taxon back into fb_check based on the species id I created earlier
 matching <- left_join(not_in_tax, select(fb_check, -genus, -species), by = c("name")) %>% 
@@ -633,6 +599,26 @@ names(tax_raw)
 
 tax_added <- rbind(tax_raw, matching)
 ```
+
+#add sealifebase names
+```{r}
+names(tax_added)
+names(sb_check)
+
+matching <- left_join(not_in_tax, select(sb_check, -genus, -species), by = c("name")) %>% 
+  filter(!is.na(family)) %>% 
+  dplyr::rename(species = spp) %>% 
+  left_join(all_regions_spp, by = "spp_id") %>% 
+  dplyr::rename(taxon = spp) %>% 
+  select(-spp_id, -sub_family) %>% 
+  mutate(superclass = NA, 
+         subphylum = NA, 
+         phylum = "Chordata", 
+         kingdom = "Animalia")
+
+tax_added <- rbind(tax_added, matching)
+```
+
 # There are still genera only rows that can be matched
 ```{r}
 
@@ -690,40 +676,7 @@ tax_added <- rbind(tax_added, matching)
 
 # anything left?
 not_in_tax <- anti_join(all_regions_spp, tax_added, by = c("spp"="taxon"))
-
-```
-```{r}
-not_in_tax
-```
-
-
-```{r}
-#remove flagged spp
-temp = list.files(here("flagspp"), pattern="*.csv")
-setwd("~/Documents/GitHub/OceanAdapt/flagspp")
-myfiles = lapply(temp, read.delim)
-
-flagspp <- do.call(rbind, myfiles)
-
-#Malin suggested adding a true/false flag to the tax_added csv for flagged species
-
-tax_added$name %in% flagspp$test.spp
-
-#remove flagged spp from tax_added
-test <- tax_added[!tax_added$name %in% flagspp$test.spp,]
-print((nrow(tax_added) - nrow(test))/nrow(tax_added))
-
-#4.9% of rows are removed
-tax_added <- tax_added[!tax_added$name %in% flagspp$test.spp,]
-
-#remove flagged spp from tax_added
-test <- not_in_tax[!not_in_tax$spp %in% flagspp$test.spp,]
-print((nrow(not_in_tax) - nrow(test))/nrow(not_in_tax))
-
-#1.2% of unknown species dropped
-not_in_tax <- not_in_tax[!not_in_tax$spp %in% flagspp$test.spp,]
-print((nrow(not_in_tax) - nrow(test))/nrow(not_in_tax))
-
+#103 taxon names left, most corresponse to families, some unusal designations
 ```
 
 
