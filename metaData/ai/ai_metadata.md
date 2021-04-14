@@ -20,6 +20,7 @@ Aleutian Islands
 - Any values SCIENTIFIC values that contain the word “Atheresthes” are changed to “Atheresthes sp.” because more than one genus/spp combo was used to describe the same organism over time. This also holds true for Lepidopsetta sp., Myoxocephalus sp. excluding scorpius, & Bathyraja sp. excluding panthera.
 - We correct the longitude for the Aleutians by subtracting 360 from any longitude value over 0.
 - We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
+
 **What the raw data includes:**
 The current files of raw data for the Aleutian Islands are ai_strata.csv, ai1983_2000.csv, ai2002_2012.csv, ai2014_2018.csv.
 
