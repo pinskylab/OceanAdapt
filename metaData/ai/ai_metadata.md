@@ -6,10 +6,10 @@ Aleutian Islands
 
 **Related papers:** 
 - [NOAA Technical Memorandum NMFS-AFSC-215 Data Report: 2010 Aleutian Islands bottom trawl survey](https://archive.fisheries.noaa.gov/afsc/Publications/AFSC-TM/NOAA-TM-AFSC-215.pdf)
-- [NOAA Protocols for Groundfish Bottom Trawl Surveys of the Nation’s Fishery Resources March 16, 2003] (https://archive.fisheries.noaa.gov/afsc/RACE/gearsupport/tmspo65.pdf)
+- [NOAA Protocols for Groundfish Bottom Trawl Surveys of the Nation’s Fishery Resources March 16, 2003](https://archive.fisheries.noaa.gov/afsc/RACE/gearsupport/tmspo65.pdf)
 - [Species Codebook 2011](https://pinskylab.github.io/OceanAdapt/metaData/ai_species_codebook_2011.pdf)
-- [Species Identification Confidence in the Gulf of Alaska and Aleutian Islands Surveys (1980-2011)] (https://archive.fisheries.noaa.gov/afsc/Publications/ProcRpt/PR2014-01.pdf)
-- [Groundfish Bottom Trawl Survey Protocols] (https://www.fisheries.noaa.gov/resource/document/noaa-protocols-groundfish-bottom-trawl-surveys)
+- [Species Identification Confidence in the Gulf of Alaska and Aleutian Islands Surveys (1980-2011)](https://archive.fisheries.noaa.gov/afsc/Publications/ProcRpt/PR2014-01.pdf)
+- [Groundfish Bottom Trawl Survey Protocols](https://www.fisheries.noaa.gov/resource/document/noaa-protocols-groundfish-bottom-trawl-surveys)
 
 **How we process the data:**
 - The 2014-2018.csv file has a comment that contains a comma, which affects the parsing of the csv file. We fix this by replacing all occurrences of “Stone et al., 2011” with “Stone et al. 2011”. This causes the columns to parse correctly.
