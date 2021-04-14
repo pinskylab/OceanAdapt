@@ -47,11 +47,11 @@ The current files of raw data for the Aleutian Islands are ai_strata.csv, ai1983
 |NUMCPUE	|Catch number per area the net swept in number/HA.	|numeric	|dimensionless
 |COMMON |	The common name of the marine organism associated with the SCIENTIFIC_NAME	|character|	dimensionless
 |SCIENTIFIC	|The scientific name of the organism associated with the COMMON_NAME.	|character	|dimensionless
-|SID	|Domain: RACE Species Codebook; http://www.afsc.noaa.gov/RACE/groundfish/species_codebook.pdf	|numeric	|dimensionless
+|SID	|Domain: [RACE Species Codebook](http://www.afsc.noaa.gov/RACE/groundfish/species_codebook.pdf)	|numeric	|dimensionless
 |BOT_DEPTH	|Weighted average depth (m) and is calculated by adding GEAR_DEPTH to NET_HEIGHT. Prior to (year), before NET_HEIGHT was regularly measured, this value was obtained using either echosounder or bathythermograph.	|numeric	|meter
 |BOT_TEMP	|Weighted average temperature (in tenths of a degree Celsius) measured at the maximum depth of the headrope of the trawl. Null values indicate temperature not recoreded.	|numeric	|celsius
 |SURF_TEMP	|Weighted average temperature (in tenths of a degree Celsius) measured at the sea surface of the trawl. Null values indicate temperature not recoreded.	|numeric	|celsius
 |CRUISE	|This is a six-digit number identifying the Cruise number. It is of the form: YYYY99 (where YYYY = year of the cruise; 99 = 2-digit number and is sequential; 01 denotes the first cruise that vessel made in this year, 02 is the second, etc.)|	character	|dimensionless
 |HAUL	|This number uniquely identifies a haul within a cruise. It is a sequential number, in chronological order of occurrence.	|numeric	|dimensionless
 
-The Ecological Metadata Language file can be accessed [here](https://github.com/pinskylab/OceanAdapt/blob/master/metaData/ai.xml
+The Ecological Metadata Language file can be accessed [here](https://github.com/pinskylab/OceanAdapt/blob/master/metaData/ai.xml)
