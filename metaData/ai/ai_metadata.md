@@ -28,8 +28,8 @@ The current files of raw data for the Aleutian Islands are ai_strata.csv, ai1983
 | attributeName                  | attributeDefinition   | col_classes             | unit |       
 |--------------------------|----------------|----------------------------|-----------------------------------------------------------|
 |NPFMCArea	|North Pacific Fisheries Management Council (NPFMC) area name |	character	|dimensionless
-|SubareaDesription | NPFMC sub-area name |	character	|dimensionless
-|StratumCode |	a numeric character code asigned to each unique stratum |	character	|dimensionless
+|SubareaDesription | NPFMC subarea name |	character	|dimensionless
+|StratumCode |	a numeric character code asigned to each unique stratum, matches STRATUM column in bio dataset |	character	|dimensionless
 |DepthIntervalm |	The depth interval of the stratum in 100 meter increments |	character	| meter
 |Areakm2 |	The area of the stratum in square kilometers |	numeric | square kilometer
 
@@ -54,4 +54,4 @@ The current files of raw data for the Aleutian Islands are ai_strata.csv, ai1983
 |CRUISE	|This is a six-digit number identifying the Cruise number. It is of the form: YYYY99 (where YYYY = year of the cruise; 99 = 2-digit number and is sequential; 01 denotes the first cruise that vessel made in this year, 02 is the second, etc.)|	character	|dimensionless
 |HAUL	|This number uniquely identifies a haul within a cruise. It is a sequential number, in chronological order of occurrence.	|numeric	|dimensionless
 
-The Ecological Metadata Language file can be accessed [here](https://github.com/pinskylab/OceanAdapt/blob/master/metaData/ai.xml)
+The Ecological Metadata Language file can be accessed [here](https://github.com/pinskylab/OceanAdapt/blob/new_canada_2019/metaData/ai/ai.xml)
