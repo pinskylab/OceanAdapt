@@ -28,7 +28,7 @@ For each subregion:
 - We remove any SCIENTIFIC spp values that contain the word “EGG”, "UNIDENTIFIED", or where the only value in the SCIENTIFIC field is white space.
 - We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
 
-**What the raw data includes:**
+**What the raw data include:**
 
 The current files of raw data for the Canadian Pacific are:
 
