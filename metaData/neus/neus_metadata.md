@@ -27,7 +27,7 @@ Northeast U.S.
 - We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
 - We separate the trawls into Fall and Spring seasons.
 
-**What the raw data includes:**
+**What the raw data include:**
 
 The current files of raw data for the Northeast U.S. are neus_fall_svcat.csv, neus_fall_svsta.csv, neus_spring_svcat.csv, neus_spring_svsta.csv, neus_strata.csv, and neus_svspp.csv.
 
