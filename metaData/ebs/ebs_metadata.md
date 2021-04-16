@@ -17,7 +17,7 @@ Eastern Bering Sea
 - Any values SCIENTIFIC values that contain the word “Atheresthes” are changed to “Atheresthes sp.” because more than one genus/spp combo was used to describe the same organism over time. This also holds true for Lepidopsetta sp., Myoxocephalus sp., Hippoglossoides sp. & Bathyraja sp.
 - We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
 
-**What the raw data includes:**
+**What the raw data include:**
 The current files of raw data for the Eastern Bering Sea are ebs_strata.csv, ebs1982_1984.csv, ebs1985_1989.csv, ebs1990_1994.csv, ebs1995_1999.csv, ebs2000_2004.csv, ebs2005_2008.csv, ebs2009_2012.csv, ebs2013_2016.csv, ebs2017_2019.csv
 
 **ebs_strata.csv is constant through the years with the column definitions:**
