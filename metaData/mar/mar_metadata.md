@@ -17,7 +17,7 @@ NA
 - We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
 - We only keep rows with the season value “SUMMER”
 
-**What the raw data includes:**
+**What the raw data include:**
 
 The current files of raw data for the Maritimes regions are MAR_FALL_MISSIONS.csv, MAR_SPRING_MISSIONS.csv, MAR_SUMMER_MISSIONS.csv, MAR_FALL_INF.csv, MAR_SPRING_INF.csv, MAR_SUMMER_INF.csv, MAR_FALL_CATCH.csv, MAR_SPRING_CATCH.csv, MAR_SUMMER_CATCH.csv
 
