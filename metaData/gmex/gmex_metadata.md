@@ -54,7 +54,7 @@ gmex_station_clean <- str_replace_all(gmex_station_raw, "\\\\\"", "")
 - We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
 
 
-**What the raw data includes:**
+**What the raw data include:**
 The current files of raw data for the Gulf of Mexico are gmex_BGSREC.csv, gmex_CRUISES.csv, gmex_INVREC.csv, gmex_NEWBIOCODESBIG.csv, gmex_STAREC.csv.
 
 **gmex_BGSREC.csv column definitions:**
