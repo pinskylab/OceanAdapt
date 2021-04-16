@@ -15,7 +15,7 @@ Gulf of Alaska
 - Any values SCIENTIFIC values that contain the word “Lepidopsetta” are changed to “Lepidopsetta sp.” because more than one genus/spp combo was used to describe the same organism over time. This also holds true for Myoxocephalus sp. excluding scorpius and Bathyraja sp. excluding panthera.
 - We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
 
-**What the raw data includes:**
+**What the raw data include:**
 The current files of raw data for the Gulf of Alaska are goa_strata.csv, goa1984_1987.csv, goa1990_1999.csv, goa2001_2005.csv, goa2007_2013.csv, goa2015_2019.csv.
 
 **goa_strata.csv is constant through the years with the column definitions:**
