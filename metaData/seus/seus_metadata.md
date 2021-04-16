@@ -24,7 +24,7 @@ Southeast U.S.
 - We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
 - We split the data out into spring, summer, and fall seasons.
 
-**What the raw data includes:**
+**What the raw data include:**
 The current files of raw data for the Aleutian Islands are seus_catch.csv, seus_haul.csv, and seus_strata.csv.
 
 **seus_strata.csv is constant through the years with the column definitions:**
