@@ -16,7 +16,7 @@ Canadian Pacific
 
 **Related papers:** 
 
-NA
+1. [A reproducible data synopsis for over 100 species of British Columbia groundfsh](https://www.dfo-mpo.gc.ca/csas-sccs/Publications/ResDocs-DocRech/2019/2019_041-eng.pdf)
 
 **How we process the data:**
 
