@@ -32,15 +32,15 @@ For each subregion:
 
 The current files of raw data for the Canadian Pacific are:
 
-Queen Charlotte Sound: QCS_biology.csv, QCS_biomass.csv, QCS_catch.csv, QCS_effort.csv.
+  Queen Charlotte Sound: QCS_biology.csv, QCS_biomass.csv, QCS_catch.csv, QCS_effort.csv.
 
-West Coast Vancouver Island: WCV_biology.csv, WCV_biomass.csv, WCV_catch.csv, WCV_effort.csv.
+  West Coast Vancouver Island: WCV_biology.csv, WCV_biomass.csv, WCV_catch.csv, WCV_effort.csv.
 
-Hecate Strait: HS_biology.csv, HS_biomass.csv, HS_catch.csv, HS_effort.csv.
+  Hecate Strait: HS_biology.csv, HS_biomass.csv, HS_catch.csv, HS_effort.csv.
 
-West Coast Haida Gwaii: WCHG_biology.csv, WCHG_biomass.csv, WCHG_catch.csv, WCHG_effort.csv.
+  West Coast Haida Gwaii: WCHG_biology.csv, WCHG_biomass.csv, WCHG_catch.csv, WCHG_effort.csv.
 
-Strait of Georiga: SOG_biology.csv, SOG_biomass.csv, SOG_catch.csv, SOG_effort.csv.
+  Strait of Georiga: SOG_biology.csv, SOG_biomass.csv, SOG_catch.csv, SOG_effort.csv.
 
 **All of these files are trawl data files, data added annually, with the column definitions:**
 
