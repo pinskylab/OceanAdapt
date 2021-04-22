@@ -1,31 +1,34 @@
-unique.test4.spp.,region,exclude,contact_name,date,comment
+test.spp.,region,exclude,contact_name,date,comment
 SCUTELLIDAE,Gulf of Mexico,TRUE,David Hanisko,4/15/21,David provided taxonomic database file. Family name.
-SICYONIA BURKENROADI,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-DISTORSIO CLATHRATA,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-ASTROPECTEN DUPLICATUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-POLYSTIRA ALBIDA,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-OPHIOLEPIS ELEGANS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-TETHYASTER GRANDIS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-ASTROPECTEN CINGULATUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
+SICYONIA BURKENROADI,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+DISTORSIO CLATHRATA,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+ASTROPECTEN DUPLICATUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+POLYSTIRA ALBIDA,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+OPHIOLEPIS ELEGANS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+TETHYASTER GRANDIS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+ASTROPECTEN CINGULATUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
 HALIEUTICHTHYS,Gulf of Mexico,TRUE,David Hanisko,4/15/21,David provided taxonomic database file. Family name.
 PORIFERENCOTH,Gulf of Mexico,TRUE,David Hanisko,4/15/21,David provided taxonomic database file. Non-taxonomic description.
 PORIFERFINBRA,Gulf of Mexico,TRUE,David Hanisko,4/15/21,David provided taxonomic database file. Non-taxonomic description.
 PORIFERBALL,Gulf of Mexico,TRUE,David Hanisko,4/15/21,David provided taxonomic database file. Non-taxonomic description.
-PTEROIS VOLITANS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-PALICUS ALTERNATA,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
+PTEROIS VOLITANS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+PALICUS ALTERNATA,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
 PORIFERVASTUB,Gulf of Mexico,TRUE,David Hanisko,4/15/21,David provided taxonomic database file. Non-taxonomic description.
-OCYURUS CHRYSURUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
+OCYURUS CHRYSURUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
 PORIFERBARREL,Gulf of Mexico,TRUE,David Hanisko,4/15/21,David provided taxonomic database file. Non-taxonomic description.
-SQUILLA RUGOSA,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-MEOMA VENTRICOSA,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-POMACANTHUS ARCUATUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-SYNODUS MACROSTIGMUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-OGCOCEPHALUS CUBIFRONS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-APOGON QUADRISQUAMATUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-CRYPTOTOMUS ROSEUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
+SQUILLA RUGOSA,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+MEOMA VENTRICOSA,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+POMACANTHUS ARCUATUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+SYNODUS MACROSTIGMUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+OGCOCEPHALUS CUBIFRONS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+APOGON QUADRISQUAMATUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+CRYPTOTOMUS ROSEUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
 RHYNCHOCONGER FLAVUS,Gulf of Mexico,TRUE,David Hanisko,4/15/21,David provided taxonomic database file. Synonym in database
 OPHIDION ANTIPHOLUS,Gulf of Mexico,TRUE,David Hanisko,4/15/21,David provided taxonomic database file. Synonym in database
-MITHRAX HISPIDUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-TETHYASTER,Gulf of Mexico,FALSE,David Hanisko,4/15/21,
-ECHENEIS,Gulf of Mexico,TRUE,David Hanisko,4/15/21,
-PTEROIS,Gulf of Mexico,TRUE,David Hanisko,4/15/21,
+MITHRAX HISPIDUS,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+TETHYASTER,Gulf of Mexico,FALSE,David Hanisko,4/15/21,NA
+ECHENEIS,Gulf of Mexico,TRUE,David Hanisko,4/15/21,NA
+PTEROIS,Gulf of Mexico,TRUE,David Hanisko,4/15/21,NA
+,,,,,
+,,,,,
+,,,,,
