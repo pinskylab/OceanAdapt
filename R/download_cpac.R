@@ -2,13 +2,15 @@ library(readr)
 library("jsonlite")
 
 
-#visit the following links to download .csv files survey (1970 to present):
-https://open.canada.ca/data/en/dataset/86af7918-c2ab-4f1a-ba83-94c9cebb0e6c
-https://open.canada.ca/data/en/dataset/557e42ae-06fe-426d-8242-c3107670b1de
-https://open.canada.ca/data/en/dataset/780a1c02-1f9c-4994-bc70-a0e9ef8e3968
-https://open.canada.ca/data/en/dataset/5ee30758-b1d6-49fe-8c4e-5136f4b39ad1
-https://open.canada.ca/data/en/dataset/d880ba18-8790-41a2-bf73-e9247380759b
-#double-click data download and copy/paste the URL into the url_catch line below
+#visit the following links to download .csv files survey (1970 to present).
+# right-click "Access" button next to Dataset, English and select "copy link address"
+# then paste the URL into the download.file() function below.
+# https://open.canada.ca/data/en/dataset/86af7918-c2ab-4f1a-ba83-94c9cebb0e6c #Queen Charlotte Sound
+# https://open.canada.ca/data/en/dataset/557e42ae-06fe-426d-8242-c3107670b1de #West Coast Vancouver Island
+# https://open.canada.ca/data/en/dataset/780a1c02-1f9c-4994-bc70-a0e9ef8e3968 #Hecate Strait
+# https://open.canada.ca/data/en/dataset/5ee30758-b1d6-49fe-8c4e-5136f4b39ad1 #West Coast Haida Gwaii
+# https://open.canada.ca/data/en/dataset/d880ba18-8790-41a2-bf73-e9247380759b #Strait of Georgia
+
 
 #Queen Charlotte Sound
 temp <- tempfile()

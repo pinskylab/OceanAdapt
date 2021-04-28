@@ -7,7 +7,7 @@
 #' and [Spring](https://inport.nmfs.noaa.gov/inport/item/22561). 
 #' Currently ftp through R is not working, so first visit the website and download
 #' files at each link under "Distribution 1" and "Distribution 2" 
-#' Then use the first chunk of code to unzip the files into "ownloads "data_raw"
+#' Then use the first chunk of code to unzip the files into "data_raw"
 #' Then use the second chunk to move the files out of their subdirectory and rename
 #' 
 #' 
