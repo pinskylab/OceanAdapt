@@ -1,10 +1,7 @@
 OceanAdapt Metadata
 ================
 
--   [[data\_clean](https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean)](#data_clean)
--   [data\_raw folder](#data_raw-folder)
-
-[data\_clean](https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean)
+data\_clean
 --------------------------------------------------------------------------------
 
 The data we report on OceanAdapt are curated from several data sources. Our curated data can be found here:
@@ -53,7 +50,7 @@ The data we report on OceanAdapt are curated from several data sources. Our cura
     -   common - character - the common name of the organism captured in the trawl.
 -   [dat\_exploded.RData](https://github.com/mpinsky/OceanAdapt/tree/update_2019/data_clean/by_species.RData) a table where all species found in a region occupy a row in the table in all years and represented with zeros when not observed. The table is made up of the same columns as all-data-full and all-data-trimmed.
 
-data\_raw folder
+data\_raw
 ----------------
 
 contains data that are downloaded from the websites of various government agencies. Raw data is regionally sourced and those sources are the best place to find the most current information about the raw data:
@@ -90,7 +87,7 @@ add_spp_to_taxonomy.Rmd plots:
    - all (region)\_tax_check_test.png
 
 
-spp\_QAQC folder
+spp\_QAQC
 ----------------
 Within this directory are two folders, /flagged and /exclude\_spp
 
