@@ -1,6 +1,39 @@
 OceanAdapt Metadata
 ================
 
+metadata
+------------------------
+Within the metadata directory are:
+
+1. Subdirectories for each region on OceanAdapt. 
+    - Each regional subdirectory contains a region-specific metadata file, (region)\_metadata.md.
+    - These files contain information about: 1. the data source, 2. related papers, 3. our methods for processing the data, and 4. the original data columns, formats, and definitions.
+
+2. How_to_update.md
+    - a markdown file describing the process of updating or replicating OceanAdapt from data acquisition to analysis and presentation
+
+3. Regional_Contacts.md
+    - a markdown file containing contact names and emails for each regional dataset
+
+4. /taxonomy
+    - contains the taxonomy_metadata.txt file for records of manual changes to the spptaxonomy.csv file
+
+5. /site_libs
+    - contains libraries housing all source code and packages for the OceanAdapt website. 
+
+6. /00-scripts
+    - scripts used to generate antiquated metadata files
+
+7. /sample_data
+    - contains .csv files of sample output data from the compile.R script
+
+8. /oceanadapt_docs
+    - contains miscellaneous documentation with information about OceanAdapt metadata
+
+
+
+
+
 data\_clean
 --------------------------------------------------------------------------------
 
