@@ -3,7 +3,7 @@ OceanAdapt
 
 <img src="https://user-images.githubusercontent.com/29224545/58205284-33653280-7cac-11e9-94d8-96ffe420ef0d.jpg" width="100%" title="https://www.steveparish-natureconnect.com.au/nature-centre/warm-temperate-and-tropical-oceans/">
 
-# [Metadata](https://pinskylab.github.io/OceanAdapt/metadata/)
+# [Metadata](https://github.com/pinskylab/OceanAdapt/tree/master/metadata)
 
 # News
 
