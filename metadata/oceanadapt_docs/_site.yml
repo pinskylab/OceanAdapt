@@ -1,5 +1,0 @@
-name: "OceanAdapt Metadata"
-output_dir: "."
-output:
-  html_document:
-    theme: journal
