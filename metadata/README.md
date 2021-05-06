@@ -96,7 +96,9 @@ contains data that are downloaded from the websites of various government agenci
 
 R
 ----------------
-within this directory are all R scripts used for data acquisition and processing, except compile.R
+- Within this directory are all R scripts used for data acquisition and processing, except compile.R (main directory)
+- Additionally, the create_data_for_map_generation.R is used by the web-development team to parse dat_exploded.csv into region-specific .csvs
+
 
 Python
 ----------------
