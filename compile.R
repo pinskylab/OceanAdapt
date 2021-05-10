@@ -60,7 +60,7 @@ WRITE_MASTER_DAT <- TRUE
 # 7. Output the clean trimmed data frame. #DEFAULT:FALSE
 WRITE_TRIMMED_DAT <- TRUE
 
-# 8. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
+# 7. Generate dat.exploded table. #OPTIONAL, DEFAULT:TRUE
 DAT_EXPLODED <- TRUE
 
 # 9. Output the dat.exploded table #DEFAULT:FALSE
@@ -928,7 +928,7 @@ if (HQ_DATA_ONLY == TRUE){
   
   if (HQ_PLOTS == TRUE){
     temp <- grid.arrange(p1, p2, nrow = 2)
-    ggsave(plot = temp, filename = here::here("plots", "wcann_hq_dat_removed.pdf"))
+    ggsave(plot = temp, filename = here::here("plots", "wcann_hq_dat_removed.png"))
     rm(temp)
   }
   rm(p1, p2)
@@ -1308,11 +1308,13 @@ neus_fall <- left_join(neus_fall, neus_strata, by = "stratum")
 neus_fall <- filter(neus_fall, !is.na(stratum_area))
 neus_fall <- neus_fall %>%
   rename(stratumarea = stratum_area) %>%
-  mutate(stratumarea = as.double(stratumarea))
+  mutate(stratumarea = as.double(stratumarea)* 3.429904) #convert square nautical miles to square kilometers
 neus_fall$region <- "Northeast US Fall"
 
 neus_fall<- neus_fall %>%
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
+
+
 
 # are there any strata in the data that are not in the strata file?
 stopifnot(nrow(filter(neus_fall, is.na(stratumarea))) == 0)
@@ -1370,10 +1372,10 @@ neus_spring <- filter(neus_spring, !is.na(stratum_area))
 stopifnot(nrow(filter(neus_spring, is.na(stratum_area))) == 0)
 neus_spring <- neus_spring %>%
   rename(stratumarea = stratum_area) %>%
-  mutate(stratumarea = as.double(stratumarea))
+  mutate(stratumarea = as.double(stratumarea)* 3.429904)#convert square nautical miles to square kilometers
 
 neus_spring$region <- "Northeast US Spring"
-neus_spring<- neus_spring %>%
+neus_spring <- neus_spring %>%
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue)
 
 # are there any strata in the data that are not in the strata file?
@@ -1501,7 +1503,8 @@ print("Compile SEUS")
 seus_catch <- read_csv(unz(here::here("data_raw", "seus_catch.csv.zip"), "seus_catch.csv"), col_types = cols(.default = col_character())) %>% 
   # remove symbols
   mutate_all(list(~str_replace(., "=", ""))) %>% 
-  mutate_all(list(~str_replace(., '"', ''))) 
+  mutate_all(list(~str_replace(., '"', ''))) %>% 
+  mutate_all(list(~str_replace(., '\"', ''))) 
 
 # The 9 parsing failures are due to the metadata at the end of the file that does not fit into the data columns
 
@@ -1575,6 +1578,7 @@ seus_haul <- type_convert(seus_haul, col_types = cols(
   DEPTHSTART = col_integer()
 ))
 
+seus <- left_join(seus_catch, seus_haul, by = "EVENTNAME")
 
 # contains strata areas
 seus_strata <- read_csv(here::here("data_raw", "seus_strata.csv"), col_types = cols(
@@ -1582,7 +1586,6 @@ seus_strata <- read_csv(here::here("data_raw", "seus_strata.csv"), col_types = c
   STRATAHECTARE = col_double()
 ))
 
-seus <- left_join(seus_catch, seus_haul, by = "EVENTNAME")  
 
 #Create STRATA column
 seus <- seus %>% 
@@ -1702,6 +1705,9 @@ seus <- seus %>%
   mutate(region = "Southeast US") %>% 
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue, SEASON) %>% 
   ungroup()
+
+#remove infinite wtcpue values (where effort was 0, causes wtcpue to be inf)
+seus <- seus[!is.infinite(seus$wtcpue),]
 
 # now that lines have been removed from the main data set, can split out seasons
 # SEUS spring ====
@@ -2129,7 +2135,7 @@ QCS <- left_join(QCS_catch, QCS_effort, by = c("Trip.identifier", "Set.number","
   QCS <- QCS %>% 
     # Create a unique haulid
     mutate(
-      haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0)), 
+      haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0), sep= "-"), 
       # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
       stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
       # catch weight (kg.) per tow	
@@ -2241,7 +2247,7 @@ WCV <- left_join(WCV_catch, WCV_effort, by = c("Trip.identifier", "Set.number","
 WCV <- WCV %>% 
   # Create a unique haulid
   mutate(
-    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0)), 
+    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0), sep= "-"), 
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
     # catch weight (kg.) per tow	
@@ -2353,7 +2359,7 @@ WCHG <- left_join(WCHG_catch, WCHG_effort, by = c("Trip.identifier", "Set.number
 WCHG <- WCHG %>% 
   # Create a unique haulid
   mutate(
-    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0)), 
+    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0), sep= "-"), 
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
     # catch weight (kg.) per tow	
@@ -2461,7 +2467,7 @@ HS <- left_join(HS_catch, HS_effort, by = c("Trip.identifier", "Set.number","Sur
 HS <- HS %>% 
   # Create a unique haulid
   mutate(
-    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0)), 
+    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0), sep= "-"), 
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
     # catch weight (kg.) per tow	
@@ -2569,7 +2575,7 @@ SOG <- left_join(SOG_catch, SOG_effort, by = c("Trip.identifier", "Set.number","
 SOG <- SOG %>% 
   # Create a unique haulid
   mutate(
-    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0)), 
+    haulid = paste(formatC(Trip.identifier, width=3, flag=0), formatC(Set.number, width=3, flag=0), sep= "-"), 
     # Add "strata" (define by lat, lon and depth bands) where needed # degree bins # 100 m bins # no need to use lon grids on west coast (so narrow)
     stratum = paste(floor(Start.latitude), floor(Start.longitude),floor(Bottom.depth..m./100)*100, sep= "-"), 
     # catch weight (kg.) per tow	
@@ -2757,7 +2763,7 @@ print("Compile GSL South")
 
 GSLsouth <- read_csv(here::here("data_raw", "GSLsouth.csv"))
 
-GSLsouth$haulid <- paste(GSLsouth$month,GSLsouth$day,GSLsouth$start.hour,GSLsouth$start.minute, sep="-")
+GSLsouth$haulid <- paste(GSLsouth$year,GSLsouth$month,GSLsouth$day,GSLsouth$start.hour,GSLsouth$start.minute, sep="-")
 
 GSLsouth <- GSLsouth %>% 
   # Create a unique haulid
@@ -2944,11 +2950,10 @@ GSLnor$Date <-as.Date(GSLnor$Date_Deb_Trait)
 GSLnor$year <- year(GSLnor$Date)
 
 
-GSLnor$haulid <- paste(GSLnor$No_Releve,GSLnor$Trait,GSLnor$Date_Deb_Trait,GSLnor$Hre_Deb, sep="-")
+#GSLnor$haulid <- paste(GSLnor$No_Releve,GSLnor$Trait,GSLnor$Date_Deb_Trait,GSLnor$Hre_Deb, sep="-")
 
 GSLnor <- GSLnor[!is.na(GSLnor$lat),]
 GSLnor <- GSLnor[!is.na(GSLnor$depth),]
-GSLnor$depth_adj <- plyr::round_any(GSLnor$depth, 100)  
 
 GSLnor <- GSLnor %>%
   # Create a unique haulid
@@ -3215,20 +3220,28 @@ spplist <- presyrsum %>%
 #any flagged species in spplist?
 
 #remove flagged spp
-temp = list.files(here("~/OceanAdapt/OceanAdapt/flagspp/"), pattern="*.csv")
-myfiles = lapply(here("flagspp",temp), read.csv)
+temp = list.files(here("~/OceanAdapt/OceanAdapt/spp_QAQC/exclude_spp/"), pattern="*.csv")
+myfiles = lapply(here("spp_QAQC/exclude_spp",temp), read.csv)
 myfiles[[6]] <- NULL #removes empty item for GSLnor (no flagged spp)
 myfiles[[6]] <- NULL #removes empty item for GSLsouth (no flagged spp)
+myfiles[[13]] <- NULL #removes ineffective check for wctri
 names(myfiles[[4]]) <- names(myfiles[[1]]) #adjusts column names of Gulf of Mexico (after removing spp. in add-spp-to-taxonomy.Rmd)
-flagspp <- do.call(rbind, myfiles)
-names(flagspp)[1] <- "spp"
+excludespp <- do.call(rbind, myfiles)
+names(excludespp)[1] <- "spp"
 #Malin suggested adding a true/false flag to the tax_added csv for flagged species
-test <- merge(spplist, flagspp)
-test$test <- !is.na(test$a)
-stopifnot(nrow(test)==0)
+test <- merge(spplist, excludespp)
+length(test$exclude[test$exclude == TRUE])
+#8 flagged species in the list, 7 listed as exclude (all in Gulf of Alaska) 
+test <- filter(test, exclude == TRUE)
 
+spplist$exclude <- match(paste(spplist$region,spplist$spp), paste(test$region,test$spp))
+#test = the number of flagged spp
+test <- max(na.rm(spplist$exclude))
+#overwrite count with TRUE/FALSE
+spplist$exclude <- !is.na(spplist$exclude)
+#exclude 7 "TRUE" species in list
+spplist <- filter(spplist, exclude == FALSE)
 
-#no flagged spp in list
 
 # Trim dat to these species (for a given region, spp pair in spplist, in dat, keep only rows that match that region, spp pairing)
 trimmed_dat <- dat %>% 
@@ -3238,7 +3251,7 @@ trimmed_dat <- dat %>%
     spp = ifelse(grepl("LIMANDA FERRUGINEA", spp), "LIMANDA FERRUGINEA", spp),
     spp = ifelse(grepl("PSEUDOPLEURONECTES AMERICANUS", spp), "PSEUDOPLEURONECTES AMERICANUS", spp))
 
-rm (maxyrs, presyr, presyrsum, spplist)
+rm (maxyrs, presyr, presyrsum)
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
@@ -3248,32 +3261,15 @@ if(isTRUE(WRITE_TRIMMED_DAT)){
   }
 }
 
+
 # are there any spp in trimmed_dat that are not in the taxonomy file?
-test <- anti_join(select(trimmed_dat, spp, common), tax, by = c("spp" = "name")) %>% 
+test <- anti_join(select(trimmed_dat, spp, common), spplist, by = "spp") %>% 
   distinct()
 
 # if test contains more than 0 obs, use the add-spp-to-taxonomy.R script to add new taxa to the spptaxonomy.csv and go back to "Compile Tax".
 rm(test)
 
 ## FILTERED DATA
-
-# Find a standard set of species (present at least 3/4 of the years in a region)
-# this result differs from the original code because it does not include any species that have a pres value of 0.  It does, however, include species for which the common name is NA.
-presyr <- present_every_year(dat_fltr, region, spp, common, year) 
-
-# years in which spp was present
-presyrsum <- num_year_present(presyr, region, spp, common)
-
-# max num years of survey in each region
-maxyrs <- max_year_surv(presyrsum, region)
-
-# merge in max years
-presyrsum <- left_join(presyrsum, maxyrs, by = "region")
-
-# retain all spp present at least 3/4 of the available years in a survey
-spplist <- presyrsum %>% 
-  filter(presyr >= (maxyrs * 3/4)) %>% 
-  select(region, spp, common)
 
 # Trim dat to these species (for a given region, spp pair in spplist, in dat, keep only rows that match that region, spp pairing)
 trimmed_dat_fltr <- dat_fltr %>% 
@@ -3283,7 +3279,7 @@ trimmed_dat_fltr <- dat_fltr %>%
     spp = ifelse(grepl("LIMANDA FERRUGINEA", spp), "LIMANDA FERRUGINEA", spp),
     spp = ifelse(grepl("PSEUDOPLEURONECTES AMERICANUS", spp), "PSEUDOPLEURONECTES AMERICANUS", spp))
 
-rm (maxyrs, presyr, presyrsum, spplist)
+rm(spplist)
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
@@ -3294,7 +3290,7 @@ if(isTRUE(WRITE_TRIMMED_DAT)){
 }
 
 # are there any spp in trimmed_dat that are not in the taxonomy file?
-test <- anti_join(select(trimmed_dat_fltr, spp, common), tax, by = c("spp" = "name")) %>% 
+test <- anti_join(select(trimmed_dat_fltr, spp, common), spplist, by = "spp") %>% 
   distinct()
 
 # if test contains more than 0 obs, use the add-spp-to-taxonomy.R script to add new taxa to the spptaxonomy.csv and go back to "Compile Tax".
@@ -3605,7 +3601,7 @@ if(isTRUE(PLOT_CHARTS)) {
   
   # for latitude
   print("Starting latitude plots for species")
-  pdf(file = here("plots", "sppcentlatstrat.pdf"), width=10, height=8)
+  pdf(file = here("plots", "sppcentlatstrat.png"), width=10, height=8)
   
   regs = sort(unique(centbio$region))
   for(i in 1:length(regs)){
@@ -3638,7 +3634,7 @@ if(isTRUE(PLOT_CHARTS)) {
   
   # for depth
   print("Starting depth plots for species")
-  pdf(file = here("plots", "sppcentdepthstrat.pdf"), width=10, height=8)
+  pdf(file = here("plots", "sppcentdepthstrat.png"), width=10, height=8)
   
   regs = sort(unique(centbio$region))
   for(i in 1:length(regs)){
@@ -3778,5 +3774,3 @@ if(isTRUE(PLOT_CHARTS)) {
   ggsave(nat_depth_plot, filename =  here::here("plots", "national-depth.png"), width = 6, height = 3.5)
   
 }
-
-
