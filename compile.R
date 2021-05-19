@@ -15,12 +15,12 @@
  library(tidyverse)
  library(lubridate)
  library(PBSmapping) 
- library(data.table) 
  library(gridExtra) 
  library(questionr) 
  library(geosphere)
  library(here)
  library(dplyr)
+ library(data.table) 
 
 # If running from R instead of RStudio, please set the working directory to the folder containing this script before running this script.
 # This script is designed to run within the following directory structure:
@@ -209,6 +209,7 @@ oddtoeven <- function(x) {
 eventoodd <- function(x) {
   ifelse(x %% 2 == x+1,1,x)
 }
+
 
 # Compile AI =====================================================
 print("Compile AI")
@@ -1244,8 +1245,52 @@ if (HQ_DATA_ONLY == TRUE){
 }
 rm(gmex_bio, gmex_cruise, gmex_spp, gmex_station, gmex_tow, newspp, problems, gmex_station_raw, gmex_station_clean, gmex_strats, dups)
 
-# Compile NEUS ===========================================================
+# Compile Northeast US ===========================================================
 print("Compile NEUS")
+
+#load conversion factors
+NEFSC_conv <- read_csv(here::here("data_raw", "NEFSC_conversion_factors.csv"), col_types = "_ddddddd")
+NEFSC_conv <- data.table::as.data.table(NEFSC_conv)
+#Bigelow >2008 Vessel Conversion
+#Use Bigelow conversions for Pisces as well (PC)
+#Tables 56-58 from Miller et al. 2010 Biomass estimators
+big_fall <- data.table::data.table(svspp = c('012', '022', '024', '027', '028', 
+                                            '031', '033', '034', '073', '076', 
+                                            '106', '107', '109', '121', '135', 
+                                            '136', '141', '143', '145', '149', 
+                                            '155', '164', '171', '181', '193', 
+                                            '197', '502', '512', '015', '023', '026', 
+                                            '032', '072', '074', '077', '078', 
+                                            '102', '103', '104', '105', '108', 
+                                            '131', '163', '301', '313', '401', 
+                                            '503'),
+                                  season = c(rep('fall', 47)),
+                                  rhoW = c(1.082, 3.661, 6.189, 4.45, 3.626, 1.403, 1.1, 2.12,
+                                           1.58, 2.088, 2.086, 3.257, 12.199, 0.868, 0.665, 1.125,
+                                           2.827, 1.347, 1.994, 1.535, 1.191, 1.354, 3.259, 0.22,
+                                           3.912, 8.062, 1.409, 2.075, 1.21,
+                                           2.174, 8.814, 1.95, 4.349, 1.489, 3, 2.405, 1.692,
+                                           2.141, 2.151, 2.402, 1.901, 1.808, 2.771, 1.375, 2.479,
+                                           3.151, 1.186))
+
+big_spring <- data.table::data.table(svspp = c('012', '022', '024', '027', '028', 
+                                            '031', '033', '034', '073', '076', 
+                                            '106', '107', '109', '121', '135', 
+                                            '136', '141', '143', '145', '149', 
+                                            '155', '164', '171', '181', '193', 
+                                            '197', '502', '512', '015', '023', 
+                                            '026', '032', '072', '074', '077', 
+                                            '078', '102', '103', '104', '105', 
+                                            '108', '131', '163', '301', '313', 
+                                            '401', '503'),
+                                  season = c(rep('spring', 47)),
+                                  rhoW = c(1.082, 3.661, 6.189, 4.45, 3.626, 1.403, 1.1, 2.12,
+                                           1.58, 2.088, 2.086, 3.257, 12.199, 0.868, 0.665, 1.125,
+                                           2.827, 1.347, 1.994, 1.535, 1.191, 1.354, 3.259, 0.22,
+                                           3.912, 8.062, 1.409, 2.075, 1.166, 3.718, 2.786, 5.394,
+                                           4.591, 0.878, 3.712, 3.483, 2.092, 3.066, 3.05, 2.244,
+                                           3.069, 2.356, 2.986, 1.272, 3.864, 1.85, 2.861))
+
 
 #read strata file
 neus_strata <- read_csv(here::here("data_raw", "neus_strata.csv"), col_types = cols(.default = col_character())) %>%
@@ -1276,7 +1321,7 @@ neus_fall_catch <- read_csv(neus_catch_clean, col_types = cols(.default = col_ch
   select('CRUISE6','STRATUM','TOW','STATION','ID','LOGGED_SPECIES_NAME','SVSPP','CATCHSEX','EXPCATCHNUM','EXPCATCHWT')
 
 neus_fall_haul <- read_csv(here::here("data_raw", "neus_fall_svsta.csv"), col_types = cols(.default = col_character())) %>% 
-  select("CRUISE6","STRATUM", "ID", "AREA","EST_YEAR","AVGDEPTH", "DECDEG_BEGLAT","DECDEG_BEGLON")
+  select("CRUISE6","STRATUM", "ID", "AREA","EST_YEAR","AVGDEPTH", "DECDEG_BEGLAT","DECDEG_BEGLON", "SVVESSEL")
 drops <- c("CRUISE6","STRATUM")
 neus_fall <- left_join(neus_fall_catch, neus_fall_haul[ , !(names(neus_fall_haul) %in% drops)], by = "ID")
 neus_fall <- left_join(neus_fall, neus_spp, by = "SVSPP")
@@ -1295,13 +1340,51 @@ neus_fall <- neus_fall %>%
          lat = as.double(lat),
          lon = as.double(lon),
          depth = as.double(depth),
-         wtcpue = as.double(wtcpue))
+         wtcpue = as.double(wtcpue),
+         year = as.double(year),
+         SVSPP = as.double(SVSPP))
 
+
+#apply fall conversion factors
+setDT(neus_fall)
+
+dcf.spp <- NEFSC_conv[DCF_WT > 0, SVSPP]
+
+#before
+before <- neus_fall[year < 1985 & SVSPP %in% dcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+
+for(i in 1:length(dcf.spp)){
+  neus_fall[year < 1985 & SVSPP == dcf.spp[i], wtcpue := wtcpue * NEFSC_conv[SVSPP == dcf.spp[i], DCF_WT]]
+}
+
+#after
+after <- neus_fall[year < 1985 & SVSPP %in% dcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+
+before <- neus_fall[SVVESSEL == 'DE' & SVSPP %in% vcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+
+vcf.spp <- NEFSC_conv[VCF_WT > 0, SVSPP]
+for(i in 1:length(dcf.spp)){
+  neus_fall[SVVESSEL == 'DE' & SVSPP == vcf.spp[i], wtcpue := wtcpue* NEFSC_conv[SVSPP == vcf.spp[i], VCF_WT]]
+}
+
+after<- neus_fall[SVVESSEL == 'DE' & SVSPP %in% vcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+
+spp_fall <- big_fall[season == 'fall', svspp]
+
+before <- neus_fall[SVVESSEL %in% c('HB', 'PC') & SVSPP %in% spp_fall, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+for(i in 1:length(big_fall$svspp)){
+  neus_fall[SVVESSEL %in% c('HB', 'PC') & SVSPP == spp_fall[i], wtcpue := wtcpue / big_fall[i, rhoW]]
+}  
+
+after <- neus_fall[SVVESSEL %in% c('HB', 'PC')  & SVSPP %in% spp_fall, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+
+neus_fall <- as.data.frame(neus_fall)
+  
 # sum different sexes of same spp together
 neus_fall <- neus_fall %>% 
   group_by(year, lat, lon, depth, haulid, CRUISE6, STATION, stratum, spp) %>% 
-  summarise(wtcpue = sum(wtcpue)) %>%
-  ungroup()
+  summarise(wtcpue = sum(wtcpue))
+neus_fall <- ungroup(neus_fall)
 
 #join with strata
 neus_fall <- left_join(neus_fall, neus_strata, by = "stratum")
@@ -1335,10 +1418,11 @@ neus_spring_catch <- read_csv(neus_catch_clean, col_types = cols(.default = col_
 rm(neus_catch_clean, neus_catch_raw)
 
 neus_spring_haul <- read_csv(here::here("data_raw", "neus_spring_svsta.csv"), col_types = cols(.default = col_character())) %>% 
-  select("CRUISE6","STRATUM", "ID", "AREA","EST_YEAR","AVGDEPTH", "DECDEG_BEGLAT","DECDEG_BEGLON")
+  select("CRUISE6","STRATUM", "ID", "AREA","EST_YEAR","AVGDEPTH", "DECDEG_BEGLAT","DECDEG_BEGLON", "SVVESSEL")
 drops <- c("CRUISE6","STRATUM")
 neus_spring <- left_join(neus_spring_catch, neus_spring_haul[ , !(names(neus_spring_haul) %in% drops)], by = "ID")
 neus_spring <- left_join(neus_spring, neus_spp, by = "SVSPP")
+
 
 rm(neus_spring_catch, neus_spring_haul)
 neus_spring <- neus_spring %>%
@@ -1357,12 +1441,44 @@ neus_spring <- neus_spring %>%
          depth = as.double(depth),
          wtcpue = as.double(wtcpue))
 
+
+#apply spring conversion factors
+setDT(neus_spring)
+
+dcf.spp <- NEFSC_conv[DCF_WT > 0, SVSPP]
+
+for(i in 1:length(dcf.spp)){
+  neus_spring[year < 1985 & SVSPP == dcf.spp[i], 
+              wtcpue := wtcpue * NEFSC_conv[SVSPP == dcf.spp[i], DCF_WT]]
+}
+
+gcf.spp <- NEFSC_conv[GCF_WT > 0, SVSPP]
+for(i in 1:length(gcf.spp)){
+  neus_spring[year > 1972 & year < 1982 & SVSPP == gcf.spp[i],
+              wtcpue := wtcpue / NEFSC_conv[SVSPP == gcf.spp[i], GCF_WT]]
+}
+
+vcf.spp <- NEFSC_conv[VCF_WT > 0, SVSPP]
+for(i in 1:length(dcf.spp)){
+  neus_spring[SVVESSEL == 'DE' & SVSPP == vcf.spp[i], wtcpue := wtcpue* NEFSC_conv[SVSPP == vcf.spp[i], VCF_WT]]
+}
+
+spp_spring <- big_spring[season == 'spring', svspp]
+before <- neus_spring[SVVESSEL %in% c('HB', 'PC') & SVSPP %in% spp_spring, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+for(i in 1:length(big_spring$svspp)){
+  neus_spring[SVVESSEL %in% c('HB', 'PC') & SVSPP == spp_spring[i], wtcpue := wtcpue / big_spring[i, rhoW]]
+}  
+
+after <- neus_spring[SVVESSEL %in% c('HB', 'PC')  & SVSPP %in% spp_spring, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+
+
+neus_spring <- as.data.frame(neus_spring)
+
 # sum different sexes of same spp together
 neus_spring <- neus_spring %>% 
   group_by(year, lat, lon, depth, haulid, CRUISE6, STATION, stratum, spp) %>% 
   summarise(wtcpue = sum(wtcpue)) 
 neus_spring <- ungroup(neus_spring)
-
 
 #join with strata
 neus_spring <- left_join(neus_spring, neus_strata, by = "stratum")
@@ -1381,63 +1497,6 @@ neus_spring <- neus_spring %>%
 # are there any strata in the data that are not in the strata file?
 stopifnot(nrow(filter(neus_fall, is.na(stratumarea))) == 0)
 
- 
-if (HQ_DATA_ONLY == TRUE){
-  # look at the graph and make sure decisions to keep or eliminate data make sense
-  
-  p1 <-neus_spring %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
-  
-  p2 <- neus_spring %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
-  
-  # for neus Spring, right away it is apparent that 1972 and earlier be eliminated
-  neus_spring_fltr <- neus_spring %>% 
-    filter(year > 1972)
-  
-  # it's hard to read the strata labels so I'm finding them here::here
-  test <- neus_spring %>% 
-    select(stratum, year) %>% 
-    distinct() %>% 
-    group_by(stratum) %>% 
-    summarise(count = n()) %>%
-    filter(count < 40)
-  
-  neus_spring_fltr <- neus_spring %>%
-    filter(!stratum %in% test$stratum)
-  
-  # check by year
-  test <- neus_spring %>% 
-    select(stratum, year) %>% 
-    distinct() %>% 
-    group_by(year) %>% 
-    summarise(count = n()) %>%
-    filter(count > 67)
-  
-  neus_spring_fltr <- neus_spring %>%
-    filter(year %in% test$year)
-  
-  p3 <- neus_spring_fltr %>% 
-    select(stratum, year) %>% 
-    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
-    geom_jitter()
-  
-  p4 <- neus_spring_fltr %>%
-    select(lat, lon) %>% 
-    ggplot(aes(x = lon, y = lat)) +
-    geom_jitter()
-  
-  if (HQ_PLOTS == TRUE){
-    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
-    ggsave(plot = temp, filename = here::here("plots", "neusS_hq_dat_removed.png"))
-    rm(temp)
-  }
-  rm(test, p1, p2, p3, p4)
-}
 
 
 # NEUS Fall ====
@@ -1495,7 +1554,65 @@ if (HQ_DATA_ONLY == TRUE){
   }
   rm(test, test2, p1, p2, p3, p4)
 }
-rm(neus_spp, neus_strata)
+
+if (HQ_DATA_ONLY == TRUE){
+  # look at the graph and make sure decisions to keep or eliminate data make sense
+  
+  p1 <-neus_spring %>% 
+    select(stratum, year) %>% 
+    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+  p2 <- neus_spring %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  # for neus Spring, right away it is apparent that 1972 and earlier be eliminated
+  neus_spring_fltr <- neus_spring %>% 
+    filter(year > 1972)
+  
+  # it's hard to read the strata labels so I'm finding them here::here
+  test <- neus_spring %>% 
+    select(stratum, year) %>% 
+    distinct() %>% 
+    group_by(stratum) %>% 
+    summarise(count = n()) %>%
+    filter(count < 40)
+  
+  neus_spring_fltr <- neus_spring %>%
+    filter(!stratum %in% test$stratum)
+  
+  # check by year
+  test <- neus_spring %>% 
+    select(stratum, year) %>% 
+    distinct() %>% 
+    group_by(year) %>% 
+    summarise(count = n()) %>%
+    filter(count > 67)
+  
+  neus_spring_fltr <- neus_spring %>%
+    filter(year %in% test$year)
+  
+  p3 <- neus_spring_fltr %>% 
+    select(stratum, year) %>% 
+    ggplot(aes(x = as.factor(stratum), y = as.factor(year)))   +
+    geom_jitter()
+  
+  p4 <- neus_spring_fltr %>%
+    select(lat, lon) %>% 
+    ggplot(aes(x = lon, y = lat)) +
+    geom_jitter()
+  
+  if (HQ_PLOTS == TRUE){
+    temp <- grid.arrange(p1, p2, p3, p4, nrow = 2)
+    ggsave(plot = temp, filename = here::here("plots", "neusS_hq_dat_removed.png"))
+    rm(temp)
+  }
+  rm(test, p1, p2, p3, p4)
+}
+
+rm(neus_spp, neus_strata, big_fall, big_spring, NEFSC_conv)
 
 # Compile SEUS ===========================================================
 print("Compile SEUS")
@@ -3774,3 +3891,4 @@ if(isTRUE(PLOT_CHARTS)) {
   ggsave(nat_depth_plot, filename =  here::here("plots", "national-depth.png"), width = 6, height = 3.5)
   
 }
+
