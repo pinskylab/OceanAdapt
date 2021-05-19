@@ -1350,33 +1350,32 @@ setDT(neus_fall)
 
 dcf.spp <- NEFSC_conv[DCF_WT > 0, SVSPP]
 
-#before
-before <- neus_fall[year < 1985 & SVSPP %in% dcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#test for changes due to conversion with "before" and "after"
+#before <- neus_fall[year < 1985 & SVSPP %in% dcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
 for(i in 1:length(dcf.spp)){
   neus_fall[year < 1985 & SVSPP == dcf.spp[i], wtcpue := wtcpue * NEFSC_conv[SVSPP == dcf.spp[i], DCF_WT]]
 }
 
-#after
-after <- neus_fall[year < 1985 & SVSPP %in% dcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#after <- neus_fall[year < 1985 & SVSPP %in% dcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
-before <- neus_fall[SVVESSEL == 'DE' & SVSPP %in% vcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#before <- neus_fall[SVVESSEL == 'DE' & SVSPP %in% vcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
 vcf.spp <- NEFSC_conv[VCF_WT > 0, SVSPP]
 for(i in 1:length(dcf.spp)){
   neus_fall[SVVESSEL == 'DE' & SVSPP == vcf.spp[i], wtcpue := wtcpue* NEFSC_conv[SVSPP == vcf.spp[i], VCF_WT]]
 }
 
-after<- neus_fall[SVVESSEL == 'DE' & SVSPP %in% vcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#after<- neus_fall[SVVESSEL == 'DE' & SVSPP %in% vcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
 spp_fall <- big_fall[season == 'fall', svspp]
 
-before <- neus_fall[SVVESSEL %in% c('HB', 'PC') & SVSPP %in% spp_fall, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#before <- neus_fall[SVVESSEL %in% c('HB', 'PC') & SVSPP %in% spp_fall, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 for(i in 1:length(big_fall$svspp)){
   neus_fall[SVVESSEL %in% c('HB', 'PC') & SVSPP == spp_fall[i], wtcpue := wtcpue / big_fall[i, rhoW]]
 }  
 
-after <- neus_fall[SVVESSEL %in% c('HB', 'PC')  & SVSPP %in% spp_fall, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#after <- neus_fall[SVVESSEL %in% c('HB', 'PC')  & SVSPP %in% spp_fall, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
 neus_fall <- as.data.frame(neus_fall)
   
@@ -1464,12 +1463,12 @@ for(i in 1:length(dcf.spp)){
 }
 
 spp_spring <- big_spring[season == 'spring', svspp]
-before <- neus_spring[SVVESSEL %in% c('HB', 'PC') & SVSPP %in% spp_spring, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#before <- neus_spring[SVVESSEL %in% c('HB', 'PC') & SVSPP %in% spp_spring, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 for(i in 1:length(big_spring$svspp)){
   neus_spring[SVVESSEL %in% c('HB', 'PC') & SVSPP == spp_spring[i], wtcpue := wtcpue / big_spring[i, rhoW]]
 }  
 
-after <- neus_spring[SVVESSEL %in% c('HB', 'PC')  & SVSPP %in% spp_spring, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#after <- neus_spring[SVVESSEL %in% c('HB', 'PC')  & SVSPP %in% spp_spring, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
 
 neus_spring <- as.data.frame(neus_spring)
@@ -1568,31 +1567,42 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  # for neus Spring, right away it is apparent that 1972 and earlier be eliminated
-  neus_spring_fltr <- neus_spring %>% 
-    filter(year > 1972)
   
-  # it's hard to read the strata labels so I'm finding them here::here
   test <- neus_spring %>% 
+    filter(year > 1973) %>% 
     select(stratum, year) %>% 
     distinct() %>% 
     group_by(stratum) %>% 
     summarise(count = n()) %>%
-    filter(count < 40)
+    filter(count >= 45)
   
-  neus_spring_fltr <- neus_spring %>%
-    filter(!stratum %in% test$stratum)
+  # how many rows will be lost if only stratum trawled ever year are kept?
+  test2 <- neus_spring %>% 
+    filter(stratum %in% test$stratum)
+  nrow(neus_spring) - nrow(test2)
+  # percent that will be lost
+  (nrow(neus_spring) - nrow(test2))/nrow(neus_spring)
+  #23%
   
-  # check by year
   test <- neus_spring %>% 
+    filter(year != 2020,year != 2014, year != 1975, year > 1973) %>%
     select(stratum, year) %>% 
     distinct() %>% 
-    group_by(year) %>% 
+    group_by(stratum) %>% 
     summarise(count = n()) %>%
-    filter(count > 67)
+    filter(count >= 42)
+  
+  # how many rows will be lost if only stratum trawled ever year are kept?
+  test2 <- neus_spring %>% 
+    filter(stratum %in% test$stratum)
+  nrow(neus_spring) - nrow(test2)
+  # percent that will be lost
+  (nrow(neus_spring) - nrow(test2))/nrow(neus_spring)
+  # When bad strata are removed after bad years we only lose 20.1%
   
   neus_spring_fltr <- neus_spring %>%
-    filter(year %in% test$year)
+    filter(year != 2020,year != 2014, year != 1975, year > 1973) %>% 
+    filter(stratum %in% test$stratum) 
   
   p3 <- neus_spring_fltr %>% 
     select(stratum, year) %>% 
@@ -3798,7 +3808,7 @@ if(isTRUE(PLOT_CHARTS)) {
   
   reg_lat_plot <- ggplot(data = reg_lat_depth, aes(x=year, y=lat, ymin=minlat, ymax=maxlat)) + 
     geom_line(color = "#D95F02") + 
- gmex_station_cleangeom_ribbon(alpha=0.5, color = "#CBD5E8") + 
+  geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
     theme_bw ()+
     theme(
       panel.border = element_rect(),
