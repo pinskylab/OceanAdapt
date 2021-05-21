@@ -30,10 +30,8 @@ The compile.R is used on a server to produce the graphs that are on OceanAdapt. 
    1. Make sure the directory is set to the folder containing [compile.R](https://github.com/mpinsky/OceanAdapt/blob/master/compile.R), which should be the top level
    2. Run the script. It will access the raw files, making specific corrections/ standardizations to data format and content, and calculating statistics etc.
    3. Check each region's x_hq_dat_removed.png plots to see if data filtration still looks reasonable with additional year's data
-   4. If it is your first time running the compile.R script this year, stop before the "Trim Species" section. Open the add-spp-to-taxonomy.Rmd script.
-      * Once you have produced new "flagspp" files (located in the spp_QAQC folder), refer to these and compare those in the files with those in exclude_spp
-      * If nothing changed (no new spp compared to the excludespp files), continue with compile.R script as is
-      * If new species have appeared in flagspp, contact data providers to ask if they are reliably caught species (refer to Regional_Contacts.md in metadata folder) and add species, note, and flag to excludepp files
+   4. If it is your first time running the compile.R script this year, stop before the "Trim Species" section. Open the add-spp-to-taxonomy.Rmd script. See README.md in /spp_QAQC for details on how to continue.
+   5. Continue with compile.R through to the end (data anlysis).
 ---
 ## Upload to website ###
    1. The website upload requires a zip file containing a "light" version of this repo. The zip file should contain:
