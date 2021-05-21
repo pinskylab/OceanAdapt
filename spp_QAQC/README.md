@@ -25,9 +25,9 @@ These checks are not reliable for surveys less frequent than annual, and thus sh
 
 *Section 2.* The second section adds new species to the spptaxonomy.csv. Run the script and check to make sure that the length of "not_in_tax" has not increased substantially from last year (103 taxa currently), and does not contain many taxa with species desginations (i.e., is primarily families or odd designations like "eggs").
 
-## /flagspp ##
+## /flagged ##
 
-The first section of add-spp-to-taxonomy.Rmd will produce csvs of "suspicious" species for each region. Please open these files and compare to the excludespp files located in the /exclude_spp directory. If there are additional taxa in a flagspp.csv compared to the excludespp.csv for the same region, please contact the appropriate regional contact (see Regional_Contacts.md) and ask about the taxon or taxa (are they reliably caught, and can they be included?).
+The first section of add-spp-to-taxonomy.Rmd will produce csvs of "suspicious" species for each region saved within this directory. Please open these files and compare to the excludespp files located in the /exclude_spp directory. If there are additional taxa in a flagspp.csv compared to the excludespp.csv for the same region, please contact the appropriate regional contact (see Regional_Contacts.md) and ask about the taxon or taxa (are they reliably caught, and can they be included?).
 
 ## /exclude_spp ##
 
