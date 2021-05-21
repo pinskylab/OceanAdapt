@@ -511,10 +511,10 @@ names(all_data)
 ```
 # Combine the imported and cleaned regions and check the values before they are trimmed to the spptaxonomy file
 ```{r}
-load( here("data_clean", "individual-regions.rds"))
-all_regions <- rbind(ai, CPAC, ebs, gmex, goa,GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, wcann, wctri)
+#load( here("data_clean", "individual-regions.rds"))
+#all_regions <- rbind(ai, CPAC, ebs, gmex, goa,GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, wcann, wctri)
 
-names(all_regions)
+#names(all_regions)
 
 
 
