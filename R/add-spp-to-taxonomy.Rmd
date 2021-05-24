@@ -28,6 +28,8 @@ master_data <- readRDS(here("data_clean", "all-regions-full.rds"))
 tax <- read_csv(here("data_raw", "spptaxonomy.csv"))
 ```
 ```{r}
+
+#create flag_spp function
 flag_spp <- function(region){
     df <- region %>% 
       select(spp, year) %>% 
