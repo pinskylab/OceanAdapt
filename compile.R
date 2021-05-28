@@ -44,7 +44,7 @@ HQ_DATA_ONLY <- TRUE
 HQ_PLOTS <- FALSE
 
 # 3. Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`. #DEFAULT: FALSE 
-REMOVE_REGION_DATASETS <- FALSE
+REMOVE_REGION_DATASETS <- TRUE
 
 # 4. Create graphs based on the data similar to those shown on the website and outputs them to pdf. #DEFAULT:FALSE
 PLOT_CHARTS <- FALSE
@@ -3268,7 +3268,7 @@ if(isTRUE(WRITE_MASTER_DAT)){
   if(isTRUE(PREFER_RDATA)){
     saveRDS(dat, file = here::here("data_clean", "all-regions-full.rds"))
   }else{
-    write_csv(dat, here::here("data_clean", "all-regions-full.csv"))
+    write_csv(dat, file = gzfile(here::here("data_clean", "all-regions-full.csv.gz")))
   }
 }
 # 
@@ -3304,7 +3304,7 @@ if(isTRUE(WRITE_MASTER_DAT)){
   if(isTRUE(PREFER_RDATA)){
     saveRDS(dat_fltr, file = here::here("data_clean", "all-regions-full-fltr.rds"))
   }else{
-    write_csv(dat_fltr, here::here("data_clean", "all-regions-full-fltr.csv"))
+    write_csv(dat_fltr, gzfile(here::here("data_clean", "all-regions-full-fltr.csv.gz")))
   }
 }
 
@@ -3315,6 +3315,12 @@ if(isTRUE(WRITE_MASTER_DAT)){
 #     write_csv(dat_fltr, gzfile(here::here("data_clean", "all-regions-full-fltr.csv.gz")))
 #   }
 # }
+
+###STOP#####
+#if this is the first time running compile.R for this year's annual update, now open add-spp-to-taxonomy.Rmd and run this script.
+#Once you have produced new "flagspp" files, refer to these and compare those in the files with those in exclude_spp
+#If nothing changed, continue script as is
+#If new species have appeared in flagspp, contact data providers
 
 # At this point, we have a compiled `dat` master table on which we can begin our analysis.
 
@@ -3384,7 +3390,7 @@ if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
     saveRDS(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed.rds"))
   }else{
-    write_csv(trimmed_dat, here::here("data_clean", "all-regions-trimmed.csv"))
+    write_csv(trimmed_dat, gzfile(here::here("data_clean", "all-regions-trimmed.csv.gz")))
   }
 }
 
@@ -3412,7 +3418,7 @@ if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
     saveRDS(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed-fltr.rds"))
   }else{
-    write_csv(trimmed_dat, here::here("data_clean", "all-regions-trimmed-fltr.csv"))
+    write_csv(trimmed_dat, gzfile(here::here("data_clean", "all-regions-trimmed-fltr.csv.gz")))
   }
 }
 
@@ -3515,7 +3521,7 @@ if (DAT_EXPLODED == TRUE){
     if(isTRUE(PREFER_RDATA)){
       saveRDS(dat.exploded, file = here::here("data_clean", "dat_exploded.rds"))
     }else{
-      write_csv(dat.exploded, here::here("data_clean", "dat_exploded.csv"))
+      write_csv(dat.exploded, gzfile(here::here("data_clean", "dat_exploded.csv.gz")))
     }
   }
   
