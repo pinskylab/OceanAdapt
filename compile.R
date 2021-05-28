@@ -51,7 +51,7 @@ PLOT_CHARTS <- FALSE
 # This used to be called OPTIONAL_PLOT_CHARTS, do I need to change it back?
 
 # 5. If you would like to write out the clean data, would you prefer it in Rdata or CSV form?  Note the CSV's are much larger than the Rdata files. #DEFAULT:TRUE, FALSE generates CSV's instead of Rdata.
-PREFER_RDATA <- TRUE
+PREFER_RDATA <- FALSE
 
 # 6. Output the clean full master data frame. #DEFAULT:FALSE
 WRITE_MASTER_DAT <- TRUE
@@ -1350,33 +1350,32 @@ setDT(neus_fall)
 
 dcf.spp <- NEFSC_conv[DCF_WT > 0, SVSPP]
 
-#before
-before <- neus_fall[year < 1985 & SVSPP %in% dcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#test for changes due to conversion with "before" and "after"
+#before <- neus_fall[year < 1985 & SVSPP %in% dcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
 for(i in 1:length(dcf.spp)){
   neus_fall[year < 1985 & SVSPP == dcf.spp[i], wtcpue := wtcpue * NEFSC_conv[SVSPP == dcf.spp[i], DCF_WT]]
 }
 
-#after
-after <- neus_fall[year < 1985 & SVSPP %in% dcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#after <- neus_fall[year < 1985 & SVSPP %in% dcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
-before <- neus_fall[SVVESSEL == 'DE' & SVSPP %in% vcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#before <- neus_fall[SVVESSEL == 'DE' & SVSPP %in% vcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
 vcf.spp <- NEFSC_conv[VCF_WT > 0, SVSPP]
 for(i in 1:length(dcf.spp)){
   neus_fall[SVVESSEL == 'DE' & SVSPP == vcf.spp[i], wtcpue := wtcpue* NEFSC_conv[SVSPP == vcf.spp[i], VCF_WT]]
 }
 
-after<- neus_fall[SVVESSEL == 'DE' & SVSPP %in% vcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#after<- neus_fall[SVVESSEL == 'DE' & SVSPP %in% vcf.spp, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
 spp_fall <- big_fall[season == 'fall', svspp]
 
-before <- neus_fall[SVVESSEL %in% c('HB', 'PC') & SVSPP %in% spp_fall, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#before <- neus_fall[SVVESSEL %in% c('HB', 'PC') & SVSPP %in% spp_fall, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 for(i in 1:length(big_fall$svspp)){
   neus_fall[SVVESSEL %in% c('HB', 'PC') & SVSPP == spp_fall[i], wtcpue := wtcpue / big_fall[i, rhoW]]
 }  
 
-after <- neus_fall[SVVESSEL %in% c('HB', 'PC')  & SVSPP %in% spp_fall, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#after <- neus_fall[SVVESSEL %in% c('HB', 'PC')  & SVSPP %in% spp_fall, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
 neus_fall <- as.data.frame(neus_fall)
   
@@ -1464,12 +1463,12 @@ for(i in 1:length(dcf.spp)){
 }
 
 spp_spring <- big_spring[season == 'spring', svspp]
-before <- neus_spring[SVVESSEL %in% c('HB', 'PC') & SVSPP %in% spp_spring, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#before <- neus_spring[SVVESSEL %in% c('HB', 'PC') & SVSPP %in% spp_spring, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 for(i in 1:length(big_spring$svspp)){
   neus_spring[SVVESSEL %in% c('HB', 'PC') & SVSPP == spp_spring[i], wtcpue := wtcpue / big_spring[i, rhoW]]
 }  
 
-after <- neus_spring[SVVESSEL %in% c('HB', 'PC')  & SVSPP %in% spp_spring, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
+#after <- neus_spring[SVVESSEL %in% c('HB', 'PC')  & SVSPP %in% spp_spring, .(mean_wtcpue=mean(wtcpue)), by=SVSPP][order(SVSPP)]
 
 
 neus_spring <- as.data.frame(neus_spring)
@@ -1568,31 +1567,42 @@ if (HQ_DATA_ONLY == TRUE){
     ggplot(aes(x = lon, y = lat)) +
     geom_jitter()
   
-  # for neus Spring, right away it is apparent that 1972 and earlier be eliminated
-  neus_spring_fltr <- neus_spring %>% 
-    filter(year > 1972)
   
-  # it's hard to read the strata labels so I'm finding them here::here
   test <- neus_spring %>% 
+    filter(year > 1973) %>% 
     select(stratum, year) %>% 
     distinct() %>% 
     group_by(stratum) %>% 
     summarise(count = n()) %>%
-    filter(count < 40)
+    filter(count >= 45)
   
-  neus_spring_fltr <- neus_spring %>%
-    filter(!stratum %in% test$stratum)
+  # how many rows will be lost if only stratum trawled ever year are kept?
+  test2 <- neus_spring %>% 
+    filter(stratum %in% test$stratum)
+  nrow(neus_spring) - nrow(test2)
+  # percent that will be lost
+  (nrow(neus_spring) - nrow(test2))/nrow(neus_spring)
+  #23%
   
-  # check by year
   test <- neus_spring %>% 
+    filter(year != 2020,year != 2014, year != 1975, year > 1973) %>%
     select(stratum, year) %>% 
     distinct() %>% 
-    group_by(year) %>% 
+    group_by(stratum) %>% 
     summarise(count = n()) %>%
-    filter(count > 67)
+    filter(count >= 42)
+  
+  # how many rows will be lost if only stratum trawled ever year are kept?
+  test2 <- neus_spring %>% 
+    filter(stratum %in% test$stratum)
+  nrow(neus_spring) - nrow(test2)
+  # percent that will be lost
+  (nrow(neus_spring) - nrow(test2))/nrow(neus_spring)
+  # When bad strata are removed after bad years we only lose 20.1%
   
   neus_spring_fltr <- neus_spring %>%
-    filter(year %in% test$year)
+    filter(year != 2020,year != 2014, year != 1975, year > 1973) %>% 
+    filter(stratum %in% test$stratum) 
   
   p3 <- neus_spring_fltr %>% 
     select(stratum, year) %>% 
@@ -3258,7 +3268,7 @@ if(isTRUE(WRITE_MASTER_DAT)){
   if(isTRUE(PREFER_RDATA)){
     saveRDS(dat, file = here::here("data_clean", "all-regions-full.rds"))
   }else{
-    write_csv(dat, here::here("data_clean", "all-regions-full.csv"))
+    write_csv(dat, file = gzfile(here::here("data_clean", "all-regions-full.csv.gz")))
   }
 }
 # 
@@ -3294,7 +3304,7 @@ if(isTRUE(WRITE_MASTER_DAT)){
   if(isTRUE(PREFER_RDATA)){
     saveRDS(dat_fltr, file = here::here("data_clean", "all-regions-full-fltr.rds"))
   }else{
-    write_csv(dat_fltr, here::here("data_clean", "all-regions-full-fltr.csv"))
+    write_csv(dat_fltr, gzfile(here::here("data_clean", "all-regions-full-fltr.csv.gz")))
   }
 }
 
@@ -3305,6 +3315,12 @@ if(isTRUE(WRITE_MASTER_DAT)){
 #     write_csv(dat_fltr, gzfile(here::here("data_clean", "all-regions-full-fltr.csv.gz")))
 #   }
 # }
+
+###STOP#####
+#if this is the first time running compile.R for this year's annual update, now open add-spp-to-taxonomy.Rmd and run this script.
+#Once you have produced new "flagspp" files, refer to these and compare those in the files with those in exclude_spp
+#If nothing changed, continue script as is
+#If new species have appeared in flagspp, contact data providers
 
 # At this point, we have a compiled `dat` master table on which we can begin our analysis.
 
@@ -3374,7 +3390,7 @@ if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
     saveRDS(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed.rds"))
   }else{
-    write_csv(trimmed_dat, here::here("data_clean", "all-regions-trimmed.csv"))
+    write_csv(trimmed_dat, gzfile(here::here("data_clean", "all-regions-trimmed.csv.gz")))
   }
 }
 
@@ -3402,7 +3418,7 @@ if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
     saveRDS(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed-fltr.rds"))
   }else{
-    write_csv(trimmed_dat, here::here("data_clean", "all-regions-trimmed-fltr.csv"))
+    write_csv(trimmed_dat, gzfile(here::here("data_clean", "all-regions-trimmed-fltr.csv.gz")))
   }
 }
 
@@ -3505,7 +3521,7 @@ if (DAT_EXPLODED == TRUE){
     if(isTRUE(PREFER_RDATA)){
       saveRDS(dat.exploded, file = here::here("data_clean", "dat_exploded.rds"))
     }else{
-      write_csv(dat.exploded, here::here("data_clean", "dat_exploded.csv"))
+      write_csv(dat.exploded, gzfile(here::here("data_clean", "dat_exploded.csv.gz")))
     }
   }
   
@@ -3798,7 +3814,7 @@ if(isTRUE(PLOT_CHARTS)) {
   
   reg_lat_plot <- ggplot(data = reg_lat_depth, aes(x=year, y=lat, ymin=minlat, ymax=maxlat)) + 
     geom_line(color = "#D95F02") + 
- gmex_station_cleangeom_ribbon(alpha=0.5, color = "#CBD5E8") + 
+  geom_ribbon(alpha=0.5, color = "#CBD5E8") + 
     theme_bw ()+
     theme(
       panel.border = element_rect(),

@@ -3,7 +3,7 @@
  #' Visit the following links to and copy download URL by right-clicking "Access" button next to dataset on website
  #' to make sure that the download URL has not changed
  #' If new link, copy and paste URL into download.file() functions below
- #' Then right script
+ #' Then run script
  #' Fall: https://open.canada.ca/data/en/dataset/5f82b379-c1e5-4a02-b825-f34fc645a529
  #' Spring: https://open.canada.ca/data/en/dataset/fecf045a-95a2-4b69-8a40-818649a62716
  #' Summer: https://open.canada.ca/data/en/dataset/1366e1f1-e2c8-4905-89ae-e10f1be0a164
@@ -71,24 +71,27 @@ data <- read.csv(unz(temp, "SUMMER_2020_GSSPECIES.csv"))
 write_csv(data, here::here(save_loc, file_name))
 unlink(temp) 
 
-#4VSW
-temp <- tempfile()
-save_loc <- "data_raw"
-save_date <- Sys.Date()
-file_name <- "4VSW_MISSION.csv"
-download.file("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/Maritimes_Research_Vessel_Survey/4VSW_csv.zip",temp)
-data <- read.csv(unz(temp, "4VSW_2020GSMISSIONS.csv"))
-write_csv(data, here::here(save_loc, file_name))
-file_name <- "4VSW_CATCH.csv"
-data <- read.csv(unz(temp, "4VSW_2020_GSCAT.csv"))
-write_csv(data, here::here(save_loc, file_name))
-file_name <- "4VSW_INF.csv"
-data <- read.csv(unz(temp, "4VSW_2020_GSINF.csv"))
-write_csv(data, here::here(save_loc, file_name))
-file_name <- "4VSW_SPP.csv"
-data <- read.csv(unz(temp, "4VSW_2020_GSSPECIES.csv"))
-write_csv(data, here::here(save_loc, file_name))
-unlink(temp) 
+## We do not use 4VSW file because of small spatial extent and redundant area covered by these surveys
+
+# #4VSW
+# temp <- tempfile()
+# save_loc <- "data_raw"
+# save_date <- Sys.Date()
+# file_name <- "4VSW_MISSION.csv"
+# download.file("https://pacgis01.dfo-mpo.gc.ca/FGPPublic/Maritimes_Research_Vessel_Survey/4VSW_csv.zip",temp)
+# data <- read.csv(unz(temp, "4VSW_2020GSMISSIONS.csv"))
+# write_csv(data, here::here(save_loc, file_name))
+# file_name <- "4VSW_CATCH.csv"
+# data <- read.csv(unz(temp, "4VSW_2020_GSCAT.csv"))
+# write_csv(data, here::here(save_loc, file_name))
+# file_name <- "4VSW_INF.csv"
+# data <- read.csv(unz(temp, "4VSW_2020_GSINF.csv"))
+# write_csv(data, here::here(save_loc, file_name))
+# file_name <- "4VSW_SPP.csv"
+# data <- read.csv(unz(temp, "4VSW_2020_GSSPECIES.csv"))
+# write_csv(data, here::here(save_loc, file_name))
+# unlink(temp) 
+
 #' Old script preserved below
 ------------------------------------------------------------  
  #' 
