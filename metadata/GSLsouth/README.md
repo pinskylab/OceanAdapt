@@ -16,7 +16,11 @@ NA
 - We create a stratum column by grouping latitude and longitude (rounded to nearest degree), separated by "-", for example: (lat-lon) "47--65".
 - We calculate stratum area using the convex hull approach.
 - We remove any SCIENTIFIC spp values that contain the word “EGG”, "UNIDENTIFIED", or where the only value in the SCIENTIFIC field is white space.
-- We group the data by haulid, stratum, stratumarea, year, lat, lon, depth, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
+- We group the data by haulid, stratum, stratumarea, year, lat, lon, and spp and then sum up all of the wtcpue values for each group and reassign that as the wtcpue.
+
+**NOTE** 
+
+The Gulf of St. Lawrence South raw data currently do not contain any depth information. At the moment, we fill this column with "NA". We therefore do not produce any analyses in this region related to depth, nor can we provide any depth info.
 
 **What the raw data include:**
 
