@@ -6,9 +6,9 @@ Gulf of St. Lawrence South
 
 [NAFO Division 4T groundfish research vessel trawl survey (September Survey) dataset](https://open.canada.ca/data/en/dataset/1989de32-bc5d-c696-879c-54d422438e64)
 
-**NOTE** 
+&ensp; **NOTE** 
 
-The Gulf of St. Lawrence South raw data currently do not contain any depth information. At the moment, we fill this column with "NA". We therefore do not produce any analyses in this region related to depth, nor can we provide any depth info.
+- The Gulf of St. Lawrence South raw data currently do not contain any depth information. At the moment, we fill this column with "NA". We therefore do not produce any analyses in this region related to depth, nor can we provide any depth info.
 
 **Related papers:** 
 
