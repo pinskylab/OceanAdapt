@@ -184,7 +184,7 @@ testdf$region <- 'Gulf of Mexico'
   length(test$spp)/length(region$spp)
   #gmex, 1.74%
   temp <- grid.arrange(p1, p2, nrow = 2)
-  ggsave(plot = temp, filename = here::here("plots", "gmex_tax_check_test2.png"))
+  ggsave(plot = temp, filename = here::here("plots", "gmex_tax_check_test.png"))
   
   testdf <- data.frame(unique(test4$spp))
 if (dim(testdf)[1] > 0) {

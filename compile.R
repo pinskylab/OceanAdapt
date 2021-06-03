@@ -36,7 +36,7 @@
 
 # Answer the following questions using all caps TRUE or FALSE to direct the actions of the script =====================================
 
-# 1. Some strata and years have very little data, should they be removed? #DEFAULT: TRUE. 
+# 1. Some strata and years have very little data, should they be removed and saved as fltr data? #DEFAULT: TRUE. 
 HQ_DATA_ONLY <- TRUE
 
 # 2. View plots of removed strata for HQ_DATA. #OPTIONAL, DEFAULT:FALSE
@@ -44,7 +44,7 @@ HQ_DATA_ONLY <- TRUE
 HQ_PLOTS <- FALSE
 
 # 3. Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`. #DEFAULT: FALSE 
-REMOVE_REGION_DATASETS <- TRUE
+REMOVE_REGION_DATASETS <- FALSE
 
 # 4. Create graphs based on the data similar to those shown on the website and outputs them to pdf. #DEFAULT:FALSE
 PLOT_CHARTS <- FALSE
@@ -64,7 +64,7 @@ WRITE_TRIMMED_DAT <- TRUE
 DAT_EXPLODED <- TRUE
 
 # 9. Output the dat.exploded table #DEFAULT:FALSE
-WRITE_DAT_EXPLODED <- TRUE
+WRITE_DAT_EXPLODED <- FALSE
 
 # 10. Output the BY_SPECIES, BY_REGION, and BY_NATIONAL tables. #DEFAULT:FALSE
 WRITE_BY_TABLES <- TRUE
@@ -905,6 +905,7 @@ wcann <- wcann %>%
   mutate(region = "West Coast Annual") %>% 
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
   ungroup()
+
 
 if (HQ_DATA_ONLY == TRUE){
   # keep the same footprint as wctri
@@ -3074,7 +3075,9 @@ GSLnor$depth <-as.numeric(as.character(GSLnor$Prof_Max))
 GSLnor$Dist_Towed <-as.numeric(GSLnor$Dist_Chalute_Position)
 GSLnor$Pds_Capture <- as.double(GSLnor$Pds_Capture)
 GSLnor$Date <-as.Date(GSLnor$Date_Deb_Trait)
-GSLnor$year <- year(GSLnor$Date)
+GSLnor$year <- as.integer(year(GSLnor$Date))
+GSLnor$spp <- trimws(as.character(GSLnor$Nom_Scient_Esp), which = "right")
+
 
 
 #GSLnor$haulid <- paste(GSLnor$No_Releve,GSLnor$Trait,GSLnor$Date_Deb_Trait,GSLnor$Hre_Deb, sep="-")
@@ -3104,7 +3107,6 @@ GSLnor_strats <- GSLnor  %>%
 GSLnor <- left_join(GSLnor, GSLnor_strats, by = "stratum")
 
 GSLnor <- GSLnor %>%
-  mutate(spp = Nom_Scient_Esp) %>%
   filter(
     # remove unidentified spp and non-species
     spp != "" | !is.na(spp), 
@@ -3232,19 +3234,19 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
   select(taxon, name, common)
 
 
-if(isTRUE(WRITE_MASTER_DAT)){
-  save(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rds"))
-}
-if(isTRUE(WRITE_MASTER_DAT)){
-  save(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, tax, wcann_fltr, wctri_fltr, file = here("data_clean", "individual-regions-fltr.rds"))
-}
+# if(isTRUE(WRITE_MASTER_DAT)){
+#   save(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rds"))
+# }
+# if(isTRUE(WRITE_MASTER_DAT)){
+#   save(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, tax, wcann_fltr, wctri_fltr, file = here("data_clean", "individual-regions-fltr.rds"))
+# }
 
-# if(isTRUE(WRITE_MASTER_DAT)){
-#   save(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = gzfile(here("data_clean", "individual-regions.rds.gz")))
-# }
-# if(isTRUE(WRITE_MASTER_DAT)){
-#    save(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, tax, wcann_fltr, wctri_fltr, file = gzfile(here("data_clean", "individual-regions-fltr.rds.gz")))
-# }
+if(isTRUE(WRITE_MASTER_DAT)){
+  save(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = gzfile(here("data_clean", "individual-regions.rds.gz")))
+}
+if(isTRUE(WRITE_MASTER_DAT)){
+   save(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, tax, wcann_fltr, wctri_fltr, file = gzfile(here("data_clean", "individual-regions-fltr.rds.gz")))
+}
 
 
 # Master Data Set ===========================================================
@@ -3361,7 +3363,7 @@ myfiles[[13]] <- NULL #removes ineffective check for wctri
 names(myfiles[[4]]) <- names(myfiles[[1]]) #adjusts column names of Gulf of Mexico (after removing spp. in add-spp-to-taxonomy.Rmd)
 excludespp <- do.call(rbind, myfiles)
 names(excludespp)[1] <- "spp"
-#Malin suggested adding a true/false flag to the tax_added csv for flagged species
+#Add a true/false flag to the tax_added csv for flagged species
 test <- merge(spplist, excludespp)
 length(test$exclude[test$exclude == TRUE])
 #8 flagged species in the list, 7 listed as exclude (all in Gulf of Alaska) 
@@ -3412,7 +3414,7 @@ trimmed_dat_fltr <- dat_fltr %>%
     spp = ifelse(grepl("LIMANDA FERRUGINEA", spp), "LIMANDA FERRUGINEA", spp),
     spp = ifelse(grepl("PSEUDOPLEURONECTES AMERICANUS", spp), "PSEUDOPLEURONECTES AMERICANUS", spp))
 
-rm(spplist)
+#rm(spplist)
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
@@ -3459,22 +3461,22 @@ dat_strat_yr <- dat_strat_yr %>%
 
 # calculate mean lat
 cent_bio_lat <- dat_strat_yr %>% 
-  group_by(region, spp, common, year) %>% 
-  summarise(lat = questionr::wtd.mean(lat, wttot, na.rm = T))
+  group_by(region, spp, year) %>% 
+  summarise(lat = questionr::wtd.mean(lat, wttot, na.rm = TRUE))
 
 # mean depth
 cent_bio_depth <- dat_strat_yr %>% 
-  group_by(region, spp, common, year) %>% 
-  summarise(depth = questionr::wtd.mean(depth, wttot, na.rm = T))
+  group_by(region, spp, year) %>% 
+  summarise(depth = questionr::wtd.mean(depth, wttot, na.rm = TRUE))
 
 # mean lon
 cent_bio_lon <- dat_strat_yr %>% 
-  group_by(region, spp, common, year) %>% 
-  summarise(lon = questionr::wtd.mean(lon, wttot, na.rm = T))
+  group_by(region, spp, year) %>% 
+  summarise(lon = questionr::wtd.mean(lon, wttot, na.rm = TRUE))
 
 # merge
-cent_bio <- left_join(cent_bio_lat, cent_bio_depth, by = c("region", "spp", "common", "year"))
-cent_bio <- left_join(cent_bio, cent_bio_lon, by = c("region", "spp", "common", "year"))
+cent_bio <- left_join(cent_bio_lat, cent_bio_depth, by = c("region", "spp", "year"))
+cent_bio <- left_join(cent_bio, cent_bio_lon, by = c("region", "spp",  "year"))
 
 # standard error for lat
 cent_bio_lat_se <- dat_strat_yr %>%
@@ -3513,21 +3515,24 @@ rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, c
 print("Dat exploded") 
 # these Sys.time() flags are here::here to see how long this section of code takes to run.
 Sys.time()
-# This takes about 5 minutes
+# This takes about 10 minutes
 if (DAT_EXPLODED == TRUE){
   dat.exploded <- as.data.table(dat)[,explode0(.SD), by="region"]
+  dat_expl_spl <- split(dat.exploded, dat.exploded$region, drop = FALSE)
   
-  if(isTRUE(WRITE_DAT_EXPLODED)){
+ if(isTRUE(WRITE_DAT_EXPLODED)){
     if(isTRUE(PREFER_RDATA)){
-      saveRDS(dat.exploded, file = here::here("data_clean", "dat_exploded.rds"))
+      lapply(dat_expl_spl, function(x) saveRDS(x, here::here("data_clean", paste0('dat_exploded', x$region[1], '.rds')))) 
     }else{
-      write_csv(dat.exploded, gzfile(here::here("data_clean", "dat_exploded.csv.gz")))
+      lapply(dat_expl_spl, function(x) write_csv(x, gzfile(here::here("data_clean", paste0('dat_exploded', x$region[1], '.csv.gz')))))
     }
   }
   
 }
 Sys.time()
 
+#clean up
+rm(dat_expl_spl)
 
 #By region data ================================================
 print("by region data")
@@ -3731,10 +3736,11 @@ if(isTRUE(PLOT_CHARTS)) {
   # Plot Species #####
   
   centbio <- BY_SPECIES_DATA
+  centbio <- centbio[!is.na(centbio$spp),]
   
   # for latitude
   print("Starting latitude plots for species")
-  pdf(file = here("plots", "sppcentlatstrat.png"), width=10, height=8)
+  pdf(file = here("plots", "sppcentlatstrat.pdf"), width=10, height=8)
   
   regs = sort(unique(centbio$region))
   for(i in 1:length(regs)){
@@ -3767,7 +3773,9 @@ if(isTRUE(PLOT_CHARTS)) {
   
   # for depth
   print("Starting depth plots for species")
-  pdf(file = here("plots", "sppcentdepthstrat.png"), width=10, height=8)
+  pdf(file = here("plots", "sppcentdepthstrat.pdf"), width=10, height=8)
+  
+  centbio <- centbio[!is.na(centbio$depth),]
   
   regs = sort(unique(centbio$region))
   for(i in 1:length(regs)){
