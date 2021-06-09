@@ -1,42 +1,37 @@
 #' ---
 #' title: "Download NEUS"
 #' ---
-#' # For NEUS, email Sean Lucey (sean.lucey@noaa.gov) at NOAA and ask for the latest Survdat.Rdata file, and you are ready to run compile
-#' 
-#' Ignore the following, unless given specific instructions:
-#' 
-#' If the conversion factor code has been figured out, download 
-#' the spring and fall bottom trawl survey files from 
+#'
+#' Download the spring and fall bottom trawl survey files from 
 #' [Fall](https://inport.nmfs.noaa.gov/inport/item/22560) 
-#' and [Spring](https://inport.nmfs.noaa.gov/inport/item/22561).  Currently 
-#' ftp through R is not working so 1st chunk is bash to download and unzip 
-#' the files into Downloads and the 2nd chunk is to rename and move the files 
-#' to data_raw using R.
-#' 
-
-# curl -L -R -O ftp://ftp.nefsc.noaa.gov/pub/dropoff/PARR/PEMAD/ESB/SVDBS/SVDBS_SupportTables.zip
-
+#' and [Spring](https://inport.nmfs.noaa.gov/inport/item/22561). 
+#' Currently ftp through R is not working, so first visit the website and download
+#' files at each link under "Distribution 1" and "Distribution 2" 
+#' Then use the first chunk of code to unzip the files into "data_raw"
+#' Then use the second chunk to move the files out of their subdirectory and rename
 #' 
 #' 
 ## ----neus----------------------------------------------------------------
-unzip("SVDBS_SupportTables.zip", exdir = here::here("data_raw"))
+
+
+unzip("~/Downloads/SVDBS_SupportTables.zip", exdir = here::here("data_raw"))
 svdbs <- dir(pattern = "SVDBS", path = "data_raw", full.names = T)
-svdbs <- svdbs[-c(grep("STRATA", svdbs))]
+svdbs <- svdbs[-c(grep("STRATA","SPECIES", svdbs))]
 file.remove(svdbs)
 file.rename(here::here("data_raw", "SVDBS_SVMSTRATA.csv"), here::here("data_raw", "neus_strata.csv"))
+file.rename(here::here("data_raw", "SVDBS_SVSPECIES_LIST.csv"), here::here("data_raw", "neus_spp.csv"))
 
-unzip("22560_FSCSTables.zip", exdir = here::here("data_raw"))
-unzip("22561_FSCSTables.zip", exdir = here::here("data_raw"))
+other <- dir(pattern = "SVDBS", path = "data_raw", full.names = T)
+unlink(other, recursive = TRUE)
 
-file.rename(here::here("data_raw","22560_UNION_FSCS_SVSTA.csv"), here::here("data_raw","neus_fall_svsta.csv"), overwrite = T)
-file.rename(here::here("data_raw","22560_UNION_FSCS_SVCAT.csv"), here::here("data_raw","neus_fall_svcat.csv"), overwrite = T)
+unzip("~/Downloads/22560_FSCSTables.zip", exdir = here::here("data_raw"))
+unzip("~/Downloads/22561_FSCSTables.zip", exdir = here::here("data_raw"))
 
-file.rename(here::here("data_raw","22561_UNION_FSCS_SVSTA.csv"), here::here("data_raw","neus_spring_svsta.csv"), overwrite = T)
-file.rename(here::here("data_raw","22561_UNION_FSCS_SVCAT.csv"), here::here("data_raw","neus_spring_svcat.csv"), overwrite = T)
+file.rename(here::here("data_raw","22560_FSCSTables/22560_UNION_FSCS_SVSTA.csv"), here::here("data_raw","neus_fall_svsta.csv"))
+file.rename(here::here("data_raw","22560_FSCSTables/22560_UNION_FSCS_SVCAT.csv"), here::here("data_raw","neus_fall_svcat.csv"))
+
+file.rename(here::here("data_raw","22561_FSCSTables/22561_UNION_FSCS_SVSTA.csv"), here::here("data_raw","neus_spring_svsta.csv"))
+file.rename(here::here("data_raw","22561_FSCSTables/22561_UNION_FSCS_SVCAT.csv"), here::here("data_raw","neus_spring_svcat.csv"))
 
 other <- dir(pattern = "FSCS", path = "data_raw", full.names = T)
-file.remove(other)
-
-
-#' 
-#' - This year we are attempting to download the data from the publicly available website instead of emailing a NOAA staff member.  The data is in separate files for Spring and Fall.  Instead of one file that contains all of the data, we must download multiple files and combine them.  The files we need are UNION_FSCS_SVSTA and UNION_FSCS_SVCAT.  These documents are included in the ftp "distribution 1". Connecting to this ftp address with Fetch revealed a zip file.  I downloaded that zip file and it opened into a directory called 22561_FSCSTables that contained csv files.
+unlink(other, recursive = TRUE)

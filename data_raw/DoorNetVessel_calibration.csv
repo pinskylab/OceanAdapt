@@ -1,0 +1,29 @@
+common,spp,trawl,door,vessel
+Atlantic Cod,Gadus Morhua,1,1.56,0.79
+Haddock,Melanogrammus Aeglefinus,1,1.49,0.82
+Pollock,Pollachius Virens,1,2.21,1
+Redfish,Sebastes spp.,1,1,1
+Goosefish,Lophius Americanus,0.408,1,0.83
+Ocean Pout,Macrozoarces Americanus,1,1,0.7
+Silver Hake,Merluccius Bilinearis,0.424,1,1
+Red Hake,Urophycis Chuss,1,1.31,1
+White Hake,Urophycis Tenuis,1,1,1
+Witch Flounder,Glyptocephalus Cynoglossus,1,1,1
+American Plaice,Hippoglossoides Platessoides,1,1,0.82
+Yellowtail Flounder,Limanda Ferruginea,0.568,1.22,0.85
+Winter Flounder,Pseudopleuronectes Americanus,0.495,1.46,1
+Windowpane,Scophthalmus Aquosus,0.599,1.54,0.82
+Sea Scallop,Placopecten Maggellanicus,1,1.39,1.22
+Atlantic Herring,Clupea Harengus,1,1,0.59
+Atlantic Salmon,Salmo Salar,1,1,1
+Blue Fish,Pomatomus Saltatrix,1,1,1
+Longfin Inshore Squid,Loligo Pealeii,1,1,0.83
+Nothern Shortfin Squid,Illex Illecebrosus,1,1,0.78
+Atlantic Mackerel,Scomber Scombrus,1,1,1
+Butterfish,Peprilus Tricanthus,1,1,1
+Summer Flounder,Paralichthys Dentatus,0.813,1,1
+Scup,Stenotomus Chrysops,1,1,1
+Black Sea Bass,Centropristis Striata,1,1,1
+Spiny Dogfish,Squalus Acanthias,0.714,1,0.79
+Atlantic Surfclam,Spisula Solidissima,1,1,1
+Ocean Quahog,Arctica Islandica,1,1,1

@@ -5,19 +5,503 @@ output: html_notebook
 
 Load libraries and data
 ```{r setup, include = FALSE}
-library(here) # to find yourself
-library(tidyverse)
+#library(tidyverse)
+library(dplyr)
+library(plyr)
+library(tidyr)
+library(stringr)
+library(readr)
 library(rfishbase) # to get missing taxon data
 library(janitor) # to clean names
+library(ggplot2)
+library(matrixStats)
+library(gridExtra)
+library(here) # to find yourself
 
 # this is an R data of all of the individual regions
-
+all_data <- load(here("data_clean", "individual-regions.rds"))
 
 # this is the data after it has been joined with the spptaxonomy file but before trimming.
-master_data <- readRDS(here("data_clean", "all-regions-full.RData"))
+master_data <- readRDS(here("data_clean", "all-regions-full.rds"))
 
 # this is the spptaxonomy file
 tax <- read_csv(here("data_raw", "spptaxonomy.csv"))
+```
+```{r}
+
+#create flag_spp function
+flag_spp <- function(region){
+    df <- region %>% 
+      select(spp, year) %>% 
+      group_by(spp) %>% 
+      distinct()
+    years <- unique(df$year)
+    df2 <- data.frame(matrix(ncol = length(years)+1, nrow = length(df$spp)))
+    x <- c('spp', unique(df$year))
+    colnames(df2) <- x
+    df2$spp <- df$spp
+    
+    n<-2
+  for (year in years){
+    df2[,n] <- c(apply(df, 1, function(r) any(r %in% c(year))))
+    n <- n+1
+    }
+    df2 <- df2 %>% group_by(spp) %>% summarize_all(any)
+    df3 <- data.frame(matrix(ncol = 3, nrow = length(df2$spp)))
+    colnames(df3) <- c('spp', 'rlmax', 'PresToAbs')
+    for (n in 1:length(df2$spp)){
+      r <- rle(df2[n,])
+      sp <- c(df2[n,1])
+      rlmax <- max(r$lengths)
+      df3[n,1] <- sp
+      df3[n,2] <- rlmax
+      df3[n,3] <- length(r$values)
+    }
+    x <- round(0.95*length(years))
+    df3 <- df3[df3$rlmax < x,]
+    df3 <- df3[df3$PresToAbs < 4,]
+    df3
+  
+}
+
+```
+```{r}
+#Flag spp for each region
+flaglist <- list()
+
+#Aleutian Islands
+region <- ai
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Aleutian Islands'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "ai_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "ai_tax_check_test.png"))
+  
+#Canadian Pacific
+region <- CPAC
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Canadian Pacific'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "cpac_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #CPAC 3.6%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "cpac_tax_check_test.png"))
+  
+
+#Eastern Bering Sea
+region <- ebs
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Eastern Bering Sea'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "ebs_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #ebs, 1.74%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "ebs_tax_check_test.png"))
+
+#Gulf of Mexico 
+region <- gmex
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Gulf of Mexico'
+} else {}
+#write csv of flagged spp in region
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  #Remove species from the list that were first identified in 2008 (Jeff Rester said that they would likely have first appeared because of the expansion of the study area into the East Gulf, not because of any problem)
+  test <- subset(region, spp %in% test$spp)
+  test2 <- aggregate(year ~ spp, test, function(x) min(x))
+  test3 <- test2[test2$year == 2008,]
+  test4 <- test[!test$spp %in% test3$spp,]
+  
+  p2 <- test4 %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.74%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "gmex_tax_check_test.png"))
+  
+  testdf <- data.frame(unique(test4$spp))
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Gulf of Mexico'
+} else {}
+  write_csv(testdf, file = here::here("flagspp", "gmex_flagspp2.csv"))
+
+#Gulf of Alaska
+region <- goa
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Gulf of Alaska'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "goa_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #goa, 1.62%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "goa_tax_check_test.png"))
+
+#Gulf of St. Lawrence - North
+region <- GSLnor
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Gulf of St. Lawrence North'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "GSLnor_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "GSLnor_tax_check_test.png"))
+
+#Gulf of St. Lawrence - South
+region <- GSLsouth
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Gulf of St. Lawrence South'
+} else {}
+
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "GSLsouth_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "GSLsouth_tax_check_test.png"))  
+
+  
+#NEUS Fall
+region <- neus_fall
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Northeast US Fall'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "neusF_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "neusF_tax_check_test.png"))
+
+#NEUS Spring  
+region <- neus_spring
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Northeast US Spring'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "neusS_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "neusS_tax_check_test.png"))
+  
+# Maritimes
+region <- mar
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Maritimes'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "mar_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "mar_tax_check_test.png"))
+
+#SEUS Fall
+region <- seusFALL
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Southeast US Fall'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "seusFALL_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "seusFALL_tax_check_test.png"))
+
+#SEUS Spring
+region <- seusSPRING
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Southeast US Spring'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "seusSPRING_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "seusSPRING_tax_check_test.png"))
+
+#SEUS Summer
+region <- seusSUMMER
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Southeast US Summer'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "seusSUMMER_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "seusSUMMER_tax_check_test.png"))
+  
+#West Coast Annual
+region <- wcann
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Westcoast Annual'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "wcann_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "wcann_tax_check_test.png"))
+  
+#AWest Coast Triannual
+region <- wctri
+test <- flag_spp(region)
+
+testdf <- data.frame(test$spp)
+if (dim(testdf)[1] > 0) {
+testdf$region <- 'Westcoast Triennial'
+} else {}
+#write csv of flagged spp in region
+write_csv(testdf, file = here::here("flagspp", "wctri_flagspp.csv"))
+
+  p1 <- region %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+
+  test <- subset(region, spp %in% test$spp)
+  
+  p2 <- test %>%
+    select(spp, year) %>%
+    ggplot(aes(x = year, y = spp)) +
+    geom_point()
+  
+  length(test$spp)/length(region$spp)
+  #gmex, 1.04%; scot, 3.8%; ai, 4.99%; neusF, 2.2%; neusS, 2.84%; seusFALL, 1.9%; seusSPRING, 1.86%; seusSUMMER, 0.84%; wcann, 1.5%, wctri, 5.07%, ebs, 1.68%; goa, 1.61%
+  temp <- grid.arrange(p1, p2, nrow = 2)
+  ggsave(plot = temp, filename = here::here("plots", "wctri_tax_check_test.png"))
+
 ```
 
 
@@ -29,8 +513,14 @@ names(all_data)
 ```
 # Combine the imported and cleaned regions and check the values before they are trimmed to the spptaxonomy file
 ```{r}
-load( here("data_clean", "individual-regions.rda"))
-all_regions <- rbind(ai, ebs, gmex, goa, neusF, neusS, scot, seusFALL, seusSPRING, seusSUMMER, wcann, wctri)
+#load( here("data_clean", "individual-regions.rds"))
+#all_regions <- rbind(ai, CPAC, ebs, gmex, goa,GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, wcann, wctri)
+
+#names(all_regions)
+
+
+
+all_regions <- readRDS( here("data_clean", "all-regions-trimmed.rds"))
 
 names(all_regions)
 
@@ -39,30 +529,27 @@ names(all_regions)
 # examine only the spp column, only unique values, and assign a test id number
 ```{r}
 
-all_regions_spp <- all_regions_spp %>% 
+all_regions_spp <- all_regions %>% 
   select(spp) %>% 
   distinct() %>% 
   mutate(spp_id = 1:nrow(.))
-  
+
 ```
 # Anti-join this spp list to the taxon column from the spptaxonomy file to see which spp are not represented there
 ```{r}
+
 not_in_tax <- anti_join(all_regions_spp, tax, by = c("spp"="taxon")) %>% 
   # format the column into genus and spp so that I can check it against fishbase
   separate(spp, into= c("genus", "spp", "extra", "extra1"), sep = " ") %>%
-  mutate(genus = str_to_title(genus), 
-         spp = str_c(spp, extra, sep = " "),
-         spp = str_to_lower(spp), 
-         spp = str_trim(spp)) %>% 
+  mutate(genus = str_to_title(genus)) %>% 
   select(-contains("extra")) 
-
-
 ```
 Check that all whitespace was removed from names
 ```{r, eval = FALSE}
 test <- not_in_tax %>% 
   separate(spp, into = c("spp", "white"), sep = " ") %>% 
   filter(!is.na(white)) 
+
 # should return one row for the spp with 2 names
 ```
 
@@ -77,13 +564,16 @@ fb_check <- fishbase %>%
   filter(name %in% not_in_tax$name) %>% 
   clean_names() %>% 
   select(-contains("code"), -species_ref_no) %>% 
-  rename(common = f_bname) 
-  
+  dplyr::rename(common = f_bname) 
+#155 in fb check  
 
 sb_check <- sealifebase %>% 
   mutate(name = str_c(Genus, Species, sep = " ")) %>% 
-  filter(name %in% not_in_tax$name)
-# none in sealife base
+  filter(name %in% not_in_tax$name) %>% 
+  clean_names() %>% 
+  select(-contains("code"), -species_ref_no) %>% 
+  dplyr::rename(common = f_bname) 
+# 54 in sb_check
 ```
 
 # Add the results of species to the spptaxonomy.csv
@@ -97,9 +587,9 @@ names(tax_raw)
 # have to add the taxon back into fb_check based on the species id I created earlier
 matching <- left_join(not_in_tax, select(fb_check, -genus, -species), by = c("name")) %>% 
   filter(!is.na(family)) %>% 
-  rename(species = spp) %>% 
+  dplyr::rename(species = spp) %>% 
   left_join(all_regions_spp, by = "spp_id") %>% 
-  rename(taxon = spp) %>% 
+  dplyr::rename(taxon = spp) %>% 
   select(-spp_id, -sub_family) %>% 
   mutate(superclass = NA, 
          subphylum = NA, 
@@ -107,14 +597,34 @@ matching <- left_join(not_in_tax, select(fb_check, -genus, -species), by = c("na
          kingdom = "Animalia")
 
 names(matching)
+names(tax_raw)
 
 tax_added <- rbind(tax_raw, matching)
-
 ```
+
+#add sealifebase names
+```{r}
+names(tax_added)
+names(sb_check)
+
+matching <- left_join(not_in_tax, select(sb_check, -genus, -species), by = c("name")) %>% 
+  filter(!is.na(family)) %>% 
+  dplyr::rename(species = spp) %>% 
+  left_join(all_regions_spp, by = "spp_id") %>% 
+  dplyr::rename(taxon = spp) %>% 
+  select(-spp_id, -sub_family) %>% 
+  mutate(superclass = NA, 
+         subphylum = NA, 
+         phylum = "Chordata", 
+         kingdom = "Animalia")
+
+tax_added <- rbind(tax_added, matching)
+```
+
 # There are still genera only rows that can be matched
 ```{r}
-gen_not_in_tax <- anti_join(not_in_tax, select(matching, -genus),by = "name") %>% 
-  filter(is.na(spp))
+
+gen_not_in_tax <- anti_join(not_in_tax, select(matching, -genus), by = "name")
 
 gen_fb_check <- fishbase %>% 
   # join the genus and spp columns into one
@@ -151,9 +661,9 @@ names(tax_added)
 # have to add the taxon back into fb_check based on the species id I created earlier
 matching <- left_join(not_in_tax, gen_check, by = "genus") %>% 
   filter(!is.na(family), is.na(spp)) %>% 
-  rename(species = spp) %>% 
+  dplyr::rename(species = spp) %>% 
   left_join(all_regions_spp, by = "spp_id") %>% 
-  rename(taxon = spp) %>% 
+  dplyr::rename(taxon = spp) %>% 
   select(-spp_id, -sub_family) %>% 
   mutate(superclass = NA, 
          subphylum = NA, 
@@ -168,14 +678,20 @@ tax_added <- rbind(tax_added, matching)
 
 # anything left?
 not_in_tax <- anti_join(all_regions_spp, tax_added, by = c("spp"="taxon"))
-
+#103 taxon names left, most corresponse to families, some unusal designations
 ```
+
+
 # Write to csv
 ```{r}
 write_csv(tax_added, here("data_raw", "spptaxonomy.csv"))
 ```
 
-
+# Write to csv
+```{r}
+library(compare)
+comparison <- compare(tax_raw,tax_added,allowAll=TRUE)
+```
 
 Malin asked if there were other Echinoidea names that don’t have “crushed urchin"
 
@@ -194,6 +710,9 @@ other <- all_data %>%
 
 Daniel asked if there is a fish called the Alantic seabob in GOM - yep, there is a type-o, fixing it here
 ```{r eval=FALSE}
+# this is the spptaxonomy file
+tax <- read_csv(here("data_raw", "spptaxonomy.csv"))
+
 master_data %>% 
   filter(grepl("Alantic", common))
 

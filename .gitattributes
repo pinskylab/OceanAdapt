@@ -1,3 +1,6 @@
 data_raw/gmex_BGSREC.csv filter=lfs diff=lfs merge=lfs -text
 data_raw/wcann_catch.csv filter=lfs diff=lfs merge=lfs -text
 data_raw/seus_catch.csv filter=lfs diff=lfs merge=lfs -text
+dat_exploded.* filter=lfs diff=lfs merge=lfs -text
+individual-regions.* filter=lfs diff=lfs merge=lfs -text
+individual-regions* filter=lfs diff=lfs merge=lfs -text
