@@ -17,6 +17,10 @@ The projections of future species distributions were developed from statistical 
 
 # News
 
+## 2021/06/09 - data has been added to OceanAdapt\! - website update pending
+
+  - New data are available via this GitHub! Website update is pending, but expected to occur in July 2021. We have expanded to three new regions in Canada: Northern Gulf of St. Lawrence (GSLnor), Southern Gulf of St. Lawrence (GSLsouth), and the Canadian Pacific (CPAC). 2019 data were added for the Gulf of Alaska, the Maritimes regions (formerly Scotian Shelf), and Southeast US. 2020 data were not available for most regions due to survey difficulties through the COVID19 pandemic. If they were available, they only covered a small portion of the survey region.
+
 ## 2020/10/12 -  OceanAdapt listed as indicator tool on the USGCRP
 
   - Click the link to see the U.S. Global Change Research Program's [Indicator Tools](https://www.globalchange.gov/browse/indicator-details/4141) for Marine Species Distributions\!
