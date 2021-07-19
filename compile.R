@@ -806,8 +806,7 @@ rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 # Compile WCANN ===========================================================
 print("Compile WCANN")
 # commented line previously unzipped the zipped csv file, but current line reads directly from the csv
-#wcann_catch <- read_csv(unz(here::here("data_raw", "wcann_catch.csv.zip"), "wcann_catch.csv"), col_types = cols(
-wcann_catch <- read_csv(here::here("data_raw", "wcann_catch.csv"), col_types = cols(
+wcann_catch <- read_csv(unz(here::here("data_raw", "wcann_catch.csv.zip"), "wcann_catch.csv"), col_types = cols(
   catch_id = col_integer(),
   common_name = col_character(),
   cpue_kg_per_ha_der = col_double(),
