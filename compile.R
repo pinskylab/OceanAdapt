@@ -3417,9 +3417,9 @@ trimmed_dat_fltr <- dat_fltr %>%
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    saveRDS(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed-fltr.rds"))
+    saveRDS(trimmed_dat_fltr, file = here::here("data_clean", "all-regions-trimmed-fltr.rds"))
   }else{
-    write_csv(trimmed_dat, gzfile(here::here("data_clean", "all-regions-trimmed-fltr.csv.gz")))
+    write_csv(trimmed_dat_fltr, gzfile(here::here("data_clean", "all-regions-trimmed-fltr.csv.gz")))
   }
 }
 
