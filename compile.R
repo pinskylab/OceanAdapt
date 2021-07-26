@@ -1096,7 +1096,6 @@ gmex <- left_join(gmex_bio, gmex_tow, by = c("STATIONID", "CRUISE_NO", "P_STA_NO
   # add cruise title
   left_join(gmex_cruise, by = c("CRUISEID", "VESSEL"))
 
-
 gmex <- gmex %>% 
   # Trim to high quality SEAMAP summer trawls, based off the subset used by Jeff Rester's GS_TRAWL_05232011.sas
   filter(grepl("Summer", TITLE) & 
@@ -1189,6 +1188,7 @@ gmex <- gmex %>%
   mutate(region = "Gulf of Mexico") %>% 
   select(region, haulid, year, lat, lon, stratum, stratumarea, depth, spp, wtcpue) %>% 
   ungroup()
+
 
 
 if (HQ_DATA_ONLY == TRUE){
@@ -3418,9 +3418,9 @@ trimmed_dat_fltr <- dat_fltr %>%
 
 if(isTRUE(WRITE_TRIMMED_DAT)){
   if(isTRUE(PREFER_RDATA)){
-    saveRDS(trimmed_dat, file = here::here("data_clean", "all-regions-trimmed-fltr.rds"))
+    saveRDS(trimmed_dat_fltr, file = here::here("data_clean", "all-regions-trimmed-fltr.rds"))
   }else{
-    write_csv(trimmed_dat, gzfile(here::here("data_clean", "all-regions-trimmed-fltr.csv.gz")))
+    write_csv(trimmed_dat_fltr, gzfile(here::here("data_clean", "all-regions-trimmed-fltr.csv.gz")))
   }
 }
 
