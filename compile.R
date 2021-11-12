@@ -806,8 +806,8 @@ rm(wctri_catch, wctri_haul, wctri_species, wctri_strats)
 # Compile WCANN ===========================================================
 print("Compile WCANN")
 # commented line previously unzipped the zipped csv file, but current line reads directly from the csv
-#wcann_catch <- read_csv(unz(here::here("data_raw", "wcann_catch.csv.zip"), "wcann_catch.csv"), col_types = cols(
-wcann_catch <- read_csv(here::here("data_raw", "wcann_catch.csv"), col_types = cols(
+wcann_catch <- read_csv(unz(here::here("data_raw", "wcann_catch.csv.zip"), "wcann_catch.csv"), col_types = cols(
+#wcann_catch <- read_csv(here::here("data_raw", "wcann_catch.csv"), col_types = cols(
   catch_id = col_integer(),
   common_name = col_character(),
   cpue_kg_per_ha_der = col_double(),
@@ -3355,7 +3355,7 @@ spplist <- presyrsum %>%
 #any flagged species in spplist?
 
 #remove flagged spp
-temp = list.files(here("~/OceanAdapt/OceanAdapt/spp_QAQC/exclude_spp/"), pattern="*.csv")
+temp = list.files(here("spp_QAQC/exclude_spp/"), pattern="*.csv")
 myfiles = lapply(here("spp_QAQC/exclude_spp",temp), read.csv)
 myfiles[[6]] <- NULL #removes empty item for GSLnor (no flagged spp)
 myfiles[[6]] <- NULL #removes empty item for GSLsouth (no flagged spp)
@@ -3461,41 +3461,41 @@ dat_strat_yr <- dat_strat_yr %>%
 
 # calculate mean lat
 cent_bio_lat <- dat_strat_yr %>% 
-  group_by(region, spp, year) %>% 
+  group_by(region, spp, common, year) %>% 
   summarise(lat = questionr::wtd.mean(lat, wttot, na.rm = TRUE))
 
 # mean depth
 cent_bio_depth <- dat_strat_yr %>% 
-  group_by(region, spp, year) %>% 
+  group_by(region, spp, common, year) %>% 
   summarise(depth = questionr::wtd.mean(depth, wttot, na.rm = TRUE))
 
 # mean lon
 cent_bio_lon <- dat_strat_yr %>% 
-  group_by(region, spp, year) %>% 
+  group_by(region, spp, common, year) %>% 
   summarise(lon = questionr::wtd.mean(lon, wttot, na.rm = TRUE))
 
 # merge
-cent_bio <- left_join(cent_bio_lat, cent_bio_depth, by = c("region", "spp", "year"))
-cent_bio <- left_join(cent_bio, cent_bio_lon, by = c("region", "spp",  "year"))
+cent_bio <- left_join(cent_bio_lat, cent_bio_depth, by = c("region", "spp", "common", "year"))
+cent_bio <- left_join(cent_bio, cent_bio_lon, by = c("region", "spp", "common", "year"))
 
 # standard error for lat
 cent_bio_lat_se <- dat_strat_yr %>%
-  group_by(region, spp, year) %>% 
+  group_by(region, spp, common, year) %>% 
   summarise(lat_se = sqrt(questionr::wtd.var(lat, wttot, na.rm=TRUE, normwt=TRUE))/sqrt(sum(!is.na(lat) & !is.na(wttot))))
 
-cent_bio <- left_join(cent_bio, cent_bio_lat_se, by = c("region", "spp", "year"))
+cent_bio <- left_join(cent_bio, cent_bio_lat_se, by = c("region", "spp", "common", "year"))
 
 cent_bio_depth_se <- dat_strat_yr %>%
-  group_by(region, spp, year) %>% 
+  group_by(region, spp, common, year) %>% 
   summarise(depth_se = sqrt(questionr::wtd.var(depth, wttot, na.rm=TRUE, normwt=TRUE))/sqrt(sum(!is.na(depth) & !is.na(wttot))))
 
-cent_bio <- left_join(cent_bio, cent_bio_depth_se, by = c("region", "spp", "year"))
+cent_bio <- left_join(cent_bio, cent_bio_depth_se, by = c("region", "spp", "common", "year"))
 
 cent_bio_lon_se <- dat_strat_yr %>%
-  group_by(region, spp, year) %>% 
+  group_by(region, spp, common, year) %>% 
   summarise(lon_se = sqrt(questionr::wtd.var(lon, wttot, na.rm=TRUE, normwt=TRUE))/sqrt(sum(!is.na(lon) & !is.na(wttot))))
 
-cent_bio <- left_join(cent_bio, cent_bio_lon_se, by = c("region", "spp", "year"))
+cent_bio <- left_join(cent_bio, cent_bio_lon_se, by = c("region", "spp", "common", "year"))
 
 BY_SPECIES_DATA <- cent_bio %>%
   ungroup() %>% 
