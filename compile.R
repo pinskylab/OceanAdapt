@@ -3355,8 +3355,8 @@ spplist <- presyrsum %>%
 #any flagged species in spplist?
 
 #remove flagged spp
-temp = list.files(here("spp_QAQC/exclude_spp/"), pattern="*.csv")
-myfiles = lapply(here("spp_QAQC/exclude_spp",temp), read.csv)
+temp = list.files(here("spp_QAQC", "exclude_spp"), pattern="*.csv")
+myfiles = lapply(here("spp_QAQC", "exclude_spp", temp), read.csv)
 myfiles[[6]] <- NULL #removes empty item for GSLnor (no flagged spp)
 myfiles[[6]] <- NULL #removes empty item for GSLsouth (no flagged spp)
 myfiles[[13]] <- NULL #removes ineffective check for wctri
