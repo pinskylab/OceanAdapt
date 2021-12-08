@@ -1,18 +1,26 @@
 ## ---- oceanadapt
 
-# OceanAdapt requires the following verisons of packages. These versions are based on the last successful date that the script ran.  This will install these versions on your machine, proceed with caution.  The dates on the following lines can be updated if the script successfully runs with different versions on a subsequent date.
- library(devtools)
- install_version("tidyverse", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
- install_version("lubridate", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
- install_version("PBSmapping", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
- install_version("data.table", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
- install_version("gridExtra", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
- install_version("questionr", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
- install_version("geosphere", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
- install_version("here", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/")
+# OceanAdapt requires the following versions of packages. These versions are based on the last successful date that the script ran.  This will install these versions on your machine, proceed with caution.  The dates on the following lines can be updated if the script successfully runs with different versions on a subsequent date.
+library(devtools)
+install_version("readr", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 1.3.1
+install_version("purrr", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 0.3.3
+install_version("stringr", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 1.4.0
+install_version("forcats", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 0.4.0
+install_version("tidyr", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 1.0.0
+install_version("ggplot2", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 3.2.1
+install_version("dplyr", repos = "https://mran.revolutionanalytics.com/snapshot/2020-07-01/") # 0.8.3 or 1.0.0
+# note: dplyr 0.8.3 (12/5/19) would not install in R v3.5.2 during last test so v1.0.0 (7/1/20) was used
+install_version("tibble", repos = "https://mran.revolutionanalytics.com/snapshot/2020-07-01/") # 2.1.3 or 3.0.1
+# note: used v3.0.1 (7/1/20) during test to match dplyr (instead of v2.1.3 from 12/5/19)
+install_version("lubridate", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 1.7.4
+install_version("PBSmapping", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 2.72.1
+install_version("data.table", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 1.12.6
+install_version("gridExtra", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 2.3
+install_version("questionr", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 0.7.0
+install_version("geosphere", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 1.5-10
+install_version("here", repos = "https://mran.revolutionanalytics.com/snapshot/2019-12-05/") # 0.1
 
 # Load required packages 
- library(tidyverse)
  library(lubridate)
  library(PBSmapping) 
  library(gridExtra) 
@@ -20,6 +28,13 @@
  library(geosphere)
  library(here)
  library(dplyr)
+ library(readr)
+ library(purrr)
+ library(forcats)
+ library(tidyr)
+ library(tibble)
+ library(ggplot2)
+ library(stringr)
  library(data.table) 
 
 # If running from R instead of RStudio, please set the working directory to the folder containing this script before running this script.
@@ -41,13 +56,13 @@ HQ_DATA_ONLY <- TRUE
 
 # 2. View plots of removed strata for HQ_DATA. #OPTIONAL, DEFAULT:FALSE
 # It takes a while to generate these plots.
-HQ_PLOTS <- FALSE
+HQ_PLOTS <- TRUE
 
 # 3. Remove ai,ebs,gmex,goa,neus,seus,wcann,wctri, scot. Keep `dat`. #DEFAULT: FALSE 
 REMOVE_REGION_DATASETS <- FALSE
 
 # 4. Create graphs based on the data similar to those shown on the website and outputs them to pdf. #DEFAULT:FALSE
-PLOT_CHARTS <- FALSE
+PLOT_CHARTS <- TRUE
 # This used to be called OPTIONAL_PLOT_CHARTS, do I need to change it back?
 
 # 5. If you would like to write out the clean data, would you prefer it in Rdata or CSV form?  Note the CSV's are much larger than the Rdata files. #DEFAULT:TRUE, FALSE generates CSV's instead of Rdata.
@@ -218,7 +233,7 @@ print("Compile AI")
 #there is a comment that contains a comma in the 2014-2018 file that causes the delimiters to read incorrectly.  Fix that here::here:
 temp <- read_lines(here::here("data_raw", "ai2014_2018.csv"))
 # replace the string that causes the problem
-temp_fixed <- stringr::str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
+temp_fixed <- str_replace_all(temp, "Stone et al., 2011", "Stone et al. 2011")
 # read the result in as a csv
 temp_csv <- read_csv(temp_fixed)
 ## End special fix
@@ -231,7 +246,7 @@ files <- files[-c(grep("strata", files),grep("2014", files))]
 # combine all of the data files into one table
 ai_data <- files %>% 
   # read in all of the csv's in the files list
-  map_dfr(read_csv) %>%
+  purrr::map_dfr(read_csv) %>%
   # add in the data fixed above
   rbind(temp_csv) %>% 
   # remove any data rows that have headers as data rows
@@ -508,7 +523,7 @@ files <- files[-grep("strata", files)]
 # combine all of the data files into one table
 goa_data <- files %>% 
   # read in all of the csv's in the files list
-  map_dfr(read_csv) %>%
+  purrr::map_dfr(read_csv) %>%
   # remove any data rows that have headers as data rows
   filter(LATITUDE != "LATITUDE", !is.na(LATITUDE)) %>% 
   mutate(stratum = as.integer(STRATUM)) %>% 
@@ -520,7 +535,7 @@ files <- as.list(dir(pattern = "goa_strata", path = "data_raw", full.names = T))
 
 goa_strata <- files %>% 
   # read in all of the csv's in the files list
-  map_dfr(read_csv) %>% 
+  purrr::map_dfr(read_csv) %>% 
   select(StratumCode, Areakm2) %>% 
   distinct() %>% 
   rename(stratum = StratumCode)
@@ -1990,7 +2005,7 @@ rm(seus_catch, seus_haul, seus_strata, end, start, meanwt, misswt, biomass, prob
 
 spp_files <- as.list(dir(pattern = "_SPP", path = "data_raw", full.names = T))
 mar_spp <- spp_files %>% 
-  map_dfr(~ read_csv(.x, col_types = cols(
+  purrr::map_dfr(~ readr::read_csv(.x, col_types = cols(
     SPEC = col_character()
   )))
 
@@ -2000,7 +2015,7 @@ mar_spp <- mar_spp %>%
 
 mission_files <- as.list(dir(pattern = "_MISSION", path = "data_raw", full.names = T))
 mar_missions <- mission_files %>% 
-  map_dfr(~ read_csv(.x, col_types = cols(
+  purrr::map_dfr(~ readr::read_csv(.x, col_types = cols(
     .default = col_double(),
     MISSION = col_character(),
     VESEL = col_character(),
@@ -2009,7 +2024,7 @@ mar_missions <- mission_files %>%
 
 info_files <- as.list(dir(pattern = "_INF", path = "data_raw", full.names = T))
 mar_info <- info_files %>% 
-  map_dfr(~ read_csv(.x, col_types = cols(
+  purrr::map_dfr(~ readr::read_csv(.x, col_types = cols(
     .default = col_double(),
     MISSION = col_character(),
     SDATE = col_character(),
@@ -2019,7 +2034,7 @@ mar_info <- info_files %>%
 
 catch_files <- as.list(dir(pattern = "_CATCH", path = "data_raw", full.names = T))
 mar_catch <- catch_files %>% 
-  map_dfr(~ read_csv(.x, col_types = cols(
+  purrr::map_dfr(~ readr::read_csv(.x, col_types = cols(
     .default = col_double(),
     MISSION = col_character()
     )))
@@ -3235,17 +3250,17 @@ tax <- read_csv(here::here("data_raw", "spptaxonomy.csv"), col_types = cols(
 
 
 # if(isTRUE(WRITE_MASTER_DAT)){
-#   save(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here("data_clean", "individual-regions.rds"))
+#   save(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = here::here("data_clean", "individual-regions.rds"))
 # }
 # if(isTRUE(WRITE_MASTER_DAT)){
-#   save(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, tax, wcann_fltr, wctri_fltr, file = here("data_clean", "individual-regions-fltr.rds"))
+#   save(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, tax, wcann_fltr, wctri_fltr, file = here::here("data_clean", "individual-regions-fltr.rds"))
 # }
 
 if(isTRUE(WRITE_MASTER_DAT)){
-  save(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = gzfile(here("data_clean", "individual-regions.rds.gz")))
+  save(ai, CPAC, ebs, gmex, goa, GSLnor, GSLsouth, mar, neus_fall, neus_spring, seusFALL, seusSPRING, seusSUMMER, tax, wcann, wctri, file = gzfile(here::here("data_clean", "individual-regions.rds.gz")))
 }
 if(isTRUE(WRITE_MASTER_DAT)){
-   save(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, tax, wcann_fltr, wctri_fltr, file = gzfile(here("data_clean", "individual-regions-fltr.rds.gz")))
+   save(ai_fltr, CPAC_fltr, ebs_fltr, gmex_fltr, goa_fltr, GSLnor_fltr, GSLsouth_fltr, mar_fltr, neus_fall_fltr, neus_spring_fltr, seusFALL_fltr, seusSPRING_fltr, seusSUMMER_fltr, tax, wcann_fltr, wctri_fltr, file = gzfile(here::here("data_clean", "individual-regions-fltr.rds.gz")))
 }
 
 
@@ -3355,8 +3370,8 @@ spplist <- presyrsum %>%
 #any flagged species in spplist?
 
 #remove flagged spp
-temp = list.files(here("spp_QAQC", "exclude_spp"), pattern="*.csv")
-myfiles = lapply(here("spp_QAQC", "exclude_spp", temp), read.csv)
+temp = list.files(here::here("spp_QAQC", "exclude_spp"), pattern="*.csv")
+myfiles = lapply(here::here("spp_QAQC", "exclude_spp", temp), read.csv)
 myfiles[[6]] <- NULL #removes empty item for GSLnor (no flagged spp)
 myfiles[[6]] <- NULL #removes empty item for GSLsouth (no flagged spp)
 myfiles[[13]] <- NULL #removes ineffective check for wctri
@@ -3740,7 +3755,7 @@ if(isTRUE(PLOT_CHARTS)) {
   
   # for latitude
   print("Starting latitude plots for species")
-  pdf(file = here("plots", "sppcentlatstrat.pdf"), width=10, height=8)
+  pdf(file = here::here("plots", "sppcentlatstrat.pdf"), width=10, height=8)
   
   regs = sort(unique(centbio$region))
   for(i in 1:length(regs)){
@@ -3773,7 +3788,7 @@ if(isTRUE(PLOT_CHARTS)) {
   
   # for depth
   print("Starting depth plots for species")
-  pdf(file = here("plots", "sppcentdepthstrat.pdf"), width=10, height=8)
+  pdf(file = here::here("plots", "sppcentdepthstrat.pdf"), width=10, height=8)
   
   centbio <- centbio[!is.na(centbio$depth),]
   
