@@ -17,6 +17,21 @@ The projections of future species distributions were developed from statistical 
 
 # News
 
+
+## 2021/12/21 - OceanAdapt update 2021
+
+  - Expanded coverage to three new regions in Canada: Northern Gulf of St. Lawrence (GSLnor), Southern Gulf of St. Lawrence (GSLsouth), and the Canadian Pacific (CPAC). 
+  - 2019 data added for the Gulf of Alaska, the Maritimes regions (formerly Scotian Shelf), and Southeast US. 
+  - 2020 data were not available for most regions due to survey difficulties resulting from the COVID19 pandemic. If they were available, they only covered a small portion of the survey region. 
+  - A website update is pending, but expected to occur soon. 
+ 
+ Download the latest release of this repository using the links below:
+
+   [Download the lastest release (full data and
+    code)](https://github.com/pinskylab/OceanAdapt/releases/tag/update2021)
+  
+  [![DOI](https://zenodo.org/badge/29789533.svg)](https://zenodo.org/badge/latestdoi/29789533)
+  
 ## 2021/10/25 - OceanAdapt provides indicators for National Marine Ecosystem Status
 
 - The regional latitude and depth centroids from OceanAdapt are now part of the National Marine Ecosystem Status system [here](https://ecowatch.noaa.gov/). 
