@@ -2011,7 +2011,8 @@ mar_spp <- spp_files %>%
 
 mar_spp <- mar_spp %>%
   rename(spp = SPEC,
-         SPEC = CODE) 
+         SPEC = CODE) %>%
+  distinct()
 
 mission_files <- as.list(dir(pattern = "_MISSION", path = "data_raw", full.names = T))
 mar_missions <- mission_files %>% 
