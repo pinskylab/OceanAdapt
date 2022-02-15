@@ -66,7 +66,7 @@ PLOT_CHARTS <- FALSE
 # This used to be called OPTIONAL_PLOT_CHARTS, do I need to change it back?
 
 # 5. If you would like to write out the clean data, would you prefer it in Rdata or CSV form?  Note the CSV's are much larger than the Rdata files. #DEFAULT:TRUE, FALSE generates CSV's instead of Rdata.
-PREFER_RDATA <- TRUE
+PREFER_RDATA <- FALSE
 
 # 6. Output the clean full master data frame. #DEFAULT:FALSE
 WRITE_MASTER_DAT <- TRUE
