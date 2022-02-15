@@ -3529,7 +3529,7 @@ rm(cent_bio, cent_bio_depth, cent_bio_depth_se, cent_bio_lat, cent_bio_lat_se, c
 
 # Dat_exploded -  Add 0's ======================================================
 print("Dat exploded") 
-# these Sys.time() flags are here::here to see how long this section of code takes to run.
+# these Sys.time() flags are here to see how long this section of code takes to run.
 Sys.time()
 # This takes about 10 minutes
 if (DAT_EXPLODED == TRUE){
