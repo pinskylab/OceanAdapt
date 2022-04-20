@@ -18,7 +18,11 @@ The projections of future species distributions were developed from statistical 
 # News
 
 
-## 2021/02/14 - OceanAdapt update 2021.1
+## 2022/04/20 - OceanAdapt contributes to the newly released NOAA Fisheries Distribution and Mapping Analysis Portal (DisMAP)
+
+- [NOAA Fisheries announces the release](https://www.noaa.gov/news-release/noaa-showcases-new-mapping-tool-for-marine-species) of a new, state-of-the-art mapping tool for marine species: the Distribution Mapping and Analysis Portal or DisMAP. The new tool grew out of and builds off of the OceanAdapt effort and was developed in collaboration with the OceanAdapt team! Visit the portal at [https://apps-st.fisheries.noaa.gov/dismap](https://apps-st.fisheries.noaa.gov/dismap) 
+
+## 2022/02/14 - OceanAdapt update 2021.1
 
 - this is a patch for update 2021 (described below) in which a problem with duplicated records in the Maritimes region was fixed (issue #152) and the 'data_clean' folder was updated and tidied up. 
 
