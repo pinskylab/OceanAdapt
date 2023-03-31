@@ -1,0 +1,1 @@
+Within this directory is the collection of RData files previously stored on Amarel. According to Jim Morley the files contain the ensemble projections for RCP 26 and 85 (i.e. the mean projections across 16 GCMs).
