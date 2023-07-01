@@ -3,22 +3,22 @@
       {
          "orcid":"0000-0002-6632-4337",
          "affiliation":"Rutgers University",
-         "name":"Allen, Michael"
+         "name":"Michael Allen"
       },
       {
          "orcid":"0000-0002-5395-9456",
          "affiliation":"University of British Columbia",
-         "name":"Forrest, Daniel"
+         "name":"Daniel Forrest"
       },
       {
          "orcid":"0000-0003-3100-2853",
          "affiliation":"Rutgers University",
-         "name":"Stuart, Michelle"
+         "name":"Michelle Stuart"
       },
       {
          "orcid":"0000-0002-8523-8952",
          "affiliation":"Rutgers University",
-         "name":"Pinsky, Malin"
+         "name":"Malin Pinsky"
       }
    ],
    "title":"Scripts and data for OceanAdapt website to visualize shifts in marine animal distributions: Update 2021.1",
